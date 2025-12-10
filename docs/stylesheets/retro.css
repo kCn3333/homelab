@@ -7,6 +7,8 @@
     --retro-grey-text: #E0E0E0; /* Jasnoszary tekst (jak na starym monitorze) */
     --retro-dark-bg: #111111; /* Bardzo ciemne tło */
     --retro-mid-bg: #181818; /* Tło dla kart/sidebar */
+
+    
 }
 
 /* 1. Global Setup (Kolory i Czcionki) */
@@ -35,6 +37,12 @@
     --md-text-size: 0.75em; 
     --md-code-font: 'Courier New', Courier, monospace;
     --md-hue: 0; 
+
+    .md-header__title, 
+    .md-header__button, 
+    .md-header__icon {
+    color: var(--retro-green-main) !important;
+}
 }
 
 /* Wymuszenie retro czcionki dla całego dokumentu */
@@ -45,7 +53,7 @@ body, .md-typeset, code {
 /* FIX: Redukcja wielkości czcionek w nagłówkach */
 .md-typeset h1 { font-size: 1.8em !important; }
 .md-typeset h2 { font-size: 1.4em !important; }
-.md-typeset h3 { font-size: 0.6em !important; }
+.md-typeset h3 { font-size: 1.2em !important; }
 
 
 /* 2. FIX: Linki (zawsze zielone, jaśniejsze na hover) */
@@ -59,8 +67,7 @@ body, .md-typeset, code {
 
 /* 3. FIX: Cytaty (kursywa) */
 .md-typeset blockquote {
-    color: var(--retro-grey-text);
-    /* Ustawiamy na inną zieleń, aby odróżnić od linków, np. szarą kursywę */
+    color: var(--retro-green-main) !important; /* Tekst cytatu na zielono */
     font-style: italic;
     border-left: 3px solid var(--retro-green-main);
 }
