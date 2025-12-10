@@ -51,22 +51,27 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 -   :fontawesome-solid-server: **[Infrastructure](infrastructure/overview.md)**
     ---
+    
     Hardware setup, Network Config
 
 -   :fontawesome-solid-cogs: **[Provisioning](provisionig/provisionig.md)**
     ---
+
     VM and Bare-metal deployment
 
 -   :fontawesome-solid-docker: **[Applications](applications/app.md)**
     ---
+
     Docker Compose files, k8s manifests, service configs
 
 -   :fontawesome-solid-code: **[Automation](automation/overview.md)**
     ---
+
     Scripts, workflows, infrastructure as code
 
 -   :fontawesome-solid-screwdriver-wrench: **[Troubleshooting](troubleshooting/common-issues.md)**
     ---
+
     Solutions to problems I've encountered
 
 -   :fontawesome-solid-graduation-cap: **[Learning](learning/resources.md)**
