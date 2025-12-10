@@ -28,8 +28,8 @@ This repo contains my homelab documentation, configs, and infrastructure notes. 
   - **Storage:** 
     - 1x 256GB SSD M.2 SATA
     - 2x 1TB HDD 2,5" WD Blue
-- **Network:** 1GbE
-- **OS:** Debian 13 
+  - **Network:** 1GbE
+  - **OS:** Debian 13 
 </details>
 
 <details>
@@ -46,9 +46,9 @@ This repo contains my homelab documentation, configs, and infrastructure notes. 
 <summary><b>🌐 Network</b></summary>
 
 - ![UniFi](https://img.shields.io/badge/UniFi-555555?style=flat-square&logo=ubiquiti&logoColor=white&labelColor=0556C9)
-- **Router:** UniFi Cloud Gateway Ultra
-- **Core Switch:** Ubiquiti USW-Lite-8-PoE
-- **WiFi:** UniFi AP U6+, Ubiquiti Loco M2
+  - **Router:** UniFi Cloud Gateway Ultra
+  - **Core Switch:** Ubiquiti USW-Lite-8-PoE
+  - **WiFi:** UniFi AP U6+, Ubiquiti Loco M2
 </details>
 
 ### 🚀 Services Running
