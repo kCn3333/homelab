@@ -89,6 +89,11 @@ code {
     color: var(--retro-grey-text) !important;
 }
 
+/* Ukryj tytuł w header (zostaw tylko logo) */
+.md-header__title {
+    display: none !important;
+}
+
 .md-header__button,
 .md-header__topic,
 .md-header__title,
@@ -146,10 +151,18 @@ code {
 
 .md-footer__inner {
     background-color: transparent !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0;
 }
 
 .md-footer-meta {
     background-color: transparent !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .md-footer__link,
@@ -160,6 +173,36 @@ code {
 
 .md-footer-nav__link {
     color: var(--retro-grey-text) !important;
+}
+
+/* Copyright text - wyśrodkowany, italic na górze */
+.md-footer-copyright {
+    text-align: center;
+    font-style: italic;
+    order: 1;
+    margin-bottom: 0.5rem;
+}
+
+/* Last updated info - pod cytatem */
+.md-source-file {
+    order: 2;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+/* GitHub i social icons - na dole */
+.md-footer-social {
+    order: 3;
+}
+
+.md-footer-social__link {
+    color: var(--retro-grey-text) !important;
+}
+
+.md-footer-social__link:hover {
+    color: var(--retro-green-main) !important;
 }
 
 /* 9. Grid Cards */
@@ -259,3 +302,21 @@ code {
     background-color: var(--retro-green-main);
 }
 
+/* 17. Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--retro-dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--retro-mid-bg);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(76, 175, 80, 0.3);
+}

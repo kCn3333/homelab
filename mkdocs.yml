@@ -48,7 +48,7 @@ plugins:
       enable_creation_date: true
       type: timeago
       fallback_to_build_date: true
-
+      
 markdown_extensions:
   - abbr
   - admonition
