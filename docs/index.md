@@ -55,7 +55,7 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 -   :fontawesome-solid-cogs: **[Provisioning](provisionig/provisionig.md)**
     <small>VM and Bare-metal deployment</small>
 
--   :fontawesome-solid-docker: **[Applications](applications/app.md)**
+-   :fontawesome-brands-docker: **[Applications](applications/app.md)**
     <small>Docker Compose files, k8s manifests, service configs</small>
 
 -   :fontawesome-solid-code: **[Automation](automation/overview.md)**
