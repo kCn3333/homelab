@@ -108,5 +108,11 @@ extra:
       link: https://github.com/kCn3333
   generator: false
 
+  footer:
+      description: Built with coffee, curiosity, and so much fun ☕
+       text: |
+        <hr>
+        Last updated: { git.date }
+
 extra_css:
   - stylesheets/retro.css
