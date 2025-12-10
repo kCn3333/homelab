@@ -45,7 +45,7 @@ body, .md-typeset, code {
 /* FIX: Redukcja wielkości czcionek w nagłówkach */
 .md-typeset h1 { font-size: 1.8em !important; }
 .md-typeset h2 { font-size: 1.4em !important; }
-.md-typeset h3 { font-size: 1.2em !important; }
+.md-typeset h3 { font-size: 0.6em !important; }
 
 
 /* 2. FIX: Linki (zawsze zielone, jaśniejsze na hover) */
