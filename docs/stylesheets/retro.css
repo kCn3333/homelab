@@ -87,12 +87,14 @@ code {
 .md-header {
     background-color: var(--retro-dark-bg) !important;
     color: var(--retro-grey-text) !important;
+    display: none !important;
 }
 
-/* Ukryj tytuł w header (zostaw tylko logo) */
+/* Ukryj tytuł w header (zostaw tylko logo) 
 .md-header__title {
     display: none !important;
 }
+*/
 
 .md-header__button,
 .md-header__topic,
