@@ -1,5 +1,4 @@
 # [ k C n ]  🏠  homelab  
----
 <p align="center">
   <a href="https://github.com/kCn3333/homelab">
     <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white" alt="Version">
@@ -69,13 +68,5 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 </div>
 
-<br><br>
-
-<div align="center">
-
-<hr>
-
-*Built with coffee, curiosity, and so much fun*
-</div>
-<sub>Last updated:</sub>
+<br>
 

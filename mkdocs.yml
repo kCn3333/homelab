@@ -11,21 +11,9 @@ theme:
     logo: material/server-network
     repo: fontawesome/brands/github
   palette:
-    # Catppuccin Mocha theme
-    #- media: "(prefers-color-scheme: dark)"
-     # scheme: slate
-     # primary: custom
-     # accent: green
-     # toggle:
-     #   icon: material/brightness-7
-     #   name: Switch to dark mode
-    #- media: "(prefers-color-scheme: dark)"
-     # scheme: slate
-     # primary: custom
-     # accent: green
-     # toggle:
-     #   icon: material/brightness-4
-      #  name: Switch to light mode
+    - scheme: slate
+      primary: black
+      accent: green
   
   features:
     - announce.dismiss
@@ -59,6 +47,7 @@ plugins:
   - git-revision-date-localized:
       enable_creation_date: true
       type: timeago
+      fallback_to_build_date: true
 
 markdown_extensions:
   - abbr
@@ -108,11 +97,16 @@ extra:
       link: https://github.com/kCn3333
   generator: false
 
-  footer:
-    description: Built with coffee, curiosity, and so much fun ☕
-    text: |
-      <hr>
-      Last updated: { git.date }
-
 extra_css:
   - stylesheets/retro.css
+
+extra_javascript:
+  - javascripts/matrix-homelab.js
+
+# Custom footer content
+copyright: |
+  <div style="text-align: center; margin-top: 1rem;">
+    <p style="color: #E0E0E0; font-style: italic; margin-bottom: 0.5rem;">
+      Built with coffee, curiosity, and so much fun ☕
+    </p>
+  </div>
