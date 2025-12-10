@@ -1,6 +1,3 @@
-/* RETRO TERMINAL / MATRIX THEME - ULTIMATE FIX */
-
-/* Ustawiamy stonowany, terminalowy zielony */
 :root {
     --retro-green-main: #4CAF50;
     --retro-green-light: #66BB6A;
@@ -9,7 +6,7 @@
     --retro-mid-bg: #181818;
 }
 
-/* 1. Global Setup - FORCE OVERRIDE */
+
 :root, 
 [data-md-color-scheme="slate"],
 [data-md-color-scheme="default"] {
@@ -17,7 +14,7 @@
     --md-default-bg-color: var(--retro-dark-bg) !important;
     --md-default-bg-color--lighter: var(--retro-mid-bg) !important;
     
-    /* Tekst - SZARY, nie zielony! */
+    /* Tekst - SZARY */
     --md-default-fg-color: var(--retro-grey-text) !important;
     --md-default-fg-color--light: #BDBDBD !important;
     --md-default-fg-color--lighter: #9E9E9E !important;
@@ -83,43 +80,20 @@ code {
     text-decoration: underline;
 }
 
-/* 5. HEADER/NAVBAR - NUCLEAR OPTION */
+/* 5. HEADER/NAVBAR - GONE! */
 .md-header {
-    background-color: var(--retro-dark-bg) !important;
-    color: var(--retro-grey-text) !important;
     display: none !important;
 }
 
-/* Ukryj tytuł w header (zostaw tylko logo) 
-.md-header__title {
-    display: none !important;
-}
-*/
-
-.md-header__button,
-.md-header__topic,
-.md-header__title,
-.md-header .md-icon,
-.md-header svg {
-    color: var(--retro-grey-text) !important;
-    fill: var(--retro-grey-text) !important;
+/* Fix padding body żeby content był na górze */
+.md-main {
+    padding-top: 0 !important;
 }
 
-/* Repo icon w header */
-.md-source {
-    color: var(--retro-grey-text) !important;
+.md-container {
+    padding-top: 0 !important;
 }
 
-.md-source__icon {
-    color: var(--retro-grey-text) !important;
-}
-
-/* Search button */
-.md-search__icon {
-    color: var(--retro-grey-text) !important;
-}
-
-/* 6. TABS - jeśli używasz */
 .md-tabs {
     background-color: var(--retro-dark-bg) !important;
 }
@@ -145,7 +119,7 @@ code {
     color: var(--retro-green-main) !important;
 }
 
-/* 8. FOOTER - NUCLEAR OPTION */
+/* 8. FOOTER */
 .md-footer {
     background-color: #0A0A0A !important;
     color: var(--retro-grey-text) !important;
@@ -194,7 +168,7 @@ code {
     margin-bottom: 0.5rem;
 }
 
-/* GitHub i social icons - na dole */
+/* GitHub  */
 .md-footer-social {
     order: 3;
 }
