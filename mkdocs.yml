@@ -12,8 +12,8 @@ theme:
     repo: fontawesome/brands/github
   palette:
     - scheme: slate
-      primary: black
-      accent: green
+      primary: custom
+      accent: custom
   
   features:
     - announce.dismiss
