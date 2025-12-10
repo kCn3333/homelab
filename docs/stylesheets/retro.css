@@ -1,84 +1,101 @@
-/* RETRO TERMINAL / MATRIX THEME */
+/* RETRO TERMINAL / MATRIX THEME (Finalna Wersja) */
 
-/* 1. Global Setup (Colors and Base Font Size) */
+/* Ustawiamy stonowany, terminalowy zielony */
 :root {
-    /* Główny kolor tła (ciemny grafit) */
-    --md-default-bg-color: #111111;
-    /* Kolor tła dla kontenerów/kart/bocznych paneli (nieco jaśniejszy grafit) */
-    --md-default-bg-color--lighter: #181818;
-
-    /* Kolor tekstu */
-    --md-default-fg-color: #00FF41; /* Jasny, widoczny zielony */
-    --md-default-fg-color--light: #00CC33;
-    --md-default-fg-color--lighter: #009922;
-
-    /* Tło paska nawigacyjnego (Góra) i tła główne */
-    --md-primary-fg-color: #111111; 
-    --md-primary-bg-color: #111111; 
-    
-    /* Kolor akcentujący (Accent) - Zawsze zielony */
-    --md-accent-fg-color: #00FF41;
-    --md-accent-fg-color--transparent: #00FF411A;
-
-    /* Link color FIX: Ustawiamy zielony kolor linków domyślnie */
-    --md-typeset-a-color: #00FF41;
-
-    /* Code blocks - Klasyczne tło terminala */
-    --md-code-bg-color: #000000;
-    --md-code-fg-color: #00FF41;
-    
-    /* Tło paska na dole (Footer) */
-    --md-footer-bg-color: #0A0A0A;
-    
-    /* Zmniejszenie bazowej wielkości czcionki (około 20%) */
-    --md-text-size: 0.8em; 
-    --md-code-font: 'Courier New', Courier, monospace;
+    --retro-green-main: #4CAF50; /* Stonowany zielony (jak w badge'u) */
+    --retro-green-light: #66BB6A; /* Jaśniejszy dla hover */
+    --retro-grey-text: #E0E0E0; /* Jasnoszary tekst (jak na starym monitorze) */
+    --retro-dark-bg: #111111; /* Bardzo ciemne tło */
+    --retro-mid-bg: #181818; /* Tło dla kart/sidebar */
 }
 
-/* 2. Global Font & Nagłówki */
+/* 1. Global Setup (Kolory i Czcionki) */
+:root, [data-md-color-scheme="slate"] {
+    
+    /* TŁO FIX: Wymuszenie ciemnego tła */
+    --md-default-bg-color: var(--retro-dark-bg);
+    --md-default-bg-color--lighter: var(--retro-mid-bg); 
+    --md-primary-bg-color: var(--retro-dark-bg); /* Navbar */
+    --md-primary-fg-color: var(--retro-dark-bg); 
+    --md-footer-bg-color: #0A0A0A;
+
+    /* TEKST FIX: Resetujemy domyślny kolor tekstu na jasnoszary */
+    --md-default-fg-color: var(--retro-grey-text); 
+    --md-default-fg-color--light: #BDBDBD;
+
+    /* AKCENT: Stonowany zielony (tylko dla linków i akcentów) */
+    --md-accent-fg-color: var(--retro-green-main);
+    --md-typeset-a-color: var(--retro-green-main); /* FIX: Kolor linków w tekście */
+
+    /* CODE BLOCKS */
+    --md-code-bg-color: #000000;
+    --md-code-fg-color: var(--retro-green-main);
+    
+    /* FIX: Redukcja bazowej wielkości czcionki (o 25%) */
+    --md-text-size: 0.75em; 
+    --md-code-font: 'Courier New', Courier, monospace;
+    --md-hue: 0; 
+}
 
 /* Wymuszenie retro czcionki dla całego dokumentu */
-body, .md-typeset {
+body, .md-typeset, code {
     font-family: 'Courier New', Courier, monospace !important;
 }
 
-/* Zmniejszenie nagłówków, aby pasowały do mniejszego tekstu */
-.md-typeset h1 { font-size: 2.2em; }
-.md-typeset h2 { font-size: 1.6em; }
-.md-typeset h3 { font-size: 1.3em; }
+/* FIX: Redukcja wielkości czcionek w nagłówkach */
+.md-typeset h1 { font-size: 1.8em !important; }
+.md-typeset h2 { font-size: 1.4em !important; }
+.md-typeset h3 { font-size: 1.2em !important; }
 
 
-/* 3. FIX: Poprawa Koloru Linków (Zielone, Zawsze Widoczne) */
-/* Link w treści, normalny stan */
-.md-typeset a {
-    color: var(--md-accent-fg-color) !important; 
+/* 2. FIX: Linki (zawsze zielone, jaśniejsze na hover) */
+.md-typeset a, .md-typeset a:link, .md-typeset a:visited {
+    color: var(--md-typeset-a-color) !important; 
 }
-/* Link po najechaniu kursorem (lekko jaśniejszy, dynamiczny efekt) */
 .md-typeset a:hover {
-    color: #33FF66 !important;
+    color: var(--retro-green-light) !important;
+}
+
+
+/* 3. FIX: Cytaty (kursywa) */
+.md-typeset blockquote {
+    color: var(--retro-grey-text);
+    /* Ustawiamy na inną zieleń, aby odróżnić od linków, np. szarą kursywę */
+    font-style: italic;
+    border-left: 3px solid var(--retro-green-main);
 }
 
 
 /* 4. FIX: Interlinie w sekcji "Grid Cards" */
-.grid.cards hr {
-    margin: 0.8rem 0; /* Dodaje odstęp pionowy wokół linii */
+/* Używamy silniejszego selektora i marginesu, aby wymusić odstęp wokół linii */
+.grid.cards li > hr {
+    margin: 0.75rem 0 !important; 
+    border-top: 1px solid rgba(76, 175, 80, 0.2) !important; /* Zielona, przezroczysta linia */
 }
 
 
-/* 5. FIX: Ustawienia Admonitions (jak w terminalu) */
+/* 5. FIX: Admonitions (Użycie stonowanej zieleni) */
 .md-typeset .admonition {
     background-color: #0A0A0A;
-    border-left: 5px solid var(--md-accent-fg-color);
+    border-left: 5px solid var(--retro-green-main);
     color: var(--md-default-fg-color);
 }
+.md-typeset .admonition.note, .md-typeset details.note {
+    border-color: var(--retro-green-main);
+}
 .md-typeset .admonition.warning, .md-typeset details.warning {
-    border-color: #FFFF00;
+    border-color: #FFEB3B; /* Żółty */
 }
 .md-typeset .admonition.danger, .md-typeset details.danger {
-    border-color: #FF0000;
+    border-color: #F44336; /* Czerwony */
 }
-/* 7. FIX: Ukrycie dodatkowej linii w stopce z custom footerem */
-/* Usuwa podwójną linię, którą widziałeś w swoim custom footerze */
+
+/* 6. Fix dla Navbar (ikony i tytuł) */
+.md-header__title {
+    color: var(--retro-grey-text) !important; /* Tytuł na pasku ma być szary */
+}
+
+/* 7. Usuwanie dodatkowych linii z custom footer */
 .md-typeset .hr-in-footer {
     display: none;
 }
