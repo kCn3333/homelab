@@ -1,14 +1,5 @@
 # [ k C n ]  🏠  homelab  
 
-<div style="text-align: center; margin: 2em 0;">
-
-[![Version](https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white)](https://github.com/kCn3333/homelab)
-![Server Status](https://status.kcn333.pl/api/badge/3/status?upColor=4CAF50&downColor=f38ba8)
-![Uptime](https://status.kcn333.pl/api/badge/3/uptime?color=4CAF50)
-![Response](https://status.kcn333.pl/api/badge/3/response?color=4CAF50)
-
-</div>
-
 <p align="center">
   <a href="https://github.com/kCn3333/homelab">
     <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white" alt="Version">
