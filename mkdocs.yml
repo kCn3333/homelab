@@ -108,7 +108,7 @@ extra:
       link: https://github.com/kCn3333
   generator: false
 
-footer:
+  footer:
     description: Built with coffee, curiosity, and so much fun ☕
     text: |
       <hr>
