@@ -22,6 +22,7 @@ jobs:
           pip install mkdocs-material
           pip install mkdocs-roamlinks-plugin  # Ważne dla [[wiki-links]]!
           pip install mkdocs-callouts          # Ważne dla callouts!
+          pip install mkdocs-git-revision-date-localized-plugin  # Ważne dla daty utworzenia
       
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force
