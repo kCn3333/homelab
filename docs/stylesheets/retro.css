@@ -1,0 +1,68 @@
+/* RETRO TERMINAL / MATRIX THEME */
+
+/* 1. Global Setup */
+:root {
+    /* Główny kolor tła (ciemny grafit) */
+    --md-default-bg-color: #111111;
+    /* Główny kolor tekstu (jasnozielony / pastelowy zielony) */
+    --md-default-fg-color: #00FF41; /* Jasny, widoczny zielony */
+    --md-default-fg-color--light: #00CC33;
+    --md-default-fg-color--lighter: #009922;
+
+    /* Kolor główny (Primary) - Używamy ciemnego, ale z akcentami */
+    --md-primary-fg-color: #222222;
+    /* Kolor akcentujący (Accent) - Zawsze zielony */
+    --md-accent-fg-color: #00FF41;
+    --md-accent-fg-color--transparent: #00FF411A;
+    
+    /* Code blocks - Klasyczne tło dla terminala */
+    --md-code-bg-color: #000000;
+    --md-code-fg-color: #00FF41;
+    
+    /* Link color */
+    --md-typeset-a-color: #00CC33;
+    
+    /* Kolor tła dla 'cards' i 'sidebar' (ciemniejszy szary) */
+    --md-default-bg-color--lighter: #1E1E1E;
+    
+    /* Ustawienie czcionki na klasyczną monospace (Courier, Terminal) */
+    --md-text-font: 'Courier New', Courier, monospace;
+    --md-code-font: 'Courier New', Courier, monospace;
+
+    /* Kolor ikon/menu */
+    --md-footer-bg-color: #0A0A0A;
+}
+
+/* Wymuszenie retro czcionki dla całego dokumentu */
+body, h1, h2, h3, h4, .md-typeset {
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* 2. Style dla Admonitions (jak w terminalu) */
+.md-typeset .admonition {
+    background-color: #0A0A0A; /* Tło bardzo ciemne */
+    border-left: 5px solid var(--md-accent-fg-color); /* Pionowa zielona linia */
+    color: var(--md-default-fg-color); /* Tekst zielony */
+}
+
+/* 3. Kolorowanie poszczególnych Admonitions (dla zróżnicowania) */
+.md-typeset .admonition.note, .md-typeset details.note {
+    border-color: #00CC33; /* Ciemniejsza zieleń */
+}
+.md-typeset .admonition.warning, .md-typeset details.warning {
+    border-color: #FFFF00; /* Klasyczny żółty ostrzegawczy */
+}
+.md-typeset .admonition.danger, .md-typeset details.danger {
+    border-color: #FF0000; /* Klasyczny czerwony błąd */
+}
+
+/* 4. Scrollbar (Matrix style) */
+::-webkit-scrollbar-thumb {
+  background: #00CC33; /* Zielony scrollbar */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00FF41;
+}
+
+/* 5. FIX: Ustawienie schematu kolorów w pliku konfiguracyjnym */
+/* Możesz usunąć [data-md-color-scheme="slate"] jeśli używasz tylko dark mode */

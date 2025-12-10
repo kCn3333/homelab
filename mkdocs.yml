@@ -12,8 +12,8 @@ theme:
     repo: fontawesome/brands/github
   palette:
     # Catppuccin Mocha theme
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
       primary: custom
       accent: green
       toggle:
@@ -109,4 +109,4 @@ extra:
   generator: false
 
 extra_css:
-  - stylesheets/catppuccin.css
+  - stylesheets/retro.css

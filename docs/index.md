@@ -9,6 +9,15 @@
 
 </div>
 
+<p align="center">
+  <a href="https://github.com/kCn3333/homelab">
+    <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white" alt="Version">
+  </a>
+  <img src="https://status.kcn333.pl/api/badge/3/status?upColor=4CAF50&downColor=f38ba8" alt="Server Status">
+  <img src="https://status.kcn333.pl/api/badge/3/uptime?color=4CAF50" alt="Uptime">
+  <img src="https://status.kcn333.pl/api/badge/3/response?color=4CAF50" alt="Response">
+</p>
+
 
 
 ## 🔗 Quick Links
@@ -77,10 +86,14 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 <br><br>
 
+<div align="center">
+
 <hr>
 
 *Built with coffee, curiosity, and so much fun*
 
 ---
 
-<sub>Last updated: { git.date }</sub>
+<sub>Last updated:</sub>
+
+</div>
