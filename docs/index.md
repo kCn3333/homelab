@@ -1,5 +1,5 @@
 # [ k C n ]  🏠  homelab  
-
+---
 <p align="center">
   <a href="https://github.com/kCn3333/homelab">
     <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white" alt="Version">
@@ -51,7 +51,7 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 -   :fontawesome-solid-server: **[Infrastructure](infrastructure/overview.md)**
     ---
-    
+
     Hardware setup, Network Config
 
 -   :fontawesome-solid-cogs: **[Provisioning](provisionig/provisionig.md)**
