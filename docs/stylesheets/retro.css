@@ -77,8 +77,8 @@ body, .md-typeset {
 .md-typeset .admonition.danger, .md-typeset details.danger {
     border-color: #FF0000;
 }
-
 /* 7. FIX: Ukrycie dodatkowej linii w stopce z custom footerem */
+/* Usuwa podwójną linię, którą widziałeś w swoim custom footerze */
 .md-typeset .hr-in-footer {
     display: none;
 }
