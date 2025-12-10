@@ -49,22 +49,22 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 <div class="grid cards" markdown>
 
 -   :fontawesome-solid-server: **[Infrastructure](infrastructure/overview.md)**
-    <small>Hardware setup, Network Config</small>
+    <br><small>Hardware setup, Network Config</small>
 
 -   :fontawesome-solid-cogs: **[Provisioning](provisionig/provisionig.md)**
-    <small>VM and Bare-metal deployment</small>
+    <br><small>VM and Bare-metal deployment</small>
 
 -   :fontawesome-brands-docker: **[Applications](applications/app.md)**
-    <small>Docker Compose files, k8s manifests, service configs</small>
+    <br><small>Docker Compose files, k8s manifests, service configs</small>
 
 -   :fontawesome-solid-code: **[Automation](automation/overview.md)**
-    <small>Scripts, workflows, infrastructure as code</small>
+    <br><small>Scripts, workflows, infrastructure as code</small>
 
 -   :fontawesome-solid-screwdriver-wrench: **[Troubleshooting](troubleshooting/common-issues.md)**
-    <small>Solutions to problems I've encountered</small>
+    <br><small>Solutions to problems I've encountered</small>
 
 -   :fontawesome-solid-graduation-cap: **[Learning](learning/resources.md)**
-    <small>Tutorials, guides, resources I found useful</small>
+    <br><small>Tutorials, guides, resources I found useful</small>
 
 </div>
 
