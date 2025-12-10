@@ -1,0 +1,23 @@
+# Obsidian internal stuff
+.obsidian/
+.obsidian-*/        # czasem pluginy tworzą warianty
+
+# system
+Thumbs.db
+desktop.ini
+
+# Python / mkdocs artifacts
+__pycache__/
+site/               # mkdocs build output — NIE PUSHUJEMY tego
+*.pyc
+*.pyo
+
+# Backupy, tempy, edytory
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Anything not intended for publish
+private/
+drafts/
