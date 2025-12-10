@@ -2,9 +2,13 @@
 
 > My personal infrastructure playground – where containers run wild and networking should just work smoothly ™
 
-[![Documentation](https://img.shields.io/badge/docs-live-green?style=for-the-badge)](https://kcn3333.github.io/homelab/)
-[![GitHub](https://img.shields.io/badge/github-homelab-blue?style=for-the-badge&logo=github)](https://github.com/kCn3333/homelab)
-[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
+<div align="center">
+
+[![Documentation](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://kcn3333.github.io/homelab/)
+[![GitHub](https://img.shields.io/badge/github-333333?style=flat-square&logo=github&logoColor=white)](https://github.com/kCn3333/homelab)
+[![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat-square)](LICENSE)
+
+</div>
 
 ## 📚 What's This?
 
