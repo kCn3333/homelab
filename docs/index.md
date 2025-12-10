@@ -88,9 +88,7 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 *Built with coffee, curiosity, and so much fun*
 
-</hr>
 ---
-
 <sub>Last updated:</sub>
 
 </div>

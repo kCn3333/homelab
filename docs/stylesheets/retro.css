@@ -1,84 +1,429 @@
-/* RETRO TERMINAL / MATRIX THEME */
+/* ===============================================
+   MATRIX TERMINAL THEME - ENHANCED VERSION
+   cyberpunk • hacker aesthetic • retro terminal
+   =============================================== */
 
-/* 1. Global Setup (Colors and Base Font Size) */
+/* 1. Core Variables */
 :root {
-    /* Główny kolor tła (ciemny grafit) */
-    --md-default-bg-color: #111111;
-    /* Kolor tła dla kontenerów/kart/bocznych paneli (nieco jaśniejszy grafit) */
-    --md-default-bg-color--lighter: #181818;
-
-    /* Kolor tekstu */
-    --md-default-fg-color: #00FF41; /* Jasny, widoczny zielony */
-    --md-default-fg-color--light: #00CC33;
-    --md-default-fg-color--lighter: #009922;
-
-    /* Tło paska nawigacyjnego (Góra) i tła główne */
-    --md-primary-fg-color: #111111; 
-    --md-primary-bg-color: #111111; 
+    /* Background - Deep black terminal */
+    --md-default-bg-color: #0a0a0a;
+    --md-default-bg-color--lighter: #121212;
     
-    /* Kolor akcentujący (Accent) - Zawsze zielony */
-    --md-accent-fg-color: #00FF41;
-    --md-accent-fg-color--transparent: #00FF411A;
-
-    /* Link color FIX: Ustawiamy zielony kolor linków domyślnie */
-    --md-typeset-a-color: #00FF41;
-
-    /* Code blocks - Klasyczne tło terminala */
+    /* Matrix Green - The iconic color */
+    --matrix-green: #00FF41;
+    --matrix-green-dim: #00CC33;
+    --matrix-green-darker: #009922;
+    --matrix-green-glow: #00FF4133;
+    
+    /* Text colors */
+    --md-default-fg-color: var(--matrix-green);
+    --md-default-fg-color--light: var(--matrix-green-dim);
+    --md-default-fg-color--lighter: var(--matrix-green-darker);
+    
+    /* Accent (same as green for consistency) */
+    --md-accent-fg-color: var(--matrix-green);
+    --md-accent-fg-color--transparent: var(--matrix-green-glow);
+    
+    /* Primary (navigation, header) */
+    --md-primary-fg-color: #0a0a0a;
+    --md-primary-bg-color: #0a0a0a;
+    
+    /* Code blocks - Pure terminal black */
     --md-code-bg-color: #000000;
-    --md-code-fg-color: #00FF41;
+    --md-code-fg-color: var(--matrix-green);
     
-    /* Tło paska na dole (Footer) */
-    --md-footer-bg-color: #0A0A0A;
+    /* Footer */
+    --md-footer-bg-color: #000000;
+    --md-footer-fg-color: var(--matrix-green-dim);
     
-    /* Zmniejszenie bazowej wielkości czcionki (około 20%) */
-    --md-text-size: 0.8em; 
-    --md-code-font: 'Courier New', Courier, monospace;
+    /* Links */
+    --md-typeset-a-color: var(--matrix-green);
+    
+    /* Typography scale (slightly smaller for terminal feel) */
+    --md-text-font-size: 0.85rem;
+    --md-code-font: 'Courier New', 'Courier', monospace;
 }
 
-/* 2. Global Font & Nagłówki */
-
-/* Wymuszenie retro czcionki dla całego dokumentu */
-body, .md-typeset {
-    font-family: 'Courier New', Courier, monospace !important;
+/* 2. Global Typography - Terminal Font Everywhere */
+body,
+.md-typeset,
+.md-nav,
+.md-header,
+.md-footer {
+    font-family: 'Courier New', 'Courier', monospace !important;
+    font-size: var(--md-text-font-size);
 }
 
-/* Zmniejszenie nagłówków, aby pasowały do mniejszego tekstu */
-.md-typeset h1 { font-size: 2.2em; }
-.md-typeset h2 { font-size: 1.6em; }
-.md-typeset h3 { font-size: 1.3em; }
+/* Headings - Terminal style with glow effect */
+.md-typeset h1 {
+    font-size: 2em;
+    color: var(--matrix-green);
+    text-shadow: 0 0 10px var(--matrix-green-glow);
+    border-bottom: 2px solid var(--matrix-green);
+    padding-bottom: 0.3em;
+    margin-bottom: 1em;
+}
 
+.md-typeset h2 {
+    font-size: 1.5em;
+    color: var(--matrix-green);
+    text-shadow: 0 0 8px var(--matrix-green-glow);
+    border-left: 4px solid var(--matrix-green);
+    padding-left: 0.5em;
+}
 
-/* 3. FIX: Poprawa Koloru Linków (Zielone, Zawsze Widoczne) */
-/* Link w treści, normalny stan */
+.md-typeset h3 {
+    font-size: 1.2em;
+    color: var(--matrix-green-dim);
+}
+
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+    color: var(--matrix-green-dim);
+}
+
+/* 3. Links - Always visible, glowing on hover */
 .md-typeset a {
-    color: var(--md-accent-fg-color) !important; 
+    color: var(--matrix-green) !important;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--matrix-green);
+    transition: all 0.2s ease;
 }
-/* Link po najechaniu kursorem (lekko jaśniejszy, dynamiczny efekt) */
+
 .md-typeset a:hover {
     color: #33FF66 !important;
+    text-shadow: 0 0 8px var(--matrix-green-glow);
+    border-bottom: 1px solid #33FF66;
 }
 
-
-/* 4. FIX: Interlinie w sekcji "Grid Cards" */
-.grid.cards hr {
-    margin: 0.8rem 0; /* Dodaje odstęp pionowy wokół linii */
+/* Navigation links */
+.md-nav__link {
+    color: var(--matrix-green-dim) !important;
 }
 
+.md-nav__link:hover,
+.md-nav__link--active {
+    color: var(--matrix-green) !important;
+    text-shadow: 0 0 5px var(--matrix-green-glow);
+}
 
-/* 5. FIX: Ustawienia Admonitions (jak w terminalu) */
+/* 4. Code Blocks - Pure Terminal */
+.md-typeset code {
+    background-color: var(--md-code-bg-color);
+    color: var(--matrix-green);
+    border: 1px solid var(--matrix-green-darker);
+    padding: 0.1em 0.3em;
+    border-radius: 2px;
+}
+
+.md-typeset pre {
+    background-color: #000000 !important;
+    border: 1px solid var(--matrix-green);
+    box-shadow: 0 0 15px var(--matrix-green-glow);
+}
+
+.md-typeset pre code {
+    background-color: transparent;
+    border: none;
+}
+
+/* Syntax highlighting override for terminal feel */
+.highlight .o,  /* Operators */
+.highlight .p,  /* Punctuation */
+.highlight .kn, /* Keywords */
+.highlight .k {
+    color: var(--matrix-green) !important;
+}
+
+.highlight .s,  /* Strings */
+.highlight .s1,
+.highlight .s2 {
+    color: var(--matrix-green-dim) !important;
+}
+
+.highlight .c,  /* Comments */
+.highlight .cm {
+    color: var(--matrix-green-darker) !important;
+    font-style: italic;
+}
+
+/* 5. Tables - Terminal Grid Style */
+.md-typeset table {
+    background-color: #000000;
+    border: 2px solid var(--matrix-green);
+}
+
+.md-typeset table thead {
+    background-color: #0a0a0a;
+}
+
+.md-typeset table th {
+    color: var(--matrix-green);
+    border-bottom: 2px solid var(--matrix-green);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.md-typeset table td {
+    border-bottom: 1px solid var(--matrix-green-darker);
+}
+
+.md-typeset table tr:hover {
+    background-color: var(--matrix-green-glow);
+}
+
+/* 6. Admonitions - Terminal Alert Boxes */
 .md-typeset .admonition {
-    background-color: #0A0A0A;
-    border-left: 5px solid var(--md-accent-fg-color);
-    color: var(--md-default-fg-color);
-}
-.md-typeset .admonition.warning, .md-typeset details.warning {
-    border-color: #FFFF00;
-}
-.md-typeset .admonition.danger, .md-typeset details.danger {
-    border-color: #FF0000;
+    background-color: #0a0a0a;
+    border: 1px solid var(--matrix-green);
+    border-left: 4px solid var(--matrix-green);
+    color: var(--matrix-green);
+    box-shadow: 0 0 10px var(--matrix-green-glow);
 }
 
-/* 7. FIX: Ukrycie dodatkowej linii w stopce z custom footerem */
-.md-typeset .hr-in-footer {
-    display: none;
+.md-typeset .admonition-title {
+    background-color: #000000;
+    border-bottom: 1px solid var(--matrix-green);
+    color: var(--matrix-green);
+    font-weight: bold;
+}
+
+/* Warning - Yellow */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+    border-color: #FFFF00;
+    box-shadow: 0 0 10px #FFFF0033;
+}
+
+.md-typeset .admonition.warning .admonition-title {
+    color: #FFFF00;
+    border-bottom-color: #FFFF00;
+}
+
+/* Danger - Red */
+.md-typeset .admonition.danger,
+.md-typeset details.danger {
+    border-color: #FF0000;
+    box-shadow: 0 0 10px #FF000033;
+}
+
+.md-typeset .admonition.danger .admonition-title {
+    color: #FF0000;
+    border-bottom-color: #FF0000;
+}
+
+/* Tip - Brighter green */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+    border-color: #33FF66;
+    box-shadow: 0 0 10px #33FF6633;
+}
+
+/* 7. Grid Cards - Terminal Panels */
+.md-typeset .grid.cards {
+    gap: 1rem;
+}
+
+.md-typeset .grid.cards > * {
+    background-color: #000000;
+    border: 1px solid var(--matrix-green);
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.md-typeset .grid.cards > *:hover {
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 20px var(--matrix-green-glow);
+    transform: translateY(-2px);
+}
+
+.md-typeset .grid.cards hr {
+    border-color: var(--matrix-green-darker);
+    margin: 0.8rem 0;
+}
+
+/* 8. Buttons - Terminal Style */
+.md-button {
+    background-color: transparent;
+    border: 2px solid var(--matrix-green);
+    color: var(--matrix-green) !important;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+.md-button:hover {
+    background-color: var(--matrix-green);
+    color: #000000 !important;
+    box-shadow: 0 0 15px var(--matrix-green-glow);
+    transform: scale(1.05);
+}
+
+.md-button--primary {
+    background-color: var(--matrix-green);
+    color: #000000 !important;
+}
+
+.md-button--primary:hover {
+    background-color: #33FF66;
+    box-shadow: 0 0 20px var(--matrix-green-glow);
+}
+
+/* 9. Search Box - Terminal Input */
+.md-search__input {
+    background-color: #000000;
+    border: 1px solid var(--matrix-green);
+    color: var(--matrix-green);
+    font-family: 'Courier New', monospace;
+}
+
+.md-search__input::placeholder {
+    color: var(--matrix-green-darker);
+}
+
+.md-search__input:focus {
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 10px var(--matrix-green-glow);
+}
+
+/* 10. Scrollbar - Matrix Style */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+    border: 1px solid var(--matrix-green-darker);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--matrix-green-darker);
+    border: 1px solid var(--matrix-green);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--matrix-green);
+    box-shadow: 0 0 5px var(--matrix-green-glow);
+}
+
+/* 11. Badges - Terminal Tags */
+.md-typeset .badge {
+    background-color: transparent;
+    border: 1px solid var(--matrix-green);
+    color: var(--matrix-green);
+    font-family: 'Courier New', monospace;
+    padding: 0.2em 0.6em;
+    font-size: 0.85em;
+}
+
+/* 12. Navigation Tabs - Terminal Menu */
+.md-tabs {
+    background-color: #000000;
+    border-bottom: 2px solid var(--matrix-green);
+}
+
+.md-tabs__link {
+    color: var(--matrix-green-dim);
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+    color: var(--matrix-green);
+    text-shadow: 0 0 5px var(--matrix-green-glow);
+}
+
+/* 13. Header - Terminal Top Bar */
+.md-header {
+    background-color: #000000;
+    border-bottom: 2px solid var(--matrix-green);
+    box-shadow: 0 0 10px var(--matrix-green-glow);
+}
+
+/* 14. Footer - Terminal Bottom Bar */
+.md-footer {
+    background-color: #000000;
+    border-top: 2px solid var(--matrix-green);
+}
+
+.md-footer-meta {
+    background-color: #000000;
+}
+
+/* 15. Mermaid Diagrams - Terminal Style */
+.mermaid {
+    background-color: #000000 !important;
+    border: 1px solid var(--matrix-green);
+    padding: 1rem;
+}
+
+/* 16. Terminal Cursor Animation (Optional Easter Egg) */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Add blinking cursor to h1 headings */
+.md-typeset h1::after {
+    content: '█';
+    animation: blink 1s infinite;
+    margin-left: 0.2em;
+}
+
+/* 17. Selection Color - Matrix Green */
+::selection {
+    background-color: var(--matrix-green);
+    color: #000000;
+}
+
+::-moz-selection {
+    background-color: var(--matrix-green);
+    color: #000000;
+}
+
+/* 18. Loading Animation for Images */
+img {
+    border: 1px solid var(--matrix-green-darker);
+    transition: all 0.3s ease;
+}
+
+img:hover {
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 15px var(--matrix-green-glow);
+}
+
+/* 19. Blockquotes - Terminal Message */
+.md-typeset blockquote {
+    border-left: 4px solid var(--matrix-green);
+    background-color: #0a0a0a;
+    padding: 1em;
+    margin: 1em 0;
+    font-style: italic;
+}
+
+/* 20. Horizontal Rules - Terminal Divider */
+.md-typeset hr {
+    border: none;
+    border-top: 2px solid var(--matrix-green);
+    margin: 2em 0;
+    box-shadow: 0 0 5px var(--matrix-green-glow);
+}
+
+/* 21. Task Lists - Terminal Checkboxes */
+.md-typeset .task-list-item input[type="checkbox"] {
+    border: 2px solid var(--matrix-green);
+}
+
+.md-typeset .task-list-item input[type="checkbox"]:checked {
+    background-color: var(--matrix-green);
+}
+
+/* 22. Print Styles (Keep it readable) */
+@media print {
+    body {
+        color: #000000 !important;
+        background: #ffffff !important;
+    }
 }
