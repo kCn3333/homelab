@@ -1,68 +1,84 @@
 /* RETRO TERMINAL / MATRIX THEME */
 
-/* 1. Global Setup */
+/* 1. Global Setup (Colors and Base Font Size) */
 :root {
     /* Główny kolor tła (ciemny grafit) */
     --md-default-bg-color: #111111;
-    /* Główny kolor tekstu (jasnozielony / pastelowy zielony) */
+    /* Kolor tła dla kontenerów/kart/bocznych paneli (nieco jaśniejszy grafit) */
+    --md-default-bg-color--lighter: #181818;
+
+    /* Kolor tekstu */
     --md-default-fg-color: #00FF41; /* Jasny, widoczny zielony */
     --md-default-fg-color--light: #00CC33;
     --md-default-fg-color--lighter: #009922;
 
-    /* Kolor główny (Primary) - Używamy ciemnego, ale z akcentami */
-    --md-primary-fg-color: #222222;
+    /* Tło paska nawigacyjnego (Góra) i tła główne */
+    --md-primary-fg-color: #111111; 
+    --md-primary-bg-color: #111111; 
+    
     /* Kolor akcentujący (Accent) - Zawsze zielony */
     --md-accent-fg-color: #00FF41;
     --md-accent-fg-color--transparent: #00FF411A;
-    
-    /* Code blocks - Klasyczne tło dla terminala */
+
+    /* Link color FIX: Ustawiamy zielony kolor linków domyślnie */
+    --md-typeset-a-color: #00FF41;
+
+    /* Code blocks - Klasyczne tło terminala */
     --md-code-bg-color: #000000;
     --md-code-fg-color: #00FF41;
     
-    /* Link color */
-    --md-typeset-a-color: #00CC33;
-    
-    /* Kolor tła dla 'cards' i 'sidebar' (ciemniejszy szary) */
-    --md-default-bg-color--lighter: #1E1E1E;
-    
-    /* Ustawienie czcionki na klasyczną monospace (Courier, Terminal) */
-    --md-text-font: 'Courier New', Courier, monospace;
-    --md-code-font: 'Courier New', Courier, monospace;
-
-    /* Kolor ikon/menu */
+    /* Tło paska na dole (Footer) */
     --md-footer-bg-color: #0A0A0A;
+    
+    /* Zmniejszenie bazowej wielkości czcionki (około 20%) */
+    --md-text-size: 0.8em; 
+    --md-code-font: 'Courier New', Courier, monospace;
 }
 
+/* 2. Global Font & Nagłówki */
+
 /* Wymuszenie retro czcionki dla całego dokumentu */
-body, h1, h2, h3, h4, .md-typeset {
+body, .md-typeset {
     font-family: 'Courier New', Courier, monospace !important;
 }
 
-/* 2. Style dla Admonitions (jak w terminalu) */
-.md-typeset .admonition {
-    background-color: #0A0A0A; /* Tło bardzo ciemne */
-    border-left: 5px solid var(--md-accent-fg-color); /* Pionowa zielona linia */
-    color: var(--md-default-fg-color); /* Tekst zielony */
+/* Zmniejszenie nagłówków, aby pasowały do mniejszego tekstu */
+.md-typeset h1 { font-size: 2.2em; }
+.md-typeset h2 { font-size: 1.6em; }
+.md-typeset h3 { font-size: 1.3em; }
+
+
+/* 3. FIX: Poprawa Koloru Linków (Zielone, Zawsze Widoczne) */
+/* Link w treści, normalny stan */
+.md-typeset a {
+    color: var(--md-accent-fg-color) !important; 
+}
+/* Link po najechaniu kursorem (lekko jaśniejszy, dynamiczny efekt) */
+.md-typeset a:hover {
+    color: #33FF66 !important;
 }
 
-/* 3. Kolorowanie poszczególnych Admonitions (dla zróżnicowania) */
-.md-typeset .admonition.note, .md-typeset details.note {
-    border-color: #00CC33; /* Ciemniejsza zieleń */
+
+/* 4. FIX: Interlinie w sekcji "Grid Cards" */
+.grid.cards hr {
+    margin: 0.8rem 0; /* Dodaje odstęp pionowy wokół linii */
+}
+
+
+/* 5. FIX: Ustawienia Admonitions (jak w terminalu) */
+.md-typeset .admonition {
+    background-color: #0A0A0A;
+    border-left: 5px solid var(--md-accent-fg-color);
+    color: var(--md-default-fg-color);
 }
 .md-typeset .admonition.warning, .md-typeset details.warning {
-    border-color: #FFFF00; /* Klasyczny żółty ostrzegawczy */
+    border-color: #FFFF00;
 }
 .md-typeset .admonition.danger, .md-typeset details.danger {
-    border-color: #FF0000; /* Klasyczny czerwony błąd */
+    border-color: #FF0000;
 }
 
-/* 4. Scrollbar (Matrix style) */
-::-webkit-scrollbar-thumb {
-  background: #00CC33; /* Zielony scrollbar */
+/* 7. FIX: Ukrycie dodatkowej linii w stopce z custom footerem */
+.md-typeset .hr-in-footer {
+    display: none;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #00FF41;
-}
-
-/* 5. FIX: Ustawienie schematu kolorów w pliku konfiguracyjnym */
-/* Możesz usunąć [data-md-color-scheme="slate"] jeśli używasz tylko dark mode */
