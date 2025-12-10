@@ -1,6 +1,6 @@
 # 🏠 [kCn3333/homelab] Documentation
 
-> My personal infrastructure playground – where containers run wild and networking should just work smoothly ™
+
 
 <div align="center">
 
@@ -9,6 +9,9 @@
 [![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat-square)](LICENSE)
 
 </div>
+
+
+> My personal infrastructure playground – where containers run wild and networking should just work smoothly ™
 
 ## 📚 What's This?
 
