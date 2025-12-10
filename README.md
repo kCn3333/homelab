@@ -45,6 +45,7 @@ This repo contains my homelab documentation, configs, and infrastructure notes. 
 <details>
 <summary><b>🌐 Network</b></summary>
 
+- ![UniFi](https://img.shields.io/badge/UniFi-555555?style=flat-square&logo=ubiquiti&logoColor=white&labelColor=0556C9)
 - **Router:** UniFi Cloud Gateway Ultra
 - **Core Switch:** Ubiquiti USW-Lite-8-PoE
 - **WiFi:** UniFi AP U6+, Ubiquiti Loco M2
@@ -125,7 +126,5 @@ MIT License - do whatever you want with this!
 <div align="center">
   
 **Built with** [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) • **Hosted on** GitHub Pages
-
-*Last updated: Auto-generated on every push*
 
 </div>
