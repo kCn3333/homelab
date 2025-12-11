@@ -20,9 +20,8 @@
 
 Hey there! This is my personal homelab documentation – a living knowledge base where I document everything from infrastructure setup to those 3 AM debugging sessions that teach you *way* too much about Linux networking.
 
-**TL;DR:** I run a small datacenter in my home office because cloud bills are scary and self-hosting is so fun.
 
----
+![homelab](img/homelab1.png)
 
 ## 🤔 Why Self-Host?
 
@@ -40,7 +39,7 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 ## 🏗️ The Setup
 
-![homelab](img/homelab1.png)
+
 
 
 
