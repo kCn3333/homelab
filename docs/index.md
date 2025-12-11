@@ -7,7 +7,7 @@
   <img src="https://status.kcn333.pl/api/badge/3/uptime?color=4CAF50" alt="Uptime">
   <img src="https://status.kcn333.pl/api/badge/3/response?color=4CAF50" alt="Response">
 </p>
-
+> "The cloud is just someone else's computer" – Ancient IT Proverb
 
 
 ## 🔗 Quick Links
@@ -25,16 +25,15 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 ## 🤔 Why Self-Host?
 
-> "The cloud is just someone else's computer" – Ancient IT Proverb
-
 **Reasons I run a homelab:**
 
-1. **Learning** – Best way to understand infrastructure
-2. **Privacy** – My data stays on my hardware
-3. **Cost** – Cloud bills add up fast, even faster than electricity ones
-4. **Fun** – Because it's actually so enjoyable
-5. **Curiosity** - It's amazing to see how things work
-6. **Control** – I decide when things update (or break)
+
+1. **Fun** – Because it's actually so enjoyable
+2. **Curiosity** - It's amazing to see how things work
+3. **Learning** – Best way to understand infrastructure
+4. **Privacy** – My data stays on my hardware
+5. **Control** – I decide when things update (or break)
+6. **Cost** – Cloud bills add up fast, even faster than electricity ones
 ---
 
 ## 🏗️ The Setup
