@@ -37,7 +37,7 @@
 
     /* Code */
     --md-code-bg-color: #000000 !important;
-    --md-code-fg-color: var(--retro-green-main) !important;
+    /* --md-code-fg-color: var(--retro-green-main) !important; */
     
     /* Links */
     --md-typeset-a-color: var(--retro-green-main) !important;
