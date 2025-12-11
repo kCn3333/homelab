@@ -23,6 +23,7 @@ jobs:
           pip install mkdocs-roamlinks-plugin
           pip install mkdocs-callouts
           pip install mkdocs-git-revision-date-localized-plugin
+          pip install mkdocs-awesome-pages-plugin
 
       - name: Build MkDocs
         run: mkdocs build --clean
