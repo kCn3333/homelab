@@ -130,10 +130,8 @@ sudo deluser --remove-home ubuntu
 ```bash
 sudo hostnamectl set-hostname master-00
 ```
----
 
-##### Remove MAAS APT Proxy configuration
-
+4. Remove MAAS APT Proxy configuration
 ```bash
 sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
 # global proxy environment variables (HTTP_PROXY, HTTPS_PROXY)
@@ -145,7 +143,7 @@ sudo apt update --fix-missing
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
 ```
 
-and Update system packages
+and finally update system packages
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
