@@ -1,30 +1,34 @@
 name: Deploy MkDocs site
+
 on:
   push:
-    branches: [ "main" ]
-
-permissions:
-  contents: write  # Ważne dla gh-pages deploy!
+    branches:
+      - main
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
-      
+
       - name: Install MkDocs + plugins
         run: |
           pip install mkdocs-material
-          pip install mkdocs-roamlinks-plugin  # Ważne dla [[wiki-links]]!
-          pip install mkdocs-callouts          # Ważne dla callouts!
-          pip install mkdocs-git-revision-date-localized-plugin  # Ważne dla daty utworzenia
-      
+          pip install mkdocs-roamlinks-plugin
+          pip install mkdocs-callouts
+          pip install mkdocs-git-revision-date-localized-plugin
+
+      - name: Build MkDocs
+        run: mkdocs build --clean
+
       - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
