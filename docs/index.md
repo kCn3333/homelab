@@ -48,7 +48,7 @@ Browse the documentation by topic:
 
 - **[:fontawesome-solid-server: Infrastructure](infrastructure/)** - Hardware setup, network configuration
 - **[:fontawesome-solid-cogs: Provisioning](provisioning/)** - VM and bare-metal deployment workflows
-- **[:fontawesome-brands-docker: Applications](applications/)** - Docker Compose files, k8s manifests, service configs
+- **[:fontawesome-brands-docker: Applications](applications/)** - Docker compose, k8s manifests, service configs
 - **[:fontawesome-solid-code: Automation](automation/)** - Scripts, workflows, infrastructure as code
 - **[:fontawesome-solid-screwdriver-wrench: Troubleshooting](troubleshooting/)** - Common issues and their solutions
 - **[:fontawesome-solid-graduation-cap: Learning](learning/)** - Tutorials, guides, and useful resources
