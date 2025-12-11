@@ -1,5 +1,0 @@
-# docs/provisioning/Cluster Deployment/.pages
-title: Cluster Deployment
-nav:
-  - 1-cluster-deployment-maas.md
-  - 2-ssh-configuration.md
