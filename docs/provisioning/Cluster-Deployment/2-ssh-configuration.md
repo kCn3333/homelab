@@ -5,7 +5,7 @@
 
 - for Windows 10/11
 
-   ```PowerShell
+   ```Shell
     # Autostart for SSH Agent
     Get-Service ssh-agent | Set-Service -StartupType Automatic
     # 
