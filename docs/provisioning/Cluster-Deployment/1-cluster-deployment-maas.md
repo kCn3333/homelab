@@ -117,19 +117,19 @@ sudo chmod 700 /home/admin/.ssh
 sudo chmod 600 /home/admin/.ssh/authorized_keys
 ```
 
-3. Log out and log back in as the new user
+2. Log out and log back in as the new user
 ```bash
 exit
 ssh admin@<IP_ADDRESS>
 
 # If works fine, delete ubuntu user
 sudo deluser --remove-home ubuntu
-   ```
+```
 
-4. If you want to change the hostname
+3. If you want to change the hostname
 ```bash
 sudo hostnamectl set-hostname master-00
-   ```
+```
 ---
 
 ##### Remove MAAS APT Proxy configuration

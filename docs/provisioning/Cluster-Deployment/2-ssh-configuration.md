@@ -5,14 +5,14 @@
 
 - for Windows 10/11
 
-   ```bash
-    # Autostart for SSH Agent
-    Get-Service ssh-agent | Set-Service -StartupType Automatic
-    # 
-    Start-Service ssh-agent
-    # Add your SSH key
-    ssh-add C:\Users\USER\.ssh\id_rsa
-    ```
+```bash
+# Autostart for SSH Agent
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+# 
+Start-Service ssh-agent
+# Add your SSH key
+ssh-add C:\Users\USER\.ssh\id_rsa
+```
 
 - for WSL or Linux (Windows SSH Agent doesn't work for WSL)
 ```bash
@@ -51,6 +51,7 @@ Host worker-02
 
 ```
 
+make sure the permissions are correct
 ```bash
 chmod 600 ~/.ssh/config
 ```
