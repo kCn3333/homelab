@@ -34,7 +34,7 @@ sudo maas init
 
 Open a web browser and navigate to:
 
-***http://<MAAS_SERVER_IP>:5240/MAAS***
+***`http://<MAAS_SERVER_IP>:5240/MAAS`***
 
 Login: Use the administrator account credentials set during maas init
 
