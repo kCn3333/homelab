@@ -4,6 +4,15 @@ repo_url: https://github.com/kCn3333/homelab
 repo_name: kCn3333/homelab
 edit_uri: edit/main/docs/
 
+nav:
+  - Home: index.md
+  - Infrastructure: infrastructure/
+  - Provisioning: provisioning/
+  - Applications: applications/
+  - Automation: automation/
+  - Troubleshooting: troubleshooting/
+  - Learning: learning/
+
 theme:
   name: material
   language: en
