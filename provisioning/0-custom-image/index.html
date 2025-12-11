@@ -8,29 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/provisioning/Cluster-Deployment/2-ssh-configuration/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/provisioning/0-custom-image/">
       
       
-        <link rel="prev" href="../1-cluster-deployment-maas/">
+        <link rel="prev" href="../../infrastructure/home/">
       
+      
+        <link rel="next" href="../1-cluster-deployment-maas/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>📄 SSH Configuration - Homelab Documentation</title>
+        <title>📝 Custom Image with Packer - Homelab Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -49,13 +51,13 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/timeago.css">
+      <link rel="stylesheet" href="../../css/timeago.css">
     
-      <link rel="stylesheet" href="../../../stylesheets/retro.css">
+      <link rel="stylesheet" href="../../stylesheets/retro.css">
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ssh-configuration" class="md-skip">
+        <a href="#custom-image-with-packer" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +98,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Homelab Documentation" class="md-header__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
+    <a href="../.." title="Homelab Documentation" class="md-header__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              📄 SSH Configuration
+              📝 Custom Image with Packer
             
           </span>
         </div>
@@ -218,7 +220,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Homelab Documentation" class="md-nav__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
+    <a href="../.." title="Homelab Documentation" class="md-nav__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -248,7 +250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -369,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../infrastructure/home/" class="md-nav__link">
+      <a href="../../infrastructure/home/" class="md-nav__link">
         
   
   
@@ -490,26 +492,22 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
-        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
           
-          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
-            
   
   
   <span class="md-ellipsis">
     
   
-    Cluster Deployment
+    📝 Custom Image with Packer
   
 
     
@@ -517,19 +515,243 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_1">
-            <span class="md-nav__icon md-icon"></span>
-            
   
-    Cluster Deployment
+  
+  <span class="md-ellipsis">
+    
+  
+    📝 Custom Image with Packer
   
 
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Goal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Environment &amp; Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-packer-configuration-wsl2qemu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Packer Configuration (WSL2/QEMU)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Packer Configuration (WSL2/QEMU)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-kvm-acceleration-fix-crucial-for-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. KVM Acceleration Fix (Crucial for WSL2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-boot-mode-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Boot Mode Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-build-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Build the Image
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-maas-deployment-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. MAAS Deployment Steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. MAAS Deployment Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-file-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. File Transfer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-upload-image-to-maas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Upload Image to MAAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-verify-image-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Verify Image Upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-deploy-to-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Deploy to Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-fails-with-permission-denied-kvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build Fails with "Permission denied" (KVM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-is-very-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build is Very Slow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ovmfuefi-boot-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OVMF/UEFI Boot Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Additional Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
             
               
                 
@@ -563,37 +785,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    📄 SSH Configuration
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../2-ssh-configuration/" class="md-nav__link">
         
   
   
@@ -609,67 +804,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#configure-ssh-agent" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔑 Configure SSH Agent
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configure-local-ssh-aliases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⚙️ Configure Local SSH Aliases
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#hostnames" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📝 Hostnames
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1097,7 +1231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../automation" class="md-nav__link">
+      <a href="../../automation" class="md-nav__link">
         
   
   
@@ -1160,7 +1294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting" class="md-nav__link">
+      <a href="../../troubleshooting" class="md-nav__link">
         
   
   
@@ -1207,10 +1341,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configure-ssh-agent" class="md-nav__link">
+  <a href="#goal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔑 Configure SSH Agent
+        🎯 Goal
       
     </span>
   </a>
@@ -1218,10 +1352,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configure-local-ssh-aliases" class="md-nav__link">
+  <a href="#environment-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ Configure Local SSH Aliases
+        🛠️ Environment &amp; Tools
       
     </span>
   </a>
@@ -1229,10 +1363,171 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#hostnames" class="md-nav__link">
+  <a href="#1-packer-configuration-wsl2qemu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📝 Hostnames
+        1. Packer Configuration (WSL2/QEMU)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Packer Configuration (WSL2/QEMU)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-kvm-acceleration-fix-crucial-for-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. KVM Acceleration Fix (Crucial for WSL2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-boot-mode-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Boot Mode Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-build-the-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Build the Image
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-maas-deployment-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. MAAS Deployment Steps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. MAAS Deployment Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-file-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. File Transfer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-upload-image-to-maas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Upload Image to MAAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-verify-image-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Verify Image Upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-deploy-to-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Deploy to Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-fails-with-permission-denied-kvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build Fails with "Permission denied" (KVM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-is-very-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build is Very Slow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ovmfuefi-boot-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OVMF/UEFI Boot Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Additional Resources
       
     </span>
   </a>
@@ -1260,65 +1555,126 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/provisioning/Cluster-Deployment/2-ssh-configuration.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/provisioning/0-custom-image.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="ssh-configuration">📄 SSH Configuration<a class="headerlink" href="#ssh-configuration" title="Permanent link">&para;</a></h1>
-<h3 id="configure-ssh-agent">🔑 Configure SSH Agent<a class="headerlink" href="#configure-ssh-agent" title="Permanent link">&para;</a></h3>
+<h1 id="custom-image-with-packer">📝 Custom Image with Packer<a class="headerlink" href="#custom-image-with-packer" title="Permanent link">&para;</a></h1>
+<h2 id="goal">🎯 Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
+<p>To build a clean <code>debian-custom-cloudimg.tar.gz</code> image for MAAS deployment.</p>
+<hr />
+<h2 id="environment-tools">🛠️ Environment &amp; Tools<a class="headerlink" href="#environment-tools" title="Permanent link">&para;</a></h2>
+<p><strong>Host Environment:</strong></p>
 <ul>
-<li>for Windows 10/11</li>
+<li>Windows 11 / WSL2 (Ubuntu)</li>
+<li>Builder: Packer with QEMU builder</li>
 </ul>
-<pre class="highlight"><code class="language-bash"># Autostart for SSH Agent
-Get-Service ssh-agent | Set-Service -StartupType Automatic
-# 
-Start-Service ssh-agent
-# Add your SSH key
-ssh-add C:\Users\USER\.ssh\id_rsa</code></pre>
+<p><strong>Repository:</strong></p>
+<p>Clone Canonical's MAAS Image Builder (based on HCL format):</p>
+<pre class="highlight"><code class="language-bash">git clone https://github.com/canonical/packer-maas.git
+cd packer-maas</code></pre>
+<hr />
+<h2 id="1-packer-configuration-wsl2qemu">1. Packer Configuration (WSL2/QEMU)<a class="headerlink" href="#1-packer-configuration-wsl2qemu" title="Permanent link">&para;</a></h2>
+<p>The default configuration required modifications primarily due to the Nested Virtualization environment (QEMU running inside WSL2/Hyper-V).</p>
+<h3 id="11-kvm-acceleration-fix-crucial-for-wsl2">1.1. KVM Acceleration Fix (Crucial for WSL2)<a class="headerlink" href="#11-kvm-acceleration-fix-crucial-for-wsl2" title="Permanent link">&para;</a></h3>
+<p>The main build may fail because QEMU attempts to use KVM acceleration (<code>accel=kvm</code>), which is inaccessible from within WSL2, resulting in a <strong>"Permission denied"</strong> error.</p>
+<p><strong>File Modified:</strong> <code>debian-cloudimg.pkr.hcl</code></p>
+<p><strong>Original configuration:</strong></p>
+<pre class="highlight"><code class="language-hcl"># Original (doesn't work in WSL2)
+qemu_machine = { "amd64" = "accel=kvm" }
+qemu_cpu = { "amd64" = "host" }</code></pre>
+<p><strong>Fixed configuration for WSL2 emulation:</strong></p>
+<pre class="highlight"><code class="language-hcl">locals {
+    qemu_machine = { "amd64" = "q35" }   # Use standard machine without KVM flag
+    qemu_cpu = { "amd64" = "max" }       # Use safe CPU setting
+}</code></pre>
+<p><strong>Explanation:</strong></p>
 <ul>
-<li>for WSL or Linux (Windows SSH Agent doesn't work for WSL)</li>
+<li>Removed hardcoded KVM flags in the <code>locals</code> block</li>
+<li>Forces pure software emulation (slower but works in WSL2)</li>
+<li>Uses <code>q35</code> machine type (standard x86_64 chipset)</li>
+<li>Uses <code>max</code> CPU model (safe fallback without host-passthrough)</li>
 </ul>
-<pre class="highlight"><code class="language-bash"># Install keychain
-sudo apt install keychain 
+<h3 id="12-boot-mode-configuration">1.2. Boot Mode Configuration<a class="headerlink" href="#12-boot-mode-configuration" title="Permanent link">&para;</a></h3>
+<p>Switched the boot mode to <strong>BIOS</strong> (<code>BOOT=bios</code>) to avoid potential conflicts with UEFI/OVMF firmware copying and usage within the QEMU environment.</p>
+<h3 id="13-build-the-image">1.3. Build the Image<a class="headerlink" href="#13-build-the-image" title="Permanent link">&para;</a></h3>
+<p>Run the build command:</p>
+<pre class="highlight"><code class="language-bash">make debian SERIES=trixie BOOT=bios</code></pre>
+<p><strong>Build process:</strong></p>
+<ol>
+<li>Packer downloads the Debian Trixie ISO</li>
+<li>QEMU starts the VM in software emulation mode</li>
+<li>Automated installation proceeds via preseed</li>
+<li>Image is packaged as <code>debian-custom-cloudimg.tar.gz</code></li>
+</ol>
+<p><strong>Expected output:</strong></p>
+<pre class="highlight"><code>==&gt; Builds finished. The artifacts of successful builds are:
+--&gt; qemu.debian: debian-custom-cloudimg.tar.gz</code></pre>
+<hr />
+<h2 id="2-maas-deployment-steps">2. MAAS Deployment Steps<a class="headerlink" href="#2-maas-deployment-steps" title="Permanent link">&para;</a></h2>
+<p>After a successful build, the image is ready for deployment.</p>
+<h3 id="21-file-transfer">2.1. File Transfer<a class="headerlink" href="#21-file-transfer" title="Permanent link">&para;</a></h3>
+<p>Copy the image to the MAAS server:</p>
+<pre class="highlight"><code class="language-bash">scp debian-custom-cloudimg.tar.gz user@maas_server_ip:/home/user/</code></pre>
+<h3 id="22-upload-image-to-maas">2.2. Upload Image to MAAS<a class="headerlink" href="#22-upload-image-to-maas" title="Permanent link">&para;</a></h3>
+<p>SSH to the MAAS server and upload the custom image:</p>
+<pre class="highlight"><code class="language-bash">ssh user@maas_server_ip
 
-# Add keychain setup to your shell profile ~/.bashrc or ~/.zshrc 
-eval $(keychain --eval --quiet id_rsa)</code></pre>
-<h3 id="configure-local-ssh-aliases">⚙️ Configure Local SSH Aliases<a class="headerlink" href="#configure-local-ssh-aliases" title="Permanent link">&para;</a></h3>
-<p>works the same for Windows and Linux/WSL</p>
-<p>just modify your <code>C:\Users\USER\.ssh\config</code> or <code>./ssh/config</code></p>
-<pre class="highlight"><code class="language-bash"># --- HOMELAB NODES ---
-Host master-00
-    HostName 192.168.55.10
-    User admin
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-
-Host worker-01
-    HostName 192.168.55.11
-    User admin
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-
-Host worker-02
-    HostName 192.168.55.12
-    User admin
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-</code></pre>
-<p>make sure the permissions are correct</p>
-<pre class="highlight"><code class="language-bash">chmod 600 ~/.ssh/config</code></pre>
-<h3 id="hostnames">📝 Hostnames<a class="headerlink" href="#hostnames" title="Permanent link">&para;</a></h3>
+# Upload the custom image
+maas admin boot-resources create \
+    name='custom/debian-trixie' \
+    title='Debian 13 Trixie Custom' \
+    architecture='amd64/generic' \
+    filetype='tgz' \
+    content@=debian-custom-cloudimg.tar.gz</code></pre>
+<h3 id="23-verify-image-upload">2.3. Verify Image Upload<a class="headerlink" href="#23-verify-image-upload" title="Permanent link">&para;</a></h3>
+<p>Check if the image was uploaded successfully:</p>
+<pre class="highlight"><code class="language-bash">maas admin boot-resources read</code></pre>
+<p>Look for your custom image in the list:</p>
+<pre class="highlight"><code>custom/debian-trixie (amd64/generic)</code></pre>
+<h3 id="24-deploy-to-nodes">2.4. Deploy to Nodes<a class="headerlink" href="#24-deploy-to-nodes" title="Permanent link">&para;</a></h3>
+<p><strong>Via MAAS UI:</strong></p>
+<ol>
+<li>Navigate to <strong>Machines</strong></li>
+<li>Select a node in <strong>Ready</strong> state</li>
+<li>Click <strong>Deploy</strong></li>
+<li>Choose <strong>custom/debian-trixie</strong> from the OS dropdown</li>
+<li>Confirm deployment</li>
+</ol>
+<p><strong>Via CLI:</strong></p>
+<pre class="highlight"><code class="language-bash">maas admin machine deploy &lt;system_id&gt; \
+    distro_series='custom/debian-trixie'</code></pre>
+<hr />
+<h2 id="troubleshooting">🐛 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="build-fails-with-permission-denied-kvm">Build Fails with "Permission denied" (KVM)<a class="headerlink" href="#build-fails-with-permission-denied-kvm" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong></p>
+<pre class="highlight"><code>qemu-system-x86_64: failed to initialize kvm: Permission denied</code></pre>
+<p><strong>Solution:</strong></p>
+<p>Apply the KVM fix in section 1.1 - force software emulation by removing <code>accel=kvm</code>.</p>
+<h3 id="build-is-very-slow">Build is Very Slow<a class="headerlink" href="#build-is-very-slow" title="Permanent link">&para;</a></h3>
+<p><strong>Cause:</strong></p>
+<p>Software emulation (no KVM) is significantly slower than hardware acceleration.</p>
+<p><strong>Expected time:</strong></p>
 <ul>
-<li>For Windows open as Administrator <code>C:\Windows\System32\drivers\etc\hosts</code> and add:</li>
+<li>With KVM: 5-10 minutes</li>
+<li>Without KVM (WSL2): 30-60 minutes</li>
 </ul>
-<pre class="highlight"><code>192.168.55.10    master-00
-192.168.55.11    worker-01
-192.168.55.12    worker-02</code></pre>
+<p><strong>Solution:</strong></p>
+<p>Be patient. Consider building on native Linux with KVM support for faster builds.</p>
+<h3 id="ovmfuefi-boot-issues">OVMF/UEFI Boot Issues<a class="headerlink" href="#ovmfuefi-boot-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong></p>
+<pre class="highlight"><code>Could not find firmware for UEFI boot</code></pre>
+<p><strong>Solution:</strong></p>
+<p>Use <code>BOOT=bios</code> flag as shown in section 1.2.</p>
+<hr />
+<h2 id="additional-resources">📚 Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
 <ul>
-<li>For Linux or WSL <code>/etc/hosts</code></li>
+<li><a href="https://developer.hashicorp.com/packer/plugins/builders/qemu">Packer QEMU Builder Docs</a></li>
+<li><a href="https://github.com/canonical/packer-maas">MAAS Image Builder Repository</a></li>
+<li><a href="https://maas.io/docs/custom-images">MAAS Custom Images Documentation</a></li>
 </ul>
 
 
@@ -1342,7 +1698,7 @@ Host worker-02
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:07:40 UTC"><span class="timeago" datetime="2025-12-11T20:07:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:07:40 UTC">2025-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:54:16 UTC"><span class="timeago" datetime="2025-12-11T20:54:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:54:16 UTC">2025-12-11</span>
   </span>
 
     
@@ -1352,7 +1708,7 @@ Host worker-02
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 10, 2025 23:35:14 UTC"><span class="timeago" datetime="2025-12-10T23:35:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 10, 2025 23:35:14 UTC">2025-12-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:54:16 UTC"><span class="timeago" datetime="2025-12-11T20:54:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:54:16 UTC">2025-12-11</span>
   </span>
 
     
@@ -1430,18 +1786,18 @@ Host worker-02
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
-        <script src="../../../js/timeago.min.js"></script>
+        <script src="../../js/timeago.min.js"></script>
       
-        <script src="../../../js/timeago_mkdocs_material.js"></script>
+        <script src="../../js/timeago_mkdocs_material.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
       
-        <script src="../../../javascripts/hljs-init.js"></script>
+        <script src="../../javascripts/hljs-init.js"></script>
       
     
   </body>
