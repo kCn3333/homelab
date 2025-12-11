@@ -4,6 +4,18 @@ nav:
 
   - Infrastructure: infrastructure
   - Provisioning: provisioning
-  - Applications: https://github.com/kCn3333/docker-compose # applications
-  - Automation: automation
+  - Applications: 
+    - Docker Compose Repo: https://github.com/kCn3333/docker-compose
+    - .bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
+    - starship Config: https://github.com/kCn3333/starship-config
+    - conky: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
+    - wireshark Config: https://github.com/kCn3333/wireshark
+    - Bash Scripts: 
+      - backup: https://github.com/kCn3333/linux-bash/tree/main/backup
+      - db backup: https://github.com/kCn3333/linux-bash/tree/main/db_backup
+      - ssh login alert: https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
+      - temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
+  - Automation: 
+    - Automation: automation
+    - n8n Workflows: https://github.com/kCn3333/n8n_workflows
   - Troubleshooting: troubleshooting
