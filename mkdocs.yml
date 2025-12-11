@@ -73,6 +73,7 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+      pygments_style: dracula  
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink:
@@ -98,7 +99,6 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/kCn3333
   generator: false
-  pygments_style: 'dracula' # <-- DODANO: Wymuszenie kolorowania Pygments na schemat Dracula
 
 extra_css:
   - stylesheets/retro.css
