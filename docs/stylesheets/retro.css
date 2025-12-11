@@ -49,7 +49,7 @@ body,
 .md-nav,
 .md-header,
 .md-footer {
-    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-family: Verdana, sans-serif !important;
 }
 
 /* Courier New tylko dla bloków kodu */
