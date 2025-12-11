@@ -223,7 +223,7 @@ code {
 /* 12. Code blocks */
 .md-typeset code {
     background-color: var(--md-code-bg-color);
-    color: var(--retro-green-main);
+    /* Usunięto linię 'color: var(--retro-green-main);' aby Pygments (Dracula) mógł działać */
 }
 
 .md-typeset pre {
