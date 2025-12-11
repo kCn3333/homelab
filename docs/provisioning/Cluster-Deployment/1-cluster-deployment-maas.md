@@ -134,7 +134,7 @@ sudo hostnamectl set-hostname master-00
 
 ##### Remove MAAS APT Proxy configuration
 
-```bash
+```shell
 sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
 # global proxy environment variables (HTTP_PROXY, HTTPS_PROXY)
 sudo sed -i '/maas/d' /etc/environment
