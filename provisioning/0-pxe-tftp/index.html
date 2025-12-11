@@ -8,29 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/provisioning/0-pxe-tftp/">
       
       
+        <link rel="prev" href="../0-custom-image/">
       
-        <link rel="next" href="infrastructure/home/">
+      
+        <link rel="next" href="../1-cluster-deployment-maas/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Homelab Documentation</title>
+        <title>🌐 PXE TFTP - Homelab Documentation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -49,13 +51,13 @@
       
     
     
-      <link rel="stylesheet" href="css/timeago.css">
+      <link rel="stylesheet" href="../../css/timeago.css">
     
-      <link rel="stylesheet" href="stylesheets/retro.css">
+      <link rel="stylesheet" href="../../stylesheets/retro.css">
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#k-c-n-homelab" class="md-skip">
+        <a href="#pxe-tftp" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +98,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Homelab Documentation" class="md-header__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
+    <a href="../.." title="Homelab Documentation" class="md-header__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              🏠 Home
+              🌐 PXE TFTP
             
           </span>
         </div>
@@ -218,7 +220,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Homelab Documentation" class="md-nav__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
+    <a href="../.." title="Homelab Documentation" class="md-nav__button md-logo" aria-label="Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -245,37 +247,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    🏠 Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -291,81 +266,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#quick-links" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🔗 Quick Links
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#whats-this-all-about" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        👉 What's This All About?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-self-host" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🤔 Why Self-Host?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🏗️ The Setup
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation-sections" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📂 Documentation Sections
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -471,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="infrastructure/home/" class="md-nav__link">
+      <a href="../../infrastructure/home/" class="md-nav__link">
         
   
   
@@ -539,18 +439,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -571,7 +473,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -589,7 +491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="provisioning/0-custom-image/" class="md-nav__link">
+      <a href="../0-custom-image/" class="md-nav__link">
         
   
   
@@ -614,10 +516,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="provisioning/0-pxe-tftp/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌐 PXE TFTP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -633,6 +562,247 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-install-tftp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Install TFTP Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-configure-tftp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Configure TFTP Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-tftp-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Create TFTP Directory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-restart-and-verify-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Restart and Verify Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verify-tftp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Verify TFTP Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-test-tftp-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Test TFTP Connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-populate-pxe-boot-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Populate PXE Boot Files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Populate PXE Boot Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-download-pxelinux-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Download PXELinux Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-create-pxelinux-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. Create PXELinux Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-add-os-images-example-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Add OS Images (Example: Ubuntu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-dhcp-configuration-tftp-boot-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. DHCP Configuration (TFTP Boot Options)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-firewall-configuration-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Firewall Configuration (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Verification Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tftp-service-wont-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TFTP Service Won't Start
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pxe-client-cant-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PXE Client Can't Connect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#files-not-found-tftp-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files Not Found (TFTP Error)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Additional Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -645,7 +815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="provisioning/1-cluster-deployment-maas/" class="md-nav__link">
+      <a href="../1-cluster-deployment-maas/" class="md-nav__link">
         
   
   
@@ -673,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="provisioning/2-ssh-configuration/" class="md-nav__link">
+      <a href="../2-ssh-configuration/" class="md-nav__link">
         
   
   
@@ -1116,7 +1286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="automation" class="md-nav__link">
+      <a href="../../automation" class="md-nav__link">
         
   
   
@@ -1179,7 +1349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshooting" class="md-nav__link">
+      <a href="../../troubleshooting" class="md-nav__link">
         
   
   
@@ -1226,10 +1396,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-links" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔗 Quick Links
+        📋 Overview
       
     </span>
   </a>
@@ -1237,10 +1407,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#whats-this-all-about" class="md-nav__link">
+  <a href="#1-install-tftp-server" class="md-nav__link">
     <span class="md-ellipsis">
       
-        👉 What's This All About?
+        1. Install TFTP Server
       
     </span>
   </a>
@@ -1248,10 +1418,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-self-host" class="md-nav__link">
+  <a href="#2-configure-tftp-server" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🤔 Why Self-Host?
+        2. Configure TFTP Server
       
     </span>
   </a>
@@ -1259,10 +1429,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-setup" class="md-nav__link">
+  <a href="#3-create-tftp-directory" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🏗️ The Setup
+        3. Create TFTP Directory
       
     </span>
   </a>
@@ -1270,10 +1440,176 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation-sections" class="md-nav__link">
+  <a href="#4-restart-and-verify-service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📂 Documentation Sections
+        4. Restart and Verify Service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verify-tftp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Verify TFTP Server
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-test-tftp-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Test TFTP Connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-populate-pxe-boot-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Populate PXE Boot Files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Populate PXE Boot Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-download-pxelinux-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Download PXELinux Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-create-pxelinux-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. Create PXELinux Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-add-os-images-example-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Add OS Images (Example: Ubuntu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-dhcp-configuration-tftp-boot-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. DHCP Configuration (TFTP Boot Options)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-firewall-configuration-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Firewall Configuration (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Verification Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tftp-service-wont-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TFTP Service Won't Start
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pxe-client-cant-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PXE Client Can't Connect
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#files-not-found-tftp-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Files Not Found (TFTP Error)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Additional Resources
       
     </span>
   </a>
@@ -1301,57 +1637,209 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/index.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/provisioning/0-pxe-tftp.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="k-c-n-homelab">[ k C n ]  🏠  homelab<a class="headerlink" href="#k-c-n-homelab" title="Permanent link">&para;</a></h1>
-<p align="center">
-  <a href="https://github.com/kCn3333/homelab">
-    <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white" alt="Version">
-  </a>
-  <img src="https://status.kcn333.pl/api/badge/3/status?upColor=4CAF50&downColor=f38ba8" alt="Server Status">
-  <img src="https://status.kcn333.pl/api/badge/3/uptime?color=4CAF50" alt="Uptime">
-  <img src="https://status.kcn333.pl/api/badge/3/response?color=4CAF50" alt="Response">
-</p>
-<blockquote>
-<p>"The cloud is just someone else's computer" – Ancient IT Proverb</p>
-</blockquote>
-<h2 id="quick-links">🔗 Quick Links<a class="headerlink" href="#quick-links" title="Permanent link">&para;</a></h2>
+<h1 id="pxe-tftp">🌐 PXE TFTP<a class="headerlink" href="#pxe-tftp" title="Permanent link">&para;</a></h1>
+<h2 id="overview">📋 Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This guide covers setting up a TFTP server for PXE (Preboot Execution Environment) network booting on Debian.</p>
+<p><strong>Use Case:</strong></p>
+<p>Useful when PXE boot only works in <strong>Legacy BIOS mode</strong> and you need a dedicated TFTP server isolated from your main network.</p>
+<p><strong>Environment:</strong></p>
 <ul>
-<li><a href="https://status.kcn333.pl"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64v336c0 44.2 35.8 80 80 80h400c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.3c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l73.4-73.4 57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></svg></span> <strong>Service Status</strong></a></li>
-<li><a href="https://github.com/kCn3333/docker-compose"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg></span> <strong>Docker Compose</strong></a></li>
-<li><a href="https://kcn333.pl"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M351.9 280H161c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zm-191-48h190.9c-2.8-64.5-17.1-123.9-37.4-167.4-11.4-24.4-23.7-41.8-35.1-52.4C268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4m-48 0c3.5-85.6 25.6-165.1 57.9-217.3C78.7 47.3 10.9 131.2 1.5 232zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3zm111.4-48C501.9 131.2 434.1 47.3 342 14.7c32.3 52.2 54.4 131.7 57.9 217.3z"/></svg></span> <strong>My Home Page</strong></a></li>
+<li>Server: Debian-based system</li>
+<li>TFTP Service: <code>tftpd-hpa</code> (most stable and widely used for PXE)</li>
+<li>Network: VLAN 5 (<code>192.168.55.0/24</code>)</li>
+<li>TFTP Server IP: <code>192.168.55.254</code></li>
 </ul>
 <hr />
-<h2 id="whats-this-all-about">👉 What's This All About?<a class="headerlink" href="#whats-this-all-about" title="Permanent link">&para;</a></h2>
-<p>Hello and welcome! This is my personal homelab documentation – a living knowledge base where I'm trying to document everything from infrastructure setup to those 3 AM debugging sessions that teach you <em>way</em> too much about Docker networking.</p>
-<p><img alt="homelab" src="img/homelab1.png" /></p>
-<h2 id="why-self-host">🤔 Why Self-Host?<a class="headerlink" href="#why-self-host" title="Permanent link">&para;</a></h2>
-<p><strong>Reasons I run a homelab:</strong></p>
-<ol>
-<li><strong>Fun</strong> – Because it's actually so enjoyable</li>
-<li><strong>Curiosity</strong> - It's amazing to see how things work</li>
-<li><strong>Learning</strong> – Best way to understand infrastructure</li>
-<li><strong>Privacy</strong> – My data stays on my hardware</li>
-<li><strong>Control</strong> – I decide when things update (or break)</li>
-<li><strong>Cost</strong> – Cloud bills add up fast, even faster than electricity ones</li>
-</ol>
-<h2 id="the-setup">🏗️ The Setup<a class="headerlink" href="#the-setup" title="Permanent link">&para;</a></h2>
-<h2 id="documentation-sections">📂 Documentation Sections<a class="headerlink" href="#documentation-sections" title="Permanent link">&para;</a></h2>
-<p>Browse the documentation by topic:</p>
-<ul>
-<li><strong><a href="infrastructure/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v64c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm216 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48m56 24a24 24 0 1 1 48 0 24 24 0 1 1-48 0M64 288c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64v-64c0-35.3-28.7-64-64-64zm216 72a24 24 0 1 1 0 48 24 24 0 1 1 0-48m56 24a24 24 0 1 1 48 0 24 24 0 1 1-48 0"/></svg></span> Infrastructure</a></strong> - Hardware setup, network configuration</li>
-<li><strong><a href="provisioning/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M415.9 210.5c12.2-3.3 25 2.5 30.5 13.8l18.6 37.6c10.3 1.4 20.4 4.2 29.9 8.1l35-23.3c10.5-7 24.4-5.6 33.3 3.3l19.2 19.2c8.9 8.9 10.3 22.9 3.3 33.3l-23.3 34.9c1.9 4.7 3.6 9.6 5 14.7s2.3 10.1 3 15.2l37.7 18.6c11.3 5.6 17.1 18.4 13.8 30.5l-7 26.2c-3.3 12.1-14.6 20.3-27.2 19.5l-42-2.7c-6.3 8.1-13.6 15.6-21.9 22l2.7 41.9c.8 12.6-7.4 24-19.5 27.2l-26.2 7c-12.2 3.3-24.9-2.5-30.5-13.8l-18.6-37.6c-10.3-1.4-20.4-4.2-29.9-8.1l-35 23.3c-10.5 7-24.4 5.6-33.3-3.3l-19.2-19.2c-8.9-8.9-10.3-22.8-3.3-33.3l23.3-35c-1.9-4.7-3.6-9.6-5-14.7s-2.3-10.2-3-15.2L288.6 382c-11.3-5.6-17-18.4-13.8-30.5l7-26.2c3.3-12.1 14.6-20.3 27.2-19.5l41.9 2.7c6.3-8.1 13.6-15.6 21.9-22l-2.7-41.8c-.8-12.6 7.4-24 19.5-27.2l26.2-7zM448.4 340a44 44 0 1 0 .1 88 44 44 0 1 0-.1-88M224.9-45.5l26.2 7c12.1 3.3 20.3 14.7 19.5 27.2l-2.7 41.8c8.3 6.4 15.6 13.8 21.9 22l42-2.7c12.5-.8 23.9 7.4 27.2 19.5l7 26.2c3.2 12.1-2.5 24.9-13.8 30.5l-37.7 18.6c-.7 5.1-1.7 10.2-3 15.2s-3.1 10-5 14.7l23.3 35c7 10.5 5.6 24.4-3.3 33.3L307.3 262c-8.9 8.9-22.8 10.3-33.3 3.3L239 242c-9.5 3.9-19.6 6.7-29.9 8.1l-18.6 37.6c-5.6 11.3-18.4 17-30.5 13.8l-26.2-7c-12.2-3.3-20.3-14.7-19.5-27.2l2.7-41.9c-8.3-6.4-15.6-13.8-21.9-22l-42 2.7c-12.5.8-23.9-7.4-27.2-19.5l-7-26.2c-3.2-12.1 2.5-24.9 13.8-30.5l37.7-18.6c.7-5.1 1.7-10.1 3-15.2 1.4-5.1 3-10 5-14.7L55.1 46.5c-7-10.5-5.6-24.4 3.3-33.3L77.6-6c8.9-8.9 22.8-10.3 33.3-3.3l35 23.3c9.5-3.9 19.6-6.7 29.9-8.1l18.6-37.6c5.6-11.3 18.3-17 30.5-13.8M192.4 84a44 44 0 1 0 0 88 44 44 0 1 0 0-88"/></svg></span> Provisioning</a></strong> - VM and bare-metal deployment workflows</li>
-<li><strong><a href="applications/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg></span> Applications</a></strong> - Docker compose, k8s manifests, service configs</li>
-<li><strong><a href="automation/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M360.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6m64.6 136.1c-12.5 12.5-12.5 32.8 0 45.3l73.4 73.4-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0zm-274.7 0c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l73.3-73.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg></span> Automation</a></strong> - Scripts, workflows, infrastructure as code</li>
-<li><strong><a href="troubleshooting/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M70.8-6.7c5.4-5.4 13.8-6.2 20.2-2l118.9 79.2c8.9 5.9 14.2 15.9 14.2 26.6v49.6l90.8 90.8c33.3-15 73.9-8.9 101.2 18.5l126.1 126.1c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.5-67.9-18.5-101.2L178.8 192h-49.6c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2zm145 303.5c-6.3 36.9 2.3 75.9 26.2 107.2l-94.9 95c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.5 35.2 35.1zM384.1 0c20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-56.7 56.7c-3 3-4.7 7.1-4.7 11.3V144c0 8.8 7.2 16 16 16h41.4c4.2 0 8.3-1.7 11.3-4.7l56.7-56.7c7.6-7.5 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 43.2-17.2 82.3-45 111.1L450 222c-33.1-33-78.5-45.7-121.1-38.4l-56.8-56.8V97.1l-.2-5c-.8-12.4-4.4-24.3-10.5-34.9C290.8 22.2 334.8 0 384.1-.1z"/></svg></span> Troubleshooting</a></strong> - Common issues and their solutions</li>
-<li><strong><a href="learning/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="m48 195.8 209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1c-9.8-4-20.2-6.1-30.8-6.1s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160v296c0 13.3 10.7 24 24 24s24-10.7 24-24zm48 71.7V384c0 53 86 96 192 96s192-43 192-96V267.4l-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"/></svg></span> Learning</a></strong> - Tutorials, guides, and useful resources</li>
+<h2 id="1-install-tftp-server">1. Install TFTP Server<a class="headerlink" href="#1-install-tftp-server" title="Permanent link">&para;</a></h2>
+<p>Install <code>tftpd-hpa</code>, the most stable and commonly used TFTP daemon for PXE:</p>
+<pre class="highlight"><code class="language-bash">sudo apt update
+sudo apt install tftpd-hpa</code></pre>
+<hr />
+<h2 id="2-configure-tftp-server">2. Configure TFTP Server<a class="headerlink" href="#2-configure-tftp-server" title="Permanent link">&para;</a></h2>
+<p>Edit the TFTP configuration file:</p>
+<pre class="highlight"><code class="language-bash">sudo nano /etc/default/tftpd-hpa</code></pre>
+<p>Set the following configuration:</p>
+<pre class="highlight"><code class="language-bash">TFTP_USERNAME="tftp"
+TFTP_DIRECTORY="/srv/tftp"
+TFTP_ADDRESS="192.168.55.254:69"
+TFTP_OPTIONS="--secure --create"</code></pre>
+<p><strong>Configuration explanation:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TFTP_USERNAME</code></td>
+<td><code>tftp</code></td>
+<td>User account running the TFTP service</td>
+</tr>
+<tr>
+<td><code>TFTP_DIRECTORY</code></td>
+<td><code>/srv/tftp</code></td>
+<td>Root directory for PXE boot files</td>
+</tr>
+<tr>
+<td><code>TFTP_ADDRESS</code></td>
+<td><code>192.168.55.254:69</code></td>
+<td>IP and port to bind (VLAN 5 only)</td>
+</tr>
+<tr>
+<td><code>TFTP_OPTIONS</code></td>
+<td><code>--secure --create</code></td>
+<td>Security flags and file creation permission</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important:</strong></p>
+<p><code>TFTP_ADDRESS</code> must be set to <code>192.168.55.254</code> (not <code>0.0.0.0</code>) to ensure the service only listens on VLAN 5, preventing any interference with your main LAN (<code>192.168.0.0/24</code>).</p>
+<hr />
+<h2 id="3-create-tftp-directory">3. Create TFTP Directory<a class="headerlink" href="#3-create-tftp-directory" title="Permanent link">&para;</a></h2>
+<p>Create the TFTP root directory and set proper ownership:</p>
+<pre class="highlight"><code class="language-bash">sudo mkdir -p /srv/tftp
+sudo chown -R tftp:tftp /srv/tftp</code></pre>
+<hr />
+<h2 id="4-restart-and-verify-service">4. Restart and Verify Service<a class="headerlink" href="#4-restart-and-verify-service" title="Permanent link">&para;</a></h2>
+<p>Restart the TFTP service and check its status:</p>
+<pre class="highlight"><code class="language-bash">sudo systemctl restart tftpd-hpa
+sudo systemctl enable tftpd-hpa
+sudo systemctl status tftpd-hpa</code></pre>
+<p><strong>Expected output:</strong></p>
+<pre class="highlight"><code>● tftpd-hpa.service - LSB: HPA's tftp server
+   Loaded: loaded (/etc/init.d/tftpd-hpa; generated)
+   Active: active (running)</code></pre>
+<hr />
+<h2 id="5-verify-tftp-server">5. Verify TFTP Server<a class="headerlink" href="#5-verify-tftp-server" title="Permanent link">&para;</a></h2>
+<p>Test if the TFTP server is listening on the correct interface:</p>
+<pre class="highlight"><code class="language-bash">sudo ss -ulnp | grep :69</code></pre>
+<p><strong>Expected output:</strong></p>
+<pre class="highlight"><code>UNCONN 0  0  192.168.55.254:69  0.0.0.0:*  users:(("in.tftpd",pid=1234,fd=3))</code></pre>
+<p>This confirms TFTP is only listening on VLAN 5 (<code>192.168.55.254</code>).</p>
+<hr />
+<h2 id="6-test-tftp-connection">6. Test TFTP Connection<a class="headerlink" href="#6-test-tftp-connection" title="Permanent link">&para;</a></h2>
+<p>From a client machine on the same VLAN, test the TFTP connection:</p>
+<pre class="highlight"><code class="language-bash"># Install tftp client (if not already installed)
+sudo apt install tftp-hpa
+
+# Test connection
+tftp 192.168.55.254
+tftp&gt; status
+tftp&gt; quit</code></pre>
+<hr />
+<h2 id="7-populate-pxe-boot-files">7. Populate PXE Boot Files<a class="headerlink" href="#7-populate-pxe-boot-files" title="Permanent link">&para;</a></h2>
+<h3 id="71-download-pxelinux-files">7.1. Download PXELinux Files<a class="headerlink" href="#71-download-pxelinux-files" title="Permanent link">&para;</a></h3>
+<p>Download the Syslinux bootloader files needed for PXE:</p>
+<pre class="highlight"><code class="language-bash">cd /srv/tftp
+sudo wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.gz
+sudo tar -xzf syslinux-6.03.tar.gz
+sudo cp syslinux-6.03/bios/core/pxelinux.0 .
+sudo cp syslinux-6.03/bios/com32/elflink/ldlinux/ldlinux.c32 .
+sudo cp syslinux-6.03/bios/com32/lib/libcom32.c32 .
+sudo cp syslinux-6.03/bios/com32/libutil/libutil.c32 .
+sudo cp syslinux-6.03/bios/com32/menu/vesamenu.c32 .</code></pre>
+<h3 id="72-create-pxelinux-configuration">7.2. Create PXELinux Configuration<a class="headerlink" href="#72-create-pxelinux-configuration" title="Permanent link">&para;</a></h3>
+<p>Create the PXE boot menu configuration:</p>
+<pre class="highlight"><code class="language-bash">sudo mkdir -p /srv/tftp/pxelinux.cfg
+sudo nano /srv/tftp/pxelinux.cfg/default</code></pre>
+<p><strong>Example configuration:</strong></p>
+<pre class="highlight"><code>DEFAULT menu.c32
+PROMPT 0
+TIMEOUT 300
+MENU TITLE PXE Boot Menu
+
+LABEL local
+    MENU LABEL Boot from local disk
+    LOCALBOOT 0
+
+LABEL ubuntu
+    MENU LABEL Install Ubuntu Server
+    KERNEL ubuntu/vmlinuz
+    APPEND initrd=ubuntu/initrd.img</code></pre>
+<h3 id="73-add-os-images-example-ubuntu">7.3. Add OS Images (Example: Ubuntu)<a class="headerlink" href="#73-add-os-images-example-ubuntu" title="Permanent link">&para;</a></h3>
+<p>Download and place Ubuntu netboot files:</p>
+<pre class="highlight"><code class="language-bash">sudo mkdir -p /srv/tftp/ubuntu
+cd /srv/tftp/ubuntu
+sudo wget http://archive.ubuntu.com/ubuntu/dists/jammy/main/installer-amd64/current/legacy-images/netboot/ubuntu-installer/amd64/linux
+sudo wget http://archive.ubuntu.com/ubuntu/dists/jammy/main/installer-amd64/current/legacy-images/netboot/ubuntu-installer/amd64/initrd.gz
+sudo mv linux vmlinuz
+sudo mv initrd.gz initrd.img</code></pre>
+<hr />
+<h2 id="8-dhcp-configuration-tftp-boot-options">8. DHCP Configuration (TFTP Boot Options)<a class="headerlink" href="#8-dhcp-configuration-tftp-boot-options" title="Permanent link">&para;</a></h2>
+<p>Configure your DHCP server to point clients to the TFTP server.</p>
+<p><strong>Example DHCP options (for dnsmasq):</strong></p>
+<pre class="highlight"><code class="language-bash"># /etc/dnsmasq.conf
+dhcp-boot=pxelinux.0,192.168.55.254</code></pre>
+<p><strong>Example DHCP options (for ISC DHCP Server):</strong></p>
+<pre class="highlight"><code class="language-bash"># /etc/dhcp/dhcpd.conf
+next-server 192.168.55.254;
+filename "pxelinux.0";</code></pre>
+<p>Restart your DHCP service after configuration.</p>
+<hr />
+<h2 id="9-firewall-configuration-optional">9. Firewall Configuration (Optional)<a class="headerlink" href="#9-firewall-configuration-optional" title="Permanent link">&para;</a></h2>
+<p>If you have a firewall enabled, allow TFTP traffic:</p>
+<pre class="highlight"><code class="language-bash"># UFW
+sudo ufw allow 69/udp
+
+# iptables
+sudo iptables -A INPUT -p udp --dport 69 -j ACCEPT</code></pre>
+<hr />
+<h2 id="verification-checklist">✅ Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> TFTP service is running: <code>systemctl status tftpd-hpa</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> TFTP listens on VLAN 5 only: <code>ss -ulnp | grep :69</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> TFTP directory has correct permissions: <code>ls -ld /srv/tftp</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PXE boot files are in place: <code>ls /srv/tftp/pxelinux.0</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> DHCP is configured with TFTP server options</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Test PXE boot from a client machine</li>
 </ul>
-<p><br></p>
+<hr />
+<h2 id="troubleshooting">🐛 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="tftp-service-wont-start">TFTP Service Won't Start<a class="headerlink" href="#tftp-service-wont-start" title="Permanent link">&para;</a></h3>
+<p><strong>Check logs:</strong></p>
+<pre class="highlight"><code class="language-bash">sudo journalctl -u tftpd-hpa -n 50</code></pre>
+<p><strong>Common issue:</strong> Permission denied on <code>/srv/tftp</code></p>
+<p><strong>Solution:</strong></p>
+<pre class="highlight"><code class="language-bash">sudo chown -R tftp:tftp /srv/tftp
+sudo chmod 755 /srv/tftp</code></pre>
+<h3 id="pxe-client-cant-connect">PXE Client Can't Connect<a class="headerlink" href="#pxe-client-cant-connect" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> Client shows "PXE-E32: TFTP open timeout"</p>
+<p><strong>Verify:</strong></p>
+<ol>
+<li>TFTP service is running on correct IP</li>
+<li>Firewall allows UDP port 69</li>
+<li>DHCP is providing correct <code>next-server</code> option</li>
+</ol>
+<p><strong>Test from client network:</strong></p>
+<pre class="highlight"><code class="language-bash">tftp 192.168.55.254
+tftp&gt; get pxelinux.0</code></pre>
+<h3 id="files-not-found-tftp-error">Files Not Found (TFTP Error)<a class="headerlink" href="#files-not-found-tftp-error" title="Permanent link">&para;</a></h3>
+<p><strong>Symptom:</strong> "File not found" errors during PXE boot</p>
+<p><strong>Solution:</strong></p>
+<p>Verify file paths and permissions:</p>
+<pre class="highlight"><code class="language-bash">ls -la /srv/tftp/
+ls -la /srv/tftp/pxelinux.cfg/</code></pre>
+<p>All files must be readable by <code>tftp</code> user:</p>
+<pre class="highlight"><code class="language-bash">sudo chmod -R 644 /srv/tftp/*
+sudo chmod 755 /srv/tftp
+sudo chmod 755 /srv/tftp/pxelinux.cfg</code></pre>
+<hr />
+<h2 id="additional-resources">📚 Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://git.kernel.org/pub/scm/network/tftp/tftp-hpa.git">TFTP-HPA Documentation</a></li>
+<li><a href="https://wiki.syslinux.org/wiki/index.php?title=PXELINUX">Syslinux PXELinux Guide</a></li>
+<li><a href="https://help.ubuntu.com/community/PXEInstallMultiDistro">Ubuntu PXE Installation Guide</a></li>
+</ul>
 
 
 
@@ -1374,7 +1862,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 17:35:45 UTC"><span class="timeago" datetime="2025-12-11T17:35:45+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 17:35:45 UTC">2025-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 21:00:38 UTC"><span class="timeago" datetime="2025-12-11T21:00:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 21:00:38 UTC">2025-12-11</span>
   </span>
 
     
@@ -1384,7 +1872,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 10, 2025 19:41:11 UTC"><span class="timeago" datetime="2025-12-10T19:41:11+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 10, 2025 19:41:11 UTC">2025-12-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 21:00:38 UTC"><span class="timeago" datetime="2025-12-11T21:00:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 21:00:38 UTC">2025-12-11</span>
   </span>
 
     
@@ -1462,18 +1950,18 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.top", "navigation.tracking", "toc.follow"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
-        <script src="js/timeago.min.js"></script>
+        <script src="../../js/timeago.min.js"></script>
       
-        <script src="js/timeago_mkdocs_material.js"></script>
+        <script src="../../js/timeago_mkdocs_material.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
       
-        <script src="javascripts/hljs-init.js"></script>
+        <script src="../../javascripts/hljs-init.js"></script>
       
     
   </body>
