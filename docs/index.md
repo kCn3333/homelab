@@ -46,27 +46,14 @@ Hey there! This is my personal homelab documentation – a living knowledge base
 
 ## 📚 Documentation Sections
 
-<div class="grid cards" markdown>
+Browse the documentation by topic:
 
--   :fontawesome-solid-server: **[Infrastructure](infrastructure/overview.md)**
-    <br><small>Hardware setup, Network Config</small>
-
--   :fontawesome-solid-cogs: **[Provisioning](provisionig/provisionig.md)**
-    <br><small>VM and Bare-metal deployment</small>
-
--   :fontawesome-brands-docker: **[Applications](applications/app.md)**
-    <br><small>Docker Compose files, k8s manifests, service configs</small>
-
--   :fontawesome-solid-code: **[Automation](automation/overview.md)**
-    <br><small>Scripts, workflows, infrastructure as code</small>
-
--   :fontawesome-solid-screwdriver-wrench: **[Troubleshooting](troubleshooting/common-issues.md)**
-    <br><small>Solutions to problems I've encountered</small>
-
--   :fontawesome-solid-graduation-cap: **[Learning](learning/resources.md)**
-    <br><small>Tutorials, guides, resources I found useful</small>
-
-</div>
+- **[:fontawesome-solid-server: Infrastructure](infrastructure/)** - Hardware setup, network configuration
+- **[:fontawesome-solid-cogs: Provisioning](provisioning/)** - VM and bare-metal deployment workflows
+- **[:fontawesome-brands-docker: Applications](applications/)** - Docker Compose files, k8s manifests, service configs
+- **[:fontawesome-solid-code: Automation](automation/)** - Scripts, workflows, infrastructure as code
+- **[:fontawesome-solid-screwdriver-wrench: Troubleshooting](troubleshooting/)** - Common issues and their solutions
+- **[:fontawesome-solid-graduation-cap: Learning](learning/)** - Tutorials, guides, and useful resources
 
 <br>
 
