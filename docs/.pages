@@ -1,11 +1,12 @@
 # docs/.pages
 nav:
-  - Home: index.md
+  - 🏠 Home: index.md
 
 
-  - 🏗️ Infrastructure: infrastructure
+  - 🏗️ Infrastructure: 
+    - 📡 network:  infrastructure
     - 🛠️ project server: https://kcn333.pl/home_server
-    
+
   - 🚀 Provisioning: provisioning
   
 
@@ -25,6 +26,6 @@ nav:
   
   - ⚔️ Automation: 
     - 🎮 Ansible playbooks: automation 
-    - 🤖 n8n Workflows: https://github.com/kCn3333/n8n_workflows
+    - 🤖 n8n workflows: https://github.com/kCn3333/n8n_workflows
       
   - 🧐 Troubleshooting: troubleshooting
