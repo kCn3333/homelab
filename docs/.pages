@@ -3,8 +3,9 @@ nav:
   - Home: index.md
 
 
-  - 🏗️ Infrastructure:
+  - 🏗️ Infrastructure: infrastructure
     - 🛠️ project server: https://kcn333.pl/home_server
+    
   - 🚀 Provisioning: provisioning
   
 
@@ -17,10 +18,10 @@ nav:
     - 🦈 wireshark config: https://github.com/kCn3333/wireshark
 
     - 📁 Bash Scripts: 
-      - </> backup: https://github.com/kCn3333/linux-bash/tree/main/backup
-      - </> db backup: https://github.com/kCn3333/linux-bash/tree/main/db_backup
-      - </> ssh login alert: https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
-      - </> temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
+      - 📄 backup: https://github.com/kCn3333/linux-bash/tree/main/backup
+      - 📄 db backup: https://github.com/kCn3333/linux-bash/tree/main/db_backup
+      - 📄 ssh login alert: https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
+      - 📄 temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
   
   - ⚔️ Automation: 
     - 🎮 Ansible playbooks: automation 

@@ -16,6 +16,8 @@
 * [:fontawesome-brands-github: **Docker Compose**](https://github.com/kCn3333/docker-compose)
 * [:fontawesome-solid-globe: **My Home Page**](https://kcn333.pl)
 
+---
+
 ## 👉 What's This All About?
 
 Hello and welcome! This is my personal homelab documentation – a living knowledge base where I'm trying to document everything from infrastructure setup to those 3 AM debugging sessions that teach you *way* too much about Docker networking.
@@ -34,7 +36,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 4. **Privacy** – My data stays on my hardware
 5. **Control** – I decide when things update (or break)
 6. **Cost** – Cloud bills add up fast, even faster than electricity ones
----
+
 
 ## 🏗️ The Setup
 
@@ -42,7 +44,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 
 
-## 📚 Documentation Sections
+## 📂 Documentation Sections
 
 Browse the documentation by topic:
 
