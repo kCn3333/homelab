@@ -18,7 +18,7 @@
 
 ## 👉 What's This All About?
 
-Hey there! This is my personal homelab documentation – a living knowledge base where I document everything from infrastructure setup to those 3 AM debugging sessions that teach you *way* too much about Linux networking.
+Hello and welcome! This is my personal homelab documentation – a living knowledge base where I'm trying to document everything from infrastructure setup to those 3 AM debugging sessions that teach you *way* too much about Docker networking.
 
 
 ![homelab](img/homelab1.png)
