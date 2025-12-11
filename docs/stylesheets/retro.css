@@ -36,7 +36,7 @@
     --md-footer-bg-color--dark: #000000 !important;
 
     /* Code */
-    --md-code-bg-color: #000000 !important;
+    --md-code-bg-color: #363434 !important;
     /* --md-code-fg-color: var(--retro-green-main) !important; */
     
     /* Links */
@@ -48,8 +48,12 @@ body,
 .md-typeset,
 .md-nav,
 .md-header,
-.md-footer,
-code {
+.md-footer {
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Courier New tylko dla bloków kodu */
+.md-typeset code, pre code {
     font-family: 'Courier New', Courier, monospace !important;
 }
 
