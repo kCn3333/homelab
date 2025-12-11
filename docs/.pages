@@ -4,6 +4,6 @@ nav:
 
   - Infrastructure: infrastructure
   - Provisioning: provisioning
-  - Applications: applications
+  - Applications: https://github.com/kCn3333/docker-compose # applications
   - Automation: automation
   - Troubleshooting: troubleshooting
