@@ -1,0 +1,11 @@
+# docs/.pages
+nav:
+  # Strona główna (musi być pierwsza)
+  - Home: index.md
+  
+  # Lista folderów, które mają się stać sekcjami
+  - Infrastructure: infrastructure/
+  - Provisioning: provisioning/
+  - Applications: applications/
+  - Automation: automation/
+  - Troubleshooting: troubleshooting/
