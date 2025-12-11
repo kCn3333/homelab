@@ -1,4 +1,4 @@
-# 🏠 Whole infrastructure
+# 🏢 Infrastructure
 
 <br>
 

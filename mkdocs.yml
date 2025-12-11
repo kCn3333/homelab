@@ -73,7 +73,9 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-      pygments_style: one-dark  
+      pygments_style: one-dark 
+      use_pygments: false  # 
+  - pymdownx.superfences 
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink:
@@ -102,8 +104,11 @@ extra:
 
 extra_css:
   - stylesheets/retro.css
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css
 
-#extra_javascript:
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js
+  - javascripts/hljs-init.js
  # - javascripts/matrix-homelab.js
 
 # Custom footer content

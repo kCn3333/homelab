@@ -94,12 +94,12 @@ This repo contains my homelab documentation, configs, and infrastructure notes. 
 ## 📝 Documentation Structure
 
 ```
-📁 docs/
-├── 📁 infrastructure/     # Server & network setup
-├── 📁 provisioning        # Setup & System hardening
-├── 📁 applications/       # App deploying & configurations
-├── 📁 automation/         # Scripts & workflows
-└── 📁 troubleshooting/    # War stories & fixes
+📂 docs/
+├── 📂 infrastructure/     # Server & network setup
+├── 📂 provisioning        # Setup & System hardening
+├── 📂 applications/       # App deploying & configurations
+├── 📂 automation/         # Scripts & workflows
+└── 📂 troubleshooting/    # War stories & fixes
 ```
 
 ## 🎯 Goals

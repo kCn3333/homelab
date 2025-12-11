@@ -1,5 +1,5 @@
 
-# SSH Configuration
+# 📄 SSH Configuration
 
 ### 🔑 Configure SSH Agent
 
@@ -15,6 +15,7 @@ ssh-add C:\Users\USER\.ssh\id_rsa
 ```
 
 - for WSL or Linux (Windows SSH Agent doesn't work for WSL)
+
 ```bash
 # Install keychain
 sudo apt install keychain 
@@ -27,7 +28,7 @@ eval $(keychain --eval --quiet id_rsa)
 
 works the same for Windows and Linux/WSL
 
-modify your `C:\Users\USER\.ssh\config` or `./ssh/config`
+just modify your `C:\Users\USER\.ssh\config` or `./ssh/config`
 
 ```bash
 # --- HOMELAB NODES ---
@@ -52,6 +53,7 @@ Host worker-02
 ```
 
 make sure the permissions are correct
+
 ```bash
 chmod 600 ~/.ssh/config
 ```
@@ -59,6 +61,7 @@ chmod 600 ~/.ssh/config
 ### 📝 Hostnames
 
 - For Windows open as Administrator `C:\Windows\System32\drivers\etc\hosts` and add:
+
 ```
 192.168.55.10    master-00
 192.168.55.11    worker-01

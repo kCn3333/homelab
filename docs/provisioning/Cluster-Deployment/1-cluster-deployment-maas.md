@@ -1,5 +1,5 @@
 
-# Cluster Deployment using MAAS
+# 🛢️ Cluster Deployment using MAAS
 
 Used Prerequisites:
 - Ubuntu Server: for MAAS Installation
@@ -24,7 +24,7 @@ sudo apt install maas
 
 #### 2. ⚙️ Initial Configuration
 
-Initialize the MAAS region controller. You will be prompted to choose a user (create a new one) .
+Initialize the MAAS region controller. You will be prompted to choose a user (create a new one).
 
 ```bash
 sudo maas init
@@ -46,39 +46,39 @@ Login: Use the administrator account credentials set during maas init
 
 By default, MAAS provides DHCP. To avoid conflicts with your router, you must disable the dynamic range and only use MAAS for IP reservations.
 
-1. Navigate to Subnets in the MAAS UI.
+1.1 Navigate to Subnets in the MAAS UI.
 
-2. Select your primary subnet (e.g., 192.168.55.0/24).
+1.2 Select your primary subnet (e.g., 192.168.55.0/24).
 
-3. In the DHCP section, delete the dynamic IP range.
+1.3 In the DHCP section, delete the dynamic IP range.
 
-4. Ensure the DHCP mode for the VLAN is set to "Unmanaged" or that the DHCP range is empty.
+1.4 Ensure the DHCP mode for the VLAN is set to "Unmanaged" or that the DHCP range is empty.
 
 #### 2. 📝 Configure Domain and Hostnames
 
 Set a cleaner domain name and ensure MAAS uses consistent naming conventions.
 
-1. Navigate to Settings -> General -> Default DNS suffix. Change the default (e.g., maas) to something cleaner (e.g., homelab).
+2.1 Navigate to Settings -> General -> Default DNS suffix. Change the default (e.g., maas) to something cleaner (e.g., homelab).
 
-2. In the DNS tab, verify that MAAS is configured to manage DNS records for your domain.
+2.2 In the DNS tab, verify that MAAS is configured to manage DNS records for your domain.
 
 #### 3. 🔑 SSH Key Registration
 
 You can securely import your keys directly from GitHub, which is faster than pasting them manually.
 
-1. Go to User Account -> My Account.
+3.1 Go to User Account -> My Account.
 
-2. In the SSH keys section, choose "Import from GitHub".
+3.2 In the SSH keys section, choose "Import from GitHub".
 
-3. Enter your GitHub username. MAAS will automatically fetch and register all your public keys.
+3.3 Enter your GitHub username. MAAS will automatically fetch and register all your public keys.
 
 #### 4. ⚙️ Commissioning and IP Assignment
 
-1. Start Nodes: Power on your bare-metal nodes configured for PXE boot.
+4.1 Start Nodes: Power on your bare-metal nodes configured for PXE boot.
 
-2. Commissioning: MAAS will discover them and perform hardware testing. Once complete, they will transition to the Ready state.
+4.2 Commissioning: MAAS will discover them and perform hardware testing. Once complete, they will transition to the Ready state.
 
-3. Static IP Reservation: For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address.
+4.3 Static IP Reservation: For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address.
 
 for me it was :
 
@@ -92,13 +92,14 @@ for me it was :
 
 Select Ubuntu 24.04 LTS or your custom image for each node, ensure the static IP from the table above is assigned during deployment. After that remember to change boot sequence from PXE to External Disk.
 
-#### 2. 🧹 Post-Deployment Cleanup 
+#### 6. 🧹 Post-Deployment Cleanup 
 
 After deployment, the nodes are running Ubuntu 24.04 with the user `ubuntu` by default and some MAAS settings. 
 
 ##### Perform SSH login (using `ssh ubuntu@<IP_ADDRESS>`) and clean up:
 
-1. User Account Migration (ubuntu -> admin)
+6.1 User Account Migration (ubuntu -> admin)
+
 ```bash
 # Add new user
 sudo adduser admin
@@ -117,7 +118,7 @@ sudo chmod 700 /home/admin/.ssh
 sudo chmod 600 /home/admin/.ssh/authorized_keys
 ```
 
-2. Log out and log back in as the new user
+6.2 Log out and log back in as the new user
 ```bash
 exit
 ssh admin@<IP_ADDRESS>
@@ -126,12 +127,12 @@ ssh admin@<IP_ADDRESS>
 sudo deluser --remove-home ubuntu
 ```
 
-3. If you want to change the hostname
+6.3 If you want to change the hostname
 ```bash
 sudo hostnamectl set-hostname master-00
 ```
 
-4. Remove MAAS APT Proxy configuration
+6.4 Remove MAAS APT Proxy configuration
 ```bash
 sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
 # global proxy environment variables (HTTP_PROXY, HTTPS_PROXY)
