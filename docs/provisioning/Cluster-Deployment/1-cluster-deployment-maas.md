@@ -1,28 +1,29 @@
+# 🛢️ MAAS Deployment
 
-# 🛢️ Cluster Deployment using MAAS
+**Used Prerequisites:**
 
-Used Prerequisites:
 - Ubuntu Server: for MAAS Installation
-- Nodes: Three machines (Master, Worker 1, Worker 2) configured for PXE boot.
+- Nodes: Three machines (Master, Worker 1, Worker 2) configured for PXE boot
+
 ---
 
-### MAAS Deployment & Initial Configuration
+## MAAS Deployment & Initial Configuration
 
-#### 1. 💾 MAAS Core Installation
+### 1. 💾 MAAS Core Installation
 
 Install the MAAS packages and the required database components.
 
 ```bash
-# 1. Add repository for latest MaaS version
+# Add repository for latest MaaS version
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:maas/3.7
 
-# 2. Update and install the MaaS package
+# Update and install the MaaS package
 sudo apt update
 sudo apt install maas
 ```
 
-#### 2. ⚙️ Initial Configuration
+### 2. ⚙️ Initial Configuration
 
 Initialize the MAAS region controller. You will be prompted to choose a user (create a new one).
 
@@ -30,121 +31,151 @@ Initialize the MAAS region controller. You will be prompted to choose a user (cr
 sudo maas init
 ```
 
-#### 3. 🌐 Access UI
+### 3. 🌐 Access UI
 
 Open a web browser and navigate to:
 
-***`http://<MAAS_SERVER_IP>:5240/MAAS`***
+**`http://<MAAS_SERVER_IP>:5240/MAAS`**
 
-Login: Use the administrator account credentials set during maas init
+**Login:** Use the administrator account credentials set during `maas init`
 
 ---
 
-### MAAS Networking & Domain Configuration
+## MAAS Networking & Domain Configuration
 
-#### 1. 🛑 Disable DHCP on the VLAN
+### 1. 🛑 Disable DHCP on the VLAN
 
 By default, MAAS provides DHCP. To avoid conflicts with your router, you must disable the dynamic range and only use MAAS for IP reservations.
 
-1.1 Navigate to Subnets in the MAAS UI.
+**Steps:**
 
-1.2 Select your primary subnet (e.g., 192.168.55.0/24).
+1. Navigate to **Subnets** in the MAAS UI
+2. Select your primary subnet (e.g., `192.168.55.0/24`)
+3. In the DHCP section, delete the dynamic IP range
+4. Ensure the DHCP mode for the VLAN is set to **"Unmanaged"** or that the DHCP range is empty
 
-1.3 In the DHCP section, delete the dynamic IP range.
-
-1.4 Ensure the DHCP mode for the VLAN is set to "Unmanaged" or that the DHCP range is empty.
-
-#### 2. 📝 Configure Domain and Hostnames
+### 2. 📝 Configure Domain and Hostnames
 
 Set a cleaner domain name and ensure MAAS uses consistent naming conventions.
 
-2.1 Navigate to Settings -> General -> Default DNS suffix. Change the default (e.g., maas) to something cleaner (e.g., homelab).
+**Steps:**
 
-2.2 In the DNS tab, verify that MAAS is configured to manage DNS records for your domain.
+1. Navigate to **Settings → General → Default DNS suffix**
+2. Change the default (e.g., `maas`) to something cleaner (e.g., `homelab`)
+3. In the **DNS** tab, verify that MAAS is configured to manage DNS records for your domain
 
-#### 3. 🔑 SSH Key Registration
+### 3. 🔑 SSH Key Registration
 
 You can securely import your keys directly from GitHub, which is faster than pasting them manually.
 
-3.1 Go to User Account -> My Account.
+**Steps:**
 
-3.2 In the SSH keys section, choose "Import from GitHub".
+1. Go to **User Account → My Account**
+2. In the **SSH keys** section, choose **"Import from GitHub"**
+3. Enter your GitHub username - MAAS will automatically fetch and register all your public keys
 
-3.3 Enter your GitHub username. MAAS will automatically fetch and register all your public keys.
+### 4. ⚙️ Commissioning and IP Assignment
 
-#### 4. ⚙️ Commissioning and IP Assignment
+**Steps:**
 
-4.1 Start Nodes: Power on your bare-metal nodes configured for PXE boot.
+1. **Start Nodes:** Power on your bare-metal nodes configured for PXE boot
+2. **Commissioning:** MAAS will discover them and perform hardware testing. Once complete, they will transition to the **Ready** state
+3. **Static IP Reservation:** For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address
 
-4.2 Commissioning: MAAS will discover them and perform hardware testing. Once complete, they will transition to the Ready state.
+**My configuration:**
 
-4.3 Static IP Reservation: For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address.
+|Node|Hostname|Target IP|
+|---|---|---|
+|Control Plane|master-00|192.168.55.10|
+|Agent 1|worker-01|192.168.55.11|
+|Agent 2|worker-02|192.168.55.12|
 
-for me it was :
+### 5. 🚀 Deploying the Nodes
 
-| Node          | hostname  | target        |
-| ------------- | --------- | ------------- |
-| Control Plane | master-00 | 192.168.55.10 |
-| Agent 1       | worker-01 | 192.168.55.11 |
-| Agent 2       | worker-02 | 192.168.55.12 |
+1. Select **Ubuntu 24.04 LTS** or your custom image for each node
+2. Ensure the static IP from the table above is assigned during deployment
+3. After deployment, remember to **change boot sequence from PXE to External Disk**
 
-#### 5. 🚀 Deploying the Nodes
+### 6. 🧹 Post-Deployment Cleanup
 
-Select Ubuntu 24.04 LTS or your custom image for each node, ensure the static IP from the table above is assigned during deployment. After that remember to change boot sequence from PXE to External Disk.
+After deployment, the nodes are running Ubuntu 24.04 with the user `ubuntu` by default and some MAAS settings.
 
-#### 6. 🧹 Post-Deployment Cleanup 
+#### User Account Migration (ubuntu → admin)
 
-After deployment, the nodes are running Ubuntu 24.04 with the user `ubuntu` by default and some MAAS settings. 
-
-##### Perform SSH login (using `ssh ubuntu@<IP_ADDRESS>`) and clean up:
-
-6.1 User Account Migration (ubuntu -> admin)
+Perform SSH login using `ssh ubuntu@<IP_ADDRESS>` and execute:
 
 ```bash
 # Add new user
 sudo adduser admin
+
 # Grant sudo rights to the new user
 sudo usermod -aG sudo admin
+```
 
-# Enable password-less sudo (required for Ansible)
+Enable password-less sudo (required for Ansible):
+
+```bash
 sudo visudo
-# Add to the end of a file
-admin ALL=(ALL) NOPASSWD: ALL
+```
 
-# Copy SSH key to new user and fix ownership/permissions
+Add to the end of the file:
+
+```bash
+admin ALL=(ALL) NOPASSWD: ALL
+```
+
+Copy SSH key to new user and fix ownership/permissions:
+
+```bash
 sudo cp -r /home/ubuntu/.ssh /home/admin/
 sudo chown -R admin:admin /home/admin/.ssh
 sudo chmod 700 /home/admin/.ssh
 sudo chmod 600 /home/admin/.ssh/authorized_keys
 ```
 
-6.2 Log out and log back in as the new user
+#### Switch to New User
+
+Log out and log back in as the new user:
+
 ```bash
 exit
 ssh admin@<IP_ADDRESS>
+```
 
-# If works fine, delete ubuntu user
+If everything works fine, delete the ubuntu user:
+
+```bash
 sudo deluser --remove-home ubuntu
 ```
 
-6.3 If you want to change the hostname
+#### Change Hostname (Optional)
+
 ```bash
 sudo hostnamectl set-hostname master-00
 ```
 
-6.4 Remove MAAS APT Proxy configuration
+#### Remove MAAS APT Proxy Configuration
+
 ```bash
+# Remove APT proxy config
 sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
-# global proxy environment variables (HTTP_PROXY, HTTPS_PROXY)
+
+# Remove global proxy environment variables
 sudo sed -i '/maas/d' /etc/environment
 sudo sed -i '/maas/d' /etc/bash.bashrc
 
+# Fix missing packages
 sudo apt update --fix-missing
-# Optionally remove duplicate source warnings
+```
+
+Optionally remove duplicate source warnings:
+
+```bash
 sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
 ```
 
-and finally update system packages
+#### Final System Update
+
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
