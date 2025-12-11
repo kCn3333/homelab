@@ -2,9 +2,9 @@
 nav:
   - Home: index.md
 
-  - Infrastructure: infrastructure
-  - Provisioning: provisioning
-  - Applications: 
+  - ':fontawesome-solid-server: Infrastructure': infrastructure
+  - ':fontawesome-solid-cogs: Provisioning': provisioning
+  - ':fontawesome-brands-docker: Applications':
     - Docker Compose Repo: https://github.com/kCn3333/docker-compose
     - .bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
     - starship Config: https://github.com/kCn3333/starship-config
@@ -15,7 +15,7 @@ nav:
       - db backup: https://github.com/kCn3333/linux-bash/tree/main/db_backup
       - ssh login alert: https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
       - temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
-  - Automation: 
+  - ':fontawesome-solid-code: Automation': automation
     - Automation: automation
     - n8n Workflows: https://github.com/kCn3333/n8n_workflows
-  - Troubleshooting: troubleshooting
+  - ':fontawesome-solid-screwdriver-wrench: Troubleshooting': troubleshooting

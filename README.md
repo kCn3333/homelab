@@ -4,9 +4,10 @@
 
 <div align="center">
 
-[![Documentation](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://kcn3333.github.io/homelab/)
-[![GitHub](https://img.shields.io/badge/github-333333?style=flat-square&logo=github&logoColor=white)](https://github.com/kCn3333/homelab)
+[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat-square&logo=github&label=Pages%20Build&color=4CAF50)](https://github.com/kCn3333/homelab/actions)
+[![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://kcn3333.github.io/homelab/)
 [![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat-square)](LICENSE)
+
 
 </div>
 
@@ -88,17 +89,17 @@ This repo contains my homelab documentation, configs, and infrastructure notes. 
 | :--- | :--- |
 | ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat-square&logo=grafana&logoColor=white) | Metrics Visualization |
 | ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white) | Metrics Collection |
-| ![Uptime Kuma](https://img.shields.io/badge/Uptime_Kuma-58D68D?style=flat-square&logo=uptime-kuma&logoColor=white) | Service Uptime Monitoring |
+| ![Uptime Kuma](https://img.shields.io/badge/Uptime_Kuma-4CAF50?style=flat-square&logo=uptime-kuma&logoColor=white) | Service Uptime Monitoring |
 
 ## 📝 Documentation Structure
 
 ```
-docs/
-├── infrastructure/     # Server & network setup
-├── provisioning        # Setup & System hardening
-├── applications/       # App deploying & configurations
-├── automation/         # Scripts & workflows
-└── troubleshooting/    # War stories & fixes
+📁 docs/
+├── 📁 infrastructure/     # Server & network setup
+├── 📁 provisioning        # Setup & System hardening
+├── 📁 applications/       # App deploying & configurations
+├── 📁 automation/         # Scripts & workflows
+└── 📁 troubleshooting/    # War stories & fixes
 ```
 
 ## 🎯 Goals
