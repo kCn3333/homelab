@@ -25,7 +25,7 @@
     
     
       
-        <title>Cluster Deployment using MAAS - Homelab Documentation</title>
+        <title>🛢️ Cluster Deployment using MAAS - Homelab Documentation</title>
       
     
     
@@ -54,6 +54,8 @@
       <link rel="stylesheet" href="../../../css/timeago.css">
     
       <link rel="stylesheet" href="../../../stylesheets/retro.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cluster Deployment using MAAS
+              🛢️ Cluster Deployment using MAAS
             
           </span>
         </div>
@@ -376,7 +378,7 @@
   <span class="md-ellipsis">
     
   
-    🏠 Whole infrastructure
+    🏢 Infrastructure
   
 
     
@@ -554,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Cluster Deployment using MAAS
+    🛢️ Cluster Deployment using MAAS
   
 
     
@@ -572,7 +574,7 @@
   <span class="md-ellipsis">
     
   
-    Cluster Deployment using MAAS
+    🛢️ Cluster Deployment using MAAS
   
 
     
@@ -715,15 +717,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-post-deployment-cleanup" class="md-nav__link">
+  <a href="#6-post-deployment-cleanup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 🧹 Post-Deployment Cleanup
+        6. 🧹 Post-Deployment Cleanup
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 🧹 Post-Deployment Cleanup">
+    <nav class="md-nav" aria-label="6. 🧹 Post-Deployment Cleanup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -770,7 +772,7 @@
   <span class="md-ellipsis">
     
   
-    SSH Configuration
+    📄 SSH Configuration
   
 
     
@@ -1011,7 +1013,7 @@
   <span class="md-ellipsis">
     
   
-    📁 Bash Scripts
+    📂 Bash Scripts
   
 
     
@@ -1027,7 +1029,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    📁 Bash Scripts
+    📂 Bash Scripts
   
 
           </label>
@@ -1441,15 +1443,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-post-deployment-cleanup" class="md-nav__link">
+  <a href="#6-post-deployment-cleanup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 🧹 Post-Deployment Cleanup
+        6. 🧹 Post-Deployment Cleanup
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 🧹 Post-Deployment Cleanup">
+    <nav class="md-nav" aria-label="6. 🧹 Post-Deployment Cleanup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1501,7 +1503,7 @@
   
 
 
-<h1 id="cluster-deployment-using-maas">Cluster Deployment using MAAS<a class="headerlink" href="#cluster-deployment-using-maas" title="Permanent link">&para;</a></h1>
+<h1 id="cluster-deployment-using-maas">🛢️ Cluster Deployment using MAAS<a class="headerlink" href="#cluster-deployment-using-maas" title="Permanent link">&para;</a></h1>
 <p>Used Prerequisites:
 - Ubuntu Server: for MAAS Installation
 - Nodes: Three machines (Master, Worker 1, Worker 2) configured for PXE boot.</p>
@@ -1509,18 +1511,16 @@
 <h3 id="maas-deployment-initial-configuration">MAAS Deployment &amp; Initial Configuration<a class="headerlink" href="#maas-deployment-initial-configuration" title="Permanent link">&para;</a></h3>
 <h4 id="1-maas-core-installation">1. 💾 MAAS Core Installation<a class="headerlink" href="#1-maas-core-installation" title="Permanent link">&para;</a></h4>
 <p>Install the MAAS packages and the required database components.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. Add repository for latest MaaS version</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>software-properties-common
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:maas/3.7
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># 2. Update and install the MaaS package</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>maas
-</span></code></pre></div>
+<pre class="highlight"><code class="language-bash"># 1. Add repository for latest MaaS version
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:maas/3.7
+
+# 2. Update and install the MaaS package
+sudo apt update
+sudo apt install maas</code></pre>
 <h4 id="2-initial-configuration">2. ⚙️ Initial Configuration<a class="headerlink" href="#2-initial-configuration" title="Permanent link">&para;</a></h4>
-<p>Initialize the MAAS region controller. You will be prompted to choose a user (create a new one) .</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>maas<span class="w"> </span>init
-</span></code></pre></div>
+<p>Initialize the MAAS region controller. You will be prompted to choose a user (create a new one).</p>
+<pre class="highlight"><code class="language-bash">sudo maas init</code></pre>
 <h4 id="3-access-ui">3. 🌐 Access UI<a class="headerlink" href="#3-access-ui" title="Permanent link">&para;</a></h4>
 <p>Open a web browser and navigate to:</p>
 <p><strong><em><code>http://&lt;MAAS_SERVER_IP&gt;:5240/MAAS</code></em></strong></p>
@@ -1529,55 +1529,23 @@
 <h3 id="maas-networking-domain-configuration">MAAS Networking &amp; Domain Configuration<a class="headerlink" href="#maas-networking-domain-configuration" title="Permanent link">&para;</a></h3>
 <h4 id="1-disable-dhcp-on-the-vlan">1. 🛑 Disable DHCP on the VLAN<a class="headerlink" href="#1-disable-dhcp-on-the-vlan" title="Permanent link">&para;</a></h4>
 <p>By default, MAAS provides DHCP. To avoid conflicts with your router, you must disable the dynamic range and only use MAAS for IP reservations.</p>
-<ol>
-<li>
-<p>Navigate to Subnets in the MAAS UI.</p>
-</li>
-<li>
-<p>Select your primary subnet (e.g., 192.168.55.0/24).</p>
-</li>
-<li>
-<p>In the DHCP section, delete the dynamic IP range.</p>
-</li>
-<li>
-<p>Ensure the DHCP mode for the VLAN is set to "Unmanaged" or that the DHCP range is empty.</p>
-</li>
-</ol>
+<p>1.1 Navigate to Subnets in the MAAS UI.</p>
+<p>1.2 Select your primary subnet (e.g., 192.168.55.0/24).</p>
+<p>1.3 In the DHCP section, delete the dynamic IP range.</p>
+<p>1.4 Ensure the DHCP mode for the VLAN is set to "Unmanaged" or that the DHCP range is empty.</p>
 <h4 id="2-configure-domain-and-hostnames">2. 📝 Configure Domain and Hostnames<a class="headerlink" href="#2-configure-domain-and-hostnames" title="Permanent link">&para;</a></h4>
 <p>Set a cleaner domain name and ensure MAAS uses consistent naming conventions.</p>
-<ol>
-<li>
-<p>Navigate to Settings -&gt; General -&gt; Default DNS suffix. Change the default (e.g., maas) to something cleaner (e.g., homelab).</p>
-</li>
-<li>
-<p>In the DNS tab, verify that MAAS is configured to manage DNS records for your domain.</p>
-</li>
-</ol>
+<p>2.1 Navigate to Settings -&gt; General -&gt; Default DNS suffix. Change the default (e.g., maas) to something cleaner (e.g., homelab).</p>
+<p>2.2 In the DNS tab, verify that MAAS is configured to manage DNS records for your domain.</p>
 <h4 id="3-ssh-key-registration">3. 🔑 SSH Key Registration<a class="headerlink" href="#3-ssh-key-registration" title="Permanent link">&para;</a></h4>
 <p>You can securely import your keys directly from GitHub, which is faster than pasting them manually.</p>
-<ol>
-<li>
-<p>Go to User Account -&gt; My Account.</p>
-</li>
-<li>
-<p>In the SSH keys section, choose "Import from GitHub".</p>
-</li>
-<li>
-<p>Enter your GitHub username. MAAS will automatically fetch and register all your public keys.</p>
-</li>
-</ol>
+<p>3.1 Go to User Account -&gt; My Account.</p>
+<p>3.2 In the SSH keys section, choose "Import from GitHub".</p>
+<p>3.3 Enter your GitHub username. MAAS will automatically fetch and register all your public keys.</p>
 <h4 id="4-commissioning-and-ip-assignment">4. ⚙️ Commissioning and IP Assignment<a class="headerlink" href="#4-commissioning-and-ip-assignment" title="Permanent link">&para;</a></h4>
-<ol>
-<li>
-<p>Start Nodes: Power on your bare-metal nodes configured for PXE boot.</p>
-</li>
-<li>
-<p>Commissioning: MAAS will discover them and perform hardware testing. Once complete, they will transition to the Ready state.</p>
-</li>
-<li>
-<p>Static IP Reservation: For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address.</p>
-</li>
-</ol>
+<p>4.1 Start Nodes: Power on your bare-metal nodes configured for PXE boot.</p>
+<p>4.2 Commissioning: MAAS will discover them and perform hardware testing. Once complete, they will transition to the Ready state.</p>
+<p>4.3 Static IP Reservation: For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address.</p>
 <p>for me it was :</p>
 <table>
 <thead>
@@ -1607,59 +1575,44 @@
 </table>
 <h4 id="5-deploying-the-nodes">5. 🚀 Deploying the Nodes<a class="headerlink" href="#5-deploying-the-nodes" title="Permanent link">&para;</a></h4>
 <p>Select Ubuntu 24.04 LTS or your custom image for each node, ensure the static IP from the table above is assigned during deployment. After that remember to change boot sequence from PXE to External Disk.</p>
-<h4 id="2-post-deployment-cleanup">2. 🧹 Post-Deployment Cleanup<a class="headerlink" href="#2-post-deployment-cleanup" title="Permanent link">&para;</a></h4>
+<h4 id="6-post-deployment-cleanup">6. 🧹 Post-Deployment Cleanup<a class="headerlink" href="#6-post-deployment-cleanup" title="Permanent link">&para;</a></h4>
 <p>After deployment, the nodes are running Ubuntu 24.04 with the user <code>ubuntu</code> by default and some MAAS settings. </p>
 <h5 id="perform-ssh-login-using-ssh-ubuntuip_address-and-clean-up">Perform SSH login (using <code>ssh ubuntu@&lt;IP_ADDRESS&gt;</code>) and clean up:<a class="headerlink" href="#perform-ssh-login-using-ssh-ubuntuip_address-and-clean-up" title="Permanent link">&para;</a></h5>
-<ol>
-<li>
-<p>User Account Migration (ubuntu -&gt; admin)
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Add new user</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>admin
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Grant sudo rights to the new user</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>admin
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># Enable password-less sudo (required for Ansible)</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>sudo<span class="w"> </span>visudo
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># Add to the end of a file</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>admin<span class="w"> </span><span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>ALL
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># Copy SSH key to new user and fix ownership/permissions</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>/home/ubuntu/.ssh<span class="w"> </span>/home/admin/
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>admin:admin<span class="w"> </span>/home/admin/.ssh
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/home/admin/.ssh
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/admin/.ssh/authorized_keys
-</span></code></pre></div></p>
-</li>
-<li>
-<p>Log out and log back in as the new user
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">exit</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ssh<span class="w"> </span>admin@&lt;IP_ADDRESS&gt;
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># If works fine, delete ubuntu user</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sudo<span class="w"> </span>deluser<span class="w"> </span>--remove-home<span class="w"> </span>ubuntu
-</span></code></pre></div></p>
-</li>
-<li>
-<p>If you want to change the hostname
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>master-00
-</span></code></pre></div></p>
-</li>
-<li>
-<p>Remove MAAS APT Proxy configuration
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/apt/apt.conf.d/90curtin-aptproxy
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># global proxy environment variables (HTTP_PROXY, HTTPS_PROXY)</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/maas/d&#39;</span><span class="w"> </span>/etc/environment
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/maas/d&#39;</span><span class="w"> </span>/etc/bash.bashrc
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span>--fix-missing
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Optionally remove duplicate source warnings</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/apt/sources.list<span class="w"> </span>/etc/apt/sources.list.bak
-</span></code></pre></div></p>
-</li>
-</ol>
+<p>6.1 User Account Migration (ubuntu -&gt; admin)</p>
+<pre class="highlight"><code class="language-bash"># Add new user
+sudo adduser admin
+# Grant sudo rights to the new user
+sudo usermod -aG sudo admin
+
+# Enable password-less sudo (required for Ansible)
+sudo visudo
+# Add to the end of a file
+admin ALL=(ALL) NOPASSWD: ALL
+
+# Copy SSH key to new user and fix ownership/permissions
+sudo cp -r /home/ubuntu/.ssh /home/admin/
+sudo chown -R admin:admin /home/admin/.ssh
+sudo chmod 700 /home/admin/.ssh
+sudo chmod 600 /home/admin/.ssh/authorized_keys</code></pre>
+<p>6.2 Log out and log back in as the new user
+<pre class="highlight"><code class="language-bash">exit
+ssh admin@&lt;IP_ADDRESS&gt;
+
+# If works fine, delete ubuntu user
+sudo deluser --remove-home ubuntu</code></pre></p>
+<p>6.3 If you want to change the hostname
+<pre class="highlight"><code class="language-bash">sudo hostnamectl set-hostname master-00</code></pre></p>
+<p>6.4 Remove MAAS APT Proxy configuration
+<pre class="highlight"><code class="language-bash">sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
+# global proxy environment variables (HTTP_PROXY, HTTPS_PROXY)
+sudo sed -i '/maas/d' /etc/environment
+sudo sed -i '/maas/d' /etc/bash.bashrc
+
+sudo apt update --fix-missing
+# Optionally remove duplicate source warnings
+sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak</code></pre></p>
 <p>and finally update system packages
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
-</span></code></pre></div></p>
+<pre class="highlight"><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></p>
 
 
 
@@ -1682,7 +1635,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 11:48:31 UTC"><span class="timeago" datetime="2025-12-11T11:48:31+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 11:48:31 UTC">2025-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:07:40 UTC"><span class="timeago" datetime="2025-12-11T20:07:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:07:40 UTC">2025-12-11</span>
   </span>
 
     
@@ -1778,6 +1731,10 @@
         <script src="../../../js/timeago.min.js"></script>
       
         <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+      
+        <script src="../../../javascripts/hljs-init.js"></script>
       
     
   </body>
