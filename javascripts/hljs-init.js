@@ -1,5 +1,13 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-  document.querySelectorAll('pre code').forEach((block) => {
-    hljs.highlightElement(block);
+// Instant highlight - nie czekaj na DOMContentLoaded
+(function() {
+  if (typeof hljs !== 'undefined') {
+    hljs.highlightAll();
+  }
+  
+  // Backup dla dynamic content
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof hljs !== 'undefined') {
+      hljs.highlightAll();
+    }
   });
-});
+})();

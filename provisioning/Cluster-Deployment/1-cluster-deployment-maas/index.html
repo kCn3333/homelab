@@ -25,7 +25,7 @@
     
     
       
-        <title>🛢️ Cluster Deployment using MAAS - Homelab Documentation</title>
+        <title>🛢️ MAAS Deployment - Homelab Documentation</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cluster-deployment-using-maas" class="md-skip">
+        <a href="#maas-deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              🛢️ Cluster Deployment using MAAS
+              🛢️ MAAS Deployment
             
           </span>
         </div>
@@ -556,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    🛢️ Cluster Deployment using MAAS
+    🛢️ MAAS Deployment
   
 
     
@@ -574,7 +574,7 @@
   <span class="md-ellipsis">
     
   
-    🛢️ Cluster Deployment using MAAS
+    🛢️ MAAS Deployment
   
 
     
@@ -729,10 +729,54 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#perform-ssh-login-using-ssh-ubuntuip_address-and-clean-up" class="md-nav__link">
+  <a href="#user-account-migration-ubuntu-admin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Perform SSH login (using ssh ubuntu@&lt;IP_ADDRESS&gt;) and clean up:
+        User Account Migration (ubuntu → admin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-to-new-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Switch to New User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-hostname-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change Hostname (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-maas-apt-proxy-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove MAAS APT Proxy Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-system-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final System Update
       
     </span>
   </a>
@@ -1455,10 +1499,54 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#perform-ssh-login-using-ssh-ubuntuip_address-and-clean-up" class="md-nav__link">
+  <a href="#user-account-migration-ubuntu-admin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Perform SSH login (using ssh ubuntu@&lt;IP_ADDRESS&gt;) and clean up:
+        User Account Migration (ubuntu → admin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-to-new-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Switch to New User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-hostname-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change Hostname (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-maas-apt-proxy-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove MAAS APT Proxy Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-system-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final System Update
       
     </span>
   </a>
@@ -1503,56 +1591,71 @@
   
 
 
-<h1 id="cluster-deployment-using-maas">🛢️ Cluster Deployment using MAAS<a class="headerlink" href="#cluster-deployment-using-maas" title="Permanent link">&para;</a></h1>
-<p>Used Prerequisites:
-- Ubuntu Server: for MAAS Installation
-- Nodes: Three machines (Master, Worker 1, Worker 2) configured for PXE boot.</p>
+<h1 id="maas-deployment">🛢️ MAAS Deployment<a class="headerlink" href="#maas-deployment" title="Permanent link">&para;</a></h1>
+<p><strong>Used Prerequisites:</strong></p>
+<ul>
+<li>Ubuntu Server: for MAAS Installation</li>
+<li>Nodes: Three machines (Master, Worker 1, Worker 2) configured for PXE boot</li>
+</ul>
 <hr />
-<h3 id="maas-deployment-initial-configuration">MAAS Deployment &amp; Initial Configuration<a class="headerlink" href="#maas-deployment-initial-configuration" title="Permanent link">&para;</a></h3>
-<h4 id="1-maas-core-installation">1. 💾 MAAS Core Installation<a class="headerlink" href="#1-maas-core-installation" title="Permanent link">&para;</a></h4>
+<h2 id="maas-deployment-initial-configuration">MAAS Deployment &amp; Initial Configuration<a class="headerlink" href="#maas-deployment-initial-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="1-maas-core-installation">1. 💾 MAAS Core Installation<a class="headerlink" href="#1-maas-core-installation" title="Permanent link">&para;</a></h3>
 <p>Install the MAAS packages and the required database components.</p>
-<pre class="highlight"><code class="language-bash"># 1. Add repository for latest MaaS version
+<pre class="highlight"><code class="language-bash"># Add repository for latest MaaS version
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:maas/3.7
 
-# 2. Update and install the MaaS package
+# Update and install the MaaS package
 sudo apt update
 sudo apt install maas</code></pre>
-<h4 id="2-initial-configuration">2. ⚙️ Initial Configuration<a class="headerlink" href="#2-initial-configuration" title="Permanent link">&para;</a></h4>
+<h3 id="2-initial-configuration">2. ⚙️ Initial Configuration<a class="headerlink" href="#2-initial-configuration" title="Permanent link">&para;</a></h3>
 <p>Initialize the MAAS region controller. You will be prompted to choose a user (create a new one).</p>
 <pre class="highlight"><code class="language-bash">sudo maas init</code></pre>
-<h4 id="3-access-ui">3. 🌐 Access UI<a class="headerlink" href="#3-access-ui" title="Permanent link">&para;</a></h4>
+<h3 id="3-access-ui">3. 🌐 Access UI<a class="headerlink" href="#3-access-ui" title="Permanent link">&para;</a></h3>
 <p>Open a web browser and navigate to:</p>
-<p><strong><em><code>http://&lt;MAAS_SERVER_IP&gt;:5240/MAAS</code></em></strong></p>
-<p>Login: Use the administrator account credentials set during maas init</p>
+<p><strong><code>http://&lt;MAAS_SERVER_IP&gt;:5240/MAAS</code></strong></p>
+<p><strong>Login:</strong> Use the administrator account credentials set during <code>maas init</code></p>
 <hr />
-<h3 id="maas-networking-domain-configuration">MAAS Networking &amp; Domain Configuration<a class="headerlink" href="#maas-networking-domain-configuration" title="Permanent link">&para;</a></h3>
-<h4 id="1-disable-dhcp-on-the-vlan">1. 🛑 Disable DHCP on the VLAN<a class="headerlink" href="#1-disable-dhcp-on-the-vlan" title="Permanent link">&para;</a></h4>
+<h2 id="maas-networking-domain-configuration">MAAS Networking &amp; Domain Configuration<a class="headerlink" href="#maas-networking-domain-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="1-disable-dhcp-on-the-vlan">1. 🛑 Disable DHCP on the VLAN<a class="headerlink" href="#1-disable-dhcp-on-the-vlan" title="Permanent link">&para;</a></h3>
 <p>By default, MAAS provides DHCP. To avoid conflicts with your router, you must disable the dynamic range and only use MAAS for IP reservations.</p>
-<p>1.1 Navigate to Subnets in the MAAS UI.</p>
-<p>1.2 Select your primary subnet (e.g., 192.168.55.0/24).</p>
-<p>1.3 In the DHCP section, delete the dynamic IP range.</p>
-<p>1.4 Ensure the DHCP mode for the VLAN is set to "Unmanaged" or that the DHCP range is empty.</p>
-<h4 id="2-configure-domain-and-hostnames">2. 📝 Configure Domain and Hostnames<a class="headerlink" href="#2-configure-domain-and-hostnames" title="Permanent link">&para;</a></h4>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Navigate to <strong>Subnets</strong> in the MAAS UI</li>
+<li>Select your primary subnet (e.g., <code>192.168.55.0/24</code>)</li>
+<li>In the DHCP section, delete the dynamic IP range</li>
+<li>Ensure the DHCP mode for the VLAN is set to <strong>"Unmanaged"</strong> or that the DHCP range is empty</li>
+</ol>
+<h3 id="2-configure-domain-and-hostnames">2. 📝 Configure Domain and Hostnames<a class="headerlink" href="#2-configure-domain-and-hostnames" title="Permanent link">&para;</a></h3>
 <p>Set a cleaner domain name and ensure MAAS uses consistent naming conventions.</p>
-<p>2.1 Navigate to Settings -&gt; General -&gt; Default DNS suffix. Change the default (e.g., maas) to something cleaner (e.g., homelab).</p>
-<p>2.2 In the DNS tab, verify that MAAS is configured to manage DNS records for your domain.</p>
-<h4 id="3-ssh-key-registration">3. 🔑 SSH Key Registration<a class="headerlink" href="#3-ssh-key-registration" title="Permanent link">&para;</a></h4>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Navigate to <strong>Settings → General → Default DNS suffix</strong></li>
+<li>Change the default (e.g., <code>maas</code>) to something cleaner (e.g., <code>homelab</code>)</li>
+<li>In the <strong>DNS</strong> tab, verify that MAAS is configured to manage DNS records for your domain</li>
+</ol>
+<h3 id="3-ssh-key-registration">3. 🔑 SSH Key Registration<a class="headerlink" href="#3-ssh-key-registration" title="Permanent link">&para;</a></h3>
 <p>You can securely import your keys directly from GitHub, which is faster than pasting them manually.</p>
-<p>3.1 Go to User Account -&gt; My Account.</p>
-<p>3.2 In the SSH keys section, choose "Import from GitHub".</p>
-<p>3.3 Enter your GitHub username. MAAS will automatically fetch and register all your public keys.</p>
-<h4 id="4-commissioning-and-ip-assignment">4. ⚙️ Commissioning and IP Assignment<a class="headerlink" href="#4-commissioning-and-ip-assignment" title="Permanent link">&para;</a></h4>
-<p>4.1 Start Nodes: Power on your bare-metal nodes configured for PXE boot.</p>
-<p>4.2 Commissioning: MAAS will discover them and perform hardware testing. Once complete, they will transition to the Ready state.</p>
-<p>4.3 Static IP Reservation: For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address.</p>
-<p>for me it was :</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Go to <strong>User Account → My Account</strong></li>
+<li>In the <strong>SSH keys</strong> section, choose <strong>"Import from GitHub"</strong></li>
+<li>Enter your GitHub username - MAAS will automatically fetch and register all your public keys</li>
+</ol>
+<h3 id="4-commissioning-and-ip-assignment">4. ⚙️ Commissioning and IP Assignment<a class="headerlink" href="#4-commissioning-and-ip-assignment" title="Permanent link">&para;</a></h3>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Start Nodes:</strong> Power on your bare-metal nodes configured for PXE boot</li>
+<li><strong>Commissioning:</strong> MAAS will discover them and perform hardware testing. Once complete, they will transition to the <strong>Ready</strong> state</li>
+<li><strong>Static IP Reservation:</strong> For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address</li>
+</ol>
+<p><strong>My configuration:</strong></p>
 <table>
 <thead>
 <tr>
 <th>Node</th>
-<th>hostname</th>
-<th>target</th>
+<th>Hostname</th>
+<th>Target IP</th>
 </tr>
 </thead>
 <tbody>
@@ -1573,46 +1676,52 @@ sudo apt install maas</code></pre>
 </tr>
 </tbody>
 </table>
-<h4 id="5-deploying-the-nodes">5. 🚀 Deploying the Nodes<a class="headerlink" href="#5-deploying-the-nodes" title="Permanent link">&para;</a></h4>
-<p>Select Ubuntu 24.04 LTS or your custom image for each node, ensure the static IP from the table above is assigned during deployment. After that remember to change boot sequence from PXE to External Disk.</p>
-<h4 id="6-post-deployment-cleanup">6. 🧹 Post-Deployment Cleanup<a class="headerlink" href="#6-post-deployment-cleanup" title="Permanent link">&para;</a></h4>
-<p>After deployment, the nodes are running Ubuntu 24.04 with the user <code>ubuntu</code> by default and some MAAS settings. </p>
-<h5 id="perform-ssh-login-using-ssh-ubuntuip_address-and-clean-up">Perform SSH login (using <code>ssh ubuntu@&lt;IP_ADDRESS&gt;</code>) and clean up:<a class="headerlink" href="#perform-ssh-login-using-ssh-ubuntuip_address-and-clean-up" title="Permanent link">&para;</a></h5>
-<p>6.1 User Account Migration (ubuntu -&gt; admin)</p>
+<h3 id="5-deploying-the-nodes">5. 🚀 Deploying the Nodes<a class="headerlink" href="#5-deploying-the-nodes" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Select <strong>Ubuntu 24.04 LTS</strong> or your custom image for each node</li>
+<li>Ensure the static IP from the table above is assigned during deployment</li>
+<li>After deployment, remember to <strong>change boot sequence from PXE to External Disk</strong></li>
+</ol>
+<h3 id="6-post-deployment-cleanup">6. 🧹 Post-Deployment Cleanup<a class="headerlink" href="#6-post-deployment-cleanup" title="Permanent link">&para;</a></h3>
+<p>After deployment, the nodes are running Ubuntu 24.04 with the user <code>ubuntu</code> by default and some MAAS settings.</p>
+<h4 id="user-account-migration-ubuntu-admin">User Account Migration (ubuntu → admin)<a class="headerlink" href="#user-account-migration-ubuntu-admin" title="Permanent link">&para;</a></h4>
+<p>Perform SSH login using <code>ssh ubuntu@&lt;IP_ADDRESS&gt;</code> and execute:</p>
 <pre class="highlight"><code class="language-bash"># Add new user
 sudo adduser admin
+
 # Grant sudo rights to the new user
-sudo usermod -aG sudo admin
-
-# Enable password-less sudo (required for Ansible)
-sudo visudo
-# Add to the end of a file
-admin ALL=(ALL) NOPASSWD: ALL
-
-# Copy SSH key to new user and fix ownership/permissions
-sudo cp -r /home/ubuntu/.ssh /home/admin/
+sudo usermod -aG sudo admin</code></pre>
+<p>Enable password-less sudo (required for Ansible):</p>
+<pre class="highlight"><code class="language-bash">sudo visudo</code></pre>
+<p>Add to the end of the file:</p>
+<pre class="highlight"><code class="language-bash">admin ALL=(ALL) NOPASSWD: ALL</code></pre>
+<p>Copy SSH key to new user and fix ownership/permissions:</p>
+<pre class="highlight"><code class="language-bash">sudo cp -r /home/ubuntu/.ssh /home/admin/
 sudo chown -R admin:admin /home/admin/.ssh
 sudo chmod 700 /home/admin/.ssh
 sudo chmod 600 /home/admin/.ssh/authorized_keys</code></pre>
-<p>6.2 Log out and log back in as the new user
+<h4 id="switch-to-new-user">Switch to New User<a class="headerlink" href="#switch-to-new-user" title="Permanent link">&para;</a></h4>
+<p>Log out and log back in as the new user:</p>
 <pre class="highlight"><code class="language-bash">exit
-ssh admin@&lt;IP_ADDRESS&gt;
+ssh admin@&lt;IP_ADDRESS&gt;</code></pre>
+<p>If everything works fine, delete the ubuntu user:</p>
+<pre class="highlight"><code class="language-bash">sudo deluser --remove-home ubuntu</code></pre>
+<h4 id="change-hostname-optional">Change Hostname (Optional)<a class="headerlink" href="#change-hostname-optional" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-bash">sudo hostnamectl set-hostname master-00</code></pre>
+<h4 id="remove-maas-apt-proxy-configuration">Remove MAAS APT Proxy Configuration<a class="headerlink" href="#remove-maas-apt-proxy-configuration" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-bash"># Remove APT proxy config
+sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
 
-# If works fine, delete ubuntu user
-sudo deluser --remove-home ubuntu</code></pre></p>
-<p>6.3 If you want to change the hostname
-<pre class="highlight"><code class="language-bash">sudo hostnamectl set-hostname master-00</code></pre></p>
-<p>6.4 Remove MAAS APT Proxy configuration
-<pre class="highlight"><code class="language-bash">sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
-# global proxy environment variables (HTTP_PROXY, HTTPS_PROXY)
+# Remove global proxy environment variables
 sudo sed -i '/maas/d' /etc/environment
 sudo sed -i '/maas/d' /etc/bash.bashrc
 
-sudo apt update --fix-missing
-# Optionally remove duplicate source warnings
-sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak</code></pre></p>
-<p>and finally update system packages
-<pre class="highlight"><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></p>
+# Fix missing packages
+sudo apt update --fix-missing</code></pre>
+<p>Optionally remove duplicate source warnings:</p>
+<pre class="highlight"><code class="language-bash">sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak</code></pre>
+<h4 id="final-system-update">Final System Update<a class="headerlink" href="#final-system-update" title="Permanent link">&para;</a></h4>
+<pre class="highlight"><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre>
 
 
 
@@ -1635,7 +1744,7 @@ sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak</code></pre></p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:07:40 UTC"><span class="timeago" datetime="2025-12-11T20:07:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:07:40 UTC">2025-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:39:52 UTC"><span class="timeago" datetime="2025-12-11T20:39:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:39:52 UTC">2025-12-11</span>
   </span>
 
     
