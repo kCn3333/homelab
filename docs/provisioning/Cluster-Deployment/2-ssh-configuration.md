@@ -5,7 +5,7 @@
 
 - for Windows 10/11
 
-   ```Shell
+   ```bash
     # Autostart for SSH Agent
     Get-Service ssh-agent | Set-Service -StartupType Automatic
     # 
@@ -29,7 +29,7 @@ works the same for Windows and Linux/WSL
 
 modify your `C:\Users\USER\.ssh\config` or `./ssh/config`
 
-```shell
+```bash
 # --- HOMELAB NODES ---
 Host master-00
     HostName 192.168.55.10
