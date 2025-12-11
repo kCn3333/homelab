@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://kcn3333.github.io/homelab/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/applications/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/automation/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/infrastructure/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/provisioning/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/provisioning/Cluster%20Deployment/1-cluster-deployment-maas/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/provisioning/Cluster%20Deployment/2-ssh-configuration/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/troubleshooting/</loc>
+         <lastmod>2025-12-11</lastmod>
+    </url>
+</urlset>
