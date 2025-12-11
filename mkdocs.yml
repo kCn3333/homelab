@@ -3,6 +3,7 @@ site_url: https://kcn3333.github.io/homelab/
 repo_url: https://github.com/kCn3333/homelab
 repo_name: kCn3333/homelab
 edit_uri: edit/main/docs/
+docs_dir: docs
 
 nav:
   - Home: index.md
