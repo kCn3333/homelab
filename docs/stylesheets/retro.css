@@ -65,6 +65,7 @@ body,
     border: 1px solid #444 !important; /* Twoje obramowanie */
     margin: 1.5em 0 !important;
     overflow: hidden;                   /* Ważne: żeby tło kodu nie wystawało poza zaokrąglone rogi */
+    background-color: var(--retro-mid-bg) !important;
 }
 
 /* 2. Stylowanie samego elementu pre wewnątrz kontenera */
@@ -72,6 +73,7 @@ body,
     border: none !important;            /* Usuwamy domyślne ramki pre */
     margin: 0 !important;               /* Zerujemy marginesy wewnętrzne */
     padding: 10px !important;
+    background-color: var(--retro-mid-bg) !important;
 }
 
 /* 3. Opcjonalnie: Jeśli używasz tytułów bloków kodu (title="...") */
@@ -81,6 +83,7 @@ body,
     border-bottom: none !important;        /* Żeby nie było podwójnej kreski */
     margin-top: 1.5em !important;
     margin-bottom: 0 !important;
+    background-color: var(--retro-mid-bg) !important;
 }
 
 /* Jeśli jest tytuł, dolna część (kod) traci górne zaokrąglenie */

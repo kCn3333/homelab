@@ -73,7 +73,7 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-      auto_title: true
+      #auto_title: true
       #pygments_style: one-dark 
       use_pygments: true   
   - pymdownx.superfences 
