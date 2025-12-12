@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&display=swap');
 
+/* --- CUSTOM VARIABLES --- */
 :root {
     --retro-green-main: #4CAF50;
     --retro-green-light: #66BB6A;
@@ -8,123 +9,53 @@
     --retro-mid-bg: #181818;
 }
 
-
+/* --- MATERIAL THEME OVERRIDES --- */
 :root, 
 [data-md-color-scheme="slate"],
 [data-md-color-scheme="default"] {
-    /* Tło */
+    /* Background colors */
     --md-default-bg-color: var(--retro-dark-bg) !important;
     --md-default-bg-color--lighter: var(--retro-mid-bg) !important;
     
-    /* Tekst - SZARY */
+    /* Text colors (Grey scale) */
     --md-default-fg-color: var(--retro-grey-text) !important;
     --md-default-fg-color--light: #BDBDBD !important;
     --md-default-fg-color--lighter: #9E9E9E !important;
     --md-default-fg-color--lightest: #757575 !important;
 
-    /* Primary (navbar/header) - CZARNE TŁO, SZARY TEKST */
+    /* Primary color (Navbar/Header overrides) */
     --md-primary-fg-color: var(--retro-grey-text) !important;
     --md-primary-bg-color: var(--retro-dark-bg) !important;
     --md-primary-fg-color--light: var(--retro-grey-text) !important;
     --md-primary-fg-color--dark: var(--retro-grey-text) !important;
 
-    /* Accent - TYLKO dla linków i akcentów */
+    /* Accent colors (Links and UI accents) */
     --md-accent-fg-color: var(--retro-green-main) !important;
     --md-accent-fg-color--transparent: rgba(76, 175, 80, 0.1) !important;
 
-    /* Footer */
+    /* Footer overrides */
     --md-footer-bg-color: #0A0A0A !important;
     --md-footer-fg-color: var(--retro-grey-text) !important;
     --md-footer-bg-color--dark: #000000 !important;
 
-    /* Code */
+    /* Code Background */
     --md-code-bg-color: var(--retro-mid-bg) !important;
-    /* --md-code-fg-color: var(--retro-green-main) !important; */
     
-    /* Links */
+    /* Link colors */
     --md-typeset-a-color: var(--retro-green-main) !important;
 }
 
-/* 2. FORCE czcionka */
-body, 
-.md-typeset,
-.md-nav,
-.md-header,
-.md-footer {
+/* --- TYPOGRAPHY --- */
+body, .md-typeset, .md-nav, .md-header, .md-footer {
     font-family: 'Jost', Verdana, sans-serif !important;
 }
-
 
 .md-typeset code, pre code {
     font-family: 'Source Code Pro', 'Courier New', Courier, monospace !important;
 }
 
-/* 1. Stylowanie głównego kontenera kodu */
-.md-typeset .highlight {
-    border-radius: 8px !important;      /* Zaokrąglenie */
-    border: 1px solid #444 !important; /* Twoje obramowanie */
-    margin: 1.5em 0 !important;
-    overflow: hidden;                   /* Ważne: żeby tło kodu nie wystawało poza zaokrąglone rogi */
-    background-color: var(--retro-mid-bg) !important;
-}
-
-/* 2. Stylowanie samego elementu pre wewnątrz kontenera */
-.md-typeset .highlight pre {
-    border: none !important;            /* Usuwamy domyślne ramki pre */
-    margin: 0 !important;               /* Zerujemy marginesy wewnętrzne */
-    padding: 10px !important;
-    background-color: var(--retro-mid-bg) !important;
-}
-
-/* 3. Opcjonalnie: Jeśli używasz tytułów bloków kodu (title="...") */
-.md-typeset .md-code__title {
-background-color: var(--retro-mid-bg) !important; /* To samo tło co kod */
-    border: 1px solid #444 !important;
-    border-bottom: 1px solid #333 !important; /* Subtelna linia oddzielająca */
-    
-    /* Wyrównanie do prawej */
-    text-align: right !important;
-    
-    /* "Wygaszenie" tekstu */
-    color: var(--md-default-fg-color--lighter) !important; 
-    font-size: 0.65rem !important;
-    font-weight: 400 !important;
-    text-transform: uppercase; /* Opcjonalnie: mały caps wygląda pro */
-    letter-spacing: 0.05em;
-    
-    padding: 4px 15px !important;
-    margin-top: 1.5em !important;
-    border-radius: 8px 8px 0 0 !important;
-}
-
-.md-typeset .highlight .nb { /* .nb to zazwyczaj komendy typu 'apt', 'cd', 'echo' */
-    color: #4CAF50 !important; /* Twój retro zielony */
-    font-weight: bold;
-}
-
-/* Jeśli jest tytuł, dolna część (kod) traci górne zaokrąglenie */
-.md-typeset .md-code__title + .highlight {
-    border-top: none !important;
-    border-radius: 0 0 8px 8px !important;
-    margin-top: 0 !important;
-}
-
-/* Nadpisanie koloru komentarzy w blokach kodu */
-.md-typeset .highlight .c,   /* Ogólny komentarz */
-.md-typeset .highlight .c1,  /* Komentarz jednoliniowy (np. # w Bashu, // w Javie) */
-.md-typeset .highlight .cm { /* Komentarz blokowy */
-    color: #265026 !important; /* Przygaszony szary */
-    font-style: italic !important; /* Kursywa dodaje im profesjonalnego wyglądu */
-}
-
-
-/* 3. Nagłówki - SZARE */
-.md-typeset h1,
-.md-typeset h2,
-.md-typeset h3,
-.md-typeset h4,
-.md-typeset h5,
-.md-typeset h6 {
+.md-typeset h1, .md-typeset h2, .md-typeset h3, 
+.md-typeset h4, .md-typeset h5, .md-typeset h6 {
     color: var(--retro-grey-text) !important;
 }
 
@@ -132,10 +63,8 @@ background-color: var(--retro-mid-bg) !important; /* To samo tło co kod */
 .md-typeset h2 { font-size: 1.5em !important; }
 .md-typeset h3 { font-size: 1.2em !important; }
 
-/* 4. Linki - ZIELONE */
-.md-typeset a,
-.md-typeset a:link,
-.md-typeset a:visited {
+/* --- LINKS --- */
+.md-typeset a, .md-typeset a:link, .md-typeset a:visited {
     color: var(--retro-green-main) !important;
     text-decoration: none;
 }
@@ -145,153 +74,52 @@ background-color: var(--retro-mid-bg) !important; /* To samo tło co kod */
     text-decoration: underline;
 }
 
-/* 5. HEADER/NAVBAR - GONE! */
-.md-header {
-    display: none !important;
-}
+/* --- HEADER REMOVAL --- */
+.md-header { display: none !important; }
+.md-main, .md-container { padding-top: 0 !important; }
 
-/* Fix padding body żeby content był na górze */
-.md-main {
-    padding-top: 0 !important;
-}
+/* --- NAVIGATION TABS & SIDEBAR --- */
+.md-tabs { background-color: var(--retro-dark-bg) !important; }
+.md-tabs__link { color: var(--retro-grey-text) !important; opacity: 0.7; }
+.md-tabs__link:hover, .md-tabs__link--active { color: var(--retro-green-main) !important; opacity: 1; }
 
-.md-container {
-    padding-top: 0 !important;
-}
+.md-nav__link { color: var(--retro-grey-text) !important; }
+.md-nav__link:hover, .md-nav__link--active { color: var(--retro-green-main) !important; }
 
-.md-tabs {
-    background-color: var(--retro-dark-bg) !important;
-}
-
-.md-tabs__link {
-    color: var(--retro-grey-text) !important;
-    opacity: 0.7;
-}
-
-.md-tabs__link:hover,
-.md-tabs__link--active {
-    color: var(--retro-green-main) !important;
-    opacity: 1;
-}
-
-/* 7. SIDEBAR/Navigation */
-.md-nav__link {
-    color: var(--retro-grey-text) !important;
-}
-
-.md-nav__link:hover,
-.md-nav__link--active {
-    color: var(--retro-green-main) !important;
-}
-
-/* 8. FOOTER */
-.md-footer {
-    background-color: #0A0A0A !important;
-    color: var(--retro-grey-text) !important;
-}
-
-.md-footer__inner {
+/* --- FOOTER STRUCTURE --- */
+.md-footer { background-color: #0A0A0A !important; color: var(--retro-grey-text) !important; }
+.md-footer__inner, .md-footer-meta {
     background-color: transparent !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1.5rem 0;
-}
-
-.md-footer-meta {
-    background-color: transparent !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 0.5rem;
 }
 
-.md-footer__link,
-.md-footer-copyright,
-.md-footer-copyright__highlight {
-    color: var(--retro-grey-text) !important;
-}
+.md-footer-copyright { text-align: center; font-style: italic; order: 1; margin-bottom: 0.5rem; }
+.md-source-file { order: 2; text-align: center; font-size: 0.8rem; opacity: 0.7; }
+.md-footer-social { order: 3; }
+.md-footer-social__link { color: var(--retro-grey-text) !important; }
+.md-footer-social__link:hover { color: var(--retro-green-main) !important; }
 
-.md-footer-nav__link {
-    color: var(--retro-grey-text) !important;
-}
-
-/* Copyright text - wyśrodkowany, italic na górze */
-.md-footer-copyright {
-    text-align: center;
-    font-style: italic;
-    order: 1;
-    margin-bottom: 0.5rem;
-}
-
-/* Last updated info - pod cytatem */
-.md-source-file {
-    order: 2;
-    text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.7;
-    margin-bottom: 0.5rem;
-}
-
-/* GitHub  */
-.md-footer-social {
-    order: 3;
-}
-
-.md-footer-social__link {
-    color: var(--retro-grey-text) !important;
-}
-
-.md-footer-social__link:hover {
-    color: var(--retro-green-main) !important;
-}
-
-/* 9. Grid Cards */
+/* --- UI COMPONENTS --- */
 .md-typeset .grid.cards > * {
     background-color: var(--retro-mid-bg);
     border: 1px solid rgba(76, 175, 80, 0.2);
 }
 
-.grid.cards li > hr {
-    margin: 0.75rem 0 !important;
-    border-top: 1px solid rgba(76, 175, 80, 0.2) !important;
-}
-
-/* 10. Admonitions */
 .md-typeset .admonition {
     background-color: #0A0A0A;
     border-left: 5px solid var(--retro-green-main);
     color: var(--retro-grey-text);
 }
 
-.md-typeset .admonition-title {
-    background-color: transparent;
-    color: var(--retro-grey-text);
-}
-
-.md-typeset .admonition.warning {
-    border-color: #FFEB3B;
-}
-
-.md-typeset .admonition.danger {
-    border-color: #F44336;
-}
-
-/* 11. Blockquotes */
 .md-typeset blockquote {
     color: var(--retro-green-main) !important;
     font-style: italic;
     border-left: 3px solid var(--retro-green-main);
     background-color: rgba(76, 175, 80, 0.05);
-}
-
-/* 12. Code blocks */
-.md-typeset code {
-    background-color: var(--md-code-bg-color);
-}
-/* 13. Tables */
-.md-typeset table {
-    background-color: var(--retro-dark-bg);
 }
 
 .md-typeset table th {
@@ -300,58 +128,26 @@ background-color: var(--retro-mid-bg) !important; /* To samo tło co kod */
     border-bottom: 2px solid var(--retro-green-main);
 }
 
-/* 14. Buttons */
 .md-button {
     border: 1px solid var(--retro-green-main);
     color: var(--retro-green-main) !important;
-    background-color: transparent;
 }
 
-.md-button:hover {
+.md-button:hover, .md-button--primary {
     background-color: var(--retro-green-main);
     color: var(--retro-dark-bg) !important;
 }
 
-.md-button--primary {
-    background-color: var(--retro-green-main);
-    color: var(--retro-dark-bg) !important;
-}
-
-/* 15. Search */
+/* --- SEARCH & SCROLLBAR --- */
 .md-search__input {
     background-color: var(--retro-mid-bg) !important;
     color: var(--retro-grey-text) !important;
     border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
-.md-search__input::placeholder {
-    color: #666 !important;
-}
-
-/* 16. Task lists */
-.md-typeset .task-list-item input[type="checkbox"] {
-    border: 2px solid var(--retro-green-main);
-}
-
-.md-typeset .task-list-item input[type="checkbox"]:checked {
-    background-color: var(--retro-green-main);
-}
-
-/* 17. Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--retro-dark-bg);
-}
-
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--retro-dark-bg); }
 ::-webkit-scrollbar-thumb {
     background: var(--retro-mid-bg);
     border: 1px solid rgba(76, 175, 80, 0.3);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(76, 175, 80, 0.3);
 }

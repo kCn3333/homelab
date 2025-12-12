@@ -1,0 +1,80 @@
+/* --- CODE BLOCK CONTAINERS --- */
+
+/* Main container for code blocks */
+.md-typeset .highlight {
+    border-radius: 8px !important;
+    border: 1px solid #444 !important;
+    margin: 1.5em 0 !important;
+    overflow: hidden;
+    background-color: var(--retro-mid-bg) !important;
+}
+
+/* The actual pre element inside the container */
+.md-typeset .highlight pre {
+    border: none !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    background-color: var(--retro-mid-bg) !important;
+}
+
+/* Code block title bar (e.g. filename or language name) */
+.md-typeset .md-code__title {
+    background-color: var(--retro-mid-bg) !important;
+    border: 1px solid #444 !important;
+    border-bottom: 1px solid #333 !important;
+    text-align: right !important;
+    color: var(--md-default-fg-color--lighter) !important; 
+    font-size: 0.65rem !important;
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 15px !important;
+    margin-top: 1.5em !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+/* Remove top rounding of the code block when a title is present above it */
+.md-typeset .md-code__title + .highlight {
+    border-top: none !important;
+    border-radius: 0 0 8px 8px !important;
+    margin-top: 0 !important;
+}
+
+/* --- SYNTAX HIGHLIGHTING CUSTOMIZATION (Pygments) --- */
+
+/* Commands and Built-ins (e.g., apt, cd, echo) */
+.md-typeset .highlight .nb { 
+    color: var(--retro-green-main) !important; 
+    font-weight: bold;
+}
+
+/* Comments (Single line, multi-line, and general) */
+.md-typeset .highlight .c, 
+.md-typeset .highlight .c1, 
+.md-typeset .highlight .cm { 
+    color: #265026 !important; 
+    font-style: italic !important;
+}
+
+/* Keywords (e.g., if, for, while) */
+.md-typeset .highlight .k {
+    color: #bb81b1 !important; /* Subtle purple for logic */
+}
+
+/* Strings (e.g., "text") */
+.md-typeset .highlight .s,
+.md-typeset .highlight .s2 {
+    color: #d19a66 !important; /* Soft orange/tan for strings */
+}
+
+/* Numbers */
+.md-typeset .highlight .mi {
+    color: #d19a66 !important;
+}
+
+/* Inline code (not in blocks) */
+.md-typeset code {
+    background-color: var(--retro-mid-bg);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
