@@ -21,7 +21,7 @@ jobs:
 
       - name: Install MkDocs + plugins
         run: |
-          pip install mkdocs-material[extra] 
+          pip install mkdocs-material>=9.0.0
           pip install Pygments 
           pip install mkdocs-roamlinks-plugin
           pip install mkdocs-callouts
