@@ -59,19 +59,34 @@ body,
     font-family: 'Source Code Pro', 'Courier New', Courier, monospace !important;
 }
 
-.md-typeset pre {
-    /* 1. Zaokrąglone rogi */
-    border-radius: 5px !important;
-    
-    /* 2. Cienkie obramowanie */
-    /* Używamy koloru z palety Material: --md-code-fg (jasny kolor) / --md-default-fg (domyślny tekst) */
-    border: 1px solid var(--md-code-fg) !important;
-    
-    /* 3. Delikatny cień (opcjonalnie, aby się wyróżnił) */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
-    
-    /* Dodaj margines pionowy dla czystości */
+/* 1. Stylowanie głównego kontenera kodu */
+.md-typeset .highlight {
+    border-radius: 8px !important;      /* Zaokrąglenie */
+    border: 1px solid #444 !important; /* Twoje obramowanie */
     margin: 1.5em 0 !important;
+    overflow: hidden;                   /* Ważne: żeby tło kodu nie wystawało poza zaokrąglone rogi */
+}
+
+/* 2. Stylowanie samego elementu pre wewnątrz kontenera */
+.md-typeset .highlight pre {
+    border: none !important;            /* Usuwamy domyślne ramki pre */
+    margin: 0 !important;               /* Zerujemy marginesy wewnętrzne */
+    padding: 10px !important;
+}
+
+/* 3. Opcjonalnie: Jeśli używasz tytułów bloków kodu (title="...") */
+.md-typeset .md-code__title {
+    border-radius: 8px 8px 0 0 !important; /* Zaokrąglamy tylko górę tytułu */
+    border: 1px solid #444 !important;
+    border-bottom: none !important;        /* Żeby nie było podwójnej kreski */
+    margin-top: 1.5em !important;
+    margin-bottom: 0 !important;
+}
+
+/* Jeśli jest tytuł, dolna część (kod) traci górne zaokrąglenie */
+.md-typeset .md-code__title + .highlight {
+    border-radius: 0 0 8px 8px !important;
+    margin-top: 0 !important;
 }
 
 
