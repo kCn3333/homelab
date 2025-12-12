@@ -2,11 +2,11 @@ nav:
   - ':material-home Home': index.md
 
 
-  - ':material-excavator: Infrastructure': 
-    - ':material-server-network: network':  infrastructure/home.md
-    - ':material-hammer-screwdriver: project server': https://kcn333.pl/home_server
+  - ":material-excavator: Infrastructure": 
+    - ":material-server-network: network":  infrastructure/home.md
+    - ":material-hammer-screwdriver: project server": https://kcn333.pl/home_server
 
-  - ':octicons-rocket-24: Provisioning': provisioning
+  - ":octicons-rocket-24: Provisioning": provisioning
   
 
   - ':material-application-cog-outline: Applications':
