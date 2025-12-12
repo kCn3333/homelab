@@ -38,7 +38,7 @@
     --md-footer-bg-color--dark: #000000 !important;
 
     /* Code */
-    --md-code-bg-color: #363434 !important;
+    --md-code-bg-color: var(--retro-mid-bg) !important;
     /* --md-code-fg-color: var(--retro-green-main) !important; */
     
     /* Links */
@@ -61,17 +61,17 @@ body,
 
 .md-typeset pre {
     /* 1. Zaokrąglone rogi */
-    border-radius: 5px; 
+    border-radius: 5px !important;
     
     /* 2. Cienkie obramowanie */
     /* Używamy koloru z palety Material: --md-code-fg (jasny kolor) / --md-default-fg (domyślny tekst) */
-    border: 1px solid var(--md-code-fg); 
+    border: 1px solid var(--md-code-fg) !important;
     
     /* 3. Delikatny cień (opcjonalnie, aby się wyróżnił) */
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
     
     /* Dodaj margines pionowy dla czystości */
-    margin: 1.5em 0;
+    margin: 1.5em 0 !important;
 }
 
 
@@ -245,13 +245,7 @@ body,
 /* 12. Code blocks */
 .md-typeset code {
     background-color: var(--md-code-bg-color);
-    /* Usunięto linię 'color: var(--retro-green-main);' aby Pygments (Dracula) mógł działać */
 }
-
-.md-typeset pre {
-    background-color: #000000 !important;
-}
-
 /* 13. Tables */
 .md-typeset table {
     background-color: var(--retro-dark-bg);
