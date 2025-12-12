@@ -54,10 +54,26 @@ body,
     font-family: 'Jost', Verdana, sans-serif !important;
 }
 
-/* Courier New tylko dla bloków kodu */
+
 .md-typeset code, pre code {
-    font-family: 'Courier New', Courier, monospace !important;
+    font-family: 'Source Code Pro', 'Courier New', Courier, monospace !important;
 }
+
+.md-typeset pre {
+    /* 1. Zaokrąglone rogi */
+    border-radius: 5px; 
+    
+    /* 2. Cienkie obramowanie */
+    /* Używamy koloru z palety Material: --md-code-fg (jasny kolor) / --md-default-fg (domyślny tekst) */
+    border: 1px solid var(--md-code-fg); 
+    
+    /* 3. Delikatny cień (opcjonalnie, aby się wyróżnił) */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+    
+    /* Dodaj margines pionowy dla czystości */
+    margin: 1.5em 0;
+}
+
 
 /* 3. Nagłówki - SZARE */
 .md-typeset h1,
