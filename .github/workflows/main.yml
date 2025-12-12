@@ -21,12 +21,8 @@ jobs:
 
       - name: Install MkDocs + plugins
         run: |
-          # Instalacja Material z opcjonalnymi zależnościami dla lepszego kolorowania/emoji
           pip install mkdocs-material[extra] 
-          # Wymuszamy najnowsze Pygments
           pip install Pygments 
-          
-          # Twoje niestandardowe pluginy
           pip install mkdocs-roamlinks-plugin
           pip install mkdocs-callouts
           pip install mkdocs-git-revision-date-localized-plugin
