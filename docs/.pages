@@ -1,0 +1,31 @@
+# docs/.pages
+nav:
+  - 🏠 Home: index.md
+
+
+  - 🏗️ Infrastructure: 
+    - 📡 network:  infrastructure
+    - 🛠️ project server: https://kcn333.pl/home_server
+
+  - 🚀 Provisioning: provisioning
+  
+
+  - ⚙️ Applications:
+      
+    - 🐳 Docker Compose Repo: https://github.com/kCn3333/docker-compose
+    - 📄.bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
+    - 📂 Bash Scripts: 
+      - 📄 backup: https://github.com/kCn3333/linux-bash/tree/main/backup
+      - 📄 db backup: https://github.com/kCn3333/linux-bash/tree/main/db_backup
+      - 📄 ssh login alert: https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
+      - 📄 temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
+    - ⚙️ starship config: https://github.com/kCn3333/starship-config
+    - ⚙️ conky config: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
+    - 🦈 wireshark config: https://github.com/kCn3333/wireshark
+
+
+  - ⚔️ Automation: 
+    - 🎮 Ansible playbooks: automation 
+    - 🤖 n8n workflows: https://github.com/kCn3333/n8n_workflows
+      
+  - 🧐 Troubleshooting: troubleshooting

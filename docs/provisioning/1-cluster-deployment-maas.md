@@ -1,12 +1,3 @@
----
-title: MAAS Deployment
-icon: document
-order: 3
-tableOfContents: true
-prev: false
-next: false
----
-
 # 🛢️ MAAS Deployment
 
 **Used Prerequisites:**

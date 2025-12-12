@@ -1,0 +1,103 @@
+/* Catppuccin Mocha Theme */
+:root {
+  --md-primary-fg-color: #1e1e2e;
+  --md-primary-fg-color--light: #313244;
+  --md-primary-fg-color--dark: #11111b;
+  --md-primary-bg-color: #cdd6f4;
+  --md-primary-bg-color--light: #b4befe;
+  
+  /* Green accents (Catppuccin Green) */
+  --md-accent-fg-color: #a6e3a1;
+  --md-accent-fg-color--transparent: #a6e3a11a;
+  --md-accent-bg-color: #1e1e2e;
+  --md-accent-bg-color--light: #313244;
+  
+  /* Background colors */
+  --md-default-bg-color: #1e1e2e;
+  --md-default-fg-color: #cdd6f4;
+  --md-default-fg-color--light: #bac2de;
+  --md-default-fg-color--lighter: #a6adc8;
+  --md-default-fg-color--lightest: #9399b2;
+  
+  /* Code blocks */
+  --md-code-bg-color: #313244;
+  --md-code-fg-color: #cdd6f4;
+  
+  /* Footer */
+  --md-footer-bg-color: #181825;
+  --md-footer-bg-color--dark: #11111b;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 232;
+  
+  /* Catppuccin Mocha palette */
+  --md-default-bg-color: #1e1e2e;
+  --md-default-fg-color: #cdd6f4;
+  --md-code-bg-color: #313244;
+  --md-code-fg-color: #cdd6f4;
+  
+  /* Green highlights */
+  --md-typeset-a-color: #a6e3a1;
+  --md-typeset-mark-color: #a6e3a133;
+}
+
+/* Custom scrollbar (Catppuccin style) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #313244;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #45475a;
+}
+
+/* Admonitions with Catppuccin colors */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: #89b4fa;
+}
+
+.md-typeset .admonition.abstract,
+.md-typeset details.abstract {
+  border-color: #94e2d5;
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: #89dceb;
+}
+
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: #a6e3a1;
+}
+
+.md-typeset .admonition.success,
+.md-typeset details.success {
+  border-color: #a6e3a1;
+}
+
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: #f9e2af;
+}
+
+.md-typeset .admonition.failure,
+.md-typeset details.failure {
+  border-color: #f38ba8;
+}
+
+.md-typeset .admonition.danger,
+.md-typeset details.danger {
+  border-color: #eba0ac;
+}
