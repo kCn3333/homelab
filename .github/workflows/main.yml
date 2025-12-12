@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         # for faster and more reliable installs
-        run: npm ci
+        run: npm install
 
       - name: Build Astro Starlight
         # run the build script from package.json
