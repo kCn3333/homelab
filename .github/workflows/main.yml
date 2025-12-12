@@ -23,14 +23,7 @@ jobs:
           # newest LTS version
           node-version: "24"
           # cache yarn and npm dependencies
-          cache: 'npm'
-      - name: Cache Astro build
-        uses: actions/cache@v4
-        with:
-          path: |
-            dist
-            .astro
-          key: ${{ runner.os }}-astro-${{ hashFiles('**/package-lock.json') }}
+
 
       - name: Install dependencies
         # for faster and more reliable installs
