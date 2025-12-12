@@ -1,3 +1,12 @@
+---
+title: Custom Image with Packer
+icon: document
+order: 1
+tableOfContents: true
+prev: false
+next: false
+---
+
 # 📝 Custom Image with Packer
 
 ## 🎯 Goal

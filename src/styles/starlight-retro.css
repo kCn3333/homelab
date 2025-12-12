@@ -1,0 +1,70 @@
+/* starlight-retro.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&display=swap');
+
+:root {
+    /* Retro colours */
+    --retro-dark-bg: #111111; 
+    --retro-mid-bg: #1A1A1A;
+    --retro-green-main: #4CAF50;
+    --retro-green-light: #66BB6A;
+
+    /* Text */
+    --sl-color-text: #F0F0F0;
+    --sl-color-text-light: #BDBDBD;
+    --sl-color-text-inverse: var(--retro-dark-bg);
+
+    /* Background  */
+    --sl-color-bg: var(--retro-dark-bg); 
+    --sl-color-bg-sidebar: var(--retro-mid-bg); 
+    --sl-color-bg-card: var(--retro-mid-bg);
+
+    /* Accent */
+    --sl-color-accent: var(--retro-green-main); 
+    --sl-color-accent-low: rgba(76, 175, 80, 0.15); /* */
+
+    /* for Starlight */
+    --sl-color-white: #FFFFFF;
+    --sl-color-black: #000000;
+}
+
+/* Global Font */
+body {
+    font-family: 'Jost', Verdana, sans-serif !important;
+}
+
+/* Code Font */
+.sl-markdown-content code, .sl-markdown-content pre code {
+    font-family: 'Source Code Pro', 'Courier New', Courier, monospace !important;
+}
+/* Code blocks */
+.expressive-code {
+  margin: 2rem 0;
+  border-radius: 5px; 
+  border: 1px solid var(--sl-color-accent-low); 
+}
+
+
+/* Center images */
+.sl-markdown-content img {
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* coloured icons */
+.icon-accent {
+    color: var(--sl-color-accent) !important;
+}
+/* Headings - green */
+.sl-markdown-content h2 {
+    color: var(--sl-color-accent) !important;
+}
+/* Links - green */
+.sl-markdown-content a {
+    color: var(--sl-color-accent) !important; 
+}
+/* Links hover - lighter green */
+.sl-markdown-content a:hover {
+    color: #33FF66 !important;
+}

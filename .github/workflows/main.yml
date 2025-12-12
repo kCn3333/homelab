@@ -1,37 +1,52 @@
-name: Deploy MkDocs site
+# .github/workflows/main.yml
+name: Deploy Astro Starlight Site
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
-  build-deploy:
+  build-and-deploy:
+    # use Ubuntu
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          # history needed for GitHub Pages deployment
+          fetch-depth: 0 
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Setup Node.js
+        # use newest setup-node action
+        uses: actions/setup-node@v4
         with:
-          python-version: "3.x"
+          # newest LTS version
+          node-version: "24"
+          # cache yarn and npm dependencies
+          cache: 'npm'
+      - name: Cache Astro build
+        uses: actions/cache@v4
+        with:
+          path: |
+            dist
+            .astro
+          key: ${{ runner.os }}-astro-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install MkDocs + plugins
-        run: |
-          pip install mkdocs-material
-          pip install mkdocs-roamlinks-plugin
-          pip install mkdocs-callouts
-          pip install mkdocs-git-revision-date-localized-plugin
-          pip install mkdocs-awesome-pages-plugin
+      - name: Install dependencies
+        # for faster and more reliable installs
+        run: npm ci
 
-      - name: Build MkDocs
-        run: mkdocs build --clean
+      - name: Build Astro Starlight
+        # run the build script from package.json
+        run: npm run build
 
       - name: Deploy to GitHub Pages
+        # deploy using peaceiris gh-pages action
         uses: peaceiris/actions-gh-pages@v3
         with:
+          # access token to push to GH Pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+          # directory to publish
+          publish_dir: ./dist 
+          # branch to
+          publish_branch: gh-pages

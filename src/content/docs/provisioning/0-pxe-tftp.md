@@ -1,3 +1,12 @@
+---
+title: TFTP Server for PXE
+icon: document
+order: 2
+tableOfContents: true
+prev: false
+next: false
+---
+
 # 🌐 PXE TFTP 
 
 ## 📋 Overview

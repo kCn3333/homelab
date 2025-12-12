@@ -1,3 +1,12 @@
+---
+title: SSH Configuration
+icon: document
+order: 4
+tableOfContents: true
+prev: false
+next: false
+---
+
 # 📄 SSH Configuration
 
 ## 🔐 Generate SSH Keys
