@@ -1,4 +1,4 @@
-site_name: Homelab Documentation
+site_name: "> Homelab Documentation"
 site_url: https://kcn3333.github.io/homelab/
 repo_url: https://github.com/kCn3333/homelab
 repo_name: kCn3333/homelab
@@ -73,8 +73,9 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+      auto_title: true
       #pygments_style: one-dark 
-      use_pygments: true  # 
+      use_pygments: true   
   - pymdownx.superfences 
   - pymdownx.inlinehilite
   - pymdownx.keys

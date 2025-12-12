@@ -4,7 +4,7 @@ nav:
 
 
   - 🖧 Infrastructure: 
-    - 모 network:  infrastructure/home.md
+    - 모 network:  infrastructure
     - 🖴 project server: https://kcn333.pl/home_server
 
   - 🖳 Provisioning: provisioning
@@ -12,7 +12,7 @@ nav:
   - ⛭ Applications:
       
     - 🗐 Docker Compose Repo: https://github.com/kCn3333/docker-compose
-    - "</> .bashrc": https://github.com/kCn3333/linux-bash/blob/main/.bashrc
+    - 🗏 .bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
     - ⛯ starship config: https://github.com/kCn3333/starship-config
     - ⛯ conky config: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
     - 🗲 wireshark config: https://github.com/kCn3333/wireshark
@@ -27,4 +27,4 @@ nav:
     - 🅰 Ansible playbooks: automation 
     - ▶︎ n8n workflows: https://github.com/kCn3333/n8n_workflows
       
-  - 🕮 Troubleshooting: troubleshooting 𓇼 ⋆.˚ 𓆉 𓆝 𓆡⋆.˚ 𓇼
+  - 🕮 Troubleshooting: troubleshooting 
