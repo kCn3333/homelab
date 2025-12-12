@@ -1,4 +1,4 @@
-# 📝 Image with Packer
+# :octicons-image-16: Image with Packer
 
 ## 🎯 Goal
 

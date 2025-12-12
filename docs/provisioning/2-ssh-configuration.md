@@ -1,4 +1,4 @@
-# 📄 SSH Configuration
+# :octicons-terminal-16: SSH Configuration
 
 ## 🔐 Generate SSH Keys
 

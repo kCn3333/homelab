@@ -1,4 +1,4 @@
-# 🛢️ MAAS Deployment
+# :fontawesome-brands-ubuntu: MAAS Deployment
 
 **Used Prerequisites:**
 
