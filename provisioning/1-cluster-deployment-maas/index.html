@@ -55,8 +55,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/retro.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1600,16 +1598,18 @@
 <h2 id="maas-deployment-initial-configuration">MAAS Deployment &amp; Initial Configuration<a class="headerlink" href="#maas-deployment-initial-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="1-maas-core-installation">1. 💾 MAAS Core Installation<a class="headerlink" href="#1-maas-core-installation" title="Permanent link">&para;</a></h3>
 <p>Install the MAAS packages and the required database components.</p>
-<pre class="highlight"><code class="language-bash"># Add repository for latest MaaS version
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:maas/3.7
-
-# Update and install the MaaS package
-sudo apt update
-sudo apt install maas</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Add repository for latest MaaS version</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>software-properties-common
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:maas/3.7
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Update and install the MaaS package</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>maas
+</span></code></pre></div>
 <h3 id="2-initial-configuration">2. ⚙️ Initial Configuration<a class="headerlink" href="#2-initial-configuration" title="Permanent link">&para;</a></h3>
 <p>Initialize the MAAS region controller. You will be prompted to choose a user (create a new one).</p>
-<pre class="highlight"><code class="language-bash">sudo maas init</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>maas<span class="w"> </span>init
+</span></code></pre></div>
 <h3 id="3-access-ui">3. 🌐 Access UI<a class="headerlink" href="#3-access-ui" title="Permanent link">&para;</a></h3>
 <p>Open a web browser and navigate to:</p>
 <p><strong><code>http://&lt;MAAS_SERVER_IP&gt;:5240/MAAS</code></strong></p>
@@ -1685,42 +1685,52 @@ sudo apt install maas</code></pre>
 <p>After deployment, the nodes are running Ubuntu 24.04 with the user <code>ubuntu</code> by default and some MAAS settings.</p>
 <h4 id="user-account-migration-ubuntu-admin">User Account Migration (ubuntu → admin)<a class="headerlink" href="#user-account-migration-ubuntu-admin" title="Permanent link">&para;</a></h4>
 <p>Perform SSH login using <code>ssh ubuntu@&lt;IP_ADDRESS&gt;</code> and execute:</p>
-<pre class="highlight"><code class="language-bash"># Add new user
-sudo adduser admin
-
-# Grant sudo rights to the new user
-sudo usermod -aG sudo admin</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Add new user</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>admin
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Grant sudo rights to the new user</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>admin
+</span></code></pre></div>
 <p>Enable password-less sudo (required for Ansible):</p>
-<pre class="highlight"><code class="language-bash">sudo visudo</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>visudo
+</span></code></pre></div>
 <p>Add to the end of the file:</p>
-<pre class="highlight"><code class="language-bash">admin ALL=(ALL) NOPASSWD: ALL</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>admin<span class="w"> </span><span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>ALL
+</span></code></pre></div>
 <p>Copy SSH key to new user and fix ownership/permissions:</p>
-<pre class="highlight"><code class="language-bash">sudo cp -r /home/ubuntu/.ssh /home/admin/
-sudo chown -R admin:admin /home/admin/.ssh
-sudo chmod 700 /home/admin/.ssh
-sudo chmod 600 /home/admin/.ssh/authorized_keys</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>/home/ubuntu/.ssh<span class="w"> </span>/home/admin/
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>admin:admin<span class="w"> </span>/home/admin/.ssh
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/home/admin/.ssh
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/admin/.ssh/authorized_keys
+</span></code></pre></div>
 <h4 id="switch-to-new-user">Switch to New User<a class="headerlink" href="#switch-to-new-user" title="Permanent link">&para;</a></h4>
 <p>Log out and log back in as the new user:</p>
-<pre class="highlight"><code class="language-bash">exit
-ssh admin@&lt;IP_ADDRESS&gt;</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">exit</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ssh<span class="w"> </span>admin@&lt;IP_ADDRESS&gt;
+</span></code></pre></div>
 <p>If everything works fine, delete the ubuntu user:</p>
-<pre class="highlight"><code class="language-bash">sudo deluser --remove-home ubuntu</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>deluser<span class="w"> </span>--remove-home<span class="w"> </span>ubuntu
+</span></code></pre></div>
 <h4 id="change-hostname-optional">Change Hostname (Optional)<a class="headerlink" href="#change-hostname-optional" title="Permanent link">&para;</a></h4>
-<pre class="highlight"><code class="language-bash">sudo hostnamectl set-hostname master-00</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>master-00
+</span></code></pre></div>
 <h4 id="remove-maas-apt-proxy-configuration">Remove MAAS APT Proxy Configuration<a class="headerlink" href="#remove-maas-apt-proxy-configuration" title="Permanent link">&para;</a></h4>
-<pre class="highlight"><code class="language-bash"># Remove APT proxy config
-sudo rm -f /etc/apt/apt.conf.d/90curtin-aptproxy
-
-# Remove global proxy environment variables
-sudo sed -i '/maas/d' /etc/environment
-sudo sed -i '/maas/d' /etc/bash.bashrc
-
-# Fix missing packages
-sudo apt update --fix-missing</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Remove APT proxy config</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/apt/apt.conf.d/90curtin-aptproxy
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Remove global proxy environment variables</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/maas/d&#39;</span><span class="w"> </span>/etc/environment
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/maas/d&#39;</span><span class="w"> </span>/etc/bash.bashrc
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Fix missing packages</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span>--fix-missing
+</span></code></pre></div>
 <p>Optionally remove duplicate source warnings:</p>
-<pre class="highlight"><code class="language-bash">sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/apt/sources.list<span class="w"> </span>/etc/apt/sources.list.bak
+</span></code></pre></div>
 <h4 id="final-system-update">Final System Update<a class="headerlink" href="#final-system-update" title="Permanent link">&para;</a></h4>
-<pre class="highlight"><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+</span></code></pre></div>
 
 
 
@@ -1825,13 +1835,11 @@ sudo apt update --fix-missing</code></pre>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
-    
     
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
@@ -1839,10 +1847,6 @@ sudo apt update --fix-missing</code></pre>
         <script src="../../js/timeago.min.js"></script>
       
         <script src="../../js/timeago_mkdocs_material.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-      
-        <script src="../../javascripts/hljs-init.js"></script>
       
     
   </body>

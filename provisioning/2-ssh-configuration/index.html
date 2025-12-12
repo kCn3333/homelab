@@ -53,8 +53,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/retro.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1560,11 +1558,12 @@
 <h2 id="generate-ssh-keys">🔐 Generate SSH Keys<a class="headerlink" href="#generate-ssh-keys" title="Permanent link">&para;</a></h2>
 <h3 id="for-windows-powershell">For Windows (PowerShell)<a class="headerlink" href="#for-windows-powershell" title="Permanent link">&para;</a></h3>
 <p>Generate a new SSH key pair:</p>
-<pre class="highlight"><code class="language-powershell"># Generate ED25519 key (recommended)
-ssh-keygen -t ed25519 -C "your_email@example.com"
-
-# Or RSA key (if ED25519 is not supported)
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></pre>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># Generate ED25519 key (recommended)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">ssh-keygen</span> <span class="n">-t</span> <span class="n">ed25519</span> <span class="n">-C</span> <span class="s2">&quot;your_email@example.com&quot;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c"># Or RSA key (if ED25519 is not supported)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">ssh-keygen</span> <span class="n">-t</span> <span class="n">rsa</span> <span class="n">-b</span> <span class="n">4096</span> <span class="n">-C</span> <span class="s2">&quot;your_email@example.com&quot;</span>
+</span></code></pre></div>
 <p><strong>Default location:</strong> <code>C:\Users\USER\.ssh\id_ed25519</code> (or <code>id_rsa</code>)</p>
 <p><strong>Steps:</strong></p>
 <ol>
@@ -1574,11 +1573,12 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></pre>
 </ol>
 <h3 id="for-linux-wsl">For Linux / WSL<a class="headerlink" href="#for-linux-wsl" title="Permanent link">&para;</a></h3>
 <p>Generate a new SSH key pair:</p>
-<pre class="highlight"><code class="language-bash"># Generate ED25519 key (recommended)
-ssh-keygen -t ed25519 -C "your_email@example.com"
-
-# Or RSA key (if ED25519 is not supported)
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Generate ED25519 key (recommended)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your_email@example.com&quot;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Or RSA key (if ED25519 is not supported)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your_email@example.com&quot;</span>
+</span></code></pre></div>
 <p><strong>Default location:</strong> <code>~/.ssh/id_ed25519</code> (or <code>id_rsa</code>)</p>
 <p><strong>Steps:</strong></p>
 <ol>
@@ -1587,33 +1587,38 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></pre>
 <li>Confirm the passphrase</li>
 </ol>
 <p>Set correct permissions:</p>
-<pre class="highlight"><code class="language-bash">chmod 700 ~/.ssh
-chmod 600 ~/.ssh/id_ed25519
-chmod 644 ~/.ssh/id_ed25519.pub</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/id_ed25519
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>~/.ssh/id_ed25519.pub
+</span></code></pre></div>
 <hr />
 <h2 id="configure-ssh-agent">🔑 Configure SSH Agent<a class="headerlink" href="#configure-ssh-agent" title="Permanent link">&para;</a></h2>
 <h3 id="for-windows-1011">For Windows 10/11<a class="headerlink" href="#for-windows-1011" title="Permanent link">&para;</a></h3>
 <p>Set up SSH Agent to auto-start and load your key:</p>
-<pre class="highlight"><code class="language-powershell"># Set SSH Agent to start automatically
-Get-Service ssh-agent | Set-Service -StartupType Automatic
-
-# Start the SSH Agent service
-Start-Service ssh-agent
-
-# Add your SSH key
-ssh-add C:\Users\USER\.ssh\id_rsa</code></pre>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c"># Set SSH Agent to start automatically</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">Get-Service</span> <span class="n">ssh-agent</span> <span class="p">|</span> <span class="nb">Set-Service</span> <span class="n">-StartupType</span> <span class="n">Automatic</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c"># Start the SSH Agent service</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nb">Start-Service</span> <span class="n">ssh-agent</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c"># Add your SSH key</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">ssh-add</span> <span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">USER</span><span class="p">\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_rsa</span>
+</span></code></pre></div>
 <h3 id="for-wsl-or-linux">For WSL or Linux<a class="headerlink" href="#for-wsl-or-linux" title="Permanent link">&para;</a></h3>
 <p><strong>Note:</strong> Windows SSH Agent doesn't work for WSL, so use <code>keychain</code> instead.</p>
 <p>Install and configure keychain:</p>
-<pre class="highlight"><code class="language-bash"># Install keychain
-sudo apt install keychain</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Install keychain</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>keychain
+</span></code></pre></div>
 <p>Add keychain setup to your shell profile (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
-<pre class="highlight"><code class="language-bash"># Add this line to ~/.bashrc or ~/.zshrc
-eval $(keychain --eval --quiet id_rsa)</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Add this line to ~/.bashrc or ~/.zshrc</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">eval</span><span class="w"> </span><span class="k">$(</span>keychain<span class="w"> </span>--eval<span class="w"> </span>--quiet<span class="w"> </span>id_rsa<span class="k">)</span>
+</span></code></pre></div>
 <p>Reload your shell configuration:</p>
-<pre class="highlight"><code class="language-bash">source ~/.bashrc
-# or
-source ~/.zshrc</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># or</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">source</span><span class="w"> </span>~/.zshrc
+</span></code></pre></div>
 <hr />
 <h2 id="configure-local-ssh-aliases">⚙️ Configure Local SSH Aliases<a class="headerlink" href="#configure-local-ssh-aliases" title="Permanent link">&para;</a></h2>
 <p>Works the same for Windows and Linux/WSL.</p>
@@ -1623,74 +1628,83 @@ source ~/.zshrc</code></pre>
 <li><strong>Linux/WSL:</strong> <code>~/.ssh/config</code></li>
 </ul>
 <p>Add the following configuration:</p>
-<pre class="highlight"><code class="language-bash"># --- HOMELAB NODES ---
-Host master-00
-    HostName 192.168.55.10
-    User admin
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-
-Host worker-01
-    HostName 192.168.55.11
-    User admin
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes
-
-Host worker-02
-    HostName 192.168.55.12
-    User admin
-    IdentityFile ~/.ssh/id_rsa
-    ForwardAgent yes</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># --- HOMELAB NODES ---</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Host<span class="w"> </span>master-00
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span>HostName<span class="w"> </span><span class="m">192</span>.168.55.10
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span>User<span class="w"> </span>admin
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span>IdentityFile<span class="w"> </span>~/.ssh/id_rsa
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span>ForwardAgent<span class="w"> </span>yes
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>Host<span class="w"> </span>worker-01
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span>HostName<span class="w"> </span><span class="m">192</span>.168.55.11
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span>User<span class="w"> </span>admin
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span>IdentityFile<span class="w"> </span>~/.ssh/id_rsa
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span>ForwardAgent<span class="w"> </span>yes
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>Host<span class="w"> </span>worker-02
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">    </span>HostName<span class="w"> </span><span class="m">192</span>.168.55.12
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span>User<span class="w"> </span>admin
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span>IdentityFile<span class="w"> </span>~/.ssh/id_rsa
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">    </span>ForwardAgent<span class="w"> </span>yes
+</span></code></pre></div>
 <p>Make sure the permissions are correct:</p>
-<pre class="highlight"><code class="language-bash">chmod 600 ~/.ssh/config</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/config
+</span></code></pre></div>
 <p><strong>Usage:</strong></p>
 <p>Now you can simply SSH using hostnames:</p>
-<pre class="highlight"><code class="language-bash">ssh master-00
-ssh worker-01
-ssh worker-02</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ssh<span class="w"> </span>master-00
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>ssh<span class="w"> </span>worker-01
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>ssh<span class="w"> </span>worker-02
+</span></code></pre></div>
 <hr />
 <h2 id="configure-hostnames">📝 Configure Hostnames<a class="headerlink" href="#configure-hostnames" title="Permanent link">&para;</a></h2>
 <h3 id="for-windows">For Windows<a class="headerlink" href="#for-windows" title="Permanent link">&para;</a></h3>
 <p>Open <strong>as Administrator:</strong> <code>C:\Windows\System32\drivers\etc\hosts</code></p>
 <p>Add the following entries:</p>
-<pre class="highlight"><code>192.168.55.10    master-00
-192.168.55.11    worker-01
-192.168.55.12    worker-02</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>192.168.55.10    master-00
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>192.168.55.11    worker-01
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>192.168.55.12    worker-02
+</span></code></pre></div>
 <h3 id="for-linux-or-wsl">For Linux or WSL<a class="headerlink" href="#for-linux-or-wsl" title="Permanent link">&para;</a></h3>
 <p>Edit <code>/etc/hosts</code>:</p>
-<pre class="highlight"><code class="language-bash">sudo nano /etc/hosts</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/hosts
+</span></code></pre></div>
 <p>Add the following entries:</p>
-<pre class="highlight"><code>192.168.55.10    master-00
-192.168.55.11    worker-01
-192.168.55.12    worker-02</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>192.168.55.10    master-00
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>192.168.55.11    worker-01
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>192.168.55.12    worker-02
+</span></code></pre></div>
 <p>Save and exit (<code>Ctrl+X</code>, <code>Y</code>, <code>Enter</code> in nano).</p>
 <hr />
 <h2 id="copy-ssh-key-to-remote-hosts">🚀 Copy SSH Key to Remote Hosts<a class="headerlink" href="#copy-ssh-key-to-remote-hosts" title="Permanent link">&para;</a></h2>
 <h3 id="using-ssh-copy-id-linuxwsl">Using ssh-copy-id (Linux/WSL)<a class="headerlink" href="#using-ssh-copy-id-linuxwsl" title="Permanent link">&para;</a></h3>
-<pre class="highlight"><code class="language-bash"># Copy key to remote host
-ssh-copy-id admin@192.168.55.10
-ssh-copy-id admin@192.168.55.11
-ssh-copy-id admin@192.168.55.12</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Copy key to remote host</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>ssh-copy-id<span class="w"> </span>admin@192.168.55.10
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>ssh-copy-id<span class="w"> </span>admin@192.168.55.11
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>ssh-copy-id<span class="w"> </span>admin@192.168.55.12
+</span></code></pre></div>
 <h3 id="manual-method-windowslinux">Manual Method (Windows/Linux)<a class="headerlink" href="#manual-method-windowslinux" title="Permanent link">&para;</a></h3>
 <p>If <code>ssh-copy-id</code> is not available:</p>
-<pre class="highlight"><code class="language-bash"># Display your public key
-cat ~/.ssh/id_rsa.pub
-
-# SSH to the remote host
-ssh admin@192.168.55.10
-
-# On the remote host, add the key
-mkdir -p ~/.ssh
-echo "YOUR_PUBLIC_KEY" &gt;&gt; ~/.ssh/authorized_keys
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-exit</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Display your public key</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>cat<span class="w"> </span>~/.ssh/id_rsa.pub
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1"># SSH to the remote host</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>ssh<span class="w"> </span>admin@192.168.55.10
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># On the remote host, add the key</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.ssh
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;YOUR_PUBLIC_KEY&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.ssh/authorized_keys
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/authorized_keys
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="nb">exit</span>
+</span></code></pre></div>
 <hr />
 <h2 id="verify-ssh-connection">✅ Verify SSH Connection<a class="headerlink" href="#verify-ssh-connection" title="Permanent link">&para;</a></h2>
 <p>Test passwordless SSH:</p>
-<pre class="highlight"><code class="language-bash">ssh master-00
-ssh worker-01
-ssh worker-02</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ssh<span class="w"> </span>master-00
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>ssh<span class="w"> </span>worker-01
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>ssh<span class="w"> </span>worker-02
+</span></code></pre></div>
 <p>If configured correctly, you should connect without entering a password!</p>
 
 
@@ -1796,13 +1810,11 @@ ssh worker-02</code></pre>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
-    
     
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
@@ -1810,10 +1822,6 @@ ssh worker-02</code></pre>
         <script src="../../js/timeago.min.js"></script>
       
         <script src="../../js/timeago_mkdocs_material.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-      
-        <script src="../../javascripts/hljs-init.js"></script>
       
     
   </body>

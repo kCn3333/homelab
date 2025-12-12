@@ -55,8 +55,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/retro.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1659,17 +1657,20 @@
 <hr />
 <h2 id="1-install-tftp-server">1. Install TFTP Server<a class="headerlink" href="#1-install-tftp-server" title="Permanent link">&para;</a></h2>
 <p>Install <code>tftpd-hpa</code>, the most stable and commonly used TFTP daemon for PXE:</p>
-<pre class="highlight"><code class="language-bash">sudo apt update
-sudo apt install tftpd-hpa</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tftpd-hpa
+</span></code></pre></div>
 <hr />
 <h2 id="2-configure-tftp-server">2. Configure TFTP Server<a class="headerlink" href="#2-configure-tftp-server" title="Permanent link">&para;</a></h2>
 <p>Edit the TFTP configuration file:</p>
-<pre class="highlight"><code class="language-bash">sudo nano /etc/default/tftpd-hpa</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/default/tftpd-hpa
+</span></code></pre></div>
 <p>Set the following configuration:</p>
-<pre class="highlight"><code class="language-bash">TFTP_USERNAME="tftp"
-TFTP_DIRECTORY="/srv/tftp"
-TFTP_ADDRESS="192.168.55.254:69"
-TFTP_OPTIONS="--secure --create"</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">TFTP_USERNAME</span><span class="o">=</span><span class="s2">&quot;tftp&quot;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">TFTP_DIRECTORY</span><span class="o">=</span><span class="s2">&quot;/srv/tftp&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nv">TFTP_ADDRESS</span><span class="o">=</span><span class="s2">&quot;192.168.55.254:69&quot;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nv">TFTP_OPTIONS</span><span class="o">=</span><span class="s2">&quot;--secure --create&quot;</span>
+</span></code></pre></div>
 <p><strong>Configuration explanation:</strong></p>
 <table>
 <thead>
@@ -1707,92 +1708,105 @@ TFTP_OPTIONS="--secure --create"</code></pre>
 <hr />
 <h2 id="3-create-tftp-directory">3. Create TFTP Directory<a class="headerlink" href="#3-create-tftp-directory" title="Permanent link">&para;</a></h2>
 <p>Create the TFTP root directory and set proper ownership:</p>
-<pre class="highlight"><code class="language-bash">sudo mkdir -p /srv/tftp
-sudo chown -R tftp:tftp /srv/tftp</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/tftp
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>tftp:tftp<span class="w"> </span>/srv/tftp
+</span></code></pre></div>
 <hr />
 <h2 id="4-restart-and-verify-service">4. Restart and Verify Service<a class="headerlink" href="#4-restart-and-verify-service" title="Permanent link">&para;</a></h2>
 <p>Restart the TFTP service and check its status:</p>
-<pre class="highlight"><code class="language-bash">sudo systemctl restart tftpd-hpa
-sudo systemctl enable tftpd-hpa
-sudo systemctl status tftpd-hpa</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tftpd-hpa
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>tftpd-hpa
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>tftpd-hpa
+</span></code></pre></div>
 <p><strong>Expected output:</strong></p>
-<pre class="highlight"><code>● tftpd-hpa.service - LSB: HPA's tftp server
-   Loaded: loaded (/etc/init.d/tftpd-hpa; generated)
-   Active: active (running)</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>● tftpd-hpa.service - LSB: HPA&#39;s tftp server
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>   Loaded: loaded (/etc/init.d/tftpd-hpa; generated)
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   Active: active (running)
+</span></code></pre></div>
 <hr />
 <h2 id="5-verify-tftp-server">5. Verify TFTP Server<a class="headerlink" href="#5-verify-tftp-server" title="Permanent link">&para;</a></h2>
 <p>Test if the TFTP server is listening on the correct interface:</p>
-<pre class="highlight"><code class="language-bash">sudo ss -ulnp | grep :69</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>ss<span class="w"> </span>-ulnp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>:69
+</span></code></pre></div>
 <p><strong>Expected output:</strong></p>
-<pre class="highlight"><code>UNCONN 0  0  192.168.55.254:69  0.0.0.0:*  users:(("in.tftpd",pid=1234,fd=3))</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>UNCONN 0  0  192.168.55.254:69  0.0.0.0:*  users:((&quot;in.tftpd&quot;,pid=1234,fd=3))
+</span></code></pre></div>
 <p>This confirms TFTP is only listening on VLAN 5 (<code>192.168.55.254</code>).</p>
 <hr />
 <h2 id="6-test-tftp-connection">6. Test TFTP Connection<a class="headerlink" href="#6-test-tftp-connection" title="Permanent link">&para;</a></h2>
 <p>From a client machine on the same VLAN, test the TFTP connection:</p>
-<pre class="highlight"><code class="language-bash"># Install tftp client (if not already installed)
-sudo apt install tftp-hpa
-
-# Test connection
-tftp 192.168.55.254
-tftp&gt; status
-tftp&gt; quit</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Install tftp client (if not already installed)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tftp-hpa
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Test connection</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>tftp<span class="w"> </span><span class="m">192</span>.168.55.254
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>tftp&gt;<span class="w"> </span>status
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>tftp&gt;<span class="w"> </span>quit
+</span></code></pre></div>
 <hr />
 <h2 id="7-populate-pxe-boot-files">7. Populate PXE Boot Files<a class="headerlink" href="#7-populate-pxe-boot-files" title="Permanent link">&para;</a></h2>
 <h3 id="71-download-pxelinux-files">7.1. Download PXELinux Files<a class="headerlink" href="#71-download-pxelinux-files" title="Permanent link">&para;</a></h3>
 <p>Download the Syslinux bootloader files needed for PXE:</p>
-<pre class="highlight"><code class="language-bash">cd /srv/tftp
-sudo wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.gz
-sudo tar -xzf syslinux-6.03.tar.gz
-sudo cp syslinux-6.03/bios/core/pxelinux.0 .
-sudo cp syslinux-6.03/bios/com32/elflink/ldlinux/ldlinux.c32 .
-sudo cp syslinux-6.03/bios/com32/lib/libcom32.c32 .
-sudo cp syslinux-6.03/bios/com32/libutil/libutil.c32 .
-sudo cp syslinux-6.03/bios/com32/menu/vesamenu.c32 .</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">cd</span><span class="w"> </span>/srv/tftp
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>wget<span class="w"> </span>https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.tar.gz
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>sudo<span class="w"> </span>tar<span class="w"> </span>-xzf<span class="w"> </span>syslinux-6.03.tar.gz
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>sudo<span class="w"> </span>cp<span class="w"> </span>syslinux-6.03/bios/core/pxelinux.0<span class="w"> </span>.
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>cp<span class="w"> </span>syslinux-6.03/bios/com32/elflink/ldlinux/ldlinux.c32<span class="w"> </span>.
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>sudo<span class="w"> </span>cp<span class="w"> </span>syslinux-6.03/bios/com32/lib/libcom32.c32<span class="w"> </span>.
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>sudo<span class="w"> </span>cp<span class="w"> </span>syslinux-6.03/bios/com32/libutil/libutil.c32<span class="w"> </span>.
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>sudo<span class="w"> </span>cp<span class="w"> </span>syslinux-6.03/bios/com32/menu/vesamenu.c32<span class="w"> </span>.
+</span></code></pre></div>
 <h3 id="72-create-pxelinux-configuration">7.2. Create PXELinux Configuration<a class="headerlink" href="#72-create-pxelinux-configuration" title="Permanent link">&para;</a></h3>
 <p>Create the PXE boot menu configuration:</p>
-<pre class="highlight"><code class="language-bash">sudo mkdir -p /srv/tftp/pxelinux.cfg
-sudo nano /srv/tftp/pxelinux.cfg/default</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/tftp/pxelinux.cfg
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>nano<span class="w"> </span>/srv/tftp/pxelinux.cfg/default
+</span></code></pre></div>
 <p><strong>Example configuration:</strong></p>
-<pre class="highlight"><code>DEFAULT menu.c32
-PROMPT 0
-TIMEOUT 300
-MENU TITLE PXE Boot Menu
-
-LABEL local
-    MENU LABEL Boot from local disk
-    LOCALBOOT 0
-
-LABEL ubuntu
-    MENU LABEL Install Ubuntu Server
-    KERNEL ubuntu/vmlinuz
-    APPEND initrd=ubuntu/initrd.img</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>DEFAULT menu.c32
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>PROMPT 0
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>TIMEOUT 300
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>MENU TITLE PXE Boot Menu
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>LABEL local
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    MENU LABEL Boot from local disk
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    LOCALBOOT 0
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>LABEL ubuntu
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    MENU LABEL Install Ubuntu Server
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    KERNEL ubuntu/vmlinuz
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    APPEND initrd=ubuntu/initrd.img
+</span></code></pre></div>
 <h3 id="73-add-os-images-example-ubuntu">7.3. Add OS Images (Example: Ubuntu)<a class="headerlink" href="#73-add-os-images-example-ubuntu" title="Permanent link">&para;</a></h3>
 <p>Download and place Ubuntu netboot files:</p>
-<pre class="highlight"><code class="language-bash">sudo mkdir -p /srv/tftp/ubuntu
-cd /srv/tftp/ubuntu
-sudo wget http://archive.ubuntu.com/ubuntu/dists/jammy/main/installer-amd64/current/legacy-images/netboot/ubuntu-installer/amd64/linux
-sudo wget http://archive.ubuntu.com/ubuntu/dists/jammy/main/installer-amd64/current/legacy-images/netboot/ubuntu-installer/amd64/initrd.gz
-sudo mv linux vmlinuz
-sudo mv initrd.gz initrd.img</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/srv/tftp/ubuntu
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">cd</span><span class="w"> </span>/srv/tftp/ubuntu
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>sudo<span class="w"> </span>wget<span class="w"> </span>http://archive.ubuntu.com/ubuntu/dists/jammy/main/installer-amd64/current/legacy-images/netboot/ubuntu-installer/amd64/linux
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>sudo<span class="w"> </span>wget<span class="w"> </span>http://archive.ubuntu.com/ubuntu/dists/jammy/main/installer-amd64/current/legacy-images/netboot/ubuntu-installer/amd64/initrd.gz
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>sudo<span class="w"> </span>mv<span class="w"> </span>linux<span class="w"> </span>vmlinuz
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>sudo<span class="w"> </span>mv<span class="w"> </span>initrd.gz<span class="w"> </span>initrd.img
+</span></code></pre></div>
 <hr />
 <h2 id="8-dhcp-configuration-tftp-boot-options">8. DHCP Configuration (TFTP Boot Options)<a class="headerlink" href="#8-dhcp-configuration-tftp-boot-options" title="Permanent link">&para;</a></h2>
 <p>Configure your DHCP server to point clients to the TFTP server.</p>
 <p><strong>Example DHCP options (for dnsmasq):</strong></p>
-<pre class="highlight"><code class="language-bash"># /etc/dnsmasq.conf
-dhcp-boot=pxelinux.0,192.168.55.254</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># /etc/dnsmasq.conf</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>dhcp-boot<span class="o">=</span>pxelinux.0,192.168.55.254
+</span></code></pre></div>
 <p><strong>Example DHCP options (for ISC DHCP Server):</strong></p>
-<pre class="highlight"><code class="language-bash"># /etc/dhcp/dhcpd.conf
-next-server 192.168.55.254;
-filename "pxelinux.0";</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># /etc/dhcp/dhcpd.conf</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>next-server<span class="w"> </span><span class="m">192</span>.168.55.254<span class="p">;</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>filename<span class="w"> </span><span class="s2">&quot;pxelinux.0&quot;</span><span class="p">;</span>
+</span></code></pre></div>
 <p>Restart your DHCP service after configuration.</p>
 <hr />
 <h2 id="9-firewall-configuration-optional">9. Firewall Configuration (Optional)<a class="headerlink" href="#9-firewall-configuration-optional" title="Permanent link">&para;</a></h2>
 <p>If you have a firewall enabled, allow TFTP traffic:</p>
-<pre class="highlight"><code class="language-bash"># UFW
-sudo ufw allow 69/udp
-
-# iptables
-sudo iptables -A INPUT -p udp --dport 69 -j ACCEPT</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># UFW</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">69</span>/udp
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># iptables</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>udp<span class="w"> </span>--dport<span class="w"> </span><span class="m">69</span><span class="w"> </span>-j<span class="w"> </span>ACCEPT
+</span></code></pre></div>
 <hr />
 <h2 id="verification-checklist">✅ Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
@@ -1807,11 +1821,13 @@ sudo iptables -A INPUT -p udp --dport 69 -j ACCEPT</code></pre>
 <h2 id="troubleshooting">🐛 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="tftp-service-wont-start">TFTP Service Won't Start<a class="headerlink" href="#tftp-service-wont-start" title="Permanent link">&para;</a></h3>
 <p><strong>Check logs:</strong></p>
-<pre class="highlight"><code class="language-bash">sudo journalctl -u tftpd-hpa -n 50</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>tftpd-hpa<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span>
+</span></code></pre></div>
 <p><strong>Common issue:</strong> Permission denied on <code>/srv/tftp</code></p>
 <p><strong>Solution:</strong></p>
-<pre class="highlight"><code class="language-bash">sudo chown -R tftp:tftp /srv/tftp
-sudo chmod 755 /srv/tftp</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>tftp:tftp<span class="w"> </span>/srv/tftp
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/srv/tftp
+</span></code></pre></div>
 <h3 id="pxe-client-cant-connect">PXE Client Can't Connect<a class="headerlink" href="#pxe-client-cant-connect" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> Client shows "PXE-E32: TFTP open timeout"</p>
 <p><strong>Verify:</strong></p>
@@ -1821,18 +1837,21 @@ sudo chmod 755 /srv/tftp</code></pre>
 <li>DHCP is providing correct <code>next-server</code> option</li>
 </ol>
 <p><strong>Test from client network:</strong></p>
-<pre class="highlight"><code class="language-bash">tftp 192.168.55.254
-tftp&gt; get pxelinux.0</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>tftp<span class="w"> </span><span class="m">192</span>.168.55.254
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>tftp&gt;<span class="w"> </span>get<span class="w"> </span>pxelinux.0
+</span></code></pre></div>
 <h3 id="files-not-found-tftp-error">Files Not Found (TFTP Error)<a class="headerlink" href="#files-not-found-tftp-error" title="Permanent link">&para;</a></h3>
 <p><strong>Symptom:</strong> "File not found" errors during PXE boot</p>
 <p><strong>Solution:</strong></p>
 <p>Verify file paths and permissions:</p>
-<pre class="highlight"><code class="language-bash">ls -la /srv/tftp/
-ls -la /srv/tftp/pxelinux.cfg/</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>/srv/tftp/
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>ls<span class="w"> </span>-la<span class="w"> </span>/srv/tftp/pxelinux.cfg/
+</span></code></pre></div>
 <p>All files must be readable by <code>tftp</code> user:</p>
-<pre class="highlight"><code class="language-bash">sudo chmod -R 644 /srv/tftp/*
-sudo chmod 755 /srv/tftp
-sudo chmod 755 /srv/tftp/pxelinux.cfg</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">644</span><span class="w"> </span>/srv/tftp/*
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/srv/tftp
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/srv/tftp/pxelinux.cfg
+</span></code></pre></div>
 <hr />
 <h2 id="additional-resources">📚 Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1944,13 +1963,11 @@ sudo chmod 755 /srv/tftp/pxelinux.cfg</code></pre>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
-    
     
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
@@ -1958,10 +1975,6 @@ sudo chmod 755 /srv/tftp/pxelinux.cfg</code></pre>
         <script src="../../js/timeago.min.js"></script>
       
         <script src="../../js/timeago_mkdocs_material.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-      
-        <script src="../../javascripts/hljs-init.js"></script>
       
     
   </body>
