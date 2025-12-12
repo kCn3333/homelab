@@ -109,6 +109,14 @@ background-color: var(--retro-mid-bg) !important; /* To samo tło co kod */
     margin-top: 0 !important;
 }
 
+/* Nadpisanie koloru komentarzy w blokach kodu */
+.md-typeset .highlight .c,   /* Ogólny komentarz */
+.md-typeset .highlight .c1,  /* Komentarz jednoliniowy (np. # w Bashu, // w Javie) */
+.md-typeset .highlight .cm { /* Komentarz blokowy */
+    color: #265026 !important; /* Przygaszony szary */
+    font-style: italic !important; /* Kursywa dodaje im profesjonalnego wyglądu */
+}
+
 
 /* 3. Nagłówki - SZARE */
 .md-typeset h1,
