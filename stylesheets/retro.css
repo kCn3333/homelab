@@ -78,16 +78,33 @@ body,
 
 /* 3. Opcjonalnie: Jeśli używasz tytułów bloków kodu (title="...") */
 .md-typeset .md-code__title {
-    border-radius: 8px 8px 0 0 !important; /* Zaokrąglamy tylko górę tytułu */
+background-color: var(--retro-mid-bg) !important; /* To samo tło co kod */
     border: 1px solid #444 !important;
-    border-bottom: none !important;        /* Żeby nie było podwójnej kreski */
+    border-bottom: 1px solid #333 !important; /* Subtelna linia oddzielająca */
+    
+    /* Wyrównanie do prawej */
+    text-align: right !important;
+    
+    /* "Wygaszenie" tekstu */
+    color: var(--md-default-fg-color--lighter) !important; 
+    font-size: 0.65rem !important;
+    font-weight: 400 !important;
+    text-transform: uppercase; /* Opcjonalnie: mały caps wygląda pro */
+    letter-spacing: 0.05em;
+    
+    padding: 4px 15px !important;
     margin-top: 1.5em !important;
-    margin-bottom: 0 !important;
-    background-color: var(--retro-mid-bg) !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.md-typeset .highlight .nb { /* .nb to zazwyczaj komendy typu 'apt', 'cd', 'echo' */
+    color: #4CAF50 !important; /* Twój retro zielony */
+    font-weight: bold;
 }
 
 /* Jeśli jest tytuł, dolna część (kod) traci górne zaokrąglenie */
 .md-typeset .md-code__title + .highlight {
+    border-top: none !important;
     border-radius: 0 0 8px 8px !important;
     margin-top: 0 !important;
 }
