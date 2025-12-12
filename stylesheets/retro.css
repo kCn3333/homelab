@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&display=swap');
+
 :root {
     --retro-green-main: #4CAF50;
     --retro-green-light: #66BB6A;
@@ -49,7 +51,7 @@ body,
 .md-nav,
 .md-header,
 .md-footer {
-    font-family: Verdana, sans-serif !important;
+    font-family: 'Jost', Verdana, sans-serif !important;
 }
 
 /* Courier New tylko dla bloków kodu */
