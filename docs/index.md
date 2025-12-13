@@ -14,7 +14,7 @@
 
 * [:fontawesome-solid-chart-line: **Service Status**](https://status.kcn333.pl)
 * [:fontawesome-brands-github: **Docker Compose**](https://github.com/kCn3333/docker-compose)
-* [:fontawesome-solid-globe: **My Home Page**](https://kcn333.pl)
+* [:material-web: **My Home Page**](https://kcn333.pl)
 
 ---
 
@@ -40,6 +40,9 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 ## 🏗️ The Setup
 
+<div class="retro-image-frame">
+  ![homelab](img/homelab0.png)
+</div>
 
 ## 📂 Documentation Sections
 
