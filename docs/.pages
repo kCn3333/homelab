@@ -4,19 +4,19 @@ nav:
 
 
   - 🖧 Infrastructure: 
-    - 모 network:  infrastructure
+    - 모 Network:  infrastructure
     - ⛂ project server: https://kcn333.pl/home_server
     - 🗠 currently running: https://status.kcn333.pl
 
   - ⏻ Provisioning:
     - ⛃ Cluster Deplomyment: provisioning
 
-  - ⛭ Applications:
+  - ⛯ Applications:
       
     - 🗐 Docker Compose Repo: https://github.com/kCn3333/docker-compose
     - 🗏 .bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
-    - ⛯ starship config: https://github.com/kCn3333/starship-config
-    - ⛯ conky config: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
+    - ⛭ starship config: https://github.com/kCn3333/starship-config
+    - ⛭ conky config: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
     - 🗲 wireshark config: https://github.com/kCn3333/wireshark
 
     - 🗁 Bash Scripts: 

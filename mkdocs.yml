@@ -50,7 +50,7 @@ plugins:
       enable_creation_date: true
       type: timeago
       fallback_to_build_date: true
-  - git-authors
+  #- git-authors
       
 markdown_extensions:
   - abbr
@@ -102,6 +102,8 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/kCn3333
+    - icon: fontawesome/brands/discord 
+      link: https://discord.com/users/1314708812120330333
   generator: false
 
 extra_css:

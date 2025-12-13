@@ -41,18 +41,15 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 ## 🏗️ The Setup
 
 
-
-
-
 ## 📂 Documentation Sections
 
 Browse the documentation by topic:
 
-- **:fontawesome-solid-server: Infrastructure** - Hardware setup, network configuration
-- **:fontawesome-solid-cogs: Provisioning** - VM and bare-metal deployment workflows
-- **:fontawesome-brands-docker: Applications** - Docker compose, k8s manifests, service configs
-- **:fontawesome-solid-code: Automation** - Scripts, workflows, infrastructure as code
-- **:fontawesome-solid-screwdriver-wrench: Troubleshooting** - Common issues and their solutions
+- <span class="color-green">**🖧 Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>
+- <span class="color-green">**⏻ Provisioning**</span> - <span class="color-grey">:simple-virtualbox: VM and :simple-linux: bare-metal deployment workflows</span>
+- <span class="color-green">**⛯ Applications**</span> - <span class="color-grey">:simple-docker: Docker compose, :simple-kubernetes: k8s manifests, ⛭ service configs</span>
+- <span class="color-green">**➤ Automation**</span> - <span class="color-grey">:material-ansible: Playbooks, :simple-n8n: workflows, infrastructure as code</span>
+- <span class="color-green">**🕮 Troubleshooting**</span> - <span class="color-grey">:material-head-lightbulb: Common issues and their solutions</span>
 
 <br>
 
