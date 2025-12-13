@@ -3,7 +3,8 @@
 !!! info "MAAS Custom Images"
     By default, MAAS only includes an image for Ubuntu. If you want to add an image for another operating system, you need to build it in the appropriate format using the Packer application.
     
-    **Documentation:** [:octicons-book-24: Packer Docs](https://developer.hashicorp.com/packer/docs)
+    **Documentation:**   
+    [:octicons-book-24: Packer Docs](https://developer.hashicorp.com/packer/docs)
 
 
 ## 🎯 Goal
