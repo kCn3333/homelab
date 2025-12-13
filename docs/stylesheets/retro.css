@@ -76,9 +76,10 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
     text-decoration: underline;
 }
 
-/* --- HEADER REMOVAL --- */
+/* --- HEADER REMOVAL done above --- 
 .md-header { display: none !important; }
 .md-main, .md-container { padding-top: 0 !important; }
+*/
 
 /* --- NAVIGATION TABS & SIDEBAR --- */
 .md-tabs { background-color: var(--retro-dark-bg) !important; }
@@ -154,29 +155,32 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
 
 /* --- Custom Image Frame (Square, Retro Green Border) --- */
 .md-typeset .retro-image-frame {
-    /* Ustawienie zielonej ramki */
     border: 2px solid var(--retro-green-main) !important;
-    
-    /* Zaokrąglone rogi */
     border-radius: 10px !important;
-    
-    /* Cień, żeby go trochę wyróżnić (opcjonalnie) */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     
-    /* Kluczowa właściwość: ukrywa wszystko, co wystaje poza zaokrąglone rogi */
-    overflow: hidden !important; 
+    /* KLUCZOWE ZMIANY: */
     
-    /* Kontener obrazka powinien być wyświetlany jako blok z marginesem */
-    display: inline-block;
+    /* 1. Zerowanie wewnętrznego marginesu: */
+    padding: 0 !important; 
+    
+    /* 2. Ustawienie tła na przezroczyste lub jasne (żeby nie było widać czerni): */
+    background-color: transparent !important;
+    
+    /* 3. Upewnienie się, że obrazek jest jedyną treścią: */
+    line-height: 0; /* Czasami pomaga usunąć dodatkowe spacje pod obrazkami */
+
+    overflow: hidden !important; 
+    display: block !important; /* Dajmy block dla pewności, że zajmuje całą dostępną szerokość */
     margin: 1.5em 0;
 }
 
-/* Upewnienie się, że sam obrazek wewnątrz ramki jest poprawnie wyświetlany */
+/* Właściwości obrazka - powinny wypełniać kontener */
 .md-typeset .retro-image-frame img {
-    /* Upewnienie się, że obrazek wypełnia kontener ramki */
     display: block;
-    width: 100%;
-    height: auto;
+    width: 100%; 
+    height: auto; /* Zostawiamy auto, chyba że ma być dokładnie kwadrat */
+    border: none !important; 
 }
 
 
@@ -195,14 +199,16 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
 }
 
 /* --- RESPONSIVE DESIGN ADJUSTMENTS --- */
+/* Ukrywamy nagłówek TYLKO na dużych ekranach (desktop: > 76.25em) */
 @media screen and (min-width: 76.25em) { 
     .md-header {
         display: none !important;
     }
-}
-/* Remove top padding from main content area when header is hidden */
-@media screen and (min-width: 76.25em) {
-    .md-main {
-        padding-top: 0 !important;
+    
+    /* Na desktopie (gdzie nagłówek jest ukryty), zerujemy górne marginesy,
+       żeby treść była u góry strony. */
+    .md-main, 
+    .md-container { 
+        padding-top: 0 !important; 
     }
 }
