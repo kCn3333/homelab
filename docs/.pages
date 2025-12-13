@@ -6,10 +6,11 @@ nav:
   - 🖧 Infrastructure: 
     - 모 network:  infrastructure
     - ⛂ project server: https://kcn333.pl/home_server
+    - 🗠 currently running: https://status.kcn333.pl
 
   - ⏻ Provisioning:
     - ⛃ Cluster Deplomyment: provisioning
-    
+
   - ⛭ Applications:
       
     - 🗐 Docker Compose Repo: https://github.com/kCn3333/docker-compose

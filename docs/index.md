@@ -48,11 +48,11 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 Browse the documentation by topic:
 
-- **[:fontawesome-solid-server: Infrastructure](infrastructure)** - Hardware setup, network configuration
-- **[:fontawesome-solid-cogs: Provisioning](provisioning)** - VM and bare-metal deployment workflows
-- **[:fontawesome-brands-docker: Applications](applications)** - Docker compose, k8s manifests, service configs
-- **[:fontawesome-solid-code: Automation](automation)** - Scripts, workflows, infrastructure as code
-- **[:fontawesome-solid-screwdriver-wrench: Troubleshooting](troubleshooting)** - Common issues and their solutions
+- **:fontawesome-solid-server: Infrastructure** - Hardware setup, network configuration
+- **:fontawesome-solid-cogs: Provisioning** - VM and bare-metal deployment workflows
+- **:fontawesome-brands-docker: Applications** - Docker compose, k8s manifests, service configs
+- **:fontawesome-solid-code: Automation** - Scripts, workflows, infrastructure as code
+- **:fontawesome-solid-screwdriver-wrench: Troubleshooting** - Common issues and their solutions
 
 <br>
 

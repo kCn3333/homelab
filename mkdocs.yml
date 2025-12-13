@@ -107,11 +107,9 @@ extra:
 extra_css:
   - stylesheets/retro.css
   - stylesheets/code-blocks.css
-  #- https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css
+  - stylesheets/admonitions.css
 
 #extra_javascript:
- # - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js
- # - javascripts/hljs-init.js
  # - javascripts/matrix-homelab.js
 
 copyright: |
