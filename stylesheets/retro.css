@@ -152,6 +152,33 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
     color: var(--retro-grey-text2) !important;
 }
 
+/* --- Custom Image Frame (Square, Retro Green Border) --- */
+.md-typeset .retro-image-frame {
+    /* Ustawienie zielonej ramki */
+    border: 2px solid var(--retro-green-main) !important;
+    
+    /* Zaokrąglone rogi */
+    border-radius: 10px !important;
+    
+    /* Cień, żeby go trochę wyróżnić (opcjonalnie) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    
+    /* Kluczowa właściwość: ukrywa wszystko, co wystaje poza zaokrąglone rogi */
+    overflow: hidden !important; 
+    
+    /* Kontener obrazka powinien być wyświetlany jako blok z marginesem */
+    display: inline-block;
+    margin: 1.5em 0;
+}
+
+/* Upewnienie się, że sam obrazek wewnątrz ramki jest poprawnie wyświetlany */
+.md-typeset .retro-image-frame img {
+    /* Upewnienie się, że obrazek wypełnia kontener ramki */
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 
 /* --- SEARCH & SCROLLBAR --- */
 .md-search__input {
