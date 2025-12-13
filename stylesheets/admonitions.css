@@ -1,0 +1,96 @@
+/* Custom Admonitions - Retro Theme */
+
+/* Info box - zielony akcent */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+    border-left: 4px solid var(--retro-green-main);
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+.md-typeset .admonition.info > .admonition-title,
+.md-typeset details.info > .admonition-title {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--retro-green-main);
+    font-weight: bold;
+}
+
+.md-typeset .admonition.info > .admonition-title::before,
+.md-typeset details.info > .admonition-title::before {
+    background-color: var(--retro-green-main);
+}
+
+/* Note box - neutralny */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+    border-left: 4px solid var(--retro-grey-text);
+    background-color: rgba(224, 224, 224, 0.03);
+}
+
+.md-typeset .admonition.note > .admonition-title,
+.md-typeset details.note > .admonition-title {
+    background-color: rgba(224, 224, 224, 0.05);
+    color: var(--retro-grey-text);
+}
+
+/* Warning - żółty */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+    border-left: 4px solid #FFEB3B;
+    background-color: rgba(255, 235, 59, 0.05);
+}
+
+.md-typeset .admonition.warning > .admonition-title,
+.md-typeset details.warning > .admonition-title {
+    background-color: rgba(255, 235, 59, 0.1);
+    color: #FFEB3B;
+}
+
+/* Danger - czerwony */
+.md-typeset .admonition.danger,
+.md-typeset details.danger {
+    border-left: 4px solid #F44336;
+    background-color: rgba(244, 67, 54, 0.05);
+}
+
+.md-typeset .admonition.danger > .admonition-title,
+.md-typeset details.danger > .admonition-title {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+}
+
+/* Tip/Success - jaśniejszy zielony */
+.md-typeset .admonition.tip,
+.md-typeset .admonition.success,
+.md-typeset details.tip,
+.md-typeset details.success {
+    border-left: 4px solid #81C784;
+    background-color: rgba(129, 199, 132, 0.05);
+}
+
+.md-typeset .admonition.tip > .admonition-title,
+.md-typeset .admonition.success > .admonition-title,
+.md-typeset details.tip > .admonition-title,
+.md-typeset details.success > .admonition-title {
+    background-color: rgba(129, 199, 132, 0.1);
+    color: #81C784;
+}
+
+/* General styling dla wszystkich admonitions */
+.md-typeset .admonition,
+.md-typeset details {
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.1);
+    margin: 1.5rem 0;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary.admonition-title {
+    font-family: 'Courier New', monospace;
+    padding: 0.6rem 0.8rem;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Ikona w tytule - zielona */
+.md-typeset .admonition-title::before {
+    margin-right: 0.5rem;
+}
