@@ -9,8 +9,8 @@ nav:
     - 🗠 currently running: https://status.kcn333.pl
 
   - ⏻ Provisioning:
-    - ⛃ Cluster Deplomyment: provisioning/cluster
-    - 🖳 Lab Pentesting: provisioning/pentesting
+    - ⛃ Cluster Deplomyment: provisioning/cluster/
+    - 🖳 Lab Pentesting: provisioning/pentesting/
 
   - ⛯ Applications:
       
