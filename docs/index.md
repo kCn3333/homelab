@@ -40,7 +40,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 ## 🏗️ The Setup
 
-<div class="retro-image-frame">
+<div class="retro-image-frame" markdown="1">
   ![homelab](img/homelab0.png)
 </div>
 
