@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/provisioning/0-custom-image/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/provisioning/cluster/2-cluster-deployment-maas/">
       
       
-        <link rel="prev" href="../../infrastructure/home/">
+        <link rel="prev" href="../1-custom-image/">
       
       
-        <link rel="next" href="../0-pxe-tftp/">
+        <link rel="next" href="../3-ssh-configuration/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Image with Packer - > Homelab Documentation</title>
+        <title>MAAS Deployment - > Homelab Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,15 +51,15 @@
       
     
     
-      <link rel="stylesheet" href="../../css/timeago.css">
+      <link rel="stylesheet" href="../../../css/timeago.css">
     
-      <link rel="stylesheet" href="../../stylesheets/retro.css">
+      <link rel="stylesheet" href="../../../stylesheets/retro.css">
     
-      <link rel="stylesheet" href="../../stylesheets/code-blocks.css">
+      <link rel="stylesheet" href="../../../stylesheets/code-blocks.css">
     
-      <link rel="stylesheet" href="../../stylesheets/admonitions.css">
+      <link rel="stylesheet" href="../../../stylesheets/admonitions.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#image-with-packer" class="md-skip">
+        <a href="#maas-deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="&gt; Homelab Documentation" class="md-header__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
+    <a href="../../.." title="&gt; Homelab Documentation" class="md-header__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Image with Packer
+              MAAS Deployment
             
           </span>
         </div>
@@ -222,7 +222,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="&gt; Homelab Documentation" class="md-nav__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
+    <a href="../../.." title="&gt; Homelab Documentation" class="md-nav__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -252,7 +252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -373,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../infrastructure/home/" class="md-nav__link">
+      <a href="../../../infrastructure/home/" class="md-nav__link">
         
   
   
@@ -469,20 +469,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -503,7 +501,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -518,24 +516,11 @@
                 
   
   
-    
   
   
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
-            
   
   
   <span class="md-ellipsis">
@@ -549,311 +534,6 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_1">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    ⛃ Cluster Deplomyment
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Image with Packer
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Image with Packer
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 Goal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-tools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ Environment &amp; Tools
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-packer-configuration-wsl2qemu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Packer Configuration (WSL2/QEMU)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Packer Configuration (WSL2/QEMU)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-kvm-acceleration-fix-crucial-for-wsl2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1. KVM Acceleration Fix (Crucial for WSL2)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-boot-mode-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2. Boot Mode Configuration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-build-the-image" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3. Build the Image
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-maas-deployment-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. MAAS Deployment Steps
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. MAAS Deployment Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-file-transfer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1. File Transfer
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-upload-image-to-maas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2. Upload Image to MAAS
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-verify-image-upload" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Verify Image Upload
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-deploy-to-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4. Deploy to Nodes
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🐛 Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🐛 Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#build-fails-with-permission-denied-kvm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build Fails with "Permission denied" (KVM)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#build-is-very-slow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build is Very Slow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ovmfuefi-boot-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OVMF/UEFI Boot Issues
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📚 Additional Resources
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0-pxe-tftp/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PXE TFTP
-  
-
-    
-  </span>
-  
-  
-
       </a>
     </li>
   
@@ -867,14 +547,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../1-cluster-deployment-maas/" class="md-nav__link">
+      <a href="../../../pentesting/lab" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    MAAS Deployment
+    🖳 Lab Pentesting
   
 
     
@@ -883,42 +563,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2-ssh-configuration/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SSH Configuration
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1346,7 +990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../automation" class="md-nav__link">
+      <a href="../../../automation" class="md-nav__link">
         
   
   
@@ -1409,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting" class="md-nav__link">
+      <a href="../../../troubleshooting" class="md-nav__link">
         
   
   
@@ -1456,44 +1100,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
+  <a href="#maas-deployment-initial-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Goal
+        MAAS Deployment &amp; Initial Configuration
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-tools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ Environment &amp; Tools
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-packer-configuration-wsl2qemu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Packer Configuration (WSL2/QEMU)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Packer Configuration (WSL2/QEMU)">
+    <nav class="md-nav" aria-label="MAAS Deployment &amp; Initial Configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-kvm-acceleration-fix-crucial-for-wsl2" class="md-nav__link">
+  <a href="#1-maas-core-installation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. KVM Acceleration Fix (Crucial for WSL2)
+        1. 💾 MAAS Core Installation
       
     </span>
   </a>
@@ -1501,10 +1123,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-boot-mode-configuration" class="md-nav__link">
+  <a href="#2-initial-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Boot Mode Configuration
+        2. ⚙️ Initial Configuration
       
     </span>
   </a>
@@ -1512,10 +1134,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13-build-the-image" class="md-nav__link">
+  <a href="#3-access-ui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3. Build the Image
+        3. 🌐 Access UI
       
     </span>
   </a>
@@ -1528,22 +1150,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-maas-deployment-steps" class="md-nav__link">
+  <a href="#maas-networking-domain-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. MAAS Deployment Steps
+        MAAS Networking &amp; Domain Configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. MAAS Deployment Steps">
+    <nav class="md-nav" aria-label="MAAS Networking &amp; Domain Configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-file-transfer" class="md-nav__link">
+  <a href="#1-disable-dhcp-on-the-vlan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. File Transfer
+        1. 🛑 Disable DHCP on the VLAN
       
     </span>
   </a>
@@ -1551,10 +1173,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-upload-image-to-maas" class="md-nav__link">
+  <a href="#2-configure-domain-and-hostnames" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Upload Image to MAAS
+        2. 📝 Configure Domain and Hostnames
       
     </span>
   </a>
@@ -1562,10 +1184,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-verify-image-upload" class="md-nav__link">
+  <a href="#3-ssh-key-registration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Verify Image Upload
+        3. 🔑 SSH Key Registration
       
     </span>
   </a>
@@ -1573,10 +1195,88 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-deploy-to-nodes" class="md-nav__link">
+  <a href="#4-commissioning-and-ip-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Deploy to Nodes
+        4. ⚙️ Commissioning and IP Assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-deploying-the-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 🚀 Deploying the Nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-post-deployment-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 🧹 Post-Deployment Cleanup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 🧹 Post-Deployment Cleanup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-account-migration-ubuntu-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Account Migration (ubuntu → admin)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-to-new-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Switch to New User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-hostname-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change Hostname (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-maas-apt-proxy-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remove MAAS APT Proxy Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-system-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final System Update
       
     </span>
   </a>
@@ -1587,65 +1287,9 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🐛 Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🐛 Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#build-fails-with-permission-denied-kvm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build Fails with "Permission denied" (KVM)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#build-is-very-slow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build is Very Slow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ovmfuefi-boot-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OVMF/UEFI Boot Issues
-      
-    </span>
-  </a>
-  
-</li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📚 Additional Resources
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1670,144 +1314,161 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/provisioning/0-custom-image.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/provisioning/cluster/2-cluster-deployment-maas.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="image-with-packer"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 13.25A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25V2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75ZM1.75 2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h.94l.03-.03 6.077-6.078a1.75 1.75 0 0 1 2.412-.06L14.5 10.31V2.75a.25.25 0 0 0-.25-.25Zm12.5 11a.25.25 0 0 0 .25-.25v-.917l-4.298-3.889a.25.25 0 0 0-.344.009L4.81 13.5ZM7 6a2 2 0 1 1-3.999.001A2 2 0 0 1 7 6M5.5 6a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0"/></svg></span> Image with Packer<a class="headerlink" href="#image-with-packer" title="Permanent link">&para;</a></h1>
+<h1 id="maas-deployment"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M469.2 75c0-20.1-8-39.3-22.2-53.5S413.6-.7 393.5-.7s-39.3 8-53.5 22.2-22.2 33.4-22.2 53.5 8 39.3 22.1 53.5 33.4 22.1 53.5 22.1 39.3-8 53.5-22.1S469 95.1 469 75h.1zm-315 165.7a75.6 75.6 0 1 0-151.2 0 75.6 75.6 0 1 0 151.2 0M57 346c18.6 46.9 51 87 93 115.1s91.5 42.6 142 41.7c-14.7-18.6-22.9-41.5-23.2-65.2-6.8-.9-13.3-2.1-19.5-3.4-26.8-5.7-51.9-17.3-73.6-34s-39.3-38.1-51.7-62.5c-20.9 9.9-44.5 12.8-67.1 8.2zm395.1 89.8a75.6 75.6 0 1 0-151.2 0 75.6 75.6 0 1 0 151.2 0m-8.1-84.2c18.5 14.8 31.6 35.2 37.2 58.2 33.3-41.3 52.6-92.2 54.8-145.2s-12.5-105.4-42.2-149.4c-8.6 21.5-24 39.6-43.8 51.6 15.4 28.6 22.9 60.8 21.9 93.2s-10.7 64-28 91.6zM101.1 135.4c12.4 2.7 24.3 7.5 35.1 14.3 16.6-24.2 38.9-44.1 64.8-58s54.8-21.3 84.2-21.7c.2-5.9.9-11.9 2-17.7C290.8 35.6 298.3 20 309 6.8c-47.7-3.8-95.4 6-137.6 28.5S94.3 91.7 70.8 133.4c2.7-.2 5.3-.3 8-.3 7.5 0 15 .8 22.4 2.3z"/></svg></span> MAAS Deployment<a class="headerlink" href="#maas-deployment" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
-<p class="admonition-title">MAAS Custom Images</p>
-<p>By default, MAAS only includes an image for Ubuntu. If you want to add an image for another operating system, you need to build it in the appropriate format using the Packer application.</p>
-<p><a href="https://developer.hashicorp.com/packer/docs"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 0H8C6.9 0 6 .9 6 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6zm4 18H8V2h7v5h5zM4 4v18h16v2H4c-1.1 0-2-.9-2-2V4zm6 6v2h8v-2zm0 4v2h5v-2z"/></svg></span> Packer Docs</a></p>
+<p class="admonition-title">MAAS (Metal as a Service)</p>
+<p>MAAS is a powerful tool designed to automate the installation and deployment of operating systems across multiple physical (bare-metal) or virtual machines. It transforms your raw hardware into an elastic cloud resource, managing provisioning from start to finish via PXE booting.</p>
+<p><a href="https://canonical.com/maas/docs"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.427 0v24h15.146V0Zm9.994 10.25a1.57 1.57 0 0 1 1.567 1.568 1.57 1.57 0 0 1-1.567 1.568 1.57 1.57 0 0 1-1.568-1.568 1.57 1.57 0 0 1 1.568-1.568m-2.157.16q.183 0 .369.015a2.27 2.27 0 0 0-.476 1.271 3.83 3.83 0 0 0-3.08 1.647 2.24 2.24 0 0 0-1.308-.335 5.16 5.16 0 0 1 4.495-2.599zm4.242 2.296a5.14 5.14 0 0 1 .74 3.905 5.14 5.14 0 0 1-.997 2.113 2.25 2.25 0 0 0-.75-1.167 3.84 3.84 0 0 0 .125-3.818 2.26 2.26 0 0 0 .882-1.033m-8.616.982a1.57 1.57 0 0 1 1.568 1.568 1.57 1.57 0 0 1-1.568 1.568 1.57 1.57 0 0 1-1.567-1.568 1.57 1.57 0 0 1 1.567-1.568m.933 3.618a3.82 3.82 0 0 0 2.604 1.986q.191.04.385.063c.01.476.17.932.459 1.31a5 5 0 0 1-1.114-.114 5.1 5.1 0 0 1-3.675-3.08 2.26 2.26 0 0 0 1.34-.165zm5.244.427a1.57 1.57 0 0 1 1.568 1.568 1.57 1.57 0 0 1-1.568 1.568A1.57 1.57 0 0 1 12.5 19.3a1.57 1.57 0 0 1 1.568-1.568z"/></svg></span> Official MAAS documentation</a>  </p>
 </div>
-<h2 id="goal">🎯 Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
-<p>To build a clean <code>debian-custom-cloudimg.tar.gz</code> image for MAAS deployment.</p>
-<hr />
-<h2 id="environment-tools">🛠️ Environment &amp; Tools<a class="headerlink" href="#environment-tools" title="Permanent link">&para;</a></h2>
-<p><strong>Host Environment:</strong></p>
+<p><strong>Used Prerequisites:</strong></p>
 <ul>
-<li>Windows 11 / WSL2 (Ubuntu)</li>
-<li>Builder: Packer with QEMU builder</li>
+<li>Ubuntu Server: for MAAS Installation</li>
+<li>Nodes: Three machines (Master, Worker 1, Worker 2) configured for PXE boot</li>
 </ul>
-<p><strong>Repository:</strong></p>
-<p>Clone Canonical's MAAS Image Builder (based on HCL format):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/canonical/packer-maas.git
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>packer-maas
-</span></code></pre></div>
 <hr />
-<h2 id="1-packer-configuration-wsl2qemu">1. Packer Configuration (WSL2/QEMU)<a class="headerlink" href="#1-packer-configuration-wsl2qemu" title="Permanent link">&para;</a></h2>
-<p>The default configuration required modifications primarily due to the Nested Virtualization environment (QEMU running inside WSL2/Hyper-V).</p>
-<h3 id="11-kvm-acceleration-fix-crucial-for-wsl2">1.1. KVM Acceleration Fix (Crucial for WSL2)<a class="headerlink" href="#11-kvm-acceleration-fix-crucial-for-wsl2" title="Permanent link">&para;</a></h3>
-<p>The main build may fail because QEMU attempts to use KVM acceleration (<code>accel=kvm</code>), which is inaccessible from within WSL2, resulting in a <strong>"Permission denied"</strong> error.</p>
-<p><strong>File Modified:</strong> <code>debian-cloudimg.pkr.hcl</code></p>
-<p><strong>Original configuration:</strong></p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Original (doesn&#39;t work in WSL2)</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">qemu_machine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;amd64&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;accel=kvm&quot;</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">qemu_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;amd64&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;host&quot;</span><span class="w"> </span><span class="p">}</span>
+<h2 id="maas-deployment-initial-configuration">MAAS Deployment &amp; Initial Configuration<a class="headerlink" href="#maas-deployment-initial-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="1-maas-core-installation">1. 💾 MAAS Core Installation<a class="headerlink" href="#1-maas-core-installation" title="Permanent link">&para;</a></h3>
+<p>Install the MAAS packages and the required database components.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Add repository for latest MaaS version</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>software-properties-common
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>add-apt-repository<span class="w"> </span>ppa:maas/3.7
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Update and install the MaaS package</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>maas
 </span></code></pre></div>
-<p><strong>Fixed configuration for WSL2 emulation:</strong></p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nb">qemu_machine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;amd64&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;q35&quot;</span><span class="w"> </span><span class="p">}</span><span class="c1">   # Use standard machine without KVM flag</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nb">qemu_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;amd64&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;max&quot;</span><span class="w"> </span><span class="p">}</span><span class="c1">       # Use safe CPU setting</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+<h3 id="2-initial-configuration">2. ⚙️ Initial Configuration<a class="headerlink" href="#2-initial-configuration" title="Permanent link">&para;</a></h3>
+<p>Initialize the MAAS region controller. You will be prompted to choose a user (create a new one).</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>maas<span class="w"> </span>init
 </span></code></pre></div>
-<p><strong>Explanation:</strong></p>
-<ul>
-<li>Removed hardcoded KVM flags in the <code>locals</code> block</li>
-<li>Forces pure software emulation (slower but works in WSL2)</li>
-<li>Uses <code>q35</code> machine type (standard x86_64 chipset)</li>
-<li>Uses <code>max</code> CPU model (safe fallback without host-passthrough)</li>
-</ul>
-<h3 id="12-boot-mode-configuration">1.2. Boot Mode Configuration<a class="headerlink" href="#12-boot-mode-configuration" title="Permanent link">&para;</a></h3>
-<p>Switched the boot mode to <strong>BIOS</strong> (<code>BOOT=bios</code>) to avoid potential conflicts with UEFI/OVMF firmware copying and usage within the QEMU environment.</p>
-<h3 id="13-build-the-image">1.3. Build the Image<a class="headerlink" href="#13-build-the-image" title="Permanent link">&para;</a></h3>
-<p>Run the build command:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>debian<span class="w"> </span><span class="nv">SERIES</span><span class="o">=</span>trixie<span class="w"> </span><span class="nv">BOOT</span><span class="o">=</span>bios
-</span></code></pre></div>
-<p><strong>Build process:</strong></p>
+<h3 id="3-access-ui">3. 🌐 Access UI<a class="headerlink" href="#3-access-ui" title="Permanent link">&para;</a></h3>
+<p>Open a web browser and navigate to:</p>
+<p><strong><code>http://&lt;MAAS_SERVER_IP&gt;:5240/MAAS</code></strong></p>
+<p><strong>Login:</strong> Use the administrator account credentials set during <code>maas init</code></p>
+<hr />
+<h2 id="maas-networking-domain-configuration">MAAS Networking &amp; Domain Configuration<a class="headerlink" href="#maas-networking-domain-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="1-disable-dhcp-on-the-vlan">1. 🛑 Disable DHCP on the VLAN<a class="headerlink" href="#1-disable-dhcp-on-the-vlan" title="Permanent link">&para;</a></h3>
+<p>By default, MAAS provides DHCP. To avoid conflicts with your router, you must disable the dynamic range and only use MAAS for IP reservations.</p>
+<p><strong>Steps:</strong></p>
 <ol>
-<li>Packer downloads the Debian Trixie ISO</li>
-<li>QEMU starts the VM in software emulation mode</li>
-<li>Automated installation proceeds via preseed</li>
-<li>Image is packaged as <code>debian-custom-cloudimg.tar.gz</code></li>
+<li>Navigate to <strong>Subnets</strong> in the MAAS UI</li>
+<li>Select your primary subnet (e.g., <code>192.168.55.0/24</code>)</li>
+<li>In the DHCP section, delete the dynamic IP range</li>
+<li>Ensure the DHCP mode for the VLAN is set to <strong>"Unmanaged"</strong> or that the DHCP range is empty</li>
 </ol>
-<p><strong>Expected output:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>==&gt; Builds finished. The artifacts of successful builds are:
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>--&gt; qemu.debian: debian-custom-cloudimg.tar.gz
-</span></code></pre></div>
-<hr />
-<h2 id="2-maas-deployment-steps">2. MAAS Deployment Steps<a class="headerlink" href="#2-maas-deployment-steps" title="Permanent link">&para;</a></h2>
-<p>After a successful build, the image is ready for deployment.</p>
-<h3 id="21-file-transfer">2.1. File Transfer<a class="headerlink" href="#21-file-transfer" title="Permanent link">&para;</a></h3>
-<p>Copy the image to the MAAS server:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>scp<span class="w"> </span>debian-custom-cloudimg.tar.gz<span class="w"> </span>user@maas_server_ip:/home/user/
-</span></code></pre></div>
-<h3 id="22-upload-image-to-maas">2.2. Upload Image to MAAS<a class="headerlink" href="#22-upload-image-to-maas" title="Permanent link">&para;</a></h3>
-<p>SSH to the MAAS server and upload the custom image:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssh<span class="w"> </span>user@maas_server_ip
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Upload the custom image</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>maas<span class="w"> </span>admin<span class="w"> </span>boot-resources<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;custom/debian-trixie&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nv">title</span><span class="o">=</span><span class="s1">&#39;Debian 13 Trixie Custom&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nv">architecture</span><span class="o">=</span><span class="s1">&#39;amd64/generic&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nv">filetype</span><span class="o">=</span><span class="s1">&#39;tgz&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>content@<span class="o">=</span>debian-custom-cloudimg.tar.gz
-</span></code></pre></div>
-<h3 id="23-verify-image-upload">2.3. Verify Image Upload<a class="headerlink" href="#23-verify-image-upload" title="Permanent link">&para;</a></h3>
-<p>Check if the image was uploaded successfully:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>maas<span class="w"> </span>admin<span class="w"> </span>boot-resources<span class="w"> </span><span class="nb">read</span>
-</span></code></pre></div>
-<p>Look for your custom image in the list:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>custom/debian-trixie (amd64/generic)
-</span></code></pre></div>
-<h3 id="24-deploy-to-nodes">2.4. Deploy to Nodes<a class="headerlink" href="#24-deploy-to-nodes" title="Permanent link">&para;</a></h3>
-<p><strong>Via MAAS UI:</strong></p>
+<h3 id="2-configure-domain-and-hostnames">2. 📝 Configure Domain and Hostnames<a class="headerlink" href="#2-configure-domain-and-hostnames" title="Permanent link">&para;</a></h3>
+<p>Set a cleaner domain name and ensure MAAS uses consistent naming conventions.</p>
+<p><strong>Steps:</strong></p>
 <ol>
-<li>Navigate to <strong>Machines</strong></li>
-<li>Select a node in <strong>Ready</strong> state</li>
-<li>Click <strong>Deploy</strong></li>
-<li>Choose <strong>custom/debian-trixie</strong> from the OS dropdown</li>
-<li>Confirm deployment</li>
+<li>Navigate to <strong>Settings → General → Default DNS suffix</strong></li>
+<li>Change the default (e.g., <code>maas</code>) to something cleaner (e.g., <code>homelab</code>)</li>
+<li>In the <strong>DNS</strong> tab, verify that MAAS is configured to manage DNS records for your domain</li>
 </ol>
-<p><strong>Via CLI:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>maas<span class="w"> </span>admin<span class="w"> </span>machine<span class="w"> </span>deploy<span class="w"> </span>&lt;system_id&gt;<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nv">distro_series</span><span class="o">=</span><span class="s1">&#39;custom/debian-trixie&#39;</span>
+<h3 id="3-ssh-key-registration">3. 🔑 SSH Key Registration<a class="headerlink" href="#3-ssh-key-registration" title="Permanent link">&para;</a></h3>
+<p>You can securely import your keys directly from GitHub, which is faster than pasting them manually.</p>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Go to <strong>User Account → My Account</strong></li>
+<li>In the <strong>SSH keys</strong> section, choose <strong>"Import from GitHub"</strong></li>
+<li>Enter your GitHub username - MAAS will automatically fetch and register all your public keys</li>
+</ol>
+<h3 id="4-commissioning-and-ip-assignment">4. ⚙️ Commissioning and IP Assignment<a class="headerlink" href="#4-commissioning-and-ip-assignment" title="Permanent link">&para;</a></h3>
+<p><strong>Steps:</strong></p>
+<ol>
+<li><strong>Start Nodes:</strong> Power on your bare-metal nodes configured for PXE boot</li>
+<li><strong>Commissioning:</strong> MAAS will discover them and perform hardware testing. Once complete, they will transition to the <strong>Ready</strong> state</li>
+<li><strong>Static IP Reservation:</strong> For each Node, go to its configuration page and set a Static IP Reservation corresponding to its MAC address</li>
+</ol>
+<p><strong>My configuration:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Hostname</th>
+<th>Target IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control Plane</td>
+<td>master-00</td>
+<td>192.168.55.10</td>
+</tr>
+<tr>
+<td>Agent 1</td>
+<td>worker-01</td>
+<td>192.168.55.11</td>
+</tr>
+<tr>
+<td>Agent 2</td>
+<td>worker-02</td>
+<td>192.168.55.12</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-deploying-the-nodes">5. 🚀 Deploying the Nodes<a class="headerlink" href="#5-deploying-the-nodes" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Select <strong>Ubuntu 24.04 LTS</strong> or your custom image for each node</li>
+<li>Ensure the static IP from the table above is assigned during deployment</li>
+<li>After deployment, remember to <strong>change boot sequence from PXE to External Disk</strong></li>
+</ol>
+<h3 id="6-post-deployment-cleanup">6. 🧹 Post-Deployment Cleanup<a class="headerlink" href="#6-post-deployment-cleanup" title="Permanent link">&para;</a></h3>
+<p>After deployment, the nodes are running Ubuntu 24.04 with the user <code>ubuntu</code> by default and some MAAS settings.</p>
+<h4 id="user-account-migration-ubuntu-admin">User Account Migration (ubuntu → admin)<a class="headerlink" href="#user-account-migration-ubuntu-admin" title="Permanent link">&para;</a></h4>
+<p>Perform SSH login using <code>ssh ubuntu@&lt;IP_ADDRESS&gt;</code> and execute:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Add new user</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>adduser<span class="w"> </span>admin
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Grant sudo rights to the new user</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>admin
 </span></code></pre></div>
-<hr />
-<h2 id="troubleshooting">🐛 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="build-fails-with-permission-denied-kvm">Build Fails with "Permission denied" (KVM)<a class="headerlink" href="#build-fails-with-permission-denied-kvm" title="Permanent link">&para;</a></h3>
-<p><strong>Symptom:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>qemu-system-x86_64: failed to initialize kvm: Permission denied
+<p>Enable password-less sudo (required for Ansible):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>visudo
 </span></code></pre></div>
-<p><strong>Solution:</strong></p>
-<p>Apply the KVM fix in section 1.1 - force software emulation by removing <code>accel=kvm</code>.</p>
-<h3 id="build-is-very-slow">Build is Very Slow<a class="headerlink" href="#build-is-very-slow" title="Permanent link">&para;</a></h3>
-<p><strong>Cause:</strong></p>
-<p>Software emulation (no KVM) is significantly slower than hardware acceleration.</p>
-<p><strong>Expected time:</strong></p>
-<ul>
-<li>With KVM: 5-10 minutes</li>
-<li>Without KVM (WSL2): 30-60 minutes</li>
-</ul>
-<p><strong>Solution:</strong></p>
-<p>Be patient. Consider building on native Linux with KVM support for faster builds.</p>
-<h3 id="ovmfuefi-boot-issues">OVMF/UEFI Boot Issues<a class="headerlink" href="#ovmfuefi-boot-issues" title="Permanent link">&para;</a></h3>
-<p><strong>Symptom:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Could not find firmware for UEFI boot
+<p>Add to the end of the file:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>admin<span class="w"> </span><span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>ALL
 </span></code></pre></div>
-<p><strong>Solution:</strong></p>
-<p>Use <code>BOOT=bios</code> flag as shown in section 1.2.</p>
-<hr />
-<h2 id="additional-resources">📚 Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://developer.hashicorp.com/packer/plugins/builders/qemu">Packer QEMU Builder Docs</a></li>
-<li><a href="https://github.com/canonical/packer-maas">MAAS Image Builder Repository</a></li>
-<li><a href="https://maas.io/docs/custom-images">MAAS Custom Images Documentation</a></li>
-</ul>
+<p>Copy SSH key to new user and fix ownership/permissions:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>/home/ubuntu/.ssh<span class="w"> </span>/home/admin/
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>admin:admin<span class="w"> </span>/home/admin/.ssh
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/home/admin/.ssh
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/admin/.ssh/authorized_keys
+</span></code></pre></div>
+<h4 id="switch-to-new-user">Switch to New User<a class="headerlink" href="#switch-to-new-user" title="Permanent link">&para;</a></h4>
+<p>Log out and log back in as the new user:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">exit</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ssh<span class="w"> </span>admin@&lt;IP_ADDRESS&gt;
+</span></code></pre></div>
+<p>If everything works fine, delete the ubuntu user:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>deluser<span class="w"> </span>--remove-home<span class="w"> </span>ubuntu
+</span></code></pre></div>
+<h4 id="change-hostname-optional">Change Hostname (Optional)<a class="headerlink" href="#change-hostname-optional" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>master-00
+</span></code></pre></div>
+<h4 id="remove-maas-apt-proxy-configuration">Remove MAAS APT Proxy Configuration<a class="headerlink" href="#remove-maas-apt-proxy-configuration" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Remove APT proxy config</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/apt/apt.conf.d/90curtin-aptproxy
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Remove global proxy environment variables</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/maas/d&#39;</span><span class="w"> </span>/etc/environment
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/maas/d&#39;</span><span class="w"> </span>/etc/bash.bashrc
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Fix missing packages</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span>--fix-missing
+</span></code></pre></div>
+<p>Optionally remove duplicate source warnings:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/apt/sources.list<span class="w"> </span>/etc/apt/sources.list.bak
+</span></code></pre></div>
+<h4 id="final-system-update">Final System Update<a class="headerlink" href="#final-system-update" title="Permanent link">&para;</a></h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+</span></code></pre></div>
 <hr />
 
 
@@ -1841,7 +1502,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:54:16 UTC"><span class="timeago" datetime="2025-12-11T20:54:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:54:16 UTC">2025-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 10, 2025 23:35:14 UTC"><span class="timeago" datetime="2025-12-10T23:35:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 10, 2025 23:35:14 UTC">2025-12-10</span>
   </span>
 
     
@@ -1928,14 +1589,14 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
-        <script src="../../js/timeago.min.js"></script>
+        <script src="../../../js/timeago.min.js"></script>
       
-        <script src="../../js/timeago_mkdocs_material.js"></script>
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
       
     
   </body>
