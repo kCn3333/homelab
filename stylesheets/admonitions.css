@@ -4,6 +4,9 @@
 .md-typeset .admonition.info,
 .md-typeset details.info {
     border-left: 4px solid var(--retro-green-main);
+    border-right: 1px solid var(--retro-green-main);
+    border-top: 1px solid var(--retro-green-main);
+    border-bottom: 1px solid var(--retro-green-main);
     background-color: rgba(76, 175, 80, 0.05);
 }
 
