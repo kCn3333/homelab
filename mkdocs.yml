@@ -50,6 +50,7 @@ plugins:
       enable_creation_date: true
       type: timeago
       fallback_to_build_date: true
+  - git-authors
       
 markdown_extensions:
   - abbr

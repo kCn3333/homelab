@@ -1,5 +1,11 @@
 # :octicons-image-16: Image with Packer
 
+!!! info "MAAS Custom Images"
+    By default, MAAS only includes an image for Ubuntu. If you want to add an image for another operating system, you need to build it in the appropriate format using the Packer application.
+    
+    **Documentation:** [:fontawesome-solid-book: Packer Docs](https://developer.hashicorp.com/packer/docs)
+
+
 ## 🎯 Goal
 
 To build a clean `debian-custom-cloudimg.tar.gz` image for MAAS deployment.
