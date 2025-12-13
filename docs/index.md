@@ -13,7 +13,7 @@
 ## 🔗 Quick Links
 
 * [:fontawesome-solid-chart-line: **Service Status**](https://status.kcn333.pl)
-* [:fontawesome-brands-github: **Docker Compose**](https://github.com/kCn3333/docker-compose)
+* [:fontawesome-brands-github: **Docker Compose Repository**](https://github.com/kCn3333/docker-compose)
 * [:material-web: **My Home Page**](https://kcn333.pl)
 
 ---
