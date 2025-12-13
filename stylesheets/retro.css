@@ -6,6 +6,7 @@
     --retro-green-main: #4CAF50;
     --retro-green-light: #66BB6A;
     --retro-grey-text: #E0E0E0;
+    --retro-grey-text2: #979595;
     --retro-dark-bg: #111111;
     --retro-mid-bg: #181818;
 }
@@ -139,6 +140,19 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
     color: var(--retro-dark-bg) !important;
 }
 
+/* --- CUSTOM UTILITY CLASS --- */
+
+/* Utility class to force text color to the main retro green */
+.color-green {
+    color: var(--retro-green-main) !important;
+}
+
+/* Utility class to force text color to the main retro grey (for descriptions) */
+.color-grey {
+    color: var(--retro-grey-text2) !important;
+}
+
+
 /* --- SEARCH & SCROLLBAR --- */
 .md-search__input {
     background-color: var(--retro-mid-bg) !important;
@@ -151,4 +165,17 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
 ::-webkit-scrollbar-thumb {
     background: var(--retro-mid-bg);
     border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* --- RESPONSIVE DESIGN ADJUSTMENTS --- */
+@media screen and (min-width: 76.25em) { 
+    .md-header {
+        display: none !important;
+    }
+}
+/* Remove top padding from main content area when header is hidden */
+@media screen and (min-width: 76.25em) {
+    .md-main {
+        padding-top: 0 !important;
+    }
 }
