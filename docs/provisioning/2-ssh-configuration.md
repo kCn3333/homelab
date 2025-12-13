@@ -1,5 +1,10 @@
 # :octicons-terminal-16: SSH Configuration
 
+!!! info "SSH Key Login"
+    Using passwords for SSH is generally insecure and cumbersome for frequent access. It is strongly recommended to disable password authentication and switch to cryptographic key pairs for a robust and convenient security model.  
+
+    [:fontawesome-brands-wikipedia-w: SSH-keygen Wikipedia page](https://en.wikipedia.org/wiki/Ssh-keygen)  
+
 ## 🔐 Generate SSH Keys
 
 ### For Windows (PowerShell)
@@ -224,3 +229,7 @@ ssh worker-02
 ```
 
 If configured correctly, you should connect without entering a password!
+
+
+---  
+

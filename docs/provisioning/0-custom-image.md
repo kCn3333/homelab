@@ -3,8 +3,7 @@
 !!! info "MAAS Custom Images"
     By default, MAAS only includes an image for Ubuntu. If you want to add an image for another operating system, you need to build it in the appropriate format using the Packer application.
     
-    **Documentation:**   
-    [:octicons-book-24: Packer Docs](https://developer.hashicorp.com/packer/docs)
+    [:material-file-document-multiple-outline: Packer Docs](https://developer.hashicorp.com/packer/docs)
 
 
 ## 🎯 Goal
@@ -202,3 +201,7 @@ Use `BOOT=bios` flag as shown in section 1.2.
 - [Packer QEMU Builder Docs](https://developer.hashicorp.com/packer/plugins/builders/qemu)
 - [MAAS Image Builder Repository](https://github.com/canonical/packer-maas)
 - [MAAS Custom Images Documentation](https://maas.io/docs/custom-images)
+
+
+---  
+

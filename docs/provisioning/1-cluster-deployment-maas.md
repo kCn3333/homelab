@@ -1,5 +1,11 @@
 # :fontawesome-brands-ubuntu: MAAS Deployment
 
+!!! info "MAAS (Metal as a Service)"
+    MAAS is a powerful tool designed to automate the installation and deployment of operating systems across multiple physical (bare-metal) or virtual machines. It transforms your raw hardware into an elastic cloud resource, managing provisioning from start to finish via PXE booting.
+    
+    [:simple-canonical: Official MAAS documentation](https://canonical.com/maas/docs)  
+
+
 **Used Prerequisites:**
 
 - Ubuntu Server: for MAAS Installation
@@ -179,3 +185,6 @@ sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
+
+---  
+

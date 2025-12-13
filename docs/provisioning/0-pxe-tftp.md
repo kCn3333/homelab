@@ -1,8 +1,14 @@
 # :material-power-plug: PXE TFTP 
 
+!!! info "Legacy PXE/TFTP"
+    When the network environment or hardware supports only legacy PXE (Preboot Execution Environment), the Trivial File Transfer Protocol (TFTP) is required to deliver the initial boot files (kernel and initramfs) to the machine, as it is a minimal, connectionless protocol ideal for this early stage.
+
+    [:fontawesome-brands-wikipedia-w: TFTP Wikipedia page](https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol)  
+
+
 ## 📋 Overview
 
-This guide covers setting up a TFTP server for PXE (Preboot Execution Environment) network booting on Debian.
+This guide covers setting up a TFTP server for PXE network booting on Debian.
 
 **Use Case:**
 
@@ -296,3 +302,7 @@ sudo chmod 755 /srv/tftp/pxelinux.cfg
 - [TFTP-HPA Documentation](https://git.kernel.org/pub/scm/network/tftp/tftp-hpa.git)
 - [Syslinux PXELinux Guide](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX)
 - [Ubuntu PXE Installation Guide](https://help.ubuntu.com/community/PXEInstallMultiDistro)
+
+
+---  
+
