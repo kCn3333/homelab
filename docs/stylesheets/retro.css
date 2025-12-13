@@ -155,7 +155,7 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
 
 /* --- Custom Image Frame (Square, Retro Green Border) --- */
 .md-typeset .retro-image-frame {
-    border: 2px solid var(--retro-green-main) !important;
+    border: 1px solid var(--retro-green-main) !important;
     border-radius: 10px !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     
@@ -180,7 +180,13 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
     display: block;
     width: 100%; 
     height: auto; /* Zostawiamy auto, chyba że ma być dokładnie kwadrat */
+    margin: 0 !important; 
+    padding: 0 !important;
     border: none !important; 
+}
+.md-typeset .retro-image-frame p {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 
