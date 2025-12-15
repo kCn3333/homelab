@@ -3,18 +3,18 @@
   <a href="https://github.com/kCn3333/homelab">
     <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white" alt="Version">
   </a>
-  <img src="https://status.kcn333.pl/api/badge/3/status?upColor=4CAF50&downColor=f38ba8" alt="Server Status">
-  <img src="https://status.kcn333.pl/api/badge/3/uptime?color=4CAF50" alt="Uptime">
-  <img src="https://status.kcn333.pl/api/badge/3/response?color=4CAF50" alt="Response">
+  <img src="https://status.kcn333.com/api/badge/3/status?upColor=4CAF50&downColor=f38ba8" alt="Server Status">
+  <img src="https://status.kcn333.com/api/badge/3/uptime?color=4CAF50" alt="Uptime">
+  <img src="https://status.kcn333.com/api/badge/3/response?color=4CAF50" alt="Response">
 </p>
 > "The cloud is just someone else's computer" – Ancient IT Proverb
 
 
 ## 🔗 Quick Links
 
-* [:fontawesome-solid-chart-line: **Service Status**](https://status.kcn333.pl)
+* [:fontawesome-solid-chart-line: **Service Status**](https://status.kcn333.com)
 * [:fontawesome-brands-github: **Docker Compose Repository**](https://github.com/kCn3333/docker-compose)
-* [:material-web: **My Home Page**](https://kcn333.pl)
+* [:material-web: **My Home Page**](https://kcn333.com)
 
 ---
 
@@ -46,7 +46,6 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 ## 📂 Documentation Sections
 
-Browse the documentation by topic:
 
 - <span class="color-green">**🖧 Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>
 - <span class="color-green">**⏻ Provisioning**</span> - <span class="color-grey">:simple-virtualbox: VM and :simple-linux: bare-metal deployment workflows</span>

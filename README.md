@@ -4,8 +4,8 @@
 
 <div align="center">
 
-[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat-square&logo=github&label=Pages%20Build&color=4CAF50)](https://github.com/kCn3333/homelab/actions)
-[![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://kcn3333.github.io/homelab/)
+[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat-square&logo=github&label=Pages%20Build&color=4CAF50)](https://homelab.kcn333.coms)
+[![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://homelab.kcn333.com)
 [![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat-square)](LICENSE)
 
 
@@ -18,9 +18,9 @@
 
 This repo contains my homelab documentation, configs, and infrastructure notes. Think of it as a digital garden where I document everything I learn while breaking and fixing things in my lab.
 
-**📖 [Read the full documentation →](https://kcn3333.github.io/homelab/)**
+**📖 [Read the full documentation →](https://homelab.kcn333.com/)**
 
-**🟢 [Check what is up →](https://status.kcn333.pl/)**
+**🟢 [Check what is up →](https://status.kcn333.com/)**
 
 
 ## 🛠️ The Stack
@@ -65,23 +65,23 @@ This repo contains my homelab documentation, configs, and infrastructure notes. 
 ---
 | Service | Role in Lab | Status |
 | :--- | :--- | :--- |
-| ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) | Containerization & Runtime | <img src="https://status.kcn333.pl/api/badge/1/status?upColor=4CAF50&downColor=f38ba8" alt="Docker Status"> |
-| ![Pi-Hole](https://img.shields.io/badge/Pi--hole-96060C?style=flat-square&logo=pi-hole&logoColor=white) | Network-wide Ad Blocking & DNS | <img src="https://status.kcn333.pl/api/badge/6/status?upColor=4CAF50&downColor=f38ba8" alt="Pi-Hole Status"> |
-| ![Nginx Proxy Manager](https://img.shields.io/badge/Nginx_Proxy_Manager-232F3E?style=flat-square&logo=nginx&logoColor=white) | Reverse Proxy Management | <img src="https://status.kcn333.pl/api/badge/4/status?upColor=4CAF50&downColor=f38ba8" alt="NPM Status"> |
-| ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white) | Secure Tunnels & DNS | <img src="https://status.kcn333.pl/api/badge/11/status?upColor=4CAF50&downColor=f38ba8" alt="Cloudflare Status"> |
-| ![Twingate](https://img.shields.io/badge/Twingate-1C1C1C?style=flat-square&logo=twingate&logoColor=white) | Zero-trust Network Access | <img src="https://status.kcn333.pl/api/badge/13/status?upColor=4CAF50&downColor=f38ba8" alt="Twingate Status"> |
-| ![Watchtower](https://img.shields.io/badge/Watchtower-5E60CE?style=flat-square&logo=watchtower&logoColor=white) | Auto-update Docker Containers | <img src="https://status.kcn333.pl/api/badge/10/status?upColor=4CAF50&downColor=f38ba8" alt="Watchtower Status"> |
+| ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) | Containerization & Runtime | <img src="https://status.kcn333.com/api/badge/1/status?upColor=4CAF50&downColor=f38ba8" alt="Docker Status"> |
+| ![Pi-Hole](https://img.shields.io/badge/Pi--hole-96060C?style=flat-square&logo=pi-hole&logoColor=white) | Network-wide Ad Blocking & DNS | <img src="https://status.kcn333.com/api/badge/6/status?upColor=4CAF50&downColor=f38ba8" alt="Pi-Hole Status"> |
+| ![Nginx Proxy Manager](https://img.shields.io/badge/Nginx_Proxy_Manager-232F3E?style=flat-square&logo=nginx&logoColor=white) | Reverse Proxy Management | <img src="https://status.kcn333.com/api/badge/4/status?upColor=4CAF50&downColor=f38ba8" alt="NPM Status"> |
+| ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white) | Secure Tunnels & DNS | <img src="https://status.kcn333.com/api/badge/11/status?upColor=4CAF50&downColor=f38ba8" alt="Cloudflare Status"> |
+| ![Twingate](https://img.shields.io/badge/Twingate-1C1C1C?style=flat-square&logo=twingate&logoColor=white) | Zero-trust Network Access | <img src="https://status.kcn333.com/api/badge/13/status?upColor=4CAF50&downColor=f38ba8" alt="Twingate Status"> |
+| ![Watchtower](https://img.shields.io/badge/Watchtower-5E60CE?style=flat-square&logo=watchtower&logoColor=white) | Auto-update Docker Containers | <img src="https://status.kcn333.com/api/badge/10/status?upColor=4CAF50&downColor=f38ba8" alt="Watchtower Status"> |
 
 ### Applications
 ---
 | Application | Role in Lab | Status |
 | :--- | :--- | :--- |
-| ![Portainer](https://img.shields.io/badge/Portainer-13BEF9?style=flat-square&logo=portainer&logoColor=white) | Docker Management GUI | <img src="https://status.kcn333.pl/api/badge/24/status?upColor=4CAF50&downColor=f38ba8" alt="Portainer Status"> |
-| ![n8n](https://img.shields.io/badge/n8n-FF6584?style=flat-square&logo=n8n&logoColor=white) | Workflow Automation | <img src="https://status.kcn333.pl/api/badge/20/status?upColor=4CAF50&downColor=f38ba8" alt="n8n Status"> |
-| ![Duplicati](https://img.shields.io/badge/Duplicati-4ea2e0?style=flat-square&logo=duplicati&logoColor=white) | Backup Solution | <img src="https://status.kcn333.pl/api/badge/19/status?upColor=4CAF50&downColor=f38ba8" alt="Duplicati Status"> |
-| ![Nextcloud](https://img.shields.io/badge/Nextcloud-0082C9?style=flat-square&logo=nextcloud&logoColor=white) | Personal Cloud & Collaboration | <img src="https://status.kcn333.pl/api/badge/5/status?upColor=4CAF50&downColor=f38ba8" alt="Nextcloud Status"> |
-| ![Gitea](https://img.shields.io/badge/Gitea-609926?style=flat-square&logo=gitea&logoColor=white) | Self-hosted Git Service | <img src="https://status.kcn333.pl/api/badge/16/status?upColor=4CAF50&downColor=f38ba8" alt="Gitea Status"> |
-| ![Vaultwarden](https://img.shields.io/badge/Vaultwarden-175DDC?style=flat-square&logo=bitwarden&logoColor=white) | Password Manager (Bitwarden) | <img src="https://status.kcn333.pl/api/badge/12/status?upColor=4CAF50&downColor=f38ba8" alt="Vaultwarden Status"> |
+| ![Portainer](https://img.shields.io/badge/Portainer-13BEF9?style=flat-square&logo=portainer&logoColor=white) | Docker Management GUI | <img src="https://status.kcn333.com/api/badge/24/status?upColor=4CAF50&downColor=f38ba8" alt="Portainer Status"> |
+| ![n8n](https://img.shields.io/badge/n8n-FF6584?style=flat-square&logo=n8n&logoColor=white) | Workflow Automation | <img src="https://status.kcn333.com/api/badge/20/status?upColor=4CAF50&downColor=f38ba8" alt="n8n Status"> |
+| ![Duplicati](https://img.shields.io/badge/Duplicati-4ea2e0?style=flat-square&logo=duplicati&logoColor=white) | Backup Solution | <img src="https://status.kcn333.com/api/badge/19/status?upColor=4CAF50&downColor=f38ba8" alt="Duplicati Status"> |
+| ![Nextcloud](https://img.shields.io/badge/Nextcloud-0082C9?style=flat-square&logo=nextcloud&logoColor=white) | Personal Cloud & Collaboration | <img src="https://status.kcn333.com/api/badge/5/status?upColor=4CAF50&downColor=f38ba8" alt="Nextcloud Status"> |
+| ![Gitea](https://img.shields.io/badge/Gitea-609926?style=flat-square&logo=gitea&logoColor=white) | Self-hosted Git Service | <img src="https://status.kcn333.com/api/badge/16/status?upColor=4CAF50&downColor=f38ba8" alt="Gitea Status"> |
+| ![Vaultwarden](https://img.shields.io/badge/Vaultwarden-175DDC?style=flat-square&logo=bitwarden&logoColor=white) | Password Manager (Bitwarden) | <img src="https://status.kcn333.com/api/badge/12/status?upColor=4CAF50&downColor=f38ba8" alt="Vaultwarden Status"> |
 
 ### Monitoring
 ---
@@ -124,7 +124,7 @@ MIT License - do whatever you want with this!
 
 ## 🔗 Links
 
-- 📖 **[Full Documentation](https://kcn3333.github.io/homelab/)**
+- 📖 **[Full Documentation](https://homelab.kcn333.com/)**
 - 💬 **[Discussions](https://github.com/kCn3333/homelab/discussions)**
 - 🐛 **[Report Issues](https://github.com/kCn3333/homelab/issues)**
 
