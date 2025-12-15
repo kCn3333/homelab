@@ -108,6 +108,9 @@ extra:
       link: mailto:kcn@kcn333.com
   generator: false
 
+extra_files:
+  - CNAME
+
 extra_css:
   - stylesheets/retro.css
   - stylesheets/code-blocks.css
