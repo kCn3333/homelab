@@ -104,6 +104,8 @@ extra:
       link: https://github.com/kCn3333
     - icon: fontawesome/brands/discord 
       link: https://discord.com/users/1314708812120330333
+    - icon: fontawesome/solid/envelope
+      link: mailto:kcn@kcn333.com
   generator: false
 
 extra_css:
