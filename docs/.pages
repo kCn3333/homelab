@@ -28,7 +28,7 @@ nav:
       - 🗅 temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
   
   - ➤ Automation: 
-    - 🅰 Ansible playbooks: automation 
+    - 🅰 Ansible playbooks: https://github.com/kCn3333/homelab-ansible
     - ▶︎ n8n workflows: https://github.com/kCn3333/n8n_workflows
       
   - 🕮 Troubleshooting: troubleshooting 
