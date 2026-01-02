@@ -8,7 +8,7 @@ nav:
     - 모 Network:  infrastructure
     - ⛃ project cluster: https://kcn333.com/#/projects/cluster
     - ⛂ project server: https://kcn333.com/#/projects/home-server
-    - ⏚ project fan-controller: https://github.com/kCn3333/rack-fan-controller
+    - 🌡 project fan-controller: https://github.com/kCn3333/rack-fan-controller
 
   - ⏻ Provisioning:
     - ⛃ Cluster Deplomyment: provisioning
