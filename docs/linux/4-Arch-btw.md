@@ -265,10 +265,11 @@ mkinitcpio -P
 
 ### Add Root Key to GRUB
 ```bash
-sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=07ce5469-d3fb-4ad6-9e1c-e149570664f9=cryptroot root=/dev/mapper/cryptroot rd.luks.key=07ce5469-d3fb-4ad6-9e1c-e149570664f9=/etc/cryptsetup-keys.d/root.key rw"|' /etc/default/grub
+sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=<ROOT-KEY>=cryptroot root=/dev/mapper/cryptroot rd.luks.key=<ROOT-KEY>=/etc/cryptsetup-keys.d/root.key rw"|' /etc/default/grub
 ```
 
 **Tip:** Use this nvim command to insert UUID:
+
 1. Position cursor where UUID should go
 2. Type: `:r !blkid -s UUID -o value /dev/sda2`
 3. UUID will be inserted at cursor position
