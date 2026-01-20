@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://kcn3333.github.io/homelab/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/infrastructure/home/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/linux/4-Arch-btw/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/pentesting/pentest_lab_notes/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/pentesting/pfsense-config-notes/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/provisioning/0-pxe-tftp/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/provisioning/1-custom-image/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/provisioning/2-cluster-deployment-maas/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/provisioning/3-ssh-configuration/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
     <url>
          <loc>https://kcn3333.github.io/homelab/troubleshooting/placeholder/</loc>
-         <lastmod>2026-01-17</lastmod>
+         <lastmod>2026-01-20</lastmod>
     </url>
 </urlset>
