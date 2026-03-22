@@ -1,4 +1,6 @@
-# K3s Homelab — Sesje 14-15-16 (Hubble debugging marathon)
+# 14 - Hubble
+
+# K3s Homelab — Sesja 14 (Hubble debugging marathon)
 
 **Daty:** 2026-03-14, 2026-03-15, 2026-03-16  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1 (VXLAN)

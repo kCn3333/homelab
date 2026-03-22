@@ -1,3 +1,5 @@
+# 02 - Let's Encrypt
+
 # K3s Homelab — Sesja 02
 
 **Data:** 2026-02-27  

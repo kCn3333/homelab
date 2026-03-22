@@ -1,3 +1,5 @@
+# 07 - Sealed Secrets + Longhorn
+
 # K3s Homelab — Sesja 06
 
 **Data:** 2026-03-04  

@@ -1,3 +1,5 @@
+# 11 - CI/CD 
+
 # K3s Homelab — Sesja 11
 
 **Data:** 2026-03-11  

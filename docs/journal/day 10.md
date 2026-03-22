@@ -1,3 +1,5 @@
+# 10 - Metrics + Alerts 
+
 # K3s Homelab — Sesja 10
 
 **Data:** 2026-03-10  

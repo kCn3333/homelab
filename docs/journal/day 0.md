@@ -1,3 +1,5 @@
+# 00 Plan
+
 Plan docelowy:
 - HA control plane    
 - persistent storage z replikacją    

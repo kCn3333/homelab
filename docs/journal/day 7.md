@@ -1,3 +1,5 @@
+# 07 - Cilium
+
 # K3s Homelab — Sesja 07
 
 **Data:** 2026-03-06  

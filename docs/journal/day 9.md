@@ -1,3 +1,5 @@
+# 09 - S3 Garage
+
 # K3s Homelab — Sesja 09
 
 **Data:** 2026-03-08  

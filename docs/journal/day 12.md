@@ -1,3 +1,5 @@
+# 12 - Grafana + HPA
+
 # K3s Homelab — Sesja 12
 
 **Data:** 2026-03-12  

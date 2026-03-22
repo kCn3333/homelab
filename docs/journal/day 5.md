@@ -1,3 +1,5 @@
+# 05 - Flux
+
 # K3s Homelab — Sesja 05
 
 **Data:** 2026-03-03  

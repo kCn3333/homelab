@@ -1,3 +1,5 @@
+# 03 - HAProxy 
+
 # K3s Homelab — Sesja 03
 
 **Data:** 2026-02-28  

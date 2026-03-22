@@ -1,3 +1,5 @@
+# 08 - Monitoring
+
 # K3s Homelab — Sesja 08
 
 **Data:** 2026-03-07  

@@ -1,3 +1,5 @@
+# 17 - Progressive Delivery
+
 # K3s Homelab — Sesja 17 (Progressive Delivery)
 
 **Data:** 2026-03-21  

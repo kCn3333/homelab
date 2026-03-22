@@ -1,3 +1,5 @@
+# 04 - UFW + backup
+
 # K3s Homelab — Sesja 04
 
 **Data:** 2026-03-01  
