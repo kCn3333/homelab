@@ -1,4 +1,4 @@
-# 02 - Let's Encrypt
+# 2 - Let's Encrypt
 
 # K3s Homelab — Sesja 02
 

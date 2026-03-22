@@ -1,4 +1,4 @@
-# 09 - S3 Garage
+# 9 - S3 Garage
 
 # K3s Homelab — Sesja 09
 

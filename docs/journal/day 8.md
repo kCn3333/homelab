@@ -1,4 +1,4 @@
-# 08 - Monitoring
+# 8 - Monitoring
 
 # K3s Homelab — Sesja 08
 

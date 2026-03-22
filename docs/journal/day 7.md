@@ -1,4 +1,4 @@
-# 07 - Cilium
+# 7 - Cilium
 
 # K3s Homelab — Sesja 07
 

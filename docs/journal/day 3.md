@@ -1,4 +1,4 @@
-# 03 - HAProxy 
+# 3 - HAProxy 
 
 # K3s Homelab — Sesja 03
 

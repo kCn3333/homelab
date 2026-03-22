@@ -1,4 +1,4 @@
-# 05 - Flux
+# 5 - Flux
 
 # K3s Homelab — Sesja 05
 

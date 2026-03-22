@@ -1,4 +1,4 @@
-# 01 - HA k3s embedded etcd
+# 1 - HA k3s embedded etcd
 
 # K3s Homelab — Sesja 01
 

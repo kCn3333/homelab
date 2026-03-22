@@ -1,4 +1,4 @@
-# 07 - Sealed Secrets + Longhorn
+# 7 - Sealed Secrets + Longhorn
 
 # K3s Homelab — Sesja 06
 

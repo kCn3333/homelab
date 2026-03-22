@@ -1,4 +1,4 @@
-# 04 - UFW + backup
+# 4 - UFW + backup
 
 # K3s Homelab — Sesja 04
 
