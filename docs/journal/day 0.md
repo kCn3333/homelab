@@ -1,4 +1,4 @@
-# 00 Plan
+# 00 - Plan
 
 Plan docelowy:
 - HA control plane    
