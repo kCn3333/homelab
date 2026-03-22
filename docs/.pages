@@ -11,7 +11,11 @@ nav:
     - 🌡 project fan-controller: https://github.com/kCn3333/rack-fan-controller
 
   - ⏻ Provisioning:
-    - ⛃ Cluster Deployment: provisioning
+    - ⛃ Cluster Deployment: 
+      - 🖴 Bare Metal: provisioning
+      - ⛭ Kubernetes: kubernetes
+      - 🗁 Flux Repo: https://github.com/kCn3333/k3s-homelab
+      - 🗐 Journal (Polish): journal 
     - 🖳 Lab Pentesting: pentesting
     - ☕︎ Linux Setup: linux
 
