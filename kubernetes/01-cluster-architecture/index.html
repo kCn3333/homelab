@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/kubernetes/placeholder/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/kubernetes/01-cluster-architecture/">
       
       
-        <link rel="prev" href="../../provisioning/3-ssh-configuration/">
+        <link rel="prev" href="../00-overview/">
       
       
-        <link rel="next" href="../../journal/day%200/">
+        <link rel="next" href="../02-networking/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>This section is currently under construction. - > Homelab Documentation</title>
+        <title>Cluster Architecture - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-section-is-currently-under-construction" class="md-skip">
+        <a href="#cluster-architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              This section is currently under construction.
+              Cluster Architecture
             
           </span>
         </div>
@@ -838,6 +838,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -850,6 +878,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cluster Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -857,7 +903,7 @@
   <span class="md-ellipsis">
     
   
-    This section is currently under construction.
+    Cluster Architecture
   
 
     
@@ -867,6 +913,493 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ha-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HA Control Plane
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HA Control Plane">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-ha-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why HA matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd-quorum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        etcd quorum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tested-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tested behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initial-cluster-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Cluster Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initial Cluster Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-0-uninstall-existing-k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0 — Uninstall existing k3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-bootstrap-the-first-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Bootstrap the first control-plane
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-grab-the-cluster-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Grab the cluster token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-join-the-second-and-third-control-plane-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Join the second and third control-plane nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-san-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS SAN Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TLS SAN Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-san-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What SAN is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-the-config-lives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the config lives
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-san" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating SAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#k3s-san-behavior-quirk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        k3s SAN behavior — quirk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#san-sync-in-ha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAN sync in HA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-the-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Cluster
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accessing the Cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubeconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kubeconfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merging-kubeconfigs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merging kubeconfigs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Useful Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-networking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-ingress-tls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingress &amp; TLS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-gitops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitOps with Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-observability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -969,7 +1502,7 @@
   <span class="md-ellipsis">
     
   
-    Day 0
+    00 Plan
   
 
     
@@ -997,7 +1530,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 01
+    01 - HA k3s embedded etcd
   
 
     
@@ -1025,7 +1558,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 10
+    10 - Metrics + Alerts
   
 
     
@@ -1053,7 +1586,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 11
+    11 - CI/CD
   
 
     
@@ -1081,7 +1614,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 12
+    12 - Grafana + HPA
   
 
     
@@ -1109,7 +1642,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 13
+    13 - Alerts
   
 
     
@@ -1137,7 +1670,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesje 14-15-16 (Hubble debugging marathon)
+    14 - Hubble
   
 
     
@@ -1165,7 +1698,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 15 (Helm Chart dla clients-api)
+    15 - Helm Chart
   
 
     
@@ -1193,7 +1726,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 16 (OCI Helm Chart + Progressive Delivery Setup)
+    16 - OCI
   
 
     
@@ -1221,7 +1754,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 17 (Progressive Delivery)
+    17 - Progressive Delivery
   
 
     
@@ -1249,7 +1782,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 02
+    02 - Let's Encrypt
   
 
     
@@ -1277,7 +1810,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 03
+    03 - HAProxy
   
 
     
@@ -1305,7 +1838,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 04
+    04 - UFW + backup
   
 
     
@@ -1333,7 +1866,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 05
+    05 - Flux
   
 
     
@@ -1361,7 +1894,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 06
+    07 - Sealed Secrets + Longhorn
   
 
     
@@ -1389,7 +1922,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 07
+    07 - Cilium
   
 
     
@@ -1417,7 +1950,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 08
+    08 - Monitoring
   
 
     
@@ -1445,7 +1978,7 @@
   <span class="md-ellipsis">
     
   
-    K3s Homelab — Sesja 09
+    09 - S3 Garage
   
 
     
@@ -2249,6 +2782,258 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ha-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HA Control Plane
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HA Control Plane">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-ha-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why HA matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcd-quorum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        etcd quorum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tested-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tested behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initial-cluster-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Cluster Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initial Cluster Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-0-uninstall-existing-k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 0 — Uninstall existing k3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-bootstrap-the-first-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — Bootstrap the first control-plane
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-grab-the-cluster-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — Grab the cluster token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-join-the-second-and-third-control-plane-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — Join the second and third control-plane nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-san-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS SAN Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TLS SAN Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-san-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What SAN is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-the-config-lives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the config lives
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-san" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating SAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#k3s-san-behavior-quirk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        k3s SAN behavior — quirk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#san-sync-in-ha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAN sync in HA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-the-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the Cluster
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accessing the Cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubeconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kubeconfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merging-kubeconfigs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merging kubeconfigs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Useful Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2268,15 +3053,153 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/kubernetes/placeholder.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/kubernetes/01-cluster-architecture.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="this-section-is-currently-under-construction">This section is currently under construction.<a class="headerlink" href="#this-section-is-currently-under-construction" title="Permanent link">&para;</a></h1>
-<blockquote></blockquote>
+<h1 id="cluster-architecture">Cluster Architecture<a class="headerlink" href="#cluster-architecture" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The cluster runs k3s in HA mode — all three nodes are control-plane members and etcd peers simultaneously. There's no dedicated "worker-only" node. This is a deliberate choice: with only 3 machines, dedicating one purely to workers would waste the etcd quorum capacity.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[PC / kubectl]
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      ▼
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>HAProxy :6443 (TCP passthrough)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>      │
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      ├── master  192.168.55.10  (control-plane + etcd)
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>      ├── worker1 192.168.55.11  (control-plane + etcd)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      └── worker2 192.168.55.12  (control-plane + etcd)
+</span></code></pre></div>
+<hr />
+<h2 id="ha-control-plane">HA Control Plane<a class="headerlink" href="#ha-control-plane" title="Permanent link">&para;</a></h2>
+<h3 id="why-ha-matters">Why HA matters<a class="headerlink" href="#why-ha-matters" title="Permanent link">&para;</a></h3>
+<p>HA has two distinct dimensions that are easy to mix up:</p>
+<ul>
+<li><strong>Control-plane HA</strong> — the scheduler, controller-manager, and API server need to be up for the cluster to react to failures (evict pods from a dead node, scale deployments, etc.)</li>
+<li><strong>Application HA</strong> — pods keep running even if the control plane goes down, but the cluster is "blind" — it can't reschedule, scale, or repair anything</li>
+</ul>
+<p>In practice: if a node dies, k8s detects it after <code>node-monitor-grace-period</code> (~40s by default) and starts evicting pods. You need a working control plane for that eviction to happen.</p>
+<h3 id="etcd-quorum">etcd quorum<a class="headerlink" href="#etcd-quorum" title="Permanent link">&para;</a></h3>
+<p>k3s uses embedded etcd for HA. With 3 nodes, the cluster tolerates 1 node failure — the formula is <code>(n-1)/2</code> nodes can fail while maintaining quorum.</p>
+<h3 id="tested-behavior">Tested behavior<a class="headerlink" href="#tested-behavior" title="Permanent link">&para;</a></h3>
+<p>With the master node powered off:
+- After ~2-3 minutes, pods from the dead node were rescheduled on the remaining nodes
+- API access was uninterrupted (HAProxy routed to surviving control-plane nodes)
+- <code>node-monitor-grace-period</code> is the key timer; pods stuck in <code>Terminating</code> require <code>--force</code> if kubelet can't confirm shutdown</p>
+<hr />
+<h2 id="initial-cluster-setup">Initial Cluster Setup<a class="headerlink" href="#initial-cluster-setup" title="Permanent link">&para;</a></h2>
+<h3 id="step-0-uninstall-existing-k3s">Step 0 — Uninstall existing k3s<a class="headerlink" href="#step-0-uninstall-existing-k3s" title="Permanent link">&para;</a></h3>
+<p>k3s HA must be bootstrapped from scratch. You can't "upgrade" a single-node install to HA.</p>
+<p>On all control-plane nodes:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>/usr/local/bin/k3s-uninstall.sh
+</span></code></pre></div></p>
+<p>On workers (if any):
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>/usr/local/bin/k3s-agent-uninstall.sh
+</span></code></pre></div></p>
+<p>Clean up any leftover data:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/rancher
+</span></code></pre></div></p>
+<h3 id="step-1-bootstrap-the-first-control-plane">Step 1 — Bootstrap the first control-plane<a class="headerlink" href="#step-1-bootstrap-the-first-control-plane" title="Permanent link">&para;</a></h3>
+<p>On <code>192.168.55.10</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&quot;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="s2">server \</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="s2">--cluster-init \</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s2">--tls-san 192.168.0.45 \</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="s2">--tls-san cluster.kcn333.com</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-
+</span></code></pre></div>
+<ul>
+<li><code>--cluster-init</code> — creates a new HA cluster with embedded etcd</li>
+<li><code>--tls-san</code> — adds IPs/domains to the API server's TLS certificate SAN. Without this, kubectl via HAProxy gets a TLS error. Add both the LB IP and your domain.</li>
+</ul>
+<h3 id="step-2-grab-the-cluster-token">Step 2 — Grab the cluster token<a class="headerlink" href="#step-2-grab-the-cluster-token" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>cat<span class="w"> </span>/var/lib/rancher/k3s/server/node-token
+</span></code></pre></div>
+<h3 id="step-3-join-the-second-and-third-control-plane-nodes">Step 3 — Join the second and third control-plane nodes<a class="headerlink" href="#step-3-join-the-second-and-third-control-plane-nodes" title="Permanent link">&para;</a></h3>
+<p>On <code>192.168.55.11</code> and <code>192.168.55.12</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&quot;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="s2">server \</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="s2">--server https://192.168.55.10:6443 \</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="s2">--token &lt;TOKEN&gt; \</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="s2">--tls-san 192.168.0.45 \</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="s2">--tls-san cluster.kcn333.com</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-
+</span></code></pre></div>
+<p><code>--server</code> points to the first node — this means "join the existing etcd cluster" rather than creating a new one.</p>
+<hr />
+<h2 id="tls-san-management">TLS SAN Management<a class="headerlink" href="#tls-san-management" title="Permanent link">&para;</a></h2>
+<h3 id="what-san-is">What SAN is<a class="headerlink" href="#what-san-is" title="Permanent link">&para;</a></h3>
+<p>The Subject Alternative Name is the list of IPs and domains the API server certificate is valid for. When kubectl connects through HAProxy, it checks that the IP it's talking to is listed in the cert's SAN. If it's not — TLS error.</p>
+<h3 id="where-the-config-lives">Where the config lives<a class="headerlink" href="#where-the-config-lives" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>/etc/systemd/system/k3s.service
+</span></code></pre></div>
+<p>Look for the <code>ExecStart</code> block:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ExecStart=/usr/local/bin/k3s \
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    server \
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        &#39;--cluster-init&#39; \
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        &#39;--tls-san&#39; \
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        &#39;192.168.0.45&#39; \
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        &#39;--tls-san&#39; \
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        &#39;cluster.kcn333.com&#39; \
+</span></code></pre></div>
+<h3 id="updating-san">Updating SAN<a class="headerlink" href="#updating-san" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 1. Snapshot etcd first (always!)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>k3s<span class="w"> </span>etcd-snapshot<span class="w"> </span>save<span class="w"> </span>--name<span class="w"> </span>pre-tls-san-change
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 2. Edit the service file</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/systemd/system/k3s.service
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># 3. Reload and restart</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>k3s
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="c1"># 4. Verify the new SAN is in the cert</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>&lt;IP&gt;:6443<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">  </span>openssl<span class="w"> </span>x509<span class="w"> </span>-text<span class="w"> </span>-noout<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A10<span class="w"> </span><span class="s2">&quot;Subject Alternative Name&quot;</span>
+</span></code></pre></div>
+<h3 id="k3s-san-behavior-quirk">k3s SAN behavior — quirk<a class="headerlink" href="#k3s-san-behavior-quirk" title="Permanent link">&para;</a></h3>
+<p>k3s manages the API server cert via a dynamic listener stored as a Secret <code>k3s-serving</code> in <code>kube-system</code>. The SAN list comes from:
+- <code>--tls-san</code> flags in <code>k3s.service</code>
+- All node IPs in the cluster
+- Node hostnames
+- Standard k8s names (<code>kubernetes</code>, <code>kubernetes.default</code>, etc.)
+- <strong>History from etcd</strong> — addresses from previous configurations</p>
+<p>Removing a <code>--tls-san</code> and restarting isn't always enough — k3s can rebuild the cert from etcd history. In practice, if the old IP isn't accessible anyway, it's not a security risk.</p>
+<h3 id="san-sync-in-ha">SAN sync in HA<a class="headerlink" href="#san-sync-in-ha" title="Permanent link">&para;</a></h3>
+<p>Changing SAN on one control-plane node is automatically synced via etcd to the other nodes. You don't need to manually edit <code>k3s.service</code> on every node for SAN changes.</p>
+<hr />
+<h2 id="accessing-the-cluster">Accessing the Cluster<a class="headerlink" href="#accessing-the-cluster" title="Permanent link">&para;</a></h2>
+<h3 id="kubeconfig">kubeconfig<a class="headerlink" href="#kubeconfig" title="Permanent link">&para;</a></h3>
+<p>The kubeconfig lives at <code>/etc/rancher/k3s/k3s.yaml</code> on any control-plane node. It contains admin-level credentials — treat it like a root password.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Copy to your local machine</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>ssh<span class="w"> </span>user@master<span class="w"> </span><span class="s2">&quot;sudo cat /etc/rancher/k3s/k3s.yaml&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Out-File<span class="w"> </span>-Encoding<span class="w"> </span>ascii<span class="w"> </span>k3s.yaml
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Change the server address to HAProxy</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># server: https://127.0.0.1:6443 → https://192.168.0.45:6443</span>
+</span></code></pre></div>
+<h3 id="merging-kubeconfigs">Merging kubeconfigs<a class="headerlink" href="#merging-kubeconfigs" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">KUBECONFIG</span><span class="o">=</span>~/.kube/config:~/.kube/k3s.yaml<span class="w"> </span>kubectl<span class="w"> </span>config<span class="w"> </span>view<span class="w"> </span>--flatten<span class="w"> </span>&gt;<span class="w"> </span>~/.kube/config_new
+</span></code></pre></div>
+<hr />
+<h2 id="useful-commands">Useful Commands<a class="headerlink" href="#useful-commands" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Cluster state</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># etcd operations</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>sudo<span class="w"> </span>k3s<span class="w"> </span>etcd-snapshot<span class="w"> </span>save<span class="w"> </span>--name<span class="w"> </span>&lt;name&gt;
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>sudo<span class="w"> </span>k3s<span class="w"> </span>etcd-snapshot<span class="w"> </span>ls
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1"># Certificate rotation</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>sudo<span class="w"> </span>k3s<span class="w"> </span>certificate<span class="w"> </span>rotate
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>k3s
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="c1"># k3s service logs</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>k3s<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span><span class="w"> </span>--no-pager
+</span></code></pre></div>
 
 
 
@@ -2299,7 +3222,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 15:27:43 UTC"><span class="timeago" datetime="2026-03-22T15:27:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 15:27:43 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
   </span>
 
     
@@ -2309,7 +3232,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 15:27:43 UTC"><span class="timeago" datetime="2026-03-22T15:27:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 15:27:43 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
   </span>
 
     

@@ -81,7 +81,43 @@
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://kcn3333.github.io/homelab/kubernetes/placeholder/</loc>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/00-overview/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/01-cluster-architecture/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/02-networking/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/03-ingress-tls/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/04-storage/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/05-gitops/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/06-security/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/07-observability/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/08-backup/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://kcn3333.github.io/homelab/kubernetes/09-applications/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
