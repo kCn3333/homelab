@@ -81,9 +81,8 @@ Workloads (namespaced)
 
 ## Git Repositories
 
-- **k3s-homelab** — cluster config, Flux manifests, GitOps source of truth
-- **clients-api** — application code + Helm chart + GitHub Actions pipeline
-
+- **[k3s-homelab](https://github.com/kCn3333/k3s-homelab)** — cluster config, Flux manifests, GitOps source of truth
+- **[clients-api](https://github.com/kCn3333/clients-api)** — application code + Helm chart + GitHub Actions pipeline
 ---
 
 ## Key Design Decisions

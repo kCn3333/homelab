@@ -14,10 +14,10 @@ nav:
     - ⛃ Cluster Deployment: 
       - 🖴 Bare Metal: provisioning
       - ⛭ Kubernetes: kubernetes
+      - 🗐 Build Journal (Polish): journal 
       - 🗁 Flux Repo: https://github.com/kCn3333/k3s-homelab
-      - 🗐 Journal (Polish): journal 
     - 🖳 Lab Pentesting: pentesting
-    - ☕︎ Linux Setup: linux
+    - ☕︎ Custom Arch Linux Setup: linux
 
   - ⛯ Applications:
       
