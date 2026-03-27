@@ -22,10 +22,13 @@ nav:
   - ⛯ Applications:
       
     - 🗐 Docker Compose Repo: https://github.com/kCn3333/docker-compose
-    - 🗏 .bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
-    - ⛭ starship config: https://github.com/kCn3333/starship-config
-    - ⛭ conky config: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
-    - 🗲 wireshark config: https://github.com/kCn3333/wireshark
+    - 🗅 cluster stats: https://github.com/kCn3333/k8s-badge
+    - 🗅 server stats: https://github.com/kCn3333/server-stats
+    - 🗁 Config Files: 
+      - 🗏 .bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
+      - ⛭ starship config: https://github.com/kCn3333/starship-config
+      - ⛭ conky config: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
+      - 🗲 wireshark config: https://github.com/kCn3333/wireshark
 
     - 🗁 Bash Scripts: 
       - 🗅 backup: https://github.com/kCn3333/linux-bash/tree/main/backup
