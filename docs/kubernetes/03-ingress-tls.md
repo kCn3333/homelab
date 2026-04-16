@@ -6,8 +6,6 @@ Traefik is the ingress controller (ships with k3s), cert-manager handles automat
 
 ## Traefik
 
-### What it does
-
 Traefik is a reverse proxy and L7 ingress controller. It receives traffic from HAProxy (already past the load balancer layer), matches hostnames and paths against Ingress/IngressRoute rules, and forwards to the appropriate Service.
 
 ```
@@ -77,7 +75,7 @@ htpasswd -nb admin your-password
 # Output: admin:$apr1$xxxxx$yyyyyyy
 ```
 
-Store the hash as a SealedSecret (see [security/sealed-secrets.md](../06-security/sealed-secrets.md)).
+Store the hash as a SealedSecret (see [security/sealed-secrets.md](../06-security.md)).
 
 **Middleware:**
 ```yaml
@@ -172,8 +170,6 @@ kubectl port-forward -n kube-system deployment/traefik 9000:9000
 
 ## cert-manager
 
-### What it does
-
 cert-manager automates TLS certificate issuance and renewal. It integrates with Let's Encrypt and handles the entire ACME challenge flow — you just declare what certificate you want and it handles the rest, including renewals (auto-renews at 1/3 of remaining validity).
 
 ### Installation via Helm
@@ -225,6 +221,7 @@ server: https://acme-v02.api.letsencrypt.org/directory
 **DNS-01**: Let's Encrypt checks a TXT record `_acme-challenge.yourdomain.com` in public DNS — **the cluster doesn't need to be reachable from the internet.**
 
 Flow with Cloudflare:
+
 1. cert-manager requests a certificate
 2. Uses Cloudflare API to add `TXT _acme-challenge.cluster.kcn333.com`
 3. Let's Encrypt verifies the TXT record
@@ -234,6 +231,7 @@ Flow with Cloudflare:
 ### Cloudflare API Token
 
 Create a token with **minimum permissions** (principle of least privilege):
+
 - `Zone | DNS | Edit`
 - `Zone | Zone | Read`
 - Zone Resources: Specific zone (your domain only)

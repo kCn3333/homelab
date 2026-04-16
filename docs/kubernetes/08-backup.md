@@ -11,8 +11,6 @@ Both use Garage (self-hosted S3) as the remote storage destination, plus rsync t
 
 ## etcd Snapshots
 
-### What gets backed up
-
 The etcd database contains all Kubernetes object state — every Deployment, Secret, ConfigMap, Service, etc. Restoring from an etcd snapshot brings the cluster back to the exact state it was in when the snapshot was taken.
 
 What it **doesn't** cover: the actual data in PVCs (that's Longhorn's job).
@@ -20,6 +18,7 @@ What it **doesn't** cover: the actual data in PVCs (that's Longhorn's job).
 ### Automatic snapshots (k3s built-in)
 
 k3s takes etcd snapshots automatically:
+
 - Default schedule: daily at 12:00 UTC
 - Default retention: 5 snapshots
 - Location: `/var/lib/rancher/k3s/server/db/snapshots/`

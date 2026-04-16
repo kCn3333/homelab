@@ -6,8 +6,6 @@ This section covers everything network-related: the external load balancer, the 
 
 ## HAProxy — External Load Balancer
 
-### What it does
-
 HAProxy runs on a separate Debian server and serves as the single entry point for all cluster traffic. It load-balances across all three nodes and handles TLS passthrough for both the API server and Traefik.
 
 ```
@@ -66,6 +64,7 @@ For k8s API and HTTPS ingress → always `mode tcp`.
 `option httpchk GET /healthz` doesn't work with `mode tcp` — HAProxy can't parse HTTP in TCP mode. Also, Traefik returns `404` on unknown paths, which HAProxy considers unhealthy by default.
 
 Solutions:
+
 - Remove `check` from backends entirely (simplest for homelab)
 - Use `http-check expect status 200,301,302,404`
 
@@ -75,11 +74,12 @@ The debugging lesson: remove health checks first to confirm routing works, then 
 
 ## Cilium CNI
 
-### Why Cilium (and why we migrated from Flannel)
+### Why Cilium (and why migrated from Flannel)
 
 Flannel was the default CNI in k3s and worked fine — until a hard power-off. Flannel stores its `subnet.env` in `/run/flannel/` which is a `tmpfs` (lives in RAM). After a hard shutdown, that file disappears and Flannel can't initialize the network on restart, leaving all pods stuck in `ContainerCreating`.
 
 Cilium doesn't have this problem. It also brings:
+
 - eBPF instead of iptables — better performance, lower overhead
 - Built-in NetworkPolicy support
 - Hubble for network observability
@@ -146,6 +146,7 @@ helm install cilium cilium/cilium \
 ```
 
 **Why a direct IP instead of hostname?** Cilium during bootstrap can't use DNS because:
+
 - DNS runs as CoreDNS pods
 - Pods can't start without CNI
 - CNI (Cilium) can't connect without DNS → deadlock

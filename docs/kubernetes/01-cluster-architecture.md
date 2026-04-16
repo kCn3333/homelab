@@ -19,8 +19,6 @@ HAProxy :6443 (TCP passthrough)
 
 ## HA Control Plane
 
-### Why HA matters
-
 HA has two distinct dimensions that are easy to mix up:
 
 - **Control-plane HA** — the scheduler, controller-manager, and API server need to be up for the cluster to react to failures (evict pods from a dead node, scale deployments, etc.)
@@ -35,6 +33,7 @@ k3s uses embedded etcd for HA. With 3 nodes, the cluster tolerates 1 node failur
 ### Tested behavior
 
 With the master node powered off:
+
 - After ~2-3 minutes, pods from the dead node were rescheduled on the remaining nodes
 - API access was uninterrupted (HAProxy routed to surviving control-plane nodes)
 - `node-monitor-grace-period` is the key timer; pods stuck in `Terminating` require `--force` if kubelet can't confirm shutdown
@@ -104,8 +103,6 @@ server \
 
 ## TLS SAN Management
 
-### What SAN is
-
 The Subject Alternative Name is the list of IPs and domains the API server certificate is valid for. When kubectl connects through HAProxy, it checks that the IP it's talking to is listed in the cert's SAN. If it's not — TLS error.
 
 ### Where the config lives
@@ -144,9 +141,10 @@ echo | openssl s_client -connect <IP>:6443 2>/dev/null | \
   openssl x509 -text -noout | grep -A10 "Subject Alternative Name"
 ```
 
-### k3s SAN behavior — quirk
+### k3s SAN behavior
 
 k3s manages the API server cert via a dynamic listener stored as a Secret `k3s-serving` in `kube-system`. The SAN list comes from:
+
 - `--tls-san` flags in `k3s.service`
 - All node IPs in the cluster
 - Node hostnames
