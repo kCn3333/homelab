@@ -1,4 +1,4 @@
-# 00 - Planowanie
+# 0 - Planowanie
 
 Przygotowanie środowiska pod klaster HA k3s z embedded etcd oraz zewnętrznym Load Balancerem (HAProxy).
 
