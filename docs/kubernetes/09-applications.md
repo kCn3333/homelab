@@ -2,7 +2,7 @@
 
 ## clients-api — Demo Application
 
-`clients-api` is a Spring Boot REST API backed by PostgreSQL (CloudNativePG). It exists to demonstrate the full production workflow: containerized build, automated CI/CD, Helm chart packaging, GitOps delivery, monitoring integration, and progressive delivery across environments.
+(`clients-api`)[https://github.com/kCn3333/clients-api] is a Spring Boot REST API backed by PostgreSQL (CloudNativePG). It exists to demonstrate the full production workflow: containerized build, automated CI/CD, Helm chart packaging, GitOps delivery, monitoring integration, and progressive delivery across environments.
 
 ---
 

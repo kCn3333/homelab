@@ -62,6 +62,7 @@ flux bootstrap github \
 `--read-write-key` is required for Image Automation — Flux needs write access to commit tag updates back to the repo. The default bootstrap creates a read-only deploy key.
 
 If you forgot `--read-write-key`:
+
 1. Delete the old key on GitHub (Settings → Deploy keys → Delete)
 2. Get the new key: `kubectl get secret flux-system -n flux-system -o jsonpath='{.data.identity\.pub}' | base64 -d`
 3. Add it on GitHub with **Allow write access** checked

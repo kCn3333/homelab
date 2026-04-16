@@ -1,6 +1,7 @@
 # Backup
 
 Two independent backup strategies:
+
 1. **etcd snapshots** — cluster state (all k8s objects, Flux config, etc.)
 2. **Longhorn volume backups** — persistent data (application data stored in PVCs)
 
@@ -89,6 +90,7 @@ journalctl -t etcd-backup
 ### Snapshot before risky operations
 
 Always take a manual snapshot before:
+
 - Changing TLS SAN configuration
 - Migrating CNI (Flannel → Cilium)
 - Upgrading k3s or any core component

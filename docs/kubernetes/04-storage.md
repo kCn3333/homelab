@@ -2,8 +2,6 @@
 
 ## Longhorn
 
-### What it does
-
 Longhorn is a distributed block storage system for Kubernetes. It creates volume replicas across multiple nodes, so if one node fails, the data remains accessible on the remaining nodes.
 
 Without Longhorn (or similar), you'd be limited to `local-path` storage — data lives on a single node. If that node dies, the pod can't be rescheduled anywhere else (the data isn't there). For anything stateful in a HA cluster, that's not acceptable.
@@ -184,7 +182,7 @@ initContainers:
 
 ## Longhorn S3 Backup
 
-See [backup/longhorn-s3.md](../08-backup/longhorn-s3.md) for setting up automated volume backups to Garage (self-hosted S3).
+See [backup/longhorn-s3.md](../08-backup.md) for setting up automated volume backups to Garage (self-hosted S3).
 
 ---
 

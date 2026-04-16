@@ -2,8 +2,6 @@
 
 ## kube-prometheus-stack
 
-### What it is
-
 A single Helm chart that installs the complete monitoring stack:
 
 | Component | Role |

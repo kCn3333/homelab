@@ -2,8 +2,6 @@
 
 ## UFW Firewall
 
-### Why UFW on the nodes
-
 By default, k3s nodes accept connections on all ports from anywhere. Without a firewall, anything on the local network can hit the API server, Longhorn UI, or any NodePort service directly — bypassing HAProxy and Traefik entirely.
 
 The goal: all external traffic goes through HAProxy (`192.168.0.45`). Direct access to node ports is blocked for everything else.
