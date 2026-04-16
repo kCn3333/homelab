@@ -2640,10 +2640,10 @@
 
 <h1 id="13-alerts">13 - Alerts<a class="headerlink" href="#13-alerts" title="Permanent link">&para;</a></h1>
 <h1 id="k3s-homelab-sesja-13">K3s Homelab — Sesja 13<a class="headerlink" href="#k3s-homelab-sesja-13" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-03-13<br />
+<p><strong>Data:</strong> 2026-02-18<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h2 id="co-zbudowalismy">Co zbudowaliśmy<a class="headerlink" href="#co-zbudowalismy" title="Permanent link">&para;</a></h2>
+<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>AlertManager — wyciszenie InfoInhibitor</strong> — null receiver dla szumów przy starcie klastra</li>
 <li><strong>PrometheusRule dla clients-api</strong> — 3 własne alerty aplikacyjne</li>
@@ -2652,7 +2652,6 @@
 <li><strong>Naprawka UFW</strong> — port 4240 (Cilium health), 4244 (Hubble), CIDR <code>/8</code> zamiast <code>/16</code></li>
 </ol>
 <hr />
-<h2 id="czego-sie-nauczyem">Czego się nauczyłem<a class="headerlink" href="#czego-sie-nauczyem" title="Permanent link">&para;</a></h2>
 <h3 id="1-alertmanager-null-receiver-wyciszanie-szumow">1. AlertManager — null receiver (wyciszanie szumów)<a class="headerlink" href="#1-alertmanager-null-receiver-wyciszanie-szumow" title="Permanent link">&para;</a></h3>
 <p><strong>Problem:</strong> Przy każdym starcie klastra przychodziły dziesiątki powiadomień <code>InfoInhibitor</code> — normalny stan przejściowy, nie błąd.</p>
 <p><strong>Rozwiązanie:</strong> Route z <code>receiver: "null"</code> — AlertManager porzuca alerty bez wysyłania.</p>
@@ -2669,7 +2668,7 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="nt">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;null&quot;</span><span class="w">                </span><span class="c1"># pusty receiver — porzuca alerty</span>
 </span></code></pre></div>
-<p><strong>Ważna zasada:</strong> AlertManager stosuje <strong>pierwszy pasujący route</strong>. <code>null</code> musi być wyżej niż domyślny <code>ntfy</code>.</p>
+<p><strong>Wniosek:</strong> AlertManager stosuje <strong>pierwszy pasujący route</strong>. <code>null</code> musi być wyżej niż domyślny <code>ntfy</code>.</p>
 <p><strong>Weryfikacja:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/kube-prometheus-stack-alertmanager<span class="w"> </span><span class="m">9093</span>:9093
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9093/api/v2/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>json.tool<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A30<span class="w"> </span><span class="s2">&quot;config&quot;</span>
@@ -2816,7 +2815,7 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>maxUnavailable: 1 → maksymalnie 1 pod może być NIEDOSTĘPNY jednocześnie
 </span></code></pre></div>
 <hr />
-<h3 id="4-hubble-ui-architektura-i-debugging-wip">4. Hubble UI — architektura i debugging (WIP)<a class="headerlink" href="#4-hubble-ui-architektura-i-debugging-wip" title="Permanent link">&para;</a></h3>
+<h3 id="4-hubble-ui">4. Hubble UI<a class="headerlink" href="#4-hubble-ui" title="Permanent link">&para;</a></h3>
 <p><strong>Architektura:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Cilium Agent (każdy node) → port 4244 (gRPC)
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        ↑
@@ -2846,7 +2845,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Root causes napotkane dziś:</strong></p>
+<p><strong>Problemy:</strong></p>
 <ol>
 <li>UFW blokował port 4244 → <code>No connection to peer</code></li>
 <li>UFW blokował port 4240 → <code>Cluster health: 1/3 reachable</code></li>
@@ -2854,7 +2853,7 @@
 <li>Wielokrotna zmiana TLS on/off → niespójny stan certyfikatów relay</li>
 </ol>
 <p><strong>Po naprawach:</strong> <code>Cluster health: 3/3 reachable</code> ✅ ale relay nadal niestabilny przez niespójne certyfikaty — wymaga reinstalacji Cilium.</p>
-<p><strong>Lekcja:</strong> Nigdy nie przełączaj TLS Cilium w działającym klastrze bez pełnego restartu — zostawia niespójny stan wewnętrznych certyfikatów.</p>
+<p><strong>Wniosek:</strong> Nigdy nie przełączaj TLS Cilium w działającym klastrze bez pełnego restartu — zostawia niespójny stan wewnętrznych certyfikatów.</p>
 <p><strong>Aktualny stan HelmRelease Cilium:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">values</span><span class="p">:</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">k8sServiceHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.55.10</span>
@@ -2878,7 +2877,7 @@
 </span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hubble.cluster.kcn333.com</span>
 </span></code></pre></div>
 <hr />
-<h3 id="5-ufw-co-dodalismy-dzis">5. UFW — co dodaliśmy dziś<a class="headerlink" href="#5-ufw-co-dodalismy-dzis" title="Permanent link">&para;</a></h3>
+<h3 id="5-ufw-aktualizacja">5. UFW — aktualizacja<a class="headerlink" href="#5-ufw-aktualizacja" title="Permanent link">&para;</a></h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Cilium health checks między nodami</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rule</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">allow</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">from_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.55.0/24</span>
@@ -2904,7 +2903,7 @@
 <hr />
 <h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Hubble UI</strong> — reinstalacja Cilium (helm uninstall + reinstall przez Flux) ← następna sesja</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Hubble UI</strong> — reinstalacja Cilium (helm uninstall + reinstall przez Flux) </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PrometheusRule — dodatkowe alerty (high CPU/RAM)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Grafana dashboard — zapis jako ConfigMap w Git</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Progressive delivery (staging/production branches)</li>
@@ -2963,7 +2962,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 14:58:04 UTC"><span class="timeago" datetime="2026-04-16T14:58:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 14:58:04 UTC">2026-04-16</span>
   </span>
 
     

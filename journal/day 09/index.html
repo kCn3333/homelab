@@ -2640,23 +2640,22 @@
 
 <h1 id="9-s3-garage">9 - S3 Garage<a class="headerlink" href="#9-s3-garage" title="Permanent link">&para;</a></h1>
 <h1 id="k3s-homelab-sesja-09">K3s Homelab — Sesja 09<a class="headerlink" href="#k3s-homelab-sesja-09" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-03-08<br />
+<p><strong>Data:</strong> 2026-02-08<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h2 id="co-zbudowalismy">Co zbudowaliśmy<a class="headerlink" href="#co-zbudowalismy" title="Permanent link">&para;</a></h2>
-<ol>
+<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<ul>
 <li><strong>AlertManager + ntfy</strong> — powiadomienia push przez własny webhook adapter</li>
 <li><strong>Garage v2.2.0 na Debianie</strong> — self-hosted S3 storage (25GB)</li>
 <li><strong>Longhorn backup na Garage</strong> — automatyczne backupy wolumenów do S3</li>
 <li><strong>Loki + Promtail</strong> — centralny stack logów dla całego klastra</li>
 <li><strong>NTP synchronizacja</strong> — poprawka zegarów na workerach</li>
-</ol>
+</ul>
 <hr />
-<h2 id="czego-sie-nauczyem">Czego się nauczyłem<a class="headerlink" href="#czego-sie-nauczyem" title="Permanent link">&para;</a></h2>
 <h3 id="1-alertmanager-ntfy-przez-webhook-adapter">1. AlertManager + ntfy przez webhook adapter<a class="headerlink" href="#1-alertmanager-ntfy-przez-webhook-adapter" title="Permanent link">&para;</a></h3>
 <p><strong>Problem:</strong> AlertManager wysyła JSON, ntfy oczekuje prostego tekstu z nagłówkami HTTP. Nie ma natywnej integracji.</p>
 <p><strong>Rozwiązanie:</strong> Własny Python webhook adapter jako ConfigMap + Deployment.</p>
-<p><strong>Ważne lekcje:</strong></p>
+<p><strong>Wnioski:</strong></p>
 <ul>
 <li><code>url</code> w <code>webhook_configs</code> nie obsługuje <code>_file</code> — nie można ukryć URL przez Secret</li>
 <li>Właściwe rozwiązanie: cała konfiguracja AlertManagera jako SealedSecret</li>
@@ -2753,9 +2752,9 @@
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="s1">    &quot;generatorURL&quot;: &quot;http://localhost&quot;</span>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="s1">  }]&#39;</span>
 </span></code></pre></div>
-<p><strong>Aktywne alerty które znaleźliśmy:</strong></p>
+<p><strong>Aktywne alerty:</strong></p>
 <ul>
-<li><code>NodeClockNotSynchronising</code> — NTP nie działa (naprawione)</li>
+<li><code>NodeClockNotSynchronising</code> — NTP nie działa</li>
 <li><code>Watchdog</code> — heartbeat, powinien być zawsze aktywny ✅</li>
 <li><code>KubeAggregatedAPIDown</code> — metrics-server ma problemy</li>
 <li><code>KubeDeploymentReplicasMismatch</code> — przejściowe, samo się naprawiło</li>
@@ -2921,7 +2920,7 @@
 </span></code></pre></div>
 <hr />
 <h3 id="5-loki-promtail-stack">5. Loki + Promtail stack<a class="headerlink" href="#5-loki-promtail-stack" title="Permanent link">&para;</a></h3>
-<p><strong>Loki v6.53.0 w trybie SingleBinary</strong> — wszystko w jednym podzie, idealne dla homelaba.</p>
+<p><strong>Loki v6.53.0 w trybie SingleBinary</strong> — wszystko w jednym podzie.</p>
 <p><strong>Kluczowe ustawienia values:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">deploymentMode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SingleBinary</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
@@ -2989,7 +2988,7 @@
 </span><span id="__span-15-64"><a id="__codelineno-15-64" name="__codelineno-15-64" href="#__codelineno-15-64"></a><span class="nt">resultsCache</span><span class="p">:</span>
 </span><span id="__span-15-65"><a id="__codelineno-15-65" name="__codelineno-15-65" href="#__codelineno-15-65"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span></code></pre></div>
-<p><strong>Typowe błędy przy instalacji Loki:</strong></p>
+<p><strong>błędy przy instalacji Loki:</strong></p>
 <table>
 <thead>
 <tr>
@@ -3028,13 +3027,13 @@
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>{namespace=&quot;loki&quot;} |= &quot;error&quot;
 </span></code></pre></div>
 <hr />
-<h3 id="6-problemy-ktore-napotkalismy">6. Problemy które napotkaliśmy<a class="headerlink" href="#6-problemy-ktore-napotkalismy" title="Permanent link">&para;</a></h3>
+<h3 id="6-problemy-ktore-napotkaem">6. Problemy które napotkałem<a class="headerlink" href="#6-problemy-ktore-napotkaem" title="Permanent link">&para;</a></h3>
 <p><strong>Problem: metrics-server nie działa</strong></p>
 <ul>
 <li>metrics-server zarządzany przez k3s Addon — nie można go edytować przez Deployment (k3s nadpisuje)</li>
 <li><code>hostNetwork: true</code> koliduje z <code>--secure-port=10250</code> (port zajęty przez kubelet)</li>
-<li><strong>Decyzja:</strong> Zostawiamy — Grafana ma pełne metryki przez node-exporter, <code>kubectl top</code> nie jest krytyczne</li>
 </ul>
+<p>-&gt; Zostawiamy — Grafana ma pełne metryki przez node-exporter, <code>kubectl top</code> nie jest krytyczne</p>
 <p><strong>Problem: UFW blokuje port 9100 dla node-exporter</strong></p>
 <ul>
 <li>Prometheus z <code>hostNetwork: true</code> wychodzi z IP noda</li>
@@ -3137,7 +3136,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:46:14 UTC"><span class="timeago" datetime="2026-03-22T16:46:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:46:14 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 14:58:04 UTC"><span class="timeago" datetime="2026-04-16T14:58:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 14:58:04 UTC">2026-04-16</span>
   </span>
 
     

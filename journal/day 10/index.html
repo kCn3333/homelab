@@ -2640,10 +2640,10 @@
 
 <h1 id="10-metrics-alerts">10 - Metrics + Alerts<a class="headerlink" href="#10-metrics-alerts" title="Permanent link">&para;</a></h1>
 <h1 id="k3s-homelab-sesja-10">K3s Homelab — Sesja 10<a class="headerlink" href="#k3s-homelab-sesja-10" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-03-10<br />
+<p><strong>Data:</strong> 2026-02-10<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h2 id="co-zbudowalismy">Co zbudowaliśmy<a class="headerlink" href="#co-zbudowalismy" title="Permanent link">&para;</a></h2>
+<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>metrics-server</strong> — diagnostyka i naprawa intermittent timeouts</li>
 <li><strong>Flux image automation</strong> — upgrade v1beta2 → v1 (deprecation fix)</li>
@@ -2651,7 +2651,6 @@
 <li><strong>Custom AlertManager rules</strong> — CPU, Memory, Disk, PodCrashLoop, Longhorn</li>
 </ol>
 <hr />
-<h2 id="czego-sie-nauczyem">Czego się nauczyłem<a class="headerlink" href="#czego-sie-nauczyem" title="Permanent link">&para;</a></h2>
 <h3 id="1-debugowanie-przez-eliminacje-warstw-metrics-server">1. Debugowanie przez eliminację warstw — metrics-server<a class="headerlink" href="#1-debugowanie-przez-eliminacje-warstw-metrics-server" title="Permanent link">&para;</a></h3>
 <p><strong>Objaw:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl top nodes  → timeout ~60s lub &quot;Metrics API not available&quot;
@@ -2671,22 +2670,18 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>UFW na worker1 nie ma reguły dla 4443 → DROP → TCP timeout 60s
 </span></code></pre></div>
 <p><strong>Dlaczego <code>kubectl get --raw</code> działało?</strong> Cilium preferuje lokalny endpoint gdy źródło i cel są na tym samym hoście. Testy zawsze trafiały na lokalny pod — stąd pozorna spójność.</p>
-<p><strong>Fix — UFW:</strong></p>
+<p><strong>Rozwiązanie— UFW:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># ansible/ufw.yml</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> port</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;4443&#39;</span><span class="p p-Indicator">,</span><span class="nt"> proto</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tcp&#39;</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w">  </span><span class="c1"># metrics-server hostNetwork</span>
 </span></code></pre></div>
-<p><strong>Reguła którą warto zapamiętać:</strong> przy każdym nowym komponencie z <code>hostNetwork: true</code> zadaj pytanie:</p>
-<blockquote>
-<p><em>Na jakim porcie binduje? Czy ktokolwiek spoza tego noda musi się z nim połączyć?</em></p>
-</blockquote>
-<p><strong>Uproszczenie metrics-server:</strong> 3 repliki bez leader election dawały 3x obciążenie kubeletów bez realnego HA benefitu. Zredukowano do 1 repliki. Zmieniono też <code>metric-resolution</code> z <code>55s</code> na domyślne <code>15s</code> — przy 55s margines do 60s timeout <code>kubectl top</code> był zbyt mały.</p>
+<p><strong>Uproszczenie metrics-server:</strong> 3 repliki bez leader election dawały 3x obciążenie kubeletów bez realnego HA benefitu. Zredukowałem do 1 repliki. Zmieniono też <code>metric-resolution</code> z <code>55s</code> na domyślne <code>15s</code> — przy 55s margines do 60s timeout <code>kubectl top</code> był zbyt mały.</p>
 <hr />
 <h3 id="2-flux-image-automation-api-versioning">2. Flux image automation — API versioning<a class="headerlink" href="#2-flux-image-automation-api-versioning" title="Permanent link">&para;</a></h3>
-<p><strong>Dlaczego robimy upgrade:</strong></p>
+<p><strong>wersjonowanie:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>v1alpha1 → v1beta1 → v1beta2 → v1 (stable)
 </span></code></pre></div>
 <p><code>v1beta2</code> zostanie usunięte z przyszłych wersji Fluxa. Po upgrade Fluxa zasoby na starym API przestałyby działać.</p>
-<p><strong>Co się zmieniło:</strong> tylko <code>apiVersion</code> — spec jest identyczny. Czysta zmiana bez ryzyka.</p>
+<p><strong>Co się zmieniło:</strong> tylko <code>apiVersion</code> — spec jest identyczny.</p>
 <p><strong>Zasoby po migracji:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># ImagePolicy</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image.toolkit.fluxcd.io/v1</span><span class="w">   </span><span class="c1"># było: v1beta2</span>
@@ -2738,12 +2733,13 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Memory: zawsze Mi/Gi (nie M/G) — 256Mi, 512Mi, 1Gi, 2Gi
 </span></code></pre></div>
 <p><strong>Jak dobierać wartości:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;<span class="w">   </span><span class="c1"># obserwuj przez kilka dni w Grafanie</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># Request ≈ średnie zużycie</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Limit   ≈ 2-3x request (headroom na piki)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;<span class="w">   </span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># obserwuj przez kilka dni w Grafanie</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Request ≈ średnie zużycie</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Limit   ≈ 2-3x request (headroom na piki)</span>
 </span></code></pre></div>
 <hr />
-<h3 id="4-helm-values-gotcha-z-subchartami">4. Helm values — gotcha z subchartami<a class="headerlink" href="#4-helm-values-gotcha-z-subchartami" title="Permanent link">&para;</a></h3>
+<h3 id="4-helm-values-subcharty">4. Helm values — subcharty<a class="headerlink" href="#4-helm-values-subcharty" title="Permanent link">&para;</a></h3>
 <p>kube-prometheus-stack składa się z subchartów. Każdy subchart ma <strong>dwa klucze</strong> — wrapper kube-prometheus-stack i bezpośredni klucz subchartu:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># WRAPPER — tylko włącz/wyłącz, dashboardy</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">nodeExporter</span><span class="p">:</span>
@@ -2756,7 +2752,7 @@
 </span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10m</span>
 </span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32Mi</span>
 </span></code></pre></div>
-<p><strong>Zasada:</strong> zawsze weryfikuj nazwy kluczy przez <code>helm show values</code> — nie zgaduj:</p>
+<p><strong>Wniosek:</strong> weryfikuj nazwy kluczy przez <code>helm show values</code></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>helm<span class="w"> </span>show<span class="w"> </span>values<span class="w"> </span>prometheus-community/kube-prometheus-stack<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A20<span class="w"> </span><span class="s2">&quot;^nodeExporter:&quot;</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>helm<span class="w"> </span>show<span class="w"> </span>values<span class="w"> </span>prometheus-community/kube-prometheus-stack<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;prometheus-node-exporter&quot;</span>
 </span></code></pre></div>
@@ -3063,7 +3059,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 14:58:04 UTC"><span class="timeago" datetime="2026-04-16T14:58:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 14:58:04 UTC">2026-04-16</span>
   </span>
 
     

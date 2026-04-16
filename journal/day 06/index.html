@@ -2640,10 +2640,10 @@
 
 <h1 id="7-sealed-secrets-longhorn">7 - Sealed Secrets + Longhorn<a class="headerlink" href="#7-sealed-secrets-longhorn" title="Permanent link">&para;</a></h1>
 <h1 id="k3s-homelab-sesja-06">K3s Homelab — Sesja 06<a class="headerlink" href="#k3s-homelab-sesja-06" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-03-04<br />
+<p><strong>Data:</strong> 2026-01-23<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1</p>
 <hr />
-<h2 id="co-zbudowalismy">Co zbudowaliśmy<a class="headerlink" href="#co-zbudowalismy" title="Permanent link">&para;</a></h2>
+<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Sealed Secrets — bezpieczne przechowywanie sekretów w Git</li>
 <li>Longhorn — distributed block storage z RWX</li>
@@ -2651,15 +2651,15 @@
 <li>Traefik dashboard z BasicAuth i TLS</li>
 </ul>
 <hr />
-<h2 id="czego-sie-nauczyem">Czego się nauczyłem<a class="headerlink" href="#czego-sie-nauczyem" title="Permanent link">&para;</a></h2>
 <h3 id="1-sealed-secrets">1. Sealed Secrets<a class="headerlink" href="#1-sealed-secrets" title="Permanent link">&para;</a></h3>
-<p><strong>Problem który rozwiązuje:</strong> Kubernetes Secrets w plaintext nie mogą być bezpiecznie trzymane w Git. Sealed Secrets szyfruje je kluczem publicznym klastra — tylko klaster może je odszyfrować.</p>
-<p><strong>Jak działa:</strong></p>
+<p>Kubernetes Secrets w plaintext nie mogą być bezpiecznie trzymane w Git. Sealed Secrets szyfruje je kluczem publicznym klastra — tylko klaster może je odszyfrować.</p>
+<p><strong>Architektura:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Klucz prywatny → zostaje w klastrze (Secret w flux-system)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Klucz publiczny → pobierasz lokalnie, używasz do szyfrowania
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>SealedSecret → zaszyfrowany blob, bezpieczny w Git
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>       ↓
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Sealed Secrets controller odszyfrowuje → tworzy prawdziwy Secret
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>SealedSecret → zaszyfrowany blob, bezpieczny w Git
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>       ↓
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Sealed Secrets controller odszyfrowuje → tworzy prawdziwy Secret
 </span></code></pre></div>
 <p><strong>Instalacja przez Flux HelmRelease:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># apps/base/sealed-secrets/helmrepository.yaml</span>
@@ -2734,7 +2734,7 @@
 </ul>
 <hr />
 <h3 id="2-longhorn-distributed-block-storage">2. Longhorn — Distributed Block Storage<a class="headerlink" href="#2-longhorn-distributed-block-storage" title="Permanent link">&para;</a></h3>
-<p><strong>Co to jest:</strong> Distributed storage dla Kubernetes — tworzy repliki danych między nodami. Jeśli jeden node padnie, dane są dostępne na pozostałych.</p>
+<p>Distributed storage dla Kubernetes — tworzy repliki danych między nodami. Jeśli jeden node padnie, dane są dostępne na pozostałych.</p>
 <p><strong>Wymagania systemowe (przez Ansible):</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">open-iscsi</span><span class="w">      </span><span class="c1"># iSCSI initiator</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nfs-common</span><span class="w">      </span><span class="c1"># klient NFS (potrzebny dla RWX)</span>
@@ -3104,7 +3104,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:46:14 UTC"><span class="timeago" datetime="2026-03-22T16:46:14+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:46:14 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 14:58:04 UTC"><span class="timeago" datetime="2026-04-16T14:58:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 14:58:04 UTC">2026-04-16</span>
   </span>
 
     
