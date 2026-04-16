@@ -3205,10 +3205,12 @@
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span>--read-write-key
 </span></code></pre></div>
 <p><code>--read-write-key</code> is required for Image Automation — Flux needs write access to commit tag updates back to the repo. The default bootstrap creates a read-only deploy key.</p>
-<p>If you forgot <code>--read-write-key</code>:
-1. Delete the old key on GitHub (Settings → Deploy keys → Delete)
-2. Get the new key: <code>kubectl get secret flux-system -n flux-system -o jsonpath='{.data.identity\.pub}' | base64 -d</code>
-3. Add it on GitHub with <strong>Allow write access</strong> checked</p>
+<p>If you forgot <code>--read-write-key</code>:</p>
+<ol>
+<li>Delete the old key on GitHub (Settings → Deploy keys → Delete)</li>
+<li>Get the new key: <code>kubectl get secret flux-system -n flux-system -o jsonpath='{.data.identity\.pub}' | base64 -d</code></li>
+<li>Add it on GitHub with <strong>Allow write access</strong> checked</li>
+</ol>
 <hr />
 <h2 id="repository-structure">Repository Structure<a class="headerlink" href="#repository-structure" title="Permanent link">&para;</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>k3s-homelab/
@@ -3458,7 +3460,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 15:13:59 UTC"><span class="timeago" datetime="2026-04-16T15:13:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 15:13:59 UTC">2026-04-16</span>
   </span>
 
     
