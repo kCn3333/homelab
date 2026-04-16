@@ -187,6 +187,7 @@ helm install cert-manager jetstack/cert-manager \
 `crds.enabled=true` installs the CRDs that define the `Certificate`, `ClusterIssuer`, etc. resource types. Without these, k8s doesn't know what those objects are.
 
 cert-manager runs 3 pods:
+
 - `cert-manager` — main controller, manages certificate lifecycle
 - `cert-manager-cainjector` — injects CA into k8s webhooks
 - `cert-manager-webhook` — validates cert-manager resources on creation

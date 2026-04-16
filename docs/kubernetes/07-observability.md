@@ -292,6 +292,7 @@ rm /tmp/alertmanager.yaml
 AlertManager sends JSON payloads, but ntfy expects plain text with HTTP headers. There's no native integration — a small Python adapter runs as a Deployment and translates between the two.
 
 Key implementation details:
+
 - `User-Agent: Mozilla/5.0` header is **required** when ntfy is behind Cloudflare Tunnel (returns HTTP 1010 without it)
 - `python -u` in the container command disables stdout buffering (required for k8s logs)
 - `HTTPServer.allow_reuse_address = True` prevents `Address already in use` on pod restart
@@ -518,9 +519,7 @@ URL: `http://loki.loki.svc.cluster.local:3100`
 
 ---
 
-## Hubble UI (WIP)
-
-### What it is
+## Hubble UI
 
 Hubble is Cilium's built-in network observability layer. It provides a real-time view of all network flows in the cluster — which pods are talking to which, what's being allowed/dropped, latency, etc.
 

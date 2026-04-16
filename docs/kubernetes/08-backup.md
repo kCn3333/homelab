@@ -112,8 +112,6 @@ ssh master "sudo k3s etcd-snapshot ls"
 
 ## Garage — Self-Hosted S3
 
-### What it is
-
 Garage is a lightweight distributed S3-compatible object store written in Rust. It runs on the Debian server and serves as the S3 backend for both Longhorn volume backups and Loki log storage.
 
 It's designed exactly for homelab/small-deployment use cases — minimal resource footprint, single-node deployment with optional clustering.
