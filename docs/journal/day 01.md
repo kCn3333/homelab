@@ -2,7 +2,7 @@
 
 # K3s Homelab — Sesja 01
 
-**Data:** 2026-02-26  
+**Data:** 2026-01-20-21  
 **Środowisko:** 3x HP T630 (8GB RAM, 128GB SSD), Ubuntu Server 24.04
 
 ---

@@ -3,9 +3,18 @@
 Przygotowanie środowiska pod klaster HA k3s z embedded etcd oraz zewnętrznym Load Balancerem (HAProxy).
 
 kluczowe założenia:
+
 - control-plane HA (3 nody)
 - embedded etcd (bez zewnętrznego DB)
 - ruch przez jeden punkt wejścia (HAProxy)
+
+```
+HAProxy
+   ↓
+3× k3s server (z etcd)
+   ↓
+workload + ingress
+```
 
 ---
 
@@ -23,25 +32,12 @@ kluczowe założenia:
 - secrets management    
 - disaster recovery plan
 ---
-```
-master (server + embedded sqlite)  
-worker1  
-worker2
-```
-
-```
-HAProxy
-   ↓
-3× k3s server (z etcd)
-   ↓
-workload + ingress
-```
-
 
 ## Krok 0 — Zewnętrzny LoadBalancer
 
 Debian Server :
-[[HA k8s/HAProxy|HAProxy (TCP dla API server + HTTP dla ingress)]]
+https://github.com/kCn3333/docker-compose/tree/main/haproxy
+
 
 Dlaczego HAProxy zamiast MetalLB?
 
@@ -81,12 +77,11 @@ server \
 --tls-san 192.168.0.46  
 " sh -
 ```
-### `--cluster-init`
-→ mówi k3s:
-> tworzę nowy klaster HA z embedded etcd
-### `--tls-san 192.168.0.46`
-→ bardzo ważne  
-To IP HAProxy.
+Kluczowe flagi:
+
+`--cluster-init` → tworzy nowy klaster etcd
+
+`--tls-san` → dodaje adres HAProxy do certyfikatu API servera
 
 Bez tego kube-apiserver nie zaakceptuje połączeń przez LB.
 
@@ -96,7 +91,7 @@ Bez tego kube-apiserver nie zaakceptuje połączeń przez LB.
 
 ## Krok 4 — Dodanie drugiego control-plane
 
-Na 192.168.55.11:
+Na worker1 (192.168.55.11):
 
 ```bash
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="  
