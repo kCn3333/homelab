@@ -2,12 +2,10 @@
 
 # K3s Homelab — Sesja 01
 
-**Data:** 2026-01-20-21  
+**Data:** 2026-01-12  
 **Środowisko:** 3x HP T630 (8GB RAM, 128GB SSD), Ubuntu Server 24.04
 
 ---
-
-## Co zbudowaliśmy
 
 ### Architektura klastra
 
@@ -23,7 +21,7 @@ Wszystkie trzy nody mają role `control-plane,etcd` — każdy jest jednocześni
 
 ---
 
-## Czego się nauczyłem
+## Kluczowe wnioski:
 
 ### 1. High Availability w Kubernetes
 

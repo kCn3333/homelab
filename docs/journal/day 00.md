@@ -105,5 +105,6 @@ server \
 Dlaczego `--server` wskazuje IP pierwszego noda?
 
 Bo dołącza do istniejącego klastra etcd.
+
 - `--cluster-init` = twórz nowe etcd    
 - bez tego = dołącz do istniejącego etcd
