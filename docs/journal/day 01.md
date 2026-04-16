@@ -7,7 +7,11 @@
 
 ---
 
-### Architektura klastra
+### Cel sesji:
+
+- uruchomienie klastra k3s w trybie High Availability (3× `control-plane,etcd`)  
+- wystawienie API i ingress przez HAProxy  
+- zrozumienie zachowania klastra przy awarii noda  
 
 ```
 [PC / kubectl] → [HAProxy :6443/:6480/:6453] → [master / worker1 / worker2]
@@ -17,11 +21,7 @@
                                               [Service → Pods]
 ```
 
-Wszystkie trzy nody mają role `control-plane,etcd` — każdy jest jednocześnie masterem i członkiem klastra etcd.
-
 ---
-
-## Kluczowe wnioski:
 
 ### 1. High Availability w Kubernetes
 
