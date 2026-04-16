@@ -1,6 +1,15 @@
-# 00 - Plan
+# 00 - Planowanie
 
-Plan docelowy:
+Przygotowanie środowiska pod klaster HA k3s z embedded etcd oraz zewnętrznym Load Balancerem (HAProxy).
+
+kluczowe założenia:
+- control-plane HA (3 nody)
+- embedded etcd (bez zewnętrznego DB)
+- ruch przez jeden punkt wejścia (HAProxy)
+
+---
+
+## Plan docelowy
 - HA control plane    
 - persistent storage z replikacją    
 - backup etcd    
@@ -29,10 +38,16 @@ workload + ingress
 ```
 
 
-## Krok 0  — Zewnętrzny LoadBalancer
+## Krok 0 — Zewnętrzny LoadBalancer
 
 Debian Server :
 [[HA k8s/HAProxy|HAProxy (TCP dla API server + HTTP dla ingress)]]
+
+Dlaczego HAProxy zamiast MetalLB?
+
+- działa jako L4/L7 proxy
+- daje pełną kontrolę nad routingiem
+- lepszy do nauki niż "magiczny" LB
 
 ## Krok 1 — Wyłączenie klastra
 
@@ -44,10 +59,7 @@ Na workerach:
 
 `sudo /usr/local/bin/k3s-agent-uninstall.sh`
 
-Dlaczego?
-
-Bo k3s HA musi być inicjalizowany jako pierwszy node etcd.  
-Nie możemy „nadpisać” istniejącej instalacji.
+Klaster HA w k3s musi być inicjalizowany od pierwszego noda z --cluster-init, ponieważ to on tworzy początkowy stan etcd. Próba nadpisania istniejącej instalacji kończy się niespójnym stanem danych.
 
 Sprawdź:
 
@@ -78,7 +90,7 @@ To IP HAProxy.
 
 Bez tego kube-apiserver nie zaakceptuje połączeń przez LB.
 
-## Krok 3 — Pobierz token klastra
+## Krok 3 — Pobranie token klastra
 
 `sudo cat /var/lib/rancher/k3s/server/node-token`
 
@@ -100,7 +112,3 @@ Dlaczego `--server` wskazuje IP pierwszego noda?
 Bo dołącza do istniejącego klastra etcd.
 - `--cluster-init` = twórz nowe etcd    
 - bez tego = dołącz do istniejącego etcd
-
-
-
-
