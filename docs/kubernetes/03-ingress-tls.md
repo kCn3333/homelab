@@ -75,7 +75,7 @@ htpasswd -nb admin your-password
 # Output: admin:$apr1$xxxxx$yyyyyyy
 ```
 
-Store the hash as a SealedSecret (see [security/sealed-secrets.md](../06-security.md)).
+Store the hash as a SealedSecret (see [security/sealed-secrets.md](../06-security.md#sealed-secrets)).
 
 **Middleware:**
 ```yaml

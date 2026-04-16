@@ -182,7 +182,7 @@ initContainers:
 
 ## Longhorn S3 Backup
 
-See [backup/longhorn-s3.md](../08-backup.md) for setting up automated volume backups to Garage (self-hosted S3).
+See [backup/longhorn-s3.md](../08-backup.md#longhorn-volume-backups) for setting up automated volume backups to Garage (self-hosted S3).
 
 ---
 
