@@ -25,7 +25,7 @@
     
     
       
-        <title>00 - Plan - > Homelab Documentation</title>
+        <title>00 - Planowanie - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#00-plan" class="md-skip">
+        <a href="#00-planowanie" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              00 - Plan
+              00 - Planowanie
             
           </span>
         </div>
@@ -1192,7 +1192,7 @@
   <span class="md-ellipsis">
     
   
-    00 - Plan
+    00 - Planowanie
   
 
     
@@ -1210,7 +1210,7 @@
   <span class="md-ellipsis">
     
   
-    00 - Plan
+    00 - Planowanie
   
 
     
@@ -1234,6 +1234,17 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#plan-docelowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan docelowy
+      
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#krok-0-zewnetrzny-loadbalancer" class="md-nav__link">
@@ -1297,10 +1308,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#krok-3-pobierz-token-klastra" class="md-nav__link">
+  <a href="#krok-3-pobranie-token-klastra" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Krok 3 — Pobierz token klastra
+        Krok 3 — Pobranie token klastra
       
     </span>
   </a>
@@ -2739,6 +2750,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#plan-docelowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan docelowy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#krok-0-zewnetrzny-loadbalancer" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2800,10 +2822,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#krok-3-pobierz-token-klastra" class="md-nav__link">
+  <a href="#krok-3-pobranie-token-klastra" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Krok 3 — Pobierz token klastra
+        Krok 3 — Pobranie token klastra
       
     </span>
   </a>
@@ -2849,20 +2871,28 @@
   
 
 
-<h1 id="00-plan">00 - Plan<a class="headerlink" href="#00-plan" title="Permanent link">&para;</a></h1>
-<p>Plan docelowy:
-- HA control plane  <br />
-- persistent storage z replikacją  <br />
-- backup etcd  <br />
-- monitoring control plane  <br />
-- alerting  <br />
-- log aggregation  <br />
-- ingress z TLS  <br />
-- GitOps  <br />
-- sieć z politykami (NetworkPolicies)  <br />
-- RBAC sensownie skonfigurowany  <br />
-- secrets management  <br />
-- disaster recovery plan</p>
+<h1 id="00-planowanie">00 - Planowanie<a class="headerlink" href="#00-planowanie" title="Permanent link">&para;</a></h1>
+<p>Przygotowanie środowiska pod klaster HA k3s z embedded etcd oraz zewnętrznym Load Balancerem (HAProxy).</p>
+<p>kluczowe założenia:
+- control-plane HA (3 nody)
+- embedded etcd (bez zewnętrznego DB)
+- ruch przez jeden punkt wejścia (HAProxy)</p>
+<hr />
+<h2 id="plan-docelowy">Plan docelowy<a class="headerlink" href="#plan-docelowy" title="Permanent link">&para;</a></h2>
+<ul>
+<li>HA control plane    </li>
+<li>persistent storage z replikacją    </li>
+<li>backup etcd    </li>
+<li>monitoring control plane    </li>
+<li>alerting    </li>
+<li>log aggregation    </li>
+<li>ingress z TLS    </li>
+<li>GitOps    </li>
+<li>sieć z politykami (NetworkPolicies)    </li>
+<li>RBAC sensownie skonfigurowany    </li>
+<li>secrets management    </li>
+<li>disaster recovery plan</li>
+</ul>
 <hr />
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>master (server + embedded sqlite)  
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>worker1  
@@ -2874,17 +2904,21 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   ↓
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>workload + ingress
 </span></code></pre></div>
-<h2 id="krok-0-zewnetrzny-loadbalancer">Krok 0  — Zewnętrzny LoadBalancer<a class="headerlink" href="#krok-0-zewnetrzny-loadbalancer" title="Permanent link">&para;</a></h2>
+<h2 id="krok-0-zewnetrzny-loadbalancer">Krok 0 — Zewnętrzny LoadBalancer<a class="headerlink" href="#krok-0-zewnetrzny-loadbalancer" title="Permanent link">&para;</a></h2>
 <p>Debian Server :
 [[HA k8s/HAProxy|HAProxy (TCP dla API server + HTTP dla ingress)]]</p>
+<p>Dlaczego HAProxy zamiast MetalLB?</p>
+<ul>
+<li>działa jako L4/L7 proxy</li>
+<li>daje pełną kontrolę nad routingiem</li>
+<li>lepszy do nauki niż "magiczny" LB</li>
+</ul>
 <h2 id="krok-1-wyaczenie-klastra">Krok 1 — Wyłączenie klastra<a class="headerlink" href="#krok-1-wyaczenie-klastra" title="Permanent link">&para;</a></h2>
 <p>Na wszystkich 3 nodach:</p>
 <p><code>sudo /usr/local/bin/k3s-uninstall.sh</code></p>
 <p>Na workerach:</p>
 <p><code>sudo /usr/local/bin/k3s-agent-uninstall.sh</code></p>
-<p>Dlaczego?</p>
-<p>Bo k3s HA musi być inicjalizowany jako pierwszy node etcd.<br />
-Nie możemy „nadpisać” istniejącej instalacji.</p>
+<p>Klaster HA w k3s musi być inicjalizowany od pierwszego noda z --cluster-init, ponieważ to on tworzy początkowy stan etcd. Próba nadpisania istniejącej instalacji kończy się niespójnym stanem danych.</p>
 <p>Sprawdź:</p>
 <p><code>ls /var/lib/rancher</code></p>
 <p>Jeśli coś zostało:</p>
@@ -2906,7 +2940,7 @@ Nie możemy „nadpisać” istniejącej instalacji.</p>
 <p>→ bardzo ważne<br />
 To IP HAProxy.</p>
 <p>Bez tego kube-apiserver nie zaakceptuje połączeń przez LB.</p>
-<h2 id="krok-3-pobierz-token-klastra">Krok 3 — Pobierz token klastra<a class="headerlink" href="#krok-3-pobierz-token-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="krok-3-pobranie-token-klastra">Krok 3 — Pobranie token klastra<a class="headerlink" href="#krok-3-pobranie-token-klastra" title="Permanent link">&para;</a></h2>
 <p><code>sudo cat /var/lib/rancher/k3s/server/node-token</code></p>
 <h2 id="krok-4-dodanie-drugiego-control-plane">Krok 4 — Dodanie drugiego control-plane<a class="headerlink" href="#krok-4-dodanie-drugiego-control-plane" title="Permanent link">&para;</a></h2>
 <p>Na 192.168.55.11:</p>
@@ -2943,7 +2977,7 @@ To IP HAProxy.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:44:28 UTC"><span class="timeago" datetime="2026-03-22T16:44:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:44:28 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 10:27:52 UTC"><span class="timeago" datetime="2026-04-16T10:27:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 10:27:52 UTC">2026-04-16</span>
   </span>
 
     
