@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 02
 
-**Data:** 2026-02-27  
+**Data:** 2026-01-13  
 **Środowisko:** 3x HP T630, k3s v1.34.4, HAProxy, Traefik
 
 ---
 
-## Co zbudowaliśmy
+## Cel sesji:
 
 Działający HTTPS z prawdziwym certyfikatem Let's Encrypt na lokalnym klastrze bez wystawiania go na świat:
 
@@ -20,17 +20,13 @@ Użytkownik → HAProxy:6453 (tcp/passthrough) → Traefik:443 → Pod
 
 ---
 
-## Czego się nauczyłem
-
 ### 1. Helm — menedżer pakietów dla Kubernetes
-
-**Czym jest Helm:**
 
 - `kubectl apply -f` to jednorazowe "wrzuć do klastra" bez śledzenia stanu
 - Helm **zarządza cyklem życia** — wie co zainstalował, może upgrade'ować, rollback'ować i odinstalować jako całość jedną komendą
 - Paczka w Helmie to **chart** — zawiera szablony manifestów + domyślne `values.yaml`
 
-**Workflow z Helmem — zawsze trzy kroki:**
+**Workflow z Helmem:**
 
 ```bash
 # 1. Dodaj repozytorium
