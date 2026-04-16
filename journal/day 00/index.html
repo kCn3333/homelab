@@ -1277,34 +1277,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Krok 2 — Pierwszy control-plane (inicjalizacja etcd)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-cluster-init" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        --cluster-init
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-tls-san-192168046" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        --tls-san 192.168.0.46
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2791,34 +2763,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Krok 2 — Pierwszy control-plane (inicjalizacja etcd)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-cluster-init" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        --cluster-init
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-tls-san-192168046" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        --tls-san 192.168.0.46
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2873,10 +2817,18 @@
 
 <h1 id="00-planowanie">00 - Planowanie<a class="headerlink" href="#00-planowanie" title="Permanent link">&para;</a></h1>
 <p>Przygotowanie środowiska pod klaster HA k3s z embedded etcd oraz zewnętrznym Load Balancerem (HAProxy).</p>
-<p>kluczowe założenia:
-- control-plane HA (3 nody)
-- embedded etcd (bez zewnętrznego DB)
-- ruch przez jeden punkt wejścia (HAProxy)</p>
+<p>kluczowe założenia:</p>
+<ul>
+<li>control-plane HA (3 nody)</li>
+<li>embedded etcd (bez zewnętrznego DB)</li>
+<li>ruch przez jeden punkt wejścia (HAProxy)</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>HAProxy
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   ↓
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>3× k3s server (z etcd)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>   ↓
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>workload + ingress
+</span></code></pre></div>
 <hr />
 <h2 id="plan-docelowy">Plan docelowy<a class="headerlink" href="#plan-docelowy" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2894,19 +2846,9 @@
 <li>disaster recovery plan</li>
 </ul>
 <hr />
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>master (server + embedded sqlite)  
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>worker1  
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>worker2
-</span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>HAProxy
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>   ↓
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>3× k3s server (z etcd)
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   ↓
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>workload + ingress
-</span></code></pre></div>
 <h2 id="krok-0-zewnetrzny-loadbalancer">Krok 0 — Zewnętrzny LoadBalancer<a class="headerlink" href="#krok-0-zewnetrzny-loadbalancer" title="Permanent link">&para;</a></h2>
 <p>Debian Server :
-[[HA k8s/HAProxy|HAProxy (TCP dla API server + HTTP dla ingress)]]</p>
+<a href="https://github.com/kCn3333/docker-compose/tree/main/haproxy">https://github.com/kCn3333/docker-compose/tree/main/haproxy</a></p>
 <p>Dlaczego HAProxy zamiast MetalLB?</p>
 <ul>
 <li>działa jako L4/L7 proxy</li>
@@ -2925,31 +2867,26 @@
 <p><code>sudo rm -rf /var/lib/rancher</code></p>
 <h2 id="krok-2-pierwszy-control-plane-inicjalizacja-etcd">Krok 2 — Pierwszy control-plane (inicjalizacja etcd)<a class="headerlink" href="#krok-2-pierwszy-control-plane-inicjalizacja-etcd" title="Permanent link">&para;</a></h2>
 <p>Na 192.168.55.10:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&quot;  </span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s2">server \  </span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s2">--cluster-init \  </span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s2">--tls-san 192.168.0.46  </span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&quot;  </span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="s2">server \  </span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="s2">--cluster-init \  </span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="s2">--tls-san 192.168.0.46  </span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-
 </span></code></pre></div>
-<h3 id="-cluster-init"><code>--cluster-init</code><a class="headerlink" href="#-cluster-init" title="Permanent link">&para;</a></h3>
-<p>→ mówi k3s:</p>
-<blockquote>
-<p>tworzę nowy klaster HA z embedded etcd</p>
-</blockquote>
-<h3 id="-tls-san-192168046"><code>--tls-san 192.168.0.46</code><a class="headerlink" href="#-tls-san-192168046" title="Permanent link">&para;</a></h3>
-<p>→ bardzo ważne<br />
-To IP HAProxy.</p>
+Kluczowe flagi:</p>
+<p><code>--cluster-init</code> → tworzy nowy klaster etcd</p>
+<p><code>--tls-san</code> → dodaje adres HAProxy do certyfikatu API servera</p>
 <p>Bez tego kube-apiserver nie zaakceptuje połączeń przez LB.</p>
 <h2 id="krok-3-pobranie-token-klastra">Krok 3 — Pobranie token klastra<a class="headerlink" href="#krok-3-pobranie-token-klastra" title="Permanent link">&para;</a></h2>
 <p><code>sudo cat /var/lib/rancher/k3s/server/node-token</code></p>
 <h2 id="krok-4-dodanie-drugiego-control-plane">Krok 4 — Dodanie drugiego control-plane<a class="headerlink" href="#krok-4-dodanie-drugiego-control-plane" title="Permanent link">&para;</a></h2>
-<p>Na 192.168.55.11:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&quot;  </span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="s2">server \  </span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="s2">--server https://192.168.55.10:6443 \  </span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="s2">--token &lt;TOKEN&gt; \  </span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s2">--tls-san 192.168.0.46  </span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-
+<p>Na worker1 (192.168.55.11):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&quot;  </span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s2">server \  </span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s2">--server https://192.168.55.10:6443 \  </span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s2">--token &lt;TOKEN&gt; \  </span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s2">--tls-san 192.168.0.46  </span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="s2">&quot;</span><span class="w"> </span>sh<span class="w"> </span>-
 </span></code></pre></div>
 <p>Dlaczego <code>--server</code> wskazuje IP pierwszego noda?</p>
 <p>Bo dołącza do istniejącego klastra etcd.
@@ -2977,7 +2914,7 @@ To IP HAProxy.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 10:27:52 UTC"><span class="timeago" datetime="2026-04-16T10:27:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 10:27:52 UTC">2026-04-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 10:56:00 UTC"><span class="timeago" datetime="2026-04-16T10:56:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 10:56:00 UTC">2026-04-16</span>
   </span>
 
     
