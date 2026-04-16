@@ -2,26 +2,16 @@
 
 # K3s Homelab — Sesja 14 (Hubble debugging marathon)
 
-**Daty:** 2026-03-14, 2026-03-15, 2026-03-16  
+**Daty:** 2026-02-20
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1 (VXLAN)
 
 ---
 
-## Co próbowaliśmy zrobić
+### Cel sesji:
 
 Uruchomić Hubble UI — wbudowany w Cilium system observability sieci.
 
-## Czego NIE udało się zrobić
-
-Hubble relay nadal nie działa. Klaster był kilkukrotnie destabilizowany.
-
-## Stan końcowy
-
-Klaster stabilny, wszystko działa **oprócz Hubble relay**. Konfiguracja Cilium: VXLAN, `kubeProxyReplacement: false`, kube-proxy k3s włączony.
-
 ---
-
-## Root cause problemu z Hubble
 
 ### Architektura Hubble
 
@@ -32,6 +22,7 @@ Hubble Relay pod (IP z puli podów, np. 10.0.0.x)
         ↑
 Hubble UI
 ```
+### Root cause problemu z Hubble
 
 ### Dlaczego relay nie działa z VXLAN
 
@@ -44,19 +35,19 @@ relay pod (10.0.0.x) → SYN → 192.168.55.11:4244
 Master widzi SYN na lxc interface ← ale nigdy nie wychodzi przez enp1s0
 ```
 
-### Dlaczego hostNetwork nie wchodzi w grę
+### hostNetwork
 
-Cilium Helm chart nie ma opcji `hostNetwork` dla relay — nie jest to wspierana konfiguracja. Próba przez `postRenderers` w HelmRelease byłaby obejściem niezgodnym z zamierzeniem projektu.
+Cilium Helm chart nie ma opcji `hostNetwork` dla relay — nie jest to wspierana konfiguracja. 
 
 ---
 
-## Co próbowaliśmy (chronologicznie)
+## Podjęte próby:
 
 ### 1. Usunięcie i regeneracja certyfikatów TLS Hubble
 
 **Wynik:** Certyfikaty się zregenerowały. Problem nie był w certach — TLS handshake działał poprawnie.
 
-**Lekcja:** Zawsze sprawdź czy problem jest sieciowy czy TLS zanim zaczniesz grzebać w certach. `openssl s_client` z node→node pokazał że TLS działa.
+**Wniosek:** Zawsze sprawdź czy problem jest sieciowy czy TLS zanim zaczniesz grzebać w certach. `openssl s_client` z node→node pokazał że TLS działa.
 
 ### 2. Dodanie `hubble.tls.auto.method: helm` do HelmRelease
 
@@ -70,19 +61,19 @@ Cilium Helm chart nie ma opcji `hostNetwork` dla relay — nie jest to wspierana
 
 **Wynik:** Klaster niestabilny. `kubeProxyReplacement: true` bez `routingMode: native` powoduje niespójny stan — Cilium próbuje przejąć obsługę serwisów ale nie ma pełnego native routing.
 
-**Lekcja:** `kubeProxyReplacement: true` i `routingMode: native` muszą być włączone **razem**.
+**Wniosek:** `kubeProxyReplacement: true` i `routingMode: native` muszą być włączone **razem**.
 
 ### 5. Próba przejścia na native routing na żywym klastrze (rolling update)
 
 **Wynik:** Katastrofa. Podczas rolling update Cilium DaemonSet jeden node miał native routing a pozostałe VXLAN → ruch sieciowy się posypał → SSH przestało działać → klaster niedostępny.
 
-**Lekcja:** **Zmiana routing mode Cilium wymaga pełnego restartu klastra.** Rolling update DaemonSet nie jest bezpieczny przy zmianie fundamentalnych parametrów CNI.
+**Wniosek:** **Zmiana routing mode Cilium wymaga pełnego restartu klastra.** Rolling update DaemonSet nie jest bezpieczny przy zmianie fundamentalnych parametrów CNI.
 
 ### 6. `--disable-kube-proxy` w k3s.service
 
 **Efekt:** Dodane podczas próby przejścia na native routing. Po cofnięciu Cilium do VXLAN z `kubeProxyReplacement: false` — nikt nie obsługiwał ClusterIP ani NodePort. Klaster działał "od wewnątrz" ale żaden zewnętrzny ruch nie docierał (Traefik, Grafana, wszystkie Ingress przestały działać).
 
-**Lekcja:** `--disable-kube-proxy` ma sens TYLKO gdy `kubeProxyReplacement: true` i Cilium jest w trybie native routing.
+**Wniosek:** `--disable-kube-proxy` ma sens TYLKO gdy `kubeProxyReplacement: true` i Cilium jest w trybie native routing.
 
 ### 7. Próby naprawy ConfigMap ręcznie przez kubectl patch
 
@@ -118,7 +109,7 @@ ipv4NativeRoutingCIDR: "10.0.0.0/8"
 '--disable-kube-proxy'
 ```
 
-Wymagania: wszystkie nody w tej samej podsieci L2 (spełnione — `192.168.55.0/24`).
+Wymagania: wszystkie nody w tej samej podsieci L2 (`192.168.55.0/24`).
 
 ### Bezpieczny sposób zmiany routing mode
 
@@ -134,7 +125,7 @@ Przy jednoczesnym usunięciu wszystkich podów — wszystkie nody tracą CNI jed
 
 ---
 
-## Stan klastru po sesjach
+## Stan klastra
 
 **Działa:**
 
@@ -184,9 +175,14 @@ values:
 
 ---
 
-## Plan na przyszłość — przejście na native routing
+## Stan końcowy
 
-Zrobić w osobnej sesji, ze świeżą głową:
+Hubble relay nadal nie działa. Klaster był kilkukrotnie destabilizowany.
+
+Klaster stabilny, wszystko działa **oprócz Hubble relay**. Konfiguracja Cilium: VXLAN, `kubeProxyReplacement: false`, kube-proxy k3s włączony.
+
+
+## Plan na przyszłość — przejście na native routing (?)
 
 1. Zaktualizuj HelmRelease Cilium z pełną konfiguracją native
 2. Graceful shutdown klastra

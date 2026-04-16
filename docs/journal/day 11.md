@@ -2,20 +2,18 @@
 
 # K3s Homelab — Sesja 11
 
-**Data:** 2026-03-11  
+**Data:** 2026-02-12  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 1. **GitHub Actions CI/CD pipeline** — automatyczny build i push do DockerHub z semver tagowaniem
 2. **clients-api deployment** — Spring Boot + CloudNativePG na klastrze przez GitOps
 3. **ServiceMonitor** — integracja z Prometheus, metryki aplikacji widoczne w Grafanie
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. GitHub Actions — semver tagging
 
@@ -144,11 +142,6 @@ env:
 1. **Label na Service metadata** (nie tylko spec.selector!) — Prometheus relabeling sprawdza `__meta_kubernetes_service_label_<label>`:
 
 ```yaml
-# ŹLE — brak labela w metadata
-metadata:
-  name: clients-api
-
-# DOBRZE
 metadata:
   name: clients-api
   labels:

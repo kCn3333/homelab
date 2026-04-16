@@ -2,12 +2,11 @@
 
 # K3s Homelab — Sesja 17 (Progressive Delivery)
 
-**Data:** 2026-03-21  
+**Data:** 2026-03-11  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1
 
 ---
-
-## Co zbudowaliśmy
+### Cel sesji:
 
 Pełny pipeline progressive delivery z trzema środowiskami i różnymi triggerami deploy:
 
@@ -16,8 +15,6 @@ git tag v*  →  dev (auto)  →  staging (auto)  →  prod (PR review)
 ```
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. Progressive Delivery — koncepcja
 
@@ -68,7 +65,7 @@ spec:
     name: flux-system  # ← ten sam deploy key co główny flux-system
 ```
 
-**Lekcja:** URL musi być SSH (`ssh://git@github.com/...`) — deploy key w `flux-system` secret jest kluczem SSH i nie działa z HTTPS URL.
+**Wniosek:** URL musi być SSH (`ssh://git@github.com/...`) — deploy key w `flux-system` secret jest kluczem SSH i nie działa z HTTPS URL.
 
 ### 4. Osobne ImagePolicy per środowisko
 
@@ -161,7 +158,7 @@ git push origin release/1.5.4
 # 6. Merge → Flux automatycznie deployuje na prod
 ```
 
-**PR description template (profesjonalny standard):**
+**PR description template:**
 
 ```
 ## Release 1.5.4
@@ -234,7 +231,7 @@ k3s-homelab/
 |CPU limit|1000m|1000m|2000m|
 |livenessProbe delay|120s|120s|60s|
 
-### 10. Problemy napotkane
+### 10. Napotkane problemy 
 
 **`authentication required: No anonymous write access`**
 
@@ -272,7 +269,7 @@ kubectl get imageupdateautomation -n flux-system
 
 ## Backlog
 
-- [ ] Hubble UI — native routing migration (planned)
+- [ ] Hubble UI — native routing migration (?)
 - [ ] HashiCorp Vault
 - [ ] External-dns
 - [ ] RBAC

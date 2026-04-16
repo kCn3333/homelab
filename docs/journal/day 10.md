@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 10
 
-**Data:** 2026-03-10  
+**Data:** 2026-02-10  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 1. **metrics-server** — diagnostyka i naprawa intermittent timeouts
 2. **Flux image automation** — upgrade v1beta2 → v1 (deprecation fix)
@@ -15,8 +15,6 @@
 4. **Custom AlertManager rules** — CPU, Memory, Disk, PodCrashLoop, Longhorn
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. Debugowanie przez eliminację warstw — metrics-server
 
@@ -45,24 +43,20 @@ UFW na worker1 nie ma reguły dla 4443 → DROP → TCP timeout 60s
 
 **Dlaczego `kubectl get --raw` działało?** Cilium preferuje lokalny endpoint gdy źródło i cel są na tym samym hoście. Testy zawsze trafiały na lokalny pod — stąd pozorna spójność.
 
-**Fix — UFW:**
+**Rozwiązanie— UFW:**
 
 ```yaml
 # ansible/ufw.yml
 - { port: '4443', proto: 'tcp' }  # metrics-server hostNetwork
 ```
 
-**Reguła którą warto zapamiętać:** przy każdym nowym komponencie z `hostNetwork: true` zadaj pytanie:
-
-> _Na jakim porcie binduje? Czy ktokolwiek spoza tego noda musi się z nim połączyć?_
-
-**Uproszczenie metrics-server:** 3 repliki bez leader election dawały 3x obciążenie kubeletów bez realnego HA benefitu. Zredukowano do 1 repliki. Zmieniono też `metric-resolution` z `55s` na domyślne `15s` — przy 55s margines do 60s timeout `kubectl top` był zbyt mały.
+**Uproszczenie metrics-server:** 3 repliki bez leader election dawały 3x obciążenie kubeletów bez realnego HA benefitu. Zredukowałem do 1 repliki. Zmieniono też `metric-resolution` z `55s` na domyślne `15s` — przy 55s margines do 60s timeout `kubectl top` był zbyt mały.
 
 ---
 
 ### 2. Flux image automation — API versioning
 
-**Dlaczego robimy upgrade:**
+**wersjonowanie:**
 
 ```
 v1alpha1 → v1beta1 → v1beta2 → v1 (stable)
@@ -70,7 +64,7 @@ v1alpha1 → v1beta1 → v1beta2 → v1 (stable)
 
 `v1beta2` zostanie usunięte z przyszłych wersji Fluxa. Po upgrade Fluxa zasoby na starym API przestałyby działać.
 
-**Co się zmieniło:** tylko `apiVersion` — spec jest identyczny. Czysta zmiana bez ryzyka.
+**Co się zmieniło:** tylko `apiVersion` — spec jest identyczny.
 
 **Zasoby po migracji:**
 
@@ -145,14 +139,15 @@ Memory: zawsze Mi/Gi (nie M/G) — 256Mi, 512Mi, 1Gi, 2Gi
 **Jak dobierać wartości:**
 
 ```bash
-kubectl top pods -n <namespace>   # obserwuj przez kilka dni w Grafanie
+kubectl top pods -n <namespace>   
+# obserwuj przez kilka dni w Grafanie
 # Request ≈ średnie zużycie
 # Limit   ≈ 2-3x request (headroom na piki)
 ```
 
 ---
 
-### 4. Helm values — gotcha z subchartami
+### 4. Helm values — subcharty
 
 kube-prometheus-stack składa się z subchartów. Każdy subchart ma **dwa klucze** — wrapper kube-prometheus-stack i bezpośredni klucz subchartu:
 
@@ -169,7 +164,7 @@ prometheus-node-exporter:    # ← nazwa z myślnikiem!
       memory: 32Mi
 ```
 
-**Zasada:** zawsze weryfikuj nazwy kluczy przez `helm show values` — nie zgaduj:
+**Wniosek:** weryfikuj nazwy kluczy przez `helm show values`
 
 ```bash
 helm show values prometheus-community/kube-prometheus-stack | grep -A20 "^nodeExporter:"

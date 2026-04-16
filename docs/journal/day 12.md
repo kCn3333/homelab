@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 12
 
-**Data:** 2026-03-12  
+**Data:** 2026-02-15  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 1. **HTTP request logging** — CommonsRequestLoggingFilter w Spring Boot
 2. **Grafana dashboard** — Request Rate, Error Rate, p99 Latency, JVM Heap, DB Connection Pool, Loki logs
@@ -17,7 +17,6 @@
 
 ---
 
-## Czego się nauczyłem
 
 ### 1. HTTP Request Logging w Spring Boot
 
@@ -186,7 +185,7 @@ CPU limit przekroczony → throttling (spowolnienie, nie zabicie)
 Memory limit przekroczony → OOMKilled (natychmiastowe zabicie)
 ```
 
-**Lekcja:** JVM pod obciążeniem potrzebuje headroom powyżej requests. Limit `500m` był za mały — JVM był throttlowany przy każdym request.
+**Wniosek:** JVM pod obciążeniem potrzebuje headroom powyżej requests. Limit `500m` był za mały — JVM był throttlowany przy każdym request.
 
 ```yaml
 # Przed — za mały limit
@@ -303,7 +302,7 @@ spec:
 ```
 HP T630 (3 nody) ma fizyczne ograniczenie CPU
 20 replik JVM → saturacja wszystkich nodów → paradoksalnie gorsze wyniki
-Optymum dla homelaba → 4-6 replik
+Optymum → 4-6 replik
 ```
 
 ---

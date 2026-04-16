@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 13
 
-**Data:** 2026-03-13  
+**Data:** 2026-02-18  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 1. **AlertManager — wyciszenie InfoInhibitor** — null receiver dla szumów przy starcie klastra
 2. **PrometheusRule dla clients-api** — 3 własne alerty aplikacyjne
@@ -16,8 +16,6 @@
 5. **Naprawka UFW** — port 4240 (Cilium health), 4244 (Hubble), CIDR `/8` zamiast `/16`
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. AlertManager — null receiver (wyciszanie szumów)
 
@@ -40,7 +38,7 @@ receivers:
   - name: "null"                # pusty receiver — porzuca alerty
 ```
 
-**Ważna zasada:** AlertManager stosuje **pierwszy pasujący route**. `null` musi być wyżej niż domyślny `ntfy`.
+**Wniosek:** AlertManager stosuje **pierwszy pasujący route**. `null` musi być wyżej niż domyślny `ntfy`.
 
 **Weryfikacja:**
 
@@ -207,7 +205,7 @@ maxUnavailable: 1 → maksymalnie 1 pod może być NIEDOSTĘPNY jednocześnie
 
 ---
 
-### 4. Hubble UI — architektura i debugging (WIP)
+### 4. Hubble UI 
 
 **Architektura:**
 
@@ -226,7 +224,7 @@ Hubble UI → https://hubble.cluster.kcn333.com
 |4244|TCP|Hubble gRPC (relay → agent)|
 |4240|TCP|Cilium cluster health checks|
 
-**Root causes napotkane dziś:**
+**Problemy:**
 
 1. UFW blokował port 4244 → `No connection to peer`
 2. UFW blokował port 4240 → `Cluster health: 1/3 reachable`
@@ -235,7 +233,7 @@ Hubble UI → https://hubble.cluster.kcn333.com
 
 **Po naprawach:** `Cluster health: 3/3 reachable` ✅ ale relay nadal niestabilny przez niespójne certyfikaty — wymaga reinstalacji Cilium.
 
-**Lekcja:** Nigdy nie przełączaj TLS Cilium w działającym klastrze bez pełnego restartu — zostawia niespójny stan wewnętrznych certyfikatów.
+**Wniosek:** Nigdy nie przełączaj TLS Cilium w działającym klastrze bez pełnego restartu — zostawia niespójny stan wewnętrznych certyfikatów.
 
 **Aktualny stan HelmRelease Cilium:**
 
@@ -264,7 +262,7 @@ values:
 
 ---
 
-### 5. UFW — co dodaliśmy dziś
+### 5. UFW — aktualizacja
 
 ```yaml
 # Cilium health checks między nodami
@@ -297,7 +295,7 @@ kubectl get configmap -n kube-system cilium-config -o yaml | grep cluster-pool-i
 
 ## Backlog (do zrobienia)
 
-- [ ] **Hubble UI** — reinstalacja Cilium (helm uninstall + reinstall przez Flux) ← następna sesja
+- [ ] **Hubble UI** — reinstalacja Cilium (helm uninstall + reinstall przez Flux) 
 - [ ] PrometheusRule — dodatkowe alerty (high CPU/RAM)
 - [ ] Grafana dashboard — zapis jako ConfigMap w Git
 - [ ] Progressive delivery (staging/production branches)

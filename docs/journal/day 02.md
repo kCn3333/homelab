@@ -6,10 +6,11 @@
 **Środowisko:** 3x HP T630, k3s v1.34.4, HAProxy, Traefik
 
 ---
+### Cel sesji:
 
-## Cel sesji:
-
-Działający HTTPS z prawdziwym certyfikatem Let's Encrypt na lokalnym klastrze bez wystawiania go na świat:
+- uzyskanie ważnych certyfikatów TLS (Let's Encrypt)
+- brak wystawiania klastra do internetu
+- automatyczna rotacja certyfikatów (cert-manager)
 
 ```
 Użytkownik → HAProxy:6453 (tcp/passthrough) → Traefik:443 → Pod
@@ -20,17 +21,19 @@ Użytkownik → HAProxy:6453 (tcp/passthrough) → Traefik:443 → Pod
 
 ---
 
-### 1. Helm — menedżer pakietów dla Kubernetes
+### 1. Instalacja cert-manager (Helm)
 
-- `kubectl apply -f` to jednorazowe "wrzuć do klastra" bez śledzenia stanu
-- Helm **zarządza cyklem życia** — wie co zainstalował, może upgrade'ować, rollback'ować i odinstalować jako całość jedną komendą
-- Paczka w Helmie to **chart** — zawiera szablony manifestów + domyślne `values.yaml`
+**Helm**
+- zarządza cyklem życia (install / upgrade / rollback)
+- pozwala łatwo zmieniać konfigurację (values.yaml)
+- standard w ekosystemie Kubernetes
 
 **Workflow z Helmem:**
 
 ```bash
 # 1. Dodaj repozytorium
 helm repo add jetstack https://charts.jetstack.io
+helm repo update
 
 # 2. Przejrzyj dostępne opcje konfiguracji
 helm show values jetstack/cert-manager | grep -i crd
@@ -44,9 +47,8 @@ helm install cert-manager jetstack/cert-manager \
 
 **Ważne flagi:**
 
-- `--create-namespace` — tworzy namespace jeśli nie istnieje (nie musisz robić `kubectl create ns` osobno)
+- `--create-namespace` — tworzy namespace jeśli nie istnieje 
 - `--set klucz=wartość` — nadpisuje wartość z `values.yaml`
-- Format charta: `nazwa-repo/nazwa-charta`
 
 **CRD (CustomResourceDefinition):**
 
@@ -82,7 +84,7 @@ helm install cert-manager jetstack/cert-manager \
 |Użycie|Certyfikaty tylko w tym samym namespace|Certyfikaty dla dowolnego namespace|
 |Kiedy używać|Izolacja per-team/per-app|Współdzielony CA dla całego klastra|
 
-**Dla homelaba:** zawsze `ClusterIssuer` — jeden issuer dla wszystkich aplikacji.
+**Dla homelaba:** `ClusterIssuer` — jeden issuer dla wszystkich aplikacji.
 
 `ClusterIssuer` jest **cluster-scoped** jak `Node` czy `PersistentVolume` — nie należy do żadnego namespace, nie podajesz `-n` przy apply.
 

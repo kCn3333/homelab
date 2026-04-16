@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 16 (OCI Helm Chart + Progressive Delivery Setup)
 
-**Data:** 2026-03-20  
+**Data:** 2026-03-03  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 1. **Publikowanie Helm chart jako OCI image na GHCR** — automatycznie przy każdym tagu
 2. **Flux pobiera chart z OCI registry** zamiast z GitRepository
@@ -18,9 +18,6 @@
 7. **Poprawka NetworkPolicy** — dozwolony ruch intra-namespace dla helm test
 
 ---
-
-## Czego się nauczyłem
-
 ### 1. OCI Helm Registry — jak to działa
 
 **OCI (Open Container Initiative)** — ten sam standard co obrazy Docker, używany do przechowywania Helm chartów. GHCR (GitHub Container Registry) obsługuje OCI.
@@ -41,7 +38,7 @@ Zalety OCI vs GitRepository:
 
 ### 2. GitHub Actions — job publish-chart
 
-Dodaliśmy nowy job który uruchamia się **tylko na tagach** (`v*`):
+dodany nowy job który uruchamia się **tylko na tagach** (`v*`):
 
 ```yaml
 publish-chart:
@@ -67,7 +64,7 @@ publish-chart:
           oci://${{ env.CHART_REGISTRY }}
 ```
 
-**Kluczowa lekcja:** CI dynamicznie nadpisuje `version` i `appVersion` w `Chart.yaml`. Lokalny plik to placeholder — nie zmieniaj go ręcznie przed tagowaniem.
+**Wniosek:** CI dynamicznie nadpisuje `version` i `appVersion` w `Chart.yaml`. Lokalny plik to placeholder — nie zmieniaj go ręcznie przed tagowaniem.
 
 **Wersjonowanie:** tag `v1.5.0` → chart `1.5.0` + Docker image `1.5.0`. Jedna wersja dla obu.
 
@@ -108,7 +105,7 @@ chart:
     interval: 1m
 ```
 
-**`reconcileStrategy`** — domyślnie `ChartVersion` (update tylko gdy zmieni się wersja). Dla GitRepository używaliśmy `Revision`. Dla OCI nie jest potrzebne — każdy nowy tag = nowa wersja.
+**`reconcileStrategy`** — domyślnie `ChartVersion` (update tylko gdy zmieni się wersja). Dla GitRepository używałem `Revision`. Dla OCI nie jest potrzebne — każdy nowy tag = nowa wersja.
 
 ### 5. helm test
 
@@ -233,7 +230,7 @@ spec:
 
 ### 10. JVM warmup — probe tuning dla dev/staging
 
-JVM potrzebuje więcej czasu na start przy ograniczonych zasobach. Zwiększ `initialDelaySeconds`:
+JVM potrzebuje więcej czasu na start przy ograniczonych zasobach -> zwiększ `initialDelaySeconds`:
 
 ```yaml
 livenessProbe:
@@ -251,13 +248,13 @@ resources:
 
 ---
 
-## Progressive Delivery — co zostało do zrobienia
+## Progressive Delivery
 
-**Aktualny stan (nie pełny progressive delivery):**
+**Aktualny stan:**
 
 Wszystkie 3 środowiska aktualizują się przy każdym nowym tagu — nie ma różnicy w triggerze.
 
-**Plan na jutro — właściwy flow:**
+**właściwy flow:**
 
 ```
 dev    → każdy commit na main  → ImagePolicy: semver
@@ -275,7 +272,7 @@ prod    → PR merge do main      → tag pinned, zmiana przez PR
 
 ---
 
-## Struktura repo po sesji
+## Struktura repo
 
 **clients-api repo:**
 

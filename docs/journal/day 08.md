@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 08
 
-**Data:** 2026-03-07  
+**Data:** 2026-02-03  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 - kube-prometheus-stack v82.10.1 (Prometheus + Grafana + AlertManager + node-exporter)
 - Grafana dostępna przez Ingress z TLS: `grafana.cluster.kcn333.com`
@@ -16,8 +16,6 @@
 - Pełne metryki klastra — wszystkie 3 nody widoczne w Grafanie
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. kube-prometheus-stack — instalacja przez Flux
 
@@ -151,7 +149,7 @@ kubectl -n monitoring exec -it prometheus-kube-prometheus-stack-prometheus-0 -- 
 
 **Root cause:** Cilium domyślnie nie routuje ruchu z podów do node IP (`192.168.55.x`). Pod widzi tylko sieć podów (`10.0.0.0/16`).
 
-**Złe podejście** (próbowaliśmy — nie rób tego):
+**Złe podejście**:
 
 ```yaml
 # NIE rób — otwiera zbyt wiele

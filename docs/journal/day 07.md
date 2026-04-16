@@ -2,20 +2,18 @@
 
 # K3s Homelab — Sesja 07
 
-**Data:** 2026-03-06  
+**Data:** 2026-02-01  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 - Migracja CNI: Flannel → Cilium v1.19.1 (eBPF)
 - Cilium zarządzany przez Flux jako HelmRelease
 - Klaster w pełni operacyjny po migracji
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. Problem z flannel po twardym wyłączeniu
 
@@ -31,7 +29,7 @@ ssh worker1 "sudo mkdir -p /run/flannel && printf 'FLANNEL_NETWORK=10.42.0.0/16\
 ssh worker2 "sudo mkdir -p /run/flannel && printf 'FLANNEL_NETWORK=10.42.0.0/16\nFLANNEL_SUBNET=10.42.2.1/24\nFLANNEL_MTU=1450\nFLANNEL_IPMASQ=true\n' | sudo tee /run/flannel/subnet.env"
 ```
 
-**Prawdziwe rozwiązanie:** Migracja na Cilium — nie ma tego problemu.
+**Prawdziwe rozwiązanie:** Migracja na Cilium
 
 **Wniosek:** Zawsze używaj Ansible graceful shutdown playbooka zamiast przycisku zasilania!
 
@@ -108,8 +106,6 @@ ssh worker1 "sudo systemctl daemon-reload && sudo systemctl start k3s" &
 ssh worker2 "sudo systemctl daemon-reload && sudo systemctl start k3s" &
 ```
 
-⚠️ **Ważne:** W HA klastrze etcd potrzebuje quorum (2/3 nodów). Nie czekaj z workerami zbyt długo!
-
 **Krok 7 — Instalacja Cilium przez Helm:**
 
 ```bash
@@ -178,7 +174,7 @@ spec:
 
 ---
 
-### 3. Problemy które napotkaliśmy
+### 3. Problemy które napotkałem
 
 **Problem 1: Cilium crashuje i zabiera sieć**
 
@@ -195,7 +191,7 @@ done
 # Następnie fizycznie zrestartuj zawieszony node
 ```
 
-**Lekcja:** W klastrze HA zawsze masz worker2 jako koło ratunkowe. Nigdy nie rób niebezpiecznych operacji na wszystkich nodach jednocześnie.
+**Wniosek:** Nigdy nie rób niebezpiecznych operacji na wszystkich nodach jednocześnie.
 
 **Problem 2: Namespace `cilium-secrets` w stanie `Terminating`**
 

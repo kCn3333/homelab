@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 05
 
-**Data:** 2026-03-03  
+**Data:** 2026-01-21 
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 Pełna pętla GitOps z automatyczną aktualizacją obrazów:
 
@@ -22,8 +22,6 @@ ImagePolicy wykrywa nowszy tag → Flux commituje do repo
 ```
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. GitOps — filozofia
 
@@ -213,7 +211,7 @@ image: nginx:1.29.5 # {"$imagepolicy": "flux-system:nginx"}
 
 ### 6. Deploy key — uprawnienia do zapisu
 
-Flux używa SSH deploy key do komunikacji z repo (nie PAT token). Domyślny bootstrap tworzy klucz **read-only**.
+Flux używa SSH deploy key do komunikacji z repo (nie token). Domyślny bootstrap tworzy klucz **read-only**.
 
 Do Image Automation potrzebny jest klucz **read/write** — flaga `--read-write-key` w bootstrap.
 
@@ -227,7 +225,7 @@ Do Image Automation potrzebny jest klucz **read/write** — flaga `--read-write-
 
 ### 7. Flux i konflikty Git
 
-Flux commituje do repo automatycznie. Gdy jednocześnie Ty pushуjesz zmiany, może wystąpić konflikt.
+Flux commituje do repo automatycznie. Gdy jednocześnie Ty pchasz zmiany, może wystąpić konflikt.
 
 **Rozwiązanie — rebase:**
 

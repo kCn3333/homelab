@@ -23,6 +23,17 @@
 
 ---
 
+### Założenia architektoniczne:
+- brak dedykowanych workerów — każdy node pełni rolę control-plane + etcd
+- HA na poziomie control-plane (quorum etcd)
+- jeden punkt wejścia (HAProxy jako L4/L7 LB)
+
+### Uzasadnienie:
+- uproszczenie architektury
+- maksymalne wykorzystanie zasobów
+- pełne HA już przy 3 nodach
+
+---
 ### 1. High Availability w Kubernetes
 
 **HA ma dwa wymiary:**
@@ -70,7 +81,7 @@
 - Rozwiązanie: usunąć `check` z backendów lub użyć `http-check expect status 200,301,302,404`
 - Traefik ma endpoint `/ping` ale na porcie wewnętrznym niedostępnym z zewnątrz
 
-**Lekcja z debugowania:** najpierw usuń health check żeby potwierdzić że routing działa, potem napraw health check. Zawsze potwierdzaj hipotezę zanim optymalizujesz.
+**Wniosek:** najpierw usuń health check żeby potwierdzić że routing działa, potem napraw health check.
 
 ---
 
@@ -79,7 +90,7 @@
 **kubeconfig** (`/etc/rancher/k3s/k3s.yaml`) zawiera:
 
 - adres API servera
-- `client-certificate-data` i `client-key-data` — credentials z pełnym dostępem (odpowiednik root), traktować jak hasło
+- `client-certificate-data` i `client-key-data` — credentials z pełnym dostępem (odpowiednik root) -> traktować jak hasło
 
 **Kopiowanie na PC:**
 

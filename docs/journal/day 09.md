@@ -2,22 +2,20 @@
 
 # K3s Homelab — Sesja 09
 
-**Data:** 2026-03-08  
+**Data:** 2026-02-08  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
-1. **AlertManager + ntfy** — powiadomienia push przez własny webhook adapter
-2. **Garage v2.2.0 na Debianie** — self-hosted S3 storage (25GB)
-3. **Longhorn backup na Garage** — automatyczne backupy wolumenów do S3
-4. **Loki + Promtail** — centralny stack logów dla całego klastra
-5. **NTP synchronizacja** — poprawka zegarów na workerach
+- **AlertManager + ntfy** — powiadomienia push przez własny webhook adapter
+- **Garage v2.2.0 na Debianie** — self-hosted S3 storage (25GB)
+- **Longhorn backup na Garage** — automatyczne backupy wolumenów do S3
+- **Loki + Promtail** — centralny stack logów dla całego klastra
+- **NTP synchronizacja** — poprawka zegarów na workerach
 
 ---
-
-## Czego się nauczyłem
 
 ### 1. AlertManager + ntfy przez webhook adapter
 
@@ -25,7 +23,7 @@
 
 **Rozwiązanie:** Własny Python webhook adapter jako ConfigMap + Deployment.
 
-**Ważne lekcje:**
+**Wnioski:**
 
 - `url` w `webhook_configs` nie obsługuje `_file` — nie można ukryć URL przez Secret
 - Właściwe rozwiązanie: cała konfiguracja AlertManagera jako SealedSecret
@@ -135,9 +133,9 @@ curl -X POST http://localhost:9093/api/v2/alerts \
   }]'
 ```
 
-**Aktywne alerty które znaleźliśmy:**
+**Aktywne alerty:**
 
-- `NodeClockNotSynchronising` — NTP nie działa (naprawione)
+- `NodeClockNotSynchronising` — NTP nie działa
 - `Watchdog` — heartbeat, powinien być zawsze aktywny ✅
 - `KubeAggregatedAPIDown` — metrics-server ma problemy
 - `KubeDeploymentReplicasMismatch` — przejściowe, samo się naprawiło
@@ -344,7 +342,7 @@ docker exec -it garage-garage-1 /garage bucket info longhorn-backup
 
 ### 5. Loki + Promtail stack
 
-**Loki v6.53.0 w trybie SingleBinary** — wszystko w jednym podzie, idealne dla homelaba.
+**Loki v6.53.0 w trybie SingleBinary** — wszystko w jednym podzie.
 
 **Kluczowe ustawienia values:**
 
@@ -416,7 +414,7 @@ resultsCache:
   enabled: false
 ```
 
-**Typowe błędy przy instalacji Loki:**
+**błędy przy instalacji Loki:**
 
 |Błąd|Rozwiązanie|
 |---|---|
@@ -447,13 +445,14 @@ config:
 
 ---
 
-### 6. Problemy które napotkaliśmy
+### 6. Problemy które napotkałem
 
 **Problem: metrics-server nie działa**
 
 - metrics-server zarządzany przez k3s Addon — nie można go edytować przez Deployment (k3s nadpisuje)
 - `hostNetwork: true` koliduje z `--secure-port=10250` (port zajęty przez kubelet)
-- **Decyzja:** Zostawiamy — Grafana ma pełne metryki przez node-exporter, `kubectl top` nie jest krytyczne
+
+-> Zostawiamy — Grafana ma pełne metryki przez node-exporter, `kubectl top` nie jest krytyczne
 
 **Problem: UFW blokuje port 9100 dla node-exporter**
 

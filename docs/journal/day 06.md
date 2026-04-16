@@ -2,12 +2,12 @@
 
 # K3s Homelab — Sesja 06
 
-**Data:** 2026-03-04  
+**Data:** 2026-01-23  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 - Sealed Secrets — bezpieczne przechowywanie sekretów w Git
 - Longhorn — distributed block storage z RWX
@@ -16,17 +16,16 @@
 
 ---
 
-## Czego się nauczyłem
-
 ### 1. Sealed Secrets
 
-**Problem który rozwiązuje:** Kubernetes Secrets w plaintext nie mogą być bezpiecznie trzymane w Git. Sealed Secrets szyfruje je kluczem publicznym klastra — tylko klaster może je odszyfrować.
+Kubernetes Secrets w plaintext nie mogą być bezpiecznie trzymane w Git. Sealed Secrets szyfruje je kluczem publicznym klastra — tylko klaster może je odszyfrować.
 
-**Jak działa:**
+**Architektura:**
 
 ```
 Klucz prywatny → zostaje w klastrze (Secret w flux-system)
 Klucz publiczny → pobierasz lokalnie, używasz do szyfrowania
+
 SealedSecret → zaszyfrowany blob, bezpieczny w Git
        ↓
 Sealed Secrets controller odszyfrowuje → tworzy prawdziwy Secret
@@ -119,7 +118,7 @@ kubeseal --format yaml \
 
 ### 2. Longhorn — Distributed Block Storage
 
-**Co to jest:** Distributed storage dla Kubernetes — tworzy repliki danych między nodami. Jeśli jeden node padnie, dane są dostępne na pozostałych.
+Distributed storage dla Kubernetes — tworzy repliki danych między nodami. Jeśli jeden node padnie, dane są dostępne na pozostałych.
 
 **Wymagania systemowe (przez Ansible):**
 

@@ -85,7 +85,7 @@ Kluczowe flagi:
 
 Bez tego kube-apiserver nie zaakceptuje połączeń przez LB.
 
-## Krok 3 — Pobranie token klastra
+## Krok 3 — Pobranie tokenu klastra
 
 `sudo cat /var/lib/rancher/k3s/server/node-token`
 

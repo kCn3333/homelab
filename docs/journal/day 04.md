@@ -2,24 +2,20 @@
 
 # K3s Homelab — Sesja 04
 
-**Data:** 2026-03-01  
+**Data:** 2026-01-20  
 **Środowisko:** 3x HP T630, k3s v1.34.4, HAProxy, Traefik v3.6.7
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
-- Diagnoza i naprawa problemu z IPv6/DNS (PiHole bez upstream DNS)
+- Diagnoza i naprawa problemu z IPv6/DNS
 - UFW firewall na wszystkich nodach przez Ansible
 - Automatyczny backup etcd na serwer Debiana przez rsync + cron
 
 ---
 
-## Czego się nauczyłem
-
 ### 1. Diagnoza problemów — metodologia
-
-**Zawsze szukaj problemu u źródła**, nie łataj klientów. Przykład z dzisiejszej sesji:
 
 - Objaw: `time_namelookup: 15s` w curlu
 - Błędne podejście: wyłączanie IPv6 na klientach (WSL, Debian)
@@ -95,7 +91,7 @@ ufw default deny incoming
 ufw default allow outgoing
 ```
 
-**Ważna lekcja:** HAProxy działa na hoście `192.168.0.46` ale binduje na `192.168.0.45`. Reguły ufw muszą zezwalać na **oba adresy** — `192.168.0.45` (wirtualny) i `192.168.0.46` (fizyczny host).
+**Obserwacja:** HAProxy działa na hoście `192.168.0.46` ale binduje na `192.168.0.45`. Reguły ufw muszą zezwalać na **oba adresy** — `192.168.0.45` (wirtualny) i `192.168.0.46` (fizyczny host).
 
 **Sieć podów** też musi być dozwolona:
 
@@ -270,7 +266,7 @@ sudo k3s etcd-snapshot ls
 
 ---
 
-## Architektura bezpieczeństwa po sesji 04
+## Architektura klastra:
 
 ```
 Internet/LAN

@@ -2,12 +2,11 @@
 
 # K3s Homelab — Sesja 03
 
-**Data:** 2026-02-28  
+**Data:** 2026-01-16  
 **Środowisko:** 3x HP T630, k3s v1.34.4, HAProxy, Traefik v3.6.7
 
 ---
-
-## Co zbudowaliśmy
+### Cel sesji:
 
 - HAProxy przeniesiony na dedykowane IP `192.168.0.45` ze standardowymi portami 80/443
 - TLS SAN zaktualizowany o nowe IP i domenę
@@ -20,11 +19,9 @@ Użytkownik → HAProxy:80 → Traefik:80 → 301 → HAProxy:443 → Traefik:44
 
 ---
 
-## Czego się nauczyłem
-
 ### 1. IP Alias na Debianie (ifupdown)
 
-Debian używa `/etc/network/interfaces` — starszy styl niż Netplan (Ubuntu).
+Debian 13 używa `/etc/network/interfaces` — starszy styl niż Netplan (Ubuntu).
 
 ```
 # /etc/network/interfaces
@@ -137,8 +134,6 @@ spec:
             permanent: true
 ```
 
-**Zasada:** nigdy nie edytuj bezpośrednio konfiguracji zarządzanych przez narzędzia — używaj ich mechanizmów konfiguracji.
-
 **Weryfikacja:**
 
 ```bash
@@ -157,8 +152,6 @@ Składnia konfiguracji przekierowania HTTP→HTTPS zmieniła się między wersja
 |Przekierowanie|`redirectTo.port: websecure`|`redirections.entryPoint.to: websecure`|
 
 **Traefik v3 po cichu ignoruje** nieznane pola konfiguracji bez błędu w logach. To utrudnia debugowanie — zawsze sprawdzaj wersję i szukaj dokumentacji dla tej konkretnej wersji.
-
-**Lekcja:** breaking changes w narzędziach DevOps są częste. Zawsze sprawdzaj changelog i migration guide przy aktualizacji.
 
 ---
 
@@ -179,7 +172,7 @@ curl -w "\ntime_namelookup: %{time_namelookup}\n" -o /dev/null -s https://domena
 - Debian/systemd: `echo "precedence ::ffff:0:0/96 100" >> /etc/gai.conf`
 - Traefik: `service.ipFamilyPolicy: SingleStack` w HelmChartConfig
 
-**WSL specifics:**
+**WSL:**
 
 ```bash
 # /etc/wsl.conf

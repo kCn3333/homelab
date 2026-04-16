@@ -2,24 +2,23 @@
 
 # K3s Homelab — Sesja 15 (Helm Chart dla clients-api)
 
-**Data:** 2026-03-19  
+**Data:** 2026-02-28  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0
 
 ---
 
-## Co zbudowaliśmy
+### Cel sesji:
 
 Własny Helm chart dla aplikacji clients-api w repozytorium aplikacji (opcja mono-repo), podłączony do klastra przez Flux GitOps.
 
 ---
 
-## Czego się nauczyłem
-
 ### 1. Struktura Helm chart
 
-Helm chart to paczka szablonów YAML + konfiguracja. Generujemy szkielet:
+Helm chart to paczka szablonów YAML + konfiguracja. 
 
 ```bash
+# Generowanie szkieletu:
 helm create helm/clients-api
 ```
 
@@ -68,7 +67,7 @@ x.0.0  → breaking changes (zmiana struktury values)
 
 ### 3. values.yaml — serce charta
 
-Wszystko co może się różnić między środowiskami trafia do `values.yaml`. Grupujemy logicznie:
+Wszystko co może się różnić między środowiskami trafia do `values.yaml`. 
 
 ```yaml
 # Liczba replik — nadpisywana przez HPA
@@ -260,7 +259,7 @@ spec:
 
 **Marker dla image automation** — `# {"$imagepolicy": "flux-system:clients-api:tag"}` mówi Fluxowi żeby automatycznie aktualizował tag gdy pojawi się nowy image.
 
-### 8. reconcileStrategy — krytyczna lekcja
+### 8. reconcileStrategy 
 
 Domyślna strategia to `ChartVersion` — Flux pobiera nowy chart **tylko gdy zmieni się `version`** w Chart.yaml.
 
@@ -268,7 +267,7 @@ Domyślna strategia to `ChartVersion` — Flux pobiera nowy chart **tylko gdy zm
 
 Dla developmentu `Revision` jest wygodniejsze. W produkcji `ChartVersion` daje lepszą kontrolę.
 
-### 9. Błędy które napotkaliśmy i jak je naprawić
+### 9. Napotkane problemy
 
 **`reconcileStrategy: ChartVersion` blokuje update:**
 
@@ -299,17 +298,14 @@ kubectl annotate helmrelease clients-api -n clients \
   reconcile.fluxcd.io/requestedAt="$(date +%s)" --overwrite
 ```
 
-### 10. Gdzie trzymać chart — mono-repo vs osobne repo
+### 10. mono-repo vs osobne repo
 
-|Opcja|Opis|Kiedy|
-|:--|:--|:--|
-|Mono-repo (Opcja A)|Chart w repo aplikacji (`helm/clients-api/`)|Mały zespół, jeden właściciel serwisu|
-|Osobne repo (Opcja B)|Dedykowane repo dla chartów|Duża platforma, centralny DevOps team|
-|OCI Registry|Chart jako image (`ghcr.io/org/charts/app:1.0`)|Dystrybucja między organizacjami|
+- Mono-repo - chart i aplikacja wersjonowane razem.
+  - Chart w repo aplikacji (`helm/clients-api/`)
+- Dedykowane repo dla chartów, większa platforma
+- OCI Registry, Chart jako image (`ghcr.io/org/charts/app:1.0`)
 
-Wybraliśmy Opcję A — chart i aplikacja wersjonowane razem.
-
-**Opcja B (OCI) — jak to wygląda:**
+**OCI**
 
 ```bash
 helm package helm/clients-api
