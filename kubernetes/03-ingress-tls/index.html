@@ -997,17 +997,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-it-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What it does
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#klipper-lb-svclb-traefik" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1100,17 +1089,6 @@
   
     <nav class="md-nav" aria-label="cert-manager">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-it-does_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What it does
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#installation-via-helm" class="md-nav__link">
@@ -2911,17 +2889,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-it-does" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What it does
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#klipper-lb-svclb-traefik" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3014,17 +2981,6 @@
   
     <nav class="md-nav" aria-label="cert-manager">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-it-does_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What it does
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#installation-via-helm" class="md-nav__link">
@@ -3173,7 +3129,6 @@
 <p>Traefik is the ingress controller (ships with k3s), cert-manager handles automatic TLS certificate issuance via Let's Encrypt.</p>
 <hr />
 <h2 id="traefik">Traefik<a class="headerlink" href="#traefik" title="Permanent link">&para;</a></h2>
-<h3 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h3>
 <p>Traefik is a reverse proxy and L7 ingress controller. It receives traffic from HAProxy (already past the load balancer layer), matches hostnames and paths against Ingress/IngressRoute rules, and forwards to the appropriate Service.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>HAProxy (L4, TCP passthrough)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      │
@@ -3238,7 +3193,7 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>htpasswd<span class="w"> </span>-nb<span class="w"> </span>admin<span class="w"> </span>your-password
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Output: admin:$apr1$xxxxx$yyyyyyy</span>
 </span></code></pre></div></p>
-<p>Store the hash as a SealedSecret (see <a href="../06-security/sealed-secrets.md">security/sealed-secrets.md</a>).</p>
+<p>Store the hash as a SealedSecret (see <a href="../06-security.md">security/sealed-secrets.md</a>).</p>
 <p><strong>Middleware:</strong>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik.io/v1alpha1</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Middleware</span>
@@ -3316,7 +3271,6 @@
 </span></code></pre></div>
 <hr />
 <h2 id="cert-manager">cert-manager<a class="headerlink" href="#cert-manager" title="Permanent link">&para;</a></h2>
-<h3 id="what-it-does_1">What it does<a class="headerlink" href="#what-it-does_1" title="Permanent link">&para;</a></h3>
 <p>cert-manager automates TLS certificate issuance and renewal. It integrates with Let's Encrypt and handles the entire ACME challenge flow — you just declare what certificate you want and it handles the rest, including renewals (auto-renews at &#8531; of remaining validity).</p>
 <h3 id="installation-via-helm">Installation via Helm<a class="headerlink" href="#installation-via-helm" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>jetstack<span class="w"> </span>https://charts.jetstack.io
@@ -3367,17 +3321,21 @@
 <h3 id="dns-01-challenge-certificates-without-exposing-the-cluster">DNS-01 Challenge — certificates without exposing the cluster<a class="headerlink" href="#dns-01-challenge-certificates-without-exposing-the-cluster" title="Permanent link">&para;</a></h3>
 <p><strong>HTTP-01</strong>: Let's Encrypt visits <code>http://yourdomain.com/.well-known/acme-challenge/...</code> — the server must be accessible from the internet.</p>
 <p><strong>DNS-01</strong>: Let's Encrypt checks a TXT record <code>_acme-challenge.yourdomain.com</code> in public DNS — <strong>the cluster doesn't need to be reachable from the internet.</strong></p>
-<p>Flow with Cloudflare:
-1. cert-manager requests a certificate
-2. Uses Cloudflare API to add <code>TXT _acme-challenge.cluster.kcn333.com</code>
-3. Let's Encrypt verifies the TXT record
-4. cert-manager removes the TXT record
-5. Certificate issued → stored as a Secret in k8s</p>
+<p>Flow with Cloudflare:</p>
+<ol>
+<li>cert-manager requests a certificate</li>
+<li>Uses Cloudflare API to add <code>TXT _acme-challenge.cluster.kcn333.com</code></li>
+<li>Let's Encrypt verifies the TXT record</li>
+<li>cert-manager removes the TXT record</li>
+<li>Certificate issued → stored as a Secret in k8s</li>
+</ol>
 <h3 id="cloudflare-api-token">Cloudflare API Token<a class="headerlink" href="#cloudflare-api-token" title="Permanent link">&para;</a></h3>
-<p>Create a token with <strong>minimum permissions</strong> (principle of least privilege):
-- <code>Zone | DNS | Edit</code>
-- <code>Zone | Zone | Read</code>
-- Zone Resources: Specific zone (your domain only)</p>
+<p>Create a token with <strong>minimum permissions</strong> (principle of least privilege):</p>
+<ul>
+<li><code>Zone | DNS | Edit</code></li>
+<li><code>Zone | Zone | Read</code></li>
+<li>Zone Resources: Specific zone (your domain only)</li>
+</ul>
 <p><strong>Don't use</strong> the Global API Key — it has way too broad access.</p>
 <p>Store the token as a Secret in <code>cert-manager</code> namespace:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
@@ -3472,7 +3430,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 15:30:37 UTC"><span class="timeago" datetime="2026-04-16T15:30:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 15:30:37 UTC">2026-04-16</span>
   </span>
 
     
