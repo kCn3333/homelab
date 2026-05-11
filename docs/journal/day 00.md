@@ -1,5 +1,7 @@
 # 0 - Planowanie
 
+**Data:** 2026-01 
+
 Przygotowanie środowiska pod klaster HA k3s z embedded etcd oraz zewnętrznym Load Balancerem (HAProxy).
 
 kluczowe założenia:
