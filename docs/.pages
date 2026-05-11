@@ -38,6 +38,7 @@ nav:
   
   - ➤ Automation: 
     - 🅰 Ansible playbooks: https://github.com/kCn3333/homelab-ansible
+    - ◆ Terraform IaC: https://github.com/kCn3333/homelab-terraform
     - ▶︎ n8n workflows: https://github.com/kCn3333/n8n_workflows
       
   - 🕮 Troubleshooting: troubleshooting 
