@@ -12,8 +12,8 @@ nav:
     - 🌡 project fan-controller: https://github.com/kCn3333/rack-fan-controller
 
   - ⏻ Provisioning:
-    - ⛂ Zion Server: zion
-    - ☁︎ Relay VPS: relay 
+    - ⛂ Main Server: zion
+    - ☁︎ Cloud Infrastructure: relay 
 
     - ⛃ Cluster Deployment: 
       - 🖴 Bare Metal: provisioning
