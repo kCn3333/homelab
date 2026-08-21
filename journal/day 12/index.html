@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -2731,36 +2731,36 @@
 <hr />
 <h3 id="2-logql-podstawy-i-puapki">2. LogQL — podstawy i pułapki<a class="headerlink" href="#2-logql-podstawy-i-puapki" title="Permanent link">&para;</a></h3>
 <p><strong>Składnia:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{selektor} | operator &quot;tekst&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{selektor} | operator "tekst"
 </span></code></pre></div>
 <p><strong>Operatory filtrowania:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>|=  &quot;tekst&quot;    ← zawiera (case-sensitive!)
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>!=  &quot;tekst&quot;    ← nie zawiera
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>|~  &quot;regex&quot;    ← pasuje do regex
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>!~  &quot;regex&quot;    ← nie pasuje do regex
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>|=  "tekst"    ← zawiera (case-sensitive!)
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>!=  "tekst"    ← nie zawiera
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>|~  "regex"    ← pasuje do regex
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>!~  "regex"    ← nie pasuje do regex
 </span></code></pre></div>
 <p><strong>Regex w Loki:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># ŹLE — * bez kropki to &quot;zero lub więcej poprzedniego znaku&quot;
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>{pod=~&quot;clients-api*&quot;}     ← matches: clients-ap, clients-api, clients-apii
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># ŹLE — * bez kropki to "zero lub więcej poprzedniego znaku"
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>{pod=~"clients-api*"}     ← matches: clients-ap, clients-api, clients-apii
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a># DOBRZE — .* to &quot;dowolny znak zero lub więcej razy&quot;
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>{pod=~&quot;clients-api.*&quot;}    ← matches: clients-api-6598449f4c-7wfrj
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a># DOBRZE — .* to "dowolny znak zero lub więcej razy"
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>{pod=~"clients-api.*"}    ← matches: clients-api-6598449f4c-7wfrj
 </span></code></pre></div>
 <p><strong>Case-sensitivity:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># Logi zawierają &quot;After request&quot; (mała litera r)
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>|= &quot;REQUEST&quot;   ← nie znajdzie nic!
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>|= &quot;request&quot;   ← znajdzie
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>|~ &quot;(?i)request&quot;  ← case-insensitive przez flagę regex
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># Logi zawierają "After request" (mała litera r)
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>|= "REQUEST"   ← nie znajdzie nic!
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>|= "request"   ← znajdzie
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>|~ "(?i)request"  ← case-insensitive przez flagę regex
 </span></code></pre></div>
 <p><strong>Praktyczne zapytania dla Spring Boot:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a># Tylko HTTP requesty, bez scrapowania Prometheusa
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>{namespace=&quot;clients&quot;, pod=~&quot;clients-api.*&quot;} |= &quot;request&quot; != &quot;/actuator&quot;
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>{namespace="clients", pod=~"clients-api.*"} |= "request" != "/actuator"
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a># JSON parser + formatowanie
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>{namespace=&quot;clients&quot;, pod=~&quot;clients-api.*&quot;}
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>{namespace="clients", pod=~"clients-api.*"}
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>| json
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>| message =~ &quot;After request.*&quot;
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>| line_format &quot;{{.level}} | {{.thread_name}} | {{.message}}&quot;
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>| message =~ "After request.*"
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>| line_format "{{.level}} | {{.thread_name}} | {{.message}}"
 </span></code></pre></div>
 <hr />
 <h3 id="3-prometheus-metryki-spring-boot-actuator">3. Prometheus — metryki Spring Boot Actuator<a class="headerlink" href="#3-prometheus-metryki-spring-boot-actuator" title="Permanent link">&para;</a></h3>
@@ -2771,39 +2771,39 @@
 </span></code></pre></div>
 <p>Po włączeniu pojawia się <code>http_server_requests_seconds_bucket</code> z dziesiątkami serii (różne wartości <code>le</code> — upper bound bucketu).</p>
 <p><strong>Co to jest <code>le</code> w histogramie:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>le=&quot;0.001&quot;  → ile requestów odpowiedziało w &lt; 1ms
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>le=&quot;0.005&quot;  → ile requestów odpowiedziało w &lt; 5ms
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>le=&quot;+Inf&quot;   → wszystkie requesty
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>le="0.001"  → ile requestów odpowiedziało w &lt; 1ms
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>le="0.005"  → ile requestów odpowiedziało w &lt; 5ms
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>le="+Inf"   → wszystkie requesty
 </span></code></pre></div>
 <p><code>histogram_quantile(0.99, ...)</code> interpoluje z tych bucketów 99. percentyl.</p>
 <p><strong>Przydatne PromQL queries:</strong></p>
 <div class="language-promql highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Request rate (req/s)</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_count</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients-api</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_count</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">"}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Error rate (%)</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_count</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients-api</span><span class="p">&quot;,</span><span class="nl">status</span><span class="o">=~</span><span class="p">&quot;</span><span class="s">5..</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_count</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">",</span><span class="nl">status</span><span class="o">=~</span><span class="p">"</span><span class="s">5..</span><span class="p">"}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="ow">or</span><span class="w"> </span><span class="kr">vector</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
 </span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="o">/</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_count</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients-api</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="k">sum</span><span class="o">(</span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_count</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">"}[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
 </span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="o">*</span><span class="w"> </span><span class="mi">100</span>
 </span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
 </span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="c1"># p99 latency (ms) — tylko /api/clients, bez actuatora</span>
 </span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="kr">histogram_quantile</span><span class="o">(</span><span class="mf">0.99</span><span class="p">,</span>
 </span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">  </span><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="o">(</span><span class="nv">le</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>
 </span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_bucket</span><span class="p">{</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">      </span><span class="nl">application</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients-api</span><span class="p">&quot;,</span>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nl">uri</span><span class="o">=</span><span class="p">&quot;</span><span class="s">/api/clients</span><span class="p">&quot;</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">      </span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">",</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nl">uri</span><span class="o">=</span><span class="p">"</span><span class="s">/api/clients</span><span class="p">"</span>
 </span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">    </span><span class="p">}[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
 </span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">  </span><span class="o">)</span>
 </span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="o">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span>
 </span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
 </span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="c1"># JVM Heap — tylko aktywne pody</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="nv">jvm_memory_used_bytes</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients-api</span><span class="p">&quot;,</span><span class="w"> </span><span class="nl">area</span><span class="o">=</span><span class="p">&quot;</span><span class="s">heap</span><span class="p">&quot;}</span>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="o">*</span><span class="w"> </span><span class="k">on</span><span class="o">(</span><span class="nv">pod</span><span class="o">)</span><span class="w"> </span><span class="k">group_left</span><span class="o">()</span><span class="w"> </span><span class="nv">kube_pod_info</span><span class="p">{</span><span class="nl">namespace</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients</span><span class="p">&quot;}</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="nv">jvm_memory_used_bytes</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">",</span><span class="w"> </span><span class="nl">area</span><span class="o">=</span><span class="p">"</span><span class="s">heap</span><span class="p">"}</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="o">*</span><span class="w"> </span><span class="k">on</span><span class="o">(</span><span class="nv">pod</span><span class="o">)</span><span class="w"> </span><span class="k">group_left</span><span class="o">()</span><span class="w"> </span><span class="nv">kube_pod_info</span><span class="p">{</span><span class="nl">namespace</span><span class="o">=</span><span class="p">"</span><span class="s">clients</span><span class="p">"}</span>
 </span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>
 </span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="c1"># DB Connection Pool</span>
-</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="nv">hikaricp_connections_active</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients-api</span><span class="p">&quot;}</span>
-</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="nv">hikaricp_connections_pending</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">&quot;</span><span class="s">clients-api</span><span class="p">&quot;}</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="nv">hikaricp_connections_active</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">"}</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="nv">hikaricp_connections_pending</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">"}</span>
 </span></code></pre></div>
 <p><strong><code>or vector(0)</code> — dlaczego ważne:</strong> Gdy nie ma błędów, <code>rate()</code> zwraca <code>No data</code>. <code>or vector(0)</code> sprawia że panel pokazuje <code>0</code> zamiast pustego wykresu.</p>
 <p><strong>Stare pody w Grafanie:</strong> Prometheus przechowuje dane przez 7 dni — wykresy pokazują serie z usuniętych podów. Rozwiązania:</p>
@@ -2828,11 +2828,11 @@
 <p><strong>Wniosek:</strong> JVM pod obciążeniem potrzebuje headroom powyżej requests. Limit <code>500m</code> był za mały — JVM był throttlowany przy każdym request.</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Przed — za mały limit</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">limits</span><span class="p">:</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;500m&quot;</span><span class="w">    </span><span class="c1"># JVM dobijał do 100% i był throttlowany</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">"500m"</span><span class="w">    </span><span class="c1"># JVM dobijał do 100% i był throttlowany</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
 </span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># Po — odpowiedni headroom</span>
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nt">limits</span><span class="p">:</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2000m&quot;</span><span class="w">   </span><span class="c1"># JVM może używać do 2 cores podczas GC i pików</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">"2000m"</span><span class="w">   </span><span class="c1"># JVM może używać do 2 cores podczas GC i pików</span>
 </span></code></pre></div>
 <hr />
 <h3 id="5-load-testing-z-hey">5. Load testing z <code>hey</code><a class="headerlink" href="#5-load-testing-z-hey" title="Permanent link">&para;</a></h3>
@@ -2843,7 +2843,7 @@
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="c1"># Użycie</span>
 </span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>hey<span class="w"> </span>-n<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-c<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="se">\ </span><span class="w">          </span><span class="c1"># 1000 requestów, 20 równoległych</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Basic ...&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">'Authorization: Basic ...'</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span>https://endpoint/path
 </span></code></pre></div>
 <p><strong>Dlaczego <code>curl</code> w pętli jest złym testem:</strong></p>
@@ -3004,14 +3004,14 @@
 </span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span>--image<span class="o">=</span>postgres:17<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span>--restart<span class="o">=</span>Never<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span>-n<span class="w"> </span>clients<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span>--<span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>clients-db-rw<span class="w"> </span>-U<span class="w"> </span>app<span class="w"> </span>-d<span class="w"> </span>clients_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;SELECT 1&quot;</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span>--<span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>clients-db-rw<span class="w"> </span>-U<span class="w"> </span>app<span class="w"> </span>-d<span class="w"> </span>clients_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">"SELECT 1"</span>
 </span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>
 </span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="c1"># Jeśli pod wisi bez odpowiedzi → NetworkPolicy działa ✅</span>
-</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="c1"># DROP (Cilium) = cisza, nie &quot;connection refused&quot;</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="c1"># DROP (Cilium) = cisza, nie "connection refused"</span>
 </span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="c1"># Atakujący nie wie czy port w ogóle istnieje</span>
 </span></code></pre></div>
 <p><strong>Cilium DROP vs REJECT:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>REJECT → natychmiastowy błąd &quot;connection refused&quot; (informuje atakującego)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>REJECT → natychmiastowy błąd "connection refused" (informuje atakującego)
 </span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>DROP   → cisza, pakiety porzucane (bezpieczniejsze — brak informacji)
 </span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>Cilium domyślnie używa DROP
 </span></code></pre></div>
@@ -3074,16 +3074,16 @@
 <hr />
 <h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Load testing</span>
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>hey<span class="w"> </span>-n<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-c<span class="w"> </span><span class="m">20</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Basic dXNlcjp1c2Vy&#39;</span><span class="w"> </span>https://HOST/PATH
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>hey<span class="w"> </span>-n<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-c<span class="w"> </span><span class="m">20</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Authorization: Basic dXNlcjp1c2Vy'</span><span class="w"> </span>https://HOST/PATH
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
 </span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1"># HPA status</span>
 </span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>hpa<span class="w"> </span>-n<span class="w"> </span>clients
 </span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>watch<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>hpa,pods<span class="w"> </span>-n<span class="w"> </span>clients
 </span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>
 </span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="c1"># Metryki bezpośrednio z poda (bez czekania na scrape)</span>
-</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>watch<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s1">&#39;kubectl exec -n clients deploy/clients-api -- \</span>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>watch<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s1">'kubectl exec -n clients deploy/clients-api -- \</span>
 </span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="s1">  wget -qO- http://localhost:8080/actuator/prometheus \</span>
-</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="s1">  | grep -E &quot;hikaricp_connections_(active|pending|idle|max)&quot;&#39;</span>
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="s1">  | grep -E "hikaricp_connections_(active|pending|idle|max)"'</span>
 </span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>
 </span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="c1"># NetworkPolicy</span>
 </span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>kubectl<span class="w"> </span>get<span class="w"> </span>networkpolicy<span class="w"> </span>-n<span class="w"> </span>clients
@@ -3092,13 +3092,13 @@
 </span><span id="__span-28-17"><a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a><span class="c1"># Test izolacji</span>
 </span><span id="__span-28-18"><a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>kubectl<span class="w"> </span>run<span class="w"> </span>test-isolation<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-28-19"><a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a><span class="w">  </span>--image<span class="o">=</span>postgres:17<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-28-20"><a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a><span class="w">  </span>--<span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>clients-db-rw<span class="w"> </span>-U<span class="w"> </span>app<span class="w"> </span>-d<span class="w"> </span>clients_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;SELECT 1&quot;</span>
+</span><span id="__span-28-20"><a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a><span class="w">  </span>--<span class="w"> </span>psql<span class="w"> </span>-h<span class="w"> </span>clients-db-rw<span class="w"> </span>-U<span class="w"> </span>app<span class="w"> </span>-d<span class="w"> </span>clients_db<span class="w"> </span>-c<span class="w"> </span><span class="s2">"SELECT 1"</span>
 </span><span id="__span-28-21"><a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>
 </span><span id="__span-28-22"><a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a><span class="c1"># LogQL — HTTP requesty bez actuatora</span>
-</span><span id="__span-28-23"><a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a><span class="c1"># {namespace=&quot;clients&quot;, pod=~&quot;clients-api.*&quot;} |= &quot;request&quot; != &quot;/actuator&quot;</span>
+</span><span id="__span-28-23"><a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a><span class="c1"># {namespace="clients", pod=~"clients-api.*"} |= "request" != "/actuator"</span>
 </span><span id="__span-28-24"><a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a>
 </span><span id="__span-28-25"><a id="__codelineno-28-25" name="__codelineno-28-25" href="#__codelineno-28-25"></a><span class="c1"># PromQL — p99 latency</span>
-</span><span id="__span-28-26"><a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a><span class="c1"># histogram_quantile(0.99, sum by(le) (rate(http_server_requests_seconds_bucket{application=&quot;clients-api&quot;,uri=&quot;/api/clients&quot;}[5m]))) * 1000</span>
+</span><span id="__span-28-26"><a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a><span class="c1"># histogram_quantile(0.99, sum by(le) (rate(http_server_requests_seconds_bucket{application="clients-api",uri="/api/clients"}[5m]))) * 1000</span>
 </span></code></pre></div>
 
 
@@ -3230,7 +3230,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -5179,7 +5179,7 @@
 - <code>sd-vconsole</code> – replaces <code>keymap</code> and <code>consolefont</code>, reads <code>/etc/vconsole.conf</code> for keyboard layout
 - <code>sd-encrypt</code> – systemd-based LUKS encryption support</p>
 <h3 id="set-keyboard-layout">Set Keyboard Layout<a class="headerlink" href="#set-keyboard-layout" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;KEYMAP=pl&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/vconsole.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"KEYMAP=pl"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/vconsole.conf
 </span></code></pre></div>
 <h3 id="generate-kernel-image">Generate Kernel Image<a class="headerlink" href="#generate-kernel-image" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>mkinitcpio<span class="w"> </span>-P
@@ -5197,7 +5197,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>nvim<span class="w"> </span>/etc/default/grub
 </span></code></pre></div></p>
 <p>Set the following lines:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 quiet rd.luks.name=YOUR-UUID-SDA2=cryptroot root=/dev/mapper/cryptroot rw&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=YOUR-UUID-SDA2=cryptroot root=/dev/mapper/cryptroot rw"
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>GRUB_DISABLE_OS_PROBER=false
 </span></code></pre></div></p>
 <h3 id="install-grub-to-efi">Install GRUB to EFI<a class="headerlink" href="#install-grub-to-efi" title="Permanent link">&para;</a></h3>
@@ -5229,13 +5229,13 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>FILES=(/etc/cryptsetup-keys.d/root.key)
 </span></code></pre></div></p>
 <h3 id="add-home-key-to-crypttab">Add Home Key to Crypttab<a class="headerlink" href="#add-home-key-to-crypttab" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;crypthome UUID=</span><span class="k">$(</span>blkid<span class="w"> </span>-s<span class="w"> </span>UUID<span class="w"> </span>-o<span class="w"> </span>value<span class="w"> </span>/dev/sda3<span class="k">)</span><span class="s2"> /etc/cryptsetup-keys.d/home.key luks&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/crypttab
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"crypthome UUID=</span><span class="k">$(</span>blkid<span class="w"> </span>-s<span class="w"> </span>UUID<span class="w"> </span>-o<span class="w"> </span>value<span class="w"> </span>/dev/sda3<span class="k">)</span><span class="s2"> /etc/cryptsetup-keys.d/home.key luks"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/crypttab
 </span></code></pre></div>
 <h3 id="rebuild-initramfs">Rebuild Initramfs<a class="headerlink" href="#rebuild-initramfs" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>mkinitcpio<span class="w"> </span>-P
 </span></code></pre></div>
 <h3 id="add-root-key-to-grub">Add Root Key to GRUB<a class="headerlink" href="#add-root-key-to-grub" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=&quot;loglevel=3 quiet rd.luks.name=&lt;ROOT-KEY&gt;=cryptroot root=/dev/mapper/cryptroot rd.luks.key=&lt;ROOT-KEY&gt;=/etc/cryptsetup-keys.d/root.key rw&quot;|&#39;</span><span class="w"> </span>/etc/default/grub
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=&lt;ROOT-KEY&gt;=cryptroot root=/dev/mapper/cryptroot rd.luks.key=&lt;ROOT-KEY&gt;=/etc/cryptsetup-keys.d/root.key rw"|'</span><span class="w"> </span>/etc/default/grub
 </span></code></pre></div>
 <p><strong>Tip:</strong> Use this nvim command to insert UUID:</p>
 <ol>
@@ -5264,10 +5264,10 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>locale-gen<span class="w"> </span>
 </span></code></pre></div></p>
 <p>Set system language:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;LANG=en_US.UTF-8&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/locale.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"LANG=en_US.UTF-8"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/locale.conf
 </span></code></pre></div></p>
 <h3 id="set-hostname">Set Hostname<a class="headerlink" href="#set-hostname" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;archi&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"archi"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname
 </span></code></pre></div>
 <h3 id="create-user">Create User<a class="headerlink" href="#create-user" title="Permanent link">&para;</a></h3>
 <p>Create user with home directory and add to wheel group for sudo:
@@ -5364,7 +5364,7 @@
 <p>Configure picom:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>nvim<span class="w"> </span>~/.config/picom/picom.conf
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>backend = &quot;glx&quot;;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>backend = "glx";
 </span><span id="__span-65-2"><a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>vsync = true;
 </span><span id="__span-65-3"><a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a>
 </span><span id="__span-65-4"><a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>shadow = true;
@@ -5373,7 +5373,7 @@
 </span><span id="__span-65-7"><a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a>shadow-offset-y = -4;
 </span><span id="__span-65-8"><a id="__codelineno-65-8" name="__codelineno-65-8" href="#__codelineno-65-8"></a>
 </span><span id="__span-65-9"><a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a>opacity-rule = [
-</span><span id="__span-65-10"><a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a>  &quot;90:class_g = &#39;Alacritty&#39;&quot;
+</span><span id="__span-65-10"><a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a>  "90:class_g = 'Alacritty'"
 </span><span id="__span-65-11"><a id="__codelineno-65-11" name="__codelineno-65-11" href="#__codelineno-65-11"></a>];
 </span></code></pre></div>
 <p>Auto-start in i3:
@@ -5392,14 +5392,14 @@
 <h3 id="configure-font-rendering">Configure Font Rendering<a class="headerlink" href="#configure-font-rendering" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-69-1"><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>nvim<span class="w"> </span>~/.config/fontconfig/fonts.conf
 </span></code></pre></div>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span><span class="w"> </span>
-</span><span id="__span-70-2"><a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a><span class="cp">&lt;!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;&gt;</span><span class="w"> </span>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="cp">&lt;?xml version="1.0"?&gt;</span><span class="w"> </span>
+</span><span id="__span-70-2"><a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a><span class="cp">&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;</span><span class="w"> </span>
 </span><span id="__span-70-3"><a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="nt">&lt;fontconfig&gt;</span><span class="w"> </span>
-</span><span id="__span-70-4"><a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a><span class="w">    </span><span class="nt">&lt;match</span><span class="w"> </span><span class="na">target=</span><span class="s">&quot;font&quot;</span><span class="nt">&gt;</span><span class="w"> </span>
-</span><span id="__span-70-5"><a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;hinting&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;assign&quot;</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
-</span><span id="__span-70-6"><a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;hintstyle&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;assign&quot;</span><span class="nt">&gt;&lt;const&gt;</span>hintslight<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
-</span><span id="__span-70-7"><a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;antialias&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;assign&quot;</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
-</span><span id="__span-70-8"><a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rgba&quot;</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;assign&quot;</span><span class="nt">&gt;&lt;const&gt;</span>rgb<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-70-4"><a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a><span class="w">    </span><span class="nt">&lt;match</span><span class="w"> </span><span class="na">target=</span><span class="s">"font"</span><span class="nt">&gt;</span><span class="w"> </span>
+</span><span id="__span-70-5"><a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"hinting"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-70-6"><a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"hintstyle"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;const&gt;</span>hintslight<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-70-7"><a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"antialias"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-70-8"><a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"rgba"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;const&gt;</span>rgb<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
 </span><span id="__span-70-9"><a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a><span class="w">    </span><span class="nt">&lt;/match&gt;</span><span class="w"> </span>
 </span><span id="__span-70-10"><a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a><span class="nt">&lt;/fontconfig&gt;</span>
 </span></code></pre></div>
@@ -5424,22 +5424,22 @@
 </span><span id="__span-76-2"><a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">8.5</span><span class="w">  </span>
 </span><span id="__span-76-3"><a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a>
 </span><span id="__span-76-4"><a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a><span class="k">[font.normal]</span><span class="w">  </span>
-</span><span id="__span-76-5"><a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;JetBrainsMono Nerd Font Mono&quot;</span><span class="w">  </span>
-</span><span id="__span-76-6"><a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Regular&quot;</span><span class="w">  </span>
+</span><span id="__span-76-5"><a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
+</span><span id="__span-76-6"><a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Regular"</span><span class="w">  </span>
 </span><span id="__span-76-7"><a id="__codelineno-76-7" name="__codelineno-76-7" href="#__codelineno-76-7"></a>
 </span><span id="__span-76-8"><a id="__codelineno-76-8" name="__codelineno-76-8" href="#__codelineno-76-8"></a><span class="k">[font.bold]</span><span class="w">  </span>
-</span><span id="__span-76-9"><a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;JetBrainsMono Nerd Font Mono&quot;</span><span class="w">  </span>
-</span><span id="__span-76-10"><a id="__codelineno-76-10" name="__codelineno-76-10" href="#__codelineno-76-10"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Bold&quot;</span><span class="w">  </span>
+</span><span id="__span-76-9"><a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
+</span><span id="__span-76-10"><a id="__codelineno-76-10" name="__codelineno-76-10" href="#__codelineno-76-10"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Bold"</span><span class="w">  </span>
 </span><span id="__span-76-11"><a id="__codelineno-76-11" name="__codelineno-76-11" href="#__codelineno-76-11"></a>
 </span><span id="__span-76-12"><a id="__codelineno-76-12" name="__codelineno-76-12" href="#__codelineno-76-12"></a><span class="k">[font.italic]</span><span class="w">  </span>
-</span><span id="__span-76-13"><a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;JetBrainsMono Nerd Font Mono&quot;</span><span class="w">  </span>
-</span><span id="__span-76-14"><a id="__codelineno-76-14" name="__codelineno-76-14" href="#__codelineno-76-14"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Italic&quot;</span><span class="w">  </span>
+</span><span id="__span-76-13"><a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
+</span><span id="__span-76-14"><a id="__codelineno-76-14" name="__codelineno-76-14" href="#__codelineno-76-14"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Italic"</span><span class="w">  </span>
 </span><span id="__span-76-15"><a id="__codelineno-76-15" name="__codelineno-76-15" href="#__codelineno-76-15"></a>
 </span><span id="__span-76-16"><a id="__codelineno-76-16" name="__codelineno-76-16" href="#__codelineno-76-16"></a><span class="k">[window]</span><span class="w">  </span>
 </span><span id="__span-76-17"><a id="__codelineno-76-17" name="__codelineno-76-17" href="#__codelineno-76-17"></a><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">}</span><span class="w">  </span>
 </span><span id="__span-76-18"><a id="__codelineno-76-18" name="__codelineno-76-18" href="#__codelineno-76-18"></a>
 </span><span id="__span-76-19"><a id="__codelineno-76-19" name="__codelineno-76-19" href="#__codelineno-76-19"></a><span class="k">[env]</span><span class="w">  </span>
-</span><span id="__span-76-20"><a id="__codelineno-76-20" name="__codelineno-76-20" href="#__codelineno-76-20"></a><span class="n">TERM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;xterm-256color&quot;</span>
+</span><span id="__span-76-20"><a id="__codelineno-76-20" name="__codelineno-76-20" href="#__codelineno-76-20"></a><span class="n">TERM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"xterm-256color"</span>
 </span></code></pre></div>
 <h3 id="add-terminal-keybinding-to-i3">Add Terminal Keybinding to i3<a class="headerlink" href="#add-terminal-keybinding-to-i3" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-77-1"><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>nvim<span class="w"> </span>~/.config/i3/config
@@ -5571,7 +5571,7 @@
 <h3 id="starship-prompt">Starship Prompt<a class="headerlink" href="#starship-prompt" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-98-1"><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>starship
 </span><span id="__span-98-2"><a id="__codelineno-98-2" name="__codelineno-98-2" href="#__codelineno-98-2"></a>
-</span><span id="__span-98-3"><a id="__codelineno-98-3" name="__codelineno-98-3" href="#__codelineno-98-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;eval &quot;$(starship init bash)&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</span><span id="__span-98-3"><a id="__codelineno-98-3" name="__codelineno-98-3" href="#__codelineno-98-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'eval "$(starship init bash)"'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 </span></code></pre></div>
 <hr />
 <h2 id="laptop-hardware-keys">Laptop Hardware Keys<a class="headerlink" href="#laptop-hardware-keys" title="Permanent link">&para;</a></h2>
@@ -5625,7 +5625,7 @@
 </span><span id="__span-108-4"><a id="__codelineno-108-4" name="__codelineno-108-4" href="#__codelineno-108-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span>playerctl<span class="w"> </span>status<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>Playing<span class="p">;</span><span class="w"> </span><span class="k">then</span>
 </span><span id="__span-108-5"><a id="__codelineno-108-5" name="__codelineno-108-5" href="#__codelineno-108-5"></a><span class="w">        </span>systemd-inhibit<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-108-6"><a id="__codelineno-108-6" name="__codelineno-108-6" href="#__codelineno-108-6"></a><span class="w">          </span>--what<span class="o">=</span>sleep<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-108-7"><a id="__codelineno-108-7" name="__codelineno-108-7" href="#__codelineno-108-7"></a><span class="w">          </span>--why<span class="o">=</span><span class="s2">&quot;Media playback&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-108-7"><a id="__codelineno-108-7" name="__codelineno-108-7" href="#__codelineno-108-7"></a><span class="w">          </span>--why<span class="o">=</span><span class="s2">"Media playback"</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-108-8"><a id="__codelineno-108-8" name="__codelineno-108-8" href="#__codelineno-108-8"></a><span class="w">          </span>--mode<span class="o">=</span>block<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-108-9"><a id="__codelineno-108-9" name="__codelineno-108-9" href="#__codelineno-108-9"></a><span class="w">          </span>sleep<span class="w"> </span><span class="m">30</span>
 </span><span id="__span-108-10"><a id="__codelineno-108-10" name="__codelineno-108-10" href="#__codelineno-108-10"></a><span class="w">    </span><span class="k">else</span>
@@ -5788,7 +5788,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../js/timeago.min.js"></script>
       
