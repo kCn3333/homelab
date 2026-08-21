@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/kubernetes/00-overview/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/relay/relay/">
       
       
-        <link rel="prev" href="../../provisioning/3-ssh-configuration/">
+        <link rel="prev" href="../../zion/supporting-services/">
       
       
-        <link rel="next" href="../01-cluster-architecture/">
+        <link rel="next" href="../../provisioning/0-pxe-tftp/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>K3s Homelab - > Homelab Documentation</title>
+        <title>Relay VPS - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#k3s-homelab" class="md-skip">
+        <a href="#relay-vps" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              K3s Homelab
+              Relay VPS
             
           </span>
         </div>
@@ -880,18 +880,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
         
           
           <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
@@ -912,7 +914,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -927,10 +929,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../relay/relay/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relay VPS
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -946,6 +975,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#compute-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traffic-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traffic model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wireguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WireGuard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WireGuard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mtu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caddy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caddy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firewall model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-technical-debt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known technical debt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -963,20 +1117,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
           <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
@@ -997,7 +1149,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1179,20 +1331,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
         
           
           <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
@@ -1213,7 +1363,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_3_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1228,37 +1378,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    K3s Homelab
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../kubernetes/00-overview/" class="md-nav__link">
         
   
   
@@ -1274,92 +1397,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hardware
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture-overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture Overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#whats-running" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What's Running
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Documentation Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git-repositories" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Git Repositories
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-design-decisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Design Decisions
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1372,7 +1409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-cluster-architecture/" class="md-nav__link">
+      <a href="../../kubernetes/01-cluster-architecture/" class="md-nav__link">
         
   
   
@@ -1400,7 +1437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-networking/" class="md-nav__link">
+      <a href="../../kubernetes/02-networking/" class="md-nav__link">
         
   
   
@@ -1428,7 +1465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-ingress-tls/" class="md-nav__link">
+      <a href="../../kubernetes/03-ingress-tls/" class="md-nav__link">
         
   
   
@@ -1456,7 +1493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-storage/" class="md-nav__link">
+      <a href="../../kubernetes/04-storage/" class="md-nav__link">
         
   
   
@@ -1484,7 +1521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-gitops/" class="md-nav__link">
+      <a href="../../kubernetes/05-gitops/" class="md-nav__link">
         
   
   
@@ -1512,7 +1549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-security/" class="md-nav__link">
+      <a href="../../kubernetes/06-security/" class="md-nav__link">
         
   
   
@@ -1540,7 +1577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07-observability/" class="md-nav__link">
+      <a href="../../kubernetes/07-observability/" class="md-nav__link">
         
   
   
@@ -1568,7 +1605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08-backup/" class="md-nav__link">
+      <a href="../../kubernetes/08-backup/" class="md-nav__link">
         
   
   
@@ -1596,7 +1633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09-applications/" class="md-nav__link">
+      <a href="../../kubernetes/09-applications/" class="md-nav__link">
         
   
   
@@ -3168,10 +3205,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#hardware" class="md-nav__link">
+  <a href="#compute-profile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hardware
+        Compute profile
       
     </span>
   </a>
@@ -3179,10 +3216,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" class="md-nav__link">
+  <a href="#traffic-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture Overview
+        Traffic model
       
     </span>
   </a>
@@ -3190,10 +3227,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#whats-running" class="md-nav__link">
+  <a href="#wireguard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's Running
+        WireGuard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WireGuard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mtu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTU
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caddy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caddy
       
     </span>
   </a>
@@ -3201,10 +3266,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation-structure" class="md-nav__link">
+  <a href="#firewall-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentation Structure
+        Firewall model
       
     </span>
   </a>
@@ -3212,10 +3277,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#git-repositories" class="md-nav__link">
+  <a href="#known-technical-debt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Git Repositories
+        Known technical debt
       
     </span>
   </a>
@@ -3223,10 +3288,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-design-decisions" class="md-nav__link">
+  <a href="#backups" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Design Decisions
+        Backups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational validation
       
     </span>
   </a>
@@ -3254,185 +3330,140 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/kubernetes/00-overview.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/relay/relay.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="k3s-homelab">K3s Homelab<a class="headerlink" href="#k3s-homelab" title="Permanent link">&para;</a></h1>
-<p>This is a documentation of a production-grade Kubernetes homelab built on three HP T630 thin clients. The goal was to replicate a real production setup as closely as possible in a home environment — HA control plane, GitOps, observability, proper storage, automated deployments, the whole thing.</p>
-<hr />
-<h2 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
+<h1 id="relay-vps">Relay VPS<a class="headerlink" href="#relay-vps" title="Permanent link">&para;</a></h1>
+<p>Relay is a small Oracle Cloud Infrastructure Free Tier virtual machine that provides the external edge for selected homelab services. It runs Ubuntu 24.04 Minimal with native Caddy and WireGuard.</p>
+<p>The Relay exists because the home network does not accept direct inbound application traffic. Public HTTPS terminates in Oracle Cloud, while a narrowly scoped WireGuard tunnel carries approved requests to Logos and selected internal backends.</p>
+<h2 id="compute-profile">Compute profile<a class="headerlink" href="#compute-profile" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Node</th>
-<th>Role</th>
-<th>Specs</th>
+<th>Component</th>
+<th>Specification</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>master (192.168.55.10)</td>
-<td>control-plane + etcd</td>
-<td>HP T630, 8GB RAM, 128GB SSD</td>
+<td>Provider</td>
+<td>Oracle Cloud Infrastructure Free Tier</td>
 </tr>
 <tr>
-<td>worker1 (192.168.55.11)</td>
-<td>control-plane + etcd</td>
-<td>HP T630, 8GB RAM, 128GB SSD</td>
+<td>Shape</td>
+<td><code>VM.Standard.E2.1.Micro</code></td>
 </tr>
 <tr>
-<td>worker2 (192.168.55.12)</td>
-<td>control-plane + etcd</td>
-<td>HP T630, 8GB RAM, 128GB SSD</td>
+<td>CPU</td>
+<td>&#8539; burstable OCPU</td>
 </tr>
 <tr>
-<td>haproxy (192.168.0.45/46)</td>
-<td>load balancer</td>
-<td>Debian Server</td>
+<td>Memory</td>
+<td>1 GB RAM with 1 GB swap</td>
+</tr>
+<tr>
+<td>Operating system</td>
+<td>Ubuntu 24.04 Minimal</td>
+</tr>
+<tr>
+<td>Main services</td>
+<td>Caddy, WireGuard, Fail2ban, and PatchMon agent</td>
 </tr>
 </tbody>
 </table>
-<p>All three nodes run k3s in HA mode — every node is both control-plane and etcd member.</p>
-<hr />
-<h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Internet / LAN
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      │
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      ▼
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>HAProxy (192.168.0.45)
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  :80  → Traefik HTTP
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  :443 → Traefik HTTPS (TCP passthrough)
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  :6443 → k3s API Server (TCP passthrough)
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      │
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      ▼
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>3× k3s control-plane (embedded etcd)
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  master / worker1 / worker2
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>      │
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      ▼
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>Traefik Ingress Controller (L7)
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>      │
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>      ▼
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>Workloads (namespaced)
+<p>The instance is sufficient for proxying and tunnel termination, but it has limited CPU, memory, and public throughput. It is not treated as a media transcoding host or a general-purpose cloud server.</p>
+<h2 id="traffic-model">Traffic model<a class="headerlink" href="#traffic-model" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    U["Internet client"] --&gt; C["Relay Caddy"]
+    C --&gt; W["WireGuard tunnel"]
+    W --&gt; L["Logos gateway"]
+    L --&gt; S["Approved internal service"]</code></pre>
+<p>The layers have distinct responsibilities:</p>
+<ol>
+<li>public DNS directs an approved hostname to Relay;</li>
+<li>Caddy terminates HTTPS and applies proxy headers and logging;</li>
+<li>WireGuard transports the request to Logos;</li>
+<li>Logos forwards only the approved destination and service;</li>
+<li>source NAT provides a predictable return path where required;</li>
+<li>all other forwarding from the tunnel is rejected.</li>
+</ol>
+<p>This avoids publishing the home WAN address and does not require inbound forwarding on the home router. It does not remove the need for strong application authentication and timely patching.</p>
+<h2 id="wireguard">WireGuard<a class="headerlink" href="#wireguard" title="Permanent link">&para;</a></h2>
+<p>Relay is the stable endpoint. Logos is behind NAT and maintains the tunnel with a persistent keepalive.</p>
+<p>The peer configuration follows a least-route model: only the peer tunnel address and explicitly approved backend routes are included. Relay does not receive a route to the complete home LAN.</p>
+<p>Private keys, peer public keys, endpoint addresses, and the complete <code>AllowedIPs</code> values are maintained outside the public repository.</p>
+<h3 id="mtu">MTU<a class="headerlink" href="#mtu" title="Permanent link">&para;</a></h3>
+<p>The Oracle virtual network supports jumbo frames, but the complete public Internet path does not. Automatic MTU selection previously produced a much larger value on Relay than on Logos, causing fragmentation and avoidable retransmission risk.</p>
+<p>Both tunnel interfaces now use an explicit MTU of <code>1420</code>.</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[Interface]</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">MTU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1420</span>
 </span></code></pre></div>
-<hr />
-<h2 id="whats-running">What's Running<a class="headerlink" href="#whats-running" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Category</th>
-<th>Tool</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Cluster</td>
-<td>k3s v1.34.4</td>
-<td>Lightweight Kubernetes</td>
-</tr>
-<tr>
-<td>Load Balancer</td>
-<td>HAProxy</td>
-<td>External LB + TLS passthrough</td>
-</tr>
-<tr>
-<td>CNI</td>
-<td>Cilium v1.19.1</td>
-<td>eBPF networking, replaces Flannel</td>
-</tr>
-<tr>
-<td>Ingress</td>
-<td>Traefik v3</td>
-<td>L7 routing, built into k3s</td>
-</tr>
-<tr>
-<td>TLS</td>
-<td>cert-manager + Let's Encrypt</td>
-<td>Automatic certificates via DNS-01</td>
-</tr>
-<tr>
-<td>Storage</td>
-<td>Longhorn v1.11</td>
-<td>Distributed block storage with replication</td>
-</tr>
-<tr>
-<td>GitOps</td>
-<td>Flux v2.8.1</td>
-<td>Pull-based CD, image automation</td>
-</tr>
-<tr>
-<td>Secrets</td>
-<td>Sealed Secrets</td>
-<td>Encrypted secrets safe to commit to Git</td>
-</tr>
-<tr>
-<td>Firewall</td>
-<td>UFW + Ansible</td>
-<td>Per-node firewall, managed as code</td>
-</tr>
-<tr>
-<td>Monitoring</td>
-<td>kube-prometheus-stack</td>
-<td>Prometheus + Grafana + AlertManager</td>
-</tr>
-<tr>
-<td>Logging</td>
-<td>Loki + Promtail</td>
-<td>Centralized log aggregation</td>
-</tr>
-<tr>
-<td>Alerts</td>
-<td>AlertManager + ntfy</td>
-<td>Push notifications via self-hosted ntfy</td>
-</tr>
-<tr>
-<td>Object Storage</td>
-<td>Garage v2.2.0</td>
-<td>Self-hosted S3 (backups, Loki storage)</td>
-</tr>
-<tr>
-<td>Backup</td>
-<td>etcd snapshots + rsync</td>
-<td>Daily etcd backup to Debian server</td>
-</tr>
-<tr>
-<td>App</td>
-<td>clients-api (Spring Boot)</td>
-<td>Demo app with full CI/CD</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="documentation-structure">Documentation Structure<a class="headerlink" href="#documentation-structure" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>01-cluster-architecture/   HA control plane, etcd, node setup
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>02-networking/             HAProxy, Cilium CNI, NetworkPolicy
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>03-ingress-tls/            Traefik, cert-manager, Let's Encrypt
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>04-storage/                Longhorn distributed storage
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>05-gitops/                 Flux, GitOps workflow, image automation
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>06-security/               UFW firewall, Sealed Secrets
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>07-observability/          Prometheus, Grafana, Loki, AlertManager, Hubble
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>08-backup/                 etcd snapshots, Longhorn S3 backups
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>09-applications/           CI/CD pipeline, Helm charts, Progressive Delivery
+<p>The setting is validated at runtime because <code>wg syncconf</code> updates WireGuard peer state but does not change the interface MTU:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>wg-quick<span class="w"> </span>strip<span class="w"> </span>wg0<span class="w"> </span>&gt;/dev/null
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dev<span class="w"> </span>wg0<span class="w"> </span>mtu<span class="w"> </span><span class="m">1420</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>wg0
 </span></code></pre></div>
-<hr />
-<h2 id="git-repositories">Git Repositories<a class="headerlink" href="#git-repositories" title="Permanent link">&para;</a></h2>
+<p>When applying a generated configuration through <code>sudo</code>, a pipeline is preferred over shell process substitution because the elevated process may not be able to reopen the temporary file descriptor.</p>
+<h2 id="caddy">Caddy<a class="headerlink" href="#caddy" title="Permanent link">&para;</a></h2>
+<p>Caddy runs natively under systemd rather than in Docker. It terminates public HTTPS and forwards selected services through WireGuard.</p>
+<p>The configuration uses:</p>
 <ul>
-<li><strong><a href="https://github.com/kCn3333/k3s-homelab">k3s-homelab</a></strong> — cluster config, Flux manifests, GitOps source of truth</li>
-<li><strong><a href="https://github.com/kCn3333/clients-api">clients-api</a></strong> — application code + Helm chart + GitHub Actions pipeline</li>
+<li>one site block per public service;</li>
+<li>structured access logs;</li>
+<li>explicit security headers;</li>
+<li>streaming-friendly proxy behaviour where required;</li>
+<li>validation before every reload.</li>
 </ul>
-<hr />
-<h2 id="key-design-decisions">Key Design Decisions<a class="headerlink" href="#key-design-decisions" title="Permanent link">&para;</a></h2>
-<p><strong>Why k3s instead of kubeadm/vanilla k8s?</strong><br />
-Significantly lower overhead, embedded etcd for HA, ships with Traefik and Flannel out of the box. Production-grade but resource-efficient — important on 8GB RAM nodes.</p>
-<p><strong>Why pull-based GitOps (Flux) instead of push (standard CI)?</strong><br />
-The cluster doesn't need to be accessible from the internet. Flux pulls changes from Git, which is simpler and more secure in a homelab/firewall setup.</p>
-<p><strong>Why Cilium instead of Flannel?</strong><br />
-eBPF-based networking with lower overhead, built-in NetworkPolicy support, and Hubble for network observability. Flannel had reliability issues after hard reboots (tmpfs subnet.env loss).</p>
-<p><strong>Why Longhorn instead of local-path?</strong><br />
-Data replication between nodes — if one node dies, PVCs remain available. Essential for stateful workloads in a 3-node HA setup.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>caddy
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>caddy<span class="w"> </span>--no-pager
+</span></code></pre></div>
+<p>Public DNS remains DNS-only for traffic that must reach Relay directly. CDN proxying is not assumed to be appropriate for large media streams.</p>
+<h2 id="firewall-model">Firewall model<a class="headerlink" href="#firewall-model" title="Permanent link">&para;</a></h2>
+<p>Security is enforced in more than one place:</p>
+<ul>
+<li>the OCI network policy exposes only the required public services;</li>
+<li>the Relay host firewall ends in a default reject policy;</li>
+<li>WireGuard creates only the required routes;</li>
+<li>Logos accepts only explicitly approved tunnel traffic;</li>
+<li>remaining tunnel forwarding is dropped;</li>
+<li>Fail2ban protects SSH and selected Caddy authentication paths.</li>
+</ul>
+<p>Rules are ordered deliberately. An allow rule placed after a blanket reject or drop rule is ineffective even when its syntax is correct.</p>
+<p>The complete ruleset is excluded from this public documentation because it would disclose internal destinations and service paths.</p>
+<h2 id="known-technical-debt">Known technical debt<a class="headerlink" href="#known-technical-debt" title="Permanent link">&para;</a></h2>
+<p>The current WireGuard address space overlaps with an Oracle VCN range. Host routes make the current setup work, but the overlap makes diagnostics harder and increases the chance of a routing mistake.</p>
+<p>Renumbering is planned as a coordinated maintenance task. It must update both peers, firewall rules, persistent routes, monitoring, and dependent service configuration in one controlled change. It should not be attempted as an isolated emergency fix.</p>
+<h2 id="backups">Backups<a class="headerlink" href="#backups" title="Permanent link">&para;</a></h2>
+<p>The remote configuration collector preserves selected Relay configuration, including:</p>
+<ul>
+<li>Caddy configuration;</li>
+<li>WireGuard configuration;</li>
+<li>Fail2ban configuration;</li>
+<li>persistent firewall configuration.</li>
+</ul>
+<p>Private keys and recovery credentials also exist in a separate protected recovery location. A copy stored only inside the infrastructure it is expected to recover would not be sufficient.</p>
+<h2 id="operational-validation">Operational validation<a class="headerlink" href="#operational-validation" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show<span class="w"> </span>wg0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>wg0
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>wg-quick@wg0<span class="w"> </span>caddy<span class="w"> </span>fail2ban
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>systemctl<span class="w"> </span>--failed<span class="w"> </span>--no-legend<span class="w"> </span>--plain<span class="w"> </span>--no-pager
+</span></code></pre></div>
+<p>End-to-end validation additionally confirms:</p>
+<ul>
+<li>a recent WireGuard handshake;</li>
+<li>the expected route for every approved backend;</li>
+<li>increasing firewall counters for the tested path;</li>
+<li>a valid public certificate;</li>
+<li>a successful backend response through Caddy;</li>
+<li>no unintended reachability to other LAN services.</li>
+</ul>
+<p>For failure diagnosis, see <a href="../troubleshooting/wireguard-relay.md">WireGuard relay troubleshooting</a>.</p>
 
 
 
@@ -3455,7 +3486,7 @@ Data replication between nodes — if one node dies, PVCs remain available. Esse
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 23, 2026 08:40:38 UTC"><span class="timeago" datetime="2026-03-23T08:40:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 23, 2026 08:40:38 UTC">2026-03-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:37:30 UTC"><span class="timeago" datetime="2026-08-21T12:37:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:37:30 UTC">2026-08-21</span>
   </span>
 
     
@@ -3465,7 +3496,7 @@ Data replication between nodes — if one node dies, PVCs remain available. Esse
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:37:30 UTC"><span class="timeago" datetime="2026-08-21T12:37:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:37:30 UTC">2026-08-21</span>
   </span>
 
     
