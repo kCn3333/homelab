@@ -25,7 +25,7 @@ The lab started as a single low-power Debian server and gradually evolved into a
 ```text
 Internet
    │
-   ├── Oracle Relay
+   ├── Oracle Relay VPS (Ubuntu 24.04 LTS)
    │     ├── Caddy public reverse proxy
    │     └── WireGuard endpoint
    │              │
@@ -33,17 +33,20 @@ Internet
    │           Logos
    │     main operations server
    │
-LAN ── Zion (Proxmox VE)
-       ├── Logos VM
-       ├── AdGuard Home LXC
-       ├── Caddy LXC
-       ├── HAProxy LXC
-       ├── Docker Media LXC
-       ├── Home Assistant LXC
-       └── Proxmox Backup Server LXC
+LAN├─ - - - - - -
+    ├── Zion (Proxmox VE)
+    |     ├── Logos VM (Ubuntu 26.04 LTS)
+    |     ├── Kali VM (Kali Linux)
+    |     ├── AdGuard Home LXC
+    |     ├── Caddy LXC
+    |     ├── HAProxy LXC
+    |     ├── Docker Media LXC
+    |     ├── Home Assistant LXC
+    |     └── Proxmox Backup Server LXC
+    └── Oracle Legacy (Debian 13)
 
 Separate learning environment:
-3 × HP T630 ── K3s HA cluster with embedded etcd
+3 × HP T630 ── K3s HA cluster with embedded etcd (Ubuntu 24.04 LTS)
 ```
 
 Zion provides the virtualization layer. Logos is the main operational server and runs more than Docker alone: it is also the automation controller, backup coordinator, WireGuard gateway, and home for several supporting services. Dedicated LXC containers isolate network, media, home-automation, and backup workloads.
@@ -57,10 +60,10 @@ Zion provides the virtualization layer. Logos is the main operational server and
 | Motherboard | Gigabyte Z370 HD3, LGA 1151 |
 | CPU | Intel Core i5-8400, 6 cores at 2.8 GHz |
 | Memory | Kingston DDR4-2666 |
-| CPU cooler | BeQuiet! Pure Rock |
-| Power supply | BeQuiet! Pure Power 13 850 W |
+| CPU cooler | be quiet! Pure Rock |
+| Power supply | be quiet! Pure Power 13 850 W |
 | System storage | Kingston KC3000 2 TB NVMe |
-| Backup storage | Seagate IronWolf 4 TB SATA |
+| Data storage | Seagate IronWolf 4 TB SATA |
 | Hypervisor | Proxmox VE |
 
 The platform is tuned for low idle power consumption while retaining enough headroom for virtualization, storage, and future hardware expansion.
@@ -86,7 +89,8 @@ All three nodes participate in the control plane and etcd quorum. The cluster is
 | System | Main responsibilities |
 |---|---|
 | **Zion** | Proxmox VE, VM/LXC lifecycle, local storage and hardware management |
-| **Logos** | Main operational server, Docker workloads, Semaphore, Kopia, Garage, WireGuard gateway and supporting automation |
+| **Logos VM** | Main operational server, Docker workloads, Semaphore, Kopia, Garage, WireGuard gateway and supporting automation |
+| **Kali VM** | On-demand security testing, network diagnostics and lab tooling |
 | **Caddy LXC** | Internal HTTPS reverse proxy and certificate automation |
 | **AdGuard Home LXC** | Local DNS, filtering and internal DNS rewrites |
 | **HAProxy LXC** | Load balancing for the K3s API and ingress traffic |
@@ -108,6 +112,7 @@ All three nodes participate in the control plane and etcd quorum. The cluster is
 | Backups | Proxmox Backup Server, Kopia, Garage S3 and configuration collection |
 | Monitoring | Uptime Kuma, PatchMon, Prometheus, Grafana and ntfy notifications |
 | Home automation | Home Assistant, ESPHome and Zigbee |
+| Security testing | Kali Linux and isolated, on-demand diagnostic tooling |
 
 ## Documentation Map
 
