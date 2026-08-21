@@ -8,9 +8,22 @@ nav:
     - 모 Network:  infrastructure
     - ⛃ project cluster: https://kcn333.com/#/projects/cluster
     - ⛂ project server: https://kcn333.com/#/projects/home-server
+    - ⛂ project server v2: https://kcn333.com/#/projects/home-server2
     - 🌡 project fan-controller: https://github.com/kCn3333/rack-fan-controller
 
   - ⏻ Provisioning:
+    - ⛂ Zion Server:
+      - Overview and Proxmox: zion/platform.md
+      - Logos Operations Server: zion/logos.md
+      - Internal Caddy: zion/caddy.md
+      - HAProxy for K3s: zion/haproxy.md
+      - Supporting LXC Services: zion/supporting-services.md
+      - Home Assistant and Zigbee: zion/home-assistant.md
+      - Backup and Recovery: zion/backup-and-recovery.md
+      - Maintenance and Updates: zion/maintenance.md
+      - Migration Journal: zion/migration.md
+
+
     - ⛃ Cluster Deployment: 
       - 🖴 Bare Metal: provisioning
       - ⛭ Kubernetes: kubernetes
