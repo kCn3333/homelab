@@ -1,137 +1,159 @@
-# 🏠 [kCn3333/homelab] Documentation
-
-
+# 🏠 kCn Homelab
 
 <div align="center">
 
-[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat-square&logo=github&label=Pages%20Build&color=4CAF50)](https://homelab.kcn333.com)
-[![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://homelab.kcn333.com)
-[![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat-square)](LICENSE)
-
+[![Documentation](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square&logo=materialformkdocs&logoColor=white)](https://homelab.kcn333.com/)
+[![GitHub Pages](https://github.com/kCn3333/homelab/actions/workflows/main.yml/badge.svg)](https://github.com/kCn3333/homelab/actions/workflows/main.yml)
+[![Service Status](https://img.shields.io/badge/services-status-4CAF50?style=flat-square&logo=statuspage&logoColor=white)](https://status.kcn333.com/)
 
 </div>
 
+> A personal infrastructure playground where containers run wild, backups are tested, and networking eventually works™.
 
-> My personal infrastructure playground – where containers run wild and networking should just work smoothly ™
+This repository contains the documentation for my homelab: the hardware, provisioning notes, service architecture, automation, migrations, and the occasional troubleshooting story that was too useful to forget.
 
-## 📚 What's This?
+The lab started as a single low-power Debian server and gradually evolved into a Proxmox-based platform with dedicated VMs and LXC containers, a small K3s learning cluster, layered backups, and an external WireGuard relay. It is built primarily for learning and everyday self-hosting—not for pretending that three thin clients are a hyperscale datacenter.
 
-This repo contains my homelab documentation, configs, and infrastructure notes. Think of it as a digital garden where I document everything I learn while breaking and fixing things in my lab.
+**[Read the full documentation](https://homelab.kcn333.com/)** · **[Check service status](https://status.kcn333.com/)**
 
-**📖 [Read the full documentation →](https://homelab.kcn333.com/)**
+## Current Architecture
 
-**🟢 [Check what is up →](https://status.kcn333.com/)**
+```text
+Internet
+   │
+   ├── Oracle Relay
+   │     ├── Caddy public reverse proxy
+   │     └── WireGuard endpoint
+   │              │
+   │              ▼
+   │           Logos
+   │     main operations server
+   │
+LAN ── Zion (Proxmox VE)
+       ├── Logos VM
+       ├── AdGuard Home LXC
+       ├── Caddy LXC
+       ├── HAProxy LXC
+       ├── Docker Media LXC
+       ├── Home Assistant LXC
+       └── Proxmox Backup Server LXC
 
-
-## 🛠️ The Stack
-
-### Hardware
-
-<details>
-<summary><b>🖥️ Main Server</b> (click to expand)</summary>
-
-- ![DELL](https://img.shields.io/badge/Dell_Wyse_5070-555555?style=flat-square&logo=dell&logoColor=white&labelColor=007bff)
-  - **CPU:** Intel Silver J5005 (4C/4T) Burst 2.80 GHz, Base 1.50 GHz, 4MB Cache, TDP 10 W
-  - **RAM:** Samsung 16GB DDR4 2666Mhz
-  - **Storage:** 
-    - 1x 256GB SSD M.2 SATA
-    - 2x 1TB HDD 2,5" WD Blue
-  - **Network:** 1GbE
-  - **OS:** Debian 13 
-</details>
-
-<details>
-<summary><b>🔧 Cluster Nodes (x3)</b></summary>
-
-- ![HP](https://img.shields.io/badge/HP_T630-555555?style=flat-square&logo=hp&logoColor=white&labelColor=0096D6)
-  - **CPU:** AMD GX-420GI (4C/4T), Burst 2.2 GHz, 15 W TDP
-  - **RAM:** 8GB RAM 
-  - **Storage:** 128 SSD
-- **Purpose:** Kubernetes worker nodes
-</details>
-
-<details>
-<summary><b>🌐 Network</b></summary>
-
-- ![UniFi](https://img.shields.io/badge/UniFi-555555?style=flat-square&logo=ubiquiti&logoColor=white&labelColor=0556C9)
-  - **Router:** UniFi Cloud Gateway Ultra
-  - **Core Switch:** Ubiquiti USW-Lite-8-PoE
-  - **WiFi:** UniFi AP U6+, Ubiquiti Loco M2
-</details>
-
-### 🚀 Services Running
-
-### Core Infrastructure
----
-| Service | Role in Lab | Status |
-| :--- | :--- | :--- |
-| ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) | Containerization & Runtime | <img src="https://status.kcn333.com/api/badge/1/status?upColor=4CAF50&downColor=f38ba8" alt="Docker Status"> |
-| ![Pi-Hole](https://img.shields.io/badge/Pi--hole-96060C?style=flat-square&logo=pi-hole&logoColor=white) | Network-wide Ad Blocking & DNS | <img src="https://status.kcn333.com/api/badge/6/status?upColor=4CAF50&downColor=f38ba8" alt="Pi-Hole Status"> |
-| ![Nginx Proxy Manager](https://img.shields.io/badge/Nginx_Proxy_Manager-232F3E?style=flat-square&logo=nginx&logoColor=white) | Reverse Proxy Management | <img src="https://status.kcn333.com/api/badge/4/status?upColor=4CAF50&downColor=f38ba8" alt="NPM Status"> |
-| ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=flat-square&logo=cloudflare&logoColor=white) | Secure Tunnels & DNS | <img src="https://status.kcn333.com/api/badge/11/status?upColor=4CAF50&downColor=f38ba8" alt="Cloudflare Status"> |
-| ![Twingate](https://img.shields.io/badge/Twingate-1C1C1C?style=flat-square&logo=twingate&logoColor=white) | Zero-trust Network Access | <img src="https://status.kcn333.com/api/badge/13/status?upColor=4CAF50&downColor=f38ba8" alt="Twingate Status"> |
-| ![Watchtower](https://img.shields.io/badge/Watchtower-5E60CE?style=flat-square&logo=watchtower&logoColor=white) | Auto-update Docker Containers | <img src="https://status.kcn333.com/api/badge/10/status?upColor=4CAF50&downColor=f38ba8" alt="Watchtower Status"> |
-
-### Applications
----
-| Application | Role in Lab | Status |
-| :--- | :--- | :--- |
-| ![Portainer](https://img.shields.io/badge/Portainer-13BEF9?style=flat-square&logo=portainer&logoColor=white) | Docker Management GUI | <img src="https://status.kcn333.com/api/badge/24/status?upColor=4CAF50&downColor=f38ba8" alt="Portainer Status"> |
-| ![n8n](https://img.shields.io/badge/n8n-FF6584?style=flat-square&logo=n8n&logoColor=white) | Workflow Automation | <img src="https://status.kcn333.com/api/badge/20/status?upColor=4CAF50&downColor=f38ba8" alt="n8n Status"> |
-| ![Duplicati](https://img.shields.io/badge/Duplicati-4ea2e0?style=flat-square&logo=duplicati&logoColor=white) | Backup Solution | <img src="https://status.kcn333.com/api/badge/19/status?upColor=4CAF50&downColor=f38ba8" alt="Duplicati Status"> |
-| ![Nextcloud](https://img.shields.io/badge/Nextcloud-0082C9?style=flat-square&logo=nextcloud&logoColor=white) | Personal Cloud & Collaboration | <img src="https://status.kcn333.com/api/badge/5/status?upColor=4CAF50&downColor=f38ba8" alt="Nextcloud Status"> |
-| ![Gitea](https://img.shields.io/badge/Gitea-609926?style=flat-square&logo=gitea&logoColor=white) | Self-hosted Git Service | <img src="https://status.kcn333.com/api/badge/16/status?upColor=4CAF50&downColor=f38ba8" alt="Gitea Status"> |
-| ![Vaultwarden](https://img.shields.io/badge/Vaultwarden-175DDC?style=flat-square&logo=bitwarden&logoColor=white) | Password Manager (Bitwarden) | <img src="https://status.kcn333.com/api/badge/12/status?upColor=4CAF50&downColor=f38ba8" alt="Vaultwarden Status"> |
-
-### Monitoring
----
-| Application | Role in Lab |
-| :--- | :--- |
-| ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat-square&logo=grafana&logoColor=white) | Metrics Visualization |
-| ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white) | Metrics Collection |
-| ![Uptime Kuma](https://img.shields.io/badge/Uptime_Kuma-4CAF50?style=flat-square&logo=uptime-kuma&logoColor=white) | Service Uptime Monitoring |
-
-## 📝 Documentation Structure
-
-```
-📂 docs/
-├── 📂 infrastructure/     # Server & network setup
-├── 📂 provisioning        # Setup & System hardening
-├── 📂 applications/       # App deploying & configurations
-└── 📂 automation/         # Scripts & workflows
+Separate learning environment:
+3 × HP T630 ── K3s HA cluster with embedded etcd
 ```
 
-## 🎯 Goals
+Zion provides the virtualization layer. Logos is the main operational server and runs more than Docker alone: it is also the automation controller, backup coordinator, WireGuard gateway, and home for several supporting services. Dedicated LXC containers isolate network, media, home-automation, and backup workloads.
 
-- Build a stable, production-ready homelab
-- Learn container orchestration
-- Implement proper monitoring
-- Set up automated backups
-- Migrate to Kubernetes
-- Add CI/CD pipeline
-- Implement GitOps workflow
+## Hardware
 
-## 🤝 Contributing
+### Zion — main virtualization server
 
-This is my personal documentation, but feel free to:
-- Open issues if you spot errors
-- Submit PRs for typos or improvements
-- Fork for your own homelab setup
+| Component | Specification |
+|---|---|
+| Motherboard | Gigabyte Z370 HD3, LGA 1151 |
+| CPU | Intel Core i5-8400, 6 cores at 2.8 GHz |
+| Memory | Kingston DDR4-2666 |
+| CPU cooler | be quiet! Pure Rock |
+| Power supply | be quiet! Pure Power 13 850 W |
+| System storage | Kingston KC3000 2 TB NVMe |
+| Backup storage | Seagate IronWolf 4 TB SATA |
+| Hypervisor | Proxmox VE |
 
-## 📜 License
+The platform is tuned for low idle power consumption while retaining enough headroom for virtualization, storage, and future hardware expansion.
 
-MIT License - do whatever you want with this!
+### K3s learning cluster
 
-## 🔗 Links
+| Quantity | Hardware | Role |
+|---:|---|---|
+| 3 | HP T630 thin client, 8 GB RAM, 128 GB SSD | K3s control plane and embedded etcd |
 
-- 📖 **[Full Documentation](https://homelab.kcn333.com/)**
-- 💬 **[Discussions](https://github.com/kCn3333/homelab/discussions)**
-- 🐛 **[Report Issues](https://github.com/kCn3333/homelab/issues)**
+All three nodes participate in the control plane and etcd quorum. The cluster is powered on when needed and is used mainly for learning Kubernetes, GitOps, storage, networking, and observability.
+
+### Network
+
+- UniFi Cloud Gateway Ultra
+- UniFi USW-Lite-8-PoE
+- UniFi U6+ access point
+- Separate network segments for trusted devices, IoT, and the K3s lab
+- AdGuard Home for local DNS and filtering
+
+## What Runs Where
+
+| System | Main responsibilities |
+|---|---|
+| **Zion** | Proxmox VE, VM/LXC lifecycle, local storage and hardware management |
+| **Logos** | Main operational server, Docker workloads, Semaphore, Kopia, Garage, WireGuard gateway and supporting automation |
+| **Caddy LXC** | Internal HTTPS reverse proxy and certificate automation |
+| **AdGuard Home LXC** | Local DNS, filtering and internal DNS rewrites |
+| **HAProxy LXC** | Load balancing for the K3s API and ingress traffic |
+| **Docker Media LXC** | Jellyfin and the Arr media automation stack |
+| **Home Assistant LXC** | Home Assistant, ESPHome and Zigbee device access |
+| **PBS LXC** | Proxmox VM and container backups |
+| **Oracle Relay** | Public Caddy endpoint and WireGuard relay into explicitly allowed local services |
+| **K3s cluster** | Flux-managed Kubernetes learning environment with Cilium, Traefik, Longhorn and observability tooling |
+
+## Main Building Blocks
+
+| Area | Tools and services |
+|---|---|
+| Virtualization | Proxmox VE, LXC, KVM |
+| Containers | Docker, Docker Compose, Portainer |
+| Kubernetes | K3s, Flux, Cilium, Traefik, Longhorn, CloudNativePG |
+| Networking | UniFi, AdGuard Home, Caddy, HAProxy, WireGuard |
+| Automation | Ansible, Semaphore, GitHub Actions, Flux GitOps |
+| Backups | Proxmox Backup Server, Kopia, Garage S3 and configuration collection |
+| Monitoring | Uptime Kuma, PatchMon, Prometheus, Grafana and ntfy notifications |
+| Home automation | Home Assistant, ESPHome and Zigbee |
+
+## Documentation Map
+
+The documentation is organized around how the homelab was designed, built, and operated:
+
+```text
+docs/
+├── infrastructure/   physical hardware and network design
+├── provisioning/     system deployment and platform configuration
+├── applications/     apps, configs 
+├── automations/      playbooks, workflows, infrastructure as a code
+└── troubleshooting/  incidents, root causes and verified fixes
+```
+
+The site navigation also links to dedicated application, configuration, and automation repositories where the implementations themselves are maintained. This repository focuses on architecture, decisions, operational knowledge, and lessons learned.
+
+## Related Repositories
+
+- [k3s-homelab](https://github.com/kCn3333/k3s-homelab) — Flux source of truth for the K3s cluster
+- [homelab-ansible](https://github.com/kCn3333/homelab-ansible) — host maintenance and cluster lifecycle automation
+- [docker-compose](https://github.com/kCn3333/docker-compose) — Docker Compose definitions
+- [homelab-terraform](https://github.com/kCn3333/homelab-terraform) — Terraform experiments and infrastructure code
+- [rack-fan-controller](https://github.com/kCn3333/rack-fan-controller) — custom rack temperature and fan controller
+
+## Documentation Principles
+
+- Document the current state separately from migration history.
+- Keep commands reproducible and explain why they are used.
+- Record failures as troubleshooting notes instead of quietly deleting them.
+- Prefer automation, but keep emergency procedures understandable without it.
+- Test backups and recovery paths rather than trusting a green status icon.
+- Keep secrets, credentials, public IP addresses, administrative endpoints, and private recovery details out of this public repository.
+
+## Current Direction
+
+- Finish documenting the migration from the legacy server to Zion and Logos
+- Improve recovery documentation and regularly validate backup restores
+- Continue moving routine maintenance into Ansible and Semaphore
+- Develop the K3s cluster as an occasional, power-efficient learning platform
+- Keep the homelab useful, understandable, and fun to operate
+
+## Contributing
+
+This is a personal knowledge base, but corrections and suggestions are welcome. If you find an error, feel free to open an issue or submit a pull request.
 
 ---
 
 <div align="center">
-  
-**Built with** [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) • **Hosted on** GitHub Pages
+
+Built with curiosity, coffee, and a very reasonable number of containers.<br>
+Documentation powered by [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and published with GitHub Pages.
 
 </div>
