@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/kubernetes/03-ingress-tls/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/zion/0-power-management/">
       
       
-        <link rel="prev" href="../02-networking/">
+        <link rel="prev" href="../0-platform/">
       
       
-        <link rel="next" href="../04-storage/">
+        <link rel="next" href="../1-migration/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Ingress & TLS - > Homelab Documentation</title>
+        <title>Energy Optimization - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ingress-tls" class="md-skip">
+        <a href="#energy-optimization" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ingress &amp; TLS
+              Energy Optimization
             
           </span>
         </div>
@@ -601,18 +601,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
         
           
           <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
@@ -633,7 +635,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -651,7 +653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/0-platform/" class="md-nav__link">
+      <a href="../0-platform/" class="md-nav__link">
         
   
   
@@ -676,10 +678,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../zion/0-power-management/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Energy Optimization
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -695,6 +724,153 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#optimization-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimization goals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firmware-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firmware configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Firmware configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu-power-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU power management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chipset-and-pcie-power-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chipset and PCIe power management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erp-and-wake-on-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ErP and Wake-on-LAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unused-onboard-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unused onboard devices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mechanical-disk-spindown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mechanical disk spindown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#powertop-at-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PowerTOP at boot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observed-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observed result
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -707,7 +883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/1-migration/" class="md-nav__link">
+      <a href="../1-migration/" class="md-nav__link">
         
   
   
@@ -735,7 +911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/3-backup-and-recovery/" class="md-nav__link">
+      <a href="../3-backup-and-recovery/" class="md-nav__link">
         
   
   
@@ -763,7 +939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/4-logos/" class="md-nav__link">
+      <a href="../4-logos/" class="md-nav__link">
         
   
   
@@ -791,7 +967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/caddy/" class="md-nav__link">
+      <a href="../caddy/" class="md-nav__link">
         
   
   
@@ -819,7 +995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/haproxy/" class="md-nav__link">
+      <a href="../haproxy/" class="md-nav__link">
         
   
   
@@ -847,7 +1023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/home-assistant/" class="md-nav__link">
+      <a href="../home-assistant/" class="md-nav__link">
         
   
   
@@ -875,7 +1051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/supporting-services/" class="md-nav__link">
+      <a href="../supporting-services/" class="md-nav__link">
         
   
   
@@ -991,20 +1167,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
           <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
@@ -1025,7 +1199,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1207,20 +1381,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
         
           
           <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
@@ -1241,7 +1413,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_3_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1259,7 +1431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../00-overview/" class="md-nav__link">
+      <a href="../../kubernetes/00-overview/" class="md-nav__link">
         
   
   
@@ -1287,7 +1459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-cluster-architecture/" class="md-nav__link">
+      <a href="../../kubernetes/01-cluster-architecture/" class="md-nav__link">
         
   
   
@@ -1315,7 +1487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-networking/" class="md-nav__link">
+      <a href="../../kubernetes/02-networking/" class="md-nav__link">
         
   
   
@@ -1340,37 +1512,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ingress &amp; TLS
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../kubernetes/03-ingress-tls/" class="md-nav__link">
         
   
   
@@ -1386,247 +1531,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#traefik" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Traefik
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Traefik">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#klipper-lb-svclb-traefik" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        klipper-lb (svclb-traefik)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuring-traefik-in-k3s" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuring Traefik in k3s
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#traefik-v2-vs-v3-breaking-change" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Traefik v2 vs v3 breaking change
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#traefik-dashboard-with-basicauth" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Traefik Dashboard with BasicAuth
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#minimal-ingress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Minimal Ingress
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#common-debugging-pitfall" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common debugging pitfall
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#temporary-access-without-ingress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Temporary access without Ingress
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cert-manager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        cert-manager
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="cert-manager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installation-via-helm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation via Helm
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#issuer-vs-clusterissuer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Issuer vs ClusterIssuer
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#lets-encrypt-staging-vs-production" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Let's Encrypt staging vs production
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dns-01-challenge-certificates-without-exposing-the-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        DNS-01 Challenge — certificates without exposing the cluster
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cloudflare-api-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cloudflare API Token
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clusterissuer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ClusterIssuer
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#certificate-resource" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Certificate resource
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#certificate-per-namespace" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Certificate per namespace
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cert-manager-resource-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        cert-manager resource flow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debugging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Debugging
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1639,7 +1543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-storage/" class="md-nav__link">
+      <a href="../../kubernetes/04-storage/" class="md-nav__link">
         
   
   
@@ -1667,7 +1571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-gitops/" class="md-nav__link">
+      <a href="../../kubernetes/05-gitops/" class="md-nav__link">
         
   
   
@@ -1695,7 +1599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-security/" class="md-nav__link">
+      <a href="../../kubernetes/06-security/" class="md-nav__link">
         
   
   
@@ -1723,7 +1627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07-observability/" class="md-nav__link">
+      <a href="../../kubernetes/07-observability/" class="md-nav__link">
         
   
   
@@ -1751,7 +1655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08-backup/" class="md-nav__link">
+      <a href="../../kubernetes/08-backup/" class="md-nav__link">
         
   
   
@@ -1779,7 +1683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09-applications/" class="md-nav__link">
+      <a href="../../kubernetes/09-applications/" class="md-nav__link">
         
   
   
@@ -3407,22 +3311,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#traefik" class="md-nav__link">
+  <a href="#optimization-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Traefik
+        Optimization goals
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Traefik">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firmware-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firmware configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Firmware configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#klipper-lb-svclb-traefik" class="md-nav__link">
+  <a href="#cpu-power-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        klipper-lb (svclb-traefik)
+        CPU power management
       
     </span>
   </a>
@@ -3430,10 +3345,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-traefik-in-k3s" class="md-nav__link">
+  <a href="#chipset-and-pcie-power-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuring Traefik in k3s
+        Chipset and PCIe power management
       
     </span>
   </a>
@@ -3441,10 +3356,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#traefik-v2-vs-v3-breaking-change" class="md-nav__link">
+  <a href="#erp-and-wake-on-lan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Traefik v2 vs v3 breaking change
+        ErP and Wake-on-LAN
       
     </span>
   </a>
@@ -3452,43 +3367,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#traefik-dashboard-with-basicauth" class="md-nav__link">
+  <a href="#unused-onboard-devices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Traefik Dashboard with BasicAuth
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#minimal-ingress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Minimal Ingress
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#common-debugging-pitfall" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common debugging pitfall
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#temporary-access-without-ingress" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Temporary access without Ingress
+        Unused onboard devices
       
     </span>
   </a>
@@ -3501,129 +3383,57 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cert-manager" class="md-nav__link">
+  <a href="#mechanical-disk-spindown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        cert-manager
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="cert-manager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installation-via-helm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation via Helm
+        Mechanical disk spindown
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#issuer-vs-clusterissuer" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#powertop-at-boot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Issuer vs ClusterIssuer
+        PowerTOP at boot
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#lets-encrypt-staging-vs-production" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Let's Encrypt staging vs production
+        Validation
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#dns-01-challenge-certificates-without-exposing-the-cluster" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#observed-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DNS-01 Challenge — certificates without exposing the cluster
+        Observed result
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#cloudflare-api-token" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#operational-policy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cloudflare API Token
+        Operational policy
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clusterissuer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ClusterIssuer
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#certificate-resource" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Certificate resource
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#certificate-per-namespace" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Certificate per namespace
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cert-manager-resource-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        cert-manager resource flow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debugging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Debugging
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3648,298 +3458,254 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/kubernetes/03-ingress-tls.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/zion/0-power-management.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="ingress-tls">Ingress &amp; TLS<a class="headerlink" href="#ingress-tls" title="Permanent link">&para;</a></h1>
-<p>Traefik is the ingress controller (ships with k3s), cert-manager handles automatic TLS certificate issuance via Let's Encrypt.</p>
-<hr />
-<h2 id="traefik">Traefik<a class="headerlink" href="#traefik" title="Permanent link">&para;</a></h2>
-<p>Traefik is a reverse proxy and L7 ingress controller. It receives traffic from HAProxy (already past the load balancer layer), matches hostnames and paths against Ingress/IngressRoute rules, and forwards to the appropriate Service.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>HAProxy (L4, TCP passthrough)
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      │
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      ▼
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Traefik (L7, Ingress Controller)
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>      │
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      ├── nginx.cluster.kcn333.com → Service: nginx → Pods
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>      ├── grafana.cluster.kcn333.com → Service: grafana → Pods
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      └── clients-api.cluster.kcn333.com → Service: clients-api → Pods
-</span></code></pre></div>
-<h3 id="klipper-lb-svclb-traefik">klipper-lb (svclb-traefik)<a class="headerlink" href="#klipper-lb-svclb-traefik" title="Permanent link">&para;</a></h3>
-<p>k3s ships with a DaemonSet called <code>klipper-lb</code> that simulates a cloud LoadBalancer on bare metal. Without it, a Service of type <code>LoadBalancer</code> would sit in <code>&lt;pending&gt;</code> forever. It works via iptables rules on each node.</p>
-<h3 id="configuring-traefik-in-k3s">Configuring Traefik in k3s<a class="headerlink" href="#configuring-traefik-in-k3s" title="Permanent link">&para;</a></h3>
-<p>k3s manages Traefik through its own Helm mechanism. <strong>Don't edit Traefik's config directly</strong> — k3s will overwrite it. Use a <code>HelmChartConfig</code> resource instead:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm.cattle.io/v1</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HelmChartConfig</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span><span class="w">        </span><span class="c1"># must match the HelmChart name exactly</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kube-system</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">valuesContent</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="no">ports:</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="no">web:</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="no">redirections:</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">          </span><span class="no">entryPoint:</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">            </span><span class="no">to: websecure</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">            </span><span class="no">scheme: https</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">            </span><span class="no">permanent: true</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="no">api:</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="no">dashboard: true</span>
-</span></code></pre></div>
-<p>Apply and verify:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>helmchartconfig-traefik.yaml
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>helmchartconfig<span class="w"> </span>-n<span class="w"> </span>kube-system
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>helm<span class="w"> </span>get<span class="w"> </span>values<span class="w"> </span>traefik<span class="w"> </span>-n<span class="w"> </span>kube-system
-</span></code></pre></div></p>
-<h3 id="traefik-v2-vs-v3-breaking-change">Traefik v2 vs v3 breaking change<a class="headerlink" href="#traefik-v2-vs-v3-breaking-change" title="Permanent link">&para;</a></h3>
-<p>The HTTP→HTTPS redirect config changed between versions:</p>
+<h1 id="energy-optimization">Energy Optimization<a class="headerlink" href="#energy-optimization" title="Permanent link">&para;</a></h1>
+<p>Zion is designed to remain available as the main virtualization platform without wasting power while idle. The optimization work therefore focuses on reducing the baseline consumption of the motherboard, CPU, storage, and unused peripherals while preserving stability, remote administration, and the ability to expand the platform later.</p>
+<p>The settings documented here describe the configuration validated on Zion's Gigabyte Z370 HD3 and Intel Core i5-8400 platform. They are not universal recommendations for unrelated hardware.</p>
+<div class="admonition warning">
+<p class="admonition-title">Stability comes first</p>
+<p>Power-saving options can affect PCIe devices, storage latency, USB peripherals, network adapters, and wake behaviour. Apply changes in small groups, keep local console access available, and validate the platform under both idle and normal workload conditions.</p>
+</div>
+<h2 id="optimization-goals">Optimization goals<a class="headerlink" href="#optimization-goals" title="Permanent link">&para;</a></h2>
+<ul>
+<li>allow the CPU package to enter deeper idle states;</li>
+<li>reduce unnecessary activity on PCIe and chipset links;</li>
+<li>stop the mechanical data disk during sufficiently long idle periods;</li>
+<li>disable unused onboard devices;</li>
+<li>reapply safe operating-system tunables after every boot;</li>
+<li>retain integrated graphics for emergency console access and Intel Quick Sync;</li>
+<li>keep virtualization, networking, backups, and storage reliable.</li>
+</ul>
+<h2 id="firmware-configuration">Firmware configuration<a class="headerlink" href="#firmware-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="cpu-power-management">CPU power management<a class="headerlink" href="#cpu-power-management" title="Permanent link">&para;</a></h3>
+<p>The following UEFI settings allow the processor and the complete CPU package to enter deeper idle states and return to full performance when work arrives.</p>
 <table>
 <thead>
 <tr>
-<th>Version</th>
-<th>Config key</th>
+<th>Setting</th>
+<th>Value</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>v2</td>
-<td><code>redirectTo.port: websecure</code></td>
+<td>Intel CPU C-States Control</td>
+<td>Enabled</td>
+<td>Enables processor idle states</td>
 </tr>
 <tr>
-<td>v3</td>
-<td><code>redirections.entryPoint.to: websecure</code></td>
+<td>Package C-State Limit</td>
+<td>C10</td>
+<td>Allows the deepest supported package state</td>
+</tr>
+<tr>
+<td>Intel Speed Shift Technology</td>
+<td>Enabled</td>
+<td>Lets the CPU adjust performance states quickly</td>
+</tr>
+<tr>
+<td>Enhanced Halt State (C1E)</td>
+<td>Enabled</td>
+<td>Reduces power use during light idle periods</td>
+</tr>
+<tr>
+<td>C3, C6/C7, C8 and C10 support</td>
+<td>Enabled</td>
+<td>Enables progressively deeper idle states</td>
+</tr>
+<tr>
+<td>Enhanced Intel SpeedStep (EIST)</td>
+<td>Enabled</td>
+<td>Allows dynamic frequency and voltage scaling</td>
+</tr>
+<tr>
+<td>Race to Halt</td>
+<td>Enabled</td>
+<td>Completes short workloads quickly and returns to idle</td>
+</tr>
+<tr>
+<td>Energy Efficient Turbo</td>
+<td>Enabled</td>
+<td>Favors efficient turbo behaviour</td>
+</tr>
+<tr>
+<td>Voltage Optimization</td>
+<td>Enabled</td>
+<td>Enables platform-managed voltage reduction</td>
 </tr>
 </tbody>
 </table>
-<p>Traefik v3 silently ignores unknown config fields — no error in logs. Always check the version and reference the correct docs.</p>
-<h3 id="traefik-dashboard-with-basicauth">Traefik Dashboard with BasicAuth<a class="headerlink" href="#traefik-dashboard-with-basicauth" title="Permanent link">&para;</a></h3>
-<p>The dashboard needs an IngressRoute (not a standard Ingress) since it points to <code>api@internal</code>, a Traefik internal service.</p>
-<p><strong>Generate password hash:</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2-utils
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>htpasswd<span class="w"> </span>-nb<span class="w"> </span>admin<span class="w"> </span>your-password
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Output: admin:$apr1$xxxxx$yyyyyyy</span>
-</span></code></pre></div></p>
-<p>Store the hash as a SealedSecret (see <a href="../06-security#sealed-secrets">security/sealed-secrets.md</a>).</p>
-<p><strong>Middleware:</strong>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik.io/v1alpha1</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Middleware</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik-dashboard-auth</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">basicAuth</span><span class="p">:</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik-dashboard-auth</span>
-</span></code></pre></div></p>
-<p><strong>IngressRoute:</strong>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik.io/v1alpha1</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IngressRoute</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik-dashboard</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">entryPoints</span><span class="p">:</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">websecure</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">routes</span><span class="p">:</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Host(`traefik.cluster.kcn333.com`)</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">      </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rule</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">      </span><span class="nt">middlewares</span><span class="p">:</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik-dashboard-auth</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">          </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">      </span><span class="nt">services</span><span class="p">:</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api@internal</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">          </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TraefikService</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik-dashboard-tls</span>
-</span></code></pre></div></p>
-<h3 id="minimal-ingress">Minimal Ingress<a class="headerlink" href="#minimal-ingress" title="Permanent link">&para;</a></h3>
-<p>The three things needed for a working Ingress:</p>
-<ol>
-<li><strong>Deployment</strong> — pods with the app</li>
-<li><strong>Service</strong> — with a correct selector pointing to the pods</li>
-<li><strong>Ingress</strong> — with correct <code>ingressClassName</code></li>
-</ol>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-ingress</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">traefik.ingress.kubernetes.io/ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s">"true"</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app.cluster.kcn333.com</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local-prod-kcn333-tls</span><span class="w">    </span><span class="c1"># Secret name, not Certificate name!</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app.cluster.kcn333.com</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="nt">http</span><span class="p">:</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">      </span><span class="nt">paths</span><span class="p">:</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span><span class="nt">backend</span><span class="p">:</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">          </span><span class="nt">service</span><span class="p">:</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">            </span><span class="nt">port</span><span class="p">:</span>
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-</span></code></pre></div>
-<h3 id="common-debugging-pitfall">Common debugging pitfall<a class="headerlink" href="#common-debugging-pitfall" title="Permanent link">&para;</a></h3>
-<p><strong>Empty Endpoints = 503</strong> — if a Service has no endpoints, traffic goes nowhere.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>endpoints<span class="w"> </span>&lt;svc-name&gt;
-</span></code></pre></div>
-<p>Empty endpoints means the Service selector doesn't match any pod labels.</p>
-<ul>
-<li><code>kubectl expose deployment nginx</code> — copies selector automatically ✅</li>
-<li><code>kubectl create svc</code> — you have to add the selector manually</li>
-</ul>
-<h3 id="temporary-access-without-ingress">Temporary access without Ingress<a class="headerlink" href="#temporary-access-without-ingress" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>deployment/traefik<span class="w"> </span><span class="m">9000</span>:9000
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># → http://localhost:9000/dashboard/</span>
-</span></code></pre></div>
-<hr />
-<h2 id="cert-manager">cert-manager<a class="headerlink" href="#cert-manager" title="Permanent link">&para;</a></h2>
-<p>cert-manager automates TLS certificate issuance and renewal. It integrates with Let's Encrypt and handles the entire ACME challenge flow — you just declare what certificate you want and it handles the rest, including renewals (auto-renews at &#8531; of remaining validity).</p>
-<h3 id="installation-via-helm">Installation via Helm<a class="headerlink" href="#installation-via-helm" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>jetstack<span class="w"> </span>https://charts.jetstack.io
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>helm<span class="w"> </span>install<span class="w"> </span>cert-manager<span class="w"> </span>jetstack/cert-manager<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span>-n<span class="w"> </span>cert-manager<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span>--create-namespace<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span>--set<span class="w"> </span>crds.enabled<span class="o">=</span><span class="nb">true</span>
-</span></code></pre></div>
-<p><code>crds.enabled=true</code> installs the CRDs that define the <code>Certificate</code>, <code>ClusterIssuer</code>, etc. resource types. Without these, k8s doesn't know what those objects are.</p>
-<p>cert-manager runs 3 pods:</p>
-<ul>
-<li><code>cert-manager</code> — main controller, manages certificate lifecycle</li>
-<li><code>cert-manager-cainjector</code> — injects CA into k8s webhooks</li>
-<li><code>cert-manager-webhook</code> — validates cert-manager resources on creation</li>
-</ul>
-<p>None of these need replicas for HA — cert-manager isn't in the critical path for serving user traffic.</p>
-<h3 id="issuer-vs-clusterissuer">Issuer vs ClusterIssuer<a class="headerlink" href="#issuer-vs-clusterissuer" title="Permanent link">&para;</a></h3>
+<p>Prefetchers and ring-to-core offset controls remain on <code>Auto</code>. They were not changed without a workload-specific reason.</p>
+<h3 id="chipset-and-pcie-power-management">Chipset and PCIe power management<a class="headerlink" href="#chipset-and-pcie-power-management" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>Issuer</th>
-<th>ClusterIssuer</th>
+<th>Setting</th>
+<th>Value</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Scope</td>
-<td>Single namespace</td>
-<td>Whole cluster</td>
+<td>PEG ASPM</td>
+<td>Enabled</td>
+<td>Saves power on the graphics PCIe link</td>
 </tr>
 <tr>
-<td>When to use</td>
-<td>Per-team isolation</td>
-<td>Shared CA for everything</td>
+<td>PCH ASPM</td>
+<td>Enabled</td>
+<td>Enables chipset link power management</td>
+</tr>
+<tr>
+<td>DMI ASPM</td>
+<td>Enabled</td>
+<td>Enables power management between CPU and chipset</td>
+</tr>
+<tr>
+<td>CEC 2019 Ready</td>
+<td>Enabled</td>
+<td>Applies stricter platform idle-power behaviour</td>
+</tr>
+<tr>
+<td>RC6 / Render Standby</td>
+<td>Enabled</td>
+<td>Powers down the integrated GPU when idle</td>
+</tr>
+<tr>
+<td>Power Loading</td>
+<td>Auto</td>
+<td>Retains the board's low-load stability protection</td>
 </tr>
 </tbody>
 </table>
-<p>In a homelab, always use <code>ClusterIssuer</code>. It's cluster-scoped (like <code>Node</code> or <code>PV</code>) — no <code>-n</code> flag needed when applying.</p>
-<h3 id="lets-encrypt-staging-vs-production">Let's Encrypt staging vs production<a class="headerlink" href="#lets-encrypt-staging-vs-production" title="Permanent link">&para;</a></h3>
-<p><strong>Always test with staging first.</strong> Production has rate limits: max 5 certificates per domain per week. Staging has no limits but the certs aren't trusted by browsers.</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Staging</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://acme-staging-v02.api.letsencrypt.org/directory</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Production</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://acme-v02.api.letsencrypt.org/directory</span>
-</span></code></pre></div>
-<h3 id="dns-01-challenge-certificates-without-exposing-the-cluster">DNS-01 Challenge — certificates without exposing the cluster<a class="headerlink" href="#dns-01-challenge-certificates-without-exposing-the-cluster" title="Permanent link">&para;</a></h3>
-<p><strong>HTTP-01</strong>: Let's Encrypt visits <code>http://yourdomain.com/.well-known/acme-challenge/...</code> — the server must be accessible from the internet.</p>
-<p><strong>DNS-01</strong>: Let's Encrypt checks a TXT record <code>_acme-challenge.yourdomain.com</code> in public DNS — <strong>the cluster doesn't need to be reachable from the internet.</strong></p>
-<p>Flow with Cloudflare:</p>
-<ol>
-<li>cert-manager requests a certificate</li>
-<li>Uses Cloudflare API to add <code>TXT _acme-challenge.cluster.kcn333.com</code></li>
-<li>Let's Encrypt verifies the TXT record</li>
-<li>cert-manager removes the TXT record</li>
-<li>Certificate issued → stored as a Secret in k8s</li>
-</ol>
-<h3 id="cloudflare-api-token">Cloudflare API Token<a class="headerlink" href="#cloudflare-api-token" title="Permanent link">&para;</a></h3>
-<p>Create a token with <strong>minimum permissions</strong> (principle of least privilege):</p>
+<p>The integrated GPU remains enabled. It provides an emergency local console and can be used for hardware-accelerated media processing.</p>
+<h3 id="erp-and-wake-on-lan">ErP and Wake-on-LAN<a class="headerlink" href="#erp-and-wake-on-lan" title="Permanent link">&para;</a></h3>
+<p>ErP reduces the server's consumption while powered off, but on this platform it also disables Wake-on-LAN.</p>
+<p>This is an explicit trade-off:</p>
 <ul>
-<li><code>Zone | DNS | Edit</code></li>
-<li><code>Zone | Zone | Read</code></li>
-<li>Zone Resources: Specific zone (your domain only)</li>
+<li>use <code>ErP: Enabled</code> when minimum soft-off consumption is more important and Zion is expected to remain online;</li>
+<li>use <code>ErP: Disabled</code> if remote Wake-on-LAN for Zion becomes an operational requirement.</li>
 </ul>
-<p><strong>Don't use</strong> the Global API Key — it has way too broad access.</p>
-<p>Store the token as a Secret in <code>cert-manager</code> namespace:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cloudflare-token</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Opaque</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nt">stringData</span><span class="p">:</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="nt">api-token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-token&gt;</span>
+<p>After changing ErP, test cold boot, orderly shutdown, power-loss recovery, and Wake-on-LAN rather than relying only on the firmware description.</p>
+<h3 id="unused-onboard-devices">Unused onboard devices<a class="headerlink" href="#unused-onboard-devices" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Device or feature</th>
+<th>Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SATA Aggressive Link Power Management</td>
+<td>Enabled</td>
+</tr>
+<tr>
+<td>Serial port</td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td>Parallel port</td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td>Onboard audio</td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td>Integrated graphics</td>
+<td>Enabled</td>
+</tr>
+</tbody>
+</table>
+<p>Only devices confirmed as unused should be disabled. Future PCIe passthrough, local troubleshooting, or media workloads may change that decision.</p>
+<h2 id="mechanical-disk-spindown">Mechanical disk spindown<a class="headerlink" href="#mechanical-disk-spindown" title="Permanent link">&para;</a></h2>
+<p>The IronWolf data disk consumes several watts while its platters are spinning and can prevent the platform from reaching deeper package states. It is therefore allowed to spin down after a period without I/O.</p>
+<p>Before changing disk power management:</p>
+<ol>
+<li>confirm the correct disk by model, serial number, filesystem, and mount point;</li>
+<li>ensure that no backup, scrub, SMART test, media scan, or guest workload is active;</li>
+<li>use a stable <code>/dev/disk/by-id/</code> path in persistent configuration;</li>
+<li>observe whether recurring services wake the disk too frequently.</li>
+</ol>
+<p>Read the current power state without intentionally performing filesystem I/O:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>hdparm<span class="w"> </span>-C<span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<p>In production, use Sealed Secrets so this can be committed to Git safely.</p>
-<h3 id="clusterissuer">ClusterIssuer<a class="headerlink" href="#clusterissuer" title="Permanent link">&para;</a></h3>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager.io/v1</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIssuer</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">letsencrypt-prod-cluster-issuer</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="nt">acme</span><span class="p">:</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://acme-v02.api.letsencrypt.org/directory</span>
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your@email.com</span>
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="nt">privateKeySecretRef</span><span class="p">:</span>
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">letsencrypt-prod-cluster-issuer</span>
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="nt">solvers</span><span class="p">:</span>
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">dns01</span><span class="p">:</span>
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">        </span><span class="nt">cloudflare</span><span class="p">:</span>
-</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">          </span><span class="nt">apiTokenSecretRef</span><span class="p">:</span>
-</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cloudflare-token</span>
-</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">            </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-token</span>
+<p>Request an immediate standby transition during a controlled test:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>hdparm<span class="w"> </span>-y<span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<h3 id="certificate-resource">Certificate resource<a class="headerlink" href="#certificate-resource" title="Permanent link">&para;</a></h3>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager.io/v1</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Certificate</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local-prod-cert</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-test</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local-prod-kcn333-tls</span><span class="w">      </span><span class="c1"># name of the Secret to create</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">  </span><span class="nt">commonName</span><span class="p">:</span><span class="w"> </span><span class="s">"*.cluster.kcn333.com"</span>
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="nt">dnsNames</span><span class="p">:</span>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"cluster.kcn333.com"</span>
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"*.cluster.kcn333.com"</span><span class="w">             </span><span class="c1"># wildcard for all subdomains</span>
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span><span class="nt">issuerRef</span><span class="p">:</span>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">letsencrypt-prod-cluster-issuer</span>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIssuer</span>
+<p>Configure a ten-minute idle timeout for testing:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>hdparm<span class="w"> </span>-S<span class="w"> </span><span class="m">120</span><span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<blockquote>
-<p>⚠️ Common mistake: referencing the Certificate name in Ingress <code>secretName</code> instead of the Secret name. Traefik needs the Secret name.</p>
-</blockquote>
-<h3 id="certificate-per-namespace">Certificate per namespace<a class="headerlink" href="#certificate-per-namespace" title="Permanent link">&para;</a></h3>
-<p>If you have an IngressRoute in a namespace other than <code>default</code>, create a Certificate resource in that namespace. cert-manager creates the Secret directly in the same namespace as the Certificate.</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik-dashboard-tls</span>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span><span class="w">   </span><span class="c1"># ← cert-manager creates the Secret here</span>
+<p>The disk wakes automatically when it receives I/O. The timeout should be reconsidered if logs show frequent start/stop cycles: repeated spin-up can be worse for latency and drive wear than leaving the disk running during an active period.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An interactive <code>hdparm -S</code> setting may not survive a reboot. Persistent configuration should reference the stable disk identifier and must be verified after restarting Zion.</p>
+</div>
+<h2 id="powertop-at-boot">PowerTOP at boot<a class="headerlink" href="#powertop-at-boot" title="Permanent link">&para;</a></h2>
+<p>PowerTOP is used to apply the set of operating-system tunables already validated on Zion. A small systemd unit reapplies them after boot:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">[Unit]</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">Description</span><span class="o">=</span><span class="s">Apply validated PowerTOP tunables</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">After</span><span class="o">=</span><span class="s">multi-user.target</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="na">ConditionPathExists</span><span class="o">=</span><span class="s">/usr/sbin/powertop</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">[Service]</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/sbin/powertop --auto-tune</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="na">RemainAfterExit</span><span class="o">=</span><span class="s">yes</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">[Install]</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </span></code></pre></div>
-<h3 id="cert-manager-resource-flow">cert-manager resource flow<a class="headerlink" href="#cert-manager-resource-flow" title="Permanent link">&para;</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ClusterIssuer → Certificate → CertificateRequest → Order → Challenge → Secret (TLS)
+<p>Install the file as <code>/etc/systemd/system/powertop.service</code>, then validate and enable it:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemd-analyze<span class="w"> </span>verify<span class="w"> </span>/etc/systemd/system/powertop.service
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>powertop.service
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>powertop.service<span class="w"> </span>--no-pager
 </span></code></pre></div>
-<h3 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>certificate<span class="w"> </span>&lt;name&gt;
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>certificaterequest
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>orders
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>challenges
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>clusterissuer<span class="w"> </span>&lt;name&gt;
+<p><code>powertop --auto-tune</code> should not be treated as universally safe. After kernel, hardware, or passthrough changes, verify networking, storage, USB devices, and guest operation. If one tunable causes instability, replace the blanket auto-tune policy with explicit, individually tested settings.</p>
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<p>The configuration is accepted only after checking both power behaviour and normal platform operation.</p>
+<p>Recommended checks include:</p>
+<ul>
+<li>CPU package C-state residency during a representative idle window;</li>
+<li>system load and CPU activity with guests idle;</li>
+<li>network connectivity and link stability;</li>
+<li>VM and LXC startup, shutdown, and storage access;</li>
+<li>backup execution and restore readability;</li>
+<li>SMART state and disk start/stop behaviour;</li>
+<li>absence of unexpected failed systemd units;</li>
+<li>successful reboot and recovery after simulated power loss.</li>
+</ul>
+<p>Useful read-only commands:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>powertop
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>--failed<span class="w"> </span>--no-legend<span class="w"> </span>--plain<span class="w"> </span>--no-pager
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-b<span class="w"> </span>-u<span class="w"> </span>powertop.service<span class="w"> </span>--no-pager
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sudo<span class="w"> </span>smartctl<span class="w"> </span>-a<span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<p>Check what certificate the server is actually serving:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>domain.com:443<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span>openssl<span class="w"> </span>x509<span class="w"> </span>-text<span class="w"> </span>-noout<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A2<span class="w"> </span><span class="s2">"Issuer\|Subject\|Validity"</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Staging: Issuer contains "(STAGING)"</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1"># Production: Issuer: C=US, O=Let's Encrypt, CN=R10/R11/R12</span>
-</span></code></pre></div></p>
+<h2 id="observed-result">Observed result<a class="headerlink" href="#observed-result" title="Permanent link">&para;</a></h2>
+<p>During the original tuning session:</p>
+<ul>
+<li>package idle states became active instead of remaining at zero residency;</li>
+<li>CPU active time at idle fell from roughly 11% to approximately 3%;</li>
+<li>measured idle consumption of the motherboard and CPU platform fell by about 5.5 W, approximately 25% of that part of the baseline.</li>
+</ul>
+<p>These values are measurements from one hardware and workload state, not guaranteed savings. They should be measured again after adding PCIe devices, changing storage, enabling passthrough, or substantially altering the guest workload.</p>
+<h2 id="operational-policy">Operational policy<a class="headerlink" href="#operational-policy" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Backups and data integrity take priority over spindown targets.</li>
+<li>Zion is optimized for low idle consumption, not minimum benchmark power.</li>
+<li>Firmware changes are documented and tested individually.</li>
+<li>Wake-on-LAN expectations are reviewed whenever ErP is changed.</li>
+<li>PowerTOP is revalidated after kernel or hardware changes.</li>
+<li>Energy measurements are compared using the same guest and storage state.</li>
+</ul>
 
 
 
@@ -3962,7 +3728,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 15:47:11 UTC"><span class="timeago" datetime="2026-04-16T15:47:11+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 15:47:11 UTC">2026-04-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 13:57:22 UTC"><span class="timeago" datetime="2026-08-21T13:57:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 13:57:22 UTC">2026-08-21</span>
   </span>
 
     
@@ -3972,7 +3738,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 13:57:22 UTC"><span class="timeago" datetime="2026-08-21T13:57:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 13:57:22 UTC">2026-08-21</span>
   </span>
 
     
