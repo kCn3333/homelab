@@ -25,7 +25,7 @@ The lab started as a single low-power Debian server and gradually evolved into a
 ```text
 Internet
    │
-   ├── Oracle Relay VPS (Ubuntu 24.04 LTS)
+   ├── Relay VPS (Ubuntu 24.04 LTS)
    │     ├── Caddy public reverse proxy
    │     └── WireGuard endpoint
    │              │
@@ -40,6 +40,7 @@ LAN├─ - - - - - -
     |     ├── AdGuard Home LXC
     |     ├── Caddy LXC
     |     ├── HAProxy LXC
+    |     ├── PatchMon LXC
     |     ├── Docker Media LXC
     |     ├── Home Assistant LXC
     |     └── Proxmox Backup Server LXC
@@ -97,7 +98,7 @@ All three nodes participate in the control plane and etcd quorum. The cluster is
 | **Docker Media LXC** | Jellyfin and the Arr media automation stack |
 | **Home Assistant LXC** | Home Assistant, ESPHome and Zigbee device access |
 | **PBS LXC** | Proxmox VM and container backups |
-| **Oracle Relay** | Public Caddy endpoint and WireGuard relay into explicitly allowed local services |
+| **Relay VPS** | Public Caddy endpoint and WireGuard relay into explicitly allowed local services |
 | **K3s cluster** | Flux-managed Kubernetes learning environment with Cilium, Traefik, Longhorn and observability tooling |
 
 ## Main Building Blocks
