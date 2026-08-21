@@ -1,12 +1,16 @@
-# 🏠 kCn Homelab
+# 🏠 [kCn3333/homelab] Documentation
+
+
 
 <div align="center">
 
-[![Documentation](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square&logo=materialformkdocs&logoColor=white)](https://homelab.kcn333.com/)
-[![GitHub Pages](https://github.com/kCn3333/homelab/actions/workflows/main.yml/badge.svg)](https://github.com/kCn3333/homelab/actions/workflows/main.yml)
-[![Service Status](https://img.shields.io/badge/services-status-4CAF50?style=flat-square&logo=statuspage&logoColor=white)](https://status.kcn333.com/)
+[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat-square&logo=github&label=Pages%20Build&color=4CAF50)](https://homelab.kcn333.com)
+[![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://homelab.kcn333.com)
+[![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat-square)](LICENSE)
+
 
 </div>
+
 
 > A personal infrastructure playground where containers run wild, backups are tested, and networking eventually works™.
 
@@ -53,8 +57,8 @@ Zion provides the virtualization layer. Logos is the main operational server and
 | Motherboard | Gigabyte Z370 HD3, LGA 1151 |
 | CPU | Intel Core i5-8400, 6 cores at 2.8 GHz |
 | Memory | Kingston DDR4-2666 |
-| CPU cooler | be quiet! Pure Rock |
-| Power supply | be quiet! Pure Power 13 850 W |
+| CPU cooler | BeQuiet! Pure Rock |
+| Power supply | BeQuiet! Pure Power 13 850 W |
 | System storage | Kingston KC3000 2 TB NVMe |
 | Backup storage | Seagate IronWolf 4 TB SATA |
 | Hypervisor | Proxmox VE |
@@ -111,11 +115,11 @@ The documentation is organized around how the homelab was designed, built, and o
 
 ```text
 docs/
-├── infrastructure/   physical hardware and network design
+├── infrastructure/   physical infrastructure and network design
 ├── provisioning/     system deployment and platform configuration
-├── applications/     apps, configs 
-├── automations/      playbooks, workflows, infrastructure as a code
-└── troubleshooting/  incidents, root causes and verified fixes
+├── applications/     applications and reusable configurations
+├── automation/       playbooks, workflows, and infrastructure as code
+└── troubleshooting/  incidents, root causes, and verified fixes
 ```
 
 The site navigation also links to dedicated application, configuration, and automation repositories where the implementations themselves are maintained. This repository focuses on architecture, decisions, operational knowledge, and lessons learned.
