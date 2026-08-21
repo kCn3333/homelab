@@ -24,38 +24,34 @@ The lab started as a single low-power Debian server and gradually evolved into a
 
 ```text
 Internet
-   │
-   ├── Relay VPS (Ubuntu 24.04 LTS)
-   │     ├── Caddy public reverse proxy
-   │     └── WireGuard endpoint
-   │              │
-   │              ▼
-   │           Logos
-   │     main operations server
-   │
-LAN├─ - - - - - -
-    ├── Zion (Proxmox VE)
-    |     ├── Logos VM (Ubuntu 26.04 LTS)
-    |     ├── Kali VM (Kali Linux)
-    |     ├── AdGuard Home LXC
-    |     ├── Caddy LXC
-    |     ├── HAProxy LXC
-    |     ├── PatchMon LXC
-    |     ├── Docker Media LXC
-    |     ├── Home Assistant LXC
-    |     └── Proxmox Backup Server LXC
-    |
-    ├── Oracle Legacy (Debian 13)
-    │
-    └── K3s cluster (Ubuntu 24.04 LTS)
-        ├── master  ── control plane and embedded etcd
-        ├── worker1 ── control plane and embedded etcd
-        └── worker2 ── control plane and embedded etcd
+└── Relay VPS
+    ├── Caddy public reverse proxy
+    └── WireGuard endpoint
+            │
+            │ encrypted tunnel
+            ▼
+LAN
+├── Zion (Proxmox VE)
+│   ├── Logos VM ← WireGuard peer
+│   ├── Kali VM
+│   ├── AdGuard Home LXC
+│   ├── Caddy LXC
+│   ├── HAProxy LXC
+│   ├── PatchMon LXC
+│   ├── Docker Media LXC
+│   ├── Home Assistant LXC
+│   └── Proxmox Backup Server LXC
+│
+├── Oracle Legacy
+│
+└── K3s cluster
+    ├── master
+    ├── worker1
+    └── worker2
 ```
 
-Zion provides the virtualization layer. Logos is the main operational server and runs more than Docker alone: it is also the automation controller, backup coordinator, WireGuard gateway, and home for several supporting services. Dedicated LXC containers isolate network, media, home-automation, and backup workloads.
 
-## Hardware
+## Infrastructure
 
 ### Zion — main virtualization server
 
@@ -63,7 +59,7 @@ Zion provides the virtualization layer. Logos is the main operational server and
 |---|---|
 | Motherboard | Gigabyte Z370 HD3, LGA 1151 |
 | CPU | Intel Core i5-8400, 6 cores at 2.8 GHz |
-| Memory | Kingston DDR4-2666 |
+| Memory | 32GB Kingston DDR4-2666 |
 | CPU cooler | be quiet! Pure Rock |
 | Power supply | be quiet! Pure Power 13 850 W |
 | System storage | Kingston KC3000 2 TB NVMe |
@@ -72,13 +68,31 @@ Zion provides the virtualization layer. Logos is the main operational server and
 
 The platform is tuned for low idle power consumption while retaining enough headroom for virtualization, storage, and future hardware expansion.
 
+### Oracle Legacy — former main server
+
+| Component | Specification |
+|---|---|
+| Platform | Dell Wyse 5070 thin client |
+| CPU | Intel Pentium Silver J5005 |
+| Memory | 16 GB DDR4 |
+| Storage | 256GB SSD |
+
+### Relay VPS — external edge server
+
+| Component | Specification |
+|---|---|
+| Provider | Oracle Cloud Infrastructure  |
+| Shape | VM.Standard.E2.1.Micro |
+| CPU | 1/8 burstable OCPU |
+| Memory | 1 GB RAM with 1 GB swap |
+
 ### K3s learning cluster
 
 | Quantity | Hardware | Role |
 |---:|---|---|
 | 3 | HP T630 thin client, 8 GB RAM, 128 GB SSD | K3s control plane and embedded etcd |
 
-All three nodes participate in the control plane and etcd quorum. The cluster is powered on when needed and is used mainly for learning Kubernetes, GitOps, storage, networking, and observability.
+The cluster is powered on when needed and is used mainly for learning Kubernetes, GitOps, storage, networking, and observability.
 
 ### Network
 
@@ -88,34 +102,29 @@ All three nodes participate in the control plane and etcd quorum. The cluster is
 - Separate network segments for trusted devices, IoT, and the K3s lab
 - AdGuard Home for local DNS and filtering
 
-## What Runs Where
+### Core platforms
 
-| System | Main responsibilities |
-|---|---|
-| **Zion** | Proxmox VE, VM/LXC lifecycle, local storage and hardware management |
-| **Logos VM** | Main operational server, Docker workloads, Semaphore, Kopia, Garage, WireGuard gateway and supporting automation |
-| **Kali VM** | On-demand security testing, network diagnostics and lab tooling |
-| **Caddy LXC** | Internal HTTPS reverse proxy and certificate automation |
-| **AdGuard Home LXC** | Local DNS, filtering and internal DNS rewrites |
-| **HAProxy LXC** | Load balancing for the K3s API and ingress traffic |
-| **Docker Media LXC** | Jellyfin and the Arr media automation stack |
-| **Home Assistant LXC** | Home Assistant, ESPHome and Zigbee device access |
-| **PBS LXC** | Proxmox VM and container backups |
-| **Relay VPS** | Public Caddy endpoint and WireGuard relay into explicitly allowed local services |
-| **K3s cluster** | Flux-managed Kubernetes learning environment with Cilium, Traefik, Longhorn and observability tooling |
+| System | Type | Operating system | Primary role |
+|---|---|---|---|
+| **Zion** | Physical server | Proxmox VE | Virtualization, VM/LXC lifecycle and local storage |
+| **Logos** | KVM virtual machine | Ubuntu 26.04 LTS | Main operations server, Docker workloads, automation, backups and WireGuard gateway |
+| **Kali** | KVM virtual machine | Kali Linux | On-demand security testing and network diagnostics |
+| **Oracle Legacy** | Physical thin client | Debian 13 | Former main server retained as a fallback and legacy system |
+| **Relay** | Oracle Cloud Free Tier VM | Ubuntu 24.04 LTS | Public Caddy endpoint and WireGuard relay |
+| **K3s cluster** | Three physical thin clients | Ubuntu 24.04 LTS | On-demand Kubernetes and GitOps learning environment |
 
-## Main Building Blocks
+## Technology Stack
 
 | Area | Tools and services |
 |---|---|
-| Virtualization | Proxmox VE, LXC, KVM |
-| Containers | Docker, Docker Compose, Portainer |
-| Kubernetes | K3s, Flux, Cilium, Traefik, Longhorn, CloudNativePG |
-| Networking | UniFi, AdGuard Home, Caddy, HAProxy, WireGuard |
-| Automation | Ansible, Semaphore, GitHub Actions, Flux GitOps |
-| Backups | Proxmox Backup Server, Kopia, Garage S3 and configuration collection |
-| Monitoring | Uptime Kuma, PatchMon, Prometheus, Grafana and ntfy notifications |
-| Home automation | Home Assistant, ESPHome and Zigbee |
+| Virtualization | Proxmox VE, KVM, and LXC |
+| Containers | Docker, Docker Compose, and Portainer |
+| Kubernetes | K3s, Flux, Cilium, Traefik, Longhorn, and CloudNativePG |
+| Networking | UniFi, AdGuard Home, Caddy, HAProxy, and WireGuard |
+| Automation | Ansible, Semaphore, GitHub Actions, and Flux GitOps |
+| Backups | Proxmox Backup Server, Kopia, Garage S3, and configuration collection |
+| Monitoring | Uptime Kuma, PatchMon, Prometheus, Grafana, and ntfy |
+| Home automation | Home Assistant, ESPHome, and Zigbee |
 | Security testing | Kali Linux and isolated, on-demand diagnostic tooling |
 
 ## Documentation Map
