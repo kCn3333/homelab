@@ -41,6 +41,7 @@ nav:
       - 🗅 temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
   
   - ➤ Automation: 
+    - ▷ Server automation: automation
     - ☉ IaC AWS DevOps: https://github.com/kCn3333/aws-devops
     - 🅰 Ansible playbooks: https://github.com/kCn3333/homelab-ansible
     - 𝓣 Terraform IaC: https://github.com/kCn3333/homelab-terraform
