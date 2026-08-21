@@ -1,6 +1,6 @@
 # docs/.pages
 nav:
-  - ⌂ Home: index.md
+  - 🏠︎ Home: index.md
 
   - 🗠 Currently running: https://status.kcn333.com
 
@@ -12,17 +12,8 @@ nav:
     - 🌡 project fan-controller: https://github.com/kCn3333/rack-fan-controller
 
   - ⏻ Provisioning:
-    - ⛂ Zion Server:
-      - Overview and Proxmox: zion/platform.md
-      - Logos Operations Server: zion/logos.md
-      - Internal Caddy: zion/caddy.md
-      - HAProxy for K3s: zion/haproxy.md
-      - Supporting LXC Services: zion/supporting-services.md
-      - Home Assistant and Zigbee: zion/home-assistant.md
-      - Backup and Recovery: zion/backup-and-recovery.md
-      - Maintenance and Updates: zion/maintenance.md
-      - Migration Journal: zion/migration.md
-
+    - ⛂ Zion Server: zion
+    - ☁︎ Relay VPS: relay 
 
     - ⛃ Cluster Deployment: 
       - 🖴 Bare Metal: provisioning
@@ -52,7 +43,7 @@ nav:
   - ➤ Automation: 
     - ☉ IaC AWS DevOps: https://github.com/kCn3333/aws-devops
     - 🅰 Ansible playbooks: https://github.com/kCn3333/homelab-ansible
-    - ▰ Terraform IaC: https://github.com/kCn3333/homelab-terraform
+    - 𝓣 Terraform IaC: https://github.com/kCn3333/homelab-terraform
     - ☍ n8n workflows: https://github.com/kCn3333/n8n_workflows
       
   - 🕮 Troubleshooting: troubleshooting 
