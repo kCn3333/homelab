@@ -44,10 +44,13 @@ LAN├─ - - - - - -
     |     ├── Docker Media LXC
     |     ├── Home Assistant LXC
     |     └── Proxmox Backup Server LXC
-    └── Oracle Legacy (Debian 13)
-
-Separate learning environment:
-3 × HP T630 ── K3s HA cluster with embedded etcd (Ubuntu 24.04 LTS)
+    |
+    ├── Oracle Legacy (Debian 13)
+    │
+    └── K3s cluster (Ubuntu 24.04 LTS)
+        ├── master  ── control plane and embedded etcd
+        ├── worker1 ── control plane and embedded etcd
+        └── worker2 ── control plane and embedded etcd
 ```
 
 Zion provides the virtualization layer. Logos is the main operational server and runs more than Docker alone: it is also the automation controller, backup coordinator, WireGuard gateway, and home for several supporting services. Dedicated LXC containers isolate network, media, home-automation, and backup workloads.
