@@ -8,11 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/troubleshooting/wireguard-relay/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/zion/4-logos/">
       
       
-        <link rel="prev" href="../proxmox-link-recovery/">
+        <link rel="prev" href="../3-backup-and-recovery/">
       
+      
+        <link rel="next" href="../backup-and-recovery/">
       
       
         
@@ -23,7 +25,7 @@
     
     
       
-        <title>WireGuard relay troubleshooting - > Homelab Documentation</title>
+        <title>Logos operations server - > Homelab Documentation</title>
       
     
     
@@ -82,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#wireguard-relay-troubleshooting" class="md-skip">
+        <a href="#logos-operations-server" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              WireGuard relay troubleshooting
+              Logos operations server
             
           </span>
         </div>
@@ -550,18 +552,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -582,7 +586,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -597,18 +601,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
         
           
           <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
@@ -629,7 +635,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -647,7 +653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/0-platform/" class="md-nav__link">
+      <a href="../0-platform/" class="md-nav__link">
         
   
   
@@ -675,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/1-migration/" class="md-nav__link">
+      <a href="../1-migration/" class="md-nav__link">
         
   
   
@@ -703,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/3-backup-and-recovery/" class="md-nav__link">
+      <a href="../3-backup-and-recovery/" class="md-nav__link">
         
   
   
@@ -728,10 +734,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../zion/4-logos/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logos operations server
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -747,6 +780,142 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workload-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workload groups
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workload groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-hosted-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-hosted applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wireguard-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WireGuard gateway
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#garage-object-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Garage object storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-participation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup participation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -759,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/backup-and-recovery/" class="md-nav__link">
+      <a href="../backup-and-recovery/" class="md-nav__link">
         
   
   
@@ -787,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/caddy/" class="md-nav__link">
+      <a href="../caddy/" class="md-nav__link">
         
   
   
@@ -815,7 +984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/haproxy/" class="md-nav__link">
+      <a href="../haproxy/" class="md-nav__link">
         
   
   
@@ -843,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/home-assistant/" class="md-nav__link">
+      <a href="../home-assistant/" class="md-nav__link">
         
   
   
@@ -871,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/logos/" class="md-nav__link">
+      <a href="../logos/" class="md-nav__link">
         
   
   
@@ -899,7 +1068,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/migration/" class="md-nav__link">
+      <a href="../migration/" class="md-nav__link">
         
   
   
@@ -927,7 +1096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/platform/" class="md-nav__link">
+      <a href="../platform/" class="md-nav__link">
         
   
   
@@ -955,7 +1124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../zion/supporting-services/" class="md-nav__link">
+      <a href="../supporting-services/" class="md-nav__link">
         
   
   
@@ -3054,20 +3223,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -3088,7 +3255,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3106,7 +3273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../docker-route-collision/" class="md-nav__link">
+      <a href="../../troubleshooting/docker-route-collision/" class="md-nav__link">
         
   
   
@@ -3134,7 +3301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../placeholder/" class="md-nav__link">
+      <a href="../../troubleshooting/placeholder/" class="md-nav__link">
         
   
   
@@ -3162,7 +3329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../proxmox-link-recovery/" class="md-nav__link">
+      <a href="../../troubleshooting/proxmox-link-recovery/" class="md-nav__link">
         
   
   
@@ -3187,37 +3354,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    WireGuard relay troubleshooting
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/wireguard-relay/" class="md-nav__link">
         
   
   
@@ -3233,125 +3373,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#failure-layers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Failure layers
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-preserve-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Preserve access
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-check-service-state" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Check service state
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-validate-routes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Validate routes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-validate-forwarding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Validate forwarding
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-trace-packets" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Trace packets
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-validate-mtu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Validate MTU
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-validate-the-backend-and-caddy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Validate the backend and Caddy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recovery-confirmation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recovery confirmation
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3391,10 +3412,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#failure-layers" class="md-nav__link">
+  <a href="#responsibilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Failure layers
+        Responsibilities
       
     </span>
   </a>
@@ -3402,10 +3423,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-preserve-access" class="md-nav__link">
+  <a href="#workload-groups" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Preserve access
+        Workload groups
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workload groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Platform services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-hosted-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-hosted applications
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Container management
       
     </span>
   </a>
@@ -3413,10 +3473,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-check-service-state" class="md-nav__link">
+  <a href="#wireguard-gateway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Check service state
+        WireGuard gateway
       
     </span>
   </a>
@@ -3424,10 +3484,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-validate-routes" class="md-nav__link">
+  <a href="#garage-object-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Validate routes
+        Garage object storage
       
     </span>
   </a>
@@ -3435,10 +3495,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-validate-forwarding" class="md-nav__link">
+  <a href="#backup-participation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Validate forwarding
+        Backup participation
       
     </span>
   </a>
@@ -3446,10 +3506,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-trace-packets" class="md-nav__link">
+  <a href="#update-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Trace packets
+        Update model
       
     </span>
   </a>
@@ -3457,32 +3517,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-validate-mtu" class="md-nav__link">
+  <a href="#validation-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Validate MTU
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-validate-the-backend-and-caddy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Validate the backend and Caddy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recovery-confirmation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recovery confirmation
+        Validation checklist
       
     </span>
   </a>
@@ -3510,146 +3548,113 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/troubleshooting/wireguard-relay.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/zion/4-logos.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="wireguard-relay-troubleshooting">WireGuard relay troubleshooting<a class="headerlink" href="#wireguard-relay-troubleshooting" title="Permanent link">&para;</a></h1>
-<p>This runbook diagnoses the external Relay-to-Logos path without immediately restarting the tunnel or changing firewall rules.</p>
-<h2 id="failure-layers">Failure layers<a class="headerlink" href="#failure-layers" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>public DNS
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── Relay Caddy
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    └── WireGuard handshake
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        └── route to backend
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            └── Logos forwarding and NAT
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                └── backend listener
-</span></code></pre></div>
-<p>Work from the outside inward. A successful handshake proves only that the two WireGuard peers can exchange encrypted packets; it does not prove that Relay has a route to the backend or that Logos will forward the traffic.</p>
-<h2 id="1-preserve-access">1. Preserve access<a class="headerlink" href="#1-preserve-access" title="Permanent link">&para;</a></h2>
-<p>Before changing WireGuard remotely:</p>
-<ul>
-<li>confirm that SSH does not depend exclusively on the tunnel being modified;</li>
-<li>keep the existing terminal open;</li>
-<li>copy the active configuration to a protected temporary location;</li>
-<li>validate generated configuration before applying it;</li>
-<li>avoid restarting both peers simultaneously.</li>
-</ul>
-<p>If the tunnel is the only administration path, defer disruptive changes until an out-of-band recovery method is available.</p>
-<h2 id="2-check-service-state">2. Check service state<a class="headerlink" href="#2-check-service-state" title="Permanent link">&para;</a></h2>
-<p>Run on both peers:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>wg-quick@wg0
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ip<span class="w"> </span>-brief<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>wg0
-</span></code></pre></div>
-<p>Check:</p>
-<ul>
-<li>interface is present and <code>UP</code>;</li>
-<li>peer configuration is loaded;</li>
-<li>latest handshake is recent;</li>
-<li>receive and transmit counters increase during a test;</li>
-<li>both peers use the intended MTU.</li>
-</ul>
-<p>No recent handshake points to the public endpoint, UDP reachability, peer keys, or host firewall. A recent handshake with no application traffic points further inside the route and forwarding path.</p>
-<h2 id="3-validate-routes">3. Validate routes<a class="headerlink" href="#3-validate-routes" title="Permanent link">&para;</a></h2>
-<p>On Relay:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;approved-backend-address&gt;
-</span></code></pre></div>
-<p>The selected route must use <code>wg0</code>. If it does not:</p>
-<ul>
-<li>inspect the peer's <code>AllowedIPs</code>;</li>
-<li>check for a more specific competing route;</li>
-<li>check for an overlapping cloud or local subnet;</li>
-<li>confirm that the active configuration matches the file on disk.</li>
-</ul>
-<p>On Logos, verify the return path and LAN egress interface:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;approved-backend-address&gt;
-</span></code></pre></div>
-<p>Do not copy an interface name from an older host. Use the interface selected by the current route.</p>
-<h2 id="4-validate-forwarding">4. Validate forwarding<a class="headerlink" href="#4-validate-forwarding" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sysctl<span class="w"> </span>net.ipv4.ip_forward
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>FORWARD<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span></code></pre></div>
-<p>Expected behaviour:</p>
-<ol>
-<li>established return traffic is accepted;</li>
-<li>the approved tunnel-to-backend path is accepted;</li>
-<li>any required source NAT uses the actual LAN egress interface;</li>
-<li>remaining traffic arriving from the tunnel is dropped.</li>
-</ol>
-<p>Packet counters are more useful than visually inspecting rule text. If a request does not increment the expected rule, it is not reaching that rule or an earlier rule is taking precedence.</p>
-<p>After correcting a verified rule, persist and compare the active and saved rulesets:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>netfilter-persistent<span class="w"> </span>save
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>iptables-save
-</span></code></pre></div>
-<p>Do not insert broad temporary accepts into a production ruleset merely to make the request work. Narrow the test to one source, destination, protocol, and port.</p>
-<h2 id="5-trace-packets">5. Trace packets<a class="headerlink" href="#5-trace-packets" title="Permanent link">&para;</a></h2>
-<p>Observe the same request at consecutive interfaces:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>wg0<span class="w"> </span>host<span class="w"> </span>&lt;approved-backend-address&gt;
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>&lt;lan-interface&gt;<span class="w"> </span>host<span class="w"> </span>&lt;approved-backend-address&gt;
-</span></code></pre></div>
-<p>Interpretation:</p>
+<h1 id="logos-operations-server">Logos operations server<a class="headerlink" href="#logos-operations-server" title="Permanent link">&para;</a></h1>
+<p>Logos is the main operational Linux server in the homelab. It runs as an Ubuntu KVM virtual machine on Zion and replaced the Docker and automation responsibilities previously hosted on Oracle Legacy.</p>
+<p>Calling Logos only a Docker host would miss most of its role. It also coordinates automation and backups, provides the local side of the WireGuard relay, and acts as the shared operational environment for the rest of the platform.</p>
+<h2 id="responsibilities">Responsibilities<a class="headerlink" href="#responsibilities" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Observation</th>
-<th>Likely cause</th>
+<th>Area</th>
+<th>Responsibilities</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>No packet on Relay <code>wg0</code></td>
-<td>Caddy backend, route, or Relay firewall</td>
+<td>Containers</td>
+<td>Docker Engine, Docker Compose, Portainer, and application stacks</td>
 </tr>
 <tr>
-<td>Packet on Relay <code>wg0</code>, absent on Logos</td>
-<td>Tunnel peer or Internet path</td>
+<td>Automation</td>
+<td>Semaphore controller and supporting maintenance tooling</td>
 </tr>
 <tr>
-<td>Packet on Logos <code>wg0</code>, absent on LAN interface</td>
-<td>Forwarding or firewall rule</td>
+<td>Backups</td>
+<td>Kopia, remote configuration collection target, and access to local backup storage</td>
 </tr>
 <tr>
-<td>SYN reaches backend, no SYN-ACK returns</td>
-<td>Backend listener, host firewall, or missing return NAT</td>
+<td>Object storage</td>
+<td>Garage S3 for selected cluster and application backups</td>
 </tr>
 <tr>
-<td>Response returns to Logos but not Relay</td>
-<td>Reverse forwarding or tunnel route</td>
+<td>Networking</td>
+<td>Local WireGuard peer, forwarding, NAT, and narrowly scoped access to selected services</td>
+</tr>
+<tr>
+<td>Operations</td>
+<td>Shared administration tools, logs, scripts, and service validation</td>
 </tr>
 </tbody>
 </table>
-<h2 id="6-validate-mtu">6. Validate MTU<a class="headerlink" href="#6-validate-mtu" title="Permanent link">&para;</a></h2>
-<p>Both peers currently use MTU <code>1420</code>. Test the largest non-fragmented ICMP payload appropriate for that MTU:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">5</span><span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1392</span><span class="w"> </span>&lt;peer-tunnel-address&gt;
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1393</span><span class="w"> </span>&lt;peer-tunnel-address&gt;
-</span></code></pre></div>
-<p>The first test should pass. The second should fail locally with <code>message too long</code> when MTU <code>1420</code> is active.</p>
-<p>If Relay returns to a jumbo-derived MTU after restart, ensure the MTU is declared in the persistent WireGuard interface configuration. <code>wg syncconf</code> does not update the Linux interface MTU.</p>
-<h2 id="7-validate-the-backend-and-caddy">7. Validate the backend and Caddy<a class="headerlink" href="#7-validate-the-backend-and-caddy" title="Permanent link">&para;</a></h2>
-<p>From Relay, test the approved backend directly through its tunnel route before testing the public hostname:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span>--fail<span class="w"> </span>--head<span class="w"> </span>--connect-timeout<span class="w"> </span><span class="m">5</span><span class="w"> </span>http://&lt;approved-backend-address&gt;:&lt;port&gt;
-</span></code></pre></div>
-<p>Then validate and inspect Caddy:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>caddy
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>caddy<span class="w"> </span>--since<span class="w"> </span><span class="s1">'30 minutes ago'</span><span class="w"> </span>--no-pager
-</span></code></pre></div>
-<p>An HTTP 502 normally means Caddy could not complete the upstream request. It does not by itself identify WireGuard, routing, firewall, or backend failure.</p>
-<h2 id="recovery-confirmation">Recovery confirmation<a class="headerlink" href="#recovery-confirmation" title="Permanent link">&para;</a></h2>
-<p>The incident is resolved only after:</p>
+<h2 id="workload-groups">Workload groups<a class="headerlink" href="#workload-groups" title="Permanent link">&para;</a></h2>
+<p>The Docker workloads are grouped by function instead of being documented as independent servers.</p>
+<h3 id="platform-services">Platform services<a class="headerlink" href="#platform-services" title="Permanent link">&para;</a></h3>
 <ul>
-<li>both peers have a recent handshake;</li>
-<li>the backend route uses <code>wg0</code>;</li>
-<li>the intended forwarding and NAT counters increase;</li>
-<li>the direct backend request succeeds;</li>
-<li>the public request succeeds;</li>
-<li>an unrelated LAN destination remains unreachable from Relay;</li>
-<li>the active configuration survives a controlled service or host restart.</li>
+<li>Portainer for container and stack management;</li>
+<li>Semaphore for Ansible execution;</li>
+<li>Uptime Kuma for availability monitoring;</li>
+<li>ntfy for operational notifications;</li>
+<li>Garage for S3-compatible object storage;</li>
+<li>Kopia for local and off-site file backups.</li>
+</ul>
+<h3 id="self-hosted-applications">Self-hosted applications<a class="headerlink" href="#self-hosted-applications" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Nextcloud;</li>
+<li>Immich;</li>
+<li>Mealie;</li>
+<li>Gitea and supporting database services;</li>
+<li>personal notes, dashboards, and small utility applications.</li>
+</ul>
+<p>Media workloads are not hosted directly on Logos. Jellyfin and the Arr stack run in the dedicated Docker Media LXC so that media storage, hardware access, and application data remain separated from the operations VM.</p>
+<h2 id="container-management">Container management<a class="headerlink" href="#container-management" title="Permanent link">&para;</a></h2>
+<p>Compose definitions are maintained in the dedicated Docker Compose repository. Portainer provides the operational interface, but the repository remains the preferred description of how a stack is built.</p>
+<p>Persistent application data is stored outside container writable layers. Containers can therefore be recreated without treating the running container as a backup source.</p>
+<p>The Docker address pools are intentionally constrained. A previous broad Docker network allocation overlapped with homelab routes and caused traffic to be sent to a local bridge instead of the correct gateway. New networks must be checked against LAN, VPN, Kubernetes, and cloud address spaces before deployment.</p>
+<h2 id="wireguard-gateway">WireGuard gateway<a class="headerlink" href="#wireguard-gateway" title="Permanent link">&para;</a></h2>
+<p>Logos is the home-side peer for the external Relay VPS. The tunnel is used to carry selected traffic from the public reverse proxy to explicitly approved local services.</p>
+<p>The forwarding model is deliberately narrow:</p>
+<ol>
+<li>the Relay terminates the public connection;</li>
+<li>WireGuard carries the request to Logos;</li>
+<li>Logos forwards only the approved destination and port;</li>
+<li>source NAT is applied where the internal service requires a return path through Logos;</li>
+<li>unrelated traffic from the tunnel is rejected.</li>
+</ol>
+<p>This design avoids inbound port forwarding on the home router. It does not make the exposed application private, so authentication, patching, rate limiting, and application-level security remain necessary.</p>
+<p>Firewall rules are persisted and validated after Docker or host restarts. Interface names are derived from the active route instead of being assumed from a previous machine.</p>
+<h2 id="garage-object-storage">Garage object storage<a class="headerlink" href="#garage-object-storage" title="Permanent link">&para;</a></h2>
+<p>Garage was migrated from Oracle Legacy to Logos while preserving its application data and node identity. It provides an S3-compatible endpoint used by selected Kubernetes components and backup workflows.</p>
+<p>The migration required more than moving the container:</p>
+<ul>
+<li>application data and metadata were transferred while Garage was stopped;</li>
+<li>the advertised endpoint was updated;</li>
+<li>Flux-managed consumers were changed in Git rather than patched manually in the cluster;</li>
+<li>Longhorn and Loki were validated after reconciliation;</li>
+<li>a fresh Longhorn backup was executed to confirm end-to-end access.</li>
+</ul>
+<h2 id="backup-participation">Backup participation<a class="headerlink" href="#backup-participation" title="Permanent link">&para;</a></h2>
+<p>Logos receives configuration snapshots collected from other hosts. Kopia then protects the selected parts of the Logos filesystem using both local and off-site repositories.</p>
+<p>Large application datasets and reproducible caches use separate policies. The exact inclusion lists, schedules, repository credentials, and recovery keys are kept in private operational documentation.</p>
+<h2 id="update-model">Update model<a class="headerlink" href="#update-model" title="Permanent link">&para;</a></h2>
+<p>Host package updates are executed through the shared Ansible maintenance workflow. Container image updates are handled separately from operating-system packages so that application upgrades do not silently change host state.</p>
+<p>An update may create a reboot-required marker, but it does not reboot Logos automatically. Reboot approval and post-reboot verification remain separate operations.</p>
+<h2 id="validation-checklist">Validation checklist<a class="headerlink" href="#validation-checklist" title="Permanent link">&para;</a></h2>
+<p>After a major change to Logos, the following areas are checked:</p>
+<ul>
+<li>SSH key-only administration and non-interactive automation access;</li>
+<li>Docker daemon and expected containers;</li>
+<li>WireGuard handshake and approved routes;</li>
+<li>forwarding and NAT counters for the allowed paths;</li>
+<li>Garage health and S3 consumers;</li>
+<li>Kopia repository access and recent snapshots;</li>
+<li>absence of unexpected failed systemd units.</li>
 </ul>
 
 
@@ -3673,7 +3678,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:40:59 UTC"><span class="timeago" datetime="2026-08-21T12:40:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:40:59 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:51:10 UTC"><span class="timeago" datetime="2026-08-21T12:51:10+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:51:10 UTC">2026-08-21</span>
   </span>
 
     
@@ -3683,7 +3688,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:40:59 UTC"><span class="timeago" datetime="2026-08-21T12:40:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:40:59 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:17:34 UTC"><span class="timeago" datetime="2026-08-21T12:17:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:17:34 UTC">2026-08-21</span>
   </span>
 
     
