@@ -900,23 +900,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Traffic and load balancing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#backend-names" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Backend names
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -3397,23 +3380,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Traffic and load balancing">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#backend-names" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Backend names
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -3558,6 +3524,20 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/etc/haproxy/haproxy.cfg
 </span></code></pre></div>
 <h2 id="traffic-and-load-balancing"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14 4 2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4M10 4H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3"/></svg></span> Traffic and load balancing<a class="headerlink" href="#traffic-and-load-balancing" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    clients["LAN clients&lt;br/&gt;kubectl · browsers · K3s services"]
+
+    haproxy["HAProxy LXC 80 · 443 · 6443"]
+
+    master["master&lt;br/&gt;node1"]
+    worker1["worker1&lt;br/&gt;node2"]
+    worker2["worker2&lt;br/&gt;node3"]
+
+    clients --&gt;|"HTTP :80&lt;br/&gt;HTTPS :443&lt;br/&gt;K3s API :6443"| haproxy
+
+    haproxy --&gt;|"round-robin&lt;br/&gt;80 · 443 · 6443"| master
+    haproxy --&gt;|"round-robin&lt;br/&gt;80 · 443 · 6443"| worker1
+    haproxy --&gt;|"round-robin&lt;br/&gt;80 · 443 · 6443"| worker2</code></pre>
 <table>
 <thead>
 <tr>
@@ -3591,16 +3571,6 @@
 <p>All three K3s machines are control-plane and embedded-etcd nodes despite the historical names <code>master</code>, <code>worker1</code> and <code>worker2</code>.</p>
 <p>Each backend uses <code>balance roundrobin</code>. New API and HTTPS connections, and HTTP requests, are distributed between available nodes. Backend health checks keep an unavailable node out of rotation.</p>
 <p>The API and HTTPS frontends use TCP mode. TLS passes through HAProxy and is terminated by K3s or Traefik. Port <code>80</code> uses HTTP mode. HAProxy therefore stores no kubeconfig, cluster credentials or application certificates.</p>
-<h3 id="backend-names"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21.41 11.58-9-9A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 .59 1.42l9 9A2 2 0 0 0 13 22a2 2 0 0 0 1.41-.59l7-7A2 2 0 0 0 22 13a2 2 0 0 0-.59-1.42M13 20l-9-9V4h7l9 9M6.5 5A1.5 1.5 0 1 1 5 6.5 1.5 1.5 0 0 1 6.5 5"/></svg></span> Backend names<a class="headerlink" href="#backend-names" title="Permanent link">&para;</a></h3>
-<p>Names such as <code>master1</code> or <code>node1</code> are local HAProxy identifiers. The actual destination is the address and port after the name:</p>
-<div class="language-cfg highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">server master 192.168.55.10</span><span class="o">:</span><span class="s">6443 check</span>
-</span></code></pre></div>
-<p>The identifier is used in logs, statistics and administrative output; it does not affect routing. For consistency, every backend uses the real K3s node names:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>master
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>worker1
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>worker2
-</span></code></pre></div>
-<p>The same three names may be reused in separate backends because uniqueness is required only inside one backend.</p>
 <h2 id="why-it-left-docker"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.81 10.25c-.06-.04-.56-.43-1.64-.43-.28 0-.56.03-.84.08-.21-1.4-1.38-2.11-1.43-2.14l-.29-.17-.18.27c-.24.36-.43.77-.51 1.19-.2.8-.08 1.56.33 2.21-.49.28-1.29.35-1.46.35H2.62c-.34 0-.62.28-.62.63 0 1.15.18 2.3.58 3.38.45 1.19 1.13 2.07 2 2.61.98.6 2.59.94 4.42.94.79 0 1.61-.07 2.42-.22 1.12-.2 2.2-.59 3.19-1.16A8.3 8.3 0 0 0 16.78 16c1.05-1.17 1.67-2.5 2.12-3.65h.19c1.14 0 1.85-.46 2.24-.85.26-.24.45-.53.59-.87l.08-.24zm-17.96.99h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H3.85c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.43 0h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H6.28c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.47 0h1.75c.1 0 .17-.07.17-.16V9.5c0-.08-.06-.16-.17-.16H8.75c-.08 0-.15.07-.15.16v1.58c0 .09.06.16.15.16m2.44 0h1.77c.08 0 .15-.07.15-.16V9.5c0-.08-.06-.16-.15-.16h-1.77c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16M6.28 9h1.76c.08 0 .16-.09.16-.18V7.25c0-.09-.07-.16-.16-.16H6.28c-.09 0-.16.06-.16.16v1.57c.01.09.07.18.16.18m2.47 0h1.75c.1 0 .17-.09.17-.18V7.25c0-.09-.06-.16-.17-.16H8.75c-.08 0-.15.06-.15.16v1.57c0 .09.06.18.15.18m2.44 0h1.77c.08 0 .15-.09.15-.18V7.25c0-.09-.07-.16-.15-.16h-1.77c-.08 0-.15.06-.15.16v1.57c0 .09.07.18.15.18m0-2.28h1.77c.08 0 .15-.07.15-.16V5c0-.1-.07-.17-.15-.17h-1.77c-.08 0-.15.06-.15.17v1.56c0 .08.07.16.15.16m2.46 4.52h1.76c.09 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16h-1.76c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16"/></svg></span> Why it left Docker<a class="headerlink" href="#why-it-left-docker" title="Permanent link">&para;</a></h2>
 <p>The old HAProxy ran in Docker on Oracle Legacy and used an additional address assigned to that host. This created two dependencies for a critical cluster endpoint: the Docker engine and the network configuration of a general-purpose server.</p>
 <p>The replacement LXC owns IP address directly. It can start, stop, update and restore without Logos or another Docker host.</p>
@@ -3644,11 +3614,11 @@
 </ul>
 <p>Kubernetes application routing remains in Flux and Kubernetes. HAProxy only forwards traffic to the cluster.</p>
 <h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>haproxy<span class="w"> </span>-c<span class="w"> </span>-f<span class="w"> </span>/etc/haproxy/haproxy.cfg
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>haproxy
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>haproxy
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>ss<span class="w"> </span>-lnt
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>haproxy<span class="w"> </span>--no-pager<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>haproxy<span class="w"> </span>-c<span class="w"> </span>-f<span class="w"> </span>/etc/haproxy/haproxy.cfg
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>haproxy
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>haproxy
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>ss<span class="w"> </span>-lnt
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>haproxy<span class="w"> </span>--no-pager<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span>
 </span></code></pre></div>
 <p>Functional checks:</p>
 <ol>
@@ -3711,7 +3681,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 12:30:20 UTC"><span class="timeago" datetime="2026-08-22T12:30:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 12:30:20 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 12:36:32 UTC"><span class="timeago" datetime="2026-08-22T12:36:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 12:36:32 UTC">2026-08-22</span>
   </span>
 
     
