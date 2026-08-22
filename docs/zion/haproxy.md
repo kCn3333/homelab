@@ -23,6 +23,23 @@ HAProxy is stateless. Its important state is the configuration file:
 
 ## :material-call-split: Traffic and load balancing
 
+```mermaid
+flowchart LR
+    clients["LAN clients<br/>kubectl · browsers · K3s services"]
+
+    haproxy["HAProxy LXC 80 · 443 · 6443"]
+
+    master["master<br/>node1"]
+    worker1["worker1<br/>node2"]
+    worker2["worker2<br/>node3"]
+
+    clients -->|"HTTP :80<br/>HTTPS :443<br/>K3s API :6443"| haproxy
+
+    haproxy -->|"round-robin<br/>80 · 443 · 6443"| master
+    haproxy -->|"round-robin<br/>80 · 443 · 6443"| worker1
+    haproxy -->|"round-robin<br/>80 · 443 · 6443"| worker2
+```
+
 | Listener | Mode | Backend | Load-balancing level |
 |---|---|---|---|
 | `6443/tcp` | TCP | K3s API on all three control-plane nodes | TCP connection |
@@ -35,23 +52,6 @@ Each backend uses `balance roundrobin`. New API and HTTPS connections, and HTTP 
 
 The API and HTTPS frontends use TCP mode. TLS passes through HAProxy and is terminated by K3s or Traefik. Port `80` uses HTTP mode. HAProxy therefore stores no kubeconfig, cluster credentials or application certificates.
 
-### :material-tag-outline: Backend names
-
-Names such as `master1` or `node1` are local HAProxy identifiers. The actual destination is the address and port after the name:
-
-```cfg
-server master 192.168.55.10:6443 check
-```
-
-The identifier is used in logs, statistics and administrative output; it does not affect routing. For consistency, every backend uses the real K3s node names:
-
-```text
-master
-worker1
-worker2
-```
-
-The same three names may be reused in separate backends because uniqueness is required only inside one backend.
 
 ## :material-docker: Why it left Docker
 
