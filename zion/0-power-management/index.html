@@ -25,7 +25,7 @@
     
     
       
-        <title>Energy Optimization - > Homelab Documentation</title>
+        <title>Power Management - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#energy-optimization" class="md-skip">
+        <a href="#power-management" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Energy Optimization
+              Power Management
             
           </span>
         </div>
@@ -697,7 +697,7 @@
   <span class="md-ellipsis">
     
   
-    Energy Optimization
+    Power Management
   
 
     
@@ -715,7 +715,7 @@
   <span class="md-ellipsis">
     
   
-    Energy Optimization
+    Power Management
   
 
     
@@ -741,10 +741,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#optimization-goals" class="md-nav__link">
+  <a href="#what-is-optimized" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Optimization goals
+        What is optimized
       
     </span>
   </a>
@@ -752,22 +752,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#firmware-configuration" class="md-nav__link">
+  <a href="#uefi-settings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Firmware configuration
+        UEFI settings
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Firmware configuration">
+    <nav class="md-nav" aria-label="UEFI settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cpu-power-management" class="md-nav__link">
+  <a href="#cpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CPU power management
+        CPU
       
     </span>
   </a>
@@ -775,10 +775,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chipset-and-pcie-power-management" class="md-nav__link">
+  <a href="#chipset-and-pcie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Chipset and PCIe power management
+        Chipset and PCIe
       
     </span>
   </a>
@@ -786,21 +786,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#erp-and-wake-on-lan" class="md-nav__link">
+  <a href="#onboard-devices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ErP and Wake-on-LAN
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unused-onboard-devices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Unused onboard devices
+        Onboard devices
       
     </span>
   </a>
@@ -813,10 +802,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mechanical-disk-spindown" class="md-nav__link">
+  <a href="#erp-and-wake-on-lan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mechanical disk spindown
+        ErP and Wake-on-LAN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hdd-spindown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDD spindown
       
     </span>
   </a>
@@ -846,21 +846,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#observed-result" class="md-nav__link">
+  <a href="#measured-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Observed result
+        Measured result
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measured result">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wall-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wall power
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#operational-policy" class="md-nav__link">
+  <a href="#operating-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operational policy
+        Operating rules
       
     </span>
   </a>
@@ -3394,10 +3411,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#optimization-goals" class="md-nav__link">
+  <a href="#what-is-optimized" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Optimization goals
+        What is optimized
       
     </span>
   </a>
@@ -3405,22 +3422,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#firmware-configuration" class="md-nav__link">
+  <a href="#uefi-settings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Firmware configuration
+        UEFI settings
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Firmware configuration">
+    <nav class="md-nav" aria-label="UEFI settings">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cpu-power-management" class="md-nav__link">
+  <a href="#cpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CPU power management
+        CPU
       
     </span>
   </a>
@@ -3428,10 +3445,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chipset-and-pcie-power-management" class="md-nav__link">
+  <a href="#chipset-and-pcie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Chipset and PCIe power management
+        Chipset and PCIe
       
     </span>
   </a>
@@ -3439,21 +3456,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#erp-and-wake-on-lan" class="md-nav__link">
+  <a href="#onboard-devices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ErP and Wake-on-LAN
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unused-onboard-devices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Unused onboard devices
+        Onboard devices
       
     </span>
   </a>
@@ -3466,10 +3472,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mechanical-disk-spindown" class="md-nav__link">
+  <a href="#erp-and-wake-on-lan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mechanical disk spindown
+        ErP and Wake-on-LAN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hdd-spindown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HDD spindown
       
     </span>
   </a>
@@ -3499,21 +3516,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#observed-result" class="md-nav__link">
+  <a href="#measured-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Observed result
+        Measured result
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measured result">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wall-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wall power
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#operational-policy" class="md-nav__link">
+  <a href="#operating-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Operational policy
+        Operating rules
       
     </span>
   </a>
@@ -3548,193 +3582,165 @@
   
 
 
-<h1 id="energy-optimization">Energy Optimization<a class="headerlink" href="#energy-optimization" title="Permanent link">&para;</a></h1>
-<p>Zion is designed to remain available as the main virtualization platform without wasting power while idle. The optimization work therefore focuses on reducing the baseline consumption of the motherboard, CPU, storage, and unused peripherals while preserving stability, remote administration, and the ability to expand the platform later.</p>
-<p>The settings documented here describe the configuration validated on Zion's Gigabyte Z370 HD3 and Intel Core i5-8400 platform. They are not universal recommendations for unrelated hardware.</p>
+<h1 id="power-management"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 15H6l7-14v8h5l-7 14z"/></svg></span> Power Management<a class="headerlink" href="#power-management" title="Permanent link">&para;</a></h1>
+<p>Zion runs continuously, but most of the time it is lightly loaded. The goal is therefore simple: reduce idle power draw without suspending the host or making storage, networking, and guests unreliable.</p>
+<p>This configuration was tested on Zion's Gigabyte Z370 HD3 with an Intel Core i5-8400. The same settings may behave differently on another board, controller, or kernel.</p>
 <div class="admonition warning">
-<p class="admonition-title">Stability comes first</p>
-<p>Power-saving options can affect PCIe devices, storage latency, USB peripherals, network adapters, and wake behaviour. Apply changes in small groups, keep local console access available, and validate the platform under both idle and normal workload conditions.</p>
+<p class="admonition-title">Change one group at a time</p>
+<p>Keep console access available when changing UEFI power settings. Test networking, storage and guest operation before moving to the next group.</p>
 </div>
-<h2 id="optimization-goals">Optimization goals<a class="headerlink" href="#optimization-goals" title="Permanent link">&para;</a></h2>
+<h2 id="what-is-optimized"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 2v2.07A8 8 0 0 0 4.07 11H2v2h2.07A8 8 0 0 0 11 19.93V22h2v-2.07A8 8 0 0 0 19.93 13H22v-2h-2.07A8 8 0 0 0 13 4.07V2m-2 4.08V8h2V6.09c2.5.41 4.5 2.41 4.92 4.91H16v2h1.91c-.41 2.5-2.41 4.5-4.91 4.92V16h-2v1.91C8.5 17.5 6.5 15.5 6.08 13H8v-2H6.09C6.5 8.5 8.5 6.5 11 6.08M12 11a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1"/></svg></span> What is optimized<a class="headerlink" href="#what-is-optimized" title="Permanent link">&para;</a></h2>
 <ul>
-<li>allow the CPU package to enter deeper idle states;</li>
-<li>reduce unnecessary activity on PCIe and chipset links;</li>
-<li>stop the mechanical data disk during sufficiently long idle periods;</li>
-<li>disable unused onboard devices;</li>
-<li>reapply safe operating-system tunables after every boot;</li>
-<li>retain integrated graphics for emergency console access and Intel Quick Sync;</li>
-<li>keep virtualization, networking, backups, and storage reliable.</li>
+<li>CPU and package idle states;</li>
+<li>PCIe, DMI and chipset link power management;</li>
+<li>unused onboard devices;</li>
+<li>standby behaviour of the mechanical data disk;</li>
+<li>Linux power-saving tunables applied after boot.</li>
 </ul>
-<h2 id="firmware-configuration">Firmware configuration<a class="headerlink" href="#firmware-configuration" title="Permanent link">&para;</a></h2>
-<h3 id="cpu-power-management">CPU power management<a class="headerlink" href="#cpu-power-management" title="Permanent link">&para;</a></h3>
-<p>The following UEFI settings allow the processor and the complete CPU package to enter deeper idle states and return to full performance when work arrives.</p>
+<p>Integrated graphics stays enabled for emergency console access and Intel Quick Sync. Zion itself is not suspended automatically.</p>
+<h2 id="uefi-settings"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 4h12v1h3v2h-3v2h3v2h-3v2h3v2h-3v2h3v2h-3v1H6v-1H3v-2h3v-2H3v-2h3v-2H3V9h3V7H3V5h3zm5 11v3h1v-3zm2 0v3h1v-3zm2 0v3h1v-3z"/></svg></span> UEFI settings<a class="headerlink" href="#uefi-settings" title="Permanent link">&para;</a></h2>
+<h3 id="cpu">CPU<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Setting</th>
 <th>Value</th>
-<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Intel CPU C-States Control</td>
-<td>Enabled</td>
-<td>Enables processor idle states</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Package C-State Limit</td>
-<td>C10</td>
-<td>Allows the deepest supported package state</td>
+<td><code>C10</code></td>
 </tr>
 <tr>
 <td>Intel Speed Shift Technology</td>
-<td>Enabled</td>
-<td>Lets the CPU adjust performance states quickly</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Enhanced Halt State (C1E)</td>
-<td>Enabled</td>
-<td>Reduces power use during light idle periods</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>C3, C6/C7, C8 and C10 support</td>
-<td>Enabled</td>
-<td>Enables progressively deeper idle states</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Enhanced Intel SpeedStep (EIST)</td>
-<td>Enabled</td>
-<td>Allows dynamic frequency and voltage scaling</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Race to Halt</td>
-<td>Enabled</td>
-<td>Completes short workloads quickly and returns to idle</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Energy Efficient Turbo</td>
-<td>Enabled</td>
-<td>Favors efficient turbo behaviour</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Voltage Optimization</td>
-<td>Enabled</td>
-<td>Enables platform-managed voltage reduction</td>
+<td><code>Enabled</code></td>
 </tr>
 </tbody>
 </table>
-<p>Prefetchers and ring-to-core offset controls remain on <code>Auto</code>. They were not changed without a workload-specific reason.</p>
-<h3 id="chipset-and-pcie-power-management">Chipset and PCIe power management<a class="headerlink" href="#chipset-and-pcie-power-management" title="Permanent link">&para;</a></h3>
+<p>Prefetchers and ring-to-core offset settings remain on <code>Auto</code>. There was no workload-specific reason to change them.</p>
+<h3 id="chipset-and-pcie">Chipset and PCIe<a class="headerlink" href="#chipset-and-pcie" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Setting</th>
 <th>Value</th>
-<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>PEG ASPM</td>
-<td>Enabled</td>
-<td>Saves power on the graphics PCIe link</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>PCH ASPM</td>
-<td>Enabled</td>
-<td>Enables chipset link power management</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>DMI ASPM</td>
-<td>Enabled</td>
-<td>Enables power management between CPU and chipset</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>CEC 2019 Ready</td>
-<td>Enabled</td>
-<td>Applies stricter platform idle-power behaviour</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>RC6 / Render Standby</td>
-<td>Enabled</td>
-<td>Powers down the integrated GPU when idle</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Power Loading</td>
-<td>Auto</td>
-<td>Retains the board's low-load stability protection</td>
+<td><code>Auto</code></td>
 </tr>
 </tbody>
 </table>
-<p>The integrated GPU remains enabled. It provides an emergency local console and can be used for hardware-accelerated media processing.</p>
-<h3 id="erp-and-wake-on-lan">ErP and Wake-on-LAN<a class="headerlink" href="#erp-and-wake-on-lan" title="Permanent link">&para;</a></h3>
-<p>ErP reduces the server's consumption while powered off, but on this platform it also disables Wake-on-LAN.</p>
-<p>This is an explicit trade-off:</p>
-<ul>
-<li>use <code>ErP: Enabled</code> when minimum soft-off consumption is more important and Zion is expected to remain online;</li>
-<li>use <code>ErP: Disabled</code> if remote Wake-on-LAN for Zion becomes an operational requirement.</li>
-</ul>
-<p>After changing ErP, test cold boot, orderly shutdown, power-loss recovery, and Wake-on-LAN rather than relying only on the firmware description.</p>
-<h3 id="unused-onboard-devices">Unused onboard devices<a class="headerlink" href="#unused-onboard-devices" title="Permanent link">&para;</a></h3>
+<p>ASPM allows idle PCIe and chipset links to enter lower-power states. RC6 does the same for the integrated GPU when it is not processing video or driving a console.</p>
+<h3 id="onboard-devices">Onboard devices<a class="headerlink" href="#onboard-devices" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>Device or feature</th>
-<th>Setting</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>SATA Aggressive Link Power Management</td>
-<td>Enabled</td>
+<td><code>Enabled</code></td>
 </tr>
 <tr>
 <td>Serial port</td>
-<td>Disabled</td>
+<td><code>Disabled</code></td>
 </tr>
 <tr>
 <td>Parallel port</td>
-<td>Disabled</td>
+<td><code>Disabled</code></td>
 </tr>
 <tr>
 <td>Onboard audio</td>
-<td>Disabled</td>
+<td><code>Disabled</code></td>
 </tr>
 <tr>
 <td>Integrated graphics</td>
-<td>Enabled</td>
+<td><code>Enabled</code></td>
 </tr>
 </tbody>
 </table>
-<p>Only devices confirmed as unused should be disabled. Future PCIe passthrough, local troubleshooting, or media workloads may change that decision.</p>
-<h2 id="mechanical-disk-spindown">Mechanical disk spindown<a class="headerlink" href="#mechanical-disk-spindown" title="Permanent link">&para;</a></h2>
-<p>The IronWolf data disk consumes several watts while its platters are spinning and can prevent the platform from reaching deeper package states. It is therefore allowed to spin down after a period without I/O.</p>
-<p>Before changing disk power management:</p>
-<ol>
-<li>confirm the correct disk by model, serial number, filesystem, and mount point;</li>
-<li>ensure that no backup, scrub, SMART test, media scan, or guest workload is active;</li>
-<li>use a stable <code>/dev/disk/by-id/</code> path in persistent configuration;</li>
-<li>observe whether recurring services wake the disk too frequently.</li>
-</ol>
-<p>Read the current power state without intentionally performing filesystem I/O:</p>
+<p>Only confirmed unused devices are disabled.</p>
+<h2 id="erp-and-wake-on-lan"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.84 22.73-5.53-5.53-.81.8v3h-5v-3L6 14.5V9c0-.3.1-.59.25-.86L1.11 3l1.28-1.27 19.72 19.73zM18 14.5V9c0-1-1-2-2-2V3h-2v4h-3.8l7.65 7.65zM10 3H8v1.8l2 2z"/></svg></span> ErP and Wake-on-LAN<a class="headerlink" href="#erp-and-wake-on-lan" title="Permanent link">&para;</a></h2>
+<p><code>ErP: Enabled</code> reduces soft-off power consumption below the normal standby level, but disables Wake-on-LAN on this platform.</p>
+<p>Zion is expected to remain online, so ErP is enabled. If remote Wake-on-LAN for Zion becomes necessary, ErP must be disabled and WoL tested again after a complete shutdown.</p>
+<p>This does not affect Wake-on-LAN for the separate K3s nodes.</p>
+<h2 id="hdd-spindown"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m6 2a6 6 0 0 0-6 6c0 3.31 2.69 6 6.1 6l-.88-2.23a1.01 1.01 0 0 1 .37-1.37l.86-.5a1.01 1.01 0 0 1 1.37.37l1.92 2.42A5.98 5.98 0 0 0 18 10a6 6 0 0 0-6-6m0 5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-5 9a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5.09-4.73 2.49 6.31 2.59-1.5-4.22-5.31z"/></svg></span> HDD spindown<a class="headerlink" href="#hdd-spindown" title="Permanent link">&para;</a></h2>
+<p>The IronWolf disk stores backups and bulk data such as the media library. When no job or application is using it, stopping the platters saves several watts and allows the platform to reach deeper package states.</p>
+<p>Persistent configuration should use the disk's <code>/dev/disk/by-id/</code> path. Do not copy <code>/dev/sdX</code> names into configuration because they can change after a reboot.</p>
+<p>Check the current state:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>hdparm<span class="w"> </span>-C<span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<p>Request an immediate standby transition during a controlled test:</p>
+<p>Request standby during a controlled test:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>hdparm<span class="w"> </span>-y<span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<p>Configure a ten-minute idle timeout for testing:</p>
+<p>Set a ten-minute idle timeout:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>hdparm<span class="w"> </span>-S<span class="w"> </span><span class="m">120</span><span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<p>The disk wakes automatically when it receives I/O. The timeout should be reconsidered if logs show frequent start/stop cycles: repeated spin-up can be worse for latency and drive wear than leaving the disk running during an active period.</p>
+<p>The disk wakes automatically on I/O. Backup jobs, SMART tests, media scans and filesystem activity can wake it as well.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>An interactive <code>hdparm -S</code> setting may not survive a reboot. Persistent configuration should reference the stable disk identifier and must be verified after restarting Zion.</p>
+<p><code>hdparm -S</code> issued from the shell is not persistent. After adding the setting to the system configuration, verify it again after reboot.</p>
 </div>
-<h2 id="powertop-at-boot">PowerTOP at boot<a class="headerlink" href="#powertop-at-boot" title="Permanent link">&para;</a></h2>
-<p>PowerTOP is used to apply the set of operating-system tunables already validated on Zion. A small systemd unit reapplies them after boot:</p>
+<p>Frequent spin-up and spin-down cycles defeat the purpose and add latency. If the disk wakes repeatedly during normal operation, increase the timeout or leave it running during active hours.</p>
+<h2 id="powertop-at-boot"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 3H5v6h2zm12 0h-2v10h2zM3 13h2v8h2v-8h2v-2H3zm12-6h-2V3h-2v4H9v2h6zm-4 14h2V11h-2zm4-6v2h2v4h2v-4h2v-2z"/></svg></span> PowerTOP at boot<a class="headerlink" href="#powertop-at-boot" title="Permanent link">&para;</a></h2>
+<p>The tested PowerTOP tunables are reapplied by <code>/etc/systemd/system/powertop.service</code>:</p>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">[Unit]</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">Description</span><span class="o">=</span><span class="s">Apply validated PowerTOP tunables</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">Description</span><span class="o">=</span><span class="s">Apply PowerTOP tunables</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="na">After</span><span class="o">=</span><span class="s">multi-user.target</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="na">ConditionPathExists</span><span class="o">=</span><span class="s">/usr/sbin/powertop</span>
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
@@ -3746,25 +3752,24 @@
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">[Install]</span>
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
 </span></code></pre></div>
-<p>Install the file as <code>/etc/systemd/system/powertop.service</code>, then validate and enable it:</p>
+<p>Validate and enable the unit:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemd-analyze<span class="w"> </span>verify<span class="w"> </span>/etc/systemd/system/powertop.service
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>powertop.service
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>powertop.service<span class="w"> </span>--no-pager
 </span></code></pre></div>
-<p><code>powertop --auto-tune</code> should not be treated as universally safe. After kernel, hardware, or passthrough changes, verify networking, storage, USB devices, and guest operation. If one tunable causes instability, replace the blanket auto-tune policy with explicit, individually tested settings.</p>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<p>The configuration is accepted only after checking both power behaviour and normal platform operation.</p>
-<p>Recommended checks include:</p>
+<p><code>powertop --auto-tune</code> changes several device policies at once. After a kernel update or hardware change, check the network interfaces, storage, USB devices and running guests. If one device becomes unstable, replace the blanket auto-tune with explicit settings for the tunables already verified as safe.</p>
+<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<p>After changing the configuration, check:</p>
 <ul>
-<li>CPU package C-state residency during a representative idle window;</li>
-<li>system load and CPU activity with guests idle;</li>
-<li>network connectivity and link stability;</li>
-<li>VM and LXC startup, shutdown, and storage access;</li>
-<li>backup execution and restore readability;</li>
-<li>SMART state and disk start/stop behaviour;</li>
-<li>absence of unexpected failed systemd units;</li>
-<li>successful reboot and recovery after simulated power loss.</li>
+<li>CPU package C-state residency during a representative idle period;</li>
+<li>network links and access to every VM and LXC;</li>
+<li>NVMe and HDD access;</li>
+<li>VM and container startup and shutdown;</li>
+<li>backup execution and datastore availability;</li>
+<li>HDD start/stop frequency;</li>
+<li>failed systemd units;</li>
+<li>reboot and recovery after power loss.</li>
 </ul>
 <p>Useful read-only commands:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>powertop
@@ -3772,22 +3777,47 @@
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-b<span class="w"> </span>-u<span class="w"> </span>powertop.service<span class="w"> </span>--no-pager
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sudo<span class="w"> </span>smartctl<span class="w"> </span>-a<span class="w"> </span>/dev/disk/by-id/&lt;IRONWOLF_DISK&gt;
 </span></code></pre></div>
-<h2 id="observed-result">Observed result<a class="headerlink" href="#observed-result" title="Permanent link">&para;</a></h2>
+<h2 id="measured-result"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m16 11.78 4.24-7.33 1.73 1-5.23 9.05-6.51-3.75L5.46 19H22v2H2V3h2v14.54L9.5 8z"/></svg></span> Measured result<a class="headerlink" href="#measured-result" title="Permanent link">&para;</a></h2>
 <p>During the original tuning session:</p>
 <ul>
-<li>package idle states became active instead of remaining at zero residency;</li>
-<li>CPU active time at idle fell from roughly 11% to approximately 3%;</li>
-<li>measured idle consumption of the motherboard and CPU platform fell by about 5.5 W, approximately 25% of that part of the baseline.</li>
+<li>CPU package idle states changed from no reported residency to regular <code>pc2</code> and <code>pc3</code> residency;</li>
+<li>CPU <code>C0 active</code> time at idle fell from about <strong>11%</strong> to about <strong>3%</strong>;</li>
+<li>idle draw of the motherboard and CPU platform fell by about <strong>5.5 W</strong>, roughly <strong>25%</strong> of that part of the baseline.</li>
 </ul>
-<p>These values are measurements from one hardware and workload state, not guaranteed savings. They should be measured again after adding PCIe devices, changing storage, enabling passthrough, or substantially altering the guest workload.</p>
-<h2 id="operational-policy">Operational policy<a class="headerlink" href="#operational-policy" title="Permanent link">&para;</a></h2>
+<p>These figures describe one hardware and workload state. Measure again after adding PCIe devices, enabling passthrough, changing disks or moving substantial workloads between guests.</p>
+<h3 id="wall-power"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 10.5A1.5 1.5 0 0 1 9 12a1.5 1.5 0 0 1-1.5 1.5c-.84 0-1.5-.67-1.5-1.5a1.5 1.5 0 0 1 1.5-1.5m9 0A1.5 1.5 0 0 1 18 12a1.5 1.5 0 0 1-1.5 1.5A1.5 1.5 0 0 1 15 12a1.5 1.5 0 0 1 1.5-1.5M4.22 2h15.56C21 2 22 3 22 4.22v15.56A2.22 2.22 0 0 1 19.78 22H4.22C3 22 2 21 2 19.78V4.22A2.22 2.22 0 0 1 4.22 2M12 4a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Wall power<a class="headerlink" href="#wall-power" title="Permanent link">&para;</a></h3>
+<p>Complete-system power was also measured at the wall:</p>
+<table>
+<thead>
+<tr>
+<th>System state</th>
+<th style="text-align: right;">Measured draw</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zion idle, with the IronWolf HDD spinning</td>
+<td style="text-align: right;"><strong>24–25 W</strong></td>
+</tr>
+<tr>
+<td>Zion under heavier workloads</td>
+<td style="text-align: right;"><strong>40–60 W</strong></td>
+</tr>
+<tr>
+<td>Dell Wyse 5070 idle, with two 2.5-inch drives</td>
+<td style="text-align: right;"><strong>12–13 W</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Moving from the Dell Wyse 5070 to Zion roughly doubled idle consumption. In return, Zion provides a six-core CPU, NVMe storage, substantially more memory, hardware expansion and enough capacity to separate workloads into VMs and LXC containers. An idle draw of 24–25 W is a reasonable trade-off for that increase in capability.</p>
+<h2 id="operating-rules"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-7 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M7 7h10V5h2v14H5V5h2zm.5 6.5L9 12l2 2 4.5-4.5L17 11l-6 6z"/></svg></span> Operating rules<a class="headerlink" href="#operating-rules" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Backups and data integrity take priority over spindown targets.</li>
-<li>Zion is optimized for low idle consumption, not minimum benchmark power.</li>
-<li>Firmware changes are documented and tested individually.</li>
-<li>Wake-on-LAN expectations are reviewed whenever ErP is changed.</li>
-<li>PowerTOP is revalidated after kernel or hardware changes.</li>
-<li>Energy measurements are compared using the same guest and storage state.</li>
+<li>Stability and data integrity take priority over the lowest possible idle draw.</li>
+<li>Backup windows take priority over HDD spindown.</li>
+<li>UEFI changes are applied and tested in small groups.</li>
+<li>ErP is reviewed whenever Wake-on-LAN requirements change.</li>
+<li>PowerTOP is revalidated after kernel and hardware changes.</li>
+<li>Measurements are compared with the same guests and storage state.</li>
 </ul>
 
 
@@ -3811,7 +3841,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 13:57:22 UTC"><span class="timeago" datetime="2026-08-21T13:57:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 13:57:22 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 10:26:11 UTC"><span class="timeago" datetime="2026-08-22T10:26:11+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 10:26:11 UTC">2026-08-22</span>
   </span>
 
     
