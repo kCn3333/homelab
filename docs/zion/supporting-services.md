@@ -12,7 +12,7 @@ This page records few smaller service boundaries that complete the Zion platform
 | Swap | 512 MB |
 | Runtime | Native AdGuard service |
 
-AdGuard replaced the previous Pi-hole deployment and provides:
+AdGuard replaced the previous [:material-pi-hole: Pi-hole](https://github.com/kCn3333/docker-compose/blob/main/pihole/docker-compose.yaml) deployment and provides:
 
 - DNS filtering for LAN clients;
 - local host records;
@@ -45,7 +45,7 @@ PatchMon is not given authority to restart hosts automatically.
 
 The container was created with the [PatchMon Proxmox Community Script](https://community-scripts.github.io/ProxmoxVE/scripts?id=patchmon). PatchMon's server and agent run as native systemd services rather than as part of a shared Docker host.
 
-## :simple-jellyfin: Docker Media
+## :material-movie-open-star: Docker Media
 
 The Docker Media LXC contains the complete media pipeline. It is separated from Logos so that media mounts, transcoding, downloads and frequently changed containers do not share the failure domain of the main operations server.
 
@@ -54,21 +54,19 @@ The Docker Media LXC contains the complete media pipeline. It is separated from 
 | Service | Role | Published port |
 |---|---|---:|
 | :simple-jellyfin: Jellyfin | Media server and hardware-assisted playback | `8096` |
-| Seerr | Movie and series requests | `5055` |
+| :material-eye-refresh: Seerr | Movie and series requests | `5055` |
 | :simple-radarr: Radarr | Movie library automation | `7878` |
 | :simple-sonarr: Sonarr | Series library automation | `8989` |
-| Prowlarr | Indexer management for Radarr and Sonarr | `9696` |
-| Bazarr | Subtitle discovery and download | `6767` |
+| :simple-bittorrent: Prowlarr | Indexer management for Radarr and Sonarr | `9696` |
+| :material-subtitles: Bazarr | Subtitle discovery and download | `6767` |
 | :simple-qbittorrent: qBittorrent | Download client | `8080`, `6881/tcp`, `6881/udp` |
-| FlareSolverr | Browser challenge helper used by selected indexers | `8191` |
+| :material-cube-outline: FlareSolverr | Browser challenge helper used by selected indexers | `8191` |
 | :simple-youtube: MeTube | Standalone video downloads | `8081` |
-| Subtitle Agent | Preparation and inspection of subtitle workpacks | `8181` |
+| :material-subtitles: Subtitle Agent | Preparation and inspection of subtitle workpacks | `8181` |
 | :simple-portainer: Portainer Agent | Remote stack management from Logos | `9001` |
 | :simple-watchtower: Watchtower | Container image updates and cleanup | none |
 
-- [media and Arr stack](https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml);
-
-Portainer deploys and manages the active stacks. Configuration and application state live under `/opt/appdata`; media and download directories are mounted separately.
+Portainer deploys and manages the active [Arr stack](https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml). Configuration and application state live under `/opt/appdata`; media and download directories are mounted separately.
 
 ### :material-web: External Jellyfin access
 
@@ -78,7 +76,7 @@ Jellyfin is the only media service exposed through the external Relay path:
 2. Caddy forwards the request through WireGuard;
 3. Logos routes only the explicitly allowed Jellyfin traffic into the LAN;
 
-The Relay does not receive access to the complete Docker Media host or the remaining Arr interfaces. Its setup is described in [Relay VPS](../relay.md), with failure recovery in [WireGuard relay troubleshooting](../../troubleshooting/wireguard-relay.md).
+The Relay does not receive access to the complete Docker Media host or the remaining Arr interfaces. Its setup is described in [Relay VPS](../relay/relay.md), with failure recovery in [WireGuard relay troubleshooting](../troubleshooting/wireguard-relay.md).
 
 Downloaded media and reproducible caches are treated differently from application configuration. Image-level backups and configuration collection therefore use explicit inclusions and exclusions rather than copying every media-related file.
 
