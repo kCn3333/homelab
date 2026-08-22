@@ -1,11 +1,8 @@
-# :material-lightning-bolt: Power Management
+# :material-power-plug: Power Management
 
 Zion runs continuously, but most of the time it is lightly loaded. The goal is therefore simple: reduce idle power draw without suspending the host or making storage, networking, and guests unreliable.
 
 This configuration was tested on Zion's Gigabyte Z370 HD3 with an Intel Core i5-8400. The same settings may behave differently on another board, controller, or kernel.
-
-!!! warning "Change one group at a time"
-    Keep console access available when changing UEFI power settings. Test networking, storage and guest operation before moving to the next group.
 
 ## :material-target: What is optimized
 
