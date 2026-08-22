@@ -3648,8 +3648,8 @@
 <h2 id="traffic-paths"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"/></svg></span> Traffic paths<a class="headerlink" href="#traffic-paths" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart LR
     client["Internet client"] --&gt;|"HTTPS :443"| relay["Relay&lt;br/&gt;Caddy + WireGuard"]
-    admin["Administrative client"] --&gt;|"SSH over WireGuard"| relay
-    relay --&gt;|"wg0"| logos["Logos&lt;br/&gt;routing + firewall + NAT"]
+    relay &lt;--&gt;|"WireGuard tunnel"| logos["Logos&lt;br/&gt;routing + firewall + NAT"]
+    admin["Administrative client"] --&gt;|"SSH route to Relay"| logos
     logos --&gt;|"TCP :8096"| jellyfin["Jellyfin"]
     logos --&gt;|"TCP :3000"| patchmon["PatchMon"]</code></pre>
 <p>Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server.</p>
@@ -3832,7 +3832,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 16:23:56 UTC"><span class="timeago" datetime="2026-08-22T16:23:56+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 16:23:56 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 16:27:35 UTC"><span class="timeago" datetime="2026-08-22T16:27:35+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 16:27:35 UTC">2026-08-22</span>
   </span>
 
     
