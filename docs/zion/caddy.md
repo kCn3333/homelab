@@ -1,4 +1,4 @@
-# :simple-caddy: Caddy
+# :simple-caddy: Caddy Reverse Proxy
 
 Caddy is the HTTPS entry point for services available only inside the LAN. It runs natively in a dedicated LXC, independently of Docker and Logos.
 
