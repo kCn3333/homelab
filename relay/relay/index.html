@@ -1128,23 +1128,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Forwarding and NAT on Logos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#interface-name-failure-after-migration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Interface-name failure after migration
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1231,10 +1214,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation
+        Troubleshooting
       
     </span>
   </a>
@@ -3569,23 +3552,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Forwarding and NAT on Logos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#interface-name-failure-after-migration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Interface-name failure after migration
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -3672,10 +3638,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation
+        Troubleshooting
       
     </span>
   </a>
@@ -3711,8 +3677,8 @@
 
 
 <h1 id="relay-vps"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 20q-2.28 0-3.89-1.57Q1 16.85 1 14.58q0-1.95 1.17-3.48 1.18-1.53 3.08-1.95.63-2.3 2.5-3.72Q9.63 4 12 4q2.93 0 4.96 2.04Q19 8.07 19 11q1.73.2 2.86 1.5 1.14 1.28 1.14 3 0 1.88-1.31 3.19T18.5 20m-12-2h12q1.05 0 1.77-.73.73-.72.73-1.77t-.73-1.77Q19.55 13 18.5 13H17v-2q0-2.07-1.46-3.54Q14.08 6 12 6 9.93 6 8.46 7.46 7 8.93 7 11h-.5q-1.45 0-2.47 1.03Q3 13.05 3 14.5T4.03 17q1.02 1 2.47 1m5.5-6"/></svg></span> Relay VPS<a class="headerlink" href="#relay-vps" title="Permanent link">&para;</a></h1>
-<p>The Relay is a small Oracle Cloud Free Tier VM used as the public edge of the homelab. It accepts only the traffic that must arrive from the Internet and sends it through WireGuard to selected services at home.</p>
-<p>The home router does not expose these services directly.</p>
+<p>The Relay handles inbound traffic for the few services that must be reachable from the Internet. It connects to the homelab only through WireGuard, so no inbound service ports need to be opened on the home router.</p>
+<hr />
 <h2 id="compute-profile"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9zm0 8h1v-2H9zm0 8h1v-2H9zM5 3v2h2V3zm0 8v2h2v-2zm0 8v2h2v-2z"/></svg></span> Compute profile<a class="headerlink" href="#compute-profile" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3763,29 +3729,7 @@
     relay --&gt;|"wg0"| logos["Logos&lt;br/&gt;routing + firewall + NAT"]
     logos --&gt;|"TCP :8096"| jellyfin["Jellyfin"]
     logos --&gt;|"TCP :3000"| patchmon["PatchMon"]</code></pre>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Internet → Relay → Jellyfin</td>
-<td>Public HTTPS access to Jellyfin</td>
-</tr>
-<tr>
-<td>Relay → Logos → PatchMon</td>
-<td>Monitoring data sent by the Relay agent</td>
-</tr>
-<tr>
-<td>Administrator → WireGuard → Relay</td>
-<td>SSH administration without public TCP/22</td>
-</tr>
-</tbody>
-</table>
-<p>PatchMon port <code>3000</code> is not exposed publicly. It is reachable from the Relay only through WireGuard and the forwarding rules on Logos.</p>
+<p>Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server.</p>
 <h2 id="public-surface"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg></span> Public surface<a class="headerlink" href="#public-surface" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3829,7 +3773,7 @@
 </tr>
 </tbody>
 </table>
-<p>The same policy is enforced in the OCI network rules and on the VM firewall. OCI Cloud Console remains the break-glass access path.</p>
+<p>The same policy is enforced in the OCI network rules and on the VM firewall.</p>
 <h2 id="wireguard"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 5h6l-3 3zm1.5 9.66c-.3.34-.5.84-.5 1.34a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.55-.22-1.05-.59-1.41l1.42-1.42C15.55 13.9 16 14.9 16 16a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.07.42-2.04 1.1-2.75l-.01-.01 7.08-7.07A4 4 0 0 1 19 5a4 4 0 0 1 4 4 4 4 0 0 1-4 4c-1.1 0-2.1-.45-2.83-1.17l1.42-1.42c.36.37.86.59 1.41.59a2 2 0 0 0 2-2 2 2 0 0 0-2-2c-.55 0-1.05.22-1.41.59zM6.41 7.59C6.05 7.22 5.55 7 5 7a2 2 0 0 0-2 2 2 2 0 0 0 2 2c.55 0 1.05-.22 1.41-.59l1.42 1.42C7.1 12.55 6.1 13 5 13a4 4 0 0 1-4-4 4 4 0 0 1 4-4c1.11 0 2.11.45 2.83 1.17l2.76 2.76-1.42 1.42z"/></svg></span> WireGuard<a class="headerlink" href="#wireguard" title="Permanent link">&para;</a></h2>
 <p>The Relay is the WireGuard endpoint. Logos initiates the tunnel from the home network.</p>
 <p>The examples below use descriptive placeholders instead of the real addresses:</p>
@@ -3949,66 +3893,47 @@
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>sudo<span class="w"> </span>iptables-save
 </span></code></pre></div>
-<p>Rule order matters. Return traffic must be accepted, the two explicit paths must appear before the final <code>wg0</code> drop, and the NAT rules must use the real LAN interface.</p>
-<h3 id="interface-name-failure-after-migration">Interface-name failure after migration<a class="headerlink" href="#interface-name-failure-after-migration" title="Permanent link">&para;</a></h3>
-<p>After Logos moved to Zion, WireGuard still handshaked but Jellyfin returned <code>502</code>. The saved NAT rule used the old interface name <code>eth0</code>; the VM uses <code>ens18</code>.</p>
-<p>The backend received the SYN packet, but its reply had no valid return path through Logos. Replacing the old rule fixed the path:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-D<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-o<span class="w"> </span>eth0<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span>-o<span class="w"> </span>ens18<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>sudo<span class="w"> </span>netfilter-persistent<span class="w"> </span>save
-</span></code></pre></div>
+<p>Rule order matters. Return traffic must be accepted, the two explicit paths must appear before the final <code>wg0</code> drop, and NAT must use the current LAN egress interface.</p>
 <p>The persistent rules are stored in <code>/etc/iptables/rules.v4</code>. A small idempotent fallback in <code>/etc/rc.local</code> restores the Jellyfin NAT rule if Docker reloads the firewall:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-C<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>-o<span class="w"> </span>ens18<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span>-o<span class="w"> </span>ens18<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-C<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-o<span class="w"> </span>ens18<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span>-o<span class="w"> </span>ens18<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
 </span></code></pre></div>
 <h2 id="caddy"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg></span> Caddy<a class="headerlink" href="#caddy" title="Permanent link">&para;</a></h2>
 <p>Caddy runs directly on the Relay and terminates public TLS. Jellyfin traffic is then proxied to its LAN address through WireGuard.</p>
-<div class="language-caddyfile highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&lt;PUBLIC_JELLYFIN_HOSTNAME&gt;<span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">encode</span><span class="w"> </span>gzip
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="k">reverse_proxy</span><span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;:8096<span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span>flush_interval<span class="w"> </span>-1
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span>header_up<span class="w"> </span>X-Forwarded-For<span class="w"> </span><span class="nv">{remote_host}</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span>header_up<span class="w"> </span>X-Real-IP<span class="w"> </span><span class="nv">{remote_host}</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">        </span>header_up<span class="w"> </span>Host<span class="w"> </span><span class="nv">{host}</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="k">log</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span>output<span class="w"> </span>file<span class="w"> </span>/var/log/caddy/jellyfin_access.log<span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">            </span>mode<span class="w"> </span><span class="m">0644</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span>format<span class="w"> </span>json
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
-</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="k">header</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">        </span>Strict-Transport-Security<span class="w"> </span><span class="s2">"max-age=31536000; includeSubDomains"</span>
-</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">        </span>X-Frame-Options<span class="w"> </span><span class="s2">"SAMEORIGIN"</span>
-</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">        </span>X-Content-Type-Options<span class="w"> </span><span class="s2">"nosniff"</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">        </span>Referrer-Policy<span class="w"> </span><span class="s2">"strict-origin-when-cross-origin"</span>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">        </span>-Server
-</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="p">}</span>
+<div class="language-caddyfile highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&lt;PUBLIC_JELLYFIN_HOSTNAME&gt;<span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="k">encode</span><span class="w"> </span>gzip
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="k">reverse_proxy</span><span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;:8096<span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span>flush_interval<span class="w"> </span>-1
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span>header_up<span class="w"> </span>X-Forwarded-For<span class="w"> </span><span class="nv">{remote_host}</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span>header_up<span class="w"> </span>X-Real-IP<span class="w"> </span><span class="nv">{remote_host}</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">        </span>header_up<span class="w"> </span>Host<span class="w"> </span><span class="nv">{host}</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="k">log</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">        </span>output<span class="w"> </span>file<span class="w"> </span>/var/log/caddy/jellyfin_access.log<span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">            </span>mode<span class="w"> </span><span class="m">0644</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">        </span>format<span class="w"> </span>json
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">    </span><span class="k">header</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">        </span>Strict-Transport-Security<span class="w"> </span><span class="s2">"max-age=31536000; includeSubDomains"</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">        </span>X-Frame-Options<span class="w"> </span><span class="s2">"SAMEORIGIN"</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">        </span>X-Content-Type-Options<span class="w"> </span><span class="s2">"nosniff"</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">        </span>Referrer-Policy<span class="w"> </span><span class="s2">"strict-origin-when-cross-origin"</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">        </span>-Server
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Public HTTPS terminates directly on the Relay.</p>
 <h2 id="administrative-access"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg></span> Administrative access<a class="headerlink" href="#administrative-access" title="Permanent link">&para;</a></h2>
-<p>Public SSH is disabled. Administrative clients reach the Relay only through WireGuard. The cloud provider console is the out-of-band recovery path when the tunnel is unavailable.</p>
-<p>This avoids keeping TCP/22 open to Internet scans and password-guessing traffic.</p>
+<p>Administration uses WireGuard only. The cloud provider console is the out-of-band recovery path when the tunnel is unavailable.</p>
 <h2 id="mtu"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m1.39 18.36 1.77-1.76L4.58 18l1.06-1.05-1.42-1.41 1.42-1.42 2.47 2.48 1.06-1.06-2.47-2.48 1.41-1.41 1.42 1.41L10.59 12l-1.42-1.41 1.42-1.42 2.47 2.48 1.06-1.06-2.47-2.48 1.41-1.41 1.41 1.41 1.07-1.06-1.42-1.41 1.42-1.42L18 6.7l1.07-1.06-2.47-2.48 1.76-1.77 4.25 4.25L5.64 22.61z"/></svg></span> MTU<a class="headerlink" href="#mtu" title="Permanent link">&para;</a></h2>
-<p>OCI exposes <code>ens3</code> with MTU <code>9000</code>. Automatic WireGuard selection previously produced MTU <code>8920</code> on the Relay while Logos used <code>1420</code>. The tunnel handshaked, but larger packets failed.</p>
-<p>Both peers now use:</p>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="na">MTU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1420</span>
+<p>Both peers use a fixed MTU because automatic selection on the cloud interface previously produced a value that was too large for the complete path:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="na">MTU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1420</span>
 </span></code></pre></div>
-<p>The useful boundary test is:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ping<span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1392</span><span class="w"> </span>&lt;LOGOS_WG_IP&gt;
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ping<span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1393</span><span class="w"> </span>&lt;LOGOS_WG_IP&gt;
-</span></code></pre></div>
-<p>With a <code>1420</code> tunnel MTU, <code>1392</code> bytes succeeds and <code>1393</code> is too large after adding the IPv4 and ICMP headers.</p>
 <h2 id="known-routing-debt"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Known routing debt<a class="headerlink" href="#known-routing-debt" title="Permanent link">&para;</a></h2>
 <p>The current WireGuard subnet overlaps the OCI VCN. Explicit <code>/32</code> peer routes keep the setup working, but the overlap makes diagnostics harder and leaves little room for expansion.</p>
 <p>The proper fix is a coordinated move to a non-overlapping tunnel subnet. Both peers, firewall rules, routes and monitoring targets must be updated in one maintenance window.</p>
@@ -4028,25 +3953,8 @@
 <li><code>/etc/rc.local</code></li>
 </ul>
 <p>Private keys and live credentials belong in encrypted backups, never in this repository.</p>
-<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<p>Run these checks after firewall, WireGuard or Caddy changes:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Relay</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>ip<span class="w"> </span>-br<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>curl<span class="w"> </span>--fail<span class="w"> </span>--silent<span class="w"> </span>--show-error<span class="w"> </span>http://&lt;JELLYFIN_LAN_IP&gt;:8096/
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>curl<span class="w"> </span>--fail<span class="w"> </span>--silent<span class="w"> </span>--show-error<span class="w"> </span>http://&lt;PATCHMON_LAN_IP&gt;:3000/
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># Logos</span>
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>ip<span class="w"> </span>-br<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>ens18
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>ip<span class="w"> </span>-br<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>FORWARD<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'wg0|MASQUERADE|PatchMon|8096|3000'</span><span class="w"> </span>/etc/iptables/rules.v4
-</span></code></pre></div>
-<p>Counters should increase on the expected <code>FORWARD</code> and <code>POSTROUTING</code> rules while testing each service.</p>
-<p>For symptom-based diagnostics, see <a href="../../troubleshooting/wireguard-relay/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21.71 20.29-1.42 1.42a1 1 0 0 1-1.41 0L7 9.85A3.8 3.8 0 0 1 6 10a4 4 0 0 1-3.78-5.3l2.54 2.54.53-.53 1.42-1.42.53-.53L4.7 2.22A4 4 0 0 1 10 6a3.8 3.8 0 0 1-.15 1l11.86 11.88a1 1 0 0 1 0 1.41M2.29 18.88a1 1 0 0 0 0 1.41l1.42 1.42a1 1 0 0 0 1.41 0l5.47-5.46-2.83-2.83M20 2l-4 2v2l-2.17 2.17 2 2L18 8h2l2-4Z"/></svg></span> WireGuard relay troubleshooting</a>.</p>
+<h2 id="troubleshooting"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21.71 20.29-1.42 1.42a1 1 0 0 1-1.41 0L7 9.85A3.8 3.8 0 0 1 6 10a4 4 0 0 1-3.78-5.3l2.54 2.54.53-.53 1.42-1.42.53-.53L4.7 2.22A4 4 0 0 1 10 6a3.8 3.8 0 0 1-.15 1l11.86 11.88a1 1 0 0 1 0 1.41M2.29 18.88a1 1 0 0 0 0 1.41l1.42 1.42a1 1 0 0 0 1.41 0l5.47-5.46-2.83-2.83M20 2l-4 2v2l-2.17 2.17 2 2L18 8h2l2-4Z"/></svg></span> Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p>The failure layers, packet-tracing commands, MTU tests and recovery checks are kept in the separate <a href="../../troubleshooting/wireguard-relay/">WireGuard relay troubleshooting</a> runbook.</p>
 
 
 
@@ -4069,7 +3977,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 15:57:02 UTC"><span class="timeago" datetime="2026-08-22T15:57:02+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 15:57:02 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 16:08:57 UTC"><span class="timeago" datetime="2026-08-22T16:08:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 16:08:57 UTC">2026-08-22</span>
   </span>
 
     
