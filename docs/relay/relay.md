@@ -30,19 +30,7 @@ flowchart LR
     logos -->|"TCP :22"| ssh["Administrator"]
 ```
 
-Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server.
-
-## :material-shield-lock-outline: Public surface
-
-| Port | Protocol | State | Purpose |
-|---:|---|---|---|
-| `80` | TCP | Allowed | HTTP redirect and ACME |
-| `443` | TCP | Allowed | Public HTTPS handled by Caddy |
-| `<WIREGUARD_UDP_PORT>` | UDP | Allowed | WireGuard |
-| `22` | TCP | Blocked publicly | SSH is available through WireGuard only |
-| `3000` | TCP | Not exposed | PatchMon stays behind Logos |
-
-The same policy is enforced in the OCI network rules and on the VM firewall.
+Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server and SSH is available through WireGuard only.
 
 ## :simple-wireguard: WireGuard VPN
 
