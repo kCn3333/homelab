@@ -4,7 +4,8 @@ Zion runs continuously, but most of the time it is lightly loaded. The goal is t
 
 ---
 
-This configuration was tested on Gigabyte Z370 HD3 with an Intel Core i5-8400. The same settings may behave differently on another board, controller, or kernel.
+!!! info
+    This configuration was tested on Gigabyte Z370 HD3 with an Intel Core i5-8400. The same settings may behave differently on another board, controller, or kernel.
 
 ## :material-target: What is optimized
 
