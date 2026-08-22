@@ -32,6 +32,19 @@ flowchart LR
 
 Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server and SSH is available through WireGuard only.
 
+## :material-cloud-lock-outline: OCI network firewall
+
+Traffic is filtered before it reaches the Relay VM. The OCI network policy exposes only the services required by the public edge:
+
+| Traffic | Protocol | Port | Policy |
+|---|---|---:|---|
+| HTTP | TCP | `80` | Allowed for redirects and ACME |
+| HTTPS | TCP | `443` | Allowed for public services handled by Caddy |
+| WireGuard | UDP | `<WIREGUARD_UDP_PORT>` | Allowed for the VPN tunnel |
+| SSH | TCP | `22` | Not exposed publicly |
+| Internal backends | TCP | `3000`, `8096` | Not exposed publicly |
+| Other inbound traffic | Any | Any | Denied |
+
 ## :simple-wireguard: WireGuard VPN
 
 The Relay is the WireGuard endpoint. Logos initiates the tunnel from the home network.
@@ -137,12 +150,6 @@ Caddy runs directly on the Relay and terminates public TLS. Jellyfin traffic is 
 ## :material-console: Administrative access
 
 Administration uses WireGuard only. The cloud provider console is the out-of-band recovery path when the tunnel is unavailable.
-
-## :material-alert-outline: Known routing debt
-
-The current WireGuard subnet overlaps the OCI VCN. Explicit `/32` peer routes keep the setup working, but the overlap makes diagnostics harder and leaves little room for expansion.
-
-The proper fix is a coordinated move to a non-overlapping tunnel subnet. Both peers, firewall rules, routes and monitoring targets must be updated in one maintenance window.
 
 ## :material-check-decagram: Validation
 
