@@ -2,17 +2,17 @@
 
 Zion replaced Oracle Legacy, the original bare-metal Debian server. Oracle worked well for years, but almost every service shared the same operating system, Docker daemon, network stack, storage layout, and maintenance window. A broken package update, firewall mistake, or Docker networking problem could affect the whole homelab at once.
 
+---
 
-:simple-proxmox: Why Proxmox?
+## :simple-proxmox: Why Proxmox?
 
-| Oracle Legacy limitation | What changed on Zion |
-|---|---|
-| Most services shared one Debian installation | Services have separate operating environments |
-| System maintenance affected the whole server | Guests can be updated or restarted independently |
-| Docker, networking, and applications shared one failure domain | DNS, proxies, media, automation, and Home Assistant are separated |
-| Recovery was mostly file- and configuration-based | Complete VMs and LXC containers can be backed up and restored |
-| Experiments ran close to production services | Kali and test workloads run in isolated VMs |
-| Resource use was difficult to control per service | CPU, RAM, storage, startup order, and network interfaces are assigned per guest |
+- infrastructure services can be separated from applications;
+- each guest has its own lifecycle, resource limits, network interface, and backup policy;
+- risky tools such as Kali can stay powered off and isolated until needed;
+- complete VMs and LXC containers can be backed up and restored;
+- a failed service can be rebuilt without reinstalling the whole server;
+- KVM and LXC can be used where each one makes sense;
+- the platform provides a useful place to learn virtualization instead of running another large Docker host.
 
 This is still one physical server, so Proxmox does not make the homelab highly available. A Zion hardware failure affects every running guest. The improvement is separation, recovery, and easier maintenance—not physical redundancy.
 
@@ -22,12 +22,12 @@ Hardware selection and the build history are documented separately under **Infra
 
 | System | Type | Main role | Why this type? |
 |---|---|---|---|
-| **:simple-ubuntu: Logos** | KVM VM | Docker, Semaphore, Kopia, Garage, WireGuard, and administration tools | Needs a normal Linux kernel and works as the main general-purpose server |
-| **:simple-kalilinux: Kali** | KVM VM | Security testing and network diagnostics | Keeps testing tools and custom network modes outside normal infrastructure |
+| **:simple-ubuntu: Logos** | VM | Docker, Semaphore, Kopia, Garage, WireGuard, and administration tools | Needs a normal Linux kernel and works as the main general-purpose server |
+| **:simple-kalilinux: Kali** | VM | Security testing and network diagnostics | Keeps testing tools and custom network modes outside normal infrastructure |
 | **:simple-adguard: AdGuard Home** | LXC | Local DNS filtering and DNS rewrites | Small, dedicated Linux service with low resource use |
 | **:simple-caddy: Caddy** | LXC | Internal HTTPS reverse proxy and certificates | Independent network service that should not depend on Logos |
-| **:simple-haproxy: HAProxy** | LXC | K3s API and ingress load balancing | Small critical service with a separate lifecycle |
-| **:material-update: PatchMon** | LXC | Patch visibility and maintenance reporting | Lightweight service that remains separate from monitored hosts |
+| **:material-web: HAProxy** | LXC | K3s API and ingress load balancing | Small critical service with a separate lifecycle |
+| **:material-pac-man: PatchMon** | LXC | Patch visibility and maintenance reporting | Lightweight service that remains separate from monitored hosts |
 | **:simple-docker: Docker Media** | LXC | Jellyfin and the Arr stack | Groups related media services and their storage access |
 | **:simple-homeassistant: Home Assistant** | LXC | Home Assistant, ESPHome, and Zigbee | Separate Docker environment with direct USB device access |
 | **:simple-proxmox: Proxmox Backup Server** | LXC | Image-level guest backups | Low overhead; the backup datastore remains outside the container rootfs |
