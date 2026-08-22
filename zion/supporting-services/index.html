@@ -3493,7 +3493,7 @@
 </tr>
 </tbody>
 </table>
-<p>AdGuard replaced the previous Pi-hole deployment and provides:</p>
+<p>AdGuard replaced the previous <a href="https://github.com/kCn3333/docker-compose/blob/main/pihole/docker-compose.yaml"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.62 2c3.88 0 5.95 2.29 6.15 5.93.73-4.36 4.16-3.85 4.16-3.85.17 2.47-1.86 3.97-4.16 4.09-.65-1.36-4.52-4.7-4.52-4.7-.02.03 3.72 3.27 3.58 4.68C8.33 7.88 5.82 6 5.62 2m.44 11.11 3.86-3.86a3 3 0 0 1 4.24 0L18 13.11a2.964 2.964 0 0 1 0 4.24l-3.84 3.86a3 3 0 0 1-4.24 0l-3.86-3.86a3 3 0 0 1 0-4.24m3.33 6.48c0-1.23.76-2.74 2.7-2.74 1.31 0 2.78 1.25 4.22 1.11-1.44-.04-2.72-1.11-2.72-2.77 0-1.33 1.1-2.29 1.1-3.85-.06.99-.87 2.43-2.69 2.43-1.41 0-2.45-1.14-4.13-1.14.71.04 2.63.67 2.63 2.72 0 1.65-1.11 2.15-1.11 4.24"/></svg></span> Pi-hole</a> deployment and provides:</p>
 <ul>
 <li>DNS filtering for LAN clients;</li>
 <li>local host records;</li>
@@ -3543,7 +3543,7 @@
 </ul>
 <p>PatchMon is not given authority to restart hosts automatically.</p>
 <p>The container was created with the <a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=patchmon">PatchMon Proxmox Community Script</a>. PatchMon's server and agent run as native systemd services rather than as part of a shared Docker host.</p>
-<h2 id="docker-media"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .002C8.826.002-1.398 18.537.16 21.666c1.56 3.129 22.14 3.094 23.682 0S15.177 0 12 0zm7.76 18.949c-1.008 2.028-14.493 2.05-15.514 0C3.224 16.9 9.92 4.755 12.003 4.755c2.081 0 8.77 12.166 7.759 14.196zM12 9.198c-1.054 0-4.446 6.15-3.93 7.189.518 1.04 7.348 1.027 7.86 0 .511-1.027-2.874-7.19-3.93-7.19z"/></svg></span> Docker Media<a class="headerlink" href="#docker-media" title="Permanent link">&para;</a></h2>
+<h2 id="docker-media"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.65 6.5-2.74-3.54 3.93-.78.78 3.92zm-2.94.57-2.74-3.53-1.97.39 2.75 3.53zM19 13c1.1 0 2.12.3 3 .81V10H2v10a2 2 0 0 0 2 2h9.81c-.51-.88-.81-1.9-.81-3 0-3.31 2.69-6 6-6M4.16 5.5l-.98.19a2.01 2.01 0 0 0-1.57 2.35L2 10l4.9-.97zm7.65 2.55L9.07 4.5l-1.97.41 2.75 3.53zM23 17.89l-2.89-.25L19 15l-1.13 2.64-2.87.25 2.18 1.88-.68 2.81 2.5-1.49 2.45 1.49-.65-2.81z"/></svg></span> Docker Media<a class="headerlink" href="#docker-media" title="Permanent link">&para;</a></h2>
 <p>The Docker Media LXC contains the complete media pipeline. It is separated from Logos so that media mounts, transcoding, downloads and frequently changed containers do not share the failure domain of the main operations server.</p>
 <h3 id="workload"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 11h8V3H3m2 2h4v4H5m8 12h8v-8h-8m2 2h4v4h-4M3 21h8v-8H3m2 2h4v4H5m8-16v8h8V3m-2 6h-4V5h4Z"/></svg></span> Workload<a class="headerlink" href="#workload" title="Permanent link">&para;</a></h3>
 <table>
@@ -3561,7 +3561,7 @@
 <td style="text-align: right;"><code>8096</code></td>
 </tr>
 <tr>
-<td>Seerr</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3m6 9.5 1.8-1.8c-.5-.4-1.1-.7-1.8-.7-1.4 0-2.5 1.1-2.5 2.5S16.6 21 18 21c.8 0 1.5-.4 2-1h1.7c-.6 1.5-2 2.5-3.7 2.5-2.2 0-4-1.8-4-4s1.8-4 4-4c1.1 0 2.1.4 2.8 1.2l1.2-1.2v4zm-5.9 1s-.1 0 0 0C7 19.5 2.7 16.4 1 12c1.7-4.4 6-7.5 11-7.5s9.3 3.1 11 7.5c-.2.4-.4.9-.6 1.3-1.1-.8-2.4-1.3-3.9-1.3-.5 0-1 .1-1.5.2V12c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5h.2c-.1.5-.2 1-.2 1.5 0 .3 0 .7.1 1"/></svg></span> Seerr</td>
 <td>Movie and series requests</td>
 <td style="text-align: right;"><code>5055</code></td>
 </tr>
@@ -3576,12 +3576,12 @@
 <td style="text-align: right;"><code>8989</code></td>
 </tr>
 <tr>
-<td>Prowlarr</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .001C5.374.001.001 5.371 0 11.998a12 12 0 0 0 1.7 6.16.13.13 0 0 0 .113.038c.03 0 .048-.07.048-.11a1 1 0 0 0-.033-.13 22 22 0 0 1-.423-2.294 9.8 9.8 0 0 1 .428-3.866c1.101-3.396 3.333-5.7 6.664-6.938a10.3 10.3 0 0 1 3.398-.595.78.78 0 0 1 .856.763c0 .45-.343.737-.85.766a13 13 0 0 0-1.607.165 8.7 8.7 0 0 0-4.864 2.64c-2.083 2.22-2.88 4.86-2.4 7.857a8.7 8.7 0 0 0 2.445 4.785 8.94 8.94 0 0 0 6.37 2.76H12a11.95 11.95 0 0 0 5.613-1.392H12.02a8.4 8.4 0 0 1-1.408-.13 7.71 7.71 0 0 1-6.24-8.824 7.72 7.72 0 0 1 7.034-6.479 7.6 7.6 0 0 1 2.16.137.75.75 0 0 1 .617.876.785.785 0 0 1-.96.602 6 6 0 0 0-.802-.115 6.3 6.3 0 0 0-2.899.504 6.2 6.2 0 0 0-3.705 6.383 6.22 6.22 0 0 0 6.163 5.52h6.99c.68 0 .84.014 1.138-.24q.574-.53 1.077-1.126h-9.33A4.35 4.35 0 0 1 9.78 19.2a4.847 4.847 0 1 1 4.619-8.514.75.75 0 0 1 .317 1.044.766.766 0 0 1-1.066.271 3.333 3.333 0 0 0-4.547 1.243 3.33 3.33 0 0 0-.396 2.179 3.29 3.29 0 0 0 3.275 2.803c3.36.034 6.72 0 10.08 0a.42.42 0 0 0 .28-.144c3.358-5.713 1.45-13.066-4.263-16.425A12 12 0 0 0 12 .001"/></svg></span> Prowlarr</td>
 <td>Indexer management for Radarr and Sonarr</td>
 <td style="text-align: right;"><code>9696</code></td>
 </tr>
 <tr>
-<td>Bazarr</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M4 12h4v2H4zm10 6H4v-2h10zm6 0h-4v-2h4zm0-4H10v-2h10z"/></svg></span> Bazarr</td>
 <td>Subtitle discovery and download</td>
 <td style="text-align: right;"><code>6767</code></td>
 </tr>
@@ -3591,7 +3591,7 @@
 <td style="text-align: right;"><code>8080</code>, <code>6881/tcp</code>, <code>6881/udp</code></td>
 </tr>
 <tr>
-<td>FlareSolverr</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15 6.04 7.5 12 10.85l5.96-3.35zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg></span> FlareSolverr</td>
 <td>Browser challenge helper used by selected indexers</td>
 <td style="text-align: right;"><code>8191</code></td>
 </tr>
@@ -3601,7 +3601,7 @@
 <td style="text-align: right;"><code>8081</code></td>
 </tr>
 <tr>
-<td>Subtitle Agent</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M4 12h4v2H4zm10 6H4v-2h10zm6 0h-4v-2h4zm0-4H10v-2h10z"/></svg></span> Subtitle Agent</td>
 <td>Preparation and inspection of subtitle workpacks</td>
 <td style="text-align: right;"><code>8181</code></td>
 </tr>
@@ -3617,10 +3617,7 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li><a href="https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml">media and Arr stack</a>;</li>
-</ul>
-<p>Portainer deploys and manages the active stacks. Configuration and application state live under <code>/opt/appdata</code>; media and download directories are mounted separately.</p>
+<p>Portainer deploys and manages the active <a href="https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml">Arr stack</a>. Configuration and application state live under <code>/opt/appdata</code>; media and download directories are mounted separately.</p>
 <h3 id="external-jellyfin-access"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg></span> External Jellyfin access<a class="headerlink" href="#external-jellyfin-access" title="Permanent link">&para;</a></h3>
 <p>Jellyfin is the only media service exposed through the external Relay path:</p>
 <ol>
@@ -3628,7 +3625,7 @@
 <li>Caddy forwards the request through WireGuard;</li>
 <li>Logos routes only the explicitly allowed Jellyfin traffic into the LAN;</li>
 </ol>
-<p>The Relay does not receive access to the complete Docker Media host or the remaining Arr interfaces. Its setup is described in <a href="../relay.md">Relay VPS</a>, with failure recovery in <a href="../../troubleshooting/wireguard-relay.md">WireGuard relay troubleshooting</a>.</p>
+<p>The Relay does not receive access to the complete Docker Media host or the remaining Arr interfaces. Its setup is described in <a href="../../relay/relay/">Relay VPS</a>, with failure recovery in <a href="../../troubleshooting/wireguard-relay/">WireGuard relay troubleshooting</a>.</p>
 <p>Downloaded media and reproducible caches are treated differently from application configuration. Image-level backups and configuration collection therefore use explicit inclusions and exclusions rather than copying every media-related file.</p>
 <h2 id="common-operating-model"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.7 20h-.4l-.4-2.6c-1.2-.2-2.2-.9-3-1.8l-2.4 1-.8-1.3 2.1-1.6q-.6-1.8 0-3.6L4.7 8.7l.8-1.3 2.4 1q1.2-1.35 3-1.8l.3-2.6h1.5l.4 2.6c1.2.2 2.3.9 3 1.8l2.4-1 .8 1.3-2.1 1.5q.3.9.3 1.8h.5c.5 0 1 .1 1.5.2V12l-.1-1 2.1-1.6c.2-.2.2-.4.1-.6l-2-3.5c-.1-.3-.3-.3-.6-.3l-2.5 1c-.5-.4-1.1-.7-1.7-1l-.4-2.7c.1-.1-.2-.3-.4-.3h-4c-.2 0-.5.2-.5.4l-.4 2.7c-.6.2-1.1.6-1.7.9L5 5c-.3 0-.5 0-.7.3l-2 3.5c-.1.2 0 .4.2.6L4.6 11l-.1 1 .1 1-2.1 1.7c-.2.2-.2.4-.1.6l2 3.5c.1.2.3.2.6.2l2.5-1c.5.4 1.1.7 1.7 1l.4 2.7c0 .2.2.4.5.4h2.5c-.5-.7-.7-1.4-.9-2.1m4.3-7.7V12c0-2.2-1.8-4-4-4s-4 1.8-4 4 1.8 4 4 4c.7-1.7 2.2-3.1 4-3.7m-6-.3c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2m8 2.5V13l-2.2 2.2 2.2 2.2V16c1.4 0 2.5 1.1 2.5 2.5 0 .4-.1.8-.3 1.1l1.1 1.1c1.2-1.8.7-4.3-1.1-5.5-.6-.5-1.4-.7-2.2-.7m0 6.5c-1.4 0-2.5-1.1-2.5-2.5 0-.4.1-.8.3-1.1l-1.1-1.1c-1.2 1.8-.7 4.3 1.1 5.5.7.4 1.4.7 2.2.7V24l2.2-2.2-2.2-2.3z"/></svg></span> Common operating model<a class="headerlink" href="#common-operating-model" title="Permanent link">&para;</a></h2>
 <p>These LXC containers follow the same baseline:</p>
@@ -3687,7 +3684,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 14:01:22 UTC"><span class="timeago" datetime="2026-08-22T14:01:22+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 14:01:22 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 14:14:34 UTC"><span class="timeago" datetime="2026-08-22T14:14:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 14:14:34 UTC">2026-08-22</span>
   </span>
 
     
