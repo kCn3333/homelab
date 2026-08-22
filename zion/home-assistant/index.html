@@ -25,7 +25,7 @@
     
     
       
-        <title>Home Assistant and Zigbee - > Homelab Documentation</title>
+        <title>Home Assistant and ESPHome - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#home-assistant-and-zigbee" class="md-skip">
+        <a href="#home-assistant-and-esphome" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home Assistant and Zigbee
+              Home Assistant and ESPHome
             
           </span>
         </div>
@@ -865,7 +865,7 @@
   <span class="md-ellipsis">
     
   
-    Home Assistant and Zigbee
+    Home Assistant and ESPHome
   
 
     
@@ -883,7 +883,7 @@
   <span class="md-ellipsis">
     
   
-    Home Assistant and Zigbee
+    Home Assistant and ESPHome
   
 
     
@@ -909,10 +909,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#lxc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        LXC
       
     </span>
   </a>
@@ -920,10 +920,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-a-dedicated-lxc" class="md-nav__link">
+  <a href="#containers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why a dedicated LXC
+        Containers
       
     </span>
   </a>
@@ -931,10 +931,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usb-passthrough" class="md-nav__link">
+  <a href="#zigbee-passthrough" class="md-nav__link">
     <span class="md-ellipsis">
       
-        USB passthrough
+        Zigbee passthrough
       
     </span>
   </a>
@@ -942,10 +942,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#container-layout" class="md-nav__link">
+  <a href="#migration-history" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Container layout
+        Migration history
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration history">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oracle-legacy-to-zion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle Legacy to Zion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild-of-the-destination-lxc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebuild of the destination LXC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-cutover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final cutover
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rollback
       
     </span>
   </a>
@@ -953,21 +1003,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#migration-rules" class="md-nav__link">
+  <a href="#proxy-and-access" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migration rules
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reverse-proxy-awareness" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reverse proxy awareness
+        Proxy and access
       
     </span>
   </a>
@@ -986,10 +1025,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#known-pitfalls" class="md-nav__link">
+  <a href="#quick-diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Known pitfalls
+        Quick diagnosis
       
     </span>
   </a>
@@ -3355,10 +3394,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#lxc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        LXC
       
     </span>
   </a>
@@ -3366,10 +3405,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-a-dedicated-lxc" class="md-nav__link">
+  <a href="#containers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why a dedicated LXC
+        Containers
       
     </span>
   </a>
@@ -3377,10 +3416,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usb-passthrough" class="md-nav__link">
+  <a href="#zigbee-passthrough" class="md-nav__link">
     <span class="md-ellipsis">
       
-        USB passthrough
+        Zigbee passthrough
       
     </span>
   </a>
@@ -3388,10 +3427,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#container-layout" class="md-nav__link">
+  <a href="#migration-history" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Container layout
+        Migration history
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration history">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oracle-legacy-to-zion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle Legacy to Zion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuild-of-the-destination-lxc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebuild of the destination LXC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-cutover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final cutover
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rollback
       
     </span>
   </a>
@@ -3399,21 +3488,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#migration-rules" class="md-nav__link">
+  <a href="#proxy-and-access" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migration rules
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reverse-proxy-awareness" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reverse proxy awareness
+        Proxy and access
       
     </span>
   </a>
@@ -3432,10 +3510,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#known-pitfalls" class="md-nav__link">
+  <a href="#quick-diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Known pitfalls
+        Quick diagnosis
       
     </span>
   </a>
@@ -3470,113 +3548,159 @@
   
 
 
-<h1 id="home-assistant-and-zigbee">Home Assistant and Zigbee<a class="headerlink" href="#home-assistant-and-zigbee" title="Permanent link">&para;</a></h1>
-<p>Home Assistant and ESPHome run in Docker inside a dedicated LXC on Zion. The container was created during the migration from Oracle Legacy so that home automation and its USB hardware no longer depend on the general-purpose server.</p>
-<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart TD
-    Z["Zion — Proxmox VE"] --&gt; L["Home Assistant LXC"]
-    U["USB Zigbee coordinator"] --&gt; L
-    L --&gt; H["Home Assistant container"]
-    L --&gt; E["ESPHome container"]</code></pre>
-<p>The LXC uses nesting for Docker and receives the Zigbee serial device through an explicit device passthrough. Home Assistant uses host networking, while ESPHome exposes only its required service port.</p>
-<h2 id="why-a-dedicated-lxc">Why a dedicated LXC<a class="headerlink" href="#why-a-dedicated-lxc" title="Permanent link">&para;</a></h2>
-<ul>
-<li>USB ownership and restart behaviour are isolated from unrelated Docker workloads;</li>
-<li>Home Assistant and ESPHome can be backed up and restored together;</li>
-<li>the Zigbee coordinator remains attached to one predictable guest;</li>
-<li>maintenance of Logos does not interrupt local automations;</li>
-<li>the trust implications of USB passthrough are confined to one workload.</li>
-</ul>
-<h2 id="usb-passthrough">USB passthrough<a class="headerlink" href="#usb-passthrough" title="Permanent link">&para;</a></h2>
-<p>The coordinator uses a Silicon Labs CP210x USB-to-UART bridge and appears as a <code>ttyUSB</code> device. Proxmox grants the LXC access to the relevant character-device major number and bind-mounts the device into the container.</p>
-<p>The essential LXC configuration is equivalent to:</p>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">features</span><span class="o">:</span><span class="w"> </span><span class="s">nesting=1,fuse=1</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">unprivileged</span><span class="o">:</span><span class="w"> </span><span class="s">0</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">lxc.cgroup2.devices.allow</span><span class="o">:</span><span class="w"> </span><span class="s">c 188:* rwm</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">lxc.mount.entry</span><span class="o">:</span><span class="w"> </span><span class="s">/dev/ttyUSB0 dev/ttyUSB0 none bind,optional,create=file</span>
-</span></code></pre></div>
-<p>The privileged LXC is a deliberate exception required by the current USB passthrough model. It increases the impact of a container compromise, so the guest is kept narrow, patched, and inaccessible from untrusted networks.</p>
-<p>The application refers to <code>/dev/ttyUSB0</code> inside the LXC. Host-side <code>/dev/serial/by-id/</code> links are not assumed to exist inside the container.</p>
-<h2 id="container-layout">Container layout<a class="headerlink" href="#container-layout" title="Permanent link">&para;</a></h2>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">services</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">homeassistant</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/home-assistant/home-assistant:stable</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./homeassistant:/config</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/localtime:/etc/localtime:ro</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">devices</span><span class="p">:</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/ttyUSB0:/dev/ttyUSB0</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nt">esphome</span><span class="p">:</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/esphome/esphome:stable</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./esphome:/config</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/localtime:/etc/localtime:ro</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Europe/Warsaw</span>
-</span></code></pre></div>
-<p>The production Compose definition and secrets are maintained outside this documentation. The example shows only the workload boundaries and required device mapping.</p>
-<h2 id="migration-rules">Migration rules<a class="headerlink" href="#migration-rules" title="Permanent link">&para;</a></h2>
-<p>Home Assistant must be stopped before copying its configuration directory. Copying the SQLite database while the application is running risks an inconsistent backup.</p>
-<p>The migration followed this order:</p>
-<ol>
-<li>create and validate the destination LXC;</li>
-<li>configure USB passthrough before starting the application;</li>
-<li>stop Home Assistant and ESPHome on Oracle Legacy;</li>
-<li>transfer application state while preserving ownership and modes;</li>
-<li>update the saved Zigbee serial path;</li>
-<li>start the containers on Zion;</li>
-<li>validate ZHA devices, ESPHome, proxy access, and backups;</li>
-<li>keep the old containers stopped until the new environment is proven stable.</li>
-</ol>
-<h2 id="reverse-proxy-awareness">Reverse proxy awareness<a class="headerlink" href="#reverse-proxy-awareness" title="Permanent link">&para;</a></h2>
-<p>Home Assistant is configured to trust only the proxy addresses that legitimately forward requests to it. Broad Docker ranges should not be added merely to silence an <code>untrusted proxy</code> log entry unless the resulting trust boundary is understood.</p>
-<p>External access requires multi-factor authentication. Public exposure, tunnel configuration, and identity controls are documented separately from the local LXC deployment.</p>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">test</span><span class="w"> </span>-c<span class="w"> </span>/dev/ttyUSB0
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docker<span class="w"> </span>logs<span class="w"> </span>homeassistant<span class="w"> </span>--since<span class="w"> </span>10m
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>docker<span class="w"> </span>logs<span class="w"> </span>esphome<span class="w"> </span>--since<span class="w"> </span>10m
-</span></code></pre></div>
-<p>The operational check also confirms:</p>
-<ul>
-<li>ZHA is connected and expected devices are present;</li>
-<li>ESPHome can reach managed devices;</li>
-<li>no unexpected proxy errors are logged;</li>
-<li>key-only SSH and non-interactive automation access still work;</li>
-<li>the latest configuration backup includes both application directories.</li>
-</ul>
-<h2 id="known-pitfalls">Known pitfalls<a class="headerlink" href="#known-pitfalls" title="Permanent link">&para;</a></h2>
+<h1 id="home-assistant-and-esphome"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.8 13H20v8h-7v-3.33l2.79-2.79.71.12a2.1 2.1 0 1 0 0-4.2 2.1 2.1 0 0 0-2.1 2.1l.1.71-1.5 1.52V9.65c.66-.36 1.1-1.05 1.1-1.85A2.1 2.1 0 0 0 12 5.7a2.1 2.1 0 0 0-2.1 2.1c0 .8.44 1.49 1.1 1.85v5.48l-1.5-1.52.1-.71a2.1 2.1 0 0 0-2.1-2.1 2.1 2.1 0 0 0-2.1 2.1A2.1 2.1 0 0 0 7.5 15l.71-.12L11 17.67V21H4v-8H2.25c-.42 0-.83 0-.83-.21.01-.22.43-.64.86-1.07L11 3c.33-.33.67-.67 1-.67s.67.34 1 .67l4 4V6h2v3l2.78 2.78c.4.4.81.81.82 1.02 0 .2-.4.2-.8.2M7.5 12a.9.9 0 0 1 .9.9.9.9 0 0 1-.9.9.9.9 0 0 1-.9-.9.9.9 0 0 1 .9-.9m9 0c.5 0 .9.4.9.9s-.4.9-.9.9a.9.9 0 0 1-.9-.9.9.9 0 0 1 .9-.9M12 6.9c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9"/></svg></span> Home Assistant and ESPHome<a class="headerlink" href="#home-assistant-and-esphome" title="Permanent link">&para;</a></h1>
+<p>Home Assistant, ESPHome and the Portainer Agent run in Docker inside a dedicated LXC on Zion. The Zigbee coordinator is passed from Proxmox to that LXC and then into the Home Assistant container.</p>
+<p>Keeping home automation in one guest isolates its USB device, updates and restarts from Logos and the media stack.</p>
+<hr />
+<h2 id="lxc"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10.15 8.98 1.647.951-5.756 3.345.005-1.911zm1.723-1.001-1.553.902 1.548.893zM6.028 5.33 6.025 6.4l.543.316 3.602 2.079 1.632-.948-2.19-1.279-3.231-1.887-.351-.203zm.072-.983.359.209 6.321 3.65 5.258 3.037 5.858-3.405L11.956.943zm6.002 12.602-.005 1.924 5.858-3.404.005-1.924zm-.077-9.009-.005 1.922 5.94 3.428.005-1.92zm-10.13.945 4.075 2.352 4.031-2.342-4.075-2.353zM24 7.982l-5.858 3.404-.015 3.982 5.858-3.404zm-12.048 10.04.003-1.073L7.6 14.436l-1.565-.903v.001l-.939-.542L.015 10.06.01 11.979l11.94 6.895zm5.935-4.605-5.922-3.411-5.853 3.401 5.917 3.414zm6.072-1.238-11.862 6.864-.01 4.013 11.863-6.894zM11.944 21.27l.005-2.227L.01 12.148 0 16.162l11.94 6.895zM.021 9.802 1.6 8.885.025 7.976zm5.832-3.39.024-1.636.001-.296L.099 7.848l1.647.951zm.041 4.951L1.749 8.97l-.46.267-1.195.695 5.795 3.345z"/></svg></span> LXC<a class="headerlink" href="#lxc" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Symptom</th>
-<th>Likely cause</th>
+<th>Property</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Zigbee device is absent inside the LXC</td>
-<td>Device passthrough or cgroup permission is missing</td>
+<td>System</td>
+<td>Debian 13, privileged LXC</td>
 </tr>
 <tr>
-<td>Home Assistant still references the old device</td>
-<td>ZHA retained the pre-migration serial path</td>
+<td>CPU</td>
+<td>2 vCPU</td>
 </tr>
 <tr>
-<td>SSH key exists but authentication fails</td>
-<td>Ownership was inherited from an earlier unprivileged-container mapping</td>
+<td>Memory</td>
+<td>3 GB</td>
 </tr>
 <tr>
-<td>Proxy requests are rejected</td>
-<td>The actual proxy is missing from <code>trusted_proxies</code></td>
+<td>Root disk</td>
+<td>20 GB</td>
 </tr>
 <tr>
-<td>Package management reports permission warnings</td>
-<td>Container privilege and ownership mapping require review</td>
+<td>Features</td>
+<td><code>nesting=1</code></td>
+</tr>
+<tr>
+<td>USB device</td>
+<td>Zigbee coordinator through <code>dev0</code></td>
+</tr>
+</tbody>
+</table>
+<p>The privileged LXC is a deliberate exception for the current USB passthrough model. It runs only the home-automation stack and is not exposed to untrusted networks.</p>
+<h2 id="containers"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.81 10.25c-.06-.04-.56-.43-1.64-.43-.28 0-.56.03-.84.08-.21-1.4-1.38-2.11-1.43-2.14l-.29-.17-.18.27c-.24.36-.43.77-.51 1.19-.2.8-.08 1.56.33 2.21-.49.28-1.29.35-1.46.35H2.62c-.34 0-.62.28-.62.63 0 1.15.18 2.3.58 3.38.45 1.19 1.13 2.07 2 2.61.98.6 2.59.94 4.42.94.79 0 1.61-.07 2.42-.22 1.12-.2 2.2-.59 3.19-1.16A8.3 8.3 0 0 0 16.78 16c1.05-1.17 1.67-2.5 2.12-3.65h.19c1.14 0 1.85-.46 2.24-.85.26-.24.45-.53.59-.87l.08-.24zm-17.96.99h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H3.85c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.43 0h1.76c.08 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16H6.28c-.09 0-.16.07-.16.16v1.58c.01.09.07.16.16.16m2.47 0h1.75c.1 0 .17-.07.17-.16V9.5c0-.08-.06-.16-.17-.16H8.75c-.08 0-.15.07-.15.16v1.58c0 .09.06.16.15.16m2.44 0h1.77c.08 0 .15-.07.15-.16V9.5c0-.08-.06-.16-.15-.16h-1.77c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16M6.28 9h1.76c.08 0 .16-.09.16-.18V7.25c0-.09-.07-.16-.16-.16H6.28c-.09 0-.16.06-.16.16v1.57c.01.09.07.18.16.18m2.47 0h1.75c.1 0 .17-.09.17-.18V7.25c0-.09-.06-.16-.17-.16H8.75c-.08 0-.15.06-.15.16v1.57c0 .09.06.18.15.18m2.44 0h1.77c.08 0 .15-.09.15-.18V7.25c0-.09-.07-.16-.15-.16h-1.77c-.08 0-.15.06-.15.16v1.57c0 .09.07.18.15.18m0-2.28h1.77c.08 0 .15-.07.15-.16V5c0-.1-.07-.17-.15-.17h-1.77c-.08 0-.15.06-.15.17v1.56c0 .08.07.16.15.16m2.46 4.52h1.76c.09 0 .16-.07.16-.16V9.5c0-.08-.07-.16-.16-.16h-1.76c-.08 0-.15.07-.15.16v1.58c0 .09.07.16.15.16"/></svg></span> Containers<a class="headerlink" href="#containers" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Home Assistant</strong> uses host networking and stores its state under <code>/home/kcn/docker/homeassistant</code>.</li>
+<li><strong>ESPHome</strong> stores its configuration under <code>/home/kcn/docker/esphome</code> and publishes its required service port.</li>
+<li><strong>Portainer Agent</strong> provides remote stack management from Logos.</li>
+</ul>
+<p>The production definition is kept in the <a href="https://github.com/kCn3333/docker-compose/blob/main/homeassistant/docker-compose.yaml">Home Assistant Compose file</a>. Secrets and application state are not stored in that repository.</p>
+<h2 id="zigbee-passthrough"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 2c-1.1 0-2 .9-2 2v8H5v4l4 4v2h6v-2l4-4v-4h-1V4a2 2 0 0 0-2-2M8 4h8v8H8m1-5v2h2V7m2 0v2h2V7Z"/></svg></span> Zigbee passthrough<a class="headerlink" href="#zigbee-passthrough" title="Permanent link">&para;</a></h2>
+<p>The coordinator uses a Silicon Labs CP210x USB-to-UART bridge and appears on Zion as <code>/dev/ttyUSB0</code>.</p>
+<p>The current Proxmox configuration passes it to the LXC explicitly:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pct<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;home-assistant-vmid&gt;<span class="w"> </span>--dev0<span class="w"> </span><span class="nv">path</span><span class="o">=</span>/dev/ttyUSB0
+</span></code></pre></div>
+<p>Inside the LXC, the Home Assistant container receives the same device:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">devices</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/ttyUSB0:/dev/ttyUSB0</span>
+</span></code></pre></div>
+<p>The application uses <code>/dev/ttyUSB0</code>. Host-side <code>/dev/serial/by-id/</code> symlinks are not assumed to exist inside the LXC.</p>
+<p>After a host reboot or USB reconnect, confirm that the coordinator still uses the expected device before restarting Home Assistant.</p>
+<h2 id="migration-history"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"/></svg></span> Migration history<a class="headerlink" href="#migration-history" title="Permanent link">&para;</a></h2>
+<h3 id="oracle-legacy-to-zion">Oracle Legacy to Zion<a class="headerlink" href="#oracle-legacy-to-zion" title="Permanent link">&para;</a></h3>
+<p>Home Assistant and ESPHome originally ran in Docker on Oracle Legacy with the Zigbee coordinator attached directly to that server.</p>
+<p>The first move used this order:</p>
+<ol>
+<li>Create a dedicated LXC and enable Docker nesting.</li>
+<li>Configure and test the USB passthrough.</li>
+<li>Stop Home Assistant and ESPHome on Oracle Legacy.</li>
+<li>Copy both application directories while preserving ownership and modes.</li>
+<li>Change the saved Zigbee path from the old alias to <code>/dev/ttyUSB0</code>.</li>
+<li>Start the stack in the LXC.</li>
+<li>Move proxy traffic to the new address.</li>
+<li>Verify ZHA, ESPHome, logins and backups.</li>
+<li>Leave the old stack stopped until the new environment is proven.</li>
+</ol>
+<p>Home Assistant must be stopped for the final copy. Copying its SQLite database while the container is writing can produce an inconsistent restore.</p>
+<h3 id="rebuild-of-the-destination-lxc">Rebuild of the destination LXC<a class="headerlink" href="#rebuild-of-the-destination-lxc" title="Permanent link">&para;</a></h3>
+<p>The first LXC had been changed from unprivileged to privileged without correcting its UID/GID mapping. System files retained mapped owners, causing SSH, package and systemd errors.</p>
+<p>A recursive <code>chown</code> was rejected because the system contained service accounts, setuid files and Docker data with different ownership requirements. The safer fix was a clean privileged Debian 13 LXC.</p>
+<p>Only these application directories were migrated:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/home/kcn/docker/homeassistant
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>/home/kcn/docker/esphome
+</span></code></pre></div>
+<p>The final synchronization used <code>rsync -aHAXx --delete-delay --chown=1000:1000</code> after stopping both containers. System directories from the damaged LXC were not copied.</p>
+<h3 id="final-cutover">Final cutover<a class="headerlink" href="#final-cutover" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create a stop-mode backup of the old LXC and verify the archive.</li>
+<li>Perform an initial application-data copy.</li>
+<li>Stop Home Assistant and ESPHome.</li>
+<li>Run the final <code>rsync</code> and confirm a zero dry-run diff.</li>
+<li>Stop both LXC containers.</li>
+<li>Assign the production address and Zigbee device to the new LXC.</li>
+<li>Start the new LXC and its Docker stack.</li>
+<li>Update the SSH host key in the administrator and Semaphore <code>known_hosts</code>.</li>
+<li>Test the UI, ZHA, ESPHome, proxy path, automation SSH and backup.</li>
+<li>Keep the old LXC and its backup offline until the new host completes a normal maintenance and backup cycle.</li>
+</ol>
+<h2 id="rollback"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.9 8.9 0 0 0 13 21a9 9 0 0 0 9-9 9 9 0 0 0-9-9"/></svg></span> Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h2>
+<p>If the new LXC fails during cutover:</p>
+<ol>
+<li>Stop it before changing addresses or USB assignments.</li>
+<li>Restore the production address and Zigbee passthrough to the old LXC.</li>
+<li>Start the old LXC and its containers.</li>
+<li>Check Home Assistant, ZHA and ESPHome.</li>
+<li>Do not synchronize data backwards until the newest valid dataset is identified.</li>
+</ol>
+<p>Only one LXC may own the production address and Zigbee coordinator at a time.</p>
+<h2 id="proxy-and-access"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-1.66C8.07 16.13 6 13 6 9.67v-4L12 3l6 2.67v4c0 3.33-2.07 6.46-5 7.67zM12 5 8 6.69V10h4zm0 5v6c1.91-.47 4-2.94 4-5v-1z"/></svg></span> Proxy and access<a class="headerlink" href="#proxy-and-access" title="Permanent link">&para;</a></h2>
+<p>Home Assistant trusts only the proxy addresses that actually forward requests to it. Adding a broad Docker subnet merely to silence an <code>untrusted proxy</code> message would enlarge the trust boundary unnecessarily.</p>
+<p>External access requires multi-factor authentication. Tunnel and public-edge configuration are documented separately from this LXC.</p>
+<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">test</span><span class="w"> </span>-c<span class="w"> </span>/dev/ttyUSB0
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>docker<span class="w"> </span>containerd<span class="w"> </span>ssh
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>systemctl<span class="w"> </span>--failed<span class="w"> </span>--no-legend<span class="w"> </span>--plain<span class="w"> </span>--no-pager
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>docker<span class="w"> </span>logs<span class="w"> </span>homeassistant<span class="w"> </span>--since<span class="w"> </span>10m
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>docker<span class="w"> </span>logs<span class="w"> </span>esphome<span class="w"> </span>--since<span class="w"> </span>10m
+</span></code></pre></div>
+<p>Then confirm:</p>
+<ul>
+<li>Home Assistant UI opens through the expected proxy path;</li>
+<li>ZHA is connected and Zigbee devices are available;</li>
+<li>ESPHome is healthy and reaches managed devices;</li>
+<li>Portainer Agent is reachable from Logos;</li>
+<li>key-only SSH and the Ansible account work;</li>
+<li>both application directories are present in the latest configuration backup.</li>
+</ul>
+<h2 id="quick-diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Quick diagnosis<a class="headerlink" href="#quick-diagnosis" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/dev/ttyUSB0</code> is missing</td>
+<td>Proxmox <code>dev0</code>, host USB enumeration and LXC state</td>
+</tr>
+<tr>
+<td>ZHA uses the old device path</td>
+<td>Saved ZHA configuration</td>
+</tr>
+<tr>
+<td>SSH key is rejected after restore</td>
+<td>Ownership of <code>.ssh</code> and <code>authorized_keys</code></td>
+</tr>
+<tr>
+<td>Proxy request is rejected</td>
+<td>Exact <code>trusted_proxies</code> entries</td>
+</tr>
+<tr>
+<td>Package or systemd errors mention ownership</td>
+<td>Privileged/unprivileged UID mapping</td>
 </tr>
 </tbody>
 </table>
@@ -3602,7 +3726,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:17:34 UTC"><span class="timeago" datetime="2026-08-21T12:17:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:17:34 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 13:03:06 UTC"><span class="timeago" datetime="2026-08-22T13:03:06+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 13:03:06 UTC">2026-08-22</span>
   </span>
 
     
