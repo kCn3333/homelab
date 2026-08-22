@@ -1,115 +1,145 @@
-# Home Assistant and Zigbee
+# :material-home-assistant: Home Assistant and ESPHome
 
-Home Assistant and ESPHome run in Docker inside a dedicated LXC on Zion. The container was created during the migration from Oracle Legacy so that home automation and its USB hardware no longer depend on the general-purpose server.
+Home Assistant, ESPHome and the Portainer Agent run in Docker inside a dedicated LXC on Zion. The Zigbee coordinator is passed from Proxmox to that LXC and then into the Home Assistant container.
 
-## Architecture
+Keeping home automation in one guest isolates its USB device, updates and restarts from Logos and the media stack.
 
-```mermaid
-flowchart TD
-    Z["Zion — Proxmox VE"] --> L["Home Assistant LXC"]
-    U["USB Zigbee coordinator"] --> L
-    L --> H["Home Assistant container"]
-    L --> E["ESPHome container"]
+***
+
+## :simple-linuxcontainers: LXC
+
+| Property | Value |
+|---|---|
+| System | Debian 13, privileged LXC |
+| CPU | 2 vCPU |
+| Memory | 3 GB |
+| Root disk | 20 GB |
+| Features | `nesting=1` |
+| USB device | Zigbee coordinator through `dev0` |
+
+The privileged LXC is a deliberate exception for the current USB passthrough model. It runs only the home-automation stack and is not exposed to untrusted networks.
+
+## :material-docker: Containers
+
+- **Home Assistant** uses host networking and stores its state under `/home/kcn/docker/homeassistant`.
+- **ESPHome** stores its configuration under `/home/kcn/docker/esphome` and publishes its required service port.
+- **Portainer Agent** provides remote stack management from Logos.
+
+The production definition is kept in the [Home Assistant Compose file](https://github.com/kCn3333/docker-compose/blob/main/homeassistant/docker-compose.yaml). Secrets and application state are not stored in that repository.
+
+## :material-usb-port: Zigbee passthrough
+
+The coordinator uses a Silicon Labs CP210x USB-to-UART bridge and appears on Zion as `/dev/ttyUSB0`.
+
+The current Proxmox configuration passes it to the LXC explicitly:
+
+```bash
+pct set <home-assistant-vmid> --dev0 path=/dev/ttyUSB0
 ```
 
-The LXC uses nesting for Docker and receives the Zigbee serial device through an explicit device passthrough. Home Assistant uses host networking, while ESPHome exposes only its required service port.
-
-## Why a dedicated LXC
-
-- USB ownership and restart behaviour are isolated from unrelated Docker workloads;
-- Home Assistant and ESPHome can be backed up and restored together;
-- the Zigbee coordinator remains attached to one predictable guest;
-- maintenance of Logos does not interrupt local automations;
-- the trust implications of USB passthrough are confined to one workload.
-
-## USB passthrough
-
-The coordinator uses a Silicon Labs CP210x USB-to-UART bridge and appears as a `ttyUSB` device. Proxmox grants the LXC access to the relevant character-device major number and bind-mounts the device into the container.
-
-The essential LXC configuration is equivalent to:
-
-```ini
-features: nesting=1,fuse=1
-unprivileged: 0
-lxc.cgroup2.devices.allow: c 188:* rwm
-lxc.mount.entry: /dev/ttyUSB0 dev/ttyUSB0 none bind,optional,create=file
-```
-
-The privileged LXC is a deliberate exception required by the current USB passthrough model. It increases the impact of a container compromise, so the guest is kept narrow, patched, and inaccessible from untrusted networks.
-
-The application refers to `/dev/ttyUSB0` inside the LXC. Host-side `/dev/serial/by-id/` links are not assumed to exist inside the container.
-
-## Container layout
+Inside the LXC, the Home Assistant container receives the same device:
 
 ```yaml
-services:
-  homeassistant:
-    image: ghcr.io/home-assistant/home-assistant:stable
-    restart: unless-stopped
-    network_mode: host
-    volumes:
-      - ./homeassistant:/config
-      - /etc/localtime:/etc/localtime:ro
-    devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
-
-  esphome:
-    image: ghcr.io/esphome/esphome:stable
-    restart: unless-stopped
-    volumes:
-      - ./esphome:/config
-      - /etc/localtime:/etc/localtime:ro
-    environment:
-      TZ: Europe/Warsaw
+devices:
+  - /dev/ttyUSB0:/dev/ttyUSB0
 ```
 
-The production Compose definition and secrets are maintained outside this documentation. The example shows only the workload boundaries and required device mapping.
+The application uses `/dev/ttyUSB0`. Host-side `/dev/serial/by-id/` symlinks are not assumed to exist inside the LXC.
 
-## Migration rules
+After a host reboot or USB reconnect, confirm that the coordinator still uses the expected device before restarting Home Assistant.
 
-Home Assistant must be stopped before copying its configuration directory. Copying the SQLite database while the application is running risks an inconsistent backup.
+## :material-swap-horizontal: Migration history
 
-The migration followed this order:
+### Oracle Legacy to Zion
 
-1. create and validate the destination LXC;
-2. configure USB passthrough before starting the application;
-3. stop Home Assistant and ESPHome on Oracle Legacy;
-4. transfer application state while preserving ownership and modes;
-5. update the saved Zigbee serial path;
-6. start the containers on Zion;
-7. validate ZHA devices, ESPHome, proxy access, and backups;
-8. keep the old containers stopped until the new environment is proven stable.
+Home Assistant and ESPHome originally ran in Docker on Oracle Legacy with the Zigbee coordinator attached directly to that server.
 
-## Reverse proxy awareness
+The first move used this order:
 
-Home Assistant is configured to trust only the proxy addresses that legitimately forward requests to it. Broad Docker ranges should not be added merely to silence an `untrusted proxy` log entry unless the resulting trust boundary is understood.
+1. Create a dedicated LXC and enable Docker nesting.
+2. Configure and test the USB passthrough.
+3. Stop Home Assistant and ESPHome on Oracle Legacy.
+4. Copy both application directories while preserving ownership and modes.
+5. Change the saved Zigbee path from the old alias to `/dev/ttyUSB0`.
+6. Start the stack in the LXC.
+7. Move proxy traffic to the new address.
+8. Verify ZHA, ESPHome, logins and backups.
+9. Leave the old stack stopped until the new environment is proven.
 
-External access requires multi-factor authentication. Public exposure, tunnel configuration, and identity controls are documented separately from the local LXC deployment.
+Home Assistant must be stopped for the final copy. Copying its SQLite database while the container is writing can produce an inconsistent restore.
 
-## Validation
+### Rebuild of the destination LXC
+
+The first LXC had been changed from unprivileged to privileged without correcting its UID/GID mapping. System files retained mapped owners, causing SSH, package and systemd errors.
+
+A recursive `chown` was rejected because the system contained service accounts, setuid files and Docker data with different ownership requirements. The safer fix was a clean privileged Debian 13 LXC.
+
+Only these application directories were migrated:
+
+```text
+/home/kcn/docker/homeassistant
+/home/kcn/docker/esphome
+```
+
+The final synchronization used `rsync -aHAXx --delete-delay --chown=1000:1000` after stopping both containers. System directories from the damaged LXC were not copied.
+
+### Final cutover
+
+1. Create a stop-mode backup of the old LXC and verify the archive.
+2. Perform an initial application-data copy.
+3. Stop Home Assistant and ESPHome.
+4. Run the final `rsync` and confirm a zero dry-run diff.
+5. Stop both LXC containers.
+6. Assign the production address and Zigbee device to the new LXC.
+7. Start the new LXC and its Docker stack.
+8. Update the SSH host key in the administrator and Semaphore `known_hosts`.
+9. Test the UI, ZHA, ESPHome, proxy path, automation SSH and backup.
+10. Keep the old LXC and its backup offline until the new host completes a normal maintenance and backup cycle.
+
+## :material-restore: Rollback
+
+If the new LXC fails during cutover:
+
+1. Stop it before changing addresses or USB assignments.
+2. Restore the production address and Zigbee passthrough to the old LXC.
+3. Start the old LXC and its containers.
+4. Check Home Assistant, ZHA and ESPHome.
+5. Do not synchronize data backwards until the newest valid dataset is identified.
+
+Only one LXC may own the production address and Zigbee coordinator at a time.
+
+## :material-security-network: Proxy and access
+
+Home Assistant trusts only the proxy addresses that actually forward requests to it. Adding a broad Docker subnet merely to silence an `untrusted proxy` message would enlarge the trust boundary unnecessarily.
+
+External access requires multi-factor authentication. Tunnel and public-edge configuration are documented separately from this LXC.
+
+## :material-check-decagram: Validation
 
 ```bash
 test -c /dev/ttyUSB0
+systemctl is-active docker containerd ssh
+systemctl --failed --no-legend --plain --no-pager
 docker compose ps
 docker logs homeassistant --since 10m
 docker logs esphome --since 10m
 ```
 
-The operational check also confirms:
+Then confirm:
 
-- ZHA is connected and expected devices are present;
-- ESPHome can reach managed devices;
-- no unexpected proxy errors are logged;
-- key-only SSH and non-interactive automation access still work;
-- the latest configuration backup includes both application directories.
+- Home Assistant UI opens through the expected proxy path;
+- ZHA is connected and Zigbee devices are available;
+- ESPHome is healthy and reaches managed devices;
+- Portainer Agent is reachable from Logos;
+- key-only SSH and the Ansible account work;
+- both application directories are present in the latest configuration backup.
 
-## Known pitfalls
+## :material-wrench-outline: Quick diagnosis
 
-| Symptom | Likely cause |
+| Symptom | Check |
 |---|---|
-| Zigbee device is absent inside the LXC | Device passthrough or cgroup permission is missing |
-| Home Assistant still references the old device | ZHA retained the pre-migration serial path |
-| SSH key exists but authentication fails | Ownership was inherited from an earlier unprivileged-container mapping |
-| Proxy requests are rejected | The actual proxy is missing from `trusted_proxies` |
-| Package management reports permission warnings | Container privilege and ownership mapping require review |
-
+| `/dev/ttyUSB0` is missing | Proxmox `dev0`, host USB enumeration and LXC state |
+| ZHA uses the old device path | Saved ZHA configuration |
+| SSH key is rejected after restore | Ownership of `.ssh` and `authorized_keys` |
+| Proxy request is rejected | Exact `trusted_proxies` entries |
+| Package or systemd errors mention ownership | Privileged/unprivileged UID mapping |
