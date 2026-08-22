@@ -1,4 +1,4 @@
-## :material-movie-open-star: Docker Media
+# :material-movie-open-star: Docker Media
 
 The Docker Media LXC contains the complete media pipeline. It is separated from Logos so that media mounts, transcoding, downloads and frequently changed containers do not share the failure domain of the main operations server.
 
