@@ -26,6 +26,8 @@ Clients use AdGuard as their LAN DNS resolver. Stable frontend services resolve 
 
 The container was created with the [AdGuard Home Proxmox VE Community Script](https://community-scripts.org/scripts/adguard), then adjusted to the final resource limits and network configuration.
 
+---
+
 ## :material-pac-man: PatchMon
 
 | Property | Value |
