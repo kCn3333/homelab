@@ -36,7 +36,7 @@ The IronWolf contains both the PBS datastore and the local Kopia repository, but
 
 Downloaded media, caches, transcodes, build toolchains and other reproducible data are intentionally excluded where appropriate.
 
-## :material-server: Proxmox Backup Server
+## :simple-proxmox: Proxmox Backup Server
 
 PBS runs in an unprivileged LXC on Zion. Its root filesystem is stored on NVMe, while the datastore is a bind mount from the IronWolf disk:
 
