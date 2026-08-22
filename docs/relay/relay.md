@@ -43,21 +43,9 @@ Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tu
 
 The same policy is enforced in the OCI network rules and on the VM firewall.
 
-## :material-vpn: WireGuard
+## :simple-wireguard: WireGuard VPN
 
 The Relay is the WireGuard endpoint. Logos initiates the tunnel from the home network.
-
-The examples below use descriptive placeholders instead of the real addresses:
-
-| Placeholder | Meaning |
-|---|---|
-| `<RELAY_WG_IP>` | Relay address inside WireGuard |
-| `<LOGOS_WG_IP>` | Logos address inside WireGuard |
-| `<WG_PREFIX>` | WireGuard network prefix |
-| `<WIREGUARD_UDP_PORT>` | Public UDP port used by WireGuard |
-| `<JELLYFIN_LAN_IP>` | Jellyfin address on the home LAN |
-| `<PATCHMON_LAN_IP>` | PatchMon address on the home LAN |
-| `<PUBLIC_JELLYFIN_HOSTNAME>` | Public hostname handled by Caddy |
 
 ### Relay
 
