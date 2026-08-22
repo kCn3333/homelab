@@ -28,7 +28,7 @@ Hardware selection and the build history are documented separately under **Infra
 | **:simple-caddy: Caddy** | LXC | Internal HTTPS reverse proxy and certificates | Independent network service that should not depend on Logos |
 | **:material-web: HAProxy** | LXC | K3s API and ingress load balancing | Small critical service with a separate lifecycle |
 | **:material-pac-man: PatchMon** | LXC | Patch visibility and maintenance reporting | Lightweight service that remains separate from monitored hosts |
-| **:simple-docker: Docker Media** | LXC | Jellyfin and the Arr stack | Groups related media services and their storage access |
+| **:simple-jellyfin: Docker Media** | LXC | Jellyfin and the Arr stack | Groups related media services and their storage access |
 | **:simple-homeassistant: Home Assistant** | LXC | Home Assistant, ESPHome, and Zigbee | Separate Docker environment with direct USB device access |
 | **:simple-proxmox: Proxmox Backup Server** | LXC | Image-level guest backups | Low overhead; the backup datastore remains outside the container rootfs |
 
