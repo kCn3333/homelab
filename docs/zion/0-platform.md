@@ -24,7 +24,7 @@ Hardware selection and the build history are documented separately under **Infra
 |---|---|---|---|
 | **:simple-ubuntu: Logos** | VM | Docker, Semaphore, Kopia, Garage, WireGuard, and administration tools | Needs a normal Linux kernel and works as the main general-purpose server |
 | **:simple-kalilinux: Kali** | VM | Security testing and network diagnostics | Keeps testing tools and custom network modes outside normal infrastructure |
-| **:simple-adguard: AdGuard Home** | LXC | Local DNS filtering and DNS rewrites | Small, dedicated Linux service with low resource use |
+| **:simple-adguard: AdGuard** | LXC | Local DNS filtering and DNS rewrites | Small, dedicated Linux service with low resource use |
 | **:simple-caddy: Caddy** | LXC | Internal HTTPS reverse proxy and certificates | Independent network service that should not depend on Logos |
 | **:material-web: HAProxy** | LXC | K3s API and ingress load balancing | Small critical service with a separate lifecycle |
 | **:material-pac-man: PatchMon** | LXC | Patch visibility and maintenance reporting | Lightweight service that remains separate from monitored hosts |
@@ -32,7 +32,7 @@ Hardware selection and the build history are documented separately under **Infra
 | **:simple-homeassistant: Home Assistant** | LXC | Home Assistant, ESPHome, and Zigbee | Separate Docker environment with direct USB device access |
 | **:simple-proxmox: Proxmox Backup Server** | LXC | Image-level guest backups | Low overhead; the backup datastore remains outside the container rootfs |
 
-### Why dedicated LXC containers?
+### :simple-linuxcontainers: Why dedicated LXC containers?
 
 Small Linux services do not need a complete virtual machine. LXC keeps their overhead low while still giving them separate filesystems, package databases, service managers, network interfaces, and backup units.
 
@@ -54,16 +54,16 @@ Zion uses two storage tiers:
 | Storage | Proxmox storage | Contents |
 |---|---|---|
 | **:material-memory: Kingston KC3000 NVMe** | `local`, `local-lvm` | Proxmox system, ISO images, LXC templates, guest rootfs, virtual disks, container data, and other active state |
-| **:fontawesome-solid-hard-drive: Seagate IronWolf HDD** | `wolfie1-4tb`, `PBS-IronWolf` | PBS datastore, VM/LXC backups, media library, and other capacity-oriented data |
+| **:material-harddisk: Seagate IronWolf HDD** | `wolfie1-4tb`, `PBS-IronWolf` | PBS datastore, VM/LXC backups, media library, and other capacity-oriented data |
 
-### :material-lightning-bolt: NVMe — active workloads
+### :octicons-workflow-24: NVMe — active workloads
 
 - VMs and LXC containers run from NVMe.
 - `local-lvm` holds their virtual disks and root filesystems.
 - `local` holds Proxmox-side files such as ISO images and LXC templates.
 - Databases, Docker metadata, package operations, and normal guest I/O stay off the mechanical disk.
 
-### :fontawesome-solid-box-archive: IronWolf — backups and large data
+### :material-harddisk: IronWolf — backups and large data
 
 - PBS stores image-level backups on the IronWolf filesystem.
 - Large data such as the media library uses HDD capacity instead of NVMe space.
@@ -76,24 +76,14 @@ This does not protect against loss of the complete Zion machine or damage to the
 
 ## :fontawesome-solid-network-wired: Networking
 
-| Component | Purpose |
-|---|---|
-| Physical NIC | Port of `vmbr0`; it has no management address |
-| `vmbr0` | Main Linux bridge and Zion management interface |
-| Guest virtual NICs | Connect VMs and LXC containers to the LAN through `vmbr0` |
-
 Each guest gets its own MAC address, IP configuration, firewall scope, and traffic counters. A guest can later be moved to another VLAN or bridge without redesigning the entire host network.
 
 ### :simple-ubuntu: Logos interfaces
 
-Logos has two virtual NICs with separate jobs:
+Logos has two virtual NICs with separate jobs: 
 
-| Interface | Traffic |
-|---|---|
-| Primary NIC | LAN, Docker services, management, backups, and WireGuard |
-| Secondary NIC | K3s VLAN used by Semaphore for Wake-on-LAN |
-
-The secondary NIC carries the tagged cluster VLAN through a dedicated VLAN interface inside Logos.
+- primary for LAN, Docker services, management, backups and WireGuard
+- secondary for K3s VLAN used by Semaphore for Wake-on-LAN
 
 This was required because Wake-on-LAN is a layer-2 broadcast. Sending a directed broadcast through the normal router did not recreate the Ethernet broadcast inside the K3s VLAN. With a direct VLAN interface, Semaphore sends the magic packet from the same broadcast domain as the powered-off nodes.
 
@@ -105,8 +95,7 @@ Zion's physical NIC uses `allow-hotplug`, so it returns after a switch or upstre
 
 The tested link settings are applied through `/etc/network/interfaces`, not by a repair cron job.
 
-!!! warning
-    Restarting networking remotely can disconnect Zion and every guest attached to `vmbr0`. Network changes are applied during a controlled maintenance window with console access available.
+For the full recovery procedure, see [:material-lan-disconnect: Proxmox Link Recovery](../troubleshooting/proxmox-link-recovery.md).
 
 ## :fontawesome-solid-bolt: Power management
 
