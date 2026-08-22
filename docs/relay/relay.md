@@ -1,8 +1,8 @@
 # :material-cloud-outline: Relay VPS
 
-The Relay is a small Oracle Cloud Free Tier VM used as the public edge of the homelab. It accepts only the traffic that must arrive from the Internet and sends it through WireGuard to selected services at home.
+The Relay handles inbound traffic for the few services that must be reachable from the Internet. It connects to the homelab only through WireGuard, so no inbound service ports need to be opened on the home router.
 
-The home router does not expose these services directly.
+---
 
 ## :material-server: Compute profile
 
@@ -29,13 +29,7 @@ flowchart LR
     logos -->|"TCP :3000"| patchmon["PatchMon"]
 ```
 
-| Path | Purpose |
-|---|---|
-| Internet → Relay → Jellyfin | Public HTTPS access to Jellyfin |
-| Relay → Logos → PatchMon | Monitoring data sent by the Relay agent |
-| Administrator → WireGuard → Relay | SSH administration without public TCP/22 |
-
-PatchMon port `3000` is not exposed publicly. It is reachable from the Relay only through WireGuard and the forwarding rules on Logos.
+Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server.
 
 ## :material-shield-lock-outline: Public surface
 
@@ -47,7 +41,7 @@ PatchMon port `3000` is not exposed publicly. It is reachable from the Relay onl
 | `22` | TCP | Blocked publicly | SSH is available through WireGuard only |
 | `3000` | TCP | Not exposed | PatchMon stays behind Logos |
 
-The same policy is enforced in the OCI network rules and on the VM firewall. OCI Cloud Console remains the break-glass access path.
+The same policy is enforced in the OCI network rules and on the VM firewall.
 
 ## :material-vpn: WireGuard
 
@@ -148,23 +142,7 @@ sudo iptables -t nat -L POSTROUTING -n -v --line-numbers
 sudo iptables-save
 ```
 
-Rule order matters. Return traffic must be accepted, the two explicit paths must appear before the final `wg0` drop, and the NAT rules must use the real LAN interface.
-
-### Interface-name failure after migration
-
-After Logos moved to Zion, WireGuard still handshaked but Jellyfin returned `502`. The saved NAT rule used the old interface name `eth0`; the VM uses `ens18`.
-
-The backend received the SYN packet, but its reply had no valid return path through Logos. Replacing the old rule fixed the path:
-
-```bash
-sudo iptables -t nat -D POSTROUTING \
-  -o eth0 -d <JELLYFIN_LAN_IP> -j MASQUERADE
-
-sudo iptables -t nat -A POSTROUTING \
-  -o ens18 -d <JELLYFIN_LAN_IP> -j MASQUERADE
-
-sudo netfilter-persistent save
-```
+Rule order matters. Return traffic must be accepted, the two explicit paths must appear before the final `wg0` drop, and NAT must use the current LAN egress interface.
 
 The persistent rules are stored in `/etc/iptables/rules.v4`. A small idempotent fallback in `/etc/rc.local` restores the Jellyfin NAT rule if Docker reloads the firewall:
 
@@ -207,32 +185,17 @@ Caddy runs directly on the Relay and terminates public TLS. Jellyfin traffic is 
 }
 ```
 
-Public HTTPS terminates directly on the Relay.
-
 ## :material-console: Administrative access
 
-Public SSH is disabled. Administrative clients reach the Relay only through WireGuard. The cloud provider console is the out-of-band recovery path when the tunnel is unavailable.
-
-This avoids keeping TCP/22 open to Internet scans and password-guessing traffic.
+Administration uses WireGuard only. The cloud provider console is the out-of-band recovery path when the tunnel is unavailable.
 
 ## :material-ruler: MTU
 
-OCI exposes `ens3` with MTU `9000`. Automatic WireGuard selection previously produced MTU `8920` on the Relay while Logos used `1420`. The tunnel handshaked, but larger packets failed.
-
-Both peers now use:
+Both peers use a fixed MTU because automatic selection on the cloud interface previously produced a value that was too large for the complete path:
 
 ```ini
 MTU = 1420
 ```
-
-The useful boundary test is:
-
-```bash
-ping -M do -s 1392 <LOGOS_WG_IP>
-ping -M do -s 1393 <LOGOS_WG_IP>
-```
-
-With a `1420` tunnel MTU, `1392` bytes succeeds and `1393` is too large after adding the IPv4 and ICMP headers.
 
 ## :material-alert-outline: Known routing debt
 
@@ -259,27 +222,6 @@ The configuration collection includes:
 
 Private keys and live credentials belong in encrypted backups, never in this repository.
 
-## :material-check-decagram: Validation
+## :material-tools: Troubleshooting
 
-Run these checks after firewall, WireGuard or Caddy changes:
-
-```bash
-# Relay
-sudo wg show
-ip -br address show wg0
-curl --fail --silent --show-error http://<JELLYFIN_LAN_IP>:8096/
-curl --fail --silent --show-error http://<PATCHMON_LAN_IP>:3000/
-sudo caddy validate --config /etc/caddy/Caddyfile
-
-# Logos
-sudo wg show
-ip -br address show ens18
-ip -br address show wg0
-sudo iptables -L FORWARD -n -v --line-numbers
-sudo iptables -t nat -L POSTROUTING -n -v --line-numbers
-sudo grep -E 'wg0|MASQUERADE|PatchMon|8096|3000' /etc/iptables/rules.v4
-```
-
-Counters should increase on the expected `FORWARD` and `POSTROUTING` rules while testing each service.
-
-For symptom-based diagnostics, see [:material-tools: WireGuard relay troubleshooting](../troubleshooting/wireguard-relay.md).
+The failure layers, packet-tracing commands, MTU tests and recovery checks are kept in the separate [WireGuard relay troubleshooting](../troubleshooting/wireguard-relay.md) runbook.
