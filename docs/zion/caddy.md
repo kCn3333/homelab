@@ -1,33 +1,44 @@
-# Internal Caddy
+# :simple-caddy: Caddy
 
-Caddy provides internal HTTPS termination and reverse proxying for services hosted across Zion and Logos. It runs natively as a systemd service in a dedicated LXC so that internal service access does not depend on the Docker engine or the availability of a general-purpose application host.
+Caddy is the HTTPS entry point for services available only inside the LAN. It runs natively in a dedicated LXC, independently of Docker and Logos.
 
-## Request flow
+It replaced Nginx Proxy Manager, which previously ran in Docker on Oracle Legacy. The old deployment worked, but every internal route depended on the general-purpose Docker host. Caddy keeps the same job with fewer moving parts and configuration stored as plain text.
 
-```mermaid
-flowchart LR
-    C["LAN client"] --> D["AdGuard Home"]
-    D --> R["Caddy LXC"]
-    R --> S["Internal service"]
-```
+## :material-server: LXC
 
-AdGuard Home resolves the internal service name to Caddy. Caddy obtains or presents the appropriate certificate and proxies the request to the selected backend.
+| Property | Value |
+|---|---|
+| VMID | `102` |
+| System | Debian 13, unprivileged LXC |
+| CPU | 1 vCPU |
+| Memory | 1 GB |
+| Root disk | 10 GB |
+| Runtime | Native `caddy.service` |
 
-## Configuration layout
+The container was created with the [Caddy Proxmox Community Script](https://community-scripts.github.io/ProxmoxVE/scripts?id=caddy). The script installed the operating system and Caddy; the proxy configuration was then added manually.
 
-The configuration is split into one small site file per backend:
+The previous Nginx Proxy Manager definition remains available as a [migration reference](https://github.com/kCn3333/docker-compose/blob/main/nginx-proxy-manager/docker-compose.yaml).
+
+## :material-arrow-decision: Request path
+
+1. AdGuard Home resolves an internal service name to the Caddy LXC.
+2. The client opens HTTPS to Caddy.
+3. Caddy presents the certificate and forwards the request to the configured backend.
+4. The backend handles authentication and application authorization.
+
+Caddy is not used for public ingress. Public services use the separate Relay path.
+
+## :material-file-tree: Configuration
 
 ```text
 /etc/caddy/
 ├── Caddyfile
 ├── .env
 └── sites/
-    ├── service-a.caddy
-    ├── service-b.caddy
-    └── ...
+    └── <service>.caddy
 ```
 
-The main file contains global options and imports the site directory:
+`Caddyfile` contains global options and imports one file per backend:
 
 ```caddy
 {
@@ -37,23 +48,30 @@ The main file contains global options and imports the site directory:
 import /etc/caddy/sites/*.caddy
 ```
 
-The DNS provider credential is stored in an environment file with restricted permissions and loaded by the systemd unit. It is never committed to the repository.
+The Cloudflare token is stored in `/etc/caddy/.env` with restricted permissions and loaded through a systemd override:
 
-## Adding an internal service
-
-1. Create a dedicated file under `sites/`.
-2. Add or update the corresponding DNS rewrite in AdGuard Home.
-3. Format and validate the complete configuration.
-4. Reload Caddy gracefully.
-5. Test the certificate, response headers, and backend reachability.
-
-```bash
-caddy fmt --overwrite /etc/caddy/Caddyfile
-caddy validate --config /etc/caddy/Caddyfile
-caddy reload --config /etc/caddy/Caddyfile
+```ini
+[Service]
+EnvironmentFile=/etc/caddy/.env
 ```
 
-A basic backend definition remains intentionally small:
+The token is not stored in Git.
+
+## :material-plus-network-outline: Add a service
+
+1. Create `/etc/caddy/sites/<service>.caddy`.
+2. Add or update the matching DNS rewrite in AdGuard Home.
+3. Format and validate the complete configuration.
+4. Reload Caddy without restarting the process.
+5. Test DNS, TLS and backend access from a LAN client.
+
+```bash
+sudo caddy fmt --overwrite /etc/caddy/Caddyfile
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+```
+
+A normal HTTP backend needs only:
 
 ```caddy
 service.internal.example {
@@ -61,11 +79,9 @@ service.internal.example {
 }
 ```
 
-Caddy handles WebSocket upgrades automatically through `reverse_proxy`. Forwarded headers are customized only when the backend application requires explicit proxy awareness.
+Caddy handles WebSocket upgrades automatically. Extra forwarded headers are added only when a backend requires them.
 
-## HTTPS backends
-
-Some administrative applications expose only HTTPS with a self-signed certificate. Disabling upstream certificate verification is treated as a compatibility exception:
+### HTTPS backend with a self-signed certificate
 
 ```caddy
 service.internal.example {
@@ -77,42 +93,47 @@ service.internal.example {
 }
 ```
 
-Where practical, a trusted internal CA or correctly validated backend certificate is preferred.
+`tls_insecure_skip_verify` is limited to known internal backends that cannot present a trusted certificate.
 
-## Configuration ownership
+## :material-swap-horizontal: Migration from Nginx Proxy Manager
 
-- Caddy owns HTTPS and proxy routing.
-- AdGuard Home owns internal name resolution.
-- Backend applications own authentication and application authorization.
-- Public access is configured separately from the internal reverse proxy.
+1. Inventory every NPM proxy host, backend, custom header and certificate requirement.
+2. Create the matching Caddy site files without changing DNS.
+3. Install the Cloudflare DNS module and load its token through systemd.
+4. Validate the full Caddy configuration.
+5. Test each route against the Caddy LXC using a temporary local DNS override.
+6. Change the AdGuard rewrite from Oracle Legacy to the Caddy LXC.
+7. Verify certificates, WebSockets and application logins.
+8. Stop NPM only after all internal routes work through Caddy.
 
-A proxy configuration is not used to conceal an application that lacks suitable authentication.
+Moving the DNS target was the cutover. Backend applications did not need to change because their addresses and ports stayed the same.
 
-## Validation
+## :material-check-decagram: Validation
 
 ```bash
-caddy validate --config /etc/caddy/Caddyfile
+sudo caddy validate --config /etc/caddy/Caddyfile
 systemctl is-active caddy
 systemctl is-enabled caddy
+systemctl --failed --no-legend --plain --no-pager
 journalctl -u caddy --no-pager -n 50
 ```
 
-Validation after a change also confirms that:
+Also verify:
 
-- the internal DNS answer points to Caddy;
+- AdGuard returns the Caddy address;
 - the expected certificate is presented;
-- the backend is reachable from the Caddy LXC;
-- no unexpected failed systemd units remain.
+- Caddy can reach the backend;
+- the application accepts proxy traffic;
+- an ordinary reload does not interrupt existing routes.
 
-## Troubleshooting order
+## :material-wrench-outline: Quick diagnosis
 
-| Symptom | First checks |
+| Symptom | Check first |
 |---|---|
-| Name does not resolve | AdGuard record or rewrite and client DNS cache |
-| Certificate is not issued | DNS provider credential, Caddy modules, and ACME logs |
-| HTTP 502 | Backend address, listener, route, and firewall |
-| Configuration reload fails | `caddy fmt`, `caddy validate`, and systemd logs |
-| Backend rejects the request | Proxy trust and forwarded-header configuration |
+| Name does not resolve | AdGuard rewrite and client DNS cache |
+| Certificate is missing | Cloudflare module, token loading and ACME logs |
+| HTTP 502 | Backend address, listener and firewall |
+| Reload fails | `caddy fmt`, `caddy validate` and journal |
+| Application rejects requests | Trusted proxy and forwarded-header settings |
 
-The current service state is checked before restarting Caddy. Reload is preferred for ordinary configuration changes because it avoids unnecessary interruption.
-
+Use reload for normal configuration changes. Restart the service only when a package, module or systemd setting has changed.
