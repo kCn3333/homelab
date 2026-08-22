@@ -36,18 +36,6 @@ The IronWolf contains both the PBS datastore and the local Kopia repository, but
 
 Downloaded media, caches, transcodes, build toolchains and other reproducible data are intentionally excluded where appropriate.
 
-## :material-calendar-clock: Schedule
-
-| Time | Job |
-|---|---|
-| Daily at 04:40 | Zion configuration collection |
-| Daily at 04:40 | Fedora workstation backup |
-| Daily at 04:50 | Kopia snapshot to MEGA |
-| Sunday at 05:20 | Proxmox VM and LXC backup to PBS |
-| Sunday at 06:00 | UniFi configuration backup |
-
-The ten-minute gap between configuration collection and Kopia is intentional. The collection job must finish writing to Logos before Kopia snapshots `/home`.
-
 ## :material-server: Proxmox Backup Server
 
 PBS runs in an unprivileged LXC on Zion. Its root filesystem is stored on NVMe, while the datastore is a bind mount from the IronWolf disk:
