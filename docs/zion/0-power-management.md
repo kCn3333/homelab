@@ -2,8 +2,7 @@
 
 Zion runs continuously, but most of the time it is lightly loaded. The goal is therefore simple: reduce idle power draw without suspending the host or making storage, networking, and guests unreliable.
 
-!!! warning
-    This configuration was tested on Gigabyte Z370 HD3 with an Intel Core i5-8400. The same settings may behave differently on another board, controller, or kernel.
+***
 
 ## :material-target: What is optimized
 
@@ -14,6 +13,9 @@ Zion runs continuously, but most of the time it is lightly loaded. The goal is t
 - Linux power-saving tunables applied after boot.
 
 Integrated graphics stays enabled for emergency console access and Intel Quick Sync. Zion itself is not suspended automatically.
+
+!!! warning
+    This configuration was tested on Gigabyte Z370 HD3 with an Intel Core i5-8400. The same settings may behave differently on another board, controller, or kernel.
 
 ## :material-chip: UEFI settings
 
