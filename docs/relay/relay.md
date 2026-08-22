@@ -40,7 +40,7 @@ Traffic is filtered before it reaches the Relay VM. The OCI network policy expos
 |---|---|---:|---|
 | HTTP | TCP | `80` | Allowed for redirects and ACME |
 | HTTPS | TCP | `443` | Allowed for public services handled by Caddy |
-| WireGuard | UDP | `<WIREGUARD_UDP_PORT>` | Allowed for the VPN tunnel |
+| WireGuard | UDP | `<WIREGUARD_PORT>` | Allowed for the VPN tunnel |
 | SSH | TCP | `22` | Not exposed publicly |
 | Internal backends | TCP | `3000`, `8096` | Not exposed publicly |
 | Other inbound traffic | Any | Any | Denied |
