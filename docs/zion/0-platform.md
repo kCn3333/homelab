@@ -72,13 +72,11 @@ Zion uses two storage tiers:
 
 If the NVMe fails, the intended path is: reinstall Proxmox, reconnect the IronWolf filesystem, recreate PBS, attach the existing datastore, and restore the guests.
 
-This does not protect against loss of the complete Zion machine or damage to the IronWolf disk. Configuration collection and Kopia provide separate local and off-site layers. See [Backup and recovery](backup-and-recovery.md).
+This does not protect against loss of the complete Zion machine or damage to the IronWolf disk. Configuration collection and Kopia provide separate local and off-site layers. See [Backup and recovery](3-backup-and-recovery.md).
 
 ## :fontawesome-solid-network-wired: Networking
 
 Each guest gets its own MAC address, IP configuration, firewall scope, and traffic counters. A guest can later be moved to another VLAN or bridge without redesigning the entire host network.
-
-### :simple-ubuntu: Logos interfaces
 
 Logos has two virtual NICs with separate jobs: 
 
