@@ -4,11 +4,12 @@ Caddy is the HTTPS entry point for services available only inside the LAN. It ru
 
 It replaced Nginx Proxy Manager, which previously ran in Docker on Oracle Legacy. The old deployment worked, but every internal route depended on the general-purpose Docker host. Caddy keeps the same job with fewer moving parts and configuration stored as plain text.
 
-## :material-server: LXC
+***
+
+## :simple-linuxcontainers: LXC
 
 | Property | Value |
 |---|---|
-| VMID | `102` |
 | System | Debian 13, unprivileged LXC |
 | CPU | 1 vCPU |
 | Memory | 1 GB |
