@@ -141,49 +141,13 @@ iptables -t nat -A POSTROUTING \
   -o ens18 -d <JELLYFIN_LAN_IP> -j MASQUERADE
 ```
 
-## :material-web: Caddy
+## :simple-caddy: Caddy
 
 Caddy runs directly on the Relay and terminates public TLS. Jellyfin traffic is then proxied to its LAN address through WireGuard.
-
-```caddyfile
-<PUBLIC_JELLYFIN_HOSTNAME> {
-    encode gzip
-
-    reverse_proxy <JELLYFIN_LAN_IP>:8096 {
-        flush_interval -1
-        header_up X-Forwarded-For {remote_host}
-        header_up X-Real-IP {remote_host}
-        header_up Host {host}
-    }
-
-    log {
-        output file /var/log/caddy/jellyfin_access.log {
-            mode 0644
-        }
-        format json
-    }
-
-    header {
-        Strict-Transport-Security "max-age=31536000; includeSubDomains"
-        X-Frame-Options "SAMEORIGIN"
-        X-Content-Type-Options "nosniff"
-        Referrer-Policy "strict-origin-when-cross-origin"
-        -Server
-    }
-}
-```
 
 ## :material-console: Administrative access
 
 Administration uses WireGuard only. The cloud provider console is the out-of-band recovery path when the tunnel is unavailable.
-
-## :material-ruler: MTU
-
-Both peers use a fixed MTU because automatic selection on the cloud interface previously produced a value that was too large for the complete path:
-
-```ini
-MTU = 1420
-```
 
 ## :material-alert-outline: Known routing debt
 
@@ -191,24 +155,27 @@ The current WireGuard subnet overlaps the OCI VCN. Explicit `/32` peer routes ke
 
 The proper fix is a coordinated move to a non-overlapping tunnel subnet. Both peers, firewall rules, routes and monitoring targets must be updated in one maintenance window.
 
-## :material-backup-restore: Recovery data
+## :material-check-decagram: Validation
 
-The configuration collection includes:
+Run these checks after firewall, WireGuard or Caddy changes:
 
-### Relay
+```bash
+# Relay
+sudo wg show
+ip -br address show wg0
+curl --fail --silent --show-error http://<JELLYFIN_LAN_IP>:8096/
+sudo caddy validate --config /etc/caddy/Caddyfile
 
-- `/etc/wireguard/`
-- `/etc/caddy/`
-- `/etc/fail2ban/`
-- `/etc/iptables/`
+# Logos
+sudo wg show
+ip -br address show ens18
+ip -br address show wg0
+sudo iptables -L FORWARD -n -v --line-numbers
+sudo iptables -t nat -L POSTROUTING -n -v --line-numbers
+sudo grep -E 'wg0|MASQUERADE|PatchMon|8096|3000' /etc/iptables/rules.v4
+```
 
-### Logos
-
-- `/etc/wireguard/`
-- `/etc/iptables/`
-- `/etc/rc.local`
-
-Private keys and live credentials belong in encrypted backups, never in this repository.
+Counters should increase on the expected `FORWARD` and `POSTROUTING` rules while testing each service.
 
 ## :material-tools: Troubleshooting
 
