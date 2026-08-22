@@ -1,119 +1,111 @@
-# Energy Optimization
+# :material-lightning-bolt: Power Management
 
-Zion is designed to remain available as the main virtualization platform without wasting power while idle. The optimization work therefore focuses on reducing the baseline consumption of the motherboard, CPU, storage, and unused peripherals while preserving stability, remote administration, and the ability to expand the platform later.
+Zion runs continuously, but most of the time it is lightly loaded. The goal is therefore simple: reduce idle power draw without suspending the host or making storage, networking, and guests unreliable.
 
-The settings documented here describe the configuration validated on Zion's Gigabyte Z370 HD3 and Intel Core i5-8400 platform. They are not universal recommendations for unrelated hardware.
+This configuration was tested on Zion's Gigabyte Z370 HD3 with an Intel Core i5-8400. The same settings may behave differently on another board, controller, or kernel.
 
-!!! warning "Stability comes first"
-    Power-saving options can affect PCIe devices, storage latency, USB peripherals, network adapters, and wake behaviour. Apply changes in small groups, keep local console access available, and validate the platform under both idle and normal workload conditions.
+!!! warning "Change one group at a time"
+    Keep console access available when changing UEFI power settings. Test networking, storage and guest operation before moving to the next group.
 
-## Optimization goals
+## :material-target: What is optimized
 
-- allow the CPU package to enter deeper idle states;
-- reduce unnecessary activity on PCIe and chipset links;
-- stop the mechanical data disk during sufficiently long idle periods;
-- disable unused onboard devices;
-- reapply safe operating-system tunables after every boot;
-- retain integrated graphics for emergency console access and Intel Quick Sync;
-- keep virtualization, networking, backups, and storage reliable.
+- CPU and package idle states;
+- PCIe, DMI and chipset link power management;
+- unused onboard devices;
+- standby behaviour of the mechanical data disk;
+- Linux power-saving tunables applied after boot.
 
-## Firmware configuration
+Integrated graphics stays enabled for emergency console access and Intel Quick Sync. Zion itself is not suspended automatically.
 
-### CPU power management
+## :material-chip: UEFI settings
 
-The following UEFI settings allow the processor and the complete CPU package to enter deeper idle states and return to full performance when work arrives.
+### CPU
 
-| Setting | Value | Purpose |
-|---|---|---|
-| Intel CPU C-States Control | Enabled | Enables processor idle states |
-| Package C-State Limit | C10 | Allows the deepest supported package state |
-| Intel Speed Shift Technology | Enabled | Lets the CPU adjust performance states quickly |
-| Enhanced Halt State (C1E) | Enabled | Reduces power use during light idle periods |
-| C3, C6/C7, C8 and C10 support | Enabled | Enables progressively deeper idle states |
-| Enhanced Intel SpeedStep (EIST) | Enabled | Allows dynamic frequency and voltage scaling |
-| Race to Halt | Enabled | Completes short workloads quickly and returns to idle |
-| Energy Efficient Turbo | Enabled | Favors efficient turbo behaviour |
-| Voltage Optimization | Enabled | Enables platform-managed voltage reduction |
-
-Prefetchers and ring-to-core offset controls remain on `Auto`. They were not changed without a workload-specific reason.
-
-### Chipset and PCIe power management
-
-| Setting | Value | Purpose |
-|---|---|---|
-| PEG ASPM | Enabled | Saves power on the graphics PCIe link |
-| PCH ASPM | Enabled | Enables chipset link power management |
-| DMI ASPM | Enabled | Enables power management between CPU and chipset |
-| CEC 2019 Ready | Enabled | Applies stricter platform idle-power behaviour |
-| RC6 / Render Standby | Enabled | Powers down the integrated GPU when idle |
-| Power Loading | Auto | Retains the board's low-load stability protection |
-
-The integrated GPU remains enabled. It provides an emergency local console and can be used for hardware-accelerated media processing.
-
-### ErP and Wake-on-LAN
-
-ErP reduces the server's consumption while powered off, but on this platform it also disables Wake-on-LAN.
-
-This is an explicit trade-off:
-
-- use `ErP: Enabled` when minimum soft-off consumption is more important and Zion is expected to remain online;
-- use `ErP: Disabled` if remote Wake-on-LAN for Zion becomes an operational requirement.
-
-After changing ErP, test cold boot, orderly shutdown, power-loss recovery, and Wake-on-LAN rather than relying only on the firmware description.
-
-### Unused onboard devices
-
-| Device or feature | Setting |
+| Setting | Value |
 |---|---|
-| SATA Aggressive Link Power Management | Enabled |
-| Serial port | Disabled |
-| Parallel port | Disabled |
-| Onboard audio | Disabled |
-| Integrated graphics | Enabled |
+| Intel CPU C-States Control | `Enabled` |
+| Package C-State Limit | `C10` |
+| Intel Speed Shift Technology | `Enabled` |
+| Enhanced Halt State (C1E) | `Enabled` |
+| C3, C6/C7, C8 and C10 support | `Enabled` |
+| Enhanced Intel SpeedStep (EIST) | `Enabled` |
+| Race to Halt | `Enabled` |
+| Energy Efficient Turbo | `Enabled` |
+| Voltage Optimization | `Enabled` |
 
-Only devices confirmed as unused should be disabled. Future PCIe passthrough, local troubleshooting, or media workloads may change that decision.
+Prefetchers and ring-to-core offset settings remain on `Auto`. There was no workload-specific reason to change them.
 
-## Mechanical disk spindown
+### Chipset and PCIe
 
-The IronWolf data disk consumes several watts while its platters are spinning and can prevent the platform from reaching deeper package states. It is therefore allowed to spin down after a period without I/O.
+| Setting | Value |
+|---|---|
+| PEG ASPM | `Enabled` |
+| PCH ASPM | `Enabled` |
+| DMI ASPM | `Enabled` |
+| CEC 2019 Ready | `Enabled` |
+| RC6 / Render Standby | `Enabled` |
+| Power Loading | `Auto` |
 
-Before changing disk power management:
+ASPM allows idle PCIe and chipset links to enter lower-power states. RC6 does the same for the integrated GPU when it is not processing video or driving a console.
 
-1. confirm the correct disk by model, serial number, filesystem, and mount point;
-2. ensure that no backup, scrub, SMART test, media scan, or guest workload is active;
-3. use a stable `/dev/disk/by-id/` path in persistent configuration;
-4. observe whether recurring services wake the disk too frequently.
+### Onboard devices
 
-Read the current power state without intentionally performing filesystem I/O:
+| Device or feature | Value |
+|---|---|
+| SATA Aggressive Link Power Management | `Enabled` |
+| Serial port | `Disabled` |
+| Parallel port | `Disabled` |
+| Onboard audio | `Disabled` |
+| Integrated graphics | `Enabled` |
+
+Only confirmed unused devices are disabled.
+
+## :material-power-plug-off: ErP and Wake-on-LAN
+
+`ErP: Enabled` reduces soft-off power consumption below the normal standby level, but disables Wake-on-LAN on this platform.
+
+Zion is expected to remain online, so ErP is enabled. If remote Wake-on-LAN for Zion becomes necessary, ErP must be disabled and WoL tested again after a complete shutdown.
+
+This does not affect Wake-on-LAN for the separate K3s nodes.
+
+## :material-harddisk: HDD spindown
+
+The IronWolf disk stores backups and bulk data such as the media library. When no job or application is using it, stopping the platters saves several watts and allows the platform to reach deeper package states.
+
+Persistent configuration should use the disk's `/dev/disk/by-id/` path. Do not copy `/dev/sdX` names into configuration because they can change after a reboot.
+
+Check the current state:
 
 ```bash
 sudo hdparm -C /dev/disk/by-id/<IRONWOLF_DISK>
 ```
 
-Request an immediate standby transition during a controlled test:
+Request standby during a controlled test:
 
 ```bash
 sudo hdparm -y /dev/disk/by-id/<IRONWOLF_DISK>
 ```
 
-Configure a ten-minute idle timeout for testing:
+Set a ten-minute idle timeout:
 
 ```bash
 sudo hdparm -S 120 /dev/disk/by-id/<IRONWOLF_DISK>
 ```
 
-The disk wakes automatically when it receives I/O. The timeout should be reconsidered if logs show frequent start/stop cycles: repeated spin-up can be worse for latency and drive wear than leaving the disk running during an active period.
+The disk wakes automatically on I/O. Backup jobs, SMART tests, media scans and filesystem activity can wake it as well.
 
 !!! note
-    An interactive `hdparm -S` setting may not survive a reboot. Persistent configuration should reference the stable disk identifier and must be verified after restarting Zion.
+    `hdparm -S` issued from the shell is not persistent. After adding the setting to the system configuration, verify it again after reboot.
 
-## PowerTOP at boot
+Frequent spin-up and spin-down cycles defeat the purpose and add latency. If the disk wakes repeatedly during normal operation, increase the timeout or leave it running during active hours.
 
-PowerTOP is used to apply the set of operating-system tunables already validated on Zion. A small systemd unit reapplies them after boot:
+## :material-tune-vertical: PowerTOP at boot
+
+The tested PowerTOP tunables are reapplied by `/etc/systemd/system/powertop.service`:
 
 ```ini
 [Unit]
-Description=Apply validated PowerTOP tunables
+Description=Apply PowerTOP tunables
 After=multi-user.target
 ConditionPathExists=/usr/sbin/powertop
 
@@ -126,7 +118,7 @@ RemainAfterExit=yes
 WantedBy=multi-user.target
 ```
 
-Install the file as `/etc/systemd/system/powertop.service`, then validate and enable it:
+Validate and enable the unit:
 
 ```bash
 sudo systemd-analyze verify /etc/systemd/system/powertop.service
@@ -135,22 +127,20 @@ sudo systemctl enable --now powertop.service
 sudo systemctl status powertop.service --no-pager
 ```
 
-`powertop --auto-tune` should not be treated as universally safe. After kernel, hardware, or passthrough changes, verify networking, storage, USB devices, and guest operation. If one tunable causes instability, replace the blanket auto-tune policy with explicit, individually tested settings.
+`powertop --auto-tune` changes several device policies at once. After a kernel update or hardware change, check the network interfaces, storage, USB devices and running guests. If one device becomes unstable, replace the blanket auto-tune with explicit settings for the tunables already verified as safe.
 
-## Validation
+## :material-check-decagram: Validation
 
-The configuration is accepted only after checking both power behaviour and normal platform operation.
+After changing the configuration, check:
 
-Recommended checks include:
-
-- CPU package C-state residency during a representative idle window;
-- system load and CPU activity with guests idle;
-- network connectivity and link stability;
-- VM and LXC startup, shutdown, and storage access;
-- backup execution and restore readability;
-- SMART state and disk start/stop behaviour;
-- absence of unexpected failed systemd units;
-- successful reboot and recovery after simulated power loss.
+- CPU package C-state residency during a representative idle period;
+- network links and access to every VM and LXC;
+- NVMe and HDD access;
+- VM and container startup and shutdown;
+- backup execution and datastore availability;
+- HDD start/stop frequency;
+- failed systemd units;
+- reboot and recovery after power loss.
 
 Useful read-only commands:
 
@@ -161,21 +151,33 @@ sudo journalctl -b -u powertop.service --no-pager
 sudo smartctl -a /dev/disk/by-id/<IRONWOLF_DISK>
 ```
 
-## Observed result
+## :material-chart-line: Measured result
 
 During the original tuning session:
 
-- package idle states became active instead of remaining at zero residency;
-- CPU active time at idle fell from roughly 11% to approximately 3%;
-- measured idle consumption of the motherboard and CPU platform fell by about 5.5 W, approximately 25% of that part of the baseline.
+- CPU package idle states changed from no reported residency to regular `pc2` and `pc3` residency;
+- CPU `C0 active` time at idle fell from about **11%** to about **3%**;
+- idle draw of the motherboard and CPU platform fell by about **5.5 W**, roughly **25%** of that part of the baseline.
 
-These values are measurements from one hardware and workload state, not guaranteed savings. They should be measured again after adding PCIe devices, changing storage, enabling passthrough, or substantially altering the guest workload.
+These figures describe one hardware and workload state. Measure again after adding PCIe devices, enabling passthrough, changing disks or moving substantial workloads between guests.
 
-## Operational policy
+### :material-power-socket-eu: Wall power
 
-- Backups and data integrity take priority over spindown targets.
-- Zion is optimized for low idle consumption, not minimum benchmark power.
-- Firmware changes are documented and tested individually.
-- Wake-on-LAN expectations are reviewed whenever ErP is changed.
-- PowerTOP is revalidated after kernel or hardware changes.
-- Energy measurements are compared using the same guest and storage state.
+Complete-system power was also measured at the wall:
+
+| System state | Measured draw |
+|---|---:|
+| Zion idle, with the IronWolf HDD spinning | **24–25 W** |
+| Zion under heavier workloads | **40–60 W** |
+| Dell Wyse 5070 idle, with two 2.5-inch drives | **12–13 W** |
+
+Moving from the Dell Wyse 5070 to Zion roughly doubled idle consumption. In return, Zion provides a six-core CPU, NVMe storage, substantially more memory, hardware expansion and enough capacity to separate workloads into VMs and LXC containers. An idle draw of 24–25 W is a reasonable trade-off for that increase in capability.
+
+## :material-clipboard-check-outline: Operating rules
+
+- Stability and data integrity take priority over the lowest possible idle draw.
+- Backup windows take priority over HDD spindown.
+- UEFI changes are applied and tested in small groups.
+- ErP is reviewed whenever Wake-on-LAN requirements change.
+- PowerTOP is revalidated after kernel and hardware changes.
+- Measurements are compared with the same guests and storage state.
