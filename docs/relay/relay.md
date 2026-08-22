@@ -24,10 +24,10 @@ The VM runs native Caddy, WireGuard, Fail2ban and a PatchMon agent. Docker is no
 ```mermaid
 flowchart LR
     client["Internet client"] -->|"HTTPS :443"| relay["Relay<br/>Caddy + WireGuard"]
-    relay <-->|"WireGuard tunnel"| logos["Logos<br/>routing + firewall + NAT"]
-    admin["Administrative client"] -->|"SSH route to Relay"| logos
+    relay -->|"wg0"| logos["Logos<br/>routing + firewall + NAT"]
     logos -->|"TCP :8096"| jellyfin["Jellyfin"]
     logos -->|"TCP :3000"| patchmon["PatchMon"]
+    logos -->|"TCP :22"| ssh["Administrator"]
 ```
 
 Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server.
