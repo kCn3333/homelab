@@ -3538,36 +3538,6 @@
     haproxy --&gt;|"round-robin&lt;br/&gt;80 · 443 · 6443"| master
     haproxy --&gt;|"round-robin&lt;br/&gt;80 · 443 · 6443"| worker1
     haproxy --&gt;|"round-robin&lt;br/&gt;80 · 443 · 6443"| worker2</code></pre>
-<table>
-<thead>
-<tr>
-<th>Listener</th>
-<th>Mode</th>
-<th>Backend</th>
-<th>Load-balancing level</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>6443/tcp</code></td>
-<td>TCP</td>
-<td>K3s API on all three control-plane nodes</td>
-<td>TCP connection</td>
-</tr>
-<tr>
-<td><code>80/tcp</code></td>
-<td>HTTP</td>
-<td>Traefik HTTP ingress on all three nodes</td>
-<td>HTTP request</td>
-</tr>
-<tr>
-<td><code>443/tcp</code></td>
-<td>TCP</td>
-<td>Traefik HTTPS ingress on all three nodes</td>
-<td>TCP connection</td>
-</tr>
-</tbody>
-</table>
 <p>All three K3s machines are control-plane and embedded-etcd nodes despite the historical names <code>master</code>, <code>worker1</code> and <code>worker2</code>.</p>
 <p>Each backend uses <code>balance roundrobin</code>. New API and HTTPS connections, and HTTP requests, are distributed between available nodes. Backend health checks keep an unavailable node out of rotation.</p>
 <p>The API and HTTPS frontends use TCP mode. TLS passes through HAProxy and is terminated by K3s or Traefik. Port <code>80</code> uses HTTP mode. HAProxy therefore stores no kubeconfig, cluster credentials or application certificates.</p>
@@ -3576,8 +3546,8 @@
 <p>The replacement LXC owns IP address directly. It can start, stop, update and restore without Logos or another Docker host.</p>
 <p>The previous deployment is retained as a reference:</p>
 <ul>
-<li><a href="https://github.com/kCn3333/docker-compose/blob/main/haproxy/docker-compose.yaml">legacy Compose definition</a>;</li>
-<li><a href="https://github.com/kCn3333/docker-compose/blob/main/haproxy/haproxy.cfg">HAProxy configuration</a>.</li>
+<li><a href="https://github.com/kCn3333/docker-compose/blob/main/haproxy/docker-compose.yaml">legacy Compose definition</a></li>
+<li><a href="https://github.com/kCn3333/docker-compose/blob/main/haproxy/haproxy.cfg">HAProxy configuration</a></li>
 </ul>
 <h2 id="migration-and-cutover"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9s-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2s2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1"/></svg></span> Migration and cutover<a class="headerlink" href="#migration-and-cutover" title="Permanent link">&para;</a></h2>
 <p>The migration was deliberately simple because HAProxy has no application data:</p>
@@ -3681,7 +3651,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 12:36:32 UTC"><span class="timeago" datetime="2026-08-22T12:36:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 12:36:32 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 12:39:32 UTC"><span class="timeago" datetime="2026-08-22T12:39:32+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 12:39:32 UTC">2026-08-22</span>
   </span>
 
     
