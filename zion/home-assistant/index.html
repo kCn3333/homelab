@@ -964,41 +964,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#rebuild-of-the-destination-lxc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rebuild of the destination LXC
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#final-cutover" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Final cutover
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rollback
-      
-    </span>
-  </a>
   
 </li>
       
@@ -3449,41 +3416,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#rebuild-of-the-destination-lxc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rebuild of the destination LXC
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#final-cutover" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Final cutover
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rollback" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rollback
-      
-    </span>
-  </a>
   
 </li>
       
@@ -3594,7 +3528,7 @@
 <li><strong>ESPHome</strong> stores its configuration under <code>/home/kcn/docker/esphome</code> and publishes its required service port.</li>
 <li><strong>Portainer Agent</strong> provides remote stack management from Logos.</li>
 </ul>
-<p>The production definition is kept in the <a href="https://github.com/kCn3333/docker-compose/blob/main/homeassistant/docker-compose.yaml">Home Assistant Compose file</a>. Secrets and application state are not stored in that repository.</p>
+<p>Stack definition is kept in the <a href="https://github.com/kCn3333/docker-compose/blob/main/homeassistant/docker-compose.yaml">Home Assistant Compose file</a>. Secrets and application state are not stored in that repository.</p>
 <h2 id="zigbee-passthrough"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 2c-1.1 0-2 .9-2 2v8H5v4l4 4v2h6v-2l4-4v-4h-1V4a2 2 0 0 0-2-2M8 4h8v8H8m1-5v2h2V7m2 0v2h2V7Z"/></svg></span> Zigbee passthrough<a class="headerlink" href="#zigbee-passthrough" title="Permanent link">&para;</a></h2>
 <p>The coordinator uses a Silicon Labs CP210x USB-to-UART bridge and appears on Zion as <code>/dev/ttyUSB0</code>.</p>
 <p>The current Proxmox configuration passes it to the LXC explicitly:</p>
@@ -3622,47 +3556,25 @@
 <li>Leave the old stack stopped until the new environment is proven.</li>
 </ol>
 <p>Home Assistant must be stopped for the final copy. Copying its SQLite database while the container is writing can produce an inconsistent restore.</p>
-<h3 id="rebuild-of-the-destination-lxc">Rebuild of the destination LXC<a class="headerlink" href="#rebuild-of-the-destination-lxc" title="Permanent link">&para;</a></h3>
-<p>The first LXC had been changed from unprivileged to privileged without correcting its UID/GID mapping. System files retained mapped owners, causing SSH, package and systemd errors.</p>
-<p>A recursive <code>chown</code> was rejected because the system contained service accounts, setuid files and Docker data with different ownership requirements. The safer fix was a clean privileged Debian 13 LXC.</p>
-<p>Only these application directories were migrated:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/home/kcn/docker/homeassistant
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>/home/kcn/docker/esphome
-</span></code></pre></div>
-<p>The final synchronization used <code>rsync -aHAXx --delete-delay --chown=1000:1000</code> after stopping both containers. System directories from the damaged LXC were not copied.</p>
-<h3 id="final-cutover">Final cutover<a class="headerlink" href="#final-cutover" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Create a stop-mode backup of the old LXC and verify the archive.</li>
-<li>Perform an initial application-data copy.</li>
-<li>Stop Home Assistant and ESPHome.</li>
-<li>Run the final <code>rsync</code> and confirm a zero dry-run diff.</li>
-<li>Stop both LXC containers.</li>
-<li>Assign the production address and Zigbee device to the new LXC.</li>
-<li>Start the new LXC and its Docker stack.</li>
-<li>Update the SSH host key in the administrator and Semaphore <code>known_hosts</code>.</li>
-<li>Test the UI, ZHA, ESPHome, proxy path, automation SSH and backup.</li>
-<li>Keep the old LXC and its backup offline until the new host completes a normal maintenance and backup cycle.</li>
-</ol>
-<h2 id="rollback"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.9 8.9 0 0 0 13 21a9 9 0 0 0 9-9 9 9 0 0 0-9-9"/></svg></span> Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h2>
-<p>If the new LXC fails during cutover:</p>
-<ol>
-<li>Stop it before changing addresses or USB assignments.</li>
-<li>Restore the production address and Zigbee passthrough to the old LXC.</li>
-<li>Start the old LXC and its containers.</li>
-<li>Check Home Assistant, ZHA and ESPHome.</li>
-<li>Do not synchronize data backwards until the newest valid dataset is identified.</li>
-</ol>
-<p>Only one LXC may own the production address and Zigbee coordinator at a time.</p>
 <h2 id="proxy-and-access"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-1.66C8.07 16.13 6 13 6 9.67v-4L12 3l6 2.67v4c0 3.33-2.07 6.46-5 7.67zM12 5 8 6.69V10h4zm0 5v6c1.91-.47 4-2.94 4-5v-1z"/></svg></span> Proxy and access<a class="headerlink" href="#proxy-and-access" title="Permanent link">&para;</a></h2>
-<p>Home Assistant trusts only the proxy addresses that actually forward requests to it. Adding a broad Docker subnet merely to silence an <code>untrusted proxy</code> message would enlarge the trust boundary unnecessarily.</p>
-<p>External access requires multi-factor authentication. Tunnel and public-edge configuration are documented separately from this LXC.</p>
+<p>Home Assistant accepts forwarded client addresses only from the reverse proxies that connect to it directly.</p>
+<p>The setting is stored in:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/home/kcn/docker/homeassistant/configuration.yaml
+</span></code></pre></div>
+<p>The directory is mounted inside the container as <code>/config</code>.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">http</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">use_x_forwarded_for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">trusted_proxies</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.X.X</span><span class="w">   </span><span class="c1"># used for local access through Caddy</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.X.X</span><span class="w">   </span><span class="c1"># Logos / cloudflare tunnel for external access</span>
+</span></code></pre></div>
 <h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">test</span><span class="w"> </span>-c<span class="w"> </span>/dev/ttyUSB0
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>docker<span class="w"> </span>containerd<span class="w"> </span>ssh
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>systemctl<span class="w"> </span>--failed<span class="w"> </span>--no-legend<span class="w"> </span>--plain<span class="w"> </span>--no-pager
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>docker<span class="w"> </span>logs<span class="w"> </span>homeassistant<span class="w"> </span>--since<span class="w"> </span>10m
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>docker<span class="w"> </span>logs<span class="w"> </span>esphome<span class="w"> </span>--since<span class="w"> </span>10m
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">test</span><span class="w"> </span>-c<span class="w"> </span>/dev/ttyUSB0
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>docker<span class="w"> </span>containerd<span class="w"> </span>ssh
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>systemctl<span class="w"> </span>--failed<span class="w"> </span>--no-legend<span class="w"> </span>--plain<span class="w"> </span>--no-pager
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>docker<span class="w"> </span>logs<span class="w"> </span>homeassistant<span class="w"> </span>--since<span class="w"> </span>10m
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>docker<span class="w"> </span>logs<span class="w"> </span>esphome<span class="w"> </span>--since<span class="w"> </span>10m
 </span></code></pre></div>
 <p>Then confirm:</p>
 <ul>
@@ -3726,7 +3638,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 13:03:06 UTC"><span class="timeago" datetime="2026-08-22T13:03:06+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 13:03:06 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 13:18:51 UTC"><span class="timeago" datetime="2026-08-22T13:18:51+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 13:18:51 UTC">2026-08-22</span>
   </span>
 
     
