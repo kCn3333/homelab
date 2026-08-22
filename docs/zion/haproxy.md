@@ -27,7 +27,7 @@ HAProxy is stateless. Its important state is the configuration file:
 flowchart LR
     clients["LAN clients<br/>kubectl · browsers · K3s services"]
 
-    haproxy["HAProxy LXC 80 · 443 · 6443"]
+    haproxy["HAProxy LXC<br/>80 · 443 · 6443"]
 
     master["master<br/>node1"]
     worker1["worker1<br/>node2"]
