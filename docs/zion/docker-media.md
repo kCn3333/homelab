@@ -21,9 +21,9 @@ The Docker Media LXC contains the complete media pipeline. It is separated from 
 
 Portainer deploys and manages the active [Arr stack](https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml). Configuration and application state live under `/opt/appdata`; media and download directories are mounted separately.
 
-### :simple-intel: Intel Quick Sync passthrough
+### :simple-intel: Quick Sync passthrough
 
-Jellyfin uses the Intel UHD Graphics integrated into Zion's Core i5-8400 for hardware-accelerated transcoding through Intel Quick Sync Video.
+Jellyfin uses the Intel UHD Graphics integrated into Zion's CPU for hardware-accelerated transcoding through Intel Quick Sync Video.
 
 The GPU remains managed by the Proxmox host. Only its DRM device nodes are passed through to the Docker Media LXC. This is LXC device passthrough, not full PCI passthrough.
 
