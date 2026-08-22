@@ -25,7 +25,7 @@ The privileged LXC is a deliberate exception for the current USB passthrough mod
 - **ESPHome** stores its configuration under `/home/kcn/docker/esphome` and publishes its required service port.
 - **Portainer Agent** provides remote stack management from Logos.
 
-The production definition is kept in the [Home Assistant Compose file](https://github.com/kCn3333/docker-compose/blob/main/homeassistant/docker-compose.yaml). Secrets and application state are not stored in that repository.
+Stack definition is kept in the [Home Assistant Compose file](https://github.com/kCn3333/docker-compose/blob/main/homeassistant/docker-compose.yaml). Secrets and application state are not stored in that repository.
 
 ## :material-usb-port: Zigbee passthrough
 
@@ -68,51 +68,25 @@ The first move used this order:
 
 Home Assistant must be stopped for the final copy. Copying its SQLite database while the container is writing can produce an inconsistent restore.
 
-### Rebuild of the destination LXC
-
-The first LXC had been changed from unprivileged to privileged without correcting its UID/GID mapping. System files retained mapped owners, causing SSH, package and systemd errors.
-
-A recursive `chown` was rejected because the system contained service accounts, setuid files and Docker data with different ownership requirements. The safer fix was a clean privileged Debian 13 LXC.
-
-Only these application directories were migrated:
-
-```text
-/home/kcn/docker/homeassistant
-/home/kcn/docker/esphome
-```
-
-The final synchronization used `rsync -aHAXx --delete-delay --chown=1000:1000` after stopping both containers. System directories from the damaged LXC were not copied.
-
-### Final cutover
-
-1. Create a stop-mode backup of the old LXC and verify the archive.
-2. Perform an initial application-data copy.
-3. Stop Home Assistant and ESPHome.
-4. Run the final `rsync` and confirm a zero dry-run diff.
-5. Stop both LXC containers.
-6. Assign the production address and Zigbee device to the new LXC.
-7. Start the new LXC and its Docker stack.
-8. Update the SSH host key in the administrator and Semaphore `known_hosts`.
-9. Test the UI, ZHA, ESPHome, proxy path, automation SSH and backup.
-10. Keep the old LXC and its backup offline until the new host completes a normal maintenance and backup cycle.
-
-## :material-restore: Rollback
-
-If the new LXC fails during cutover:
-
-1. Stop it before changing addresses or USB assignments.
-2. Restore the production address and Zigbee passthrough to the old LXC.
-3. Start the old LXC and its containers.
-4. Check Home Assistant, ZHA and ESPHome.
-5. Do not synchronize data backwards until the newest valid dataset is identified.
-
-Only one LXC may own the production address and Zigbee coordinator at a time.
-
 ## :material-security-network: Proxy and access
 
-Home Assistant trusts only the proxy addresses that actually forward requests to it. Adding a broad Docker subnet merely to silence an `untrusted proxy` message would enlarge the trust boundary unnecessarily.
+Home Assistant accepts forwarded client addresses only from the reverse proxies that connect to it directly.
 
-External access requires multi-factor authentication. Tunnel and public-edge configuration are documented separately from this LXC.
+The setting is stored in:
+
+```text
+/home/kcn/docker/homeassistant/configuration.yaml
+```
+
+The directory is mounted inside the container as `/config`.
+
+```yaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.X.X   # used for local access through Caddy
+    - 192.168.X.X   # Logos / cloudflare tunnel for external access
+```
 
 ## :material-check-decagram: Validation
 
