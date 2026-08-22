@@ -1,6 +1,6 @@
 # :material-cloud-outline: Relay VPS
 
-The Relay handles inbound traffic for the few services that must be reachable from the Internet. It connects to the homelab only through WireGuard, so no inbound service ports need to be opened on the home router.
+The Relay handles inbound traffic for the few services that must be reachable from the Internet. It connects to the homelab only through ***:simple-wireguard: WireGuard***, so no inbound service ports need to be opened on the home router.
 
 ---
 
