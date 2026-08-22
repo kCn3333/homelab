@@ -40,12 +40,6 @@ flowchart LR
     haproxy -->|"round-robin<br/>80 · 443 · 6443"| worker2
 ```
 
-| Listener | Mode | Backend | Load-balancing level |
-|---|---|---|---|
-| `6443/tcp` | TCP | K3s API on all three control-plane nodes | TCP connection |
-| `80/tcp` | HTTP | Traefik HTTP ingress on all three nodes | HTTP request |
-| `443/tcp` | TCP | Traefik HTTPS ingress on all three nodes | TCP connection |
-
 All three K3s machines are control-plane and embedded-etcd nodes despite the historical names `master`, `worker1` and `worker2`.
 
 Each backend uses `balance roundrobin`. New API and HTTPS connections, and HTTP requests, are distributed between available nodes. Backend health checks keep an unavailable node out of rotation.
@@ -61,8 +55,8 @@ The replacement LXC owns IP address directly. It can start, stop, update and res
 
 The previous deployment is retained as a reference:
 
-- [legacy Compose definition](https://github.com/kCn3333/docker-compose/blob/main/haproxy/docker-compose.yaml);
-- [HAProxy configuration](https://github.com/kCn3333/docker-compose/blob/main/haproxy/haproxy.cfg).
+- [legacy Compose definition](https://github.com/kCn3333/docker-compose/blob/main/haproxy/docker-compose.yaml)
+- [HAProxy configuration](https://github.com/kCn3333/docker-compose/blob/main/haproxy/haproxy.cfg)
 
 ## :material-transit-connection-variant: Migration and cutover
 
