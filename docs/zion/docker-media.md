@@ -15,11 +15,11 @@ The Docker Media LXC contains the complete media pipeline. It is separated from 
 | :simple-qbittorrent: qBittorrent | Download client | `8080`, `6881/tcp`, `6881/udp` |
 | :material-cube-outline: FlareSolverr | Browser challenge helper used by selected indexers | `8191` |
 | :simple-youtube: MeTube | Standalone video downloads | `8081` |
-| :material-subtitles: Subtitle Agent | Preparation and inspection of subtitle | `8181` |
+| :material-page-next: Subtitle Agent | Preparation and inspection of subtitle | `8181` |
 | :simple-portainer: Portainer Agent | Remote stack management from Logos | `9001` |
 | :simple-watchtower: Watchtower | Container image updates and cleanup | none |
 
-Portainer deploys and manages the active [Arr stack](https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml). Configuration and application state live under `/opt/appdata`; media and download directories are mounted separately.
+Portainer deploys and manages the active [Arr stack](https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml). Configuration and application state live under `/opt/appdata`, media and download directories are mounted separately from HDD.
 
 ### :simple-intel: Quick Sync passthrough
 
