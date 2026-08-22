@@ -2,8 +2,6 @@
 
 Home Assistant, ESPHome and the Portainer Agent run in Docker inside a dedicated LXC on Zion. The Zigbee coordinator is passed from Proxmox to that LXC and then into the Home Assistant container.
 
-Keeping home automation in one guest isolates its USB device, updates and restarts from Logos and the media stack.
-
 ***
 
 ## :simple-linuxcontainers: LXC
@@ -114,6 +112,5 @@ Then confirm:
 |---|---|
 | `/dev/ttyUSB0` is missing | Proxmox `dev0`, host USB enumeration and LXC state |
 | ZHA uses the old device path | Saved ZHA configuration |
-| SSH key is rejected after restore | Ownership of `.ssh` and `authorized_keys` |
 | Proxy request is rejected | Exact `trusted_proxies` entries |
 | Package or systemd errors mention ownership | Privileged/unprivileged UID mapping |
