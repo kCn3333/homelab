@@ -725,17 +725,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-two-vms" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why two VMs?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#why-dedicated-lxc-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -767,7 +756,7 @@
   <a href="#nvme-active-workloads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NVMe: active workloads
+        NVMe — active workloads
       
     </span>
   </a>
@@ -775,21 +764,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ironwolf-capacity-and-backups" class="md-nav__link">
+  <a href="#ironwolf-backups-and-large-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IronWolf: capacity and backups
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-this-model-protects-against" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What this model protects against
+        IronWolf — backups and large data
       
     </span>
   </a>
@@ -814,10 +792,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-guests-have-separate-interfaces" class="md-nav__link">
+  <a href="#logos-interfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why guests have separate interfaces
+        Logos interfaces
       
     </span>
   </a>
@@ -825,21 +803,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#logos-and-the-k3s-wake-on-lan-path" class="md-nav__link">
+  <a href="#link-recovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Logos and the K3s Wake-on-LAN path
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#link-recovery-on-zion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Link recovery on Zion
+        Link recovery
       
     </span>
   </a>
@@ -3451,17 +3418,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-two-vms" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why two VMs?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#why-dedicated-lxc-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3493,7 +3449,7 @@
   <a href="#nvme-active-workloads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NVMe: active workloads
+        NVMe — active workloads
       
     </span>
   </a>
@@ -3501,21 +3457,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ironwolf-capacity-and-backups" class="md-nav__link">
+  <a href="#ironwolf-backups-and-large-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IronWolf: capacity and backups
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#what-this-model-protects-against" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What this model protects against
+        IronWolf — backups and large data
       
     </span>
   </a>
@@ -3540,10 +3485,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-guests-have-separate-interfaces" class="md-nav__link">
+  <a href="#logos-interfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why guests have separate interfaces
+        Logos interfaces
       
     </span>
   </a>
@@ -3551,21 +3496,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#logos-and-the-k3s-wake-on-lan-path" class="md-nav__link">
+  <a href="#link-recovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Logos and the K3s Wake-on-LAN path
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#link-recovery-on-zion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Link recovery on Zion
+        Link recovery
       
     </span>
   </a>
@@ -3640,78 +3574,110 @@
 
 <h1 id="zion-platform">Zion platform<a class="headerlink" href="#zion-platform" title="Permanent link">&para;</a></h1>
 <p>Zion replaced Oracle Legacy, the original bare-metal Debian server. Oracle worked well for years, but almost every service shared the same operating system, Docker daemon, network stack, storage layout, and maintenance window. A broken package update, firewall mistake, or Docker networking problem could affect the whole homelab at once.</p>
-<p>:SiProxmox: Moving to Proxmox VE solved that practical problem and added room for experiments:</p>
-<ul>
-<li>infrastructure services can be separated from applications;</li>
-<li>each guest has its own lifecycle, resource limits, network interface, and backup policy;</li>
-<li>risky tools such as Kali can stay powered off and isolated until needed;</li>
-<li>complete VMs and LXC containers can be backed up and restored;</li>
-<li>a failed service can be rebuilt without reinstalling the whole server;</li>
-<li>KVM and LXC can be used where each one makes sense;</li>
-<li>the platform provides a useful place to learn virtualization instead of running another large Docker host.</li>
-</ul>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.928 1.825c-1.09.553-1.09.64-.07 1.78 5.655 6.295 7.004 7.782 7.107 7.782.139.017 7.971-8.542 8.058-8.801.034-.07-.208-.312-.519-.536-.415-.312-.864-.433-1.712-.467-1.59-.104-2.144.242-4.115 2.455-.899 1.003-1.66 1.833-1.66 1.833-.017 0-.76-.813-1.642-1.798S8.473 2.1 8.127 1.91c-.796-.45-2.421-.484-3.2-.086zM1.297 4.367C.45 4.695 0 5.007 0 5.248c0 .121 1.331 1.678 2.94 3.459 1.625 1.78 2.939 3.268 2.939 3.302s-1.331 1.522-2.94 3.303C1.314 17.11.017 18.683.035 18.822c.086.467 1.504 1.055 2.541 1.055 1.678-.018 2.058-.312 5.603-4.202 1.78-1.954 3.233-3.614 3.233-3.666 0-.069-1.435-1.694-3.199-3.63-2.3-2.508-3.423-3.632-3.96-3.874-.812-.398-2.126-.467-2.956-.138m18.467.12c-.502.26-1.764 1.505-3.943 3.891-1.763 1.937-3.199 3.562-3.199 3.631 0 .07 1.453 1.712 3.234 3.666 3.544 3.89 3.925 4.184 5.602 4.202 1.038 0 2.455-.588 2.542-1.055.017-.156-1.28-1.712-2.905-3.493-1.608-1.78-2.94-3.285-2.94-3.32s1.332-1.539 2.94-3.32C22.72 6.91 24.017 5.352 24 5.214c-.087-.45-1.366-.968-2.473-1.038-.795-.034-1.21.035-1.763.312zM7.954 16.973c-2.144 2.369-3.908 4.374-3.943 4.46-.034.07.208.312.52.537.414.311.864.432 1.711.467 1.574.103 2.161-.26 4.15-2.508.864-.968 1.608-1.78 1.625-1.78s.761.812 1.643 1.798c2.023 2.248 2.559 2.576 4.132 2.49.848-.035 1.297-.156 1.712-.467.311-.225.553-.467.519-.536-.087-.26-7.92-8.819-8.058-8.801-.069 0-1.867 1.954-4.011 4.34"/></svg></span> Why Proxmox?</p>
+<table>
+<thead>
+<tr>
+<th>Oracle Legacy limitation</th>
+<th>What changed on Zion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Most services shared one Debian installation</td>
+<td>Services have separate operating environments</td>
+</tr>
+<tr>
+<td>System maintenance affected the whole server</td>
+<td>Guests can be updated or restarted independently</td>
+</tr>
+<tr>
+<td>Docker, networking, and applications shared one failure domain</td>
+<td>DNS, proxies, media, automation, and Home Assistant are separated</td>
+</tr>
+<tr>
+<td>Recovery was mostly file- and configuration-based</td>
+<td>Complete VMs and LXC containers can be backed up and restored</td>
+</tr>
+<tr>
+<td>Experiments ran close to production services</td>
+<td>Kali and test workloads run in isolated VMs</td>
+</tr>
+<tr>
+<td>Resource use was difficult to control per service</td>
+<td>CPU, RAM, storage, startup order, and network interfaces are assigned per guest</td>
+</tr>
+</tbody>
+</table>
 <p>This is still one physical server, so Proxmox does not make the homelab highly available. A Zion hardware failure affects every running guest. The improvement is separation, recovery, and easier maintenance—not physical redundancy.</p>
 <p>Hardware selection and the build history are documented separately under <strong>Infrastructure</strong>. This page covers the working platform.</p>
 <h2 id="virtualization-layout"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M232.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0l-218.6-101C5.4 145.8 0 137.3 0 128s5.4-17.9 13.9-21.8zM48.1 218.4l164.3 75.9c27.7 12.8 59.6 12.8 87.3 0L464 218.4l34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0l-218.6-101C5.4 273.8 0 265.3 0 256s5.4-17.9 13.9-21.8L48 218.4zM13.9 362.2 48 346.4l164.3 75.9c27.7 12.8 59.6 12.8 87.3 0l164.3-75.9 34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0l-218.5-101C5.4 401.8 0 393.3 0 384s5.4-17.9 13.9-21.8"/></svg></span> Virtualization layout<a class="headerlink" href="#virtualization-layout" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Guest</th>
+<th>System</th>
 <th>Type</th>
 <th>Main role</th>
+<th>Why this type?</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Logos</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.61.455a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41M12.92.8C8.923.777 5.137 2.941 3.148 6.451a5 5 0 0 1 .26-.007 4.9 4.9 0 0 1 2.585.737A8.32 8.32 0 0 1 12.688 3.6 4.94 4.94 0 0 1 13.723.834 11 11 0 0 0 12.92.8m9.226 4.994a4.9 4.9 0 0 1-1.918 2.246 8.36 8.36 0 0 1-.273 8.303 4.9 4.9 0 0 1 1.632 2.54 11.16 11.16 0 0 0 .559-13.089M3.41 7.932A3.41 3.41 0 0 0 0 11.342a3.41 3.41 0 0 0 3.41 3.409 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zm2.027 7.866a4.9 4.9 0 0 1-2.915.358 11.1 11.1 0 0 0 7.991 6.698 11.2 11.2 0 0 0 2.422.249 4.88 4.88 0 0 1-.999-2.85 9 9 0 0 1-.836-.136 8.3 8.3 0 0 1-5.663-4.32zm11.405.928a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41"/></svg></span> Logos</strong></td>
 <td>KVM VM</td>
-<td>Main operations server, Docker workloads, Semaphore, Kopia, Garage, WireGuard, and shared administration tools</td>
+<td>Docker, Semaphore, Kopia, Garage, WireGuard, and administration tools</td>
+<td>Needs a normal Linux kernel and works as the main general-purpose server</td>
 </tr>
 <tr>
-<td>Kali</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.778 5.943s-1.97-.13-5.327.92c-3.42 1.07-5.36 2.587-5.36 2.587s5.098-2.847 10.852-3.008zm7.351 3.095.257-.017s-1.468-1.78-4.278-2.648c1.58.642 2.954 1.493 4.021 2.665m.42.74c.039-.068.166.217.263.337.004.024.01.039-.045.027-.005-.025-.013-.032-.013-.032s-.135-.08-.177-.137-.049-.157-.028-.195m3.448 8.479s.312-3.578-5.31-4.403a18 18 0 0 0-2.524-.187c-4.506.06-4.67-5.197-1.275-5.462 1.407-.116 3.087.643 4.73 1.408-.007.204.002.385.136.552s.648.35.813.445c.164.094.691.43 1.014.85.07-.131.654-.512.654-.512s-.14.003-.465-.119c-.326-.122-.713-.49-.722-.511s-.015-.055.06-.07c.059-.049-.072-.207-.13-.265s-.445-.716-.454-.73c-.009-.016-.012-.031-.04-.05-.085-.027-.46.04-.46.04s-.575-.283-.774-.893c.003.107-.099.224 0 .469-.3-.127-.558-.344-.762-.88-.12.305 0 .499 0 .499s-.707-.198-.82-.85c-.124.293 0 .469 0 .469s-1.153-.602-3.069-.61c-1.283-.118-1.55-2.374-1.43-2.754 0 0-1.85-.975-5.493-1.406-3.642-.43-6.628-.065-6.628-.065s6.45-.31 11.617 1.783c.176.785.704 2.094.989 2.723-.815.563-1.733 1.092-1.876 2.97s1.472 3.53 3.474 3.58c1.9.102 3.214.116 4.806.942 1.52.84 2.766 3.4 2.89 5.703.132-1.709-.509-5.383-3.5-6.498 4.181.732 4.549 3.832 4.549 3.832M12.68 5.663l-.15-.485s-2.484-.441-5.822-.204S0 6.38 0 6.38s6.896-1.735 12.68-.717"/></svg></span> Kali</strong></td>
 <td>KVM VM</td>
-<td>On-demand security testing and network diagnostics</td>
+<td>Security testing and network diagnostics</td>
+<td>Keeps testing tools and custom network modes outside normal infrastructure</td>
 </tr>
 <tr>
-<td>AdGuard Home</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C8.249 0 3.725.861 0 2.755 0 6.845-.051 17.037 12 24 24.051 17.037 24 6.845 24 2.755 20.275.861 15.751 0 12 0m-.106 15.429L6.857 9.612c.331-.239 1.75-1.143 2.794.042l2.187 2.588c.009-.001 5.801-5.948 5.815-5.938.246-.22.694-.503 1.204-.101z"/></svg></span> AdGuard Home</strong></td>
 <td>LXC</td>
-<td>Local DNS filtering and internal DNS rewrites</td>
+<td>Local DNS filtering and DNS rewrites</td>
+<td>Small, dedicated Linux service with low resource use</td>
 </tr>
 <tr>
-<td>Caddy</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.094.47c-.842 0-1.696.092-2.552.288a11.4 11.4 0 0 0-4.87 2.423 10.6 10.6 0 0 0-2.36 2.826A10.1 10.1 0 0 0 .305 8.582c-.398 1.62-.4 3.336-.043 5.048.085.405.183.809.31 1.212a11.9 11.9 0 0 0 1.662 3.729 3 3 0 0 0-.086.427 3.323 3.323 0 0 0 2.848 3.71 3.28 3.28 0 0 0 1.947-.346c1.045.51 2.17.864 3.339 1.04a11.7 11.7 0 0 0 4.285-.155 11.57 11.57 0 0 0 4.936-2.485 10.6 10.6 0 0 0 2.352-2.894 11.2 11.2 0 0 0 1.356-4.424 11.2 11.2 0 0 0-.498-4.335q.263-.116.486-.293h.001c.402-.322.693-.794.777-1.342a2.146 2.146 0 0 0-1.79-2.434 2.1 2.1 0 0 0-1.205.171q-.059-.064-.113-.13a11.7 11.7 0 0 0-3.476-2.93 13 13 0 0 0-1.76-.81 13.6 13.6 0 0 0-2.06-.613 12 12 0 0 0-2.48-.258Zm.714.328a10 10 0 0 1 1.028.042 9.9 9.9 0 0 1 2.743.639c.984.39 1.89.958 2.707 1.632a10.8 10.8 0 0 1 2.091 2.328q.038.06.07.12a2.12 2.12 0 0 0-.435 2.646c-.158.114-.97.692-1.634 1.183-.414.308-.733.557-.733.557l.581.68s.296-.276.665-.638c.572-.562 1.229-1.233 1.395-1.403a2.12 2.12 0 0 0 1.907.677 11.2 11.2 0 0 1-.013 4.046 11.4 11.4 0 0 1-1.475 3.897 12.3 12.3 0 0 1-2.079 2.587c-1.19 1.125-2.633 2.022-4.306 2.531a10.8 10.8 0 0 1-3.973.484 11 11 0 0 1-3.057-.652 3.3 3.3 0 0 0 1.417-2.294 3.28 3.28 0 0 0-.294-1.842c.18-.162.403-.363.656-.6 1.015-.955 2.353-2.303 2.353-2.303l-.47-.599s-1.63.972-2.801 1.728c-.307.198-.573.378-.777.517a3.3 3.3 0 0 0-1.516-.611 3.33 3.33 0 0 0-3.487 2.017 10 10 0 0 1-.695-1.078A11 11 0 0 1 .728 14.8a10 10 0 0 1-.2-1.212c-.164-1.653.103-3.258.629-4.754a13 13 0 0 1 1.087-2.288c.57-.968 1.248-1.872 2.069-2.656A11 11 0 0 1 11.808.797Zm-.147 3.257a3.84 3.84 0 0 0-3.82 3.82v2.36h-.94c-.751 0-1.377.625-1.377 1.377v3.8h1.46v-3.718h9.354v6.264H10.02v1.46h6.4c.751 0 1.377-.625 1.377-1.377v-6.43a1.39 1.39 0 0 0-1.377-1.377h-.94v-2.36a3.84 3.84 0 0 0-3.82-3.819zm0 1.46a2.37 2.37 0 0 1 2.36 2.36v2.36H9.3v-2.36a2.37 2.37 0 0 1 2.36-2.36zm10.141.392a1.253 1.253 0 0 1 1.296 1.434 1.24 1.24 0 0 1-.453.78c-.266.213-.61.318-.968.264a1.253 1.253 0 0 1-1.045-1.42 1.255 1.255 0 0 1 1.17-1.058M5.384 17.425a2.02 2.02 0 0 1 1.917 1.298c.116.3.159.628.114.967a2.015 2.015 0 0 1-2.249 1.728 2.016 2.016 0 0 1-1.727-2.25 2.02 2.02 0 0 1 1.945-1.743"/></svg></span> Caddy</strong></td>
 <td>LXC</td>
-<td>Internal HTTPS reverse proxy and certificate management</td>
+<td>Internal HTTPS reverse proxy and certificates</td>
+<td>Independent network service that should not depend on Logos</td>
 </tr>
 <tr>
-<td>HAProxy</td>
+<td><strong>:simple-haproxy: HAProxy</strong></td>
 <td>LXC</td>
-<td>Load balancing for the K3s API and ingress traffic</td>
+<td>K3s API and ingress load balancing</td>
+<td>Small critical service with a separate lifecycle</td>
 </tr>
 <tr>
-<td>PatchMon</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1a6.887 6.887 0 0 0 0 9.8c2.73 2.7 7.15 2.7 9.88 0 1.36-1.35 2.04-2.92 2.04-4.9h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58a8.987 8.987 0 0 1 12.65 0L21 3zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8z"/></svg></span> PatchMon</strong></td>
 <td>LXC</td>
-<td>Patch visibility and host maintenance reporting</td>
+<td>Patch visibility and maintenance reporting</td>
+<td>Lightweight service that remains separate from monitored hosts</td>
 </tr>
 <tr>
-<td>Docker Media</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51q-.508.001-1.01.087c-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.75.75 0 0 0-.75.748 11.4 11.4 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137a15.7 15.7 0 0 0 2.93-.266 12.3 12.3 0 0 0 3.823-1.389 10.5 10.5 0 0 0 2.61-2.136c1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg></span> Docker Media</strong></td>
 <td>LXC</td>
-<td>Jellyfin and the Arr media stack</td>
+<td>Jellyfin and the Arr stack</td>
+<td>Groups related media services and their storage access</td>
 </tr>
 <tr>
-<td>Home Assistant</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.939 10.627 13.061.749a1.505 1.505 0 0 0-2.121 0l-9.879 9.878C.478 11.21 0 12.363 0 13.187v9c0 .826.675 1.5 1.5 1.5h9.227l-4.063-4.062a2 2 0 0 1-.664.113c-1.13 0-2.05-.92-2.05-2.05s.92-2.05 2.05-2.05 2.05.92 2.05 2.05c0 .233-.041.456-.113.665l3.163 3.163V9.928a2.05 2.05 0 0 1-1.15-1.84c0-1.13.92-2.05 2.05-2.05s2.05.92 2.05 2.05a2.05 2.05 0 0 1-1.15 1.84v8.127l3.146-3.146A2.05 2.05 0 0 1 18 12.239c1.13 0 2.05.92 2.05 2.05s-.92 2.05-2.05 2.05a2 2 0 0 1-.709-.13L12.9 20.602v3.088h9.6c.825 0 1.5-.675 1.5-1.5v-9c0-.825-.477-1.977-1.061-2.561z"/></svg></span> Home Assistant</strong></td>
 <td>LXC</td>
-<td>Home Assistant, ESPHome, and the Zigbee USB device</td>
+<td>Home Assistant, ESPHome, and Zigbee</td>
+<td>Separate Docker environment with direct USB device access</td>
 </tr>
 <tr>
-<td>Proxmox Backup Server</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.928 1.825c-1.09.553-1.09.64-.07 1.78 5.655 6.295 7.004 7.782 7.107 7.782.139.017 7.971-8.542 8.058-8.801.034-.07-.208-.312-.519-.536-.415-.312-.864-.433-1.712-.467-1.59-.104-2.144.242-4.115 2.455-.899 1.003-1.66 1.833-1.66 1.833-.017 0-.76-.813-1.642-1.798S8.473 2.1 8.127 1.91c-.796-.45-2.421-.484-3.2-.086zM1.297 4.367C.45 4.695 0 5.007 0 5.248c0 .121 1.331 1.678 2.94 3.459 1.625 1.78 2.939 3.268 2.939 3.302s-1.331 1.522-2.94 3.303C1.314 17.11.017 18.683.035 18.822c.086.467 1.504 1.055 2.541 1.055 1.678-.018 2.058-.312 5.603-4.202 1.78-1.954 3.233-3.614 3.233-3.666 0-.069-1.435-1.694-3.199-3.63-2.3-2.508-3.423-3.632-3.96-3.874-.812-.398-2.126-.467-2.956-.138m18.467.12c-.502.26-1.764 1.505-3.943 3.891-1.763 1.937-3.199 3.562-3.199 3.631 0 .07 1.453 1.712 3.234 3.666 3.544 3.89 3.925 4.184 5.602 4.202 1.038 0 2.455-.588 2.542-1.055.017-.156-1.28-1.712-2.905-3.493-1.608-1.78-2.94-3.285-2.94-3.32s1.332-1.539 2.94-3.32C22.72 6.91 24.017 5.352 24 5.214c-.087-.45-1.366-.968-2.473-1.038-.795-.034-1.21.035-1.763.312zM7.954 16.973c-2.144 2.369-3.908 4.374-3.943 4.46-.034.07.208.312.52.537.414.311.864.432 1.711.467 1.574.103 2.161-.26 4.15-2.508.864-.968 1.608-1.78 1.625-1.78s.761.812 1.643 1.798c2.023 2.248 2.559 2.576 4.132 2.49.848-.035 1.297-.156 1.712-.467.311-.225.553-.467.519-.536-.087-.26-7.92-8.819-8.058-8.801-.069 0-1.867 1.954-4.011 4.34"/></svg></span> Proxmox Backup Server</strong></td>
 <td>LXC</td>
-<td>Image-level backups of Proxmox guests</td>
+<td>Image-level guest backups</td>
+<td>Low overhead; the backup datastore remains outside the container rootfs</td>
 </tr>
 </tbody>
 </table>
-<h3 id="why-two-vms">Why two VMs?<a class="headerlink" href="#why-two-vms" title="Permanent link">&para;</a></h3>
-<p>Logos is a full VM because it is the main general-purpose Linux system. It runs Docker, network forwarding, automation, backup tools, and several supporting services. A separate kernel and normal VM networking make this easier to operate than Docker inside an LXC and keep Logos independent from Proxmox userspace.</p>
-<p>Kali is also a VM because security tooling may require its own kernel features, USB devices, unusual network modes, or software that should not share a container with normal infrastructure. It remains powered off when it is not needed.</p>
 <h3 id="why-dedicated-lxc-containers">Why dedicated LXC containers?<a class="headerlink" href="#why-dedicated-lxc-containers" title="Permanent link">&para;</a></h3>
 <p>Small Linux services do not need a complete virtual machine. LXC keeps their overhead low while still giving them separate filesystems, package databases, service managers, network interfaces, and backup units.</p>
 <p>The split follows operational boundaries rather than a rule of one application per container:</p>
@@ -3725,75 +3691,98 @@
 </ul>
 <p>This layout also limits maintenance scope. Updating Caddy means working on the Caddy LXC, not restarting a shared Docker host that carries unrelated services.</p>
 <h2 id="storage-model"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v164.1C18.1 247.4 40.2 240 64 240h320c23.8 0 45.9 7.4 64 20.1V96c0-35.3-28.7-64-64-64zm384 320c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64zm-224 32a32 32 0 1 1 64 0 32 32 0 1 1-64 0m128-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64"/></svg></span> Storage model<a class="headerlink" href="#storage-model" title="Permanent link">&para;</a></h2>
-<p>Zion uses two storage tiers with different jobs.</p>
+<p>Zion uses two storage tiers:</p>
 <table>
 <thead>
 <tr>
 <th>Storage</th>
-<th>Proxmox use</th>
-<th>What belongs there</th>
+<th>Proxmox storage</th>
+<th>Contents</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Kingston KC3000 NVMe</td>
-<td><code>local</code> and <code>local-lvm</code></td>
-<td>Proxmox system, ISO images, LXC templates, guest root filesystems, virtual disks, container data, and other active operational state</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6z"/></svg></span> Kingston KC3000 NVMe</strong></td>
+<td><code>local</code>, <code>local-lvm</code></td>
+<td>Proxmox system, ISO images, LXC templates, guest rootfs, virtual disks, container data, and other active state</td>
 </tr>
 <tr>
-<td>Seagate IronWolf HDD</td>
-<td><code>wolfie1-4tb</code> and the PBS datastore exposed as <code>PBS-IronWolf</code></td>
-<td>Proxmox backups and capacity-oriented data such as the media library</td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96v164.1C18.1 247.4 40.2 240 64 240h320c23.8 0 45.9 7.4 64 20.1V96c0-35.3-28.7-64-64-64zm384 320c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v64c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64zm-224 32a32 32 0 1 1 64 0 32 32 0 1 1-64 0m128-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64"/></svg></span> Seagate IronWolf HDD</strong></td>
+<td><code>wolfie1-4tb</code>, <code>PBS-IronWolf</code></td>
+<td>PBS datastore, VM/LXC backups, media library, and other capacity-oriented data</td>
 </tr>
 </tbody>
 </table>
-<h3 id="nvme-active-workloads">NVMe: active workloads<a class="headerlink" href="#nvme-active-workloads" title="Permanent link">&para;</a></h3>
-<p>VMs and LXC containers run from the NVMe disk. This includes their system disks and normal application state. The point is simple: boot, package operations, databases, Docker metadata, and everyday guest I/O should not wait for a mechanical disk.</p>
-<p><code>local-lvm</code> provides the thin-provisioned virtual disks and LXC root filesystems. <code>local</code> keeps Proxmox-side files such as ISO images and container templates. Both are part of the NVMe-backed system tier.</p>
-<h3 id="ironwolf-capacity-and-backups">IronWolf: capacity and backups<a class="headerlink" href="#ironwolf-capacity-and-backups" title="Permanent link">&para;</a></h3>
-<p>The IronWolf disk is not used as the normal system disk for guests. It holds data where capacity matters more than latency:</p>
+<h3 id="nvme-active-workloads"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 15H6l7-14v8h5l-7 14z"/></svg></span> NVMe — active workloads<a class="headerlink" href="#nvme-active-workloads" title="Permanent link">&para;</a></h3>
 <ul>
-<li>the Proxmox Backup Server datastore;</li>
-<li>image-level backups of VMs and LXC containers;</li>
-<li>large persistent datasets such as the media library;</li>
-<li>selected local backup repositories.</li>
+<li>VMs and LXC containers run from NVMe.</li>
+<li><code>local-lvm</code> holds their virtual disks and root filesystems.</li>
+<li><code>local</code> holds Proxmox-side files such as ISO images and LXC templates.</li>
+<li>Databases, Docker metadata, package operations, and normal guest I/O stay off the mechanical disk.</li>
 </ul>
-<p>PBS runs inside an LXC, but its datastore is not stored inside that container's root filesystem. Zion bind-mounts a directory from the IronWolf filesystem into PBS. Rebuilding the PBS container therefore does not require recreating the backup data.</p>
-<p>Proxmox also connects to that datastore as <code>PBS-IronWolf</code>, so guest backups are managed through the normal Proxmox backup workflow.</p>
-<h3 id="what-this-model-protects-against">What this model protects against<a class="headerlink" href="#what-this-model-protects-against" title="Permanent link">&para;</a></h3>
-<p>Separating active guest disks from the backup disk makes recovery from an NVMe failure practical: reinstall Proxmox, reconnect the surviving IronWolf filesystem, recreate or restore PBS, and then restore the guests.</p>
-<p>It does <strong>not</strong> protect against loss of the complete server, theft, fire, filesystem damage on the IronWolf disk, or operator error affecting both tiers. Configuration collection and Kopia provide additional local and off-site layers for those cases. The complete recovery model is described in <a href="backup-and-recovery.md">Backup and recovery</a>.</p>
+<h3 id="ironwolf-backups-and-large-data"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32h448c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm32 112h448v240c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64zm152 64c-13.3 0-24 10.7-24 24s10.7 24 24 24h144c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></svg></span> IronWolf — backups and large data<a class="headerlink" href="#ironwolf-backups-and-large-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>PBS stores image-level backups on the IronWolf filesystem.</li>
+<li>Large data such as the media library uses HDD capacity instead of NVMe space.</li>
+<li>The PBS datastore is bind-mounted into the PBS LXC; it is not part of the container rootfs.</li>
+<li>Proxmox accesses the datastore as <code>PBS-IronWolf</code> through the normal backup workflow.</li>
+</ul>
+<p>If the NVMe fails, the intended path is: reinstall Proxmox, reconnect the IronWolf filesystem, recreate PBS, attach the existing datastore, and restore the guests.</p>
+<p>This does not protect against loss of the complete Zion machine or damage to the IronWolf disk. Configuration collection and Kopia provide separate local and off-site layers. See <a href="backup-and-recovery.md">Backup and recovery</a>.</p>
 <h2 id="networking"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M248 88h80v48h-80zm-8-56c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48h16v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96v32h-16c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48v-64c0-26.5-21.5-48-48-48h-16v-32h192v32h-16c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48v-64c0-26.5-21.5-48-48-48h-16v-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H320v-32h16c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm208 344h8v48h-80v-48zm-256 0h8v48h-80v-48z"/></svg></span> Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h2>
-<p>Zion uses a standard Proxmox bridge model:</p>
-<ul>
-<li>the physical NIC is a port of <code>vmbr0</code> and has no management address of its own;</li>
-<li>the Zion management address is assigned to <code>vmbr0</code>;</li>
-<li>VMs and LXC containers attach virtual interfaces to the bridge;</li>
-<li>each guest receives its own MAC address and network configuration.</li>
-</ul>
-<p>This keeps the host and guests on the normal LAN without routing traffic through the Proxmox userspace. From the network's point of view, every guest behaves like a separate machine connected to the same switch.</p>
-<h3 id="why-guests-have-separate-interfaces">Why guests have separate interfaces<a class="headerlink" href="#why-guests-have-separate-interfaces" title="Permanent link">&para;</a></h3>
-<p>Proxmox creates a dedicated virtual interface for each guest instead of sharing the host address. This gives each system:</p>
-<ul>
-<li>its own firewall scope;</li>
-<li>independent addressing and DNS;</li>
-<li>separate traffic counters and troubleshooting;</li>
-<li>the option to use a different VLAN or bridge;</li>
-<li>network changes that do not require rebuilding the whole host.</li>
-</ul>
-<p>Critical services such as DNS, internal HTTPS, and K3s load balancing therefore remain separate network endpoints even though they run on the same physical server.</p>
-<h3 id="logos-and-the-k3s-wake-on-lan-path">Logos and the K3s Wake-on-LAN path<a class="headerlink" href="#logos-and-the-k3s-wake-on-lan-path" title="Permanent link">&para;</a></h3>
-<p>Logos has two virtual network interfaces:</p>
-<ol>
-<li>the primary interface carries normal LAN traffic, Docker services, management, backups, and the WireGuard path;</li>
-<li>the secondary interface is reserved for the K3s network used by Semaphore to send Wake-on-LAN packets to the three physical cluster nodes.</li>
-</ol>
-<p>The second interface carries the tagged cluster VLAN through a dedicated VLAN interface inside Logos. It exists because Wake-on-LAN uses a layer-2 broadcast. Routing a UDP packet toward another subnet was not enough: the router forwarded the IP packet, but did not recreate the Ethernet broadcast required by the powered-off machines.</p>
-<p>Giving Semaphore a direct presence in the cluster VLAN solved that problem without moving the rest of Logos into the cluster network. Normal server traffic stays on the primary interface; only the cluster lifecycle path uses the secondary one.</p>
-<h3 id="link-recovery-on-zion">Link recovery on Zion<a class="headerlink" href="#link-recovery-on-zion" title="Permanent link">&para;</a></h3>
-<p>The physical NIC uses <code>allow-hotplug</code> so it returns after the switch or upstream link disappears and comes back. Energy Efficient Ethernet is disabled on this interface because it previously left the link unusable after an interruption even though the interface appeared to return.</p>
-<p>The settings are applied in <code>/etc/network/interfaces</code>, including the tested speed, duplex, and autonegotiation parameters. They are not repaired by an external cron job after every failure.</p>
-<p>Network changes on Zion are treated as maintenance work. Restarting the host networking service remotely can disconnect Proxmox and every guest attached to <code>vmbr0</code>. Changes are validated first and normally activated during a controlled reboot with console access available.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physical NIC</td>
+<td>Port of <code>vmbr0</code>; it has no management address</td>
+</tr>
+<tr>
+<td><code>vmbr0</code></td>
+<td>Main Linux bridge and Zion management interface</td>
+</tr>
+<tr>
+<td>Guest virtual NICs</td>
+<td>Connect VMs and LXC containers to the LAN through <code>vmbr0</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each guest gets its own MAC address, IP configuration, firewall scope, and traffic counters. A guest can later be moved to another VLAN or bridge without redesigning the entire host network.</p>
+<h3 id="logos-interfaces"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.61.455a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41M12.92.8C8.923.777 5.137 2.941 3.148 6.451a5 5 0 0 1 .26-.007 4.9 4.9 0 0 1 2.585.737A8.32 8.32 0 0 1 12.688 3.6 4.94 4.94 0 0 1 13.723.834 11 11 0 0 0 12.92.8m9.226 4.994a4.9 4.9 0 0 1-1.918 2.246 8.36 8.36 0 0 1-.273 8.303 4.9 4.9 0 0 1 1.632 2.54 11.16 11.16 0 0 0 .559-13.089M3.41 7.932A3.41 3.41 0 0 0 0 11.342a3.41 3.41 0 0 0 3.41 3.409 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zm2.027 7.866a4.9 4.9 0 0 1-2.915.358 11.1 11.1 0 0 0 7.991 6.698 11.2 11.2 0 0 0 2.422.249 4.88 4.88 0 0 1-.999-2.85 9 9 0 0 1-.836-.136 8.3 8.3 0 0 1-5.663-4.32zm11.405.928a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41"/></svg></span> Logos interfaces<a class="headerlink" href="#logos-interfaces" title="Permanent link">&para;</a></h3>
+<p>Logos has two virtual NICs with separate jobs:</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Traffic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary NIC</td>
+<td>LAN, Docker services, management, backups, and WireGuard</td>
+</tr>
+<tr>
+<td>Secondary NIC</td>
+<td>K3s VLAN used by Semaphore for Wake-on-LAN</td>
+</tr>
+</tbody>
+</table>
+<p>The secondary NIC carries the tagged cluster VLAN through a dedicated VLAN interface inside Logos.</p>
+<p>This was required because Wake-on-LAN is a layer-2 broadcast. Sending a directed broadcast through the normal router did not recreate the Ethernet broadcast inside the K3s VLAN. With a direct VLAN interface, Semaphore sends the magic packet from the same broadcast domain as the powered-off nodes.</p>
+<p>Normal Logos traffic stays on the primary NIC. The second interface exists only for the cluster lifecycle path.</p>
+<h3 id="link-recovery"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 15h2v3h2v-3h2v3h2v-3h2v3h2V9h-4V6H9v3H5v9h2zM4.38 3h15.25A2.37 2.37 0 0 1 22 5.38v14.25A2.37 2.37 0 0 1 19.63 22H4.38A2.37 2.37 0 0 1 2 19.63V5.38C2 4.06 3.06 3 4.38 3"/></svg></span> Link recovery<a class="headerlink" href="#link-recovery" title="Permanent link">&para;</a></h3>
+<p>Zion's physical NIC uses <code>allow-hotplug</code>, so it returns after a switch or upstream link interruption. Energy Efficient Ethernet is disabled because it previously left the link unusable after connectivity returned.</p>
+<p>The tested link settings are applied through <code>/etc/network/interfaces</code>, not by a repair cron job.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Restarting networking remotely can disconnect Zion and every guest attached to <code>vmbr0</code>. Network changes are applied during a controlled maintenance window with console access available.</p>
+</div>
 <h2 id="power-management"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M338.8-9.9c11.9 8.6 16.3 24.2 10.9 37.8L271.3 224H416c13.5 0 25.5 8.4 30.1 21.1s.7 26.9-9.6 35.5l-288 240c-11.3 9.4-27.4 9.9-39.3 1.3s-16.3-24.2-10.9-37.8L176.7 288H32c-13.5 0-25.5-8.4-30.1-21.1s-.7-26.9 9.6-35.5l288-240c11.3-9.4 27.4-9.9 39.3-1.3"/></svg></span> Power management<a class="headerlink" href="#power-management" title="Permanent link">&para;</a></h2>
 <p>Zion is expected to remain online, so reducing idle consumption matters more than implementing aggressive suspend behaviour.</p>
 <p>The current setup uses deeper CPU package states, PCIe power management, disabled unused onboard devices, HDD spindown, and PowerTOP tunables applied at boot. Integrated graphics remains enabled for emergency console access and hardware-accelerated media workloads.</p>
@@ -3844,7 +3833,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 08:37:41 UTC"><span class="timeago" datetime="2026-08-22T08:37:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 08:37:41 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 09:25:54 UTC"><span class="timeago" datetime="2026-08-22T09:25:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 09:25:54 UTC">2026-08-22</span>
   </span>
 
     
