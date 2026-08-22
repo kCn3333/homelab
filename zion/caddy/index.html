@@ -25,7 +25,7 @@
     
     
       
-        <title>Internal Caddy - > Homelab Documentation</title>
+        <title>Caddy - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#internal-caddy" class="md-skip">
+        <a href="#caddy" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Internal Caddy
+              Caddy
             
           </span>
         </div>
@@ -809,7 +809,7 @@
   <span class="md-ellipsis">
     
   
-    Internal Caddy
+    Caddy
   
 
     
@@ -827,7 +827,7 @@
   <span class="md-ellipsis">
     
   
-    Internal Caddy
+    Caddy
   
 
     
@@ -853,10 +853,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#request-flow" class="md-nav__link">
+  <a href="#lxc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Request flow
+        LXC
       
     </span>
   </a>
@@ -864,10 +864,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration-layout" class="md-nav__link">
+  <a href="#request-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration layout
+        Request path
       
     </span>
   </a>
@@ -875,10 +875,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-an-internal-service" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding an internal service
+        Configuration
       
     </span>
   </a>
@@ -886,21 +886,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#https-backends" class="md-nav__link">
+  <a href="#add-a-service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        HTTPS backends
+        Add a service
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add a service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#https-backend-with-a-self-signed-certificate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS backend with a self-signed certificate
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#configuration-ownership" class="md-nav__link">
+  <a href="#migration-from-nginx-proxy-manager" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration ownership
+        Migration from Nginx Proxy Manager
       
     </span>
   </a>
@@ -919,10 +936,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting-order" class="md-nav__link">
+  <a href="#quick-diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting order
+        Quick diagnosis
       
     </span>
   </a>
@@ -3344,10 +3361,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#request-flow" class="md-nav__link">
+  <a href="#lxc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Request flow
+        LXC
       
     </span>
   </a>
@@ -3355,10 +3372,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration-layout" class="md-nav__link">
+  <a href="#request-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration layout
+        Request path
       
     </span>
   </a>
@@ -3366,10 +3383,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-an-internal-service" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding an internal service
+        Configuration
       
     </span>
   </a>
@@ -3377,21 +3394,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#https-backends" class="md-nav__link">
+  <a href="#add-a-service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        HTTPS backends
+        Add a service
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add a service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#https-backend-with-a-self-signed-certificate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS backend with a self-signed certificate
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#configuration-ownership" class="md-nav__link">
+  <a href="#migration-from-nginx-proxy-manager" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration ownership
+        Migration from Nginx Proxy Manager
       
     </span>
   </a>
@@ -3410,10 +3444,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting-order" class="md-nav__link">
+  <a href="#quick-diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting order
+        Quick diagnosis
       
     </span>
   </a>
@@ -3448,114 +3482,160 @@
   
 
 
-<h1 id="internal-caddy">Internal Caddy<a class="headerlink" href="#internal-caddy" title="Permanent link">&para;</a></h1>
-<p>Caddy provides internal HTTPS termination and reverse proxying for services hosted across Zion and Logos. It runs natively as a systemd service in a dedicated LXC so that internal service access does not depend on the Docker engine or the availability of a general-purpose application host.</p>
-<h2 id="request-flow">Request flow<a class="headerlink" href="#request-flow" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    C["LAN client"] --&gt; D["AdGuard Home"]
-    D --&gt; R["Caddy LXC"]
-    R --&gt; S["Internal service"]</code></pre>
-<p>AdGuard Home resolves the internal service name to Caddy. Caddy obtains or presents the appropriate certificate and proxies the request to the selected backend.</p>
-<h2 id="configuration-layout">Configuration layout<a class="headerlink" href="#configuration-layout" title="Permanent link">&para;</a></h2>
-<p>The configuration is split into one small site file per backend:</p>
+<h1 id="caddy"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.094.47c-.842 0-1.696.092-2.552.288a11.4 11.4 0 0 0-4.87 2.423 10.6 10.6 0 0 0-2.36 2.826A10.1 10.1 0 0 0 .305 8.582c-.398 1.62-.4 3.336-.043 5.048.085.405.183.809.31 1.212a11.9 11.9 0 0 0 1.662 3.729 3 3 0 0 0-.086.427 3.323 3.323 0 0 0 2.848 3.71 3.28 3.28 0 0 0 1.947-.346c1.045.51 2.17.864 3.339 1.04a11.7 11.7 0 0 0 4.285-.155 11.57 11.57 0 0 0 4.936-2.485 10.6 10.6 0 0 0 2.352-2.894 11.2 11.2 0 0 0 1.356-4.424 11.2 11.2 0 0 0-.498-4.335q.263-.116.486-.293h.001c.402-.322.693-.794.777-1.342a2.146 2.146 0 0 0-1.79-2.434 2.1 2.1 0 0 0-1.205.171q-.059-.064-.113-.13a11.7 11.7 0 0 0-3.476-2.93 13 13 0 0 0-1.76-.81 13.6 13.6 0 0 0-2.06-.613 12 12 0 0 0-2.48-.258Zm.714.328a10 10 0 0 1 1.028.042 9.9 9.9 0 0 1 2.743.639c.984.39 1.89.958 2.707 1.632a10.8 10.8 0 0 1 2.091 2.328q.038.06.07.12a2.12 2.12 0 0 0-.435 2.646c-.158.114-.97.692-1.634 1.183-.414.308-.733.557-.733.557l.581.68s.296-.276.665-.638c.572-.562 1.229-1.233 1.395-1.403a2.12 2.12 0 0 0 1.907.677 11.2 11.2 0 0 1-.013 4.046 11.4 11.4 0 0 1-1.475 3.897 12.3 12.3 0 0 1-2.079 2.587c-1.19 1.125-2.633 2.022-4.306 2.531a10.8 10.8 0 0 1-3.973.484 11 11 0 0 1-3.057-.652 3.3 3.3 0 0 0 1.417-2.294 3.28 3.28 0 0 0-.294-1.842c.18-.162.403-.363.656-.6 1.015-.955 2.353-2.303 2.353-2.303l-.47-.599s-1.63.972-2.801 1.728c-.307.198-.573.378-.777.517a3.3 3.3 0 0 0-1.516-.611 3.33 3.33 0 0 0-3.487 2.017 10 10 0 0 1-.695-1.078A11 11 0 0 1 .728 14.8a10 10 0 0 1-.2-1.212c-.164-1.653.103-3.258.629-4.754a13 13 0 0 1 1.087-2.288c.57-.968 1.248-1.872 2.069-2.656A11 11 0 0 1 11.808.797Zm-.147 3.257a3.84 3.84 0 0 0-3.82 3.82v2.36h-.94c-.751 0-1.377.625-1.377 1.377v3.8h1.46v-3.718h9.354v6.264H10.02v1.46h6.4c.751 0 1.377-.625 1.377-1.377v-6.43a1.39 1.39 0 0 0-1.377-1.377h-.94v-2.36a3.84 3.84 0 0 0-3.82-3.819zm0 1.46a2.37 2.37 0 0 1 2.36 2.36v2.36H9.3v-2.36a2.37 2.37 0 0 1 2.36-2.36zm10.141.392a1.253 1.253 0 0 1 1.296 1.434 1.24 1.24 0 0 1-.453.78c-.266.213-.61.318-.968.264a1.253 1.253 0 0 1-1.045-1.42 1.255 1.255 0 0 1 1.17-1.058M5.384 17.425a2.02 2.02 0 0 1 1.917 1.298c.116.3.159.628.114.967a2.015 2.015 0 0 1-2.249 1.728 2.016 2.016 0 0 1-1.727-2.25 2.02 2.02 0 0 1 1.945-1.743"/></svg></span> Caddy<a class="headerlink" href="#caddy" title="Permanent link">&para;</a></h1>
+<p>Caddy is the HTTPS entry point for services available only inside the LAN. It runs natively in a dedicated LXC, independently of Docker and Logos.</p>
+<p>It replaced Nginx Proxy Manager, which previously ran in Docker on Oracle Legacy. The old deployment worked, but every internal route depended on the general-purpose Docker host. Caddy keeps the same job with fewer moving parts and configuration stored as plain text.</p>
+<h2 id="lxc"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9zm0 8h1v-2H9zm0 8h1v-2H9zM5 3v2h2V3zm0 8v2h2v-2zm0 8v2h2v-2z"/></svg></span> LXC<a class="headerlink" href="#lxc" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VMID</td>
+<td><code>102</code></td>
+</tr>
+<tr>
+<td>System</td>
+<td>Debian 13, unprivileged LXC</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>1 vCPU</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>1 GB</td>
+</tr>
+<tr>
+<td>Root disk</td>
+<td>10 GB</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>Native <code>caddy.service</code></td>
+</tr>
+</tbody>
+</table>
+<p>The container was created with the <a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=caddy">Caddy Proxmox Community Script</a>. The script installed the operating system and Caddy; the proxy configuration was then added manually.</p>
+<p>The previous Nginx Proxy Manager definition remains available as a <a href="https://github.com/kCn3333/docker-compose/blob/main/nginx-proxy-manager/docker-compose.yaml">migration reference</a>.</p>
+<h2 id="request-path"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 5H8l4-4 4 4h-3v4.43c-.75.46-1.42 1.03-2 1.69zm11 6-4-4v3a6.747 6.747 0 0 0-7 6.17A3.006 3.006 0 0 0 9.17 20 3.006 3.006 0 0 0 13 21.83 3.01 3.01 0 0 0 14.83 18c-.3-.86-.98-1.53-1.83-1.83.47-4 4.47-4.2 4.95-4.2v3zm-11.37.59A7.63 7.63 0 0 0 6 10V7l-4 4 4 4v-3c1.34.03 2.63.5 3.64 1.4.25-.64.58-1.25.99-1.81"/></svg></span> Request path<a class="headerlink" href="#request-path" title="Permanent link">&para;</a></h2>
+<ol>
+<li>AdGuard Home resolves an internal service name to the Caddy LXC.</li>
+<li>The client opens HTTPS to Caddy.</li>
+<li>Caddy presents the certificate and forwards the request to the configured backend.</li>
+<li>The backend handles authentication and application authorization.</li>
+</ol>
+<p>Caddy is not used for public ingress. Public services use the separate Relay path.</p>
+<h2 id="configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3zm12 7h6v4h-6zm0 7h6v4h-6zm-2-4H7v5h6v2H5V9h2v2h6z"/></svg></span> Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/etc/caddy/
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── Caddyfile
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── .env
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>└── sites/
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    ├── service-a.caddy
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    ├── service-b.caddy
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    └── ...
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    └── &lt;service&gt;.caddy
 </span></code></pre></div>
-<p>The main file contains global options and imports the site directory:</p>
+<p><code>Caddyfile</code> contains global options and imports one file per backend:</p>
 <div class="language-caddy highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span>acme_dns<span class="w"> </span>cloudflare<span class="w"> </span><span class="nv">{env.CLOUDFLARE_API_TOKEN}</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">}</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">import</span><span class="w"> </span>/etc/caddy/sites/*.caddy
 </span></code></pre></div>
-<p>The DNS provider credential is stored in an environment file with restricted permissions and loaded by the systemd unit. It is never committed to the repository.</p>
-<h2 id="adding-an-internal-service">Adding an internal service<a class="headerlink" href="#adding-an-internal-service" title="Permanent link">&para;</a></h2>
+<p>The Cloudflare token is stored in <code>/etc/caddy/.env</code> with restricted permissions and loaded through a systemd override:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">[Service]</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">EnvironmentFile</span><span class="o">=</span><span class="s">/etc/caddy/.env</span>
+</span></code></pre></div>
+<p>The token is not stored in Git.</p>
+<h2 id="add-a-service"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 20a1 1 0 0 0-1-1h-1v-2h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4v2h-1a1 1 0 0 0-1 1H2v2h7a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1h7v-2zm-8-5V5h10v10zm8-4h-2v2h-2v-2H9V9h2V7h2v2h2z"/></svg></span> Add a service<a class="headerlink" href="#add-a-service" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Create a dedicated file under <code>sites/</code>.</li>
-<li>Add or update the corresponding DNS rewrite in AdGuard Home.</li>
+<li>Create <code>/etc/caddy/sites/&lt;service&gt;.caddy</code>.</li>
+<li>Add or update the matching DNS rewrite in AdGuard Home.</li>
 <li>Format and validate the complete configuration.</li>
-<li>Reload Caddy gracefully.</li>
-<li>Test the certificate, response headers, and backend reachability.</li>
+<li>Reload Caddy without restarting the process.</li>
+<li>Test DNS, TLS and backend access from a LAN client.</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>caddy<span class="w"> </span>fmt<span class="w"> </span>--overwrite<span class="w"> </span>/etc/caddy/Caddyfile
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>caddy<span class="w"> </span>reload<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>fmt<span class="w"> </span>--overwrite<span class="w"> </span>/etc/caddy/Caddyfile
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>caddy
 </span></code></pre></div>
-<p>A basic backend definition remains intentionally small:</p>
-<div class="language-caddy highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>service.internal.example<span class="w"> </span><span class="p">{</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">reverse_proxy</span><span class="w"> </span>&lt;backend-address&gt;:&lt;backend-port&gt;
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
-</span></code></pre></div>
-<p>Caddy handles WebSocket upgrades automatically through <code>reverse_proxy</code>. Forwarded headers are customized only when the backend application requires explicit proxy awareness.</p>
-<h2 id="https-backends">HTTPS backends<a class="headerlink" href="#https-backends" title="Permanent link">&para;</a></h2>
-<p>Some administrative applications expose only HTTPS with a self-signed certificate. Disabling upstream certificate verification is treated as a compatibility exception:</p>
+<p>A normal HTTP backend needs only:</p>
 <div class="language-caddy highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>service.internal.example<span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">reverse_proxy</span><span class="w"> </span>https://&lt;backend-address&gt;:&lt;backend-port&gt;<span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span>transport<span class="w"> </span>http<span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">            </span>tls_insecure_skip_verify
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">reverse_proxy</span><span class="w"> </span>&lt;backend-address&gt;:&lt;backend-port&gt;
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Where practical, a trusted internal CA or correctly validated backend certificate is preferred.</p>
-<h2 id="configuration-ownership">Configuration ownership<a class="headerlink" href="#configuration-ownership" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Caddy owns HTTPS and proxy routing.</li>
-<li>AdGuard Home owns internal name resolution.</li>
-<li>Backend applications own authentication and application authorization.</li>
-<li>Public access is configured separately from the internal reverse proxy.</li>
-</ul>
-<p>A proxy configuration is not used to conceal an application that lacks suitable authentication.</p>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>caddy
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>caddy
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>caddy<span class="w"> </span>--no-pager<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span>
+<p>Caddy handles WebSocket upgrades automatically. Extra forwarded headers are added only when a backend requires them.</p>
+<h3 id="https-backend-with-a-self-signed-certificate">HTTPS backend with a self-signed certificate<a class="headerlink" href="#https-backend-with-a-self-signed-certificate" title="Permanent link">&para;</a></h3>
+<div class="language-caddy highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>service.internal.example<span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">reverse_proxy</span><span class="w"> </span>https://&lt;backend-address&gt;:&lt;backend-port&gt;<span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span>transport<span class="w"> </span>http<span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">            </span>tls_insecure_skip_verify
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>Validation after a change also confirms that:</p>
+<p><code>tls_insecure_skip_verify</code> is limited to known internal backends that cannot present a trusted certificate.</p>
+<h2 id="migration-from-nginx-proxy-manager"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"/></svg></span> Migration from Nginx Proxy Manager<a class="headerlink" href="#migration-from-nginx-proxy-manager" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Inventory every NPM proxy host, backend, custom header and certificate requirement.</li>
+<li>Create the matching Caddy site files without changing DNS.</li>
+<li>Install the Cloudflare DNS module and load its token through systemd.</li>
+<li>Validate the full Caddy configuration.</li>
+<li>Test each route against the Caddy LXC using a temporary local DNS override.</li>
+<li>Change the AdGuard rewrite from Oracle Legacy to the Caddy LXC.</li>
+<li>Verify certificates, WebSockets and application logins.</li>
+<li>Stop NPM only after all internal routes work through Caddy.</li>
+</ol>
+<p>Moving the DNS target was the cutover. Backend applications did not need to change because their addresses and ports stayed the same.</p>
+<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>caddy
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>caddy
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>systemctl<span class="w"> </span>--failed<span class="w"> </span>--no-legend<span class="w"> </span>--plain<span class="w"> </span>--no-pager
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>caddy<span class="w"> </span>--no-pager<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span>
+</span></code></pre></div>
+<p>Also verify:</p>
 <ul>
-<li>the internal DNS answer points to Caddy;</li>
+<li>AdGuard returns the Caddy address;</li>
 <li>the expected certificate is presented;</li>
-<li>the backend is reachable from the Caddy LXC;</li>
-<li>no unexpected failed systemd units remain.</li>
+<li>Caddy can reach the backend;</li>
+<li>the application accepts proxy traffic;</li>
+<li>an ordinary reload does not interrupt existing routes.</li>
 </ul>
-<h2 id="troubleshooting-order">Troubleshooting order<a class="headerlink" href="#troubleshooting-order" title="Permanent link">&para;</a></h2>
+<h2 id="quick-diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Quick diagnosis<a class="headerlink" href="#quick-diagnosis" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Symptom</th>
-<th>First checks</th>
+<th>Check first</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Name does not resolve</td>
-<td>AdGuard record or rewrite and client DNS cache</td>
+<td>AdGuard rewrite and client DNS cache</td>
 </tr>
 <tr>
-<td>Certificate is not issued</td>
-<td>DNS provider credential, Caddy modules, and ACME logs</td>
+<td>Certificate is missing</td>
+<td>Cloudflare module, token loading and ACME logs</td>
 </tr>
 <tr>
 <td>HTTP 502</td>
-<td>Backend address, listener, route, and firewall</td>
+<td>Backend address, listener and firewall</td>
 </tr>
 <tr>
-<td>Configuration reload fails</td>
-<td><code>caddy fmt</code>, <code>caddy validate</code>, and systemd logs</td>
+<td>Reload fails</td>
+<td><code>caddy fmt</code>, <code>caddy validate</code> and journal</td>
 </tr>
 <tr>
-<td>Backend rejects the request</td>
-<td>Proxy trust and forwarded-header configuration</td>
+<td>Application rejects requests</td>
+<td>Trusted proxy and forwarded-header settings</td>
 </tr>
 </tbody>
 </table>
-<p>The current service state is checked before restarting Caddy. Reload is preferred for ordinary configuration changes because it avoids unnecessary interruption.</p>
+<p>Use reload for normal configuration changes. Restart the service only when a package, module or systemd setting has changed.</p>
 
 
 
@@ -3578,7 +3658,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:17:34 UTC"><span class="timeago" datetime="2026-08-21T12:17:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:17:34 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 11:58:07 UTC"><span class="timeago" datetime="2026-08-22T11:58:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 11:58:07 UTC">2026-08-22</span>
   </span>
 
     
