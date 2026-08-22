@@ -713,6 +713,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#why-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Proxmox?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#virtualization-layout" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3406,6 +3417,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#why-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Proxmox?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#virtualization-layout" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3574,41 +3596,17 @@
 
 <h1 id="zion-platform">Zion platform<a class="headerlink" href="#zion-platform" title="Permanent link">&para;</a></h1>
 <p>Zion replaced Oracle Legacy, the original bare-metal Debian server. Oracle worked well for years, but almost every service shared the same operating system, Docker daemon, network stack, storage layout, and maintenance window. A broken package update, firewall mistake, or Docker networking problem could affect the whole homelab at once.</p>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.928 1.825c-1.09.553-1.09.64-.07 1.78 5.655 6.295 7.004 7.782 7.107 7.782.139.017 7.971-8.542 8.058-8.801.034-.07-.208-.312-.519-.536-.415-.312-.864-.433-1.712-.467-1.59-.104-2.144.242-4.115 2.455-.899 1.003-1.66 1.833-1.66 1.833-.017 0-.76-.813-1.642-1.798S8.473 2.1 8.127 1.91c-.796-.45-2.421-.484-3.2-.086zM1.297 4.367C.45 4.695 0 5.007 0 5.248c0 .121 1.331 1.678 2.94 3.459 1.625 1.78 2.939 3.268 2.939 3.302s-1.331 1.522-2.94 3.303C1.314 17.11.017 18.683.035 18.822c.086.467 1.504 1.055 2.541 1.055 1.678-.018 2.058-.312 5.603-4.202 1.78-1.954 3.233-3.614 3.233-3.666 0-.069-1.435-1.694-3.199-3.63-2.3-2.508-3.423-3.632-3.96-3.874-.812-.398-2.126-.467-2.956-.138m18.467.12c-.502.26-1.764 1.505-3.943 3.891-1.763 1.937-3.199 3.562-3.199 3.631 0 .07 1.453 1.712 3.234 3.666 3.544 3.89 3.925 4.184 5.602 4.202 1.038 0 2.455-.588 2.542-1.055.017-.156-1.28-1.712-2.905-3.493-1.608-1.78-2.94-3.285-2.94-3.32s1.332-1.539 2.94-3.32C22.72 6.91 24.017 5.352 24 5.214c-.087-.45-1.366-.968-2.473-1.038-.795-.034-1.21.035-1.763.312zM7.954 16.973c-2.144 2.369-3.908 4.374-3.943 4.46-.034.07.208.312.52.537.414.311.864.432 1.711.467 1.574.103 2.161-.26 4.15-2.508.864-.968 1.608-1.78 1.625-1.78s.761.812 1.643 1.798c2.023 2.248 2.559 2.576 4.132 2.49.848-.035 1.297-.156 1.712-.467.311-.225.553-.467.519-.536-.087-.26-7.92-8.819-8.058-8.801-.069 0-1.867 1.954-4.011 4.34"/></svg></span> Why Proxmox?</p>
-<table>
-<thead>
-<tr>
-<th>Oracle Legacy limitation</th>
-<th>What changed on Zion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Most services shared one Debian installation</td>
-<td>Services have separate operating environments</td>
-</tr>
-<tr>
-<td>System maintenance affected the whole server</td>
-<td>Guests can be updated or restarted independently</td>
-</tr>
-<tr>
-<td>Docker, networking, and applications shared one failure domain</td>
-<td>DNS, proxies, media, automation, and Home Assistant are separated</td>
-</tr>
-<tr>
-<td>Recovery was mostly file- and configuration-based</td>
-<td>Complete VMs and LXC containers can be backed up and restored</td>
-</tr>
-<tr>
-<td>Experiments ran close to production services</td>
-<td>Kali and test workloads run in isolated VMs</td>
-</tr>
-<tr>
-<td>Resource use was difficult to control per service</td>
-<td>CPU, RAM, storage, startup order, and network interfaces are assigned per guest</td>
-</tr>
-</tbody>
-</table>
+<hr />
+<h2 id="why-proxmox"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.928 1.825c-1.09.553-1.09.64-.07 1.78 5.655 6.295 7.004 7.782 7.107 7.782.139.017 7.971-8.542 8.058-8.801.034-.07-.208-.312-.519-.536-.415-.312-.864-.433-1.712-.467-1.59-.104-2.144.242-4.115 2.455-.899 1.003-1.66 1.833-1.66 1.833-.017 0-.76-.813-1.642-1.798S8.473 2.1 8.127 1.91c-.796-.45-2.421-.484-3.2-.086zM1.297 4.367C.45 4.695 0 5.007 0 5.248c0 .121 1.331 1.678 2.94 3.459 1.625 1.78 2.939 3.268 2.939 3.302s-1.331 1.522-2.94 3.303C1.314 17.11.017 18.683.035 18.822c.086.467 1.504 1.055 2.541 1.055 1.678-.018 2.058-.312 5.603-4.202 1.78-1.954 3.233-3.614 3.233-3.666 0-.069-1.435-1.694-3.199-3.63-2.3-2.508-3.423-3.632-3.96-3.874-.812-.398-2.126-.467-2.956-.138m18.467.12c-.502.26-1.764 1.505-3.943 3.891-1.763 1.937-3.199 3.562-3.199 3.631 0 .07 1.453 1.712 3.234 3.666 3.544 3.89 3.925 4.184 5.602 4.202 1.038 0 2.455-.588 2.542-1.055.017-.156-1.28-1.712-2.905-3.493-1.608-1.78-2.94-3.285-2.94-3.32s1.332-1.539 2.94-3.32C22.72 6.91 24.017 5.352 24 5.214c-.087-.45-1.366-.968-2.473-1.038-.795-.034-1.21.035-1.763.312zM7.954 16.973c-2.144 2.369-3.908 4.374-3.943 4.46-.034.07.208.312.52.537.414.311.864.432 1.711.467 1.574.103 2.161-.26 4.15-2.508.864-.968 1.608-1.78 1.625-1.78s.761.812 1.643 1.798c2.023 2.248 2.559 2.576 4.132 2.49.848-.035 1.297-.156 1.712-.467.311-.225.553-.467.519-.536-.087-.26-7.92-8.819-8.058-8.801-.069 0-1.867 1.954-4.011 4.34"/></svg></span> Why Proxmox?<a class="headerlink" href="#why-proxmox" title="Permanent link">&para;</a></h2>
+<ul>
+<li>infrastructure services can be separated from applications;</li>
+<li>each guest has its own lifecycle, resource limits, network interface, and backup policy;</li>
+<li>risky tools such as Kali can stay powered off and isolated until needed;</li>
+<li>complete VMs and LXC containers can be backed up and restored;</li>
+<li>a failed service can be rebuilt without reinstalling the whole server;</li>
+<li>KVM and LXC can be used where each one makes sense;</li>
+<li>the platform provides a useful place to learn virtualization instead of running another large Docker host.</li>
+</ul>
 <p>This is still one physical server, so Proxmox does not make the homelab highly available. A Zion hardware failure affects every running guest. The improvement is separation, recovery, and easier maintenance—not physical redundancy.</p>
 <p>Hardware selection and the build history are documented separately under <strong>Infrastructure</strong>. This page covers the working platform.</p>
 <h2 id="virtualization-layout"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M232.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0l-218.6-101C5.4 145.8 0 137.3 0 128s5.4-17.9 13.9-21.8zM48.1 218.4l164.3 75.9c27.7 12.8 59.6 12.8 87.3 0L464 218.4l34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0l-218.6-101C5.4 273.8 0 265.3 0 256s5.4-17.9 13.9-21.8L48 218.4zM13.9 362.2 48 346.4l164.3 75.9c27.7 12.8 59.6 12.8 87.3 0l164.3-75.9 34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0l-218.5-101C5.4 401.8 0 393.3 0 384s5.4-17.9 13.9-21.8"/></svg></span> Virtualization layout<a class="headerlink" href="#virtualization-layout" title="Permanent link">&para;</a></h2>
@@ -3624,13 +3622,13 @@
 <tbody>
 <tr>
 <td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.61.455a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41M12.92.8C8.923.777 5.137 2.941 3.148 6.451a5 5 0 0 1 .26-.007 4.9 4.9 0 0 1 2.585.737A8.32 8.32 0 0 1 12.688 3.6 4.94 4.94 0 0 1 13.723.834 11 11 0 0 0 12.92.8m9.226 4.994a4.9 4.9 0 0 1-1.918 2.246 8.36 8.36 0 0 1-.273 8.303 4.9 4.9 0 0 1 1.632 2.54 11.16 11.16 0 0 0 .559-13.089M3.41 7.932A3.41 3.41 0 0 0 0 11.342a3.41 3.41 0 0 0 3.41 3.409 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zm2.027 7.866a4.9 4.9 0 0 1-2.915.358 11.1 11.1 0 0 0 7.991 6.698 11.2 11.2 0 0 0 2.422.249 4.88 4.88 0 0 1-.999-2.85 9 9 0 0 1-.836-.136 8.3 8.3 0 0 1-5.663-4.32zm11.405.928a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41"/></svg></span> Logos</strong></td>
-<td>KVM VM</td>
+<td>VM</td>
 <td>Docker, Semaphore, Kopia, Garage, WireGuard, and administration tools</td>
 <td>Needs a normal Linux kernel and works as the main general-purpose server</td>
 </tr>
 <tr>
 <td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.778 5.943s-1.97-.13-5.327.92c-3.42 1.07-5.36 2.587-5.36 2.587s5.098-2.847 10.852-3.008zm7.351 3.095.257-.017s-1.468-1.78-4.278-2.648c1.58.642 2.954 1.493 4.021 2.665m.42.74c.039-.068.166.217.263.337.004.024.01.039-.045.027-.005-.025-.013-.032-.013-.032s-.135-.08-.177-.137-.049-.157-.028-.195m3.448 8.479s.312-3.578-5.31-4.403a18 18 0 0 0-2.524-.187c-4.506.06-4.67-5.197-1.275-5.462 1.407-.116 3.087.643 4.73 1.408-.007.204.002.385.136.552s.648.35.813.445c.164.094.691.43 1.014.85.07-.131.654-.512.654-.512s-.14.003-.465-.119c-.326-.122-.713-.49-.722-.511s-.015-.055.06-.07c.059-.049-.072-.207-.13-.265s-.445-.716-.454-.73c-.009-.016-.012-.031-.04-.05-.085-.027-.46.04-.46.04s-.575-.283-.774-.893c.003.107-.099.224 0 .469-.3-.127-.558-.344-.762-.88-.12.305 0 .499 0 .499s-.707-.198-.82-.85c-.124.293 0 .469 0 .469s-1.153-.602-3.069-.61c-1.283-.118-1.55-2.374-1.43-2.754 0 0-1.85-.975-5.493-1.406-3.642-.43-6.628-.065-6.628-.065s6.45-.31 11.617 1.783c.176.785.704 2.094.989 2.723-.815.563-1.733 1.092-1.876 2.97s1.472 3.53 3.474 3.58c1.9.102 3.214.116 4.806.942 1.52.84 2.766 3.4 2.89 5.703.132-1.709-.509-5.383-3.5-6.498 4.181.732 4.549 3.832 4.549 3.832M12.68 5.663l-.15-.485s-2.484-.441-5.822-.204S0 6.38 0 6.38s6.896-1.735 12.68-.717"/></svg></span> Kali</strong></td>
-<td>KVM VM</td>
+<td>VM</td>
 <td>Security testing and network diagnostics</td>
 <td>Keeps testing tools and custom network modes outside normal infrastructure</td>
 </tr>
@@ -3647,13 +3645,13 @@
 <td>Independent network service that should not depend on Logos</td>
 </tr>
 <tr>
-<td><strong>:simple-haproxy: HAProxy</strong></td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg></span> HAProxy</strong></td>
 <td>LXC</td>
 <td>K3s API and ingress load balancing</td>
 <td>Small critical service with a separate lifecycle</td>
 </tr>
 <tr>
-<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1a6.887 6.887 0 0 0 0 9.8c2.73 2.7 7.15 2.7 9.88 0 1.36-1.35 2.04-2.92 2.04-4.9h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58a8.987 8.987 0 0 1 12.65 0L21 3zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8z"/></svg></span> PatchMon</strong></td>
+<td><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 12 7.07 7.07a9.953 9.953 0 0 1-14.14 0C1 15.17 1 8.84 4.93 4.93 8.83 1 15.16 1 19.07 4.93zm7-2a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></svg></span> PatchMon</strong></td>
 <td>LXC</td>
 <td>Patch visibility and maintenance reporting</td>
 <td>Lightweight service that remains separate from monitored hosts</td>
@@ -3833,7 +3831,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 09:25:54 UTC"><span class="timeago" datetime="2026-08-22T09:25:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 09:25:54 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 09:40:37 UTC"><span class="timeago" datetime="2026-08-22T09:40:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 09:40:37 UTC">2026-08-22</span>
   </span>
 
     
