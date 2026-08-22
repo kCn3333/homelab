@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/zion/3-backup-and-recovery/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/zion/docker-media/">
       
       
-        <link rel="prev" href="../1-migration/">
+        <link rel="prev" href="../caddy/">
       
       
-        <link rel="next" href="../4-logos/">
+        <link rel="next" href="../haproxy/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Backup and Recovery - > Homelab Documentation</title>
+        <title>Docker media - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#backup-and-recovery" class="md-skip">
+        <a href="#docker-media" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Backup and Recovery
+              Docker media
             
           </span>
         </div>
@@ -734,37 +734,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Backup and Recovery
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../3-backup-and-recovery/" class="md-nav__link">
         
   
   
@@ -780,226 +753,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#data-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Data flow
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#backup-layers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Backup layers
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proxmox-backup-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Proxmox Backup Server
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Proxmox Backup Server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#restore-a-complete-guest" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore a complete guest
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration-collection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration collection
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuration collection">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#restore-collected-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore collected configuration
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#kopia-repositories" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kopia repositories
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Kopia repositories">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#restore-files-from-kopia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore files from Kopia
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recovery-scenarios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recovery scenarios
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Recovery scenarios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#one-file-or-one-service-is-damaged" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        One file or one service is damaged
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-vm-or-lxc-is-damaged" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A VM or LXC is damaged
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zions-nvme-fails-but-the-ironwolf-survives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zion's NVMe fails but the IronWolf survives
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zion-and-the-ironwolf-are-both-lost" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zion and the IronWolf are both lost
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#service-recovery-order" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Service recovery order
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#coverage-limits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Coverage limits
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#restore-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore validation
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1065,10 +818,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../docker-media/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker media
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1084,6 +862,74 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#docker-media" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Media
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Media">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intel-quick-sync-passthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intel Quick Sync passthrough
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#external-jellyfin-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        External Jellyfin access
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3485,8 +3331,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3495,44 +3339,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#data-flow" class="md-nav__link">
+  <a href="#docker-media" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data flow
+        Docker Media
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#backup-layers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Backup layers
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proxmox-backup-server" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Proxmox Backup Server
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Proxmox Backup Server">
+    <nav class="md-nav" aria-label="Docker Media">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#restore-a-complete-guest" class="md-nav__link">
+  <a href="#workload" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Restore a complete guest
+        Workload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intel-quick-sync-passthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intel Quick Sync passthrough
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#external-jellyfin-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        External Jellyfin access
       
     </span>
   </a>
@@ -3541,156 +3385,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration-collection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration collection
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuration collection">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#restore-collected-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore collected configuration
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#kopia-repositories" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kopia repositories
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Kopia repositories">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#restore-files-from-kopia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore files from Kopia
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recovery-scenarios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recovery scenarios
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Recovery scenarios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#one-file-or-one-service-is-damaged" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        One file or one service is damaged
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#a-vm-or-lxc-is-damaged" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A VM or LXC is damaged
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zions-nvme-fails-but-the-ironwolf-survives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zion's NVMe fails but the IronWolf survives
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zion-and-the-ironwolf-are-both-lost" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zion and the IronWolf are both lost
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#service-recovery-order" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Service recovery order
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#coverage-limits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Coverage limits
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#restore-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore validation
-      
-    </span>
-  </a>
   
 </li>
       
@@ -3715,259 +3409,145 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/zion/3-backup-and-recovery.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/zion/docker-media.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="backup-and-recovery"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9H0l4 4 4-4H5a7 7 0 0 1 7-7 7 7 0 0 1 7 7 7 7 0 0 1-7 7c-1.5 0-2.91-.5-4.06-1.3L6.5 19.14A9.1 9.1 0 0 0 12 21a9 9 0 0 0 9-9 9 9 0 0 0-9-9m2 9a2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2"/></svg></span> Backup and Recovery<a class="headerlink" href="#backup-and-recovery" title="Permanent link">&para;</a></h1>
-<p>The backup system has two main jobs:</p>
-<ul>
-<li>restore complete Proxmox guests quickly;</li>
-<li>keep enough configuration off-site to rebuild the homelab if Zion and its local backup disk are both lost.</li>
-</ul>
-<p>No single layer covers every dataset or failure. A completed job is useful only if its restore path has also been tested.</p>
-<h2 id="data-flow"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1a2.5 2.5 0 0 0-2.5 2.5A2.5 2.5 0 0 0 11 5.79V7H7a2 2 0 0 0-2 2v.71A2.5 2.5 0 0 0 3.5 12 2.5 2.5 0 0 0 5 14.29V15H4a2 2 0 0 0-2 2v1.21A2.5 2.5 0 0 0 .5 20.5 2.5 2.5 0 0 0 3 23a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 4 18.21V17h4v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 9 23a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-1.5-2.29V17a2 2 0 0 0-2-2H7v-.71A2.5 2.5 0 0 0 8.5 12 2.5 2.5 0 0 0 7 9.71V9h10v.71A2.5 2.5 0 0 0 15.5 12a2.5 2.5 0 0 0 1.5 2.29V15h-1a2 2 0 0 0-2 2v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 15 23a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-1.5-2.29V17h4v1.21a2.5 2.5 0 0 0-1.5 2.29A2.5 2.5 0 0 0 21 23a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-1.5-2.29V17a2 2 0 0 0-2-2h-1v-.71A2.5 2.5 0 0 0 20.5 12 2.5 2.5 0 0 0 19 9.71V9a2 2 0 0 0-2-2h-4V5.79a2.5 2.5 0 0 0 1.5-2.29A2.5 2.5 0 0 0 12 1m0 1.5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M6 11a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m12 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M3 19.5a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m6 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1"/></svg></span> Data flow<a class="headerlink" href="#data-flow" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart TD
-    G["VM and LXC guests"] --&gt; PBS["PBS image backups"]
-    PBS --&gt;|Local datastore| HDD["IronWolf HDD"]
+  <h1>Docker media</h1>
 
-    C["Zion, LXC and Relay configuration"] --&gt; COL["Collection script on Zion"]
-    COL --&gt;|Cron and SSH or pct| HOME["Logos home and remote-configs"]
-    HOME --&gt; K["Encrypted Kopia snapshots"]
-    K --&gt;|Local repository| HDD
-    K --&gt;|rclone| MEGA["MEGA.nz off-site repository"]
-
-    F["Fedora workstation"] --&gt;|Scheduled file copy| HDD</code></pre>
-<p>The IronWolf contains both the PBS datastore and the local Kopia repository, but they are separate backup formats in separate paths. Losing the disk removes both local layers. The encrypted Kopia repository on MEGA is the remaining recovery source for the files included in its policies.</p>
-<h2 id="backup-layers"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0 3 7l1.63 1.27L12 14l7.36-5.73L21 7zm7.37 10.73L12 16.47l-7.38-5.73L3 12l9 7 9-7zm0 5L12 21.47l-7.38-5.73L3 17l9 7 9-7z"/></svg></span> Backup layers<a class="headerlink" href="#backup-layers" title="Permanent link">&para;</a></h2>
+<h2 id="docker-media"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.65 6.5-2.74-3.54 3.93-.78.78 3.92zm-2.94.57-2.74-3.53-1.97.39 2.75 3.53zM19 13c1.1 0 2.12.3 3 .81V10H2v10a2 2 0 0 0 2 2h9.81c-.51-.88-.81-1.9-.81-3 0-3.31 2.69-6 6-6M4.16 5.5l-.98.19a2.01 2.01 0 0 0-1.57 2.35L2 10l4.9-.97zm7.65 2.55L9.07 4.5l-1.97.41 2.75 3.53zM23 17.89l-2.89-.25L19 15l-1.13 2.64-2.87.25 2.18 1.88-.68 2.81 2.5-1.49 2.45 1.49-.65-2.81z"/></svg></span> Docker Media<a class="headerlink" href="#docker-media" title="Permanent link">&para;</a></h2>
+<p>The Docker Media LXC contains the complete media pipeline. It is separated from Logos so that media mounts, transcoding, downloads and frequently changed containers do not share the failure domain of the main operations server.</p>
+<h3 id="workload"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 11h8V3H3m2 2h4v4H5m8 12h8v-8h-8m2 2h4v4h-4M3 21h8v-8H3m2 2h4v4H5m8-16v8h8V3m-2 6h-4V5h4Z"/></svg></span> Workload<a class="headerlink" href="#workload" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Layer</th>
-<th>Scope</th>
-<th>Main use</th>
+<th>Service</th>
+<th>Role</th>
+<th style="text-align: right;">Published port</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>PBS</strong></td>
-<td>Complete VM and LXC images</td>
-<td>Restore a guest or the whole virtual environment</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .002C8.826.002-1.398 18.537.16 21.666c1.56 3.129 22.14 3.094 23.682 0S15.177 0 12 0zm7.76 18.949c-1.008 2.028-14.493 2.05-15.514 0C3.224 16.9 9.92 4.755 12.003 4.755c2.081 0 8.77 12.166 7.759 14.196zM12 9.198c-1.054 0-4.446 6.15-3.93 7.189.518 1.04 7.348 1.027 7.86 0 .511-1.027-2.874-7.19-3.93-7.19z"/></svg></span> Jellyfin</td>
+<td>Media server and hardware-assisted playback</td>
+<td style="text-align: right;"><code>8096</code></td>
 </tr>
 <tr>
-<td><strong>Configuration collection</strong></td>
-<td>Zion, selected LXC services and Relay configuration</td>
-<td>Rebuild a host or recover selected configuration</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3m6 9.5 1.8-1.8c-.5-.4-1.1-.7-1.8-.7-1.4 0-2.5 1.1-2.5 2.5S16.6 21 18 21c.8 0 1.5-.4 2-1h1.7c-.6 1.5-2 2.5-3.7 2.5-2.2 0-4-1.8-4-4s1.8-4 4-4c1.1 0 2.1.4 2.8 1.2l1.2-1.2v4zm-5.9 1s-.1 0 0 0C7 19.5 2.7 16.4 1 12c1.7-4.4 6-7.5 11-7.5s9.3 3.1 11 7.5c-.2.4-.4.9-.6 1.3-1.1-.8-2.4-1.3-3.9-1.3-.5 0-1 .1-1.5.2V12c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5h.2c-.1.5-.2 1-.2 1.5 0 .3 0 .7.1 1"/></svg></span> Seerr</td>
+<td>Movie and series requests</td>
+<td style="text-align: right;"><code>5055</code></td>
 </tr>
 <tr>
-<td><strong>Kopia</strong></td>
-<td>Logos <code>/home</code>, collected configuration and selected files</td>
-<td>Local file restore and encrypted off-site recovery</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.274 0C3.189.039 1.19 1.547 1.19 4.705l.184 14.518c0 1.47 1.103 2.205 2.573 2.021L3.764 3.786c0-1.654.919-1.838 2.022-1.103l14.7 8.27c1.103.734 1.655 1.47 1.838 2.756.92-1.654.552-4.043-1.286-5.33L7.991.846A4.56 4.56 0 0 0 5.274.001zm1.982 6.91-.184 10.107 9.004-5.146Zm13.598 6.064-15.068 8.82c-.92.552-2.022.736-3.124.368.918 1.47 3.307 2.389 5.145 1.47l12.68-7.35c1.102-.736 1.286-2.022.367-3.308"/></svg></span> Radarr</td>
+<td>Movie library automation</td>
+<td style="text-align: right;"><code>7878</code></td>
 </tr>
 <tr>
-<td><strong>Fedora backup</strong></td>
-<td>Administration files, dotfiles and infrastructure projects</td>
-<td>Rebuild the workstation</td>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.212 4.282Q23.989 7.588 23.989 12q0 4.272-2.602 7.489a934 934 0 0 1-2.101-2.095c-1.477-1.477-1.792-3.293-1.792-5.278 0-2.224.127-3.486 1.577-4.935l2.478-2.478a13 13 0 0 0-.337-.421m-17.7 16.193Q.806 17.779.188 14.213A12 12 0 0 1 .011 12q0-.42.017-.802 0-.039.022-.078.23-3.901 2.767-6.865-.163.19-.316.387S3.852 5.988 4.83 6.965c1.408 1.409 1.726 3.215 1.726 5.151 0 1.985-.249 3.762-1.781 5.295-1.035 1.035-2.119 2.124-2.119 2.124q.169.204.349.404c.029-.027 1.297-1.348 2.123-2.175 1.638-1.637 1.928-3.528 1.928-5.648 0-2.072-.365-3.997-1.873-5.504a620 620 0 0 0-2.366-2.357q.252-.294.523-.576l3.117 3.106-.194.195 1.903 1.898.547-.549L6.81 6.432l-.196.196L3.495 3.52c.01-.009.436-.416.643-.597.009.011 2.28 2.283 2.28 2.283 1.538 1.537 3.5 1.955 5.621 1.955 2.18 0 4.134-.442 5.731-2.038.907-.908 2.153-2.149 2.162-2.16.17.151.491.461.56.528l.013.013-3.111 3.028-.001.002-.197-.194-1.876 1.903.552.543 1.875-1.903-.197-.194 3.109-3.026q.29.305.553.619c-.03.025-2.495 2.546-2.495 2.546-1.556 1.556-1.723 2.9-1.723 5.288 0 2.121.361 4.054 1.939 5.632a577 577 0 0 0 2.133 2.124c-.183.208-.599.645-.613.66l-3.066-3.174.195-.196-1.995-1.986-.546.549 1.995 1.986.195-.196 3.065 3.172c-.021.019-.385.362-.552.506-.01-.013-1.974-1.978-1.974-1.978-1.842-1.842-3.299-2.039-5.731-2.039-2.338 0-3.92.239-5.632 1.95-.944.944-2.078 2.085-2.089 2.099-.275-.23-.649-.594-.649-.594l3.019-3.024.199.192 1.854-1.925-.558-.538-1.854 1.926.199.191zM12 8.672A3.33 3.33 0 0 0 8.672 12 3.33 3.33 0 0 0 12 15.328 3.33 3.33 0 0 0 15.328 12 3.33 3.33 0 0 0 12 8.672M4.52 2.6Q7.737 0 12.011 0q4.32 0 7.541 2.639s-1.215 1.209-2.136 2.13c-1.496 1.496-3.334 1.892-5.377 1.892-1.985 0-3.829-.37-5.267-1.809zm14.837 18.909a10 10 0 0 1-.342.256Q15.983 24 12.011 24q-3.978 0-6.993-2.235-.156-.111-.31-.227s1.096-1.101 2.053-2.058c1.602-1.602 3.09-1.804 5.278-1.804 2.28 0 3.651.166 5.377 1.892z"/></svg></span> Sonarr</td>
+<td>Series library automation</td>
+<td style="text-align: right;"><code>8989</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .001C5.374.001.001 5.371 0 11.998a12 12 0 0 0 1.7 6.16.13.13 0 0 0 .113.038c.03 0 .048-.07.048-.11a1 1 0 0 0-.033-.13 22 22 0 0 1-.423-2.294 9.8 9.8 0 0 1 .428-3.866c1.101-3.396 3.333-5.7 6.664-6.938a10.3 10.3 0 0 1 3.398-.595.78.78 0 0 1 .856.763c0 .45-.343.737-.85.766a13 13 0 0 0-1.607.165 8.7 8.7 0 0 0-4.864 2.64c-2.083 2.22-2.88 4.86-2.4 7.857a8.7 8.7 0 0 0 2.445 4.785 8.94 8.94 0 0 0 6.37 2.76H12a11.95 11.95 0 0 0 5.613-1.392H12.02a8.4 8.4 0 0 1-1.408-.13 7.71 7.71 0 0 1-6.24-8.824 7.72 7.72 0 0 1 7.034-6.479 7.6 7.6 0 0 1 2.16.137.75.75 0 0 1 .617.876.785.785 0 0 1-.96.602 6 6 0 0 0-.802-.115 6.3 6.3 0 0 0-2.899.504 6.2 6.2 0 0 0-3.705 6.383 6.22 6.22 0 0 0 6.163 5.52h6.99c.68 0 .84.014 1.138-.24q.574-.53 1.077-1.126h-9.33A4.35 4.35 0 0 1 9.78 19.2a4.847 4.847 0 1 1 4.619-8.514.75.75 0 0 1 .317 1.044.766.766 0 0 1-1.066.271 3.333 3.333 0 0 0-4.547 1.243 3.33 3.33 0 0 0-.396 2.179 3.29 3.29 0 0 0 3.275 2.803c3.36.034 6.72 0 10.08 0a.42.42 0 0 0 .28-.144c3.358-5.713 1.45-13.066-4.263-16.425A12 12 0 0 0 12 .001"/></svg></span> Prowlarr</td>
+<td>Indexer management for Radarr and Sonarr</td>
+<td style="text-align: right;"><code>9696</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M4 12h4v2H4zm10 6H4v-2h10zm6 0h-4v-2h4zm0-4H10v-2h10z"/></svg></span> Bazarr</td>
+<td>Subtitle discovery and download</td>
+<td style="text-align: right;"><code>6767</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.911 23.994c-1.31 0-2.605-.232-3.831-.705-3.4-1.024-6.2-3.865-7.433-7.58-1.23-3.708-.685-7.654 1.459-10.554C4.062 2.038 7.677.094 11.742.008c4.064-.079 7.758 1.703 9.882 4.785a12.07 12.07 0 0 1 2.369 7.145c.138 3.733-1.75 7.368-5.052 9.728-2.147 1.535-4.61 2.328-7.03 2.328m.11-22.314q-.121 0-.244.002c-3.5.074-6.599 1.725-8.29 4.415-1.856 2.516-2.31 5.893-1.25 9.086 1.06 3.197 3.448 5.636 6.386 6.523 3.025 1.165 6.496.633 9.345-1.402 2.847-2.035 4.473-5.144 4.351-8.318v-.032c0-2.214-.73-4.41-2.055-6.185-1.78-2.58-4.84-4.09-8.243-4.09zM9.406 20.246v-4.578a2.66 2.66 0 0 1-.952.863 2.6 2.6 0 0 1-1.29.344q-1.524 0-2.63-1.33-1.097-1.33-1.097-3.646 0-1.408.444-2.527.451-1.119 1.299-1.69A3.26 3.26 0 0 1 7.052 7.1q1.587 0 2.5 1.46V7.31h1.306v12.935H9.406zm-4.477-8.285q0 1.805.694 2.711.694.9 1.662.9.928 0 1.597-.855.67-.863.67-2.615 0-1.866-.71-2.81-.703-.94-1.654-.941-.944 0-1.605.88-.653.872-.654 2.73m9.55 4.702h-1.346V3.755h1.452v4.604q.92-1.259 2.347-1.258.79 0 1.492.351c.464.222.864.558 1.161.978q.46.625.718 1.514.258.89.258 1.902 0 2.404-1.088 3.716-1.09 1.312-2.614 1.312-1.517 0-2.379-1.382v1.17m-.016-4.746q0 1.683.42 2.432.684 1.223 1.854 1.223.952 0 1.646-.898.693-.907.693-2.695 0-1.83-.67-2.703-.66-.871-1.605-.872-.95 0-1.645.907-.694.9-.694 2.607"/></svg></span> qBittorrent</td>
+<td>Download client</td>
+<td style="text-align: right;"><code>8080</code>, <code>6881/tcp</code>, <code>6881/udp</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15 6.04 7.5 12 10.85l5.96-3.35zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg></span> FlareSolverr</td>
+<td>Browser challenge helper used by selected indexers</td>
+<td style="text-align: right;"><code>8191</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></span> MeTube</td>
+<td>Standalone video downloads</td>
+<td style="text-align: right;"><code>8081</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M4 12h4v2H4zm10 6H4v-2h10zm6 0h-4v-2h4zm0-4H10v-2h10z"/></svg></span> Subtitle Agent</td>
+<td>Preparation and inspection of subtitle</td>
+<td style="text-align: right;"><code>8181</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.504 0v1.023l-.01-.015-6.106 3.526H3.417v.751h5.359v3.638h1.942V5.284h1.786V15.7c.027 0 .54-.01.751.091V5.285h.531v10.608c.293.147.55.312.751.54V5.286h6.046v-.75h-1.267l-6.061-3.5V0zm0 1.87v2.664H7.889zm.751.031 4.56 2.633h-4.56zM9.142 5.285h1.21v1.686h-1.21zm-4.736 2.73v1.951h1.942v-1.95zm2.19 0v1.951h1.941v-1.95zm-2.19 2.171v1.951h1.942v-1.95zm2.19 0v1.951h1.941v-1.95zm2.18 0v1.951h1.942v-1.95zM4.36 12.43a3.73 3.73 0 0 0-.494 1.851c0 1.227.604 2.308 1.52 2.986.239-.064.477-.1.724-.11.1 0 .165.01.266.019.284-1.191 1.383-1.988 2.665-1.988.724 0 1.438.201 1.924.668.229-.476.302-1.007.302-1.575 0-.65-.165-1.292-.494-1.85zm4.828 3.16c-1.21 0-2.226.844-2.492 1.97a1 1 0 0 0-.275-.009 2.56 2.56 0 0 0-2.564 2.556 2.565 2.565 0 0 0 3.096 2.5A2.58 2.58 0 0 0 9.233 24c.862 0 1.622-.43 2.09-1.081a2.557 2.557 0 0 0 4.186-1.97c0-.567-.193-1.099-.504-1.52a2.557 2.557 0 0 0-3.866-2.94 2.57 2.57 0 0 0-1.951-.898z"/></svg></span> Portainer Agent</td>
+<td>Remote stack management from Logos</td>
+<td style="text-align: right;"><code>9001</code></td>
+</tr>
+<tr>
+<td><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .099C5.373.099 0 5.426 0 12c0 6.571 5.373 11.9 12 11.9S24 18.573 24 12C24 5.428 18.627.1 12 .1Zm.139 7.34 5.377 2.66v.222h-.526v.504l6.36-1.619a11.53 11.53 0 0 1-.248 6.424l-6.112-1.22v.652h2.428v1.091h.393l-.002.248-2.745 1.471.67 4.219-.203.111a11.7 11.7 0 0 1-5.506 1.367A11.7 11.7 0 0 1 6.72 22.3h-.01v-.003q-.098-.048-.195-.098l.685-4.31-2.765-1.473.001-.264h.413v-1.09h2.435v-.65L.961 15.675a11.5 11.5 0 0 1-.602-3.676c0-.987.125-1.947.36-2.863l6.564 1.676v-.51h-.578v-.203Zm-4.856 3.373v3.6l.33-.067v-3.451zm.33.082 2.668.68v-1.061H7.613Zm2.668.68v2.24l.328-.067v-2.09zm.328.083.452.115.039-.439h2.076l.04.453.458-.115v-1.158h-3.065zm3.065.014-.002 2.074.33.067v-2.225l2.658-.678v-.396H14v1.074zm2.986-.762v3.434l.33.066v-3.584zm0 3.434-2.658-.531v.935h2.658zm-2.988-.598-.281-.055.097 1.057h.184zm-3.063.002v1h.178l.096-1.055zm-2.996.598v.402h2.666v-.933zm-.904 7.95q.005.003.01.005l10.812-.098-.343-2.219H7.078Zm5.428-14.704-5.291 2.594h10.527Zm-.905 3.888-.298 3.268h2.408l-.299-3.268zm-3.619 3.543v.069h9.235l-.004-.069zm-2.547.32v.81h2.217v-.81zm2.547 0v.81h3.01v-.81zm3.229 0v.81h2.605v-.81zm2.824 0v.81h3.18v-.81zm3.398 0v.81H19.2v-.81Zm-12.216 1.05 2.574 1.37h9.422l2.574-1.37z"/></svg></span> Watchtower</td>
+<td>Container image updates and cleanup</td>
+<td style="text-align: right;">none</td>
 </tr>
 </tbody>
 </table>
-<p>Downloaded media, caches, transcodes, build toolchains and other reproducible data are intentionally excluded where appropriate.</p>
-<h2 id="proxmox-backup-server"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.928 1.825c-1.09.553-1.09.64-.07 1.78 5.655 6.295 7.004 7.782 7.107 7.782.139.017 7.971-8.542 8.058-8.801.034-.07-.208-.312-.519-.536-.415-.312-.864-.433-1.712-.467-1.59-.104-2.144.242-4.115 2.455-.899 1.003-1.66 1.833-1.66 1.833-.017 0-.76-.813-1.642-1.798S8.473 2.1 8.127 1.91c-.796-.45-2.421-.484-3.2-.086zM1.297 4.367C.45 4.695 0 5.007 0 5.248c0 .121 1.331 1.678 2.94 3.459 1.625 1.78 2.939 3.268 2.939 3.302s-1.331 1.522-2.94 3.303C1.314 17.11.017 18.683.035 18.822c.086.467 1.504 1.055 2.541 1.055 1.678-.018 2.058-.312 5.603-4.202 1.78-1.954 3.233-3.614 3.233-3.666 0-.069-1.435-1.694-3.199-3.63-2.3-2.508-3.423-3.632-3.96-3.874-.812-.398-2.126-.467-2.956-.138m18.467.12c-.502.26-1.764 1.505-3.943 3.891-1.763 1.937-3.199 3.562-3.199 3.631 0 .07 1.453 1.712 3.234 3.666 3.544 3.89 3.925 4.184 5.602 4.202 1.038 0 2.455-.588 2.542-1.055.017-.156-1.28-1.712-2.905-3.493-1.608-1.78-2.94-3.285-2.94-3.32s1.332-1.539 2.94-3.32C22.72 6.91 24.017 5.352 24 5.214c-.087-.45-1.366-.968-2.473-1.038-.795-.034-1.21.035-1.763.312zM7.954 16.973c-2.144 2.369-3.908 4.374-3.943 4.46-.034.07.208.312.52.537.414.311.864.432 1.711.467 1.574.103 2.161-.26 4.15-2.508.864-.968 1.608-1.78 1.625-1.78s.761.812 1.643 1.798c2.023 2.248 2.559 2.576 4.132 2.49.848-.035 1.297-.156 1.712-.467.311-.225.553-.467.519-.536-.087-.26-7.92-8.819-8.058-8.801-.069 0-1.867 1.954-4.011 4.34"/></svg></span> Proxmox Backup Server<a class="headerlink" href="#proxmox-backup-server" title="Permanent link">&para;</a></h2>
-<p>PBS runs in an unprivileged LXC on Zion. Its root filesystem is stored on NVMe, while the datastore is a bind mount from the IronWolf disk:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Zion: /mnt/pve/wolfie1-4tb/pbs-backups
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>PBS:  /mnt/backup-storage
+<p>Portainer deploys and manages the active <a href="https://github.com/kCn3333/docker-compose/blob/main/arr-stack/docker-compose.yaml">Arr stack</a>. Configuration and application state live under <code>/opt/appdata</code>; media and download directories are mounted separately.</p>
+<h3 id="intel-quick-sync-passthrough"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.42 7.345v9.18h1.651v-9.18zM0 7.475v1.737h1.737V7.474zm9.78.352v6.053q0 .77.13 1.292.131.511.44.828c.203.21.475.359.803.451q.502.138 1.255.136h.216v-1.533c-.24 0-.445-.012-.593-.037a.67.67 0 0 1-.39-.173.7.7 0 0 1-.173-.377 4 4 0 0 1-.037-.606v-2.182h1.193v-1.416h-1.193V7.827zm-3.505 2.312c-.396 0-.76.08-1.082.241q-.49.242-.822.668l-.087.117v-.902H2.658v6.256h1.639v-3.214q.025-.881.433-1.299c.29-.297.642-.445 1.044-.445.476 0 .841.149 1.082.433.235.284.359.686.359 1.2v3.324h1.663V12.97c.006-.89-.229-1.595-.686-2.09s-1.1-.742-1.917-.742zm10.065.006a3.25 3.25 0 0 0-2.306.946c-.29.29-.525.637-.692 1.033a3.15 3.15 0 0 0-.254 1.273q0 .679.241 1.274c.161.395.39.742.674 1.032s.637.526 1.045.693c.408.173.86.26 1.342.26 1.397 0 2.262-.637 2.782-1.23l-1.187-.904c-.248.297-.841.699-1.583.699-.464 0-.847-.105-1.138-.321a1.6 1.6 0 0 1-.593-.872l-.019-.056h4.915v-.587q-.001-.676-.235-1.267a3.4 3.4 0 0 0-.661-1.033 3 3 0 0 0-1.02-.692 3.35 3.35 0 0 0-1.311-.248m-16.297.118v6.256h1.651v-6.256zm16.278 1.286c1.132 0 1.664.797 1.664 1.255l-3.32.006c0-.458.525-1.255 1.656-1.261m7.073 3.814a.606.606 0 0 0-.606.606.606.606 0 0 0 .606.606.606.606 0 0 0 .606-.606.606.606 0 0 0-.606-.606m-.008.105h.002a.5.5 0 0 1 .5.501.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5.5.5 0 0 1 .498-.5zm-.233.155v.699h.13v-.285h.093l.173.285h.136l-.18-.297a.2.2 0 0 0 .118-.056c.03-.03.05-.074.05-.136q0-.1-.063-.154c-.037-.038-.105-.056-.185-.056zm.13.099h.154q.028.001.056.012a.06.06 0 0 1 .037.031c.013.013.012.031.012.056a.1.1 0 0 1-.012.055.2.2 0 0 1-.037.031q-.028.011-.056.013h-.154Z"/></svg></span> Intel Quick Sync passthrough<a class="headerlink" href="#intel-quick-sync-passthrough" title="Permanent link">&para;</a></h3>
+<p>Jellyfin uses the Intel UHD Graphics integrated into Zion's Core i5-8400 for hardware-accelerated transcoding through Intel Quick Sync Video.</p>
+<p>The GPU remains managed by the Proxmox host. Only its DRM device nodes are passed through to the Docker Media LXC. This is LXC device passthrough, not full PCI passthrough.</p>
+<p>On Zion, first verify the available devices:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>/dev/dri
 </span></code></pre></div>
-<p>The datastore is named <code>ironwolf-store</code> and uses ext4 rather than ZFS. PBS configuration is collected separately, so the container can be recreated without treating its root filesystem as the only copy of its configuration.</p>
-<p>PBS protects the guest system disks. Large external data mounts, including the media library, are not silently included in image backups.</p>
-<h3 id="restore-a-complete-guest">Restore a complete guest<a class="headerlink" href="#restore-a-complete-guest" title="Permanent link">&para;</a></h3>
-<p>The preferred route is the Proxmox interface:</p>
-<ol>
-<li>Open the PBS storage in Proxmox.</li>
-<li>Select the required VM or LXC snapshot.</li>
-<li>Restore it to an unused VMID.</li>
-<li>Keep its network interface disconnected for the first boot if the original guest still exists.</li>
-<li>Start the restored guest and verify its filesystem, services and application data.</li>
-<li>Reconnect networking only after excluding duplicate IP addresses and service instances.</li>
-<li>Remove or replace the damaged guest only after the restored copy passes validation.</li>
-</ol>
-<p>Equivalent CLI forms are available when the storage is already attached:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>qmrestore<span class="w"> </span>&lt;pbs-storage&gt;:backup/vm/&lt;vmid&gt;/&lt;timestamp&gt;<span class="w"> </span>&lt;new-vmid&gt;
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>pct<span class="w"> </span>restore<span class="w"> </span>&lt;new-vmid&gt;<span class="w"> </span>&lt;pbs-storage&gt;:backup/ct/&lt;vmid&gt;/&lt;timestamp&gt;
+<p>The expected nodes are:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/dev/dri/card0
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>/dev/dri/renderD128
 </span></code></pre></div>
-<p>Use the exact backup volume identifier reported by Proxmox; do not construct it from memory.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If file-level restore is unavailable in the current PBS LXC deployment, restore the backup under a temporary VMID and copy the required files from that isolated guest.</p>
-</div>
-<h2 id="configuration-collection"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 17.5c0-3.6 2.9-6.5 6.5-6.5.9 0 1.7.2 2.5.5V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h6.8c-1.1-1.2-1.8-2.8-1.8-4.5m2-14L18.5 9H13zm4 8.5v1.5c2.2 0 4 1.8 4 4 0 .8-.2 1.6-.7 2.2l-1.1-1.1c.2-.3.3-.7.3-1.1 0-1.4-1.1-2.5-2.5-2.5v1.5l-2.2-2.2zm0 11v-1.5c-2.2 0-4-1.8-4-4 0-.8.2-1.6.7-2.2l1.1 1.1c-.2.3-.3.7-.3 1.1 0 1.4 1.1 2.5 2.5 2.5v-1.5l2.2 2.2z"/></svg></span> Configuration collection<a class="headerlink" href="#configuration-collection" title="Permanent link">&para;</a></h2>
-<p>Configuration collection is performed by this script on the Proxmox host:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/root/scripts/remote-backup/collect-remote-configs.sh
+<p>Before assigning them, check which Proxmox device slots are already used by LXC:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pct<span class="w"> </span>config<span class="w"> </span>&lt;LXC&gt;<span class="w"> </span><span class="p">|</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'^dev[0-9]+:'</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
 </span></code></pre></div>
-<p>Root's cron on Zion runs it daily. The script uses local access for Zion, <code>pct</code> for LXC containers and a dedicated automation key for remote SSH. It writes the result to:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/home/kcn/remote-configs/
+<p>If <code>dev0</code> and <code>dev1</code> are free, pass both devices to the LXC:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pct<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;LXC&gt;<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>--dev0<span class="w"> </span><span class="nv">path</span><span class="o">=</span>/dev/dri/card0
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>pct<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;LXC&gt;<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>--dev1<span class="w"> </span><span class="nv">path</span><span class="o">=</span>/dev/dri/renderD128
 </span></code></pre></div>
-<p>on Logos. Kopia then includes that directory in the <code>/home</code> snapshot.</p>
-<p>The collection covers:</p>
-<ul>
-<li>Proxmox network, storage and guest definitions;</li>
-<li>the <code>/etc/pve</code> tree as a reconstruction reference;</li>
-<li>internal Caddy and AdGuard configuration;</li>
-<li>PBS configuration;</li>
-<li>selected Docker Media and Home Assistant state;</li>
-<li>Relay Caddy, WireGuard and host-security configuration.</li>
-</ul>
-<p>Logos does not need to be copied through SSH back to itself. Its selected <code>/home</code> content, including Portainer stack definitions, is read directly by Kopia.</p>
-<p>The collector excludes caches, media artwork, transcodes, logs and build output. <code>/etc/pve</code> is reference material only—it must not be copied over a running <code>pmxcfs</code> filesystem.</p>
-<h3 id="restore-collected-configuration">Restore collected configuration<a class="headerlink" href="#restore-collected-configuration" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Restore the required directory from Kopia into a temporary location.</li>
-<li>Stop the affected service or container.</li>
-<li>Compare the restored files with the current configuration.</li>
-<li>Copy only the required files using <code>pct push</code>, <code>scp</code> or a local copy on Zion.</li>
-<li>Restore the expected owner, group and mode.</li>
-<li>Run the service's configuration validator where one exists.</li>
-<li>Start or reload the service and inspect its logs.</li>
-<li>Create a new configuration collection after confirming the repair.</li>
-</ol>
-<p>Do not restore the complete collection tree blindly. It contains files from different hosts and different points in their lifecycle.</p>
-<h2 id="kopia-repositories"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2v1h2v-1h11v1h2v-1a2 2 0 0 0 2-2v-1h1v-2h-1V9h1V7h-1V6a2 2 0 0 0-2-2zm0 2h15v11H4zm9.5 1.5a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4M5 9v5h2V9zm8.5.5a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2"/></svg></span> Kopia repositories<a class="headerlink" href="#kopia-repositories" title="Permanent link">&para;</a></h2>
-<p>Kopia runs in Docker on Logos and reads selected source directories through read-only mounts. It writes two repositories:</p>
-<ul>
-<li>a local repository on the IronWolf for quick file recovery;</li>
-<li>an off-site repository reached through <code>rclone</code> on MEGA.nz.</li>
-</ul>
-<p>Kopia encrypts repository content on Logos before it is written locally or sent to MEGA. MEGA stores encrypted repository blocks, not plain files from <code>/home</code> or <code>remote-configs</code>.</p>
-<p>The repository password is required to decrypt either repository. The MEGA account and <code>rclone</code> configuration provide access to the remote storage but do not replace the Kopia repository password. Both must be kept outside Zion.</p>
-<h3 id="restore-files-from-kopia">Restore files from Kopia<a class="headerlink" href="#restore-files-from-kopia" title="Permanent link">&para;</a></h3>
-<p>Using the web interface:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Snapshots → source → snapshot → Browse → select files → Download
+<p>Use the next free <code>devN</code> numbers if either slot is already occupied. Restart the LXC after changing its device configuration:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pct<span class="w"> </span>reboot<span class="w"> </span>&lt;LXC&gt;
 </span></code></pre></div>
-<p>Using the container CLI:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>kopia<span class="w"> </span>kopia<span class="w"> </span>snapshot<span class="w"> </span>list
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>kopia<span class="w"> </span>kopia<span class="w"> </span>restore<span class="w"> </span>&lt;snapshot-id&gt;/&lt;path&gt;<span class="w"> </span>/tmp/restored
+<p>Verify the devices inside Docker Media:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pct<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>&lt;LXC&gt;<span class="w"> </span>--<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/dev/dri
 </span></code></pre></div>
-<p>Restore into a temporary directory first. Check the contents and ownership before copying anything into an active application directory.</p>
-<h2 id="recovery-scenarios"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a1 1 0 1 0 1 1 1 1 0 0 0-1-1m0 0a1 1 0 1 0 1 1 1 1 0 0 0-1-1m6-7H6a2 2 0 0 0-2 2v9.09A5.5 5.5 0 0 1 5 13a5.7 5.7 0 0 1 2 .36 6 6 0 1 1 8.71 1.33l-1.92-2.42a1 1 0 0 0-1.37-.37l-.86.5a1 1 0 0 0-.37 1.37L12.1 16a6.1 6.1 0 0 1-2.1-.38 6 6 0 0 1 .19 6.38H18a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2m-3.42 17.58-2.49-6.31.86-.5 4.22 5.31M12 11a1 1 0 1 0-1-1 1 1 0 0 0 1 1M7.12 22.54 5 20.41l-2.12 2.13-1.42-1.42L3.59 19l-2.13-2.12 1.42-1.42L5 17.59l2.12-2.13 1.42 1.42L6.41 19l2.13 2.12Z"/></svg></span> Recovery scenarios<a class="headerlink" href="#recovery-scenarios" title="Permanent link">&para;</a></h2>
-<h3 id="one-file-or-one-service-is-damaged">One file or one service is damaged<a class="headerlink" href="#one-file-or-one-service-is-damaged" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Stop writes to the affected service.</li>
-<li>Select the newest snapshot from before the damage.</li>
-<li>Restore into a temporary directory.</li>
-<li>Compare the restored version with the current files.</li>
-<li>Restore only the required data and permissions.</li>
-<li>Validate the configuration, database or application state.</li>
-<li>Start the service and check its logs.</li>
-<li>Run a fresh backup after the repair.</li>
-</ol>
-<p>Use Kopia for individual files and collected configuration. Use a temporary PBS restore when the required data exists only inside a guest image.</p>
-<h3 id="a-vm-or-lxc-is-damaged">A VM or LXC is damaged<a class="headerlink" href="#a-vm-or-lxc-is-damaged" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Stop or isolate the damaged guest.</li>
-<li>Confirm the timestamp and status of the PBS backup.</li>
-<li>Restore to an unused VMID with networking disconnected.</li>
-<li>Boot the restored guest and verify storage, services and application data.</li>
-<li>Confirm its network configuration before connecting it to the LAN.</li>
-<li>Replace the damaged guest only after the isolated restore passes.</li>
-<li>Run configuration collection and a new PBS backup.</li>
-</ol>
-<h3 id="zions-nvme-fails-but-the-ironwolf-survives">Zion's NVMe fails but the IronWolf survives<a class="headerlink" href="#zions-nvme-fails-but-the-ironwolf-survives" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Disconnect or preserve the failed NVMe. Do not initialize the IronWolf.</li>
-<li>Install Proxmox on replacement system storage.</li>
-<li>Restore the host network and verify access to the IronWolf filesystem.</li>
-<li>Mount the existing disk and confirm the PBS datastore directory before changing permissions.</li>
-<li>Recreate the PBS LXC with the required unprivileged-container features.</li>
-<li>Verify the <code>backup</code> user's UID mapping inside the new container before attaching the bind mount.</li>
-<li>Attach the existing datastore path and add <code>ironwolf-store</code> in PBS.</li>
-<li>Add the PBS storage to Proxmox and confirm that existing snapshots are visible.</li>
-<li>Restore DNS and the internal reverse proxy first, then Logos and the remaining guests.</li>
-<li>Validate networking, applications and backup jobs.</li>
-<li>Create and verify a new PBS backup.</li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not run a recursive <code>chown</code>, format the IronWolf or create a new datastore over the existing directory until its filesystem and ownership have been inspected.</p>
-</div>
-<h3 id="zion-and-the-ironwolf-are-both-lost">Zion and the IronWolf are both lost<a class="headerlink" href="#zion-and-the-ironwolf-are-both-lost" title="Permanent link">&para;</a></h3>
-<p>In this case the PBS images and local Kopia repository are gone. Recovery starts from the encrypted MEGA repository:</p>
-<ol>
-<li>Prepare a temporary Linux host with Docker and a compatible <code>rclone</code> version.</li>
-<li>Recover the MEGA account, <code>rclone</code> configuration and Kopia repository password from the external password store or recovery media.</li>
-<li>Start a clean Kopia container with persistent configuration and cache directories.</li>
-<li>Connect Kopia to the existing <code>rclone</code> repository.</li>
-<li>List snapshots and restore <code>/home</code> plus <code>remote-configs</code> into a staging directory.</li>
-<li>Verify the restored configuration before rebuilding any production host.</li>
-<li>Install Proxmox on replacement hardware.</li>
-<li>Recreate the required VMs and LXC containers from the collected guest definitions and documentation.</li>
-<li>Restore DNS, internal proxying and Logos before dependent applications.</li>
-<li>Restore application configuration and data covered by Kopia.</li>
-<li>Recreate PBS on new local storage.</li>
-<li>Run new configuration, Kopia and PBS backups, then test one restore from each layer.</li>
-</ol>
-<p>The remote repository can be connected from the Kopia container with:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>kopia<span class="w"> </span>kopia<span class="w"> </span>repository<span class="w"> </span>connect<span class="w"> </span>rclone<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>--remote-path<span class="o">=</span>&lt;rclone-remote&gt;:&lt;repository-path&gt;
+<p>The Jellyfin Compose service passes the same devices into its container:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">jellyfin</span><span class="p">:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">devices</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/dri/card0:/dev/dri/card0</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/dri/renderD128:/dev/dri/renderD128</span>
 </span></code></pre></div>
-<p>Enter the repository password interactively. Do not place it in shell history, Compose files or this documentation.</p>
-<h2 id="service-recovery-order"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 13c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2v-4c0-1.11-.89-2-2-2m.2 1.5 1.06 1.05-3.99 3.95-2.53-2.55 1.07-1.05 1.47 1.49M4 3c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h4c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2M4 5h4v4H4m8-4h10v2H12m0 12v-2h10v2m-10-8h10v2H12Z"/></svg></span> Service recovery order<a class="headerlink" href="#service-recovery-order" title="Permanent link">&para;</a></h2>
-<p>When several systems are unavailable, restore dependencies in this order:</p>
+<p>After redeploying the stack, verify the container view:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>jellyfin<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span>ls<span class="w"> </span>-l<span class="w"> </span>/dev/dri
+</span></code></pre></div>
+<p>The render device can be tested with the Jellyfin FFmpeg build:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>jellyfin<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span>/usr/lib/jellyfin-ffmpeg/vainfo<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span>--display<span class="w"> </span>drm<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span>--device<span class="w"> </span>/dev/dri/renderD128
+</span></code></pre></div>
+<p>Hardware acceleration is configured in the Jellyfin administration panel as <strong>Intel Quick Sync (QSV)</strong>. During an active transcode, the Jellyfin playback information should report hardware decoding or encoding instead of a fully software-based FFmpeg process.</p>
+<p>If Jellyfin reports <code>Permission denied</code>, do not make <code>/dev/dri</code> world-writable. Check the numeric <code>video</code> and <code>render</code> group IDs inside the LXC and grant the Jellyfin container access to those groups.</p>
+<h3 id="external-jellyfin-access"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg></span> External Jellyfin access<a class="headerlink" href="#external-jellyfin-access" title="Permanent link">&para;</a></h3>
+<p>Jellyfin is the only media service exposed through the external Relay path:</p>
 <ol>
-<li>Proxmox network and storage.</li>
-<li>PBS datastore, if the IronWolf survived.</li>
-<li>AdGuard DNS and internal Caddy.</li>
-<li>Logos, including Docker and automation data.</li>
-<li>HAProxy when the K3s cluster is needed.</li>
-<li>Home Assistant, Docker Media and supporting services.</li>
-<li>Relay and its restricted WireGuard paths.</li>
-<li>Monitoring and scheduled maintenance.</li>
+<li>the Relay VPS accepts public HTTPS traffic and terminates TLS in Caddy;</li>
+<li>Caddy forwards the request through WireGuard;</li>
+<li>Logos routes only the explicitly allowed Jellyfin traffic into the LAN;</li>
 </ol>
-<p>Start public or internal reverse proxies only after their backends are available.</p>
-<h2 id="coverage-limits"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Coverage limits<a class="headerlink" href="#coverage-limits" title="Permanent link">&para;</a></h2>
-<ul>
-<li>PBS and the local Kopia repository share the same physical disk and site.</li>
-<li>Loss of the IronWolf removes all local backup history.</li>
-<li>Off-site recovery includes only data selected by Kopia policies.</li>
-<li>Large media files and reproducible caches are not sent to MEGA.</li>
-<li>Some application datasets are excluded from Kopia and depend on PBS or another dedicated copy.</li>
-<li>The <code>/etc/pve</code> snapshot supports manual reconstruction; it is not a drop-in Proxmox restore.</li>
-<li>MEGA capacity limits off-site retention.</li>
-</ul>
-<p>Review exclusions whenever a service becomes important or starts storing unique data.</p>
-<h2 id="restore-validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Restore validation<a class="headerlink" href="#restore-validation" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Layer</th>
-<th>Required test</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PBS</td>
-<td>Restore one guest to an isolated VMID and boot it</td>
-</tr>
-<tr>
-<td>Configuration collection</td>
-<td>Restore one service directory and validate its contents</td>
-</tr>
-<tr>
-<td>Local Kopia</td>
-<td>Restore selected files to a temporary directory</td>
-</tr>
-<tr>
-<td>MEGA Kopia</td>
-<td>Connect to the remote repository and restore selected files</td>
-</tr>
-<tr>
-<td>Fedora backup</td>
-<td>Restore a test subset without overwriting the workstation</td>
-</tr>
-</tbody>
-</table>
-<p>After any major recovery, run every backup layer again and verify that the new snapshots are visible and restorable.</p>
+<p>The Relay does not receive access to the complete Docker Media host or the remaining Arr interfaces. Its setup is described in <a href="../../relay/relay/">Relay VPS</a>, with failure recovery in <a href="../../troubleshooting/wireguard-relay/">WireGuard relay troubleshooting</a>.</p>
+<p>Downloaded media and reproducible caches are treated differently from application configuration. Image-level backups and configuration collection therefore use explicit inclusions and exclusions rather than copying every media-related file.</p>
 
 
 
@@ -3990,7 +3570,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 11:05:27 UTC"><span class="timeago" datetime="2026-08-22T11:05:27+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 11:05:27 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 15:10:17 UTC"><span class="timeago" datetime="2026-08-22T15:10:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 15:10:17 UTC">2026-08-22</span>
   </span>
 
     
@@ -4000,7 +3580,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:17:34 UTC"><span class="timeago" datetime="2026-08-21T12:17:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:17:34 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 15:10:17 UTC"><span class="timeago" datetime="2026-08-22T15:10:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 15:10:17 UTC">2026-08-22</span>
   </span>
 
     
