@@ -1,39 +1,47 @@
-# Proxmox link recovery
+# :simple-proxmox: Proxmox link recovery
 
-This runbook documents a failure where Zion remained powered on but did not recover network connectivity after an upstream link interruption. Because every VM and LXC used the same bridge, the incident made the complete virtualized platform appear offline.
+Zion remained powered on after an upstream link interruption but did not always recover network connectivity. Because the management address, VMs and LXC containers all use the same bridge, the complete virtualized platform appeared offline.
 
-## Symptoms
+## :material-alert-outline: Symptoms
 
-- Zion stops responding over SSH and the Proxmox web interface;
-- every VM and LXC attached to the main bridge becomes unreachable;
-- the host is still powered on;
-- connectivity returns after a reboot or manual interface recovery;
-- the problem follows a switch, router, cable, or power interruption.
+- SSH and the Proxmox web interface stop responding;
+- every guest attached to the main bridge becomes unreachable;
+- Zion remains powered on;
+- connectivity returns after manual recovery or reboot;
+- the incident follows a router, switch, cable or power interruption.
 
-## Network model
+## :material-bridge: Network model
 
-```text
-physical interface (nic0)
-└── Linux bridge (vmbr0)
-    ├── Zion management address
-    ├── virtual machines
-    └── LXC containers
+```mermaid
+flowchart TD
+    nic["nic0 — physical interface"] --> bridge["vmbr0 — Linux bridge"]
+    bridge --> management["Zion management"]
+    bridge --> vm["Virtual machines"]
+    bridge --> lxc["LXC containers"]
 ```
 
-The management address belongs to `vmbr0`, not `nic0`. The physical interface is a port of the bridge.
+The management address belongs to `vmbr0`. `nic0` has no IP address and acts only as a bridge port.
 
-## Root causes found
+## :material-wrench-outline: Confirmed conditions
 
-Two host-side conditions contributed to unreliable recovery:
+The original configuration contained only:
 
-1. the physical interface was configured as `manual` without link-hotplug handling;
-2. Energy Efficient Ethernet did not recover reliably after link loss on the installed network path.
+```ini
+iface nic0 inet manual
+```
 
-The upstream interruption was historically triggered by a router firmware problem, but Zion still needed to recover correctly when carrier returned.
+Two changes were required:
 
-## Persistent configuration
+1. `nic0` was made eligible for hotplug-driven configuration;
+2. Energy Efficient Ethernet was disabled and the validated link parameters were reapplied when the interface was brought up.
 
-The relevant structure in `/etc/network/interfaces` is:
+Adding `allow-hotplug` restored the interface to `UP` after reconnecting the cable, but services still failed to recover reliably until EEE was disabled.
+
+`allow-hotplug` is not a continuous carrier monitor. It allows `ifupdown` to configure the interface after a device event. The `post-up` commands run when the interface is brought up, not after every ordinary carrier flap.
+
+## :material-file-cog-outline: Persistent configuration
+
+The verified `/etc/network/interfaces` structure is:
 
 ```ini
 auto lo
@@ -46,8 +54,8 @@ iface nic0 inet manual
 
 auto vmbr0
 iface vmbr0 inet static
-    address <zion-management-address>/<prefix>
-    gateway <lan-gateway>
+    address <ZION_MANAGEMENT_IP>/<PREFIX>
+    gateway <LAN_GATEWAY>
     bridge-ports nic0
     bridge-stp off
     bridge-fd 0
@@ -55,75 +63,88 @@ iface vmbr0 inet static
 source /etc/network/interfaces.d/*
 ```
 
-`allow-hotplug` reacts to carrier changes. The `post-up` commands reapply the validated link settings whenever the interface is brought up.
+The `1000 Mb/s`, full-duplex and autonegotiation values were verified for Zion and its switch port. Do not copy them to different hardware without checking both ends of the link.
 
-The speed and duplex values reflect the currently validated link. They must not be copied to different hardware without checking the NIC and switch capabilities.
-
-## Non-disruptive diagnosis
+## :material-magnify: Non-disruptive diagnosis
 
 ```bash
 ip -brief link
 ip -brief address
 bridge link
+ip route
 ethtool nic0
 ethtool --show-eee nic0
-ip route
 journalctl -u networking --no-pager -n 100
 ```
 
-Confirm:
+Confirm that:
 
-- `nic0` has carrier and is enslaved to `vmbr0`;
+- `nic0` has carrier and is attached to `vmbr0`;
 - the management address exists only on `vmbr0`;
 - the default route uses `vmbr0`;
 - negotiated speed and duplex match the switch;
 - EEE is disabled;
-- no duplicate address has been introduced manually.
+- no duplicate address or default route exists.
 
-## Recovery caution
+## :material-shield-lock-outline: Recovery safety
 
-Do not begin with `systemctl restart networking` on a remotely managed Proxmox host. Restarting the complete network stack can interrupt management access and every guest attached to the bridge.
+Do not begin with `systemctl restart networking` over SSH. Restarting the complete network stack can disconnect Zion and every guest attached to `vmbr0`.
 
-If an out-of-band console is available, the minimum temporary recovery may be:
+Use a local or out-of-band console. If an interface is actually administratively `DOWN`, bring up only that interface:
 
 ```bash
 ip link set nic0 up
 ip link set vmbr0 up
 ```
 
-Do not add an address or default route blindly. First inspect whether they already exist; duplicate addresses and routes can make recovery harder.
+These commands do not repair a carrier problem when both interfaces are already `UP`. Do not add an address or default route unless inspection proves it is missing; duplicate values make recovery harder.
 
-Use Proxmox-supported network reload tooling or a controlled reboot after validating the persistent configuration. Apply one change at a time and retain console access.
+The verified incident procedure was:
 
-## IPv6 timeout distinction
+1. inspect the current interface, bridge and route state;
+2. correct `/etc/network/interfaces`;
+3. disable EEE and verify the negotiated link;
+4. use a controlled reboot with console access to load the persistent configuration;
+5. test another physical link interruption.
 
-During the original incident, network restart also waited on IPv6-related timeouts. Disabling IPv6 is not a generic fix. It is appropriate only if IPv6 is intentionally unused on that bridge and the timeout has been confirmed in logs.
+## :material-router-network: IPv6 timeout
 
-Do not disable IPv6 globally to shorten an unexplained network restart.
+During the incident, `networking.service` also waited on IPv6-related timeouts. IPv6 was intentionally unused on `vmbr0`, so it was disabled only on that bridge:
 
-## Validation test
+```ini
+net.ipv6.conf.vmbr0.disable_ipv6 = 1
+```
 
-After applying the persistent configuration:
+The setting belongs in `/etc/sysctl.d/`. Do not disable IPv6 globally or use this as a generic fix without confirming the timeout in logs.
 
-1. keep a local or out-of-band console available;
-2. monitor `nic0` and `vmbr0` state;
-3. interrupt the physical link for a controlled period;
-4. restore the link;
-5. verify that carrier, bridge connectivity, management access, and guests return without reboot;
-6. confirm the EEE and negotiated-link settings again.
+## :material-check-decagram: Validation
+
+The final configuration was tested by disconnecting the physical link for ten minutes and reconnecting it while monitoring:
 
 ```bash
 watch -n1 'ip -brief link show nic0; ip -brief link show vmbr0'
 ```
 
-The test is successful only when Zion and the expected guests recover without manually reconstructing addresses or routes.
+After reconnecting, verify:
 
-## Related symptoms
+```bash
+ethtool --show-eee nic0
+ethtool nic0 | grep -E 'Speed|Duplex|Link detected'
+```
 
-| Symptom | Interpretation |
+The test passes only when:
+
+- `nic0` and `vmbr0` return without manual address or route creation;
+- EEE remains disabled;
+- the link reports the expected speed and full duplex;
+- Zion management, VMs and LXC containers become reachable without another reboot.
+
+## :material-call-split: Related symptoms
+
+| Symptom | Check first |
 |---|---|
-| SSH works but ping does not | Check Proxmox firewall policy before changing the bridge |
-| Proxmox UI fails only through the reverse proxy | Test the direct management path and proxy protocol handling |
-| Link is up but guests remain unreachable | Inspect bridge membership, forwarding, and guest interfaces |
-| Network restart waits for several minutes | Review `ifupdown2`, IPv6, and interface dependency logs |
-| Problem returns after every carrier loss | Confirm persistent hotplug and EEE settings were loaded |
+| SSH works but ping does not | Proxmox firewall policy |
+| Direct UI works but the reverse-proxy URL fails | Reverse proxy and protocol handling |
+| Link is up but guests remain unreachable | Bridge membership and guest interfaces |
+| Network restart waits for several minutes | `ifupdown2`, IPv6 and dependency logs |
+| Failure returns after another carrier loss | EEE state and persistent link settings |
