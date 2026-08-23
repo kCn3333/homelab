@@ -3206,21 +3206,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#confirm-the-owning-network" class="md-nav__link">
+  <a href="#diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Confirm the owning network
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prevent-new-collisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prevent new collisions
+        Diagnosis
       
     </span>
   </a>
@@ -3250,10 +3239,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lessons" class="md-nav__link">
+  <a href="#prevention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lessons
+        Prevention
       
     </span>
   </a>
@@ -3370,21 +3359,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#confirm-the-owning-network" class="md-nav__link">
+  <a href="#diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Confirm the owning network
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prevent-new-collisions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prevent new collisions
+        Diagnosis
       
     </span>
   </a>
@@ -3414,10 +3392,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lessons" class="md-nav__link">
+  <a href="#prevention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lessons
+        Prevention
       
     </span>
   </a>
@@ -3452,24 +3430,23 @@
   
 
 
-<h1 id="docker-route-collision">Docker route collision<a class="headerlink" href="#docker-route-collision" title="Permanent link">&para;</a></h1>
-<p>Docker networks can silently take ownership of an address range that belongs to the LAN, VPN, Kubernetes lab, or a cloud network. When this happens, the host sends traffic to a local Docker bridge instead of the real gateway.</p>
-<h2 id="symptoms">Symptoms<a class="headerlink" href="#symptoms" title="Permanent link">&para;</a></h2>
+<h1 id="docker-route-collision"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 0 0 .185-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.186.186 0 0 0-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 0 0 .184-.185V9.006a.185.185 0 0 0-.184-.186h-2.12a.185.185 0 0 0-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51q-.508.001-1.01.087c-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.75.75 0 0 0-.75.748 11.4 11.4 0 0 0 .692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137a15.7 15.7 0 0 0 2.93-.266 12.3 12.3 0 0 0 3.823-1.389 10.5 10.5 0 0 0 2.61-2.136c1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></svg></span> Docker route collision<a class="headerlink" href="#docker-route-collision" title="Permanent link">&para;</a></h1>
+<p>Docker can create a bridge whose subnet overlaps a LAN, VPN, Kubernetes or cloud network. The host then treats the remote destination as locally connected and sends traffic to the Docker bridge instead of the correct gateway.</p>
+<h2 id="symptoms"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Symptoms<a class="headerlink" href="#symptoms" title="Permanent link">&para;</a></h2>
 <ul>
-<li>SSH or API access to another homelab network fails only from the Docker host;</li>
-<li>other LAN machines can still reach the destination;</li>
+<li>the destination is unreachable only from the Docker host;</li>
+<li>other LAN machines can still reach it;</li>
 <li><code>ping</code> reports an unreachable host from a Docker bridge address;</li>
-<li>Semaphore cannot reach managed hosts even though its SSH key and inventory are correct;</li>
+<li>Semaphore cannot reach managed hosts even though its key and inventory are correct;</li>
 <li><code>ip route get</code> selects a <code>br-*</code> interface.</li>
 </ul>
-<p>The decisive check is:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;destination-address&gt;
+<h2 id="diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span> Diagnosis<a class="headerlink" href="#diagnosis" title="Permanent link">&para;</a></h2>
+<p>Check the route selected by the kernel:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;DESTINATION_IP&gt;
 </span></code></pre></div>
-<p>Incorrect result:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;destination-address&gt; dev br-&lt;docker-network-id&gt; src &lt;docker-bridge-address&gt;
+<p>A conflicting Docker route looks like:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;DESTINATION_IP&gt; dev br-&lt;DOCKER_NETWORK_ID&gt; src &lt;DOCKER_BRIDGE_IP&gt;
 </span></code></pre></div>
-<p>The kernel considers the destination locally connected to Docker and never sends it to the LAN gateway.</p>
-<h2 id="confirm-the-owning-network">Confirm the owning network<a class="headerlink" href="#confirm-the-owning-network" title="Permanent link">&para;</a></h2>
 <p>List Docker networks and their subnets:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>network<span class="w"> </span>ls
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
@@ -3478,58 +3455,49 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span>--format<span class="w"> </span><span class="s1">'{{.Name}} {{range .IPAM.Config}}{{.Subnet}} {{end}}'</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">done</span>
 </span></code></pre></div>
-<p>Compare every subnet with:</p>
+<p>After identifying the suspected network, inspect every attached container, including stopped ones:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>&lt;NETWORK_NAME&gt;
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>--all<span class="w"> </span>--filter<span class="w"> </span><span class="nv">network</span><span class="o">=</span>&lt;NETWORK_NAME&gt;
+</span></code></pre></div>
+<p>Compare its subnet with every range routed by the host:</p>
 <ul>
-<li>trusted and IoT LANs;</li>
-<li>the K3s lab network;</li>
+<li>trusted, IoT and lab VLANs;</li>
 <li>WireGuard networks;</li>
-<li>Oracle VCN ranges;</li>
+<li>cloud VCN ranges;</li>
 <li>Kubernetes pod and service ranges;</li>
-<li>any routed remote network.</li>
+<li>other remote networks.</li>
 </ul>
-<p>Do not assume that a private RFC 1918 range is free merely because it is not assigned directly to the host.</p>
-<h2 id="prevent-new-collisions">Prevent new collisions<a class="headerlink" href="#prevent-new-collisions" title="Permanent link">&para;</a></h2>
-<p>Logos uses a reviewed private address pool with small <code>/28</code> allocations for newly created Docker networks. The exact base range is part of the private address plan and is not published here.</p>
-<p>The important setting in <code>/etc/docker/daemon.json</code> is the relationship between the reviewed base pool and the per-network prefix size. A range that is safe on Logos is not automatically safe on another host. Before defining it, compare it with every routed network visible from that host.</p>
-<p>Changing <code>default-address-pools</code> affects newly created networks. It does not renumber an existing Docker bridge.</p>
-<h2 id="controlled-remediation">Controlled remediation<a class="headerlink" href="#controlled-remediation" title="Permanent link">&para;</a></h2>
+<p>A private RFC 1918 range is not automatically free for Docker.</p>
+<h2 id="controlled-remediation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Controlled remediation<a class="headerlink" href="#controlled-remediation" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Identify the exact Docker network owning the conflicting route.</li>
-<li>Identify every container or Compose project attached to it.</li>
-<li>Verify that persistent application data is outside the container writable layers.</li>
-<li>Define a non-overlapping replacement subnet or allow Docker to allocate from the reviewed pool.</li>
+<li>Confirm the exact Docker network that owns the conflicting route.</li>
+<li>Identify every container and Compose project attached to it.</li>
+<li>Verify that persistent data is stored outside container writable layers.</li>
+<li>Prepare a non-overlapping replacement network.</li>
 <li>Stop only the affected stack.</li>
 <li>Remove only the confirmed conflicting network.</li>
 <li>Recreate the stack and its network.</li>
-<li>verify the kernel route before testing SSH or the application.</li>
+<li>Verify the kernel route before testing SSH or the application.</li>
 </ol>
-<p>Useful inspection commands:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>&lt;network-name&gt;
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>--filter<span class="w"> </span><span class="nv">network</span><span class="o">=</span>&lt;network-name&gt;
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;destination-address&gt;
+<p>Do not use <code>docker network prune</code> during incident response. A network that appears unused may belong to a stopped stack.</p>
+<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;DESTINATION_IP&gt;
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>&lt;REPLACEMENT_NETWORK&gt;
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>ps<span class="w"> </span>--all<span class="w"> </span>--filter<span class="w"> </span><span class="nv">network</span><span class="o">=</span>&lt;REPLACEMENT_NETWORK&gt;
 </span></code></pre></div>
-<p>Avoid broad cleanup commands such as <code>docker network prune</code> during incident response. An unused-looking network may belong to a stopped stack that still depends on its name or subnet.</p>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<p>After recreation:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;destination-address&gt;
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span>&lt;replacement-network&gt;
-</span></code></pre></div>
-<p>The destination route must use the intended LAN/VLAN route, not a Docker bridge. Then validate:</p>
+<p>Confirm that:</p>
 <ul>
-<li>TCP reachability to the managed host;</li>
-<li>SSH with strict host-key verification;</li>
-<li>Semaphore connectivity using its dedicated automation key;</li>
-<li>all containers attached to the recreated network;</li>
-<li>Docker service restart persistence.</li>
+<li>the destination uses the intended LAN, VLAN or VPN route;</li>
+<li>no <code>br-*</code> interface owns the remote destination;</li>
+<li>TCP and SSH connectivity work;</li>
+<li>strict SSH host-key verification still succeeds;</li>
+<li>every container attached to the recreated network is healthy;</li>
+<li>the route remains correct after the next planned Docker restart.</li>
 </ul>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Routing must be checked before debugging SSH authentication.</li>
-<li>Docker network configuration is part of the infrastructure address plan.</li>
-<li>A controller using host networking still inherits the host's incorrect routes.</li>
-<li>Small default pools reduce waste but do not replace collision analysis.</li>
-<li>Existing networks must be recreated deliberately; changing <code>daemon.json</code> alone is not a repair.</li>
-</ul>
+<h2 id="prevention"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m-2-4-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9"/></svg></span> Prevention<a class="headerlink" href="#prevention" title="Permanent link">&para;</a></h2>
+<p>Logos uses a reviewed private address pool with small <code>/28</code> allocations for new Docker networks. The exact base range remains part of the private address plan.</p>
+<p>Before setting <code>default-address-pools</code> in <code>/etc/docker/daemon.json</code>, compare the complete pool with every local and routed network visible from that host.</p>
+<p>Changing <code>default-address-pools</code> affects only networks created afterwards. Existing bridges must be recreated deliberately.</p>
 
 
 
@@ -3552,7 +3520,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 23, 2026 10:12:57 UTC"><span class="timeago" datetime="2026-08-23T10:12:57+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 23, 2026 10:12:57 UTC">2026-08-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 23, 2026 10:31:00 UTC"><span class="timeago" datetime="2026-08-23T10:31:00+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 23, 2026 10:31:00 UTC">2026-08-23</span>
   </span>
 
     
