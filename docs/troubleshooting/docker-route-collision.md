@@ -1,30 +1,28 @@
-# Docker route collision
+# :simple-docker: Docker route collision
 
-Docker networks can silently take ownership of an address range that belongs to the LAN, VPN, Kubernetes lab, or a cloud network. When this happens, the host sends traffic to a local Docker bridge instead of the real gateway.
+Docker can create a bridge whose subnet overlaps a LAN, VPN, Kubernetes or cloud network. The host then treats the remote destination as locally connected and sends traffic to the Docker bridge instead of the correct gateway.
 
-## Symptoms
+## :material-alert-outline: Symptoms
 
-- SSH or API access to another homelab network fails only from the Docker host;
-- other LAN machines can still reach the destination;
+- the destination is unreachable only from the Docker host;
+- other LAN machines can still reach it;
 - `ping` reports an unreachable host from a Docker bridge address;
-- Semaphore cannot reach managed hosts even though its SSH key and inventory are correct;
+- Semaphore cannot reach managed hosts even though its key and inventory are correct;
 - `ip route get` selects a `br-*` interface.
 
-The decisive check is:
+## :material-magnify: Diagnosis
+
+Check the route selected by the kernel:
 
 ```bash
-ip route get <destination-address>
+ip route get <DESTINATION_IP>
 ```
 
-Incorrect result:
+A conflicting Docker route looks like:
 
 ```text
-<destination-address> dev br-<docker-network-id> src <docker-bridge-address>
+<DESTINATION_IP> dev br-<DOCKER_NETWORK_ID> src <DOCKER_BRIDGE_IP>
 ```
-
-The kernel considers the destination locally connected to Docker and never sends it to the LAN gateway.
-
-## Confirm the owning network
 
 List Docker networks and their subnets:
 
@@ -37,67 +35,57 @@ for network in $(docker network ls -q); do
 done
 ```
 
-Compare every subnet with:
+After identifying the suspected network, inspect every attached container, including stopped ones:
 
-- trusted and IoT LANs;
-- the K3s lab network;
+```bash
+docker network inspect <NETWORK_NAME>
+docker ps --all --filter network=<NETWORK_NAME>
+```
+
+Compare its subnet with every range routed by the host:
+
+- trusted, IoT and lab VLANs;
 - WireGuard networks;
-- Oracle VCN ranges;
+- cloud VCN ranges;
 - Kubernetes pod and service ranges;
-- any routed remote network.
+- other remote networks.
 
-Do not assume that a private RFC 1918 range is free merely because it is not assigned directly to the host.
+A private RFC 1918 range is not automatically free for Docker.
 
-## Prevent new collisions
+## :material-wrench-outline: Controlled remediation
 
-Logos uses a reviewed private address pool with small `/28` allocations for newly created Docker networks. The exact base range is part of the private address plan and is not published here.
-
-The important setting in `/etc/docker/daemon.json` is the relationship between the reviewed base pool and the per-network prefix size. A range that is safe on Logos is not automatically safe on another host. Before defining it, compare it with every routed network visible from that host.
-
-Changing `default-address-pools` affects newly created networks. It does not renumber an existing Docker bridge.
-
-## Controlled remediation
-
-1. Identify the exact Docker network owning the conflicting route.
-2. Identify every container or Compose project attached to it.
-3. Verify that persistent application data is outside the container writable layers.
-4. Define a non-overlapping replacement subnet or allow Docker to allocate from the reviewed pool.
+1. Confirm the exact Docker network that owns the conflicting route.
+2. Identify every container and Compose project attached to it.
+3. Verify that persistent data is stored outside container writable layers.
+4. Prepare a non-overlapping replacement network.
 5. Stop only the affected stack.
 6. Remove only the confirmed conflicting network.
 7. Recreate the stack and its network.
-8. verify the kernel route before testing SSH or the application.
+8. Verify the kernel route before testing SSH or the application.
 
-Useful inspection commands:
+Do not use `docker network prune` during incident response. A network that appears unused may belong to a stopped stack.
 
-```bash
-docker network inspect <network-name>
-docker ps --filter network=<network-name>
-ip route get <destination-address>
-```
-
-Avoid broad cleanup commands such as `docker network prune` during incident response. An unused-looking network may belong to a stopped stack that still depends on its name or subnet.
-
-## Validation
-
-After recreation:
+## :material-check-decagram: Validation
 
 ```bash
-ip route get <destination-address>
-docker network inspect <replacement-network>
+ip route get <DESTINATION_IP>
+docker network inspect <REPLACEMENT_NETWORK>
+docker ps --all --filter network=<REPLACEMENT_NETWORK>
 ```
 
-The destination route must use the intended LAN/VLAN route, not a Docker bridge. Then validate:
+Confirm that:
 
-- TCP reachability to the managed host;
-- SSH with strict host-key verification;
-- Semaphore connectivity using its dedicated automation key;
-- all containers attached to the recreated network;
-- Docker service restart persistence.
+- the destination uses the intended LAN, VLAN or VPN route;
+- no `br-*` interface owns the remote destination;
+- TCP and SSH connectivity work;
+- strict SSH host-key verification still succeeds;
+- every container attached to the recreated network is healthy;
+- the route remains correct after the next planned Docker restart.
 
-## Lessons
+## :material-shield-check-outline: Prevention
 
-- Routing must be checked before debugging SSH authentication.
-- Docker network configuration is part of the infrastructure address plan.
-- A controller using host networking still inherits the host's incorrect routes.
-- Small default pools reduce waste but do not replace collision analysis.
-- Existing networks must be recreated deliberately; changing `daemon.json` alone is not a repair.
+Logos uses a reviewed private address pool with small `/28` allocations for new Docker networks. The exact base range remains part of the private address plan.
+
+Before setting `default-address-pools` in `/etc/docker/daemon.json`, compare the complete pool with every local and routed network visible from that host.
+
+Changing `default-address-pools` affects only networks created afterwards. Existing bridges must be recreated deliberately.
