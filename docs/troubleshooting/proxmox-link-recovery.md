@@ -127,4 +127,3 @@ The test is successful only when Zion and the expected guests recover without ma
 | Link is up but guests remain unreachable | Inspect bridge membership, forwarding, and guest interfaces |
 | Network restart waits for several minutes | Review `ifupdown2`, IPv6, and interface dependency logs |
 | Problem returns after every carrier loss | Confirm persistent hotplug and EEE settings were loaded |
-
