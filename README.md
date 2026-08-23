@@ -83,10 +83,11 @@ The platform is tuned for low idle power consumption while retaining enough head
 |---|---|
 | Provider | Oracle Cloud Infrastructure  |
 | Shape | VM.Standard.E2.1.Micro |
-| CPU | 1/8 burstable OCPU |
+| CPU | 1 OCPU |
 | Memory | 1 GB RAM with 1 GB swap |
+| Network bandwidth | 0.5 Gbps |
 
-### K3s learning cluster
+### K3s cluster
 
 | Quantity | Hardware | Role |
 |---:|---|---|
