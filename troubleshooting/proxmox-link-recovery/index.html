@@ -3245,10 +3245,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#root-causes-found" class="md-nav__link">
+  <a href="#confirmed-conditions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Root causes found
+        Confirmed conditions
       
     </span>
   </a>
@@ -3278,10 +3278,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recovery-caution" class="md-nav__link">
+  <a href="#recovery-safety" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recovery caution
+        Recovery safety
       
     </span>
   </a>
@@ -3289,10 +3289,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ipv6-timeout-distinction" class="md-nav__link">
+  <a href="#ipv6-timeout" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IPv6 timeout distinction
+        IPv6 timeout
       
     </span>
   </a>
@@ -3300,10 +3300,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation-test" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation test
+        Validation
       
     </span>
   </a>
@@ -3414,10 +3414,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#root-causes-found" class="md-nav__link">
+  <a href="#confirmed-conditions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Root causes found
+        Confirmed conditions
       
     </span>
   </a>
@@ -3447,10 +3447,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recovery-caution" class="md-nav__link">
+  <a href="#recovery-safety" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recovery caution
+        Recovery safety
       
     </span>
   </a>
@@ -3458,10 +3458,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ipv6-timeout-distinction" class="md-nav__link">
+  <a href="#ipv6-timeout" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IPv6 timeout distinction
+        IPv6 timeout
       
     </span>
   </a>
@@ -3469,10 +3469,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation-test" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation test
+        Validation
       
     </span>
   </a>
@@ -3518,33 +3518,36 @@
   
 
 
-<h1 id="proxmox-link-recovery">Proxmox link recovery<a class="headerlink" href="#proxmox-link-recovery" title="Permanent link">&para;</a></h1>
-<p>This runbook documents a failure where Zion remained powered on but did not recover network connectivity after an upstream link interruption. Because every VM and LXC used the same bridge, the incident made the complete virtualized platform appear offline.</p>
-<h2 id="symptoms">Symptoms<a class="headerlink" href="#symptoms" title="Permanent link">&para;</a></h2>
+<h1 id="proxmox-link-recovery"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.928 1.825c-1.09.553-1.09.64-.07 1.78 5.655 6.295 7.004 7.782 7.107 7.782.139.017 7.971-8.542 8.058-8.801.034-.07-.208-.312-.519-.536-.415-.312-.864-.433-1.712-.467-1.59-.104-2.144.242-4.115 2.455-.899 1.003-1.66 1.833-1.66 1.833-.017 0-.76-.813-1.642-1.798S8.473 2.1 8.127 1.91c-.796-.45-2.421-.484-3.2-.086zM1.297 4.367C.45 4.695 0 5.007 0 5.248c0 .121 1.331 1.678 2.94 3.459 1.625 1.78 2.939 3.268 2.939 3.302s-1.331 1.522-2.94 3.303C1.314 17.11.017 18.683.035 18.822c.086.467 1.504 1.055 2.541 1.055 1.678-.018 2.058-.312 5.603-4.202 1.78-1.954 3.233-3.614 3.233-3.666 0-.069-1.435-1.694-3.199-3.63-2.3-2.508-3.423-3.632-3.96-3.874-.812-.398-2.126-.467-2.956-.138m18.467.12c-.502.26-1.764 1.505-3.943 3.891-1.763 1.937-3.199 3.562-3.199 3.631 0 .07 1.453 1.712 3.234 3.666 3.544 3.89 3.925 4.184 5.602 4.202 1.038 0 2.455-.588 2.542-1.055.017-.156-1.28-1.712-2.905-3.493-1.608-1.78-2.94-3.285-2.94-3.32s1.332-1.539 2.94-3.32C22.72 6.91 24.017 5.352 24 5.214c-.087-.45-1.366-.968-2.473-1.038-.795-.034-1.21.035-1.763.312zM7.954 16.973c-2.144 2.369-3.908 4.374-3.943 4.46-.034.07.208.312.52.537.414.311.864.432 1.711.467 1.574.103 2.161-.26 4.15-2.508.864-.968 1.608-1.78 1.625-1.78s.761.812 1.643 1.798c2.023 2.248 2.559 2.576 4.132 2.49.848-.035 1.297-.156 1.712-.467.311-.225.553-.467.519-.536-.087-.26-7.92-8.819-8.058-8.801-.069 0-1.867 1.954-4.011 4.34"/></svg></span> Proxmox link recovery<a class="headerlink" href="#proxmox-link-recovery" title="Permanent link">&para;</a></h1>
+<p>Zion remained powered on after an upstream link interruption but did not always recover network connectivity. Because the management address, VMs and LXC containers all use the same bridge, the complete virtualized platform appeared offline.</p>
+<h2 id="symptoms"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Symptoms<a class="headerlink" href="#symptoms" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Zion stops responding over SSH and the Proxmox web interface;</li>
-<li>every VM and LXC attached to the main bridge becomes unreachable;</li>
-<li>the host is still powered on;</li>
-<li>connectivity returns after a reboot or manual interface recovery;</li>
-<li>the problem follows a switch, router, cable, or power interruption.</li>
+<li>SSH and the Proxmox web interface stop responding;</li>
+<li>every guest attached to the main bridge becomes unreachable;</li>
+<li>Zion remains powered on;</li>
+<li>connectivity returns after manual recovery or reboot;</li>
+<li>the incident follows a router, switch, cable or power interruption.</li>
 </ul>
-<h2 id="network-model">Network model<a class="headerlink" href="#network-model" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>physical interface (nic0)
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── Linux bridge (vmbr0)
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    ├── Zion management address
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    ├── virtual machines
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    └── LXC containers
+<h2 id="network-model"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14v-3.09c-.72-.33-1.39-.73-2-1.2V14zm-2 4H3v-2H1v-2h2V7h2v1.43C6.8 10 9.27 11 12 11s5.2-1 7-2.57V7h2v7h2v2h-2v2h-2v-2H5zm12-7.09V14h2V9.71c-.61.47-1.28.87-2 1.2M16 14v-2.68c-.64.23-1.31.4-2 .52V14zm-3 0v-2.04L12 12l-1-.04V14zm-3 0v-2.16c-.69-.12-1.36-.29-2-.52V14z"/></svg></span> Network model<a class="headerlink" href="#network-model" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    nic["nic0 — physical interface"] --&gt; bridge["vmbr0 — Linux bridge"]
+    bridge --&gt; management["Zion management"]
+    bridge --&gt; vm["Virtual machines"]
+    bridge --&gt; lxc["LXC containers"]</code></pre>
+<p>The management address belongs to <code>vmbr0</code>. <code>nic0</code> has no IP address and acts only as a bridge port.</p>
+<h2 id="confirmed-conditions"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Confirmed conditions<a class="headerlink" href="#confirmed-conditions" title="Permanent link">&para;</a></h2>
+<p>The original configuration contained only:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">iface nic0 inet manual</span>
 </span></code></pre></div>
-<p>The management address belongs to <code>vmbr0</code>, not <code>nic0</code>. The physical interface is a port of the bridge.</p>
-<h2 id="root-causes-found">Root causes found<a class="headerlink" href="#root-causes-found" title="Permanent link">&para;</a></h2>
-<p>Two host-side conditions contributed to unreliable recovery:</p>
+<p>Two changes were required:</p>
 <ol>
-<li>the physical interface was configured as <code>manual</code> without link-hotplug handling;</li>
-<li>Energy Efficient Ethernet did not recover reliably after link loss on the installed network path.</li>
+<li><code>nic0</code> was made eligible for hotplug-driven configuration;</li>
+<li>Energy Efficient Ethernet was disabled and the validated link parameters were reapplied when the interface was brought up.</li>
 </ol>
-<p>The upstream interruption was historically triggered by a router firmware problem, but Zion still needed to recover correctly when carrier returned.</p>
-<h2 id="persistent-configuration">Persistent configuration<a class="headerlink" href="#persistent-configuration" title="Permanent link">&para;</a></h2>
-<p>The relevant structure in <code>/etc/network/interfaces</code> is:</p>
+<p>Adding <code>allow-hotplug</code> restored the interface to <code>UP</code> after reconnecting the cable, but services still failed to recover reliably until EEE was disabled.</p>
+<p><code>allow-hotplug</code> is not a continuous carrier monitor. It allows <code>ifupdown</code> to configure the interface after a device event. The <code>post-up</code> commands run when the interface is brought up, not after every ordinary carrier flap.</p>
+<h2 id="persistent-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 2a2 2 0 0 0-2 2v16c0 1.11.89 2 2 2h6v-2H6V4h7v5h5v3h2V8l-6-6m4 12a.26.26 0 0 0-.26.21l-.19 1.32c-.3.13-.59.29-.85.47l-1.24-.5c-.11 0-.24 0-.31.13l-1 1.73c-.06.11-.04.24.06.32l1.06.82a4.2 4.2 0 0 0 0 1l-1.06.82a.26.26 0 0 0-.06.32l1 1.73c.06.13.19.13.31.13l1.24-.5c.26.18.54.35.85.47l.19 1.32c.02.12.12.21.26.21h2c.11 0 .22-.09.24-.21l.19-1.32c.3-.13.57-.29.84-.47l1.23.5c.13 0 .26 0 .33-.13l1-1.73a.26.26 0 0 0-.06-.32l-1.07-.82c.02-.17.04-.33.04-.5s-.01-.33-.04-.5l1.06-.82a.26.26 0 0 0 .06-.32l-1-1.73c-.06-.13-.19-.13-.32-.13l-1.23.5c-.27-.18-.54-.35-.85-.47l-.19-1.32A.236.236 0 0 0 20 14m-1 3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5c-.84 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5"/></svg></span> Persistent configuration<a class="headerlink" href="#persistent-configuration" title="Permanent link">&para;</a></h2>
+<p>The verified <code>/etc/network/interfaces</code> structure is:</p>
 <div class="language-ini highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">auto lo</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">iface lo inet loopback</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -3555,86 +3558,96 @@
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="na">auto vmbr0</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="na">iface vmbr0 inet static</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="na">address &lt;zion-management-address&gt;/&lt;prefix&gt;</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="na">gateway &lt;lan-gateway&gt;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="na">address &lt;ZION_MANAGEMENT_IP&gt;/&lt;PREFIX&gt;</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="na">gateway &lt;LAN_GATEWAY&gt;</span>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="na">bridge-ports nic0</span>
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="na">bridge-stp off</span>
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="na">bridge-fd 0</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="na">source /etc/network/interfaces.d/*</span>
 </span></code></pre></div>
-<p><code>allow-hotplug</code> reacts to carrier changes. The <code>post-up</code> commands reapply the validated link settings whenever the interface is brought up.</p>
-<p>The speed and duplex values reflect the currently validated link. They must not be copied to different hardware without checking the NIC and switch capabilities.</p>
-<h2 id="non-disruptive-diagnosis">Non-disruptive diagnosis<a class="headerlink" href="#non-disruptive-diagnosis" title="Permanent link">&para;</a></h2>
+<p>The <code>1000 Mb/s</code>, full-duplex and autonegotiation values were verified for Zion and its switch port. Do not copy them to different hardware without checking both ends of the link.</p>
+<h2 id="non-disruptive-diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span> Non-disruptive diagnosis<a class="headerlink" href="#non-disruptive-diagnosis" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip<span class="w"> </span>-brief<span class="w"> </span>link
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ip<span class="w"> </span>-brief<span class="w"> </span>address
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>bridge<span class="w"> </span>link
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ethtool<span class="w"> </span>nic0
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ethtool<span class="w"> </span>--show-eee<span class="w"> </span>nic0
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>ip<span class="w"> </span>route
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ip<span class="w"> </span>route
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ethtool<span class="w"> </span>nic0
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>ethtool<span class="w"> </span>--show-eee<span class="w"> </span>nic0
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>networking<span class="w"> </span>--no-pager<span class="w"> </span>-n<span class="w"> </span><span class="m">100</span>
 </span></code></pre></div>
-<p>Confirm:</p>
+<p>Confirm that:</p>
 <ul>
-<li><code>nic0</code> has carrier and is enslaved to <code>vmbr0</code>;</li>
+<li><code>nic0</code> has carrier and is attached to <code>vmbr0</code>;</li>
 <li>the management address exists only on <code>vmbr0</code>;</li>
 <li>the default route uses <code>vmbr0</code>;</li>
 <li>negotiated speed and duplex match the switch;</li>
 <li>EEE is disabled;</li>
-<li>no duplicate address has been introduced manually.</li>
+<li>no duplicate address or default route exists.</li>
 </ul>
-<h2 id="recovery-caution">Recovery caution<a class="headerlink" href="#recovery-caution" title="Permanent link">&para;</a></h2>
-<p>Do not begin with <code>systemctl restart networking</code> on a remotely managed Proxmox host. Restarting the complete network stack can interrupt management access and every guest attached to the bridge.</p>
-<p>If an out-of-band console is available, the minimum temporary recovery may be:</p>
+<h2 id="recovery-safety"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg></span> Recovery safety<a class="headerlink" href="#recovery-safety" title="Permanent link">&para;</a></h2>
+<p>Do not begin with <code>systemctl restart networking</code> over SSH. Restarting the complete network stack can disconnect Zion and every guest attached to <code>vmbr0</code>.</p>
+<p>Use a local or out-of-band console. If an interface is actually administratively <code>DOWN</code>, bring up only that interface:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>nic0<span class="w"> </span>up
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vmbr0<span class="w"> </span>up
 </span></code></pre></div>
-<p>Do not add an address or default route blindly. First inspect whether they already exist; duplicate addresses and routes can make recovery harder.</p>
-<p>Use Proxmox-supported network reload tooling or a controlled reboot after validating the persistent configuration. Apply one change at a time and retain console access.</p>
-<h2 id="ipv6-timeout-distinction">IPv6 timeout distinction<a class="headerlink" href="#ipv6-timeout-distinction" title="Permanent link">&para;</a></h2>
-<p>During the original incident, network restart also waited on IPv6-related timeouts. Disabling IPv6 is not a generic fix. It is appropriate only if IPv6 is intentionally unused on that bridge and the timeout has been confirmed in logs.</p>
-<p>Do not disable IPv6 globally to shorten an unexplained network restart.</p>
-<h2 id="validation-test">Validation test<a class="headerlink" href="#validation-test" title="Permanent link">&para;</a></h2>
-<p>After applying the persistent configuration:</p>
+<p>These commands do not repair a carrier problem when both interfaces are already <code>UP</code>. Do not add an address or default route unless inspection proves it is missing; duplicate values make recovery harder.</p>
+<p>The verified incident procedure was:</p>
 <ol>
-<li>keep a local or out-of-band console available;</li>
-<li>monitor <code>nic0</code> and <code>vmbr0</code> state;</li>
-<li>interrupt the physical link for a controlled period;</li>
-<li>restore the link;</li>
-<li>verify that carrier, bridge connectivity, management access, and guests return without reboot;</li>
-<li>confirm the EEE and negotiated-link settings again.</li>
+<li>inspect the current interface, bridge and route state;</li>
+<li>correct <code>/etc/network/interfaces</code>;</li>
+<li>disable EEE and verify the negotiated link;</li>
+<li>use a controlled reboot with console access to load the persistent configuration;</li>
+<li>test another physical link interruption.</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>watch<span class="w"> </span>-n1<span class="w"> </span><span class="s1">'ip -brief link show nic0; ip -brief link show vmbr0'</span>
+<h2 id="ipv6-timeout"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9c-1.1 0-2 .9-2 2v4a2 2 0 0 0 2 2h6v2h-1c-.55 0-1 .45-1 1H2v2h7c0 .55.45 1 1 1h4c.55 0 1-.45 1-1h7v-2h-7c0-.55-.45-1-1-1h-1v-2h6c1.11 0 2-.89 2-2v-4a2 2 0 0 0-2-2zm1 3h2v2H6zm3.5 0h2v2h-2zm3.5 0h2v2h-2z"/></svg></span> IPv6 timeout<a class="headerlink" href="#ipv6-timeout" title="Permanent link">&para;</a></h2>
+<p>During the incident, <code>networking.service</code> also waited on IPv6-related timeouts. IPv6 was intentionally unused on <code>vmbr0</code>, so it was disabled only on that bridge:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="na">net.ipv6.conf.vmbr0.disable_ipv6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
 </span></code></pre></div>
-<p>The test is successful only when Zion and the expected guests recover without manually reconstructing addresses or routes.</p>
-<h2 id="related-symptoms">Related symptoms<a class="headerlink" href="#related-symptoms" title="Permanent link">&para;</a></h2>
+<p>The setting belongs in <code>/etc/sysctl.d/</code>. Do not disable IPv6 globally or use this as a generic fix without confirming the timeout in logs.</p>
+<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<p>The final configuration was tested by disconnecting the physical link for ten minutes and reconnecting it while monitoring:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>watch<span class="w"> </span>-n1<span class="w"> </span><span class="s1">'ip -brief link show nic0; ip -brief link show vmbr0'</span>
+</span></code></pre></div>
+<p>After reconnecting, verify:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ethtool<span class="w"> </span>--show-eee<span class="w"> </span>nic0
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ethtool<span class="w"> </span>nic0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'Speed|Duplex|Link detected'</span>
+</span></code></pre></div>
+<p>The test passes only when:</p>
+<ul>
+<li><code>nic0</code> and <code>vmbr0</code> return without manual address or route creation;</li>
+<li>EEE remains disabled;</li>
+<li>the link reports the expected speed and full duplex;</li>
+<li>Zion management, VMs and LXC containers become reachable without another reboot.</li>
+</ul>
+<h2 id="related-symptoms"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14 4 2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4M10 4H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3"/></svg></span> Related symptoms<a class="headerlink" href="#related-symptoms" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Symptom</th>
-<th>Interpretation</th>
+<th>Check first</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>SSH works but ping does not</td>
-<td>Check Proxmox firewall policy before changing the bridge</td>
+<td>Proxmox firewall policy</td>
 </tr>
 <tr>
-<td>Proxmox UI fails only through the reverse proxy</td>
-<td>Test the direct management path and proxy protocol handling</td>
+<td>Direct UI works but the reverse-proxy URL fails</td>
+<td>Reverse proxy and protocol handling</td>
 </tr>
 <tr>
 <td>Link is up but guests remain unreachable</td>
-<td>Inspect bridge membership, forwarding, and guest interfaces</td>
+<td>Bridge membership and guest interfaces</td>
 </tr>
 <tr>
 <td>Network restart waits for several minutes</td>
-<td>Review <code>ifupdown2</code>, IPv6, and interface dependency logs</td>
+<td><code>ifupdown2</code>, IPv6 and dependency logs</td>
 </tr>
 <tr>
-<td>Problem returns after every carrier loss</td>
-<td>Confirm persistent hotplug and EEE settings were loaded</td>
+<td>Failure returns after another carrier loss</td>
+<td>EEE state and persistent link settings</td>
 </tr>
 </tbody>
 </table>
@@ -3660,7 +3673,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 23, 2026 10:13:48 UTC"><span class="timeago" datetime="2026-08-23T10:13:48+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 23, 2026 10:13:48 UTC">2026-08-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 23, 2026 10:31:42 UTC"><span class="timeago" datetime="2026-08-23T10:31:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 23, 2026 10:31:42 UTC">2026-08-23</span>
   </span>
 
     
