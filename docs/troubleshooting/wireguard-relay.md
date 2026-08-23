@@ -158,4 +158,3 @@ The incident is resolved only after:
 - the public request succeeds;
 - an unrelated LAN destination remains unreachable from Relay;
 - the active configuration survives a controlled service or host restart.
-
