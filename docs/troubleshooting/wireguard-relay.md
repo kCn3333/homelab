@@ -1,33 +1,38 @@
-# WireGuard relay troubleshooting
+# :simple-wireguard: WireGuard relay troubleshooting
 
-This runbook diagnoses the external Relay-to-Logos path without immediately restarting the tunnel or changing firewall rules.
+This runbook checks the Relay-to-Logos path from the public service towards the backend. Do not restart the tunnel or change firewall rules before identifying the failed layer.
 
-## Failure layers
-
-```text
-public DNS
-└── Relay Caddy
-    └── WireGuard handshake
-        └── route to backend
-            └── Logos forwarding and NAT
-                └── backend listener
+```mermaid
+flowchart LR
+    dns["Public DNS"] --> caddy["Relay Caddy"]
+    caddy --> tunnel["WireGuard"]
+    tunnel --> routing["Routing"]
+    routing --> nat["Logos firewall + NAT"]
+    nat --> backend["Backend"]
 ```
 
-Work from the outside inward. A successful handshake proves only that the two WireGuard peers can exchange encrypted packets; it does not prove that Relay has a route to the backend or that Logos will forward the traffic.
+## :material-shield-lock-outline: 1. Preserve access
 
-## 1. Preserve access
+Before changing WireGuard:
 
-Before changing WireGuard remotely:
+- keep the current administrative session open;
+- prepare the cloud provider console as the out-of-band recovery path;
+- confirm that an encrypted backup of the active configuration exists;
+- change one peer at a time;
+- do not restart both peers together.
 
-- confirm that SSH does not depend exclusively on the tunnel being modified;
-- keep the existing terminal open;
-- copy the active configuration to a protected temporary location;
-- validate generated configuration before applying it;
-- avoid restarting both peers simultaneously.
+If a local pre-change copy is required, keep it root-only:
 
-If the tunnel is the only administration path, defer disruptive changes until an out-of-band recovery method is available.
+```bash
+sudo install \
+    --mode=0600 \
+    /etc/wireguard/wg0.conf \
+    /root/wg0.conf.prechange
+```
 
-## 2. Check service state
+Do not publish raw output from `wg show`, `ip address`, `tcpdump` or firewall commands. It may contain endpoints, public keys and private network details.
+
+## :material-vpn: 2. Check WireGuard
 
 Run on both peers:
 
@@ -38,123 +43,162 @@ ip -brief address show wg0
 ip link show wg0
 ```
 
-Check:
+Confirm:
 
-- interface is present and `UP`;
-- peer configuration is loaded;
-- latest handshake is recent;
+- `wg0` exists and is `UP`;
+- the expected peer is loaded;
+- the handshake is recent;
 - receive and transmit counters increase during a test;
 - both peers use the intended MTU.
 
-No recent handshake points to the public endpoint, UDP reachability, peer keys, or host firewall. A recent handshake with no application traffic points further inside the route and forwarding path.
+No recent handshake points to the public UDP path, peer configuration or host firewall. A current handshake with failed application traffic points to routing, forwarding, NAT or the backend.
 
-## 3. Validate routes
+## :material-router-network: 3. Validate routes
 
 On Relay:
 
 ```bash
-ip route get <approved-backend-address>
+ip -4 -brief address show ens3
+ip -4 -brief address show wg0
+ip -4 route show table main
+ip -4 route get <LOGOS_WG_IP>
+ip -4 route get <APPROVED_BACKEND_IP>
 ```
 
-The selected route must use `wg0`. If it does not:
+The peer and approved backend routes must use `wg0`.
 
-- inspect the peer's `AllowedIPs`;
-- check for a more specific competing route;
-- check for an overlapping cloud or local subnet;
-- confirm that the active configuration matches the file on disk.
+Check for:
 
-On Logos, verify the return path and LAN egress interface:
+- identical prefixes assigned to both `ens3` and `wg0`;
+- a WireGuard address that conflicts with the cloud gateway;
+- a competing route with the same or longer prefix;
+- differences between the active peer configuration and the file on disk.
+
+The `/32` entries in `AllowedIPs` are intentional. They restrict cryptokey routing to approved peers and backend hosts and must not be removed merely to hide an address overlap.
+
+On Logos:
 
 ```bash
-ip route get <approved-backend-address>
+ip -4 route get <APPROVED_BACKEND_IP>
 ```
 
-Do not copy an interface name from an older host. Use the interface selected by the current route.
+Use the LAN interface returned by this command. Do not copy an interface name from an older host.
 
-## 4. Validate forwarding
+## :material-shield-lock-outline: 4. Validate firewalls and NAT
+
+On Relay:
+
+```bash
+sudo iptables -L INPUT -n -v --line-numbers
+sudo iptables -L OUTPUT -n -v --line-numbers
+```
+
+On Logos:
 
 ```bash
 sysctl net.ipv4.ip_forward
 sudo iptables -L FORWARD -n -v --line-numbers
 sudo iptables -t nat -L POSTROUTING -n -v --line-numbers
-```
-
-Expected behaviour:
-
-1. established return traffic is accepted;
-2. the approved tunnel-to-backend path is accepted;
-3. any required source NAT uses the actual LAN egress interface;
-4. remaining traffic arriving from the tunnel is dropped.
-
-Packet counters are more useful than visually inspecting rule text. If a request does not increment the expected rule, it is not reaching that rule or an earlier rule is taking precedence.
-
-After correcting a verified rule, persist and compare the active and saved rulesets:
-
-```bash
-sudo netfilter-persistent save
 sudo iptables-save
 ```
 
-Do not insert broad temporary accepts into a production ruleset merely to make the request work. Narrow the test to one source, destination, protocol, and port.
+Expected state:
 
-## 5. Trace packets
+1. IPv4 forwarding is enabled on Logos.
+2. Established return traffic is accepted.
+3. Only approved tunnel-to-backend paths are accepted.
+4. Required source NAT uses the current LAN egress interface.
+5. Remaining forwarded traffic from `wg0` is dropped.
 
-Observe the same request at consecutive interfaces:
+Do not add broad temporary `ACCEPT` rules. Restrict every test rule to one source, destination, protocol and port.
+
+If a firewall change is required, save the pre-change state before editing:
 
 ```bash
-sudo tcpdump -ni wg0 host <approved-backend-address>
-sudo tcpdump -ni <lan-interface> host <approved-backend-address>
+sudo sh -c \
+    'umask 077; iptables-save > /root/iptables-prechange.rules'
 ```
 
-Interpretation:
+Do not run `netfilter-persistent save` yet. Persist the rules only after completing the validation section.
+
+## :material-swap-horizontal: 5. Trace packets
+
+Generate one backend request and observe it at consecutive interfaces:
+
+```bash
+sudo tcpdump -ni wg0 host <APPROVED_BACKEND_IP>
+sudo tcpdump -ni <LAN_INTERFACE> host <APPROVED_BACKEND_IP>
+```
 
 | Observation | Likely cause |
 |---|---|
-| No packet on Relay `wg0` | Caddy backend, route, or Relay firewall |
+| No packet on Relay `wg0` | Caddy backend, route or Relay firewall |
 | Packet on Relay `wg0`, absent on Logos | Tunnel peer or Internet path |
-| Packet on Logos `wg0`, absent on LAN interface | Forwarding or firewall rule |
-| SYN reaches backend, no SYN-ACK returns | Backend listener, host firewall, or missing return NAT |
+| Packet on Logos `wg0`, absent on the LAN | Forwarding or firewall rule |
+| SYN reaches the backend, no SYN-ACK returns | Backend listener, host firewall or missing return NAT |
 | Response returns to Logos but not Relay | Reverse forwarding or tunnel route |
 
-## 6. Validate MTU
+## :material-ruler: 6. Validate MTU
 
-Both peers currently use MTU `1420`. Test the largest non-fragmented ICMP payload appropriate for that MTU:
-
-```bash
-ping -c 5 -M do -s 1392 <peer-tunnel-address>
-ping -c 1 -M do -s 1393 <peer-tunnel-address>
-```
-
-The first test should pass. The second should fail locally with `message too long` when MTU `1420` is active.
-
-If Relay returns to a jumbo-derived MTU after restart, ensure the MTU is declared in the persistent WireGuard interface configuration. `wg syncconf` does not update the Linux interface MTU.
-
-## 7. Validate the backend and Caddy
-
-From Relay, test the approved backend directly through its tunnel route before testing the public hostname:
+Both peers currently use MTU `1420`:
 
 ```bash
-curl --fail --head --connect-timeout 5 http://<approved-backend-address>:<port>
+ping -c 5 -M do -s 1392 <PEER_WG_IP>
+ping -c 1 -M do -s 1393 <PEER_WG_IP>
 ```
 
-Then validate and inspect Caddy:
+The first test should pass. The second should fail locally with `message too long`.
+
+If the Relay returns to a jumbo-derived MTU after restart, confirm that `MTU = 1420` exists in the persistent interface configuration. `wg syncconf` does not change the Linux interface MTU.
+
+## :material-server-network: 7. Validate the backend and Caddy
+
+From Relay, test the backend without printing its response:
+
+```bash
+curl \
+    --fail \
+    --silent \
+    --show-error \
+    --output /dev/null \
+    http://<APPROVED_BACKEND_IP>:<PORT>/
+```
+
+Then check Caddy and the public path:
 
 ```bash
 sudo caddy validate --config /etc/caddy/Caddyfile
 sudo systemctl is-active caddy
-sudo journalctl -u caddy --since '30 minutes ago' --no-pager
+sudo journalctl \
+    --unit=caddy \
+    --since='30 minutes ago' \
+    --no-pager
+
+curl \
+    --fail \
+    --silent \
+    --show-error \
+    --output /dev/null \
+    https://<PUBLIC_SERVICE_HOSTNAME>/
 ```
 
-An HTTP 502 normally means Caddy could not complete the upstream request. It does not by itself identify WireGuard, routing, firewall, or backend failure.
+HTTP `502` means that Caddy could not complete the upstream request. It does not identify which internal layer failed.
 
-## Recovery confirmation
+## :material-check-decagram: Recovery confirmation
 
-The incident is resolved only after:
+Before persisting a changed firewall, confirm that:
 
 - both peers have a recent handshake;
-- the backend route uses `wg0`;
-- the intended forwarding and NAT counters increase;
+- peer and backend routes use `wg0`;
+- expected forwarding and NAT counters increase;
 - the direct backend request succeeds;
 - the public request succeeds;
-- an unrelated LAN destination remains unreachable from Relay;
-- the active configuration survives a controlled service or host restart.
+- an unrelated LAN destination remains unreachable from Relay.
+
+Only after these checks pass:
+
+```bash
+sudo netfilter-persistent save
+```
+
+Finally, perform a controlled service or host restart and repeat the checks. Remove the root-only pre-change copies after the configuration has remained stable.
