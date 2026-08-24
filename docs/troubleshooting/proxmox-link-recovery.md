@@ -107,6 +107,42 @@ The verified incident procedure was:
 4. use a controlled reboot with console access to load the persistent configuration;
 5. test another physical link interruption.
 
+## :material-robot-outline: Logos network recovery
+
+Zion also runs a `network-recovery` mechanism for Logos. After the physical link returns, it uses `qm guest exec` to restart networking inside the VM. This path depends on QEMU Guest Agent on both sides:
+
+- Guest Agent support must be enabled in the Proxmox VM configuration;
+- the `qemu-guest-agent` package and service must be present inside Logos;
+- the VM must have the QEMU `virtio-serial` device attached.
+
+Enable the agent for Logos on Zion:
+
+```bash
+qm set 101 --agent enabled=1
+```
+
+Then perform a complete stop and start of the VM. A live change or ordinary in-guest service restart is not enough to attach a missing `virtio-serial` device.
+
+Without that device, `qemu-guest-agent.service` inside Logos remains in `Dependency failed`, and every later `qm guest exec` call fails even if the package is installed correctly.
+
+Validate the dependency before relying on automatic recovery:
+
+```bash
+qm config 101 | grep '^agent:'
+qm agent 101 ping
+qm guest cmd 101 network-get-interfaces
+```
+
+Inside Logos, verify:
+
+```bash
+systemctl is-enabled qemu-guest-agent.service
+systemctl is-active qemu-guest-agent.service
+systemctl status qemu-guest-agent.service --no-pager
+```
+
+Only test `network-recovery` after `qm agent 101 ping` succeeds. Enabling the service inside Logos alone does not prove that Proxmox attached the required virtual device.
+
 ## :material-router-network: IPv6 timeout
 
 During the incident, `networking.service` also waited on IPv6-related timeouts. IPv6 was intentionally unused on `vmbr0`, so it was disabled only on that bridge:
