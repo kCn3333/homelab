@@ -116,11 +116,10 @@ The exact firmware values, disk commands, measured result, and the ErP versus Wa
 ## :fontawesome-solid-book: Related documents
 
 - [Energy optimization](0-power-management.md)
-- [Logos operations server](4-logos.md)
+- [Migration journal](1-migration.md)
 - [Internal Caddy](caddy.md)
 - [HAProxy for the K3s cluster](haproxy.md)
 - [Supporting LXC services](supporting-services.md)
 - [Home Assistant and Zigbee](home-assistant.md)
 - [Backup and recovery](3-backup-and-recovery.md)
 - [Maintenance and updates](../automation/update-strategy.md)
-- [Migration journal](1-migration.md)
