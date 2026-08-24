@@ -32,12 +32,13 @@ The move also provided a practical reason to learn Proxmox, VM, LXC, virtual net
 
 ## :simple-ubuntu: Logos decision
 
-Logos was created as a KVM virtual machine and became the main general-purpose Linux server.
+Logos was created as a virtual machine and became the main general-purpose Linux server.
 
 | Property | Choice |
 |---|---|
 | System | Ubuntu 26.04 LTS |
 | Memory | 16 GB |
+| CPU | 4 vCPU |
 | Virtual storage | 1 TB |
 | Role | Main operational server |
 
@@ -63,18 +64,16 @@ The detailed cutovers are documented in [Caddy](caddy.md), [Supporting LXC servi
 
 Most applications kept the same software and Compose-based deployment. Their containers and persistent data moved from Oracle Legacy to Logos:
 
-- Nextcloud;
-- Immich;
-- Mealie;
-- Homepage;
-- Gitea and its database;
-- Vaultwarden;
-- Uptime Kuma;
-- Semaphore;
-- Portainer;
-- Watchtower;
-- Hikvision Manager and server-stats;
-- supporting PostgreSQL and utility containers.
+- Nextcloud
+- Immich
+- Homepage
+- Gitea
+- Vaultwarden
+- Uptime Kuma
+- PostgreSQL
+- Semaphore
+- Portainer
+- ...
 
 Stateful stacks were stopped for the final data copy. Compose definitions, bind mounts, ownership, scheduled jobs, proxy settings and external consumers were checked before the old containers were retired.
 
@@ -106,7 +105,7 @@ The move was performed in stages. Oracle Legacy stayed available until each repl
 ### 2. Build the platform
 
 - install Proxmox on Zion;
-- create Logos with Ubuntu 26.04 LTS, 16 GB RAM and 1 TB of virtual storage;
+- create Logos with Ubuntu 26.04 LTS;
 - create the dedicated infrastructure LXC containers;
 - verify networking and backups before moving production data.
 
