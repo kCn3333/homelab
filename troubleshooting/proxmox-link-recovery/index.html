@@ -3289,6 +3289,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#logos-network-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logos network recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ipv6-timeout" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3458,6 +3469,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#logos-network-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logos network recovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ipv6-timeout" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3600,18 +3622,41 @@
 <li>use a controlled reboot with console access to load the persistent configuration;</li>
 <li>test another physical link interruption.</li>
 </ol>
+<h2 id="logos-network-recovery"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 15.5c0 1.11-.89 2-2 2s-2-.89-2-2 .9-2 2-2 2 .9 2 2m-9-2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.89 2-2-.89-2-2-2M23 15v3c0 .55-.45 1-1 1h-1v1c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2v-1H2c-.55 0-1-.45-1-1v-3c0-.55.45-1 1-1h1c0-3.87 3.13-7 7-7h1V5.73c-.6-.34-1-.99-1-1.73 0-1.1.9-2 2-2s2 .9 2 2c0 .74-.4 1.39-1 1.73V7h1c3.87 0 7 3.13 7 7h1c.55 0 1 .45 1 1m-2 1h-2v-2c0-2.76-2.24-5-5-5h-4c-2.76 0-5 2.24-5 5v2H3v1h2v3h14v-3h2z"/></svg></span> Logos network recovery<a class="headerlink" href="#logos-network-recovery" title="Permanent link">&para;</a></h2>
+<p>Zion also runs a <code>network-recovery</code> mechanism for Logos. After the physical link returns, it uses <code>qm guest exec</code> to restart networking inside the VM. This path depends on QEMU Guest Agent on both sides:</p>
+<ul>
+<li>Guest Agent support must be enabled in the Proxmox VM configuration;</li>
+<li>the <code>qemu-guest-agent</code> package and service must be present inside Logos;</li>
+<li>the VM must have the QEMU <code>virtio-serial</code> device attached.</li>
+</ul>
+<p>Enable the agent for Logos on Zion:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>qm<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">101</span><span class="w"> </span>--agent<span class="w"> </span><span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+</span></code></pre></div>
+<p>Then perform a complete stop and start of the VM. A live change or ordinary in-guest service restart is not enough to attach a missing <code>virtio-serial</code> device.</p>
+<p>Without that device, <code>qemu-guest-agent.service</code> inside Logos remains in <code>Dependency failed</code>, and every later <code>qm guest exec</code> call fails even if the package is installed correctly.</p>
+<p>Validate the dependency before relying on automatic recovery:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>qm<span class="w"> </span>config<span class="w"> </span><span class="m">101</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'^agent:'</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>qm<span class="w"> </span>agent<span class="w"> </span><span class="m">101</span><span class="w"> </span>ping
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>qm<span class="w"> </span>guest<span class="w"> </span>cmd<span class="w"> </span><span class="m">101</span><span class="w"> </span>network-get-interfaces
+</span></code></pre></div>
+<p>Inside Logos, verify:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>systemctl<span class="w"> </span>is-enabled<span class="w"> </span>qemu-guest-agent.service
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>systemctl<span class="w"> </span>is-active<span class="w"> </span>qemu-guest-agent.service
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>systemctl<span class="w"> </span>status<span class="w"> </span>qemu-guest-agent.service<span class="w"> </span>--no-pager
+</span></code></pre></div>
+<p>Only test <code>network-recovery</code> after <code>qm agent 101 ping</code> succeeds. Enabling the service inside Logos alone does not prove that Proxmox attached the required virtual device.</p>
 <h2 id="ipv6-timeout"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9c-1.1 0-2 .9-2 2v4a2 2 0 0 0 2 2h6v2h-1c-.55 0-1 .45-1 1H2v2h7c0 .55.45 1 1 1h4c.55 0 1-.45 1-1h7v-2h-7c0-.55-.45-1-1-1h-1v-2h6c1.11 0 2-.89 2-2v-4a2 2 0 0 0-2-2zm1 3h2v2H6zm3.5 0h2v2h-2zm3.5 0h2v2h-2z"/></svg></span> IPv6 timeout<a class="headerlink" href="#ipv6-timeout" title="Permanent link">&para;</a></h2>
 <p>During the incident, <code>networking.service</code> also waited on IPv6-related timeouts. IPv6 was intentionally unused on <code>vmbr0</code>, so it was disabled only on that bridge:</p>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="na">net.ipv6.conf.vmbr0.disable_ipv6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="na">net.ipv6.conf.vmbr0.disable_ipv6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
 </span></code></pre></div>
 <p>The setting belongs in <code>/etc/sysctl.d/</code>. Do not disable IPv6 globally or use this as a generic fix without confirming the timeout in logs.</p>
 <h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
 <p>The final configuration was tested by disconnecting the physical link for ten minutes and reconnecting it while monitoring:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>watch<span class="w"> </span>-n1<span class="w"> </span><span class="s1">'ip -brief link show nic0; ip -brief link show vmbr0'</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>watch<span class="w"> </span>-n1<span class="w"> </span><span class="s1">'ip -brief link show nic0; ip -brief link show vmbr0'</span>
 </span></code></pre></div>
 <p>After reconnecting, verify:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ethtool<span class="w"> </span>--show-eee<span class="w"> </span>nic0
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ethtool<span class="w"> </span>nic0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'Speed|Duplex|Link detected'</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ethtool<span class="w"> </span>--show-eee<span class="w"> </span>nic0
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>ethtool<span class="w"> </span>nic0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'Speed|Duplex|Link detected'</span>
 </span></code></pre></div>
 <p>The test passes only when:</p>
 <ul>
@@ -3673,7 +3718,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 23, 2026 10:31:42 UTC"><span class="timeago" datetime="2026-08-23T10:31:42+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 23, 2026 10:31:42 UTC">2026-08-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 24, 2026 07:59:31 UTC"><span class="timeago" datetime="2026-08-24T07:59:31+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 24, 2026 07:59:31 UTC">2026-08-24</span>
   </span>
 
     
