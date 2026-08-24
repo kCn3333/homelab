@@ -11,7 +11,7 @@ Home Assistant, ESPHome and the Portainer Agent run in Docker inside a dedicated
 | System | Debian 13, privileged LXC |
 | CPU | 2 vCPU |
 | Memory | 3 GB |
-| Root disk | 20 GB |
+| Root disk | 30 GB |
 | Features | `nesting=1` |
 | USB device | Zigbee coordinator through `dev0` |
 
