@@ -791,6 +791,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#service-replacements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service replacements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dedicated-lxc-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -806,17 +817,6 @@
     <span class="md-ellipsis">
       
         Logos decision
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#service-replacements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Service replacements
       
     </span>
   </a>
@@ -3610,6 +3610,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#service-replacements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service replacements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dedicated-lxc-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3625,17 +3636,6 @@
     <span class="md-ellipsis">
       
         Logos decision
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#service-replacements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Service replacements
       
     </span>
   </a>
@@ -3927,7 +3927,7 @@
 <thead>
 <tr>
 <th>Oracle Legacy</th>
-<th>Zion and Logos</th>
+<th>Zion</th>
 </tr>
 </thead>
 <tbody>
@@ -3958,6 +3958,36 @@
 </tbody>
 </table>
 <p>The move also provided a practical reason to learn Proxmox, VM, LXC, virtual networking and image-level recovery.</p>
+<h2 id="service-replacements"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 10v3h6v5H8v3l-6-5.5zm14-1.5L16 3v3h-6v5h6v3z"/></svg></span> Service replacements<a class="headerlink" href="#service-replacements" title="Permanent link">&para;</a></h2>
+<p>Three old components were deliberately replaced rather than copied:</p>
+<table>
+<thead>
+<tr>
+<th>On Oracle Legacy</th>
+<th>Replacement</th>
+<th>Destination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nginx Proxy Manager</td>
+<td>Caddy</td>
+<td>Dedicated LXC</td>
+</tr>
+<tr>
+<td>Pi-hole</td>
+<td>AdGuard Home</td>
+<td>Dedicated LXC</td>
+</tr>
+<tr>
+<td>Duplicati</td>
+<td>Kopia</td>
+<td>Logos</td>
+</tr>
+</tbody>
+</table>
+<p>Caddy and AdGuard were separated because proxying and DNS are needed by many other services. They can be updated, restarted and restored without touching the main Docker VM.</p>
+<p>The detailed cutovers are documented in <a href="../caddy/">Caddy</a>, <a href="../supporting-services/">Supporting LXC services</a> and <a href="backup-and-recovery.md">Backup and recovery</a>.</p>
 <h2 id="dedicated-lxc-containers"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg></span> Dedicated LXC containers<a class="headerlink" href="#dedicated-lxc-containers" title="Permanent link">&para;</a></h2>
 <p>PatchMon and PBS were added as part of the new platform rather than copied from Oracle Legacy.</p>
 <table>
@@ -4024,52 +4054,19 @@
 </tbody>
 </table>
 <p>Ubuntu 26.04 LTS was selected for a fresh support window, familiar Debian-based administration and straightforward support for Docker, WireGuard and automation tools.</p>
-<p>A VM was chosen instead of another LXC because Logos needed a normal Linux environment for Docker, WireGuard, automation and general administration. Its current responsibilities are documented in <a href="logos.md">Logos operations server</a>; the VM/LXC rules belong to <a href="platform.md">Zion platform</a>.</p>
-<h2 id="service-replacements"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 10v3h6v5H8v3l-6-5.5zm14-1.5L16 3v3h-6v5h6v3z"/></svg></span> Service replacements<a class="headerlink" href="#service-replacements" title="Permanent link">&para;</a></h2>
-<p>Three old components were deliberately replaced rather than copied:</p>
-<table>
-<thead>
-<tr>
-<th>On Oracle Legacy</th>
-<th>Replacement</th>
-<th>Destination</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Nginx Proxy Manager</td>
-<td>Caddy</td>
-<td>Dedicated LXC</td>
-</tr>
-<tr>
-<td>Pi-hole</td>
-<td>AdGuard Home</td>
-<td>Dedicated LXC</td>
-</tr>
-<tr>
-<td>Duplicati</td>
-<td>Kopia</td>
-<td>Logos</td>
-</tr>
-</tbody>
-</table>
-<p>Caddy and AdGuard were separated because proxying and DNS are needed by many other services. They can be updated, restarted and restored without touching the main Docker VM.</p>
-<p>The detailed cutovers are documented in <a href="../caddy/">Caddy</a>, <a href="../supporting-services/">Supporting LXC services</a> and <a href="backup-and-recovery.md">Backup and recovery</a>.</p>
+<p>A VM was chosen instead of another LXC because Logos needed a normal Linux environment for Docker, WireGuard, automation and general administration. </p>
 <h2 id="services-moved-without-replacement"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15l-1.89 1.07L16 8.61l1.96-1.11zM6.04 7.5 12 10.85l1.96-1.1-5.88-3.4zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg></span> Services moved without replacement<a class="headerlink" href="#services-moved-without-replacement" title="Permanent link">&para;</a></h2>
 <p>Most applications kept the same software and Compose-based deployment. Their containers and persistent data moved from Oracle Legacy to Logos:</p>
 <ul>
-<li>Nextcloud;</li>
-<li>Immich;</li>
-<li>Mealie;</li>
-<li>Homepage;</li>
-<li>Gitea and its database;</li>
-<li>Vaultwarden;</li>
-<li>Uptime Kuma;</li>
-<li>Semaphore;</li>
-<li>Portainer;</li>
-<li>Watchtower;</li>
-<li>Hikvision Manager and server-stats;</li>
-<li>supporting PostgreSQL and utility containers.</li>
+<li>Nextcloud</li>
+<li>Immich</li>
+<li>Homepage</li>
+<li>Gitea</li>
+<li>Vaultwarden</li>
+<li>PostgreSQL</li>
+<li>Uptime Kuma</li>
+<li>Semaphore</li>
+<li>Portainer</li>
 </ul>
 <p>Simple stateless containers could be recreated directly from Compose. Databases and Nextcloud required a controlled cutover.</p>
 <h2 id="stateful-cutovers"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 12v1.5a4 4 0 0 1 4 4c0 .82-.25 1.58-.67 2.21l-1.09-1.09c.17-.34.26-.72.26-1.12A2.5 2.5 0 0 0 19 15v1.5l-2.25-2.25zm0 11v-1.5a4 4 0 0 1-4-4c0-.82.25-1.58.67-2.21l1.09 1.09c-.17.34-.26.72-.26 1.12A2.5 2.5 0 0 0 19 20v-1.5l2.25 2.25zM12 3c4.42 0 8 1.79 8 4s-3.58 4-8 4-8-1.79-8-4 3.58-4 8-4M4 9c0 2.21 3.58 4 8 4 1.11 0 2.17-.11 3.14-.32-.95.86-1.64 1.99-1.96 3.28L12 16c-4.42 0-8-1.79-8-4zm16 0v2h-.5l-.6.03c.7-.6 1.1-1.29 1.1-2.03M4 14c0 2.21 3.58 4 8 4l1-.03c.09 1.06.42 2.03.95 2.91L12 21c-4.42 0-8-1.79-8-4z"/></svg></span> Stateful cutovers<a class="headerlink" href="#stateful-cutovers" title="Permanent link">&para;</a></h2>
@@ -4211,7 +4208,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 24, 2026 11:18:17 UTC"><span class="timeago" datetime="2026-08-24T11:18:17+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 24, 2026 11:18:17 UTC">2026-08-24</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 24, 2026 12:36:40 UTC"><span class="timeago" datetime="2026-08-24T12:36:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 24, 2026 12:36:40 UTC">2026-08-24</span>
   </span>
 
     
