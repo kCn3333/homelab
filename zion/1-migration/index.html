@@ -3715,7 +3715,7 @@
 </table>
 <p>The move also provided a practical reason to learn Proxmox, VM, LXC, virtual networking and image-level recovery.</p>
 <h2 id="logos-decision"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.61.455a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41M12.92.8C8.923.777 5.137 2.941 3.148 6.451a5 5 0 0 1 .26-.007 4.9 4.9 0 0 1 2.585.737A8.32 8.32 0 0 1 12.688 3.6 4.94 4.94 0 0 1 13.723.834 11 11 0 0 0 12.92.8m9.226 4.994a4.9 4.9 0 0 1-1.918 2.246 8.36 8.36 0 0 1-.273 8.303 4.9 4.9 0 0 1 1.632 2.54 11.16 11.16 0 0 0 .559-13.089M3.41 7.932A3.41 3.41 0 0 0 0 11.342a3.41 3.41 0 0 0 3.41 3.409 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zm2.027 7.866a4.9 4.9 0 0 1-2.915.358 11.1 11.1 0 0 0 7.991 6.698 11.2 11.2 0 0 0 2.422.249 4.88 4.88 0 0 1-.999-2.85 9 9 0 0 1-.836-.136 8.3 8.3 0 0 1-5.663-4.32zm11.405.928a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41"/></svg></span> Logos decision<a class="headerlink" href="#logos-decision" title="Permanent link">&para;</a></h2>
-<p>Logos was created as a KVM virtual machine and became the main general-purpose Linux server.</p>
+<p>Logos was created as a virtual machine and became the main general-purpose Linux server.</p>
 <table>
 <thead>
 <tr>
@@ -3731,6 +3731,10 @@
 <tr>
 <td>Memory</td>
 <td>16 GB</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>4 vCPU</td>
 </tr>
 <tr>
 <td>Virtual storage</td>
@@ -3777,18 +3781,16 @@
 <h2 id="services-moved-without-replacement"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15l-1.89 1.07L16 8.61l1.96-1.11zM6.04 7.5 12 10.85l1.96-1.1-5.88-3.4zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z"/></svg></span> Services moved without replacement<a class="headerlink" href="#services-moved-without-replacement" title="Permanent link">&para;</a></h2>
 <p>Most applications kept the same software and Compose-based deployment. Their containers and persistent data moved from Oracle Legacy to Logos:</p>
 <ul>
-<li>Nextcloud;</li>
-<li>Immich;</li>
-<li>Mealie;</li>
-<li>Homepage;</li>
-<li>Gitea and its database;</li>
-<li>Vaultwarden;</li>
-<li>Uptime Kuma;</li>
-<li>Semaphore;</li>
-<li>Portainer;</li>
-<li>Watchtower;</li>
-<li>Hikvision Manager and server-stats;</li>
-<li>supporting PostgreSQL and utility containers.</li>
+<li>Nextcloud</li>
+<li>Immich</li>
+<li>Homepage</li>
+<li>Gitea</li>
+<li>Vaultwarden</li>
+<li>Uptime Kuma</li>
+<li>PostgreSQL</li>
+<li>Semaphore</li>
+<li>Portainer</li>
+<li>...</li>
 </ul>
 <p>Stateful stacks were stopped for the final data copy. Compose definitions, bind mounts, ownership, scheduled jobs, proxy settings and external consumers were checked before the old containers were retired.</p>
 <h2 id="dedicated-lxc-containers"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg></span> Dedicated LXC containers<a class="headerlink" href="#dedicated-lxc-containers" title="Permanent link">&para;</a></h2>
@@ -3836,7 +3838,7 @@
 <h3 id="2-build-the-platform">2. Build the platform<a class="headerlink" href="#2-build-the-platform" title="Permanent link">&para;</a></h3>
 <ul>
 <li>install Proxmox on Zion;</li>
-<li>create Logos with Ubuntu 26.04 LTS, 16 GB RAM and 1 TB of virtual storage;</li>
+<li>create Logos with Ubuntu 26.04 LTS;</li>
 <li>create the dedicated infrastructure LXC containers;</li>
 <li>verify networking and backups before moving production data.</li>
 </ul>
@@ -3905,7 +3907,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 24, 2026 09:59:30 UTC"><span class="timeago" datetime="2026-08-24T09:59:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 24, 2026 09:59:30 UTC">2026-08-24</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 24, 2026 10:06:59 UTC"><span class="timeago" datetime="2026-08-24T10:06:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 24, 2026 10:06:59 UTC">2026-08-24</span>
   </span>
 
     
