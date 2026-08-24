@@ -16,8 +16,6 @@ Zion replaced Oracle Legacy, the original bare-metal Debian server. Oracle worke
 
 This is still one physical server, so Proxmox does not make the homelab highly available. A Zion hardware failure affects every running guest. The improvement is separation, recovery, and easier maintenance—not physical redundancy.
 
-Hardware selection and the build history are documented separately under **Infrastructure**. This page covers the working platform.
-
 ## :fontawesome-solid-layer-group: Virtualization layout
 
 | System | Type | Main role | Why this type? |
