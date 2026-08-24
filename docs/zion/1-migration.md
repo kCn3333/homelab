@@ -19,7 +19,7 @@ Oracle Legacy began as a low-power Debian server running most homelab workloads 
 
 The old server had reached the point where adding another container made the system harder to manage rather than more useful.
 
-| Oracle Legacy | Zion and Logos |
+| Oracle Legacy | Zion |
 |---|---|
 | One Debian installation for almost everything | Separate operating environments for infrastructure and applications |
 | One Docker restart affected unrelated services | Critical services have independent lifecycles |
@@ -29,6 +29,20 @@ The old server had reached the point where adding another container made the sys
 | Limited room for new hardware and storage | Zion provides NVMe workloads, HDD data and future expansion |
 
 The move also provided a practical reason to learn Proxmox, VM, LXC, virtual networking and image-level recovery.
+
+## :material-swap-horizontal-bold: Service replacements
+
+Three old components were deliberately replaced rather than copied:
+
+| On Oracle Legacy | Replacement | Destination |
+|---|---|---|
+| Nginx Proxy Manager | Caddy | Dedicated LXC |
+| Pi-hole | AdGuard Home | Dedicated LXC |
+| Duplicati | Kopia | Logos |
+
+Caddy and AdGuard were separated because proxying and DNS are needed by many other services. They can be updated, restarted and restored without touching the main Docker VM.
+
+The detailed cutovers are documented in [Caddy](caddy.md), [Supporting LXC services](supporting-services.md) and [Backup and recovery](backup-and-recovery.md).
 
 ## :material-server-network: Dedicated LXC containers
 
@@ -58,38 +72,21 @@ Logos was created as a virtual machine and became the main general-purpose Linux
 
 Ubuntu 26.04 LTS was selected for a fresh support window, familiar Debian-based administration and straightforward support for Docker, WireGuard and automation tools.
 
-A VM was chosen instead of another LXC because Logos needed a normal Linux environment for Docker, WireGuard, automation and general administration. Its current responsibilities are documented in [Logos operations server](logos.md); the VM/LXC rules belong to [Zion platform](platform.md).
-
-## :material-swap-horizontal-bold: Service replacements
-
-Three old components were deliberately replaced rather than copied:
-
-| On Oracle Legacy | Replacement | Destination |
-|---|---|---|
-| Nginx Proxy Manager | Caddy | Dedicated LXC |
-| Pi-hole | AdGuard Home | Dedicated LXC |
-| Duplicati | Kopia | Logos |
-
-Caddy and AdGuard were separated because proxying and DNS are needed by many other services. They can be updated, restarted and restored without touching the main Docker VM.
-
-The detailed cutovers are documented in [Caddy](caddy.md), [Supporting LXC services](supporting-services.md) and [Backup and recovery](backup-and-recovery.md).
+A VM was chosen instead of another LXC because Logos needed a normal Linux environment for Docker, WireGuard, automation and general administration. 
 
 ## :material-package-variant-closed: Services moved without replacement
 
 Most applications kept the same software and Compose-based deployment. Their containers and persistent data moved from Oracle Legacy to Logos:
 
-- Nextcloud;
-- Immich;
-- Mealie;
-- Homepage;
-- Gitea and its database;
-- Vaultwarden;
-- Uptime Kuma;
-- Semaphore;
-- Portainer;
-- Watchtower;
-- Hikvision Manager and server-stats;
-- supporting PostgreSQL and utility containers.
+- Nextcloud
+- Immich
+- Homepage
+- Gitea
+- Vaultwarden
+- PostgreSQL
+- Uptime Kuma
+- Semaphore
+- Portainer
 
 Simple stateless containers could be recreated directly from Compose. Databases and Nextcloud required a controlled cutover.
 
