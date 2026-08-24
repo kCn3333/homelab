@@ -30,6 +30,20 @@ The old server had reached the point where adding another container made the sys
 
 The move also provided a practical reason to learn Proxmox, VM, LXC, virtual networking and image-level recovery.
 
+## :material-server-network: Dedicated LXC containers
+
+PatchMon and PBS were added as part of the new platform rather than copied from Oracle Legacy.
+
+| Source or change | Destination |
+|---|---|
+| HAProxy container | HAProxy LXC |
+| Home Assistant and ESPHome containers | Home Assistant LXC |
+| Jellyfin and the Arr stack | Docker Media LXC |
+| New update-monitoring service | PatchMon LXC |
+| New image-backup service | PBS LXC |
+
+Garage remained a Docker service but moved to Logos. Its data and logical node identity were preserved, then every S3 consumer was updated and tested against the new endpoint.
+
 ## :simple-ubuntu: Logos decision
 
 Logos was created as a virtual machine and became the main general-purpose Linux server.
@@ -77,19 +91,120 @@ Most applications kept the same software and Compose-based deployment. Their con
 
 Stateful stacks were stopped for the final data copy. Compose definitions, bind mounts, ownership, scheduled jobs, proxy settings and external consumers were checked before the old containers were retired.
 
-## :material-server-network: Dedicated LXC containers
+## :material-package-variant-closed: Services moved without replacement
 
-PatchMon and PBS were added as part of the new platform rather than copied from Oracle Legacy.
+Most applications kept the same software and Compose-based deployment. Their containers and persistent data moved from Oracle Legacy to Logos:
 
-| Source or change | Destination |
-|---|---|
-| HAProxy container | HAProxy LXC |
-| Home Assistant and ESPHome containers | Home Assistant LXC |
-| Jellyfin and the Arr stack | Docker Media LXC |
-| New update-monitoring service | PatchMon LXC |
-| New image-backup service | PBS LXC |
+- Nextcloud;
+- Immich;
+- Mealie;
+- Homepage;
+- Gitea and its database;
+- Vaultwarden;
+- Uptime Kuma;
+- Semaphore;
+- Portainer;
+- Watchtower;
+- Hikvision Manager and server-stats;
+- supporting PostgreSQL and utility containers.
 
-Garage remained a Docker service but moved to Logos. Its data and logical node identity were preserved, then every S3 consumer was updated and tested against the new endpoint.
+Simple stateless containers could be recreated directly from Compose. Databases and Nextcloud required a controlled cutover.
+
+## :material-database-sync: Stateful cutovers
+
+### :simple-postgresql: PostgreSQL
+
+A live PostgreSQL data directory was never treated as an ordinary bind mount. Copying it while the database is writing can produce a dataset that looks complete but cannot be restored safely.
+
+Two migration paths were acceptable:
+
+1. stop every application writing to the database, stop PostgreSQL, and copy the complete data directory with ownership and modes preserved; or
+2. create a logical export with `pg_dump` or `pg_dumpall`, then import it into a clean destination database.
+
+The destination had to use a compatible PostgreSQL major version. After startup, roles, databases, extensions and application access were checked before the source stack was retired.
+
+### :simple-nextcloud: Nextcloud
+
+Nextcloud used MariaDB and required one coordinated outage. The application files, configuration, user data and database directory had to represent the same point in time.
+
+#### 1. Stop the source stack
+
+```bash
+cd /home/kcn/docker/nextcloud
+docker compose down
+docker compose ps
+```
+
+The final copy starts only after the application and MariaDB containers have stopped. The destination must use a compatible MariaDB image before the copied database directory is mounted.
+
+#### 2. Copy the complete stack data
+
+```bash
+sudo rsync \
+    -aHAXx \
+    --numeric-ids \
+    --info=progress2 \
+    --rsync-path="sudo rsync" \
+    /home/kcn/docker/nextcloud/ \
+    <DESTINATION_USER>@<LOGOS_HOST>:/home/kcn/docker/nextcloud/
+```
+
+The trailing slash copies the contents of `nextcloud/` into the destination directory. `-aHAXx` preserves normal metadata, hard links, ACLs and extended attributes without crossing into another filesystem. `--numeric-ids` prevents account-name differences from silently changing ownership.
+
+#### 3. Recreate the external Docker network
+
+If the Compose file references an external `proxy` network, create it before starting the stack:
+
+```bash
+docker network inspect proxy >/dev/null 2>&1 || docker network create proxy
+```
+
+#### 4. Update the trusted proxy
+
+Edit the migrated configuration:
+
+```bash
+nvim /home/kcn/docker/nextcloud/data/config/config.php
+```
+
+Add the address of the proxy that now forwards requests to Nextcloud:
+
+```php
+'trusted_proxies' =>
+array (
+  0 => '<EXISTING_PROXY_ADDRESS>',
+  1 => '<INTERNAL_CADDY_ADDRESS>',
+),
+```
+
+This is only an example of the array layout; use the next free numeric index. Existing required entries remain in place. Only actual proxy addresses should be trusted; adding a broad Docker or LAN range is unnecessary.
+
+#### 5. Start and validate the destination
+
+```bash
+cd /home/kcn/docker/nextcloud
+docker compose up -d
+docker compose ps
+docker exec -u www-data nextcloud-app-1 php occ status
+```
+
+Before changing normal traffic, verify login, file listing, one upload and download, application logs and the database connection.
+
+#### 6. Restore background jobs
+
+Add the job to the crontab of the account allowed to run Docker:
+
+```cron
+*/5 * * * * flock -n /tmp/nextcloud_cron.lock docker exec -u www-data nextcloud-app-1 php -f /var/www/html/cron.php
+```
+
+Run the command once manually and confirm that it exits successfully before relying on the schedule.
+
+#### 7. Switch traffic
+
+Update the proxy route only after direct validation succeeds. Keep the source stack stopped but intact during the observation period.
+
+Running both copies against diverging data was not an acceptable rollback method. Rollback meant stopping the destination and starting the unchanged source, not synchronizing two active Nextcloud instances.
 
 ## :material-format-list-numbered: Migration plan
 
