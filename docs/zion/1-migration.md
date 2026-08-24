@@ -78,23 +78,6 @@ The detailed cutovers are documented in [Caddy](caddy.md), [Supporting LXC servi
 
 Most applications kept the same software and Compose-based deployment. Their containers and persistent data moved from Oracle Legacy to Logos:
 
-- Nextcloud
-- Immich
-- Homepage
-- Gitea
-- Vaultwarden
-- Uptime Kuma
-- PostgreSQL
-- Semaphore
-- Portainer
-- ...
-
-Stateful stacks were stopped for the final data copy. Compose definitions, bind mounts, ownership, scheduled jobs, proxy settings and external consumers were checked before the old containers were retired.
-
-## :material-package-variant-closed: Services moved without replacement
-
-Most applications kept the same software and Compose-based deployment. Their containers and persistent data moved from Oracle Legacy to Logos:
-
 - Nextcloud;
 - Immich;
 - Mealie;
