@@ -8,13 +8,11 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/troubleshooting/wireguard-relay/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/troubleshooting/wol-vlan-route-asymmetry/">
       
       
-        <link rel="prev" href="../proxmox-link-recovery/">
+        <link rel="prev" href="../wireguard-relay/">
       
-      
-        <link rel="next" href="../wol-vlan-route-asymmetry/">
       
       
         
@@ -25,7 +23,7 @@
     
     
       
-        <title>WireGuard relay troubleshooting - > Homelab Documentation</title>
+        <title>WOL VLAN route asymmetry - > Homelab Documentation</title>
       
     
     
@@ -84,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#wireguard-relay-troubleshooting" class="md-skip">
+        <a href="#wol-vlan-route-asymmetry" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              WireGuard relay troubleshooting
+              WOL VLAN route asymmetry
             
           </span>
         </div>
@@ -3188,6 +3186,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireguard-relay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WireGuard relay troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -3207,7 +3233,7 @@
   <span class="md-ellipsis">
     
   
-    WireGuard relay troubleshooting
+    WOL VLAN route asymmetry
   
 
     
@@ -3225,7 +3251,7 @@
   <span class="md-ellipsis">
     
   
-    WireGuard relay troubleshooting
+    WOL VLAN route asymmetry
   
 
     
@@ -3251,10 +3277,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-preserve-access" class="md-nav__link">
+  <a href="#symptoms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Preserve access
+        Symptoms
       
     </span>
   </a>
@@ -3262,10 +3288,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-check-wireguard" class="md-nav__link">
+  <a href="#network-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Check WireGuard
+        Network model
       
     </span>
   </a>
@@ -3273,10 +3299,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-validate-routes" class="md-nav__link">
+  <a href="#diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Validate routes
+        Diagnosis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diagnosis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-test-the-same-endpoint-from-several-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Test the same endpoint from several locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-inspect-the-selected-route" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inspect the selected route
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-confirm-the-packet-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Confirm the packet path
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root cause
       
     </span>
   </a>
@@ -3284,10 +3360,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-validate-firewalls-and-nat" class="md-nav__link">
+  <a href="#corrective-action" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Validate firewalls and NAT
+        Corrective action
       
     </span>
   </a>
@@ -3295,10 +3371,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-trace-packets" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Trace packets
+        Validation
       
     </span>
   </a>
@@ -3306,10 +3382,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-validate-mtu" class="md-nav__link">
+  <a href="#prevention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Validate MTU
+        Prevention
       
     </span>
   </a>
@@ -3317,21 +3393,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-validate-the-backend-and-caddy" class="md-nav__link">
+  <a href="#related-documents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Validate the backend and Caddy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recovery-confirmation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recovery confirmation
+        Related documents
       
     </span>
   </a>
@@ -3342,34 +3407,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../wol-vlan-route-asymmetry/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    WOL VLAN route asymmetry
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -3409,10 +3446,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-preserve-access" class="md-nav__link">
+  <a href="#symptoms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Preserve access
+        Symptoms
       
     </span>
   </a>
@@ -3420,10 +3457,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-check-wireguard" class="md-nav__link">
+  <a href="#network-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Check WireGuard
+        Network model
       
     </span>
   </a>
@@ -3431,10 +3468,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-validate-routes" class="md-nav__link">
+  <a href="#diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Validate routes
+        Diagnosis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diagnosis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-test-the-same-endpoint-from-several-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Test the same endpoint from several locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-inspect-the-selected-route" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inspect the selected route
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-confirm-the-packet-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Confirm the packet path
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root cause
       
     </span>
   </a>
@@ -3442,10 +3529,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-validate-firewalls-and-nat" class="md-nav__link">
+  <a href="#corrective-action" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Validate firewalls and NAT
+        Corrective action
       
     </span>
   </a>
@@ -3453,10 +3540,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-trace-packets" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Trace packets
+        Validation
       
     </span>
   </a>
@@ -3464,10 +3551,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-validate-mtu" class="md-nav__link">
+  <a href="#prevention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Validate MTU
+        Prevention
       
     </span>
   </a>
@@ -3475,21 +3562,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-validate-the-backend-and-caddy" class="md-nav__link">
+  <a href="#related-documents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Validate the backend and Caddy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recovery-confirmation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recovery confirmation
+        Related documents
       
     </span>
   </a>
@@ -3517,180 +3593,169 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/troubleshooting/wireguard-relay.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/troubleshooting/wol-vlan-route-asymmetry.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="wireguard-relay-troubleshooting"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.98 11.645S24.533 0 11.735 0C.418 0 .064 11.17.064 11.17S-1.6 24 11.997 24C25.04 24 23.98 11.645 23.98 11.645M8.155 7.576c2.4-1.47 5.469-.571 6.618 1.638.218.419.246 1.063.108 1.503-.477 1.516-1.601 2.366-3.145 2.728.455-.39.817-.832.933-1.442a2.11 2.11 0 0 0-.364-1.677 2.14 2.14 0 0 0-2.465-.75c-.95.36-1.47 1.228-1.377 2.294.087.99.839 1.632 2.245 1.876-.21.111-.372.193-.53.281a5.1 5.1 0 0 0-1.644 1.43c-.143.192-.24.208-.458.075-2.827-1.729-3.009-6.067.078-7.956zM6.04 18.258c-.455.116-.895.286-1.359.438.227-1.532 2.021-2.943 3.539-2.782a3.9 3.9 0 0 0-.74 2.072c-.504.093-.98.155-1.44.272M15.703 3.3c.448.017.898.01 1.347.02a2 2 0 0 1 .334.047 3 3 0 0 1-.34.434c-.16.15-.341.296-.573.069-.055-.055-.187-.042-.283-.044-.447-.005-.894-.02-1.34-.003a8 8 0 0 0-1.154.118c-.072.013-.178.25-.146.338.078.207.191.435.359.567.619.49 1.277.928 1.9 1.413.604.472 1.167.99 1.51 1.7.446.928.46 1.9.267 2.877-.322 1.63-1.147 2.98-2.483 3.962-.538.395-1.205.62-1.821.903-.543.25-1.1.465-1.644.712-.98.446-1.53 1.51-1.369 2.615.149 1.015 1.04 1.862 2.059 2.037 1.223.21 2.486-.586 2.785-1.83.336-1.397-.423-2.646-1.845-3.024l-.256-.066c.38-.17.708-.291 1.012-.458q.793-.437 1.558-.925c.15-.096.231-.096.36.014.977.846 1.56 1.898 1.724 3.187.27 2.135-.74 4.096-2.646 5.101-2.948 1.555-6.557-.215-7.208-3.484-.558-2.8 1.418-5.34 3.797-5.83 1.023-.211 1.958-.637 2.685-1.425.47-.508.697-.944.775-1.141a3.2 3.2 0 0 0 .217-1.158 2.7 2.7 0 0 0-.237-.992c-.248-.566-1.2-1.466-1.435-1.656l-2.24-1.754c-.079-.065-.168-.06-.36-.047-.23.016-.815.048-1.067-.018.204-.155.76-.38 1-.56-.726-.49-1.554-.314-2.315-.46.176-.328 1.046-.831 1.541-.888a7 7 0 0 0-.135-.822c-.03-.111-.154-.22-.263-.283-.262-.154-.541-.281-.843-.434a1.76 1.76 0 0 1 .906-.28 3.4 3.4 0 0 1 .908.088c.54.123.97.042 1.399-.324-.338-.136-.676-.26-1.003-.407a10 10 0 0 1-.942-.493c.85.118 1.671.437 2.54.32l.022-.118-2.018-.47c1.203-.11 2.323-.128 3.384.388.299.146.61.266.897.432.14.08.233.24.348.365.09.098.164.23.276.29.424.225.89.234 1.366.223l.01-.16c.479.15 1.017.702 1.017 1.105-.776 0-1.55-.003-2.325.004-.083 0-.165.061-.247.094.078.046.155.128.235.131m-1-1.147a.118.118 0 0 0-.016.19.18.18 0 0 0 .246.065c.075-.038.148-.078.238-.125-.072-.062-.13-.114-.19-.163-.106-.087-.193-.032-.278.033"/></svg></span> WireGuard relay troubleshooting<a class="headerlink" href="#wireguard-relay-troubleshooting" title="Permanent link">&para;</a></h1>
-<p>This runbook checks the Relay-to-Logos path from the public service towards the backend. Do not restart the tunnel or change firewall rules before identifying the failed layer.</p>
-<pre class="mermaid"><code>flowchart LR
-    dns["Public DNS"] --&gt; caddy["Relay Caddy"]
-    caddy --&gt; tunnel["WireGuard"]
-    tunnel --&gt; routing["Routing"]
-    routing --&gt; nat["Logos firewall + NAT"]
-    nat --&gt; backend["Backend"]</code></pre>
-<h2 id="1-preserve-access"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg></span> 1. Preserve access<a class="headerlink" href="#1-preserve-access" title="Permanent link">&para;</a></h2>
-<p>Before changing WireGuard:</p>
+<h1 id="wol-vlan-route-asymmetry"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 10H5L3 8l2-2h6V3l1-1 1 1v1h6l2 2-2 2h-6v2h6l2 2-2 2h-6v6a2 2 0 0 1 2 2H9a2 2 0 0 1 2-2z"/></svg></span> WOL VLAN route asymmetry<a class="headerlink" href="#wol-vlan-route-asymmetry" title="Permanent link">&para;</a></h1>
+<p>A persistent VLAN interface used only for Wake-on-LAN created a connected route on Logos. Connections from the K3s nodes reached a Docker service through the normal router, but the replies left through the WOL interface. The asymmetric path caused TCP timeouts and prevented Loki from reaching its Garage S3 backend.</p>
+<h2 id="symptoms"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Symptoms<a class="headerlink" href="#symptoms" title="Permanent link">&para;</a></h2>
 <ul>
-<li>keep the current administrative session open;</li>
-<li>prepare the cloud provider console as the out-of-band recovery path;</li>
-<li>confirm that an encrypted backup of the active configuration exists;</li>
-<li>change one peer at a time;</li>
-<li>do not restart both peers together.</li>
+<li>the Garage S3 endpoint responds locally on Logos;</li>
+<li>the same endpoint responds from clients on the primary LAN;</li>
+<li>requests from the K3s nodes time out with <code>HTTP=000</code>;</li>
+<li>Garage logs show normal activity from other consumers;</li>
+<li>Loki remains <code>Running</code> but its main container is not <code>Ready</code>;</li>
+<li>the Loki container restarts while its rules sidecar remains healthy;</li>
+<li>the memberlist EndpointSlice contains the Loki Pod with <code>ready=false</code>.</li>
 </ul>
-<p>If a local pre-change copy is required, keep it root-only:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>--mode<span class="o">=</span><span class="m">0600</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>/etc/wireguard/wg0.conf<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>/root/wg0.conf.prechange
-</span></code></pre></div>
-<p>Do not publish raw output from <code>wg show</code>, <code>ip address</code>, <code>tcpdump</code> or firewall commands. It may contain endpoints, public keys and private network details.</p>
-<h2 id="2-check-wireguard"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 5h6l-3 3zm1.5 9.66c-.3.34-.5.84-.5 1.34a2 2 0 0 0 2 2 2 2 0 0 0 2-2c0-.55-.22-1.05-.59-1.41l1.42-1.42C15.55 13.9 16 14.9 16 16a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1.07.42-2.04 1.1-2.75l-.01-.01 7.08-7.07A4 4 0 0 1 19 5a4 4 0 0 1 4 4 4 4 0 0 1-4 4c-1.1 0-2.1-.45-2.83-1.17l1.42-1.42c.36.37.86.59 1.41.59a2 2 0 0 0 2-2 2 2 0 0 0-2-2c-.55 0-1.05.22-1.41.59zM6.41 7.59C6.05 7.22 5.55 7 5 7a2 2 0 0 0-2 2 2 2 0 0 0 2 2c.55 0 1.05-.22 1.41-.59l1.42 1.42C7.1 12.55 6.1 13 5 13a4 4 0 0 1-4-4 4 4 0 0 1 4-4c1.11 0 2.11.45 2.83 1.17l2.76 2.76-1.42 1.42z"/></svg></span> 2. Check WireGuard<a class="headerlink" href="#2-check-wireguard" title="Permanent link">&para;</a></h2>
-<p>Run on both peers:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>wg-quick@wg0
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ip<span class="w"> </span>-brief<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>ip<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>wg0
-</span></code></pre></div>
-<p>Confirm:</p>
+<p>The different results from separate network locations are important. They show that the application is listening and narrow the failure to one traffic path.</p>
+<h2 id="network-model"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg></span> Network model<a class="headerlink" href="#network-model" title="Permanent link">&para;</a></h2>
+<p>Logos has two interfaces with separate responsibilities:</p>
 <ul>
-<li><code>wg0</code> exists and is <code>UP</code>;</li>
-<li>the expected peer is loaded;</li>
-<li>the handshake is recent;</li>
-<li>receive and transmit counters increase during a test;</li>
-<li>both peers use the intended MTU.</li>
+<li>the primary interface carries management and application traffic through the LAN router;</li>
+<li>the secondary VLAN interface exists only to send Wake-on-LAN broadcasts to the K3s network.</li>
 </ul>
-<p>No recent handshake points to the public UDP path, peer configuration or host firewall. A current handshake with failed application traffic points to routing, forwarding, NAT or the backend.</p>
-<h2 id="3-validate-routes"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9c-1.1 0-2 .9-2 2v4a2 2 0 0 0 2 2h6v2h-1c-.55 0-1 .45-1 1H2v2h7c0 .55.45 1 1 1h4c.55 0 1-.45 1-1h7v-2h-7c0-.55-.45-1-1-1h-1v-2h6c1.11 0 2-.89 2-2v-4a2 2 0 0 0-2-2zm1 3h2v2H6zm3.5 0h2v2h-2zm3.5 0h2v2h-2z"/></svg></span> 3. Validate routes<a class="headerlink" href="#3-validate-routes" title="Permanent link">&para;</a></h2>
-<p>On Relay:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip<span class="w"> </span>-4<span class="w"> </span>-brief<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>ens3
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ip<span class="w"> </span>-4<span class="w"> </span>-brief<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>ip<span class="w"> </span>-4<span class="w"> </span>route<span class="w"> </span>show<span class="w"> </span>table<span class="w"> </span>main
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ip<span class="w"> </span>-4<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;LOGOS_WG_IP&gt;
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ip<span class="w"> </span>-4<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;APPROVED_BACKEND_IP&gt;
+<p>The failed connection followed different forward and return paths:</p>
+<pre class="mermaid"><code>flowchart TD
+    node["K3s node"] --&gt;|"SYN via router"| primary["Logos primary interface"]
+    primary --&gt; garage["Garage container"]
+    garage --&gt;|"SYN-ACK"| wol["WOL VLAN interface"]
+    wol -.-&gt;|"unexpected return path"| node</code></pre>
+<h2 id="diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span> Diagnosis<a class="headerlink" href="#diagnosis" title="Permanent link">&para;</a></h2>
+<h3 id="1-test-the-same-endpoint-from-several-locations">1. Test the same endpoint from several locations<a class="headerlink" href="#1-test-the-same-endpoint-from-several-locations" title="Permanent link">&para;</a></h3>
+<p>Run a bounded request without printing response content:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>--silent<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>--show-error<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>--output<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span>--connect-timeout<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span>--max-time<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span>--write-out<span class="w"> </span><span class="s1">'HTTP=%{http_code} CONNECT=%{time_connect}s TOTAL=%{time_total}s\n'</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span>http://&lt;GARAGE_ENDPOINT&gt;/
 </span></code></pre></div>
-<p>The peer and approved backend routes must use <code>wg0</code>.</p>
-<p>Check for:</p>
-<ul>
-<li>identical prefixes assigned to both <code>ens3</code> and <code>wg0</code>;</li>
-<li>a WireGuard address that conflicts with the cloud gateway;</li>
-<li>a competing route with the same or longer prefix;</li>
-<li>differences between the active peer configuration and the file on disk.</li>
-</ul>
-<p>The <code>/32</code> entries in <code>AllowedIPs</code> are intentional. They restrict cryptokey routing to approved peers and backend hosts and must not be removed merely to hide an address overlap.</p>
-<p>On Logos:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip<span class="w"> </span>-4<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;APPROVED_BACKEND_IP&gt;
+<p>Test from:</p>
+<ol>
+<li>Logos itself;</li>
+<li>a client on the primary LAN;</li>
+<li>at least one K3s node.</li>
+</ol>
+<p>An unauthenticated Garage request returning <code>HTTP=403</code> is useful here. It proves that routing, the TCP handshake and HTTP response path work. It does not validate S3 credentials, bucket access or object operations.</p>
+<p><code>HTTP=000</code> with a timeout means that no complete HTTP response reached the client.</p>
+<h3 id="2-inspect-the-selected-route">2. Inspect the selected route<a class="headerlink" href="#2-inspect-the-selected-route" title="Permanent link">&para;</a></h3>
+<p>On Logos, ask the kernel how it would reach the affected client:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;K3S_NODE_ADDRESS&gt;
 </span></code></pre></div>
-<p>Use the LAN interface returned by this command. Do not copy an interface name from an older host.</p>
-<h2 id="4-validate-firewalls-and-nat"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg></span> 4. Validate firewalls and NAT<a class="headerlink" href="#4-validate-firewalls-and-nat" title="Permanent link">&para;</a></h2>
-<p>On Relay:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>INPUT<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>OUTPUT<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
+<p>The failure is present when the selected route uses the WOL VLAN instead of the primary interface and LAN router.</p>
+<p>Also inspect the complete interface and route state:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip<span class="w"> </span>-4<span class="w"> </span>-brief<span class="w"> </span>address
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ip<span class="w"> </span>-4<span class="w"> </span>route
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>networkctl<span class="w"> </span>status<span class="w"> </span>&lt;WOL_INTERFACE&gt;<span class="w"> </span>--no-pager
 </span></code></pre></div>
-<p>On Logos:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sysctl<span class="w"> </span>net.ipv4.ip_forward
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>FORWARD<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sudo<span class="w"> </span>iptables-save
+<h3 id="3-confirm-the-packet-path">3. Confirm the packet path<a class="headerlink" href="#3-confirm-the-packet-path" title="Permanent link">&para;</a></h3>
+<p>Capture only the affected peer and service port:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>-ni<span class="w"> </span>any<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>-tttt<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="s1">'host &lt;K3S_NODE_ADDRESS&gt; and tcp port &lt;GARAGE_S3_PORT&gt;'</span>
+</span></code></pre></div>
+<p>The confirmed sequence was:</p>
+<ol>
+<li>a SYN entered Logos through the primary path;</li>
+<li>Docker forwarded it to the Garage container;</li>
+<li>Garage produced a SYN-ACK;</li>
+<li>the host selected the directly connected WOL VLAN for the reply;</li>
+<li>the K3s node retried the SYN because the expected return path did not complete.</li>
+</ol>
+<p>Do not publish a raw packet capture before checking it for private addresses or application data.</p>
+<h2 id="root-cause"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span> Root cause<a class="headerlink" href="#root-cause" title="Permanent link">&para;</a></h2>
+<p>The WOL interface had an IPv4 address in the same subnet as the K3s nodes. Linux therefore installed a connected route similar to:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;K3S_SUBNET&gt; dev &lt;WOL_INTERFACE&gt; scope link
+</span></code></pre></div>
+<p>Connected routes are created from an interface address and prefix. They are not DHCP-provided routes.</p>
+<p>This Netplan setting was already present:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">dhcp4-overrides</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">use-routes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></code></pre></div>
+<p>It prevents installation of routes offered by DHCP, but it cannot suppress the connected route required by the assigned subnet. Keeping the interface configured and active therefore continued to influence normal application traffic.</p>
+<h2 id="corrective-action"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Corrective action<a class="headerlink" href="#corrective-action" title="Permanent link">&para;</a></h2>
+<p>The existing Netplan profile remains persistent, but it is no longer activated automatically:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">vlans</span><span class="p">:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&lt;WOL_INTERFACE&gt;</span><span class="p">:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">activation-mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manual</span>
+</span></code></pre></div>
+<p>Generate and apply Netplan changes through a controlled procedure with console access or rollback protection. Do not restart all networking remotely as the first action.</p>
+<p>The WOL profile can then be controlled explicitly:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>networkctl<span class="w"> </span>up<span class="w"> </span>&lt;WOL_INTERFACE&gt;
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>networkctl<span class="w"> </span>down<span class="w"> </span>&lt;WOL_INTERFACE&gt;
+</span></code></pre></div>
+<p>The public Ansible playbook contains only the lifecycle logic. The interface name, broadcast address, management endpoint and node MAC addresses remain in private Semaphore inventory.</p>
+<p>The Power On sequence is:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>validate inventory
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>→ activate the WOL profile
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>→ require a global IPv4 address
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>→ send WOL to every node
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>→ deactivate the profile in always
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>→ wait for SSH
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>→ validate K3s, API, etcd and Node Ready
+</span></code></pre></div>
+<p>The cleanup belongs in an Ansible <code>always</code> section so an activation or WOL failure still attempts to restore normal routing. A hard process interruption can still prevent cleanup and requires manual route inspection.</p>
+<p>Power Off does not activate the WOL profile. Running nodes are reached through the normal routed management path.</p>
+<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<p>The change was validated with a complete cold lifecycle test. All three physical K3s nodes were powered off before Power On was started.</p>
+<p>After the playbook completes, verify the WOL profile:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>networkctl<span class="w"> </span>status<span class="w"> </span>&lt;WOL_INTERFACE&gt;<span class="w"> </span>--no-pager<span class="w"> </span><span class="p">|</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'State:|Activation Policy:'</span>
 </span></code></pre></div>
 <p>Expected state:</p>
-<ol>
-<li>IPv4 forwarding is enabled on Logos.</li>
-<li>Established return traffic is accepted.</li>
-<li>Only approved tunnel-to-backend paths are accepted.</li>
-<li>Required source NAT uses the current LAN egress interface.</li>
-<li>Remaining forwarded traffic from <code>wg0</code> is dropped.</li>
-</ol>
-<p>Do not add broad temporary <code>ACCEPT</code> rules. Restrict every test rule to one source, destination, protocol and port.</p>
-<p>If a firewall change is required, save the pre-change state before editing:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="s1">'umask 077; iptables-save &gt; /root/iptables-prechange.rules'</span>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>State: off (configured)
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Activation Policy: manual
 </span></code></pre></div>
-<p>Do not run <code>netfilter-persistent save</code> yet. Persist the rules only after completing the validation section.</p>
-<h2 id="5-trace-packets"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"/></svg></span> 5. Trace packets<a class="headerlink" href="#5-trace-packets" title="Permanent link">&para;</a></h2>
-<p>Generate one backend request and observe it at consecutive interfaces:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>wg0<span class="w"> </span>host<span class="w"> </span>&lt;APPROVED_BACKEND_IP&gt;
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>&lt;LAN_INTERFACE&gt;<span class="w"> </span>host<span class="w"> </span>&lt;APPROVED_BACKEND_IP&gt;
+<p>Verify that ordinary traffic no longer selects the WOL interface:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span>&lt;K3S_NODE_ADDRESS&gt;
 </span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th>Observation</th>
-<th>Likely cause</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>No packet on Relay <code>wg0</code></td>
-<td>Caddy backend, route or Relay firewall</td>
-</tr>
-<tr>
-<td>Packet on Relay <code>wg0</code>, absent on Logos</td>
-<td>Tunnel peer or Internet path</td>
-</tr>
-<tr>
-<td>Packet on Logos <code>wg0</code>, absent on the LAN</td>
-<td>Forwarding or firewall rule</td>
-</tr>
-<tr>
-<td>SYN reaches the backend, no SYN-ACK returns</td>
-<td>Backend listener, host firewall or missing return NAT</td>
-</tr>
-<tr>
-<td>Response returns to Logos but not Relay</td>
-<td>Reverse forwarding or tunnel route</td>
-</tr>
-</tbody>
-</table>
-<h2 id="6-validate-mtu"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m1.39 18.36 1.77-1.76L4.58 18l1.06-1.05-1.42-1.41 1.42-1.42 2.47 2.48 1.06-1.06-2.47-2.48 1.41-1.41 1.42 1.41L10.59 12l-1.42-1.41 1.42-1.42 2.47 2.48 1.06-1.06-2.47-2.48 1.41-1.41 1.41 1.41 1.07-1.06-1.42-1.41 1.42-1.42L18 6.7l1.07-1.06-2.47-2.48 1.76-1.77 4.25 4.25L5.64 22.61z"/></svg></span> 6. Validate MTU<a class="headerlink" href="#6-validate-mtu" title="Permanent link">&para;</a></h2>
-<p>Both peers currently use MTU <code>1420</code>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">5</span><span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1392</span><span class="w"> </span>&lt;PEER_WG_IP&gt;
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span>-M<span class="w"> </span><span class="k">do</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1393</span><span class="w"> </span>&lt;PEER_WG_IP&gt;
+<p>The route must use the primary interface and LAN router.</p>
+<p>Validate the cluster and recovered workload:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>loki-0
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>get<span class="w"> </span>endpointslice<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span>-l<span class="w"> </span>kubernetes.io/service-name<span class="o">=</span>loki-memberlist<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*].endpoints[*]}IP={.addresses[0]} READY={.conditions.ready} NODE={.nodeName} TARGET={.targetRef.kind}/{.targetRef.name}{"\n"}{end}'</span>
 </span></code></pre></div>
-<p>The first test should pass. The second should fail locally with <code>message too long</code>.</p>
-<p>If the Relay returns to a jumbo-derived MTU after restart, confirm that <code>MTU = 1420</code> exists in the persistent interface configuration. <code>wg syncconf</code> does not change the Linux interface MTU.</p>
-<h2 id="7-validate-the-backend-and-caddy"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg></span> 7. Validate the backend and Caddy<a class="headerlink" href="#7-validate-the-backend-and-caddy" title="Permanent link">&para;</a></h2>
-<p>From Relay, test the backend without printing its response:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>curl<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span>--fail<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span>--silent<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span>--show-error<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span>--output<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span>http://&lt;APPROVED_BACKEND_IP&gt;:&lt;PORT&gt;/
-</span></code></pre></div>
-<p>Then check Caddy and the public path:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>is-active<span class="w"> </span>caddy
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span>--unit<span class="o">=</span>caddy<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span>--since<span class="o">=</span><span class="s1">'30 minutes ago'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span>--no-pager
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>curl<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span>--fail<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span>--silent<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span>--show-error<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span>--output<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span>https://&lt;PUBLIC_SERVICE_HOSTNAME&gt;/
-</span></code></pre></div>
-<p>HTTP <code>502</code> means that Caddy could not complete the upstream request. It does not identify which internal layer failed.</p>
-<h2 id="recovery-confirmation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Recovery confirmation<a class="headerlink" href="#recovery-confirmation" title="Permanent link">&para;</a></h2>
-<p>Before persisting a changed firewall, confirm that:</p>
+<p>The verified result was:</p>
 <ul>
-<li>both peers have a recent handshake;</li>
-<li>peer and backend routes use <code>wg0</code>;</li>
-<li>expected forwarding and NAT counters increase;</li>
-<li>the direct backend request succeeds;</li>
-<li>the public request succeeds;</li>
-<li>an unrelated LAN destination remains unreachable from Relay.</li>
+<li>all three nodes became <code>Ready</code> after the cold start;</li>
+<li>local K3s API and embedded etcd readiness checks passed on every server;</li>
+<li>the WOL profile returned to <code>off (configured)</code>;</li>
+<li>the normal route used the primary interface and router;</li>
+<li>Loki returned to <code>2/2 Running</code>;</li>
+<li>the memberlist endpoint changed from <code>ready=false</code> to <code>ready=true</code>.</li>
 </ul>
-<p>Only after these checks pass:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>netfilter-persistent<span class="w"> </span>save
-</span></code></pre></div>
-<p>Finally, perform a controlled service or host restart and repeat the checks. Remove the root-only pre-change copies after the configuration has remained stable.</p>
+<p>Retries while waiting for <code>k3s.service</code> are expected during boot. The test fails only if the configured retry limit is exhausted or a later readiness assertion fails.</p>
+<h2 id="prevention"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m-2-4-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9"/></svg></span> Prevention<a class="headerlink" href="#prevention" title="Permanent link">&para;</a></h2>
+<ul>
+<li>keep auxiliary VLAN profiles inactive unless an operation requires them;</li>
+<li>inspect <code>ip route get &lt;DESTINATION&gt;</code> after adding any interface address;</li>
+<li>test application paths from more than one network location;</li>
+<li>separate private inventory values from public automation logic;</li>
+<li>place temporary network cleanup in <code>always</code>, then verify the final route;</li>
+<li>send WOL to all nodes before waiting for their individual SSH endpoints;</li>
+<li>validate automation with the real cold-start scenario, not only syntax checks and already-running nodes;</li>
+<li>treat <code>HTTP=403</code> as proof of network reachability only, not proof of valid S3 access.</li>
+</ul>
+<h2 id="related-documents"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M384 512H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h304c26.5 0 48 21.5 48 48v288c0 20.9-13.4 38.7-32 45.3V448c17.7 0 32 14.3 32 32s-14.3 32-32 32zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32h256v-64zm32-232c0 13.3 10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24H152c-13.3 0-24 10.7-24 24m24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></svg></span> Related documents<a class="headerlink" href="#related-documents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../zion/0-platform/">Zion platform</a></li>
+<li><a href="../../kubernetes/02-networking/">Kubernetes networking</a></li>
+<li><a href="../../kubernetes/07-observability/">Kubernetes observability</a></li>
+<li><a href="../../kubernetes/08-backup/">Kubernetes backup and Garage</a></li>
+<li><a href="https://github.com/kCn3333/homelab-ansible/blob/main/docs/k3s-power-management.md">Ansible K3s power management</a></li>
+</ul>
 
 
 
@@ -3713,7 +3778,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 23, 2026 10:32:34 UTC"><span class="timeago" datetime="2026-08-23T10:32:34+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 23, 2026 10:32:34 UTC">2026-08-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 4, 2026 08:43:07 UTC"><span class="timeago" datetime="2026-09-04T08:43:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 4, 2026 08:43:07 UTC">2026-09-04</span>
   </span>
 
     
@@ -3723,7 +3788,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:40:59 UTC"><span class="timeago" datetime="2026-08-21T12:40:59+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:40:59 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 4, 2026 08:43:07 UTC"><span class="timeago" datetime="2026-09-04T08:43:07+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 4, 2026 08:43:07 UTC">2026-09-04</span>
   </span>
 
     
