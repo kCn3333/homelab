@@ -1,6 +1,6 @@
 # 19 - Cluster DNS, Cilium IPAM and Longhorn Recovery
 
-# K3s Homelab — Sesja 19 (DNS klastra, Cilium IPAM i odzyskanie Longhorna)
+# K3s Homelab — DNS klastra, Cilium IPAM i odzyskanie Longhorna
 
 **Data:** 2026-09-04
 

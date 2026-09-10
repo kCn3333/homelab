@@ -1,8 +1,9 @@
 # 21 - CoreDNS Service Datapath
 
-# K3s Homelab — Sesja 21 (kube-proxy, Cilium eBPF i VXLAN)
+# K3s Homelab — kube-proxy, Cilium eBPF i VXLAN
 
 **Data:** 2026-09-09
+
 **Środowisko:** 3x HP T630, k3s v1.34.4+k3s1, Cilium v1.19.1, kube-proxy/iptables
 
 ---

@@ -1,202 +1,193 @@
 # Cluster Architecture
 
-## Overview
+## Nodes and roles
 
-The cluster runs k3s in HA mode — all three nodes are control-plane members and etcd peers simultaneously. There's no dedicated "worker-only" node. This is a deliberate choice: with only 3 machines, dedicating one purely to workers would waste the etcd quorum capacity.
+The cluster contains three k3s server nodes. Every node runs the Kubernetes control plane, an embedded etcd member and regular workloads.
 
-```
-[PC / kubectl]
-      │
-      ▼
-HAProxy :6443 (TCP passthrough)
-      │
-      ├── master  192.168.55.10  (control-plane + etcd)
-      ├── worker1 192.168.55.11  (control-plane + etcd)
-      └── worker2 192.168.55.12  (control-plane + etcd)
-```
+| Node      | Address         | Kubernetes roles               |
+| --------- | --------------- | ------------------------------ |
+| `master`  | `192.168.55.10` | control-plane, etcd, workloads |
+| `worker1` | `192.168.55.11` | control-plane, etcd, workloads |
+| `worker2` | `192.168.55.12` | control-plane, etcd, workloads |
+
+There is no dedicated worker-only node. The hostnames do not define scheduling priority or control-plane authority.
 
 ---
 
-## HA Control Plane
+## Control-plane availability
 
-HA has two distinct dimensions that are easy to mix up:
+Embedded etcd uses three voting members. The cluster tolerates the loss of one member while retaining quorum.
 
-- **Control-plane HA** — the scheduler, controller-manager, and API server need to be up for the cluster to react to failures (evict pods from a dead node, scale deployments, etc.)
-- **Application HA** — pods keep running even if the control plane goes down, but the cluster is "blind" — it can't reschedule, scale, or repair anything
+Control-plane availability and application availability are separate:
 
-In practice: if a node dies, k8s detects it after `node-monitor-grace-period` (~40s by default) and starts evicting pods. You need a working control plane for that eviction to happen.
+* the control plane schedules, reconciles and replaces workloads;
+* already running Pods can continue working during a short control-plane outage;
+* application availability still depends on replica count, storage and network state.
 
-### etcd quorum
-
-k3s uses embedded etcd for HA. With 3 nodes, the cluster tolerates 1 node failure — the formula is `(n-1)/2` nodes can fail while maintaining quorum.
-
-### Tested behavior
-
-With the master node powered off:
-
-- After ~2-3 minutes, pods from the dead node were rescheduled on the remaining nodes
-- API access was uninterrupted (HAProxy routed to surviving control-plane nodes)
-- `node-monitor-grace-period` is the key timer; pods stuck in `Terminating` require `--force` if kubelet can't confirm shutdown
+One healthy API server and an etcd quorum are required for normal reconciliation.
 
 ---
 
-## Initial Cluster Setup
+## API access
 
-### Step 0 — Uninstall existing k3s
+Clients use a stable HAProxy endpoint:
 
-k3s HA must be bootstrapped from scratch. You can't "upgrade" a single-node install to HA.
-
-On all control-plane nodes:
-```bash
-sudo /usr/local/bin/k3s-uninstall.sh
+```text
+kubectl
+→ cluster.kcn333.com:6443
+→ HAProxy
+→ one of 192.168.55.10/11/12:6443
 ```
 
-On workers (if any):
-```bash
-sudo /usr/local/bin/k3s-agent-uninstall.sh
+HAProxy forwards raw TCP. TLS terminates at the selected kube-apiserver.
+
+HAProxy runs in an LXC container on the Proxmox server at `192.168.0.45`. Its
+configuration stayed unchanged after the move to LXC.
+
+The API certificate includes `cluster.kcn333.com` as a Subject Alternative Name. The kubeconfig must use that name:
+
+```yaml
+clusters:
+  - cluster:
+      server: https://cluster.kcn333.com:6443
 ```
 
-Clean up any leftover data:
-```bash
-sudo rm -rf /var/lib/rancher
-```
+The kubeconfig grants administrative access and must be protected like a root credential.
 
-### Step 1 — Bootstrap the first control-plane
+---
 
-On `192.168.55.10`:
+## Current k3s service configuration
 
-```bash
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="
-server \
---cluster-init \
---tls-san 192.168.0.45 \
+The initial server uses:
+
+```text
+k3s server
+--cluster-init
+--flannel-backend=none
+--disable-network-policy
 --tls-san cluster.kcn333.com
-" sh -
 ```
 
-- `--cluster-init` — creates a new HA cluster with embedded etcd
-- `--tls-san` — adds IPs/domains to the API server's TLS certificate SAN. Without this, kubectl via HAProxy gets a TLS error. Add both the LB IP and your domain.
+The other servers join through:
 
-### Step 2 — Grab the cluster token
+```text
+k3s server
+--server https://cluster.kcn333.com:6443
+--flannel-backend=none
+--disable-network-policy
+```
+
+`--flannel-backend=none` disables the bundled CNI. `--disable-network-policy` disables the bundled policy controller because Cilium provides both functions.
+
+The effective systemd command can be checked with:
 
 ```bash
-sudo cat /var/lib/rancher/k3s/server/node-token
+sudo systemctl show k3s \
+  --property=ExecStart \
+  --no-pager
 ```
 
-### Step 3 — Join the second and third control-plane nodes
-
-On `192.168.55.11` and `192.168.55.12`:
-
-```bash
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="
-server \
---server https://192.168.55.10:6443 \
---token <TOKEN> \
---tls-san 192.168.0.45 \
---tls-san cluster.kcn333.com
-" sh -
-```
-
-`--server` points to the first node — this means "join the existing etcd cluster" rather than creating a new one.
+Do not publish the join token contained in `ExecStart`. Host-level configuration is
+managed through the [cluster Ansible playbooks](https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks);
+manual edits to generated systemd units are not the source of truth.
 
 ---
 
-## TLS SAN Management
+## Readiness checks
 
-The Subject Alternative Name is the list of IPs and domains the API server certificate is valid for. When kubectl connects through HAProxy, it checks that the IP it's talking to is listed in the cert's SAN. If it's not — TLS error.
-
-### Where the config lives
-
-```
-/etc/systemd/system/k3s.service
-```
-
-Look for the `ExecStart` block:
-
-```
-ExecStart=/usr/local/bin/k3s \
-    server \
-        '--cluster-init' \
-        '--tls-san' \
-        '192.168.0.45' \
-        '--tls-san' \
-        'cluster.kcn333.com' \
-```
-
-### Updating SAN
+Basic cluster state:
 
 ```bash
-# 1. Snapshot etcd first (always!)
-sudo k3s etcd-snapshot save --name pre-tls-san-change
-
-# 2. Edit the service file
-sudo vi /etc/systemd/system/k3s.service
-
-# 3. Reload and restart
-sudo systemctl daemon-reload
-sudo systemctl restart k3s
-
-# 4. Verify the new SAN is in the cert
-echo | openssl s_client -connect <IP>:6443 2>/dev/null | \
-  openssl x509 -text -noout | grep -A10 "Subject Alternative Name"
+kubectl get nodes -o wide
+kubectl get pods --all-namespaces
 ```
 
-### k3s SAN behavior
+Local API and etcd readiness on a server:
 
-k3s manages the API server cert via a dynamic listener stored as a Secret `k3s-serving` in `kube-system`. The SAN list comes from:
+```bash
+sudo k3s kubectl get --raw='/readyz?verbose'
+```
 
-- `--tls-san` flags in `k3s.service`
-- All node IPs in the cluster
-- Node hostnames
-- Standard k8s names (`kubernetes`, `kubernetes.default`, etc.)
-- **History from etcd** — addresses from previous configurations
+Expected output includes:
 
-Removing a `--tls-san` and restarting isn't always enough — k3s can rebuild the cert from etcd history. In practice, if the old IP isn't accessible anyway, it's not a security risk.
+```text
+[+]etcd ok
+readyz check passed
+```
 
-### SAN sync in HA
-
-Changing SAN on one control-plane node is automatically synced via etcd to the other nodes. You don't need to manually edit `k3s.service` on every node for SAN changes.
+`Node Ready` confirms kubelet heartbeats and node conditions. It does not prove that every application, storage volume or network path is healthy.
 
 ---
 
-## Accessing the Cluster
+## etcd operations
 
-### kubeconfig
-
-The kubeconfig lives at `/etc/rancher/k3s/k3s.yaml` on any control-plane node. It contains admin-level credentials — treat it like a root password.
+List snapshots:
 
 ```bash
-# Copy to your local machine
-ssh user@master "sudo cat /etc/rancher/k3s/k3s.yaml" | Out-File -Encoding ascii k3s.yaml
-
-# Change the server address to HAProxy
-# server: https://127.0.0.1:6443 → https://192.168.0.45:6443
+sudo k3s etcd-snapshot ls
 ```
 
-### Merging kubeconfigs
+Create a snapshot before a control-plane, CNI or storage change:
 
 ```bash
-KUBECONFIG=~/.kube/config:~/.kube/k3s.yaml kubectl config view --flatten > ~/.kube/config_new
+sudo k3s etcd-snapshot save \
+  --name pre-change
 ```
+
+Do not restart two etcd members at the same time. A planned node restart should leave at least two server nodes available.
 
 ---
 
-## Useful Commands
+## Node maintenance
+
+Use `cordon` when a short service restart must prevent new Pods from being scheduled:
 
 ```bash
-# Cluster state
+kubectl cordon <node>
+```
+
+Use `drain` when workloads must be evicted before longer host maintenance:
+
+```bash
+kubectl drain <node> \
+  --ignore-daemonsets \
+  --delete-emptydir-data
+```
+
+`drain` is not required for every short k3s restart. It can trigger unnecessary workload movement and Longhorn replica rebuilding.
+
+After maintenance:
+
+```bash
+kubectl wait \
+  --for=condition=Ready \
+  node/<node> \
+  --timeout=300s
+
+kubectl uncordon <node>
+```
+
+Before restarting another node, verify that Longhorn volumes have returned to `healthy`.
+
+---
+
+## Useful commands
+
+```bash
 kubectl get nodes -o wide
 kubectl get pods -A -o wide
+kubectl get events -A --sort-by='.lastTimestamp'
+```
 
-# etcd operations
-sudo k3s etcd-snapshot save --name <name>
-sudo k3s etcd-snapshot ls
-
-# Certificate rotation
-sudo k3s certificate rotate
-sudo systemctl daemon-reload
-sudo systemctl restart k3s
-
-# k3s service logs
+```bash
+sudo systemctl status k3s --no-pager
 sudo journalctl -u k3s -n 100 --no-pager
+sudo k3s kubectl get --raw='/readyz?verbose'
+```
+
+```bash
+echo | openssl s_client \
+  -connect cluster.kcn333.com:6443 \
+  -servername cluster.kcn333.com 2>/dev/null | \
+openssl x509 -noout -issuer -subject -dates -ext subjectAltName
 ```

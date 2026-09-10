@@ -1,329 +1,105 @@
 # GitOps with Flux
 
-## Why GitOps
+## Source of truth
 
-The classic approach (`kubectl apply -f`) has problems at scale:
-- No single source of truth about what's running in the cluster
-- Hard rollbacks (you have to figure out the previous state)
-- No audit trail of who changed what and when
-- Chaos in team environments
+The [k3s-homelab repository](https://github.com/kCn3333/k3s-homelab) defines the desired
+Kubernetes state. Flux pulls the repository, resolves Kustomize and Helm resources,
+and reconciles the cluster.
 
-GitOps solves this by making the Git repo the only source of truth. An agent running inside the cluster (Flux) continuously compares the desired state (Git) against the actual state (cluster) and reconciles any differences.
+Manual changes are useful for diagnostics but are not persistent. A change that should
+remain must be represented in Git and applied by the existing resource owner.
 
-### Pull model vs Push model
+## Repository layout
 
-| | Push (classic CI/CD) | Pull (GitOps / Flux) |
-|-|---------------------|---------------------|
-| How changes get applied | Pipeline pushes to cluster | Agent inside cluster pulls from Git |
-| Cluster access from CI | Required | Not needed |
-| Security | Cluster exposed to CI system | Cluster stays behind firewall |
+```text
+clusters/k3s-homelab/       Flux entry points and dependency order
+infrastructure/operators/   controllers and operators
+infrastructure/config/      configuration for those operators
+apps/base/                  applications enabled on main
+apps/dev/                   development overlay
+apps/staging/               staging overlay
+tests/manual/               reusable manifests not reconciled by Flux
+```
 
----
+The active application set in `apps/base/kustomization.yaml` contains `clients-api`
+and `k8s-badge`. A directory may remain in Git without being deployed when no active
+Kustomization references it.
 
-## Flux Components
+The old nginx test was removed from the active resource list. With `prune: true`, Flux
+removed its Deployment, Service, Ingress, PVC and namespace. The associated PV and
+Longhorn volume were also deleted.
 
-### Core controllers
+## Two Kustomization objects
 
-| Controller | Role |
-|-----------|------|
-| `source-controller` | Watches GitHub, fetches repo every 1 min |
-| `kustomize-controller` | Applies YAML manifests |
-| `helm-controller` | Handles Helm releases |
-| `notification-controller` | Sends notifications (Slack, webhook) |
+| API group                     | Purpose                      |
+| ----------------------------- | ---------------------------- |
+| `kustomize.config.k8s.io`     | Assembles manifests          |
+| `kustomize.toolkit.fluxcd.io` | Reconciles a repository path |
 
-### Image Automation (optional, installed separately)
+The main dependency chain is:
 
-| Controller | Role |
-|-----------|------|
-| `image-reflector-controller` | Scans registries for new image tags |
-| `image-automation-controller` | Commits updated tags back to Git repo |
+```text
+infrastructure-operators -> infrastructure-config -> apps
+```
 
-These are not installed by default — add `--components-extra` to the bootstrap command.
+CRDs and controllers are therefore available before their configuration and workloads.
 
----
+## Helm releases
 
-## Bootstrap
+Flux manages charts through source objects and `HelmRelease`. Direct `helm upgrade`
+changes the live release but not Git and may be reverted by reconciliation.
 
 ```bash
-# Pre-flight check
-flux check --pre
-
-# Bootstrap with GitHub
-flux bootstrap github \
-  --owner=<your-github-username> \
-  --repository=k3s-homelab \
-  --private=false \
-  --personal=true \
-  --path=clusters/k3s-homelab \
-  --components-extra=image-reflector-controller,image-automation-controller \
-  --read-write-key
-```
-
-`--read-write-key` is required for Image Automation — Flux needs write access to commit tag updates back to the repo. The default bootstrap creates a read-only deploy key.
-
-If you forgot `--read-write-key`:
-
-1. Delete the old key on GitHub (Settings → Deploy keys → Delete)
-2. Get the new key: `kubectl get secret flux-system -n flux-system -o jsonpath='{.data.identity\.pub}' | base64 -d`
-3. Add it on GitHub with **Allow write access** checked
-
----
-
-## Repository Structure
-
-```
-k3s-homelab/
-├── apps/
-│   ├── base/                          # actual manifests
-│   │   ├── kustomization.yaml         # lists all apps
-│   │   ├── nginx/
-│   │   │   ├── kustomization.yaml
-│   │   │   ├── namespace.yaml
-│   │   │   ├── nginx-deploy.yaml
-│   │   │   ├── imagerepository.yaml
-│   │   │   └── imagepolicy.yaml
-│   │   └── ...
-│   └── kustomization.yaml
-└── clusters/
-    └── k3s-homelab/
-        ├── apps.yaml                  # Flux Kustomization → ./apps/base
-        └── flux-system/
-            ├── gotk-components.yaml
-            ├── gotk-sync.yaml
-            └── kustomization.yaml
-```
-
-The separation between `clusters/k3s-homelab/` (what to deploy on this cluster) and `apps/base/` (how applications look) is intentional — one app definition can be deployed to multiple clusters by having different `clusters/` directories point to the same `apps/base/`.
-
----
-
-## Two Types of Kustomization
-
-This is a common source of confusion — there are two completely different `Kustomization` kinds:
-
-```yaml
-# 1. kustomize.config.k8s.io — native Kustomize, assembles YAML files
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - nginx
-```
-
-```yaml
-# 2. kustomize.toolkit.fluxcd.io — Flux CRD, tells Flux what to deploy
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: apps
-  namespace: flux-system
-spec:
-  interval: 1m0s
-  path: ./apps/base
-  prune: true           # delete resources removed from Git
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-```
-
-`prune: true` means if you delete a file from Git, Flux will delete the corresponding resource from the cluster. Very useful for keeping things clean.
-
----
-
-## Helm in Flux
-
-Flux manages Helm releases through `HelmRepository` + `HelmRelease` resources.
-
-```yaml
-# Source — where to find the chart
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: jetstack
-  namespace: flux-system     # always flux-system!
-spec:
-  interval: 1h
-  url: https://charts.jetstack.io
-
-# Release — how to install it
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: cert-manager
-      version: ">=1.0.0"
-      sourceRef:
-        kind: HelmRepository
-        name: jetstack
-        namespace: flux-system  # always reference the namespace!
-  install:
-    createNamespace: true
-  values:
-    crds:
-      enabled: true
-```
-
-**Important:** `HelmRepository` must always be in `flux-system` namespace — that's where `source-controller` runs and looks for sources.
-
-**Generating boilerplate with Flux CLI:**
-```bash
-flux create source helm <n> \
-  --url=<url> \
-  --namespace=flux-system \
-  --export > helmrepo.yaml
-
-flux create helmrelease <n> \
-  --chart=<chart> \
-  --source=HelmRepository/<n> \
-  --chart-version=<version> \
-  --namespace=<namespace> \
-  --export > helmrelease.yaml
-```
-
----
-
-## Image Automation
-
-Flux can automatically detect new image tags and commit updated tag references back to your Git repo, which then triggers a rolling deploy.
-
-### Three resources needed
-
-**ImageRepository** — watches a container registry:
-```yaml
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-kind: ImageRepository
-metadata:
-  name: nginx
-  namespace: flux-system
-spec:
-  image: nginx
-  interval: 1m0s
-```
-
-**ImagePolicy** — picks which tag to use:
-```yaml
-apiVersion: image.toolkit.fluxcd.io/v1   # v1 (was v1beta2, promoted to stable)
-kind: ImagePolicy
-metadata:
-  name: nginx
-  namespace: flux-system
-spec:
-  imageRepositoryRef:
-    name: nginx
-  policy:
-    semver:
-      range: 1.29.x
-```
-
-**ImageUpdateAutomation** — commits tag updates to Git:
-```yaml
-apiVersion: image.toolkit.fluxcd.io/v1
-kind: ImageUpdateAutomation
-metadata:
-  name: flux-system
-  namespace: flux-system
-spec:
-  interval: 1m0s
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  git:
-    checkout:
-      ref:
-        branch: main
-    commit:
-      author:
-        email: fluxbot@kcn333.com
-        name: fluxbot
-      messageTemplate: 'chore(flux): update image tags'
-    push:
-      branch: main
-  update:
-    path: ./apps
-    strategy: Setters
-```
-
-### Marker comment in deployment
-
-Flux needs to know which field in which file to update:
-```yaml
-image: nginx:1.29.5 # {"$imagepolicy": "flux-system:nginx"}
-```
-
-### Why semver instead of SHA tags
-
-SHA tags (`sha-e984bdc`) are not sortable chronologically — `sha-e984bdc` may alphabetically be "greater than" `sha-9cb3301` even though it's an older commit. Flux uses alphabetical comparison for non-semver tags, so you'd get unpredictable results.
-
-Semver is deterministic and unambiguous — `1.2.0 > 1.1.0 > 1.0.5`.
-
-### API versioning note
-
-`ImagePolicy` and `ImageUpdateAutomation` were promoted from `v1beta2` to `v1`. Update your manifests:
-
-```yaml
-# Old
-apiVersion: image.toolkit.fluxcd.io/v1beta2
-
-# New
-apiVersion: image.toolkit.fluxcd.io/v1
-```
-
-`ImageRepository` remains at `v1beta2` — it hasn't been promoted yet.
-
----
-
-## Git Workflow with Flux
-
-Flux commits automatically to your repo. When you push changes simultaneously, you get a conflict. Configure pull with rebase to avoid messy merge commits:
-
-```bash
-git config pull.rebase true
-git pull && git push
-```
-
-### Conventional Commits
-
-Flux uses conventional commits for its auto-commits. It's good practice to follow the same standard for your own commits:
-
-| Type | When |
-|------|------|
-| `feat` | New functionality |
-| `fix` | Bug fix |
-| `chore` | Maintenance, config |
-| `docs` | Documentation |
-
----
-
-## Useful Commands
-
-```bash
-# Status overview
-flux get all -n flux-system
-flux get kustomizations
-flux get sources git -n flux-system
+flux get sources all -A
 flux get helmreleases -A
+flux reconcile helmrelease <name> -n <namespace> --with-source
+```
 
-# Force reconciliation
-flux reconcile kustomization apps
-flux reconcile image update flux-system
-flux reconcile source git flux-system
-flux reconcile helmrelease <n> -n <namespace>
+## Image automation
 
-# Image automation
-flux get images all -n flux-system
-flux get images repository -n flux-system
-flux get images policy -n flux-system
-flux get images update -n flux-system
+* `ImageRepository` scans a registry.
+* `ImagePolicy` selects an allowed tag.
+* `ImageUpdateAutomation` commits the selected tag to Git.
 
-# Suspend / resume (useful when debugging)
-flux suspend helmrelease <n> -n <namespace>
-flux resume helmrelease <n> -n <namespace>
+`clients-api` uses semantic versions so promotion remains deterministic. A Deployment
+must not declare `spec.replicas` when HPA owns that field.
 
-# Git
-git log --oneline --author="fluxbot"   # only auto-commits
-git log -p -- apps/base/nginx/nginx-deploy.yaml  # history of a specific file
+## Safe change sequence
+
+1. Change manifests on a branch.
+2. Validate YAML and render Kustomize output.
+3. Review and merge to the branch watched by Flux.
+4. Reconcile the source and relevant Kustomization.
+5. Verify the applied revision and workload state.
+
+```bash
+kustomize build apps/base >/dev/null
+flux reconcile kustomization apps -n flux-system --with-source --timeout 10m
+flux get kustomizations -n flux-system
+```
+
+When a Kustomization is suspended for maintenance, merge the intended configuration
+to its watched branch before resuming it. Otherwise Flux can restore the previous
+declarative state.
+
+## Pruning and deletion
+
+Removing a resource from an active Kustomization is a deletion request when
+`prune: true`. Before merging, check whether it owns persistent data and whether its
+reclaim policy will delete the underlying volume.
+
+```bash
+kubectl get all,pvc,ingress -n <namespace>
+kubectl get pv
+kubectl get volumes.longhorn.io -n longhorn-system
+```
+
+## Routine checks
+
+```bash
+flux check
+flux get all -A
+flux get kustomizations -n flux-system
+flux get helmreleases -A
+flux get image repositories,policies,update -A
 ```

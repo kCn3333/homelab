@@ -1,6 +1,6 @@
 # 18 - Cluster Baseline and Routing Incident
 
-# K3s Homelab — Sesja 18 (Powrót do klastra i diagnostyka routingu)
+# K3s Homelab — Powrót do klastra i diagnostyka routingu
 
 **Data:** 2026-09-03–2026-09-04
 

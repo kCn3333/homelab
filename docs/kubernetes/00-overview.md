@@ -1,100 +1,126 @@
 # K3s Homelab
 
-This is a documentation of a production-grade Kubernetes homelab built on three HP T630 thin clients. The goal was to replicate a real production setup as closely as possible in a home environment — HA control plane, GitOps, observability, proper storage, automated deployments, the whole thing.
+Three-node Kubernetes homelab running on physical HP T630 machines. All nodes are k3s servers, control-plane nodes, etcd members and workload nodes.
 
 ---
 
 ## Hardware
 
-| Node | Role | Specs |
-|------|------|-------|
-| master (192.168.55.10) | control-plane + etcd | HP T630, 8GB RAM, 128GB SSD |
-| worker1 (192.168.55.11) | control-plane + etcd | HP T630, 8GB RAM, 128GB SSD |
-| worker2 (192.168.55.12) | control-plane + etcd | HP T630, 8GB RAM, 128GB SSD |
-| haproxy (192.168.0.45/46) | load balancer | Debian Server |
+| Node      | Address         | Roles                          | Hardware                      |
+| --------- | --------------- | ------------------------------ | ----------------------------- |
+| `master`  | `192.168.55.10` | control-plane, etcd, workloads | HP T630, 8 GB RAM, 128 GB SSD |
+| `worker1` | `192.168.55.11` | control-plane, etcd, workloads | HP T630, 8 GB RAM, 128 GB SSD |
+| `worker2` | `192.168.55.12` | control-plane, etcd, workloads | HP T630, 8 GB RAM, 128 GB SSD |
 
-All three nodes run k3s in HA mode — every node is both control-plane and etcd member.
+The node names are historical. `master`, `worker1` and `worker2` have the same Kubernetes roles.
+
+HAProxy runs in an LXC container on the Proxmox server and uses `192.168.0.45`.
 
 ---
 
-## Architecture Overview
+## Traffic paths
 
-```
-Internet / LAN
-      │
-      ▼
-HAProxy (192.168.0.45)
-  :80  → Traefik HTTP
-  :443 → Traefik HTTPS (TCP passthrough)
-  :6443 → k3s API Server (TCP passthrough)
-      │
-      ▼
-3× k3s control-plane (embedded etcd)
-  master / worker1 / worker2
-      │
-      ▼
-Traefik Ingress Controller (L7)
-      │
-      ▼
-Workloads (namespaced)
+Kubernetes API:
+
+```text
+kubectl
+→ HAProxy:6443
+→ one of the three k3s API servers
 ```
 
----
+Application traffic:
 
-## What's Running
-
-| Category | Tool | Purpose |
-|----------|------|---------|
-| Cluster | k3s v1.34.4 | Lightweight Kubernetes |
-| Load Balancer | HAProxy | External LB + TLS passthrough |
-| CNI | Cilium v1.19.1 | eBPF networking, replaces Flannel |
-| Ingress | Traefik v3 | L7 routing, built into k3s |
-| TLS | cert-manager + Let's Encrypt | Automatic certificates via DNS-01 |
-| Storage | Longhorn v1.11 | Distributed block storage with replication |
-| GitOps | Flux v2.8.1 | Pull-based CD, image automation |
-| Secrets | Sealed Secrets | Encrypted secrets safe to commit to Git |
-| Firewall | UFW + Ansible | Per-node firewall, managed as code |
-| Monitoring | kube-prometheus-stack | Prometheus + Grafana + AlertManager |
-| Logging | Loki + Promtail | Centralized log aggregation |
-| Alerts | AlertManager + ntfy | Push notifications via self-hosted ntfy |
-| Object Storage | Garage v2.2.0 | Self-hosted S3 (backups, Loki storage) |
-| Backup | etcd snapshots + rsync | Daily etcd backup to Debian server |
-| App | clients-api (Spring Boot) | Demo app with full CI/CD |
-
----
-
-## Documentation Structure
-
-```
-01-cluster-architecture/   HA control plane, etcd, node setup
-02-networking/             HAProxy, Cilium CNI, NetworkPolicy
-03-ingress-tls/            Traefik, cert-manager, Let's Encrypt
-04-storage/                Longhorn distributed storage
-05-gitops/                 Flux, GitOps workflow, image automation
-06-security/               UFW firewall, Sealed Secrets
-07-observability/          Prometheus, Grafana, Loki, AlertManager, Hubble
-08-backup/                 etcd snapshots, Longhorn S3 backups
-09-applications/           CI/CD pipeline, Helm charts, Progressive Delivery
+```text
+client
+→ HAProxy:80/443
+→ node:80/443
+→ K3s ServiceLB / klipper-lb
+→ Service/traefik
+→ Traefik Pod
+→ application Pod
 ```
 
+HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates application TLS and performs HTTP routing.
+
 ---
 
-## Git Repositories
+## Current platform
 
-- **[k3s-homelab](https://github.com/kCn3333/k3s-homelab)** — cluster config, Flux manifests, GitOps source of truth
-- **[clients-api](https://github.com/kCn3333/clients-api)** — application code + Helm chart + GitHub Actions pipeline
+| Area                    | Component                | Current role                                                  |
+| ----------------------- | ------------------------ | ------------------------------------------------------------- |
+| Kubernetes              | k3s `v1.34.4+k3s1`       | Kubernetes distribution and embedded etcd                     |
+| External entry point    | HAProxy                  | Selects an API server or ingress node                         |
+| CNI                     | Cilium `v1.19.1`         | Pod networking, NetworkPolicy and VXLAN transport             |
+| Service dataplane       | kube-proxy and Cilium    | iptables for tested host traffic; eBPF for tested Pod traffic |
+| Ingress                 | Traefik v3               | TLS termination and L7 routing                                |
+| Bare-metal LoadBalancer | K3s ServiceLB            | Exposes Traefik on node ports `80/443`                        |
+| TLS                     | cert-manager             | Let's Encrypt certificates through DNS-01                     |
+| Storage                 | Longhorn `v1.11`         | Replicated persistent volumes                                 |
+| GitOps                  | Flux `v2.8.1`            | Reconciliation and image automation                           |
+| Secrets                 | Sealed Secrets           | Encrypted secrets stored in Git                               |
+| Monitoring              | kube-prometheus-stack    | Prometheus, Grafana and Alertmanager                          |
+| Logging                 | Loki and Promtail        | Central log collection                                        |
+| Object storage          | Garage `v2.2.0` on Logos | S3 storage for Loki and Longhorn backups                      |
+| Firewall                | UFW managed with Ansible | Restricts node access and cluster ports                       |
+
 ---
 
-## Key Design Decisions
+## Network state
 
-**Why k3s instead of kubeadm/vanilla k8s?**  
-Significantly lower overhead, embedded etcd for HA, ships with Traefik and Flannel out of the box. Production-grade but resource-efficient — important on 8GB RAM nodes.
+```text
+Node network: 192.168.55.0/24
+Service CIDR: 10.43.0.0/16
+Pod CIDR:     10.42.0.0/16
+```
 
-**Why pull-based GitOps (Flux) instead of push (standard CI)?**  
-The cluster doesn't need to be accessible from the internet. Flux pulls changes from Git, which is simpler and more secure in a homelab/firewall setup.
+Cilium uses Kubernetes IPAM:
 
-**Why Cilium instead of Flannel?**  
-eBPF-based networking with lower overhead, built-in NetworkPolicy support, and Hubble for network observability. Flannel had reliability issues after hard reboots (tmpfs subnet.env loss).
+```text
+ipam=kubernetes
+k8s-require-ipv4-pod-cidr=true
+routing=VXLAN
+kubeProxyReplacement=false
+```
 
-**Why Longhorn instead of local-path?**  
-Data replication between nodes — if one node dies, PVCs remain available. Essential for stateful workloads in a 3-node HA setup.
+Each node receives its own `/24` PodCIDR from k3s:
+
+```text
+master:  10.42.0.0/24
+worker1: 10.42.1.0/24
+worker2: 10.42.2.0/24
+```
+
+---
+
+## Repositories
+
+* [homelab](https://github.com/kCn3333/homelab) — this documentation and the Polish journal.
+* [k3s-homelab](https://github.com/kCn3333/k3s-homelab) — Flux manifests and Kubernetes desired state.
+* [homelab-ansible playbooks](https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks) — host configuration, firewall and cluster power lifecycle.
+* [clients-api](https://github.com/kCn3333/clients-api) — Spring Boot application, Helm chart and CI pipeline.
+* [k8s-badge](https://github.com/kCn3333/k8s-badge) — lightweight cluster-status API and SVG badge.
+
+Flux is the source of truth for Kubernetes resources managed by the repository. Ansible owns host-level configuration. Built-in k3s components remain managed by k3s unless explicitly stated otherwise.
+
+---
+
+## Documentation map
+
+| File                                               | Scope                                                  |
+| -------------------------------------------------- | ------------------------------------------------------ |
+| [Cluster architecture](01-cluster-architecture.md) | Nodes, control plane, etcd and API access              |
+| [Networking](02-networking.md)                     | Cilium, kube-proxy, Service datapath and NetworkPolicy |
+| [Ingress and TLS](03-ingress-tls.md)               | HAProxy, ServiceLB, Traefik, Ingress and certificates  |
+| [Storage](04-storage.md)                           | Longhorn, StorageClasses and volume operations         |
+| [GitOps](05-gitops.md)                             | Flux structure and deployment workflow                 |
+| [Security](06-security.md)                         | UFW, Sealed Secrets and time synchronization           |
+| [Observability](07-observability.md)               | Metrics, logs, alerts and Hubble                       |
+| [Backup](08-backup.md)                             | etcd snapshots and Longhorn backups                    |
+| [Applications](09-applications.md)                 | `clients-api`, `k8s-badge` and delivery workflow       |
+
+The files above describe the current state. Migration history, incidents and experiments are kept in the [journal](../journal/).
+
+Each Kubernetes learning session produces a Polish journal entry. A reusable failure
+and its verified solution may also become a troubleshooting article. The state
+documentation is updated only when the current architecture or operating procedure
+changes.

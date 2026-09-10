@@ -1,258 +1,172 @@
 # Networking
 
-This section covers everything network-related: the external load balancer, the CNI (Cilium), and network isolation via NetworkPolicy.
+## Addressing
 
----
+| Network         | Range             | Purpose                                      |
+| --------------- | ----------------- | -------------------------------------------- |
+| Node network    | `192.168.55.0/24` | Node, API, etcd and overlay underlay traffic |
+| Pod network     | `10.42.0.0/16`    | Addresses assigned to Pods                   |
+| Service network | `10.43.0.0/16`    | Virtual Service addresses                    |
 
-## HAProxy — External Load Balancer
+Per-node PodCIDRs:
 
-HAProxy runs on a separate Debian server and serves as the single entry point for all cluster traffic. It load-balances across all three nodes and handles TLS passthrough for both the API server and Traefik.
-
-```
-Internet / LAN
-      │
-      ▼
-HAProxy (192.168.0.45)
-  :6443 → k3s API Server   (mode tcp, TLS passthrough)
-  :80   → Traefik HTTP     (mode http)
-  :443  → Traefik HTTPS    (mode tcp, TLS passthrough)
+```text
+master:  10.42.0.0/24
+worker1: 10.42.1.0/24
+worker2: 10.42.2.0/24
 ```
 
-### IP alias setup on Debian
+The current Cilium configuration uses Kubernetes IPAM:
 
-HAProxy listens on a virtual IP `192.168.0.45`, separate from the host's main IP `192.168.0.46`. This is done via an interface alias in `/etc/network/interfaces`:
-
-```
-auto enp1s0:0
-iface enp1s0:0 inet static
-    address 192.168.0.45
-    netmask 255.255.255.0
+```text
+ipam=kubernetes
+k8s-require-ipv4-pod-cidr=true
+routing=VXLAN
+kubeProxyReplacement=false
 ```
 
-Apply without full network restart:
-```bash
-sudo ifup enp1s0:0
-```
+k3s assigns each node a PodCIDR. Cilium consumes that CIDR instead of allocating addresses from a separate cluster pool.
 
-Don't use `systemctl restart networking` over SSH — you'll lose the connection.
-
-### HAProxy config
-
-```haproxy
-frontend k8s-api
-    bind 192.168.0.45:6443
-    mode tcp          # TLS passthrough — HAProxy doesn't see the content
-
-frontend ingress-http
-    bind 192.168.0.45:80
-    mode http         # HTTP — Traefik handles redirects
-
-frontend ingress-https
-    bind 192.168.0.45:443
-    mode tcp          # TLS passthrough — Traefik terminates TLS
-```
-
-### mode tcp vs mode http
-
-- `mode tcp` — HAProxy passes raw bytes through, never sees packet content. TLS is terminated by the backend (API server / Traefik). HAProxy doesn't need a certificate.
-- `mode http` — HAProxy understands HTTP, can modify headers, but requires decrypting TLS (needs the private key).
-
-For k8s API and HTTPS ingress → always `mode tcp`.
-
-### Health check pitfall
-
-`option httpchk GET /healthz` doesn't work with `mode tcp` — HAProxy can't parse HTTP in TCP mode. Also, Traefik returns `404` on unknown paths, which HAProxy considers unhealthy by default.
-
-Solutions:
-
-- Remove `check` from backends entirely (simplest for homelab)
-- Use `http-check expect status 200,301,302,404`
-
-The debugging lesson: remove health checks first to confirm routing works, then fix health checks separately.
-
----
-
-## Cilium CNI
-
-### Why Cilium (and why migrated from Flannel)
-
-Flannel was the default CNI in k3s and worked fine — until a hard power-off. Flannel stores its `subnet.env` in `/run/flannel/` which is a `tmpfs` (lives in RAM). After a hard shutdown, that file disappears and Flannel can't initialize the network on restart, leaving all pods stuck in `ContainerCreating`.
-
-Cilium doesn't have this problem. It also brings:
-
-- eBPF instead of iptables — better performance, lower overhead
-- Built-in NetworkPolicy support
-- Hubble for network observability
-- Production standard in enterprise environments
-
-### Migration from Flannel to Cilium
-
-**Step 1 — Snapshot etcd first**
-```bash
-ssh master "sudo k3s etcd-snapshot save --name pre-cilium-migration"
-```
-
-**Step 2 — Stop k3s on all nodes**
-```bash
-ansible all -m systemd -a "name=k3s state=stopped" -b
-```
-
-**Step 3 — Clean up Flannel**
-```bash
-ansible all -m shell -a "
-rm -rf /run/flannel
-rm -rf /var/lib/cni
-rm -rf /etc/cni/net.d/*
-ip link delete flannel.1 2>/dev/null || true
-ip link delete cni0 2>/dev/null || true
-" -b
-```
-
-**Step 4 — Update k3s.service flags** (on each node)
-
-Add to the `ExecStart` block:
-```
-'--flannel-backend=none'
-'--disable-network-policy'
-```
-
-**Step 5 — Start the cluster (HA quorum matters!)**
-
-In a 3-node HA cluster, etcd needs quorum (2/3 nodes) before it can elect a leader. Don't wait too long between starting master and workers.
+Verify:
 
 ```bash
-# Start master
-ssh master "sudo systemctl daemon-reload && sudo systemctl start k3s"
+kubectl get nodes \
+  -o custom-columns='NAME:.metadata.name,PODCIDR:.spec.podCIDR'
 
-# Start workers in parallel soon after
-ssh worker1 "sudo systemctl daemon-reload && sudo systemctl start k3s" &
-ssh worker2 "sudo systemctl daemon-reload && sudo systemctl start k3s" &
-```
-
-Watch for `prober detected unhealthy status` in etcd logs — that's your cue to start the workers.
-
-**Step 6 — Install Cilium via Helm**
-
-```bash
-helm repo add cilium https://helm.cilium.io/
-helm repo update
-
-helm install cilium cilium/cilium \
-  --version 1.19.1 \
+kubectl get configmap cilium-config \
   --namespace kube-system \
-  --set k8sServiceHost=192.168.55.10 \
-  --set k8sServicePort=6443 \
-  --set operator.replicas=1
+  -o jsonpath='ipam={.data.ipam}{"\n"}require-pod-cidr={.data.k8s-require-ipv4-pod-cidr}{"\n"}'
 ```
 
-**Why a direct IP instead of hostname?** Cilium during bootstrap can't use DNS because:
+---
 
-- DNS runs as CoreDNS pods
-- Pods can't start without CNI
-- CNI (Cilium) can't connect without DNS → deadlock
+## Cilium and kube-proxy
 
-Direct IP breaks the cycle.
+Cilium and kube-proxy coexist.
 
-**Step 7 — Move to Flux as HelmRelease**
+| Component  | Current responsibility                                                                |
+| ---------- | ------------------------------------------------------------------------------------- |
+| Cilium     | Pod interfaces, routing, NetworkPolicy, Service eBPF for tested Pod traffic and VXLAN |
+| kube-proxy | iptables Service rules for traffic that reaches the host netfilter dataplane          |
 
-```yaml
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: cilium
-  namespace: kube-system
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: cilium
-      version: "1.19.1"
-      sourceRef:
-        kind: HelmRepository
-        name: cilium
-        namespace: flux-system
-      interval: 12h
-  install:
-    createNamespace: false
-  upgrade:
-    remediation:
-      retries: 3
-  values:
-    k8sServiceHost: 192.168.55.10
-    k8sServicePort: 6443
-    operator:
-      replicas: 1
+`kubeProxyReplacement=false` means kube-proxy remains part of the cluster. It does not mean Cilium performs no Service translation.
+
+The tested `kube-dns` paths were:
+
+| Source              | ClusterIP translation | Remote Pod transport |
+| ------------------- | --------------------- | -------------------- |
+| Process on `master` | kube-proxy / iptables | Cilium VXLAN         |
+| Pod on `master`     | Cilium eBPF           | Cilium VXLAN         |
+
+These results apply to the tested UDP/53 ClusterIP traffic. NodePort and LoadBalancer use separate paths.
+
+---
+
+## Service and EndpointSlice
+
+A Service provides a stable virtual frontend. EndpointSlice stores the current backend addresses and readiness conditions.
+
+```text
+Service/kube-dns: 10.43.0.10:53
+EndpointSlice:    Pod CoreDNS address, ready=true
 ```
 
-### Verifying Cilium
+EndpointSlice belongs to the control path:
+
+1. Kubernetes records ready backends.
+2. kube-proxy and Cilium observe Service and EndpointSlice objects.
+3. They update local iptables rules or eBPF maps.
+4. Packets use the programmed dataplane; they do not query EndpointSlice directly.
+
+Inspect the current state:
 
 ```bash
-cilium status
-cilium connectivity test --test no-policies
+kubectl get service kube-dns \
+  --namespace kube-system \
+  --output wide
+
+kubectl get endpointslices \
+  --namespace kube-system \
+  --selector kubernetes.io/service-name=kube-dns \
+  --output wide
 ```
 
-Expected output:
-```
-Cilium:          OK
-Operator:        OK
-Envoy DaemonSet: OK
-Cluster Pods:    53/53 managed by Cilium
-```
+---
 
-### Routing modes — important context
+## kube-proxy iptables path
 
-| Mode | Description | Pod→NodeIP | kube-proxy needed |
-|------|-------------|-----------|------------------|
-| VXLAN (tunnel) | L3 encapsulation, works everywhere | ❌ | Yes |
-| Native routing | Direct L2 routing, same subnet required | ✅ | No |
+For tested traffic originating from a node process, kube-proxy used:
 
-The cluster currently runs in **VXLAN mode** with k3s kube-proxy. Native routing requires `kubeProxyReplacement: true` + `routingMode: native` + `--disable-kube-proxy` in k3s — and **must be set up from scratch or during a full cluster restart**, not as a rolling update.
-
-> ⚠️ Attempting to switch routing modes via rolling DaemonSet update will break the cluster. One node ends up with native routing while others still use VXLAN — traffic falls apart. Ask me how I know.
-
-### Incident: Cilium crashloop taking down the network
-
-During the initial Cilium install, the DaemonSet entered a crashloop (couldn't connect to the API server) and corrupted network interfaces in the process. Master and worker1 became unreachable even by ping.
-
-Recovery was done from worker2:
-```bash
-# From worker2 — poll until the API comes back up
-while true; do
-  kubectl delete daemonset cilium cilium-envoy -n kube-system \
-    --force --grace-period=0 2>/dev/null && echo "DONE!" && break
-  sleep 2
-done
-# Then physically restart the affected node
+```text
+KUBE-SERVICES
+→ KUBE-SVC-*
+→ KUBE-SEP-*
+→ DNAT to Pod IP
 ```
 
-Lesson: in a 3-node cluster, always keep at least one node out of dangerous operations. worker2 saved the day here.
+The ClusterIP is not assigned to a network interface and does not require a route in the regular routing table. Netfilter intercepts the destination and performs DNAT.
 
-### Namespace stuck in Terminating
+Inspect counters:
 
 ```bash
-kubectl get namespace <name> -o json | \
-  python3 -c "import sys,json; d=json.load(sys.stdin); d['spec']['finalizers']=[]; print(json.dumps(d))" | \
-  kubectl replace --raw /api/v1/namespaces/<name>/finalize -f -
+sudo iptables-save -c -t nat | \
+grep 'kube-system/kube-dns:dns' | \
+grep -v 'dns-tcp'
 ```
+
+---
+
+## Cilium VXLAN path
+
+After Service translation selects a Pod on another node, Cilium routes the packet through `cilium_host` and encapsulates it in VXLAN.
+
+Example observed during a DNS query:
+
+```text
+outer: 192.168.55.10 → 192.168.55.11:8472/UDP
+inner: 10.42.0.161 → 10.42.1.113:53/UDP
+```
+
+The inner destination was already the CoreDNS Pod address. Service translation therefore happened before VXLAN encapsulation.
+
+`cilium_host` is the host-side entry into the Cilium datapath. `cilium_vxlan` implements the overlay between nodes.
+
+Useful checks:
+
+```bash
+ip route get <pod-ip>
+```
+
+```bash
+sudo timeout 15 tcpdump \
+  -ni <node-interface> \
+  -nn -vv \
+  udp port 8472
+```
+
+---
+
+## HAProxy and node access
+
+HAProxy is the intended external entry point:
+
+```text
+HAProxy:6443 → kube-apiserver
+HAProxy:80   → Traefik HTTP
+HAProxy:443  → Traefik HTTPS
+```
+
+Direct node addresses are still valid technical endpoints for NodePort and ServiceLB. Router and UFW rules decide which source networks may use them. HAProxy does not make those paths disappear.
+
+Application traffic through ServiceLB is described in [Ingress and TLS](03-ingress-tls.md).
 
 ---
 
 ## NetworkPolicy
 
-### Default behavior without NetworkPolicy
+Without a policy, Pods can communicate across namespaces. A NetworkPolicy selects Pods and restricts ingress, egress or both.
 
-Every pod can connect to every other pod across all namespaces. Zero isolation.
-
-### How NetworkPolicy works in Cilium
-
-Cilium enforces NetworkPolicy at the eBPF level. When a policy exists for a pod, Cilium uses **DROP** (silently discard) by default — not REJECT. This means blocked connections just time out rather than getting an immediate "connection refused", which leaks less information.
-
-### Example: isolating the database
-
-Only the `clients-api` pods should be able to reach the PostgreSQL database:
+Example: allow PostgreSQL traffic only from `clients-api` Pods in the same namespace:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -263,119 +177,61 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      cnpg.io/cluster: clients-db   # targets the DB pods
+      cnpg.io/cluster: clients-db
   policyTypes:
     - Ingress
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              app: clients-api      # only allow from clients-api
+              app: clients-api
       ports:
         - protocol: TCP
           port: 5432
 ```
 
-### Example: application ingress policy
+Cilium drops traffic denied by policy. A timeout can therefore indicate a policy drop; it does not prove a routing failure.
 
-Allow traffic only from Traefik (kube-system) and Prometheus (monitoring), plus intra-namespace traffic for helm tests:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: clients-api-ingress
-  namespace: clients
-spec:
-  podSelector:
-    matchLabels:
-      app: clients-api
-  policyTypes:
-    - Ingress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: TCP
-          port: 8080
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: monitoring
-      ports:
-        - protocol: TCP
-          port: 8080
-    - from:
-        - podSelector: {}   # all pods in same namespace (for helm tests)
-      ports:
-        - protocol: TCP
-          port: 8080
-```
-
-Note: `podSelector: {}` is an empty selector matching all pods in the namespace where the NetworkPolicy lives.
-
-### Verifying isolation
+Inspect policies and drops:
 
 ```bash
-# Run a pod without app=clients-api label
-kubectl run test-isolation --rm -it \
-  --image=postgres:17 \
-  --restart=Never \
-  -n clients \
-  -- psql -h clients-db-rw -U app -d clients_db -c "SELECT 1"
-
-# If it hangs without responding → NetworkPolicy is working ✅
-# Cilium DROP = silence, not "connection refused"
-```
-
----
-
-## UFW Port Reference
-
-Ports needed for k3s + Cilium. Managed via Ansible playbook — see [security/ufw.md](../06-security/ufw.md).
-
-| Port | Protocol | Purpose | Source |
-|------|----------|---------|--------|
-| 22 | TCP | SSH | Management network |
-| 6443 | TCP | k8s API Server | HAProxy + cluster nodes |
-| 80 | TCP | HTTP Ingress | HAProxy |
-| 443 | TCP | HTTPS Ingress | HAProxy |
-| 8472 | UDP | Flannel VXLAN (legacy) | Between nodes |
-| 10250 | TCP | Kubelet | Between nodes |
-| 2379 | TCP | etcd client | Between nodes |
-| 2380 | TCP | etcd peer | Between nodes |
-| 9100 | TCP | node-exporter | Between nodes (Prometheus) |
-| 4443 | TCP | metrics-server | Between nodes |
-| 4244 | TCP | Hubble gRPC | Between nodes |
-| 4240 | TCP | Cilium health checks | Between nodes |
-
----
-
-## Useful Commands
-
-```bash
-# Cilium
-cilium status
-cilium status --wait
-cilium monitor --type drop
-
-# Force clean pod state after crash
-kubectl delete pods -n <ns> --field-selector status.phase=Unknown --force
-kubectl delete pods -n <ns> --field-selector status.phase=Failed --force
-
-# NetworkPolicy
-kubectl get networkpolicy -n <namespace>
+kubectl get networkpolicy -A
 kubectl describe networkpolicy <name> -n <namespace>
+kubectl -n kube-system exec ds/cilium -- cilium monitor --type drop
+```
 
-# Check Cilium config
-kubectl get configmap -n kube-system cilium-config -o yaml | \
-  grep -E "routing-mode|kube-proxy|cluster-pool-ipv4-cidr"
+---
 
-# Emergency: revert Cilium to VXLAN
-kubectl patch configmap cilium-config -n kube-system \
-  --type merge \
-  -p '{"data":{"routing-mode":"tunnel","kube-proxy-replacement":"false"}}'
-kubectl delete pods -n kube-system -l k8s-app=cilium --force --grace-period=0
+## Required node ports
+
+|  Port | Protocol | Purpose                       |
+| ----: | :------: | ----------------------------- |
+|  6443 |    TCP   | Kubernetes API                |
+|  8472 |    UDP   | Cilium VXLAN                  |
+| 10250 |    TCP   | kubelet API                   |
+|  2379 |    TCP   | etcd client traffic           |
+|  2380 |    TCP   | etcd peer traffic             |
+|  9100 |    TCP   | node-exporter                 |
+|  4443 |    TCP   | metrics-server webhook        |
+|  4244 |    TCP   | Hubble Relay to Cilium agents |
+|  4240 |    TCP   | Cilium health                 |
+|   123 |    UDP   | NTP inside the node network   |
+
+The firewall source ranges and active rules are documented in [Security](06-security.md)
+and implemented by the [cluster Ansible playbooks](https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks).
+
+---
+
+## Useful commands
+
+```bash
+cilium status
+kubectl get ciliumnodes
+kubectl get pods -n kube-system -l k8s-app=cilium -o wide
+```
+
+```bash
+kubectl get service,endpointslice -A
+sudo iptables-save -c -t nat | grep KUBE-SERVICES
+ip -4 route show table all
 ```

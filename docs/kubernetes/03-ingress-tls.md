@@ -1,332 +1,111 @@
-# Ingress & TLS
+# Ingress and TLS
 
-Traefik is the ingress controller (ships with k3s), cert-manager handles automatic TLS certificate issuance via Let's Encrypt.
+## Roles
 
----
+* `Ingress` is a Kubernetes API object that declares HTTP routing.
+* Traefik is the Ingress Controller that implements those rules.
+* cert-manager issues and renews TLS certificates.
+* HAProxy is the external L4 entry point running in an LXC container on Proxmox.
+* K3s ServiceLB exposes Traefik on ports 80 and 443 of every node.
 
-## Traefik
+## Application traffic path
 
-Traefik is a reverse proxy and L7 ingress controller. It receives traffic from HAProxy (already past the load balancer layer), matches hostnames and paths against Ingress/IngressRoute rules, and forwards to the appropriate Service.
-
-```
-HAProxy (L4, TCP passthrough)
-      │
-      ▼
-Traefik (L7, Ingress Controller)
-      │
-      ├── nginx.cluster.kcn333.com → Service: nginx → Pods
-      ├── grafana.cluster.kcn333.com → Service: grafana → Pods
-      └── clients-api.cluster.kcn333.com → Service: clients-api → Pods
+```text
+client -> HAProxy -> node:80/443 -> ServiceLB -> Service/traefik
+       -> Traefik Pod -> application backend
 ```
 
-### klipper-lb (svclb-traefik)
+HAProxy chooses a node. ServiceLB does not balance traffic between nodes; it makes the
+Traefik `LoadBalancer` Service reachable on each node. The Kubernetes API on port
+`6443` follows a separate path and does not pass through ServiceLB or Traefik.
 
-k3s ships with a DaemonSet called `klipper-lb` that simulates a cloud LoadBalancer on bare metal. Without it, a Service of type `LoadBalancer` would sit in `<pending>` forever. It works via iptables rules on each node.
+The HAProxy LXC uses `192.168.0.45`; the application and API forwarding configuration
+remained unchanged after moving HAProxy into the container.
 
-### Configuring Traefik in k3s
+## Traefik Service
 
-k3s manages Traefik through its own Helm mechanism. **Don't edit Traefik's config directly** — k3s will overwrite it. Use a `HelmChartConfig` resource instead:
+| Field                   | Value              |
+| ----------------------- | ------------------ |
+| Type                    | `LoadBalancer`     |
+| ClusterIP               | `10.43.164.47`     |
+| HTTP NodePort           | `30367`            |
+| HTTPS NodePort          | `31427`            |
+| `externalTrafficPolicy` | `Cluster`          |
+| Published addresses     | all three node IPs |
 
-```yaml
-apiVersion: helm.cattle.io/v1
-kind: HelmChartConfig
-metadata:
-  name: traefik        # must match the HelmChart name exactly
-  namespace: kube-system
-spec:
-  valuesContent: |-
-    ports:
-      web:
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-            permanent: true
-    api:
-      dashboard: true
-```
-
-Apply and verify:
-```bash
-kubectl apply -f helmchartconfig-traefik.yaml
-kubectl get helmchartconfig -n kube-system
-helm get values traefik -n kube-system
-```
-
-### Traefik v2 vs v3 breaking change
-
-The HTTP→HTTPS redirect config changed between versions:
-
-| Version | Config key |
-|---------|-----------|
-| v2 | `redirectTo.port: websecure` |
-| v3 | `redirections.entryPoint.to: websecure` |
-
-Traefik v3 silently ignores unknown config fields — no error in logs. Always check the version and reference the correct docs.
-
-### Traefik Dashboard with BasicAuth
-
-The dashboard needs an IngressRoute (not a standard Ingress) since it points to `api@internal`, a Traefik internal service.
-
-**Generate password hash:**
-```bash
-sudo apt install apache2-utils
-htpasswd -nb admin your-password
-# Output: admin:$apr1$xxxxx$yyyyyyy
-```
-
-Store the hash as a SealedSecret (see [security/sealed-secrets.md](../06-security#sealed-secrets)).
-
-**Middleware:**
-```yaml
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: traefik-dashboard-auth
-  namespace: traefik
-spec:
-  basicAuth:
-    secret: traefik-dashboard-auth
-```
-
-**IngressRoute:**
-```yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-dashboard
-  namespace: traefik
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: Host(`traefik.cluster.kcn333.com`)
-      kind: Rule
-      middlewares:
-        - name: traefik-dashboard-auth
-          namespace: traefik
-      services:
-        - name: api@internal
-          kind: TraefikService
-  tls:
-    secretName: traefik-dashboard-tls
-```
-
-### Minimal Ingress
-
-The three things needed for a working Ingress:
-
-1. **Deployment** — pods with the app
-2. **Service** — with a correct selector pointing to the pods
-3. **Ingress** — with correct `ingressClassName`
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: my-ingress
-  annotations:
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
-spec:
-  ingressClassName: traefik
-  tls:
-  - hosts:
-    - app.cluster.kcn333.com
-    secretName: local-prod-kcn333-tls    # Secret name, not Certificate name!
-  rules:
-  - host: app.cluster.kcn333.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: my-service
-            port:
-              number: 80
-```
-
-### Common debugging pitfall
-
-**Empty Endpoints = 503** — if a Service has no endpoints, traffic goes nowhere.
+K3s ServiceLB creates `DaemonSet/svclb-traefik-*`. Each Pod runs
+`rancher/klipper-lb:v0.4.14`, reserves host ports `80` and `443`, and forwards traffic
+to the Traefik Service ClusterIP. `klipper-lb` is the implementation of ServiceLB, not
+another independent load balancer tier.
 
 ```bash
-kubectl get endpoints <svc-name>
+kubectl get service traefik -n kube-system -o wide
+kubectl get daemonset,pods -n kube-system -o wide | grep -E 'svclb-traefik|traefik-'
+kubectl get endpointslices -n kube-system \
+  -l kubernetes.io/service-name=traefik
 ```
 
-Empty endpoints means the Service selector doesn't match any pod labels.
+## Routing to application backends
 
-- `kubectl expose deployment nginx` — copies selector automatically ✅
-- `kubectl create svc` — you have to add the selector manually
+Grafana currently uses:
 
-### Temporary access without Ingress
+| Object          | Value                              |
+| --------------- | ---------------------------------- |
+| Ingress class   | `traefik`                          |
+| Host            | `grafana.cluster.kcn333.com`       |
+| Backend Service | `kube-prometheus-stack-grafana:80` |
+| TLS Secret      | `grafana-tls`                      |
+
+Traefik watches Ingress, Service and EndpointSlice objects. With the current default
+configuration (`nativeLB` not enabled), it forwards directly to ready Pod endpoints.
+The Service still supplies the selector, port mapping and discovery relationship.
+
+If a Pod is replaced, EndpointSlice receives its new address. Traefik must observe
+that update before it can use the new backend.
 
 ```bash
-kubectl port-forward -n kube-system deployment/traefik 9000:9000
-# → http://localhost:9000/dashboard/
+kubectl get ingress -A
+kubectl get service kube-prometheus-stack-grafana -n monitoring
+kubectl get endpointslices -n monitoring \
+  -l kubernetes.io/service-name=kube-prometheus-stack-grafana
 ```
 
----
+## Traefik configuration
 
-## cert-manager
+Traefik is packaged by K3s. Persistent changes belong in a `HelmChartConfig` named
+`traefik` in `kube-system`, not in the generated Deployment or HelmChart.
 
-cert-manager automates TLS certificate issuance and renewal. It integrates with Let's Encrypt and handles the entire ACME challenge flow — you just declare what certificate you want and it handles the rest, including renewals (auto-renews at 1/3 of remaining validity).
+Current customizations include HTTP-to-HTTPS redirection and the dashboard. The
+dashboard is exposed through an authenticated `IngressRoute` using `api@internal`.
 
-### Installation via Helm
+## TLS
+
+cert-manager uses a cluster-scoped Let's Encrypt issuer and DNS-01 validation through
+Cloudflare. DNS-01 does not require the cluster to be reachable from the public
+internet.
+
+1. A `Certificate` requests a certificate from the `ClusterIssuer`.
+2. cert-manager creates the DNS challenge record.
+3. Let's Encrypt validates the record.
+4. cert-manager writes the certificate to a Secret.
+5. Traefik terminates TLS using that Secret.
+
+The TLS Secret must be in the same namespace as the Ingress that references it.
 
 ```bash
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-helm install cert-manager jetstack/cert-manager \
-  -n cert-manager \
-  --create-namespace \
-  --set crds.enabled=true
+kubectl get clusterissuer
+kubectl get certificate,certificaterequest,challenge -A
+kubectl describe certificate grafana-tls -n monitoring
 ```
 
-`crds.enabled=true` installs the CRDs that define the `Certificate`, `ClusterIssuer`, etc. resource types. Without these, k8s doesn't know what those objects are.
+## Troubleshooting order
 
-cert-manager runs 3 pods:
+1. Confirm that DNS resolves to the HAProxy address.
+2. Check HAProxy access to node ports `80` and `443`.
+3. Check the Traefik Service and `svclb-traefik` Pods.
+4. Check the Ingress host, path and TLS Secret.
+5. Check the backend Service selector and ready EndpointSlice entries.
+6. Check Traefik logs.
 
-- `cert-manager` — main controller, manages certificate lifecycle
-- `cert-manager-cainjector` — injects CA into k8s webhooks
-- `cert-manager-webhook` — validates cert-manager resources on creation
-
-None of these need replicas for HA — cert-manager isn't in the critical path for serving user traffic.
-
-### Issuer vs ClusterIssuer
-
-| | Issuer | ClusterIssuer |
-|-|--------|---------------|
-| Scope | Single namespace | Whole cluster |
-| When to use | Per-team isolation | Shared CA for everything |
-
-In a homelab, always use `ClusterIssuer`. It's cluster-scoped (like `Node` or `PV`) — no `-n` flag needed when applying.
-
-### Let's Encrypt staging vs production
-
-**Always test with staging first.** Production has rate limits: max 5 certificates per domain per week. Staging has no limits but the certs aren't trusted by browsers.
-
-```yaml
-# Staging
-server: https://acme-staging-v02.api.letsencrypt.org/directory
-
-# Production
-server: https://acme-v02.api.letsencrypt.org/directory
-```
-
-### DNS-01 Challenge — certificates without exposing the cluster
-
-**HTTP-01**: Let's Encrypt visits `http://yourdomain.com/.well-known/acme-challenge/...` — the server must be accessible from the internet.
-
-**DNS-01**: Let's Encrypt checks a TXT record `_acme-challenge.yourdomain.com` in public DNS — **the cluster doesn't need to be reachable from the internet.**
-
-Flow with Cloudflare:
-
-1. cert-manager requests a certificate
-2. Uses Cloudflare API to add `TXT _acme-challenge.cluster.kcn333.com`
-3. Let's Encrypt verifies the TXT record
-4. cert-manager removes the TXT record
-5. Certificate issued → stored as a Secret in k8s
-
-### Cloudflare API Token
-
-Create a token with **minimum permissions** (principle of least privilege):
-
-- `Zone | DNS | Edit`
-- `Zone | Zone | Read`
-- Zone Resources: Specific zone (your domain only)
-
-**Don't use** the Global API Key — it has way too broad access.
-
-Store the token as a Secret in `cert-manager` namespace:
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cloudflare-token
-  namespace: cert-manager
-type: Opaque
-stringData:
-  api-token: <your-token>
-```
-
-In production, use Sealed Secrets so this can be committed to Git safely.
-
-### ClusterIssuer
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-prod-cluster-issuer
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: your@email.com
-    privateKeySecretRef:
-      name: letsencrypt-prod-cluster-issuer
-    solvers:
-    - dns01:
-        cloudflare:
-          apiTokenSecretRef:
-            name: cloudflare-token
-            key: api-token
-```
-
-### Certificate resource
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: local-prod-cert
-  namespace: flux-test
-spec:
-  secretName: local-prod-kcn333-tls      # name of the Secret to create
-  commonName: "*.cluster.kcn333.com"
-  dnsNames:
-    - "cluster.kcn333.com"
-    - "*.cluster.kcn333.com"             # wildcard for all subdomains
-  issuerRef:
-    name: letsencrypt-prod-cluster-issuer
-    kind: ClusterIssuer
-```
-
-> ⚠️ Common mistake: referencing the Certificate name in Ingress `secretName` instead of the Secret name. Traefik needs the Secret name.
-
-### Certificate per namespace
-
-If you have an IngressRoute in a namespace other than `default`, create a Certificate resource in that namespace. cert-manager creates the Secret directly in the same namespace as the Certificate.
-
-```yaml
-metadata:
-  name: traefik-dashboard-tls
-  namespace: traefik   # ← cert-manager creates the Secret here
-```
-
-### cert-manager resource flow
-
-```
-ClusterIssuer → Certificate → CertificateRequest → Order → Challenge → Secret (TLS)
-```
-
-### Debugging
-
-```bash
-kubectl describe certificate <name>
-kubectl get certificaterequest
-kubectl get orders
-kubectl get challenges
-kubectl describe clusterissuer <name>
-```
-
-Check what certificate the server is actually serving:
-```bash
-echo | openssl s_client -connect domain.com:443 2>/dev/null | \
-  openssl x509 -text -noout | grep -A2 "Issuer\|Subject\|Validity"
-
-# Staging: Issuer contains "(STAGING)"
-# Production: Issuer: C=US, O=Let's Encrypt, CN=R10/R11/R12
-```
+`kubectl port-forward` is a temporary API-server tunnel. It is useful for diagnostics,
+but it does not test HAProxy, ServiceLB or the normal Ingress path.
