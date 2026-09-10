@@ -1330,10 +1330,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" class="md-nav__link">
+  <a href="#traffic-paths" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture Overview
+        Traffic paths
       
     </span>
   </a>
@@ -1341,10 +1341,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#whats-running" class="md-nav__link">
+  <a href="#current-platform" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's Running
+        Current platform
       
     </span>
   </a>
@@ -1352,10 +1352,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation-structure" class="md-nav__link">
+  <a href="#network-state" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentation Structure
+        Network state
       
     </span>
   </a>
@@ -1363,10 +1363,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#git-repositories" class="md-nav__link">
+  <a href="#repositories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Git Repositories
+        Repositories
       
     </span>
   </a>
@@ -1374,10 +1374,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-design-decisions" class="md-nav__link">
+  <a href="#documentation-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Design Decisions
+        Documentation map
       
     </span>
   </a>
@@ -1463,7 +1463,7 @@
   <span class="md-ellipsis">
     
   
-    Ingress &amp; TLS
+    Ingress and TLS
   
 
     
@@ -2303,6 +2303,34 @@
     
   
     21 - CoreDNS Service Datapath
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22 - ServiceLB, Traefik i Ingress
   
 
     
@@ -3486,10 +3514,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" class="md-nav__link">
+  <a href="#traffic-paths" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture Overview
+        Traffic paths
       
     </span>
   </a>
@@ -3497,10 +3525,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#whats-running" class="md-nav__link">
+  <a href="#current-platform" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's Running
+        Current platform
       
     </span>
   </a>
@@ -3508,10 +3536,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation-structure" class="md-nav__link">
+  <a href="#network-state" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentation Structure
+        Network state
       
     </span>
   </a>
@@ -3519,10 +3547,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#git-repositories" class="md-nav__link">
+  <a href="#repositories" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Git Repositories
+        Repositories
       
     </span>
   </a>
@@ -3530,10 +3558,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-design-decisions" class="md-nav__link">
+  <a href="#documentation-map" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Design Decisions
+        Documentation map
       
     </span>
   </a>
@@ -3569,177 +3597,221 @@
 
 
 <h1 id="k3s-homelab">K3s Homelab<a class="headerlink" href="#k3s-homelab" title="Permanent link">&para;</a></h1>
-<p>This is a documentation of a production-grade Kubernetes homelab built on three HP T630 thin clients. The goal was to replicate a real production setup as closely as possible in a home environment — HA control plane, GitOps, observability, proper storage, automated deployments, the whole thing.</p>
+<p>Three-node Kubernetes homelab running on physical HP T630 machines. All nodes are k3s servers, control-plane nodes, etcd members and workload nodes.</p>
 <hr />
 <h2 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Node</th>
-<th>Role</th>
-<th>Specs</th>
+<th>Address</th>
+<th>Roles</th>
+<th>Hardware</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>master (192.168.55.10)</td>
-<td>control-plane + etcd</td>
-<td>HP T630, 8GB RAM, 128GB SSD</td>
+<td><code>master</code></td>
+<td><code>192.168.55.10</code></td>
+<td>control-plane, etcd, workloads</td>
+<td>HP T630, 8 GB RAM, 128 GB SSD</td>
 </tr>
 <tr>
-<td>worker1 (192.168.55.11)</td>
-<td>control-plane + etcd</td>
-<td>HP T630, 8GB RAM, 128GB SSD</td>
+<td><code>worker1</code></td>
+<td><code>192.168.55.11</code></td>
+<td>control-plane, etcd, workloads</td>
+<td>HP T630, 8 GB RAM, 128 GB SSD</td>
 </tr>
 <tr>
-<td>worker2 (192.168.55.12)</td>
-<td>control-plane + etcd</td>
-<td>HP T630, 8GB RAM, 128GB SSD</td>
-</tr>
-<tr>
-<td>haproxy (192.168.0.45/46)</td>
-<td>load balancer</td>
-<td>Debian Server</td>
+<td><code>worker2</code></td>
+<td><code>192.168.55.12</code></td>
+<td>control-plane, etcd, workloads</td>
+<td>HP T630, 8 GB RAM, 128 GB SSD</td>
 </tr>
 </tbody>
 </table>
-<p>All three nodes run k3s in HA mode — every node is both control-plane and etcd member.</p>
+<p>The node names are historical. <code>master</code>, <code>worker1</code> and <code>worker2</code> have the same Kubernetes roles.</p>
+<p>HAProxy runs in an LXC container on the Proxmox server and uses <code>192.168.0.45</code>.</p>
 <hr />
-<h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Internet / LAN
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      │
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      ▼
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>HAProxy (192.168.0.45)
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  :80  → Traefik HTTP
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  :443 → Traefik HTTPS (TCP passthrough)
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  :6443 → k3s API Server (TCP passthrough)
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      │
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>      ▼
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>3× k3s control-plane (embedded etcd)
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  master / worker1 / worker2
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>      │
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      ▼
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>Traefik Ingress Controller (L7)
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>      │
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>      ▼
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>Workloads (namespaced)
+<h2 id="traffic-paths">Traffic paths<a class="headerlink" href="#traffic-paths" title="Permanent link">&para;</a></h2>
+<p>Kubernetes API:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>→ HAProxy:6443
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>→ one of the three k3s API servers
 </span></code></pre></div>
+<p>Application traffic:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>client
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>→ HAProxy:80/443
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>→ node:80/443
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>→ K3s ServiceLB / klipper-lb
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>→ Service/traefik
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>→ Traefik Pod
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>→ application Pod
+</span></code></pre></div>
+<p>HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates application TLS and performs HTTP routing.</p>
 <hr />
-<h2 id="whats-running">What's Running<a class="headerlink" href="#whats-running" title="Permanent link">&para;</a></h2>
+<h2 id="current-platform">Current platform<a class="headerlink" href="#current-platform" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Category</th>
-<th>Tool</th>
-<th>Purpose</th>
+<th>Area</th>
+<th>Component</th>
+<th>Current role</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Cluster</td>
-<td>k3s v1.34.4</td>
-<td>Lightweight Kubernetes</td>
+<td>Kubernetes</td>
+<td>k3s <code>v1.34.4+k3s1</code></td>
+<td>Kubernetes distribution and embedded etcd</td>
 </tr>
 <tr>
-<td>Load Balancer</td>
+<td>External entry point</td>
 <td>HAProxy</td>
-<td>External LB + TLS passthrough</td>
+<td>Selects an API server or ingress node</td>
 </tr>
 <tr>
 <td>CNI</td>
-<td>Cilium v1.19.1</td>
-<td>eBPF networking, replaces Flannel</td>
+<td>Cilium <code>v1.19.1</code></td>
+<td>Pod networking, NetworkPolicy and VXLAN transport</td>
+</tr>
+<tr>
+<td>Service dataplane</td>
+<td>kube-proxy and Cilium</td>
+<td>iptables for tested host traffic; eBPF for tested Pod traffic</td>
 </tr>
 <tr>
 <td>Ingress</td>
 <td>Traefik v3</td>
-<td>L7 routing, built into k3s</td>
+<td>TLS termination and L7 routing</td>
+</tr>
+<tr>
+<td>Bare-metal LoadBalancer</td>
+<td>K3s ServiceLB</td>
+<td>Exposes Traefik on node ports <code>80/443</code></td>
 </tr>
 <tr>
 <td>TLS</td>
-<td>cert-manager + Let's Encrypt</td>
-<td>Automatic certificates via DNS-01</td>
+<td>cert-manager</td>
+<td>Let's Encrypt certificates through DNS-01</td>
 </tr>
 <tr>
 <td>Storage</td>
-<td>Longhorn v1.11</td>
-<td>Distributed block storage with replication</td>
+<td>Longhorn <code>v1.11</code></td>
+<td>Replicated persistent volumes</td>
 </tr>
 <tr>
 <td>GitOps</td>
-<td>Flux v2.8.1</td>
-<td>Pull-based CD, image automation</td>
+<td>Flux <code>v2.8.1</code></td>
+<td>Reconciliation and image automation</td>
 </tr>
 <tr>
 <td>Secrets</td>
 <td>Sealed Secrets</td>
-<td>Encrypted secrets safe to commit to Git</td>
-</tr>
-<tr>
-<td>Firewall</td>
-<td>UFW + Ansible</td>
-<td>Per-node firewall, managed as code</td>
+<td>Encrypted secrets stored in Git</td>
 </tr>
 <tr>
 <td>Monitoring</td>
 <td>kube-prometheus-stack</td>
-<td>Prometheus + Grafana + AlertManager</td>
+<td>Prometheus, Grafana and Alertmanager</td>
 </tr>
 <tr>
 <td>Logging</td>
-<td>Loki + Promtail</td>
-<td>Centralized log aggregation</td>
+<td>Loki and Promtail</td>
+<td>Central log collection</td>
 </tr>
 <tr>
-<td>Alerts</td>
-<td>AlertManager + ntfy</td>
-<td>Push notifications via self-hosted ntfy</td>
+<td>Object storage</td>
+<td>Garage <code>v2.2.0</code> on Logos</td>
+<td>S3 storage for Loki and Longhorn backups</td>
 </tr>
 <tr>
-<td>Object Storage</td>
-<td>Garage v2.2.0</td>
-<td>Self-hosted S3 (backups, Loki storage)</td>
-</tr>
-<tr>
-<td>Backup</td>
-<td>etcd snapshots + rsync</td>
-<td>Daily etcd backup to Debian server</td>
-</tr>
-<tr>
-<td>App</td>
-<td>clients-api (Spring Boot)</td>
-<td>Demo app with full CI/CD</td>
+<td>Firewall</td>
+<td>UFW managed with Ansible</td>
+<td>Restricts node access and cluster ports</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="documentation-structure">Documentation Structure<a class="headerlink" href="#documentation-structure" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>01-cluster-architecture/   HA control plane, etcd, node setup
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>02-networking/             HAProxy, Cilium CNI, NetworkPolicy
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>03-ingress-tls/            Traefik, cert-manager, Let's Encrypt
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>04-storage/                Longhorn distributed storage
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>05-gitops/                 Flux, GitOps workflow, image automation
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>06-security/               UFW firewall, Sealed Secrets
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>07-observability/          Prometheus, Grafana, Loki, AlertManager, Hubble
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>08-backup/                 etcd snapshots, Longhorn S3 backups
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>09-applications/           CI/CD pipeline, Helm charts, Progressive Delivery
+<h2 id="network-state">Network state<a class="headerlink" href="#network-state" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Node network: 192.168.55.0/24
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Service CIDR: 10.43.0.0/16
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Pod CIDR:     10.42.0.0/16
+</span></code></pre></div>
+<p>Cilium uses Kubernetes IPAM:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ipam=kubernetes
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>k8s-require-ipv4-pod-cidr=true
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>routing=VXLAN
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>kubeProxyReplacement=false
+</span></code></pre></div>
+<p>Each node receives its own <code>/24</code> PodCIDR from k3s:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>master:  10.42.0.0/24
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>worker1: 10.42.1.0/24
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>worker2: 10.42.2.0/24
 </span></code></pre></div>
 <hr />
-<h2 id="git-repositories">Git Repositories<a class="headerlink" href="#git-repositories" title="Permanent link">&para;</a></h2>
+<h2 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><a href="https://github.com/kCn3333/k3s-homelab">k3s-homelab</a></strong> — cluster config, Flux manifests, GitOps source of truth</li>
-<li><strong><a href="https://github.com/kCn3333/clients-api">clients-api</a></strong> — application code + Helm chart + GitHub Actions pipeline</li>
+<li><a href="https://github.com/kCn3333/homelab">homelab</a> — this documentation and the Polish journal.</li>
+<li><a href="https://github.com/kCn3333/k3s-homelab">k3s-homelab</a> — Flux manifests and Kubernetes desired state.</li>
+<li><a href="https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks">homelab-ansible playbooks</a> — host configuration, firewall and cluster power lifecycle.</li>
+<li><a href="https://github.com/kCn3333/clients-api">clients-api</a> — Spring Boot application, Helm chart and CI pipeline.</li>
+<li><a href="https://github.com/kCn3333/k8s-badge">k8s-badge</a> — lightweight cluster-status API and SVG badge.</li>
 </ul>
+<p>Flux is the source of truth for Kubernetes resources managed by the repository. Ansible owns host-level configuration. Built-in k3s components remain managed by k3s unless explicitly stated otherwise.</p>
 <hr />
-<h2 id="key-design-decisions">Key Design Decisions<a class="headerlink" href="#key-design-decisions" title="Permanent link">&para;</a></h2>
-<p><strong>Why k3s instead of kubeadm/vanilla k8s?</strong><br />
-Significantly lower overhead, embedded etcd for HA, ships with Traefik and Flannel out of the box. Production-grade but resource-efficient — important on 8GB RAM nodes.</p>
-<p><strong>Why pull-based GitOps (Flux) instead of push (standard CI)?</strong><br />
-The cluster doesn't need to be accessible from the internet. Flux pulls changes from Git, which is simpler and more secure in a homelab/firewall setup.</p>
-<p><strong>Why Cilium instead of Flannel?</strong><br />
-eBPF-based networking with lower overhead, built-in NetworkPolicy support, and Hubble for network observability. Flannel had reliability issues after hard reboots (tmpfs subnet.env loss).</p>
-<p><strong>Why Longhorn instead of local-path?</strong><br />
-Data replication between nodes — if one node dies, PVCs remain available. Essential for stateful workloads in a 3-node HA setup.</p>
+<h2 id="documentation-map">Documentation map<a class="headerlink" href="#documentation-map" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../01-cluster-architecture/">Cluster architecture</a></td>
+<td>Nodes, control plane, etcd and API access</td>
+</tr>
+<tr>
+<td><a href="../02-networking/">Networking</a></td>
+<td>Cilium, kube-proxy, Service datapath and NetworkPolicy</td>
+</tr>
+<tr>
+<td><a href="../03-ingress-tls/">Ingress and TLS</a></td>
+<td>HAProxy, ServiceLB, Traefik, Ingress and certificates</td>
+</tr>
+<tr>
+<td><a href="../04-storage/">Storage</a></td>
+<td>Longhorn, StorageClasses and volume operations</td>
+</tr>
+<tr>
+<td><a href="../05-gitops/">GitOps</a></td>
+<td>Flux structure and deployment workflow</td>
+</tr>
+<tr>
+<td><a href="../06-security/">Security</a></td>
+<td>UFW, Sealed Secrets and time synchronization</td>
+</tr>
+<tr>
+<td><a href="../07-observability/">Observability</a></td>
+<td>Metrics, logs, alerts and Hubble</td>
+</tr>
+<tr>
+<td><a href="../08-backup/">Backup</a></td>
+<td>etcd snapshots and Longhorn backups</td>
+</tr>
+<tr>
+<td><a href="../09-applications/">Applications</a></td>
+<td><code>clients-api</code>, <code>k8s-badge</code> and delivery workflow</td>
+</tr>
+</tbody>
+</table>
+<p>The files above describe the current state. Migration history, incidents and experiments are kept in the <a href="../journal/">journal</a>.</p>
+<p>Each Kubernetes learning session produces a Polish journal entry. A reusable failure
+and its verified solution may also become a troubleshooting article. The state
+documentation is updated only when the current architecture or operating procedure
+changes.</p>
 
 
 
@@ -3762,7 +3834,7 @@ Data replication between nodes — if one node dies, PVCs remain available. Esse
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 23, 2026 08:40:38 UTC"><span class="timeago" datetime="2026-03-23T08:40:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 23, 2026 08:40:38 UTC">2026-03-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 10, 2026 12:28:23 UTC"><span class="timeago" datetime="2026-09-10T12:28:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2026 12:28:23 UTC">2026-09-10</span>
   </span>
 
     
