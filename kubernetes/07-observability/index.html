@@ -3690,11 +3690,16 @@
 </tr>
 </tbody>
 </table>
-<p><code>kube-prometheus-stack</code> is currently deployed as chart version <code>82.10.1</code> through Flux.</p>
+<p><code>kube-prometheus-stack</code> is currently deployed as chart version <code>82.10.1</code> through Flux.
+The stack includes Grafana <code>12.4.0</code> and <code>kiwigrid/k8s-sidecar:2.5.0</code>.</p>
 <h2 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h2>
 <p>Prometheus uses <code>hostNetwork: true</code> and <code>hostPID: true</code> so it can scrape kubelet and
-node-exporter endpoints on node addresses. UFW permits the required traffic inside the
-cluster subnet.</p>
+node-exporter endpoints on node addresses. It therefore listens on TCP port <code>9090</code> in
+the network namespace of its node instead of using only a Pod IP.</p>
+<p>UFW must allow <code>9090/tcp</code> from the cluster-node subnet on every K3s node. This rule is
+managed by the
+<a href="https://github.com/kCn3333/homelab-ansible/blob/main/cluster/playbooks/power/k3s-ufw.yml">K3s UFW playbook</a>
+and is intentionally not open to the entire LAN or the Internet.</p>
 <p>Some kube-prometheus-stack integrations for embedded K3s control-plane components are
 disabled because their expected upstream endpoints are not exposed in the standard
 form.</p>
@@ -3710,32 +3715,65 @@ datapath in this cluster.</p>
 <p>Grafana is exposed through Traefik at <code>grafana.cluster.kcn333.com</code>. Its Ingress points
 to the Grafana ClusterIP Service, while Traefik currently forwards to the ready Pod
 endpoint learned from EndpointSlice.</p>
-<p>Current unresolved issue: dashboards display <code>An error occurred within the plugin</code>.
-The cause has not been established. Diagnose it separately by checking:</p>
-<ol>
-<li>Grafana Pod status and logs;</li>
-<li>data source health and query errors;</li>
-<li>browser developer-console errors;</li>
-<li>affected panel plugins and their versions;</li>
-<li>whether the problem affects built-in and imported dashboards alike.</li>
-</ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>deployment/kube-prometheus-stack-grafana<span class="w"> </span>--since<span class="o">=</span>30m
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,service,endpointslices<span class="w"> </span>-n<span class="w"> </span>monitoring
+<p>The default Prometheus datasource uses:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://kube-prometheus-stack-prometheus.monitoring:9090/
 </span></code></pre></div>
-<p>Do not treat the visible plugin message as proof of a Prometheus, network or storage
-failure until the corresponding requests and logs are checked.</p>
+<p>The earlier <code>An error occurred within the plugin</code> failure was caused by UFW blocking
+traffic from the Grafana node to the Prometheus <code>hostNetwork</code> endpoint on
+<code>9090/tcp</code>. Grafana logs showed a timeout to the Prometheus ClusterIP, while packet
+capture on the Prometheus node showed incoming SYN packets without a SYN-ACK. Adding
+the cluster-scoped UFW rule restored queries immediately.</p>
+<p>Grafana currently stores <code>/var/lib/grafana</code> in <code>emptyDir</code>. Local users, sessions and
+objects created only through the UI do not survive Pod replacement. Required objects
+must therefore be provisioned from Git:</p>
+<ul>
+<li>the <code>clients-api</code> dashboard is stored in
+  <a href="https://github.com/kCn3333/k3s-homelab/blob/main/infrastructure/operators/monitoring/grafana-dashboard-clients-api.yaml"><code>grafana-dashboard-clients-api.yaml</code></a>;</li>
+<li>the Loki datasource is stored in
+  <a href="https://github.com/kCn3333/k3s-homelab/blob/main/infrastructure/operators/monitoring/grafana-datasource-loki.yaml"><code>grafana-datasource-loki.yaml</code></a>.</li>
+</ul>
+<p>Both objects are loaded by Grafana sidecars. Their runtime settings are declared in
+the
+<a href="https://github.com/kCn3333/k3s-homelab/blob/main/infrastructure/operators/monitoring/helmrelease.yaml"><code>kube-prometheus-stack</code> HelmRelease</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Sidecar</th>
+<th style="text-align: right;">Health port</th>
+<th style="text-align: right;">Reload retries</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dashboards</td>
+<td style="text-align: right;"><code>8081</code></td>
+<td style="text-align: right;"><code>8</code></td>
+</tr>
+<tr>
+<td>datasources</td>
+<td style="text-align: right;"><code>8082</code></td>
+<td style="text-align: right;"><code>8</code></td>
+</tr>
+</tbody>
+</table>
+<p>Separate health ports prevent the sidecars from competing for port <code>8080</code> in the
+shared Pod network namespace. The extended retry window covers Grafana startup and
+provisioning before its API begins listening on port <code>3000</code>.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>deployment/kube-prometheus-stack-grafana<span class="w"> </span>--since<span class="o">=</span>30m
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,service,endpointslices<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span></code></pre></div>
 <h2 id="loki">Loki<a class="headerlink" href="#loki" title="Permanent link">&para;</a></h2>
 <p>Loki stores logs in the Garage S3-compatible backend on Logos at
 <code>http://192.168.0.56:3900</code>. Credentials are delivered through a SealedSecret.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'loki|promtail'</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>&lt;loki-pod&gt;<span class="w"> </span>--since<span class="o">=</span>30m
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>loki-0<span class="w"> </span>-c<span class="w"> </span>loki<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
 <h2 id="alertmanager">Alertmanager<a class="headerlink" href="#alertmanager" title="Permanent link">&para;</a></h2>
 <p>Alertmanager groups Prometheus alerts and sends notifications through ntfy. Its
 configuration is stored as an encrypted secret in Git.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>alertmanager<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheusrule<span class="w"> </span>-A
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>alertmanager-kube-prometheus-stack-alertmanager-0<span class="w"> </span>--since<span class="o">=</span>30m
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>alertmanager<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheusrule<span class="w"> </span>-A
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>alertmanager-kube-prometheus-stack-alertmanager-0<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
 <h2 id="hubble">Hubble<a class="headerlink" href="#hubble" title="Permanent link">&para;</a></h2>
 <p>Hubble Relay and the Hubble UI are deployed, but the current Hubble problem is still
@@ -3743,17 +3781,17 @@ unresolved. Earlier hypotheses about VXLAN or routing mode are not confirmed.</p
 <p>Before changing Cilium routing or kube-proxy replacement settings, collect component
 status, Relay logs, peer information and connection errors. The diagnosis should be
 completed as a separate session.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>cilium<span class="w"> </span>status
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>cilium<span class="w"> </span>hubble<span class="w"> </span>port-forward<span class="w"> </span><span class="p">&amp;</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>hubble<span class="w"> </span>status
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>hubble-relay<span class="w"> </span>-o<span class="w"> </span>wide
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>deployment/hubble-relay<span class="w"> </span>--since<span class="o">=</span>30m
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cilium<span class="w"> </span>status
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>cilium<span class="w"> </span>hubble<span class="w"> </span>port-forward<span class="w"> </span><span class="p">&amp;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>hubble<span class="w"> </span>status
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>hubble-relay<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>deployment/hubble-relay<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
 <h2 id="routine-checks">Routine checks<a class="headerlink" href="#routine-checks" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>flux<span class="w"> </span>get<span class="w"> </span>helmreleases<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>--sort-by<span class="o">=</span>.lastTimestamp<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>flux<span class="w"> </span>get<span class="w"> </span>helmreleases<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>--sort-by<span class="o">=</span>.lastTimestamp<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span>
 </span></code></pre></div>
 
 
@@ -3777,7 +3815,7 @@ completed as a separate session.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 10, 2026 12:28:23 UTC"><span class="timeago" datetime="2026-09-10T12:28:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2026 12:28:23 UTC">2026-09-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 12, 2026 11:50:36 UTC"><span class="timeago" datetime="2026-09-12T11:50:36+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 12, 2026 11:50:36 UTC">2026-09-12</span>
   </span>
 
     
