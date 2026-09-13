@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/relay/relay/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/troubleshooting/hubble-data-streams-reconnecting/">
       
       
-        <link rel="prev" href="../../zion/supporting-services/">
+        <link rel="prev" href="../docker-route-collision/">
       
       
-        <link rel="next" href="../../provisioning/0-pxe-tftp/">
+        <link rel="next" href="../proxmox-link-recovery/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Relay VPS - > Homelab Documentation</title>
+        <title>Hubble data streams reconnecting after Cilium deployment - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#relay-vps" class="md-skip">
+        <a href="#hubble-data-streams-reconnecting-after-cilium-deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Relay VPS
+              Hubble data streams reconnecting after Cilium deployment
             
           </span>
         </div>
@@ -552,20 +552,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -586,7 +584,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -908,20 +906,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
         
           
           <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
@@ -942,7 +938,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -957,37 +953,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Relay VPS
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../relay/relay/" class="md-nav__link">
         
   
   
@@ -1003,153 +972,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#compute-profile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compute profile
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#traffic-paths" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Traffic paths
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oci-network-firewall" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OCI network firewall
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#wireguard-vpn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WireGuard VPN
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="WireGuard VPN">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#relay" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Relay
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#logos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logos
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#forwarding-and-nat-on-logos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Forwarding and NAT on Logos
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#caddy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Caddy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#administrative-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Administrative access
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3457,18 +3279,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -3489,7 +3313,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3507,7 +3331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/cilium-ipam-cidr-mismatch-longhorn-recovery/" class="md-nav__link">
+      <a href="../cilium-ipam-cidr-mismatch-longhorn-recovery/" class="md-nav__link">
         
   
   
@@ -3535,7 +3359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/docker-route-collision/" class="md-nav__link">
+      <a href="../docker-route-collision/" class="md-nav__link">
         
   
   
@@ -3560,10 +3384,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../troubleshooting/hubble-data-streams-reconnecting/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hubble data streams reconnecting after Cilium deployment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -3579,6 +3430,175 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#symptoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Symptoms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diagnosis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagnosis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diagnosis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-check-component-and-endpoint-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Check component and endpoint health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-check-relay-peer-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Check Relay peer state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-verify-the-cilium-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verify the Cilium agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test-the-failing-network-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test the failing network boundary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-exclude-unrelated-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Exclude unrelated layers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root cause
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrective-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrective action
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prevention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related documents
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3591,7 +3611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/proxmox-link-recovery/" class="md-nav__link">
+      <a href="../proxmox-link-recovery/" class="md-nav__link">
         
   
   
@@ -3619,7 +3639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/wireguard-relay/" class="md-nav__link">
+      <a href="../wireguard-relay/" class="md-nav__link">
         
   
   
@@ -3647,7 +3667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../troubleshooting/wol-vlan-route-asymmetry/" class="md-nav__link">
+      <a href="../wol-vlan-route-asymmetry/" class="md-nav__link">
         
   
   
@@ -3702,10 +3722,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#compute-profile" class="md-nav__link">
+  <a href="#symptoms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Compute profile
+        Symptoms
       
     </span>
   </a>
@@ -3713,10 +3733,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#traffic-paths" class="md-nav__link">
+  <a href="#component-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Traffic paths
+        Component path
       
     </span>
   </a>
@@ -3724,33 +3744,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oci-network-firewall" class="md-nav__link">
+  <a href="#diagnosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        OCI network firewall
+        Diagnosis
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#wireguard-vpn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WireGuard VPN
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="WireGuard VPN">
+    <nav class="md-nav" aria-label="Diagnosis">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#relay" class="md-nav__link">
+  <a href="#1-check-component-and-endpoint-health" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relay
+        1. Check component and endpoint health
       
     </span>
   </a>
@@ -3758,10 +3767,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#logos" class="md-nav__link">
+  <a href="#2-check-relay-peer-state" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Logos
+        2. Check Relay peer state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-verify-the-cilium-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verify the Cilium agents
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test-the-failing-network-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test the failing network boundary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-exclude-unrelated-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Exclude unrelated layers
       
     </span>
   </a>
@@ -3774,10 +3816,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#forwarding-and-nat-on-logos" class="md-nav__link">
+  <a href="#root-cause" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Forwarding and NAT on Logos
+        Root cause
       
     </span>
   </a>
@@ -3785,21 +3827,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#caddy" class="md-nav__link">
+  <a href="#corrective-action" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Caddy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#administrative-access" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Administrative access
+        Corrective action
       
     </span>
   </a>
@@ -3818,10 +3849,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#prevention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Prevention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related documents
       
     </span>
   </a>
@@ -3849,228 +3891,173 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/relay/relay.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/troubleshooting/hubble-data-streams-reconnecting.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="relay-vps"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 20q-2.28 0-3.89-1.57Q1 16.85 1 14.58q0-1.95 1.17-3.48 1.18-1.53 3.08-1.95.63-2.3 2.5-3.72Q9.63 4 12 4q2.93 0 4.96 2.04Q19 8.07 19 11q1.73.2 2.86 1.5 1.14 1.28 1.14 3 0 1.88-1.31 3.19T18.5 20m-12-2h12q1.05 0 1.77-.73.73-.72.73-1.77t-.73-1.77Q19.55 13 18.5 13H17v-2q0-2.07-1.46-3.54Q14.08 6 12 6 9.93 6 8.46 7.46 7 8.93 7 11h-.5q-1.45 0-2.47 1.03Q3 13.05 3 14.5T4.03 17q1.02 1 2.47 1m5.5-6"/></svg></span> Relay VPS<a class="headerlink" href="#relay-vps" title="Permanent link">&para;</a></h1>
-<p>The Relay handles inbound traffic for the few services that must be reachable from the Internet. It connects to the homelab only through <strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.98 11.645S24.533 0 11.735 0C.418 0 .064 11.17.064 11.17S-1.6 24 11.997 24C25.04 24 23.98 11.645 23.98 11.645M8.155 7.576c2.4-1.47 5.469-.571 6.618 1.638.218.419.246 1.063.108 1.503-.477 1.516-1.601 2.366-3.145 2.728.455-.39.817-.832.933-1.442a2.11 2.11 0 0 0-.364-1.677 2.14 2.14 0 0 0-2.465-.75c-.95.36-1.47 1.228-1.377 2.294.087.99.839 1.632 2.245 1.876-.21.111-.372.193-.53.281a5.1 5.1 0 0 0-1.644 1.43c-.143.192-.24.208-.458.075-2.827-1.729-3.009-6.067.078-7.956zM6.04 18.258c-.455.116-.895.286-1.359.438.227-1.532 2.021-2.943 3.539-2.782a3.9 3.9 0 0 0-.74 2.072c-.504.093-.98.155-1.44.272M15.703 3.3c.448.017.898.01 1.347.02a2 2 0 0 1 .334.047 3 3 0 0 1-.34.434c-.16.15-.341.296-.573.069-.055-.055-.187-.042-.283-.044-.447-.005-.894-.02-1.34-.003a8 8 0 0 0-1.154.118c-.072.013-.178.25-.146.338.078.207.191.435.359.567.619.49 1.277.928 1.9 1.413.604.472 1.167.99 1.51 1.7.446.928.46 1.9.267 2.877-.322 1.63-1.147 2.98-2.483 3.962-.538.395-1.205.62-1.821.903-.543.25-1.1.465-1.644.712-.98.446-1.53 1.51-1.369 2.615.149 1.015 1.04 1.862 2.059 2.037 1.223.21 2.486-.586 2.785-1.83.336-1.397-.423-2.646-1.845-3.024l-.256-.066c.38-.17.708-.291 1.012-.458q.793-.437 1.558-.925c.15-.096.231-.096.36.014.977.846 1.56 1.898 1.724 3.187.27 2.135-.74 4.096-2.646 5.101-2.948 1.555-6.557-.215-7.208-3.484-.558-2.8 1.418-5.34 3.797-5.83 1.023-.211 1.958-.637 2.685-1.425.47-.508.697-.944.775-1.141a3.2 3.2 0 0 0 .217-1.158 2.7 2.7 0 0 0-.237-.992c-.248-.566-1.2-1.466-1.435-1.656l-2.24-1.754c-.079-.065-.168-.06-.36-.047-.23.016-.815.048-1.067-.018.204-.155.76-.38 1-.56-.726-.49-1.554-.314-2.315-.46.176-.328 1.046-.831 1.541-.888a7 7 0 0 0-.135-.822c-.03-.111-.154-.22-.263-.283-.262-.154-.541-.281-.843-.434a1.76 1.76 0 0 1 .906-.28 3.4 3.4 0 0 1 .908.088c.54.123.97.042 1.399-.324-.338-.136-.676-.26-1.003-.407a10 10 0 0 1-.942-.493c.85.118 1.671.437 2.54.32l.022-.118-2.018-.47c1.203-.11 2.323-.128 3.384.388.299.146.61.266.897.432.14.08.233.24.348.365.09.098.164.23.276.29.424.225.89.234 1.366.223l.01-.16c.479.15 1.017.702 1.017 1.105-.776 0-1.55-.003-2.325.004-.083 0-.165.061-.247.094.078.046.155.128.235.131m-1-1.147a.118.118 0 0 0-.016.19.18.18 0 0 0 .246.065c.075-.038.148-.078.238-.125-.072-.062-.13-.114-.19-.163-.106-.087-.193-.032-.278.033"/></svg></span> WireGuard</strong>, so no inbound service ports need to be opened on the home router.</p>
-<hr />
-<h2 id="compute-profile"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1m0 8h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1M9 5h1V3H9zm0 8h1v-2H9zm0 8h1v-2H9zM5 3v2h2V3zm0 8v2h2v-2zm0 8v2h2v-2z"/></svg></span> Compute profile<a class="headerlink" href="#compute-profile" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Provider</td>
-<td>Oracle Cloud Infrastructure Free Tier</td>
-</tr>
-<tr>
-<td>Shape</td>
-<td>VM.Standard.E2.1.Micro</td>
-</tr>
-<tr>
-<td>Operating system</td>
-<td>Ubuntu 24.04 Minimal</td>
-</tr>
-<tr>
-<td>Architecture</td>
-<td>AMD64</td>
-</tr>
-<tr>
-<td>CPU</td>
-<td>1 OCPU</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>1 GB RAM</td>
-</tr>
-<tr>
-<td>Swap</td>
-<td>1 GB</td>
-</tr>
-<tr>
-<td>Network bandwidth</td>
-<td>0.5 Gbps</td>
-</tr>
-</tbody>
-</table>
-<p>The VM runs native Caddy, WireGuard, Fail2ban and a PatchMon agent. Docker is not needed on the Relay.</p>
-<h2 id="traffic-paths"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"/></svg></span> Traffic paths<a class="headerlink" href="#traffic-paths" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    client["Internet client"] --&gt;|"HTTPS :443"| relay["Relay&lt;br/&gt;Caddy + WireGuard"]
-    relay --&gt;|"wg0"| logos["Logos&lt;br/&gt;routing + firewall + NAT"]
-    logos --&gt;|"TCP :8096"| jellyfin["Jellyfin"]
-    logos --&gt;|"TCP :3000"| patchmon["PatchMon"]
-    logos --&gt;|"TCP :22"| ssh["Administrator"]</code></pre>
-<p>Public HTTPS terminates on the Relay and is forwarded to Jellyfin through the tunnel. The PatchMon agent uses the same tunnel to reach its server and SSH is available through WireGuard only.</p>
-<h2 id="oci-network-firewall"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 18H13v2H6.5c-1.5 0-2.81-.5-3.89-1.57C1.54 17.38 1 16.09 1 14.58q0-1.95 1.17-3.48C3.34 9.57 4 9.43 5.25 9.15c.42-1.53 1.25-2.77 2.5-3.72S10.42 4 12 4c1.95 0 3.6.68 4.96 2.04 1.12 1.12 1.77 2.46 1.97 3.96-.7 0-1.37.19-1.98.46a4.8 4.8 0 0 0-1.41-3C14.56 6.5 13.38 6 12 6s-2.56.5-3.54 1.46C7.5 8.44 7 9.62 7 11h-.5c-.97 0-1.79.34-2.47 1.03-.69.68-1.03 1.5-1.03 2.47s.34 1.79 1.03 2.5c.68.66 1.5 1 2.47 1m16.5-.7v3.5c0 .6-.6 1.2-1.3 1.2h-5.5c-.6 0-1.2-.6-1.2-1.3v-3.5c0-.6.6-1.2 1.2-1.2v-1.5c0-1.4 1.4-2.5 2.8-2.5s2.8 1.1 2.8 2.5V16c.6 0 1.2.6 1.2 1.3m-2.5-2.8c0-.8-.7-1.3-1.5-1.3s-1.5.5-1.5 1.3V16h3z"/></svg></span> OCI network firewall<a class="headerlink" href="#oci-network-firewall" title="Permanent link">&para;</a></h2>
-<p>Traffic is filtered before it reaches the Relay VM. The OCI network policy exposes only the services required by the public edge:</p>
-<table>
-<thead>
-<tr>
-<th>Traffic</th>
-<th>Protocol</th>
-<th style="text-align: right;">Port</th>
-<th>Policy</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HTTP</td>
-<td>TCP</td>
-<td style="text-align: right;"><code>80</code></td>
-<td>Allowed for redirects and ACME</td>
-</tr>
-<tr>
-<td>HTTPS</td>
-<td>TCP</td>
-<td style="text-align: right;"><code>443</code></td>
-<td>Allowed for public services handled by Caddy</td>
-</tr>
-<tr>
-<td>WireGuard</td>
-<td>UDP</td>
-<td style="text-align: right;"><code>&lt;WIREGUARD_PORT&gt;</code></td>
-<td>Allowed for the VPN tunnel</td>
-</tr>
-<tr>
-<td>SSH</td>
-<td>TCP</td>
-<td style="text-align: right;"><code>22</code></td>
-<td>Not exposed publicly</td>
-</tr>
-<tr>
-<td>Internal backends</td>
-<td>TCP</td>
-<td style="text-align: right;"><code>3000</code>, <code>8096</code></td>
-<td>Not exposed publicly</td>
-</tr>
-<tr>
-<td>Other inbound traffic</td>
-<td>Any</td>
-<td style="text-align: right;">Any</td>
-<td>Denied</td>
-</tr>
-</tbody>
-</table>
-<h2 id="wireguard-vpn"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.98 11.645S24.533 0 11.735 0C.418 0 .064 11.17.064 11.17S-1.6 24 11.997 24C25.04 24 23.98 11.645 23.98 11.645M8.155 7.576c2.4-1.47 5.469-.571 6.618 1.638.218.419.246 1.063.108 1.503-.477 1.516-1.601 2.366-3.145 2.728.455-.39.817-.832.933-1.442a2.11 2.11 0 0 0-.364-1.677 2.14 2.14 0 0 0-2.465-.75c-.95.36-1.47 1.228-1.377 2.294.087.99.839 1.632 2.245 1.876-.21.111-.372.193-.53.281a5.1 5.1 0 0 0-1.644 1.43c-.143.192-.24.208-.458.075-2.827-1.729-3.009-6.067.078-7.956zM6.04 18.258c-.455.116-.895.286-1.359.438.227-1.532 2.021-2.943 3.539-2.782a3.9 3.9 0 0 0-.74 2.072c-.504.093-.98.155-1.44.272M15.703 3.3c.448.017.898.01 1.347.02a2 2 0 0 1 .334.047 3 3 0 0 1-.34.434c-.16.15-.341.296-.573.069-.055-.055-.187-.042-.283-.044-.447-.005-.894-.02-1.34-.003a8 8 0 0 0-1.154.118c-.072.013-.178.25-.146.338.078.207.191.435.359.567.619.49 1.277.928 1.9 1.413.604.472 1.167.99 1.51 1.7.446.928.46 1.9.267 2.877-.322 1.63-1.147 2.98-2.483 3.962-.538.395-1.205.62-1.821.903-.543.25-1.1.465-1.644.712-.98.446-1.53 1.51-1.369 2.615.149 1.015 1.04 1.862 2.059 2.037 1.223.21 2.486-.586 2.785-1.83.336-1.397-.423-2.646-1.845-3.024l-.256-.066c.38-.17.708-.291 1.012-.458q.793-.437 1.558-.925c.15-.096.231-.096.36.014.977.846 1.56 1.898 1.724 3.187.27 2.135-.74 4.096-2.646 5.101-2.948 1.555-6.557-.215-7.208-3.484-.558-2.8 1.418-5.34 3.797-5.83 1.023-.211 1.958-.637 2.685-1.425.47-.508.697-.944.775-1.141a3.2 3.2 0 0 0 .217-1.158 2.7 2.7 0 0 0-.237-.992c-.248-.566-1.2-1.466-1.435-1.656l-2.24-1.754c-.079-.065-.168-.06-.36-.047-.23.016-.815.048-1.067-.018.204-.155.76-.38 1-.56-.726-.49-1.554-.314-2.315-.46.176-.328 1.046-.831 1.541-.888a7 7 0 0 0-.135-.822c-.03-.111-.154-.22-.263-.283-.262-.154-.541-.281-.843-.434a1.76 1.76 0 0 1 .906-.28 3.4 3.4 0 0 1 .908.088c.54.123.97.042 1.399-.324-.338-.136-.676-.26-1.003-.407a10 10 0 0 1-.942-.493c.85.118 1.671.437 2.54.32l.022-.118-2.018-.47c1.203-.11 2.323-.128 3.384.388.299.146.61.266.897.432.14.08.233.24.348.365.09.098.164.23.276.29.424.225.89.234 1.366.223l.01-.16c.479.15 1.017.702 1.017 1.105-.776 0-1.55-.003-2.325.004-.083 0-.165.061-.247.094.078.046.155.128.235.131m-1-1.147a.118.118 0 0 0-.016.19.18.18 0 0 0 .246.065c.075-.038.148-.078.238-.125-.072-.062-.13-.114-.19-.163-.106-.087-.193-.032-.278.033"/></svg></span> WireGuard VPN<a class="headerlink" href="#wireguard-vpn" title="Permanent link">&para;</a></h2>
-<p>The Relay is the WireGuard endpoint. Logos initiates the tunnel from the home network.</p>
-<h3 id="relay">Relay<a class="headerlink" href="#relay" title="Permanent link">&para;</a></h3>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[Interface]</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;RELAY_WG_IP&gt;/&lt;WG_PREFIX&gt;</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">ListenPort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;WIREGUARD_UDP_PORT&gt;</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">MTU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1420</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;RELAY_PRIVATE_KEY&gt;</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">[Peer]</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="na">PublicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;LOGOS_PUBLIC_KEY&gt;</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="na">AllowedIPs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;LOGOS_WG_IP&gt;/32, &lt;JELLYFIN_LAN_IP&gt;/32, &lt;PATCHMON_LAN_IP&gt;/32</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="na">PersistentKeepalive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">25</span>
+<h1 id="hubble-data-streams-reconnecting-after-cilium-deployment"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.93 3.93A9.97 9.97 0 0 0 2 11c0 2.76 1.12 5.26 2.93 7.07l1.41-1.41A7.94 7.94 0 0 1 4 11c0-2.21.89-4.22 2.34-5.66zm14.14 0-1.41 1.41A7.96 7.96 0 0 1 20 11c0 2.22-.89 4.22-2.34 5.66l1.41 1.41A9.97 9.97 0 0 0 22 11c0-2.76-1.12-5.26-2.93-7.07M7.76 6.76A5.98 5.98 0 0 0 6 11c0 1.65.67 3.15 1.76 4.24l1.41-1.41A4 4 0 0 1 8 11c0-1.11.45-2.11 1.17-2.83zm8.48 0-1.41 1.41A4 4 0 0 1 16 11c0 1.11-.45 2.11-1.17 2.83l1.41 1.41A5.98 5.98 0 0 0 18 11c0-1.65-.67-3.15-1.76-4.24M12 9a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2m-1 6v4h-1a1 1 0 0 0-1 1H2v2h7a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1h7v-2h-7a1 1 0 0 0-1-1h-1v-4z"/></svg></span> Hubble data streams reconnecting after Cilium deployment<a class="headerlink" href="#hubble-data-streams-reconnecting-after-cilium-deployment" title="Permanent link">&para;</a></h1>
+<p>Hubble UI loaded successfully but could not display flows or service maps. Hubble Relay discovered all three Cilium peers, yet every peer remained unavailable. The failure was isolated to traffic from Pods to the node addresses on <code>4244/TCP</code> and was resolved by upgrading Cilium from <code>1.19.1</code> to <code>1.19.7</code> without changing Helm values, firewall rules or network mode.</p>
+<h2 id="symptoms"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Symptoms<a class="headerlink" href="#symptoms" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hubble UI remained at <code>Data streams are reconnecting...</code>;</li>
+<li>selecting a namespace returned <code>No data found to render a service map</code> and <code>No flows found</code>;</li>
+<li>the problem was reproduced with a temporary diagnostic port-forward that bypassed the normal Ingress path;</li>
+<li><code>hubble status</code> reported <code>NOT_SERVING</code>;</li>
+<li><code>hubble list nodes</code> listed all three nodes as <code>Unavailable</code>;</li>
+<li>Hubble Relay discovered all three peers but did not obtain usable observer connections;</li>
+<li>every Cilium agent reported its local Hubble instance as <code>Ok</code>;</li>
+<li>node-to-node connections to <code>4244/TCP</code> succeeded;</li>
+<li>connections from a Pod to every <code>NodeIP:4244</code> failed immediately with <code>ConnectionRefusedError</code>.</li>
+</ul>
+<h2 id="component-path"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg></span> Component path<a class="headerlink" href="#component-path" title="Permanent link">&para;</a></h2>
+<p><code>Service/hubble-peer</code> uses <code>internalTrafficPolicy: Local</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Hubble Relay Pod
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>→ hubble-peer ClusterIP:443
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>→ Cilium agent on the same node:4244
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>→ peer discovery response
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>→ direct TLS connections to every NodeIP:4244
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>→ local Hubble observers
 </span></code></pre></div>
-<p>The routed LAN addresses are deliberately narrow. The Relay can reach only the backends listed in <code>AllowedIPs</code>.</p>
-<h3 id="logos">Logos<a class="headerlink" href="#logos" title="Permanent link">&para;</a></h3>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">[Interface]</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">Address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;LOGOS_WG_IP&gt;/&lt;WG_PREFIX&gt;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="na">MTU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1420</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="na">PrivateKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;LOGOS_PRIVATE_KEY&gt;</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">[Peer]</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="na">PublicKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;RELAY_PUBLIC_KEY&gt;</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="na">Endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;RELAY_PUBLIC_ENDPOINT&gt;:&lt;WIREGUARD_UDP_PORT&gt;</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="na">AllowedIPs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;RELAY_WG_IP&gt;/32</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="na">PersistentKeepalive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">25</span>
+<p>Users access Hubble UI through Traefik at <code>https://hubble.cluster.kcn333.com</code>. No manual port-forward is required for normal operation. Hubble UI talks to Hubble Relay through <code>Service/hubble-relay</code>; Traefik and the UI Ingress are outside the internal Relay-to-agent path.</p>
+<h2 id="diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span> Diagnosis<a class="headerlink" href="#diagnosis" title="Permanent link">&para;</a></h2>
+<h3 id="1-check-component-and-endpoint-health">1. Check component and endpoint health<a class="headerlink" href="#1-check-component-and-endpoint-health" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>daemonset/cilium<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>deployment/hubble-relay<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>deployment/hubble-ui<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span>--output<span class="w"> </span>wide
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>kubectl<span class="w"> </span>get<span class="w"> </span>endpointslices<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span>--selector<span class="w"> </span>kubernetes.io/service-name<span class="o">=</span>hubble-peer<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span>--output<span class="w"> </span>wide
 </span></code></pre></div>
-<p>For peer and route changes that do not modify the interface address or MTU:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>wg-quick<span class="w"> </span>strip<span class="w"> </span>wg0<span class="w"> </span><span class="p">|</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>wg<span class="w"> </span>syncconf<span class="w"> </span>wg0<span class="w"> </span>/dev/stdin
+<p>All workloads and all three <code>hubble-peer</code> endpoints were ready.</p>
+<h3 id="2-check-relay-peer-state">2. Check Relay peer state<a class="headerlink" href="#2-check-relay-peer-state" title="Permanent link">&para;</a></h3>
+<p>The following port-forward is an optional diagnostic command for the Hubble CLI. It bypasses Traefik and does not form part of the deployed Hubble UI path:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>service/hubble-relay<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="m">4245</span>:80
 </span></code></pre></div>
-<p>Restart <code>wg-quick@wg0</code> after changing the interface address or MTU.</p>
-<h2 id="forwarding-and-nat-on-logos"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 9c-1.1 0-2 .9-2 2v4a2 2 0 0 0 2 2h6v2h-1c-.55 0-1 .45-1 1H2v2h7c0 .55.45 1 1 1h4c.55 0 1-.45 1-1h7v-2h-7c0-.55-.45-1-1-1h-1v-2h6c1.11 0 2-.89 2-2v-4a2 2 0 0 0-2-2zm1 3h2v2H6zm3.5 0h2v2h-2zm3.5 0h2v2h-2z"/></svg></span> Forwarding and NAT on Logos<a class="headerlink" href="#forwarding-and-nat-on-logos" title="Permanent link">&para;</a></h2>
-<p>Logos is the router between <code>wg0</code> and the LAN. IPv4 forwarding must be enabled:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sysctl<span class="w"> </span>net.ipv4.ip_forward
+<p>Use an explicit IPv4 loopback address:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>hubble<span class="w"> </span>status<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>hubble<span class="w"> </span>list<span class="w"> </span>nodes<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
 </span></code></pre></div>
-<p>Expected result:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>net.ipv4.ip_forward = 1
+<p>Using <code>localhost</code> can make the CLI try <code>[::1]:4245</code> while port-forward listens only on IPv4.</p>
+<h3 id="3-verify-the-cilium-agents">3. Verify the Cilium agents<a class="headerlink" href="#3-verify-the-cilium-agents" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span><span class="w"> </span>pod<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span>--selector<span class="w"> </span>k8s-app<span class="o">=</span>cilium<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span>--output<span class="w"> </span>name
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\n### %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$pod</span><span class="s2">"</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$pod</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span>--container<span class="w"> </span>cilium-agent<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span>--<span class="w"> </span>cilium-dbg<span class="w"> </span>status<span class="w"> </span>--verbose
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="k">done</span>
 </span></code></pre></div>
-<p>The LAN backends do not have a route to the WireGuard subnet. <code>MASQUERADE</code> changes the source address to the LAN address of Logos, so replies return through Logos and can be sent back into the tunnel.</p>
-<table>
-<thead>
-<tr>
-<th>Source</th>
-<th>Destination</th>
-<th>Allowed traffic</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>WireGuard</td>
-<td><code>&lt;JELLYFIN_LAN_IP&gt;</code></td>
-<td>Jellyfin TCP/8096</td>
-</tr>
-<tr>
-<td><code>&lt;RELAY_WG_IP&gt;</code></td>
-<td><code>&lt;PATCHMON_LAN_IP&gt;</code></td>
-<td>PatchMon TCP/3000</td>
-</tr>
-<tr>
-<td>WireGuard</td>
-<td>Any other forwarded destination</td>
-<td>Dropped</td>
-</tr>
-</tbody>
-</table>
-<p>The following is the relevant <code>iptables-save</code> representation. It documents the required state; it is not a blind replacement for the complete ruleset because Docker also manages chains on Logos.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>-A FORWARD -i wg0 -d &lt;JELLYFIN_LAN_IP&gt;/32 -p tcp --dport 8096 -j ACCEPT
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>-A FORWARD -i wg0 -s &lt;RELAY_WG_IP&gt;/32 -d &lt;PATCHMON_LAN_IP&gt;/32 -p tcp --dport 3000 -m comment --comment "Relay WG to PatchMon" -j ACCEPT
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>-A FORWARD -i wg0 -j DROP
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>-A POSTROUTING -o ens18 -d &lt;JELLYFIN_LAN_IP&gt;/32 -j MASQUERADE
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>-A POSTROUTING -s &lt;RELAY_WG_IP&gt;/32 -o ens18 -d &lt;PATCHMON_LAN_IP&gt;/32 -p tcp --dport 3000 -m comment --comment "Relay WG to PatchMon" -j MASQUERADE
+<p>The agents reported:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>KubeProxyReplacement: False
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Routing: Network: Tunnel [vxlan] Host: Legacy
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Host firewall: Disabled
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Hubble: Ok
 </span></code></pre></div>
-<p>Check the live rules and counters before changing anything:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>FORWARD<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>sudo<span class="w"> </span>iptables-save
+<h3 id="4-test-the-failing-network-boundary">4. Test the failing network boundary<a class="headerlink" href="#4-test-the-failing-network-boundary" title="Permanent link">&para;</a></h3>
+<p>Run the connection test from a Pod containing Python:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">socket</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">for</span> <span class="n">address</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="s2">"192.168.55.10"</span><span class="p">,</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="s2">"192.168.55.11"</span><span class="p">,</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="s2">"192.168.55.12"</span><span class="p">,</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">):</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="n">connection</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">create_connection</span><span class="p">((</span><span class="n">address</span><span class="p">,</span> <span class="mi">4244</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">:4244 CONNECTED"</span><span class="p">)</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">:4244 FAILED: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Rule order matters. Return traffic must be accepted, the two explicit paths must appear before the final <code>wg0</code> drop, and NAT must use the current LAN egress interface.</p>
-<p>The persistent rules are stored in <code>/etc/iptables/rules.v4</code>. A small idempotent fallback in <code>/etc/rc.local</code> restores the Jellyfin NAT rule if Docker reloads the firewall:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-C<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-o<span class="w"> </span>ens18<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span>-o<span class="w"> </span>ens18<span class="w"> </span>-d<span class="w"> </span>&lt;JELLYFIN_LAN_IP&gt;<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
+<p>On Cilium <code>1.19.1</code>, all three connections failed. A capture on the node hosting the test Pod showed:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>PodIP → local NodeIP:4244  TCP SYN
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>local NodeIP → PodIP       ICMP tcp port 4244 unreachable
 </span></code></pre></div>
-<h2 id="caddy"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.094.47c-.842 0-1.696.092-2.552.288a11.4 11.4 0 0 0-4.87 2.423 10.6 10.6 0 0 0-2.36 2.826A10.1 10.1 0 0 0 .305 8.582c-.398 1.62-.4 3.336-.043 5.048.085.405.183.809.31 1.212a11.9 11.9 0 0 0 1.662 3.729 3 3 0 0 0-.086.427 3.323 3.323 0 0 0 2.848 3.71 3.28 3.28 0 0 0 1.947-.346c1.045.51 2.17.864 3.339 1.04a11.7 11.7 0 0 0 4.285-.155 11.57 11.57 0 0 0 4.936-2.485 10.6 10.6 0 0 0 2.352-2.894 11.2 11.2 0 0 0 1.356-4.424 11.2 11.2 0 0 0-.498-4.335q.263-.116.486-.293h.001c.402-.322.693-.794.777-1.342a2.146 2.146 0 0 0-1.79-2.434 2.1 2.1 0 0 0-1.205.171q-.059-.064-.113-.13a11.7 11.7 0 0 0-3.476-2.93 13 13 0 0 0-1.76-.81 13.6 13.6 0 0 0-2.06-.613 12 12 0 0 0-2.48-.258Zm.714.328a10 10 0 0 1 1.028.042 9.9 9.9 0 0 1 2.743.639c.984.39 1.89.958 2.707 1.632a10.8 10.8 0 0 1 2.091 2.328q.038.06.07.12a2.12 2.12 0 0 0-.435 2.646c-.158.114-.97.692-1.634 1.183-.414.308-.733.557-.733.557l.581.68s.296-.276.665-.638c.572-.562 1.229-1.233 1.395-1.403a2.12 2.12 0 0 0 1.907.677 11.2 11.2 0 0 1-.013 4.046 11.4 11.4 0 0 1-1.475 3.897 12.3 12.3 0 0 1-2.079 2.587c-1.19 1.125-2.633 2.022-4.306 2.531a10.8 10.8 0 0 1-3.973.484 11 11 0 0 1-3.057-.652 3.3 3.3 0 0 0 1.417-2.294 3.28 3.28 0 0 0-.294-1.842c.18-.162.403-.363.656-.6 1.015-.955 2.353-2.303 2.353-2.303l-.47-.599s-1.63.972-2.801 1.728c-.307.198-.573.378-.777.517a3.3 3.3 0 0 0-1.516-.611 3.33 3.33 0 0 0-3.487 2.017 10 10 0 0 1-.695-1.078A11 11 0 0 1 .728 14.8a10 10 0 0 1-.2-1.212c-.164-1.653.103-3.258.629-4.754a13 13 0 0 1 1.087-2.288c.57-.968 1.248-1.872 2.069-2.656A11 11 0 0 1 11.808.797Zm-.147 3.257a3.84 3.84 0 0 0-3.82 3.82v2.36h-.94c-.751 0-1.377.625-1.377 1.377v3.8h1.46v-3.718h9.354v6.264H10.02v1.46h6.4c.751 0 1.377-.625 1.377-1.377v-6.43a1.39 1.39 0 0 0-1.377-1.377h-.94v-2.36a3.84 3.84 0 0 0-3.82-3.819zm0 1.46a2.37 2.37 0 0 1 2.36 2.36v2.36H9.3v-2.36a2.37 2.37 0 0 1 2.36-2.36zm10.141.392a1.253 1.253 0 0 1 1.296 1.434 1.24 1.24 0 0 1-.453.78c-.266.213-.61.318-.968.264a1.253 1.253 0 0 1-1.045-1.42 1.255 1.255 0 0 1 1.17-1.058M5.384 17.425a2.02 2.02 0 0 1 1.917 1.298c.116.3.159.628.114.967a2.015 2.015 0 0 1-2.249 1.728 2.016 2.016 0 0 1-1.727-2.25 2.02 2.02 0 0 1 1.945-1.743"/></svg></span> Caddy<a class="headerlink" href="#caddy" title="Permanent link">&para;</a></h2>
-<p>Caddy runs directly on the Relay and terminates public TLS. Jellyfin traffic is then proxied to its LAN address through WireGuard.</p>
-<h2 id="administrative-access"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg></span> Administrative access<a class="headerlink" href="#administrative-access" title="Permanent link">&para;</a></h2>
-<p>Administration uses WireGuard only. The cloud provider console is the out-of-band recovery path when the tunnel is unavailable.</p>
+<p>At the same time, <code>ss -lntp</code> confirmed that <code>cilium-agent</code> listened on <code>*:4244</code>.</p>
+<h3 id="5-exclude-unrelated-layers">5. Exclude unrelated layers<a class="headerlink" href="#5-exclude-unrelated-layers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A temporary diagnostic port-forward reproduced the problem, excluding Traefik and Ingress without changing the deployment.</li>
+<li>Node-to-node <code>4244/TCP</code> connections succeeded.</li>
+<li>UFW allowed the Pod CIDR and required Cilium ports.</li>
+<li>A temporary UFW route rule did not change the result and its counter remained zero.</li>
+<li>No NetworkPolicy selected the Hubble components.</li>
+<li>Cilium host firewall was disabled.</li>
+<li>Cilium monitor and netfilter tracing did not observe the rejected connection.</li>
+</ul>
+<p>The packet was rejected in the Cilium-managed Pod-to-node path before the host netfilter rules used in the tests.</p>
+<h2 id="root-cause"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span> Root cause<a class="headerlink" href="#root-cause" title="Permanent link">&para;</a></h2>
+<p>The operational cause was Cilium <code>1.19.1</code> datapath behavior for Pod-to-NodeIP traffic. It prevented Hubble Relay from establishing usable connections to observers exposed by Cilium agents on <code>NodeIP:4244</code>.</p>
+<p>An exact upstream commit was not identified. The before-and-after test proves that upgrading Cilium removed the failure, but does not justify assigning it to a specific Cilium bug without separate changelog and source-code analysis.</p>
+<h2 id="corrective-action"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Corrective action<a class="headerlink" href="#corrective-action" title="Permanent link">&para;</a></h2>
+<p>Take an embedded-etcd snapshot and update the Flux-managed HelmRelease:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">chart</span><span class="p">:</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nt">chart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cilium</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"1.19.7"</span>
+</span></code></pre></div>
+<p>Render the target chart with the current values before deployment. Commit the version change to the branch observed by Flux, then reconcile:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>kustomization<span class="w"> </span>infrastructure-operators<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>--namespace<span class="w"> </span>flux-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>--with-source<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span>--timeout<span class="w"> </span>10m
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>helmrelease<span class="w"> </span>cilium<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span>--with-source<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span>--timeout<span class="w"> </span>15m
+</span></code></pre></div>
+<p>No change was required to <code>hostNetwork</code>, <code>kubeProxyReplacement=false</code>, Kubernetes IPAM, VXLAN routing, Hubble TLS, UFW or NetworkPolicy.</p>
 <h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<p>Run these checks after firewall, WireGuard or Caddy changes:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Relay</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>ip<span class="w"> </span>-br<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>curl<span class="w"> </span>--fail<span class="w"> </span>--silent<span class="w"> </span>--show-error<span class="w"> </span>http://&lt;JELLYFIN_LAN_IP&gt;:8096/
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>sudo<span class="w"> </span>caddy<span class="w"> </span>validate<span class="w"> </span>--config<span class="w"> </span>/etc/caddy/Caddyfile
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># Logos</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>sudo<span class="w"> </span>wg<span class="w"> </span>show
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>ip<span class="w"> </span>-br<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>ens18
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>ip<span class="w"> </span>-br<span class="w"> </span>address<span class="w"> </span>show<span class="w"> </span>wg0
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-L<span class="w"> </span>FORWARD<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-L<span class="w"> </span>POSTROUTING<span class="w"> </span>-n<span class="w"> </span>-v<span class="w"> </span>--line-numbers
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>sudo<span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'wg0|MASQUERADE|PatchMon|8096|3000'</span><span class="w"> </span>/etc/iptables/rules.v4
+<p>The HelmRelease completed successfully with chart <code>1.19.7</code>. All three agents reported Cilium <code>1.19.7</code>, all Nodes remained <code>Ready</code>, and no Pod remained outside <code>Running</code> or <code>Succeeded</code>.</p>
+<p>The same Pod-to-node test then returned:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>192.168.55.10:4244 CONNECTED
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>192.168.55.11:4244 CONNECTED
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>192.168.55.12:4244 CONNECTED
 </span></code></pre></div>
-<p>Counters should increase on the expected <code>FORWARD</code> and <code>POSTROUTING</code> rules while testing each service.</p>
-<h2 id="troubleshooting"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21.71 20.29-1.42 1.42a1 1 0 0 1-1.41 0L7 9.85A3.8 3.8 0 0 1 6 10a4 4 0 0 1-3.78-5.3l2.54 2.54.53-.53 1.42-1.42.53-.53L4.7 2.22A4 4 0 0 1 10 6a3.8 3.8 0 0 1-.15 1l11.86 11.88a1 1 0 0 1 0 1.41M2.29 18.88a1 1 0 0 0 0 1.41l1.42 1.42a1 1 0 0 0 1.41 0l5.47-5.46-2.83-2.83M20 2l-4 2v2l-2.17 2.17 2 2L18 8h2l2-4Z"/></svg></span> Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<p>The failure layers, packet-tracing commands, MTU tests and recovery checks are kept in the separate <a href="../../troubleshooting/wireguard-relay/">WireGuard relay troubleshooting</a> runbook.</p>
+<p>Hubble UI displayed live flows and the service map for the <code>clients</code> namespace without reconnect warnings.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>helmrelease<span class="w"> </span>cilium<span class="w"> </span>--namespace<span class="w"> </span>kube-system
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span>--output<span class="w"> </span>wide<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'(^NAME|cilium-|hubble-)'</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>hubble<span class="w"> </span>status<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>hubble<span class="w"> </span>list<span class="w"> </span>nodes<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
+</span></code></pre></div>
+<h2 id="prevention"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m-2-4-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9"/></svg></span> Prevention<a class="headerlink" href="#prevention" title="Permanent link">&para;</a></h2>
+<ul>
+<li>keep Cilium on a supported patch release instead of remaining on the initial release of a branch;</li>
+<li>upgrade one infrastructure component at a time and preserve its Helm values;</li>
+<li>render the target chart before changing the Flux source of truth;</li>
+<li>take an embedded-etcd snapshot before a CNI upgrade;</li>
+<li>preserve a repeatable Pod-to-NodeIP connectivity test;</li>
+<li>verify Hubble through Relay CLI and UI after every Cilium upgrade;</li>
+<li>do not add firewall exceptions until packet captures and counters identify the firewall as the failing layer.</li>
+</ul>
+<h2 id="related-documents"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M384 512H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h304c26.5 0 48 21.5 48 48v288c0 20.9-13.4 38.7-32 45.3V448c17.7 0 32 14.3 32 32s-14.3 32-32 32zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32h256v-64zm32-232c0 13.3 10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24H152c-13.3 0-24 10.7-24 24m24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></svg></span> Related documents<a class="headerlink" href="#related-documents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../kubernetes/02-networking/">Kubernetes networking</a></li>
+<li><a href="../../kubernetes/07-observability/">Kubernetes observability</a></li>
+<li><a href="../../kubernetes/06-security/">Kubernetes security</a></li>
+<li><a href="../../kubernetes/05-gitops/">Kubernetes GitOps</a></li>
+</ul>
 
 
 
@@ -4093,7 +4080,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 22, 2026 16:59:53 UTC"><span class="timeago" datetime="2026-08-22T16:59:53+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 22, 2026 16:59:53 UTC">2026-08-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 13, 2026 13:46:37 UTC"><span class="timeago" datetime="2026-09-13T13:46:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 13, 2026 13:46:37 UTC">2026-09-13</span>
   </span>
 
     
@@ -4103,7 +4090,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="August 21, 2026 12:37:30 UTC"><span class="timeago" datetime="2026-08-21T12:37:30+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 21, 2026 12:37:30 UTC">2026-08-21</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 13, 2026 13:46:37 UTC"><span class="timeago" datetime="2026-09-13T13:46:37+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 13, 2026 13:46:37 UTC">2026-09-13</span>
   </span>
 
     
