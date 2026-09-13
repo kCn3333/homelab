@@ -1,4 +1,4 @@
-# K3s Homelab — Kontrolowana awaria CoreDNS
+# 20 - Kontrolowana awaria CoreDNS
 
 **Data:** 2026-09-07–2026-09-08 
 

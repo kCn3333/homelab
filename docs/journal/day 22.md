@@ -1,4 +1,4 @@
-# K3s Homelab — droga ruchu z HAProxy do aplikacji
+# 22 - droga ruchu z HAProxy do aplikacji
 
 **Data:** 2026-09-10
 

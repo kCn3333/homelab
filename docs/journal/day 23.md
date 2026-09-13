@@ -1,4 +1,4 @@
-# K3s Homelab — remotedialer i naprawa Grafany
+# 23 - remotedialer i naprawa Grafany
 
 **Data:** 2026-09-12
 

@@ -1,4 +1,4 @@
-# K3s Homelab — kube-proxy, Cilium eBPF i VXLAN
+# 21 - kube-proxy, Cilium eBPF i VXLAN
 
 **Data:** 2026-09-09
 

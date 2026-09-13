@@ -1,4 +1,4 @@
-# K3s Homelab — start remotedialera i naprawa Hubble
+# 24 - start remotedialera i naprawa Hubble
 
 **Data:** 2026-09-13
 

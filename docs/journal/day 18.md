@@ -1,4 +1,4 @@
-# K3s Homelab — Powrót do klastra i diagnostyka routingu
+# 18 - Powrót do klastra i diagnostyka routingu
 
 **Data:** 2026-09-03–2026-09-04
 
