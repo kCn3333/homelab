@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/kubernetes/04-storage/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2023/">
       
       
-        <link rel="prev" href="../03-ingress-tls/">
+        <link rel="prev" href="../day%2022/">
       
       
-        <link rel="next" href="../05-gitops/">
+        <link rel="next" href="../day%2024/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Storage - > Homelab Documentation</title>
+        <title>K3s Homelab — remotedialer i naprawa Grafany - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#storage" class="md-skip">
+        <a href="#k3s-homelab-remotedialer-i-naprawa-grafany" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Storage
+              K3s Homelab — remotedialer i naprawa Grafany
             
           </span>
         </div>
@@ -1207,20 +1207,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_2" >
         
           
           <label class="md-nav__link" for="__nav_4_3_2" id="__nav_4_3_2_label" tabindex="0">
@@ -1241,7 +1239,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_3_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1259,7 +1257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../00-overview/" class="md-nav__link">
+      <a href="../../kubernetes/00-overview/" class="md-nav__link">
         
   
   
@@ -1287,7 +1285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-cluster-architecture/" class="md-nav__link">
+      <a href="../../kubernetes/01-cluster-architecture/" class="md-nav__link">
         
   
   
@@ -1315,7 +1313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-networking/" class="md-nav__link">
+      <a href="../../kubernetes/02-networking/" class="md-nav__link">
         
   
   
@@ -1343,7 +1341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-ingress-tls/" class="md-nav__link">
+      <a href="../../kubernetes/03-ingress-tls/" class="md-nav__link">
         
   
   
@@ -1351,6 +1349,875 @@
     
   
     Ingress and TLS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes/04-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes/05-gitops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitOps with Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes/06-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes/07-observability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes/08-backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kubernetes/09-applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Applications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🗐 Build Journal (Polish)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🗐 Build Journal (Polish)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2000/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    0 - Planowanie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 - HA k3s embedded etcd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 - Let's Encrypt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2003/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 - HAProxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2004/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 - UFW + backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2005/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 - Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2006/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 - Sealed Secrets + Longhorn
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2007/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7 - Cilium
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2008/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8 - Monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2009/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9 - S3 Garage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2010/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 - Metrics + Alerts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2011/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 - CI/CD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2012/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 - Grafana + HPA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2013/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13 - Alerts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2014/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14 - Hubble
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2015/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15 - Helm Chart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2016/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16 - OCI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2017/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17 - Progressive Delivery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2018/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — Powrót do klastra i diagnostyka routingu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — DNS klastra, Cilium IPAM i odzyskanie Longhorna
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — Kontrolowana awaria CoreDNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — kube-proxy, Cilium eBPF i VXLAN
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — droga ruchu z HAProxy do aplikacji
   
 
     
@@ -1387,7 +2254,7 @@
   <span class="md-ellipsis">
     
   
-    Storage
+    K3s Homelab — remotedialer i naprawa Grafany
   
 
     
@@ -1405,7 +2272,7 @@
   <span class="md-ellipsis">
     
   
-    Storage
+    K3s Homelab — remotedialer i naprawa Grafany
   
 
     
@@ -1431,10 +2298,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#longhorn" class="md-nav__link">
+  <a href="#cel-sesji" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Longhorn
+        Cel sesji
       
     </span>
   </a>
@@ -1442,10 +2309,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#storageclasses" class="md-nav__link">
+  <a href="#1-ponowne-odtworzenie-bedu-remotedialera" class="md-nav__link">
     <span class="md-ellipsis">
       
-        StorageClasses
+        1. Ponowne odtworzenie błędu remotedialera
       
     </span>
   </a>
@@ -1453,10 +2320,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#network-dependency" class="md-nav__link">
+  <a href="#2-dorazny-resync-remotedialera" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Network dependency
+        2. Doraźny resync remotedialera
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Doraźny resync remotedialera">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stan-problemu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stan problemu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-objaw-awarii-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Objaw awarii Grafany
       
     </span>
   </a>
@@ -1464,10 +2359,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#node-maintenance" class="md-nav__link">
+  <a href="#4-przyczyna-i-naprawa-poaczenia-grafana-prometheus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Node maintenance
+        4. Przyczyna i naprawa połączenia Grafana → Prometheus
       
     </span>
   </a>
@@ -1475,10 +2370,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backups" class="md-nav__link">
+  <a href="#5-utrwalenie-konfiguracji-grafany-przez-flux" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Backups
+        5. Utrwalenie konfiguracji Grafany przez Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-konflikt-portow-sidecarow-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Konflikt portów sidecarów Grafany
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-wyscig-podczas-uruchamiania-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Wyścig podczas uruchamiania Grafany
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-koncowy-stan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Końcowy stan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Końcowy stan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grafana-naprawiona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grafana — naprawiona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remotedialer-problem-otwarty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remotedialer — problem otwarty
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#najwazniejsze-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Najważniejsze wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Następna sesja
       
     </span>
   </a>
@@ -1501,874 +2479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-gitops/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GitOps with Flux
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06-security/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Security
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07-observability/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Observability
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../08-backup/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Backup
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../09-applications/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Applications
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    🗐 Build Journal (Polish)
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    🗐 Build Journal (Polish)
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2000/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    0 - Planowanie
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2001/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    1 - HA k3s embedded etcd
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2002/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    2 - Let's Encrypt
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2003/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    3 - HAProxy
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2004/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    4 - UFW + backup
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2005/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    5 - Flux
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2006/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    7 - Sealed Secrets + Longhorn
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2007/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    7 - Cilium
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2008/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    8 - Monitoring
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2009/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    9 - S3 Garage
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2010/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    10 - Metrics + Alerts
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2011/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    11 - CI/CD
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2012/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    12 - Grafana + HPA
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2013/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    13 - Alerts
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2014/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    14 - Hubble
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2015/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15 - Helm Chart
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2016/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    16 - OCI
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2017/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    17 - Progressive Delivery
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2018/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    K3s Homelab — Powrót do klastra i diagnostyka routingu
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2019/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    K3s Homelab — DNS klastra, Cilium IPAM i odzyskanie Longhorna
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2020/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    K3s Homelab — Kontrolowana awaria CoreDNS
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2021/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    K3s Homelab — kube-proxy, Cilium eBPF i VXLAN
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2022/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    K3s Homelab — droga ruchu z HAProxy do aplikacji
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2023/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    K3s Homelab — remotedialer i naprawa Grafany
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../journal/day%2024/" class="md-nav__link">
+      <a href="../day%2024/" class="md-nav__link">
         
   
   
@@ -2396,7 +2507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day-23/" class="md-nav__link">
+      <a href="../day-23/" class="md-nav__link">
         
   
   
@@ -3576,10 +3687,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#longhorn" class="md-nav__link">
+  <a href="#cel-sesji" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Longhorn
+        Cel sesji
       
     </span>
   </a>
@@ -3587,10 +3698,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#storageclasses" class="md-nav__link">
+  <a href="#1-ponowne-odtworzenie-bedu-remotedialera" class="md-nav__link">
     <span class="md-ellipsis">
       
-        StorageClasses
+        1. Ponowne odtworzenie błędu remotedialera
       
     </span>
   </a>
@@ -3598,10 +3709,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#network-dependency" class="md-nav__link">
+  <a href="#2-dorazny-resync-remotedialera" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Network dependency
+        2. Doraźny resync remotedialera
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Doraźny resync remotedialera">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stan-problemu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stan problemu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-objaw-awarii-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Objaw awarii Grafany
       
     </span>
   </a>
@@ -3609,10 +3748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#node-maintenance" class="md-nav__link">
+  <a href="#4-przyczyna-i-naprawa-poaczenia-grafana-prometheus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Node maintenance
+        4. Przyczyna i naprawa połączenia Grafana → Prometheus
       
     </span>
   </a>
@@ -3620,10 +3759,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#backups" class="md-nav__link">
+  <a href="#5-utrwalenie-konfiguracji-grafany-przez-flux" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Backups
+        5. Utrwalenie konfiguracji Grafany przez Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-konflikt-portow-sidecarow-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Konflikt portów sidecarów Grafany
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-wyscig-podczas-uruchamiania-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Wyścig podczas uruchamiania Grafany
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-koncowy-stan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Końcowy stan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Końcowy stan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grafana-naprawiona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grafana — naprawiona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remotedialer-problem-otwarty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remotedialer — problem otwarty
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#najwazniejsze-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Najważniejsze wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Następna sesja
       
     </span>
   </a>
@@ -3651,80 +3873,222 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/kubernetes/04-storage.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 23.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h1>
-<h2 id="longhorn">Longhorn<a class="headerlink" href="#longhorn" title="Permanent link">&para;</a></h2>
-<p>Longhorn <code>v1.11</code> provides replicated persistent storage. The default replica count is
-two, so a healthy volume has copies on two eligible nodes.</p>
-<p>Required node packages are <code>open-iscsi</code>, <code>nfs-common</code> and <code>util-linux</code>. The <code>iscsid</code>
-service must be enabled. Longhorn is installed and configured through Flux and Helm.</p>
-<h2 id="storageclasses">StorageClasses<a class="headerlink" href="#storageclasses" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>StorageClass</th>
-<th>Access pattern</th>
-<th>Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>longhorn</code></td>
-<td>RWO</td>
-<td>Longhorn block volume</td>
-</tr>
-<tr>
-<td><code>longhorn-rwx</code></td>
-<td>RWX</td>
-<td>Longhorn volume with an NFS share manager</td>
-</tr>
-</tbody>
-</table>
-<p>RWO permits a read-write mount from one node. Multiple Pods on that node may still
-share it. RWX supports read-write mounts from multiple nodes.</p>
-<p><code>local-path</code> remains available but is not the default StorageClass.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>storageclass
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc,pv<span class="w"> </span>-A
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>volumes.longhorn.io<span class="w"> </span>-n<span class="w"> </span>longhorn-system
-</span></code></pre></div>
-<h2 id="network-dependency">Network dependency<a class="headerlink" href="#network-dependency" title="Permanent link">&para;</a></h2>
-<p>Longhorn engines, replicas, Instance Managers and RWX share managers communicate over
-the cluster network. A ready node is not sufficient if those components still refer
-to stale Pod addresses.</p>
-<p>During the Cilium IPAM migration, replica processes remained associated with the old
-Pod address pool. The affected volumes stayed attached but became degraded. After the
-Instance Managers were recreated with current <code>10.42.x.x</code> addresses, Longhorn rebuilt
-the missing replicas and returned the volumes to <code>healthy</code>.</p>
-<p>For network changes or node restarts:</p>
+<h1 id="k3s-homelab-remotedialer-i-naprawa-grafany">K3s Homelab — remotedialer i naprawa Grafany<a class="headerlink" href="#k3s-homelab-remotedialer-i-naprawa-grafany" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 2026-09-12</p>
+<p><strong>Środowisko:</strong> 3× HP T630, k3s v1.34.4+k3s1, Flux v2.8.1, Cilium v1.19.1, kube-prometheus-stack 82.10.1, Grafana 12.4.0</p>
+<hr />
+<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Work on one node at a time.</li>
-<li>Wait for the node and its Cilium Pod to become ready.</li>
-<li>Wait for every attached Longhorn volume to become healthy.</li>
-<li>Continue with the next node only after rebuilding finishes.</li>
+<li>Ponownie sprawdzić błąd tunelu remotedialer po uruchomieniu klastra.</li>
+<li>Potwierdzić bezpieczne, doraźne odtworzenie brakującego tunelu.</li>
+<li>Znaleźć przyczynę błędu <code>An error occurred within the plugin</code> w Grafanie.</li>
+<li>Utrwalić konfigurację Grafany i Loki w repozytorium Flux.</li>
+<li>Usunąć błędy sidecarów Grafany podczas uruchamiania Poda.</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>volumes.longhorn.io<span class="w"> </span>-n<span class="w"> </span>longhorn-system<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>-o<span class="w"> </span>custom-columns<span class="o">=</span><span class="s1">'NAME:.metadata.name,STATE:.status.state,ROBUSTNESS:.status.robustness,NODE:.status.currentNodeID'</span>
+<hr />
+<h2 id="1-ponowne-odtworzenie-bedu-remotedialera">1. Ponowne odtworzenie błędu remotedialera<a class="headerlink" href="#1-ponowne-odtworzenie-bedu-remotedialera" title="Permanent link">&para;</a></h2>
+<p>Klaster uruchomiono dotychczasowym playbookiem Power On, bez zmiany kolejności i odstępów Wake-on-LAN. Usługi K3s, lokalne API i etcd osiągnęły gotowość, ale test połączeń API server → kubelet nie przeszedł:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>worker1 API → worker2 kubelet: 502 Bad Gateway
 </span></code></pre></div>
-<p><code>degraded</code> means redundancy is reduced; it does not necessarily mean the volume is
-unavailable. Do not start another disruptive operation in that state.</p>
-<h2 id="node-maintenance">Node maintenance<a class="headerlink" href="#node-maintenance" title="Permanent link">&para;</a></h2>
-<p><code>kubectl cordon</code> prevents new scheduling but does not evict existing workloads.
-<code>kubectl drain</code> evicts ordinary Pods and exercises PDBs. Drain is appropriate for
-planned maintenance, but it can trigger Longhorn detach, attach and replica rebuild
-work. Check workload redundancy and volume health first.</p>
-<h2 id="backups">Backups<a class="headerlink" href="#backups" title="Permanent link">&para;</a></h2>
-<p>Longhorn volume backups are stored in Garage. They protect PVC data; etcd snapshots
-protect Kubernetes object state. Both are required for a full recovery plan. See
-<a href="../08-backup/">Backup</a>.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>backuptarget,recurringjob<span class="w"> </span>-n<span class="w"> </span>longhorn-system
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>backupvolume,backup<span class="w"> </span>-n<span class="w"> </span>longhorn-system
+<p>Komunikat K3s:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>proxy error from 127.0.0.1:6443 while dialing 192.168.55.12:10250
 </span></code></pre></div>
+<p>Na <code>worker2</code> brakowało połączenia do API servera na <code>worker1</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>BRAK worker2 -&gt; worker1:6443
+</span></code></pre></div>
+<p>EndpointSlice Service <code>kubernetes</code> był poprawny:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>192.168.55.10 ready=true
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>192.168.55.11 ready=true
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>192.168.55.12 ready=true
+</span></code></pre></div>
+<p>Problem nie wynikał więc z braku noda w EndpointSlice. Lokalny proces K3s na <code>worker2</code> nie zestawił jednego z wymaganych tuneli mimo poprawnego docelowego stanu API.</p>
+<h2 id="2-dorazny-resync-remotedialera">2. Doraźny resync remotedialera<a class="headerlink" href="#2-dorazny-resync-remotedialera" title="Permanent link">&para;</a></h2>
+<p>Zmiana adnotacji EndpointSlice wymusiła nowe zdarzenie obserwowane przez K3s:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>endpointslice<span class="w"> </span>kubernetes<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--namespace<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>diagnostics.kcn333.com/remotedialer-resync<span class="o">=</span><span class="s2">"</span><span class="k">$(</span>date<span class="w"> </span>-u<span class="w"> </span>+%s<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>--overwrite
+</span></code></pre></div>
+<p>Na <code>worker2</code> pojawiła się pełna sekwencja synchronizacji:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Syncing apiserver addresses from tunnel watch
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Settled apiserver addresses sync
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Sync apiserver addresses - connecting: [192.168.55.11:6443]
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Started tunnel to 192.168.55.11:6443
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Remotedialer connected to proxy
+</span></code></pre></div>
+<p>Po resyncu test zakończył się wynikiem <code>ok</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssh<span class="w"> </span>worker1<span class="w"> </span><span class="s1">'</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="s1">  sudo k3s kubectl \</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="s1">    --request-timeout=5s \</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="s1">    get --raw \</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="s1">    /api/v1/nodes/worker2/proxy/healthz</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="s1">'</span>
+</span></code></pre></div>
+<p>Adnotację diagnostyczną następnie usunięto:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>endpointslice<span class="w"> </span>kubernetes<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--namespace<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>diagnostics.kcn333.com/remotedialer-resync-
+</span></code></pre></div>
+<h3 id="stan-problemu">Stan problemu<a class="headerlink" href="#stan-problemu" title="Permanent link">&para;</a></h3>
+<p>Przyczyna pozostaje nierozstrzygnięta. Potwierdzono jedynie, że:</p>
+<ul>
+<li>błąd może wystąpić po równoczesnym uruchomieniu nodów;</li>
+<li>EndpointSlice może już zawierać wszystkie trzy poprawne adresy;</li>
+<li>jeden klient remotedialera może mimo to nie posiadać tunelu do jednego API servera;</li>
+<li>ponowne zdarzenie na EndpointSlice uruchamia synchronizację i odtwarza brakujący tunel;</li>
+<li>nie jest wymagany restart noda ani usługi K3s.</li>
+</ul>
+<p>Playbook Power On pozostawiono bez sztucznego opóźnienia między nodami. Resync EndpointSlice jest obejściem, nie wyjaśnieniem przyczyny.</p>
+<hr />
+<h2 id="3-objaw-awarii-grafany">3. Objaw awarii Grafany<a class="headerlink" href="#3-objaw-awarii-grafany" title="Permanent link">&para;</a></h2>
+<p>Dashboardy Grafany wyświetlały:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>An error occurred within the plugin
+</span></code></pre></div>
+<p>Log Grafany wskazał rzeczywisty błąd:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>dial tcp 10.43.68.211:9090: i/o timeout
+</span></code></pre></div>
+<p>Adres <code>10.43.68.211:9090</code> należał do Service Prometheusa. Prometheus działał z <code>hostNetwork: true</code> na <code>worker1</code>, dlatego jego backendem był adres noda:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>192.168.55.11:9090
+</span></code></pre></div>
+<p>Test lokalny na <code>worker1</code> działał zarówno przez loopback, jak i adres noda:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>127.0.0.1:9090       Prometheus Server is Ready
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>192.168.55.11:9090   Prometheus Server is Ready
+</span></code></pre></div>
+<p>Połączenie z <code>worker2</code> kończyło się timeoutem. <code>tcpdump</code> na <code>worker1</code> pokazał przychodzące pakiety SYN z <code>192.168.55.12</code>, ale brak odpowiedzi SYN-ACK. Potwierdziło to blokadę na hoście docelowym, a nie awarię Prometheusa, Service albo DNS.</p>
+<h2 id="4-przyczyna-i-naprawa-poaczenia-grafana-prometheus">4. Przyczyna i naprawa połączenia Grafana → Prometheus<a class="headerlink" href="#4-przyczyna-i-naprawa-poaczenia-grafana-prometheus" title="Permanent link">&para;</a></h2>
+<p>UFW na nodach nie zezwalał na ruch klastra do portu <code>9090/tcp</code>, na którym Prometheus nasłuchiwał przez <code>hostNetwork</code>.</p>
+<p>Regułę najpierw sprawdzono na <code>worker1</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span>from<span class="w"> </span><span class="m">192</span>.168.55.0/24<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">9090</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span>proto<span class="w"> </span>tcp
+</span></code></pre></div>
+<p>Po jej dodaniu:</p>
+<ul>
+<li><code>worker2</code> otrzymał odpowiedź <code>Prometheus Server is Ready</code>;</li>
+<li>Grafana zaczęła łączyć się z Prometheusem przez nazwę Service;</li>
+<li>dashboardy natychmiast zaczęły wyświetlać dane;</li>
+<li>w logach Grafany przestały pojawiać się timeouty do Prometheusa.</li>
+</ul>
+<p>Regułę utrwalono następnie w playbooku UFW repozytorium Ansible:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>9090/tcp ALLOW IN 192.168.55.0/24
+</span></code></pre></div>
+<p>Pierwsze uruchomienie dodało po jednej regule na każdym nodzie. Drugie uruchomienie było idempotentne:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>master   changed=0 failed=0
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>worker1  changed=0 failed=0
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>worker2  changed=0 failed=0
+</span></code></pre></div>
+<p>Nie otwarto portu <code>9090</code> dla całej sieci LAN ani Internetu.</p>
+<hr />
+<h2 id="5-utrwalenie-konfiguracji-grafany-przez-flux">5. Utrwalenie konfiguracji Grafany przez Flux<a class="headerlink" href="#5-utrwalenie-konfiguracji-grafany-przez-flux" title="Permanent link">&para;</a></h2>
+<p>Grafana używała <code>emptyDir</code> dla <code>/var/lib/grafana</code>. Ręcznie utworzone obiekty mogły więc zniknąć po wymianie Poda.</p>
+<p>Przed rolloutem wyeksportowano dashboard aplikacji:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>tytuł: clinets-api-APP
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>UID: ad549hw
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>liczba paneli: 6
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>schemaVersion: 42
+</span></code></pre></div>
+<p>W repozytorium Flux dodano:</p>
+<ul>
+<li><code>grafana-dashboard-clients-api.yaml</code> — ConfigMap z etykietą <code>grafana_dashboard: "1"</code>;</li>
+<li><code>grafana-datasource-loki.yaml</code> — ConfigMap z etykietą <code>grafana_datasource: "1"</code>;</li>
+<li>oba zasoby do <code>infrastructure/operators/monitoring/kustomization.yaml</code>.</li>
+</ul>
+<p>Datasource Loki zachował dotychczasową tożsamość i adres:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>name: loki
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>uid: cffs50kq506wwe
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>url: http://loki.loki.svc.cluster.local:3100
+</span></code></pre></div>
+<p>Po reconciliacji Flux API Grafany potwierdziło:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>dashboard.provisioned=true
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>dashboard.uid=ad549hw
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>loki.readOnly=true
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>loki.uid=cffs50kq506wwe
+</span></code></pre></div>
+<p>Dashboard i datasource nie zależą już od efemerycznej bazy Grafany.</p>
+<hr />
+<h2 id="6-konflikt-portow-sidecarow-grafany">6. Konflikt portów sidecarów Grafany<a class="headerlink" href="#6-konflikt-portow-sidecarow-grafany" title="Permanent link">&para;</a></h2>
+<p>Pod Grafany zawiera dwa sidecary <code>kiwigrid/k8s-sidecar</code>:</p>
+<ul>
+<li><code>grafana-sc-dashboard</code>;</li>
+<li><code>grafana-sc-datasources</code>.</li>
+</ul>
+<p>Oba próbowały uruchomić endpoint zdrowia na domyślnym porcie <code>8080</code> we wspólnej przestrzeni sieciowej Poda. Jeden z nich zgłaszał:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>OSError: [Errno 98] Address in use
+</span></code></pre></div>
+<p>W HelmRelease ustawiono oddzielne porty:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">grafana</span><span class="p">:</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nt">sidecar</span><span class="p">:</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="nt">dashboards</span><span class="p">:</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">        </span><span class="nt">HEALTH_PORT</span><span class="p">:</span><span class="w"> </span><span class="s">"8081"</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="nt">datasources</span><span class="p">:</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">        </span><span class="nt">HEALTH_PORT</span><span class="p">:</span><span class="w"> </span><span class="s">"8082"</span>
+</span></code></pre></div>
+<p>Po rolloutcie oba kontenery działały równocześnie, a Pod osiągnął <code>3/3 Running</code> bez restartów.</p>
+<h2 id="7-wyscig-podczas-uruchamiania-grafany">7. Wyścig podczas uruchamiania Grafany<a class="headerlink" href="#7-wyscig-podczas-uruchamiania-grafany" title="Permanent link">&para;</a></h2>
+<p>Po usunięciu konfliktu portów oba sidecary zgłosiły jednorazowy błąd połączenia z:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>http://localhost:3000/api/admin/provisioning/.../reload
+</span></code></pre></div>
+<p>Pomiar czasów wykazał:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>11:12:53.706  Starting Grafana
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>11:13:13.2    sidecary wyczerpały domyślne próby
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>11:14:20.996  HTTP Server Listen :3000
+</span></code></pre></div>
+<p>Grafana potrzebowała około 87 sekund na utworzenie świeżej bazy SQLite, migracje, provisionowanie i instalację pluginów. Domyślne <code>REQ_RETRY_TOTAL=5</code> zakończyło się około 68 sekund przed uruchomieniem HTTP.</p>
+<p>Dla obu sidecarów ustawiono:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nt">REQ_RETRY_TOTAL</span><span class="p">:</span><span class="w"> </span><span class="s">"8"</span>
+</span></code></pre></div>
+<p>Nie zmieniono <code>REQ_RETRY_CONNECT</code>, ponieważ jego wartość domyślna wynosi <code>10</code>.</p>
+<p>Po końcowym rolloutcie:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>kube-prometheus-stack-grafana-6855d64694-kk2jq
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>3/3 Running
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>restarts=0
+</span></code></pre></div>
+<p>Dashboardy Grafany wyświetlały dane. Temat Grafany został zamknięty.</p>
+<hr />
+<h2 id="8-koncowy-stan">8. Końcowy stan<a class="headerlink" href="#8-koncowy-stan" title="Permanent link">&para;</a></h2>
+<h3 id="grafana-naprawiona">Grafana — naprawiona<a class="headerlink" href="#grafana-naprawiona" title="Permanent link">&para;</a></h3>
+<ul>
+<li>komunikacja Grafana → Prometheus działa;</li>
+<li>UFW deklaratywnie dopuszcza <code>9090/tcp</code> wyłącznie z sieci nodów;</li>
+<li>dashboard aplikacji jest provisionowany przez Flux;</li>
+<li>datasource Loki jest provisionowany przez Flux;</li>
+<li>sidecary używają oddzielnych portów zdrowia;</li>
+<li>retry sidecarów obejmuje rzeczywisty czas startu Grafany;</li>
+<li>Pod działa jako <code>3/3 Running</code> bez restartów;</li>
+<li>dashboardy pokazują dane.</li>
+</ul>
+<h3 id="remotedialer-problem-otwarty">Remotedialer — problem otwarty<a class="headerlink" href="#remotedialer-problem-otwarty" title="Permanent link">&para;</a></h3>
+<ul>
+<li>błąd został ponownie odtworzony;</li>
+<li>zachowano logi debug z niepoprawnego startu;</li>
+<li>resync przez zmianę adnotacji EndpointSlice skutecznie naprawia tunel;</li>
+<li>właściwa przyczyna utraty pojedynczej sesji nadal wymaga ustalenia.</li>
+</ul>
+<hr />
+<h2 id="najwazniejsze-wnioski">Najważniejsze wnioski<a class="headerlink" href="#najwazniejsze-wnioski" title="Permanent link">&para;</a></h2>
+<ol>
+<li><code>hostNetwork: true</code> oznacza, że dostęp do portu workloadu zależy również od firewalla noda.</li>
+<li>Działający lokalnie Prometheus nie gwarantuje dostępu z innego noda.</li>
+<li>SYN bez SYN-ACK na hoście docelowym wskazuje na filtrację albo brak odpowiedzi po stronie tego hosta.</li>
+<li>Ręcznie utworzone obiekty Grafany nie powinny pozostawać wyłącznie w bazie przechowywanej w <code>emptyDir</code>.</li>
+<li>Dashboardy i datasources można provisionować przez etykietowane ConfigMapy obserwowane przez sidecary.</li>
+<li>Kontenery w jednym Podzie współdzielą przestrzeń sieciową, więc nie mogą nasłuchiwać na tym samym adresie i porcie.</li>
+<li>Retry sidecara musi uwzględniać rzeczywisty czas startu aplikacji, do której wysyła żądanie reload.</li>
+<li>Poprawny EndpointSlice nie gwarantuje, że lokalny stan tuneli remotedialera został zsynchronizowany.</li>
+<li>Doraźny resync naprawia stan, ale nie zastępuje ustalenia przyczyny.</li>
+</ol>
+<h2 id="nastepna-sesja">Następna sesja<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h2>
+<p>Diagnostyka Hubble. Problem remotedialera pozostaje zapisany jako osobny, nierozstrzygnięty wątek do porównania podczas kolejnych uruchomień klastra.</p>
 
 
 
@@ -3747,7 +4111,7 @@ protect Kubernetes object state. Both are required for a full recovery plan. See
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 10, 2026 12:28:23 UTC"><span class="timeago" datetime="2026-09-10T12:28:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2026 12:28:23 UTC">2026-09-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 13, 2026 13:45:47 UTC"><span class="timeago" datetime="2026-09-13T13:45:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 13, 2026 13:45:47 UTC">2026-09-13</span>
   </span>
 
     
@@ -3757,7 +4121,7 @@ protect Kubernetes object state. Both are required for a full recovery plan. See
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 16:32:54 UTC"><span class="timeago" datetime="2026-03-22T16:32:54+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 16:32:54 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 12, 2026 11:46:41 UTC"><span class="timeago" datetime="2026-09-12T11:46:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 12, 2026 11:46:41 UTC">2026-09-12</span>
   </span>
 
     

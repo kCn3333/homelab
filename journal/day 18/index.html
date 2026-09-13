@@ -25,7 +25,7 @@
     
     
       
-        <title>18 - Cluster Baseline and Routing Incident - > Homelab Documentation</title>
+        <title>K3s Homelab — Powrót do klastra i diagnostyka routingu - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#18-cluster-baseline-and-routing-incident" class="md-skip">
+        <a href="#k3s-homelab-powrot-do-klastra-i-diagnostyka-routingu" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              18 - Cluster Baseline and Routing Incident
+              K3s Homelab — Powrót do klastra i diagnostyka routingu
             
           </span>
         </div>
@@ -2107,6 +2107,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — Powrót do klastra i diagnostyka routingu
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -2114,7 +2132,7 @@
   <span class="md-ellipsis">
     
   
-    18 - Cluster Baseline and Routing Incident
+    K3s Homelab — Powrót do klastra i diagnostyka routingu
   
 
     
@@ -2123,6 +2141,157 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-stan-poczatkowy-klastra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stan początkowy klastra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-coredns-service-i-endpointslice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. CoreDNS, Service i EndpointSlice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-running-nie-oznacza-ready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Running nie oznacza Ready
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-objawy-awarii-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Objawy awarii Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-diagnoza-warstwowa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Diagnoza warstwowa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Root cause
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-naprawa-i-automatyzacja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Naprawa i automatyzacja
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-peny-test-zimnego-startu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pełny test zimnego startu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-rezultat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Rezultat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-najwazniejsze-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Najważniejsze wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Następna sesja:
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2143,7 +2312,7 @@
   <span class="md-ellipsis">
     
   
-    19 - Cluster DNS, Cilium IPAM and Longhorn Recovery
+    K3s Homelab — DNS klastra, Cilium IPAM i odzyskanie Longhorna
   
 
     
@@ -2171,7 +2340,7 @@
   <span class="md-ellipsis">
     
   
-    20 - CoreDNS Failure Recovery
+    K3s Homelab — Kontrolowana awaria CoreDNS
   
 
     
@@ -2199,7 +2368,7 @@
   <span class="md-ellipsis">
     
   
-    21 - CoreDNS Service Datapath
+    K3s Homelab — kube-proxy, Cilium eBPF i VXLAN
   
 
     
@@ -2227,7 +2396,63 @@
   <span class="md-ellipsis">
     
   
-    22 - ServiceLB, Traefik i Ingress
+    K3s Homelab — droga ruchu z HAProxy do aplikacji
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — remotedialer i naprawa Grafany
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    K3s Homelab — start remotedialera i naprawa Hubble
   
 
     
@@ -3421,6 +3646,146 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-stan-poczatkowy-klastra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Stan początkowy klastra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-coredns-service-i-endpointslice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. CoreDNS, Service i EndpointSlice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-running-nie-oznacza-ready" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Running nie oznacza Ready
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-objawy-awarii-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Objawy awarii Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-diagnoza-warstwowa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Diagnoza warstwowa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Root cause
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-naprawa-i-automatyzacja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Naprawa i automatyzacja
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-peny-test-zimnego-startu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Pełny test zimnego startu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-rezultat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Rezultat
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-najwazniejsze-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Najważniejsze wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Następna sesja:
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3447,7 +3812,6 @@
   
 
 
-<h1 id="18-cluster-baseline-and-routing-incident">18 - Cluster Baseline and Routing Incident<a class="headerlink" href="#18-cluster-baseline-and-routing-incident" title="Permanent link">&para;</a></h1>
 <h1 id="k3s-homelab-powrot-do-klastra-i-diagnostyka-routingu">K3s Homelab — Powrót do klastra i diagnostyka routingu<a class="headerlink" href="#k3s-homelab-powrot-do-klastra-i-diagnostyka-routingu" title="Permanent link">&para;</a></h1>
 <p><strong>Data:</strong> 2026-09-03–2026-09-04</p>
 <p><strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4+k3s1, Flux v2.8.1, Cilium v1.19.1</p>
@@ -3639,7 +4003,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 10, 2026 12:28:23 UTC"><span class="timeago" datetime="2026-09-10T12:28:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2026 12:28:23 UTC">2026-09-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 13, 2026 13:45:47 UTC"><span class="timeago" datetime="2026-09-13T13:45:47+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 13, 2026 13:45:47 UTC">2026-09-13</span>
   </span>
 
     
