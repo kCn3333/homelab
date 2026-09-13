@@ -1,5 +1,3 @@
-# 22 - ServiceLB, Traefik i Ingress
-
 # K3s Homelab — droga ruchu z HAProxy do aplikacji
 
 **Data:** 2026-09-10

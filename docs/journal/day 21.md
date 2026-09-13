@@ -1,5 +1,3 @@
-# 21 - CoreDNS Service Datapath
-
 # K3s Homelab — kube-proxy, Cilium eBPF i VXLAN
 
 **Data:** 2026-09-09
