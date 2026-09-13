@@ -19,6 +19,7 @@ worker2: 10.42.2.0/24
 The current Cilium configuration uses Kubernetes IPAM:
 
 ```text
+version=1.19.7
 ipam=kubernetes
 k8s-require-ipv4-pod-cidr=true
 routing=VXLAN
@@ -146,6 +147,41 @@ sudo timeout 15 tcpdump \
 
 ---
 
+## Hubble network path
+
+Each Cilium agent exposes the Hubble observer API on its node address at TCP port `4244`.
+
+Users reach Hubble UI through its normal Ingress at `https://hubble.cluster.kcn333.com`. Traefik routes this request to `Service/hubble-ui`; no manual port-forward is required.
+
+The `hubble-peer` Service uses `internalTrafficPolicy: Local`. Hubble Relay first connects through the Service to the local Cilium agent and obtains the peer list. It then opens a direct TLS connection to every advertised node endpoint:
+
+```text
+Hubble Relay Pod
+  -> hubble-peer ClusterIP:443
+  -> local Cilium agent:4244
+  -> peer list
+  -> 192.168.55.10:4244
+  -> 192.168.55.11:4244
+  -> 192.168.55.12:4244
+```
+
+The internal Relay-to-agent path requires Pod-to-NodeIP connectivity on TCP `4244`. This is cluster-internal traffic and is separate from browser access through Traefik. It was verified after upgrading Cilium from `1.19.1` to `1.19.7`; no `hostNetwork` workaround, manual port-forward or additional UFW route rule is required.
+
+Useful checks:
+
+```bash
+kubectl get service hubble-peer \
+  --namespace kube-system \
+  --output wide
+
+kubectl get endpointslices \
+  --namespace kube-system \
+  --selector kubernetes.io/service-name=hubble-peer \
+  --output wide
+```
+
+---
+
 ## HAProxy and node access
 
 HAProxy is the intended external entry point:
@@ -197,7 +233,7 @@ Inspect policies and drops:
 ```bash
 kubectl get networkpolicy -A
 kubectl describe networkpolicy <name> -n <namespace>
-kubectl -n kube-system exec ds/cilium -- cilium monitor --type drop
+kubectl -n kube-system exec ds/cilium -- cilium-dbg monitor --type drop
 ```
 
 ---
@@ -225,7 +261,7 @@ and implemented by the [cluster Ansible playbooks](https://github.com/kCn3333/ho
 ## Useful commands
 
 ```bash
-cilium status
+kubectl -n kube-system exec ds/cilium -- cilium-dbg status
 kubectl get ciliumnodes
 kubectl get pods -n kube-system -l k8s-app=cilium -o wide
 ```

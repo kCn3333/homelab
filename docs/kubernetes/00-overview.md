@@ -50,7 +50,7 @@ HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates applicati
 | ----------------------- | ------------------------ | ------------------------------------------------------------- |
 | Kubernetes              | k3s `v1.34.4+k3s1`       | Kubernetes distribution and embedded etcd                     |
 | External entry point    | HAProxy                  | Selects an API server or ingress node                         |
-| CNI                     | Cilium `v1.19.1`         | Pod networking, NetworkPolicy and VXLAN transport             |
+| CNI                     | Cilium `v1.19.7`         | Pod networking, NetworkPolicy and VXLAN transport             |
 | Service dataplane       | kube-proxy and Cilium    | iptables for tested host traffic; eBPF for tested Pod traffic |
 | Ingress                 | Traefik v3               | TLS termination and L7 routing                                |
 | Bare-metal LoadBalancer | K3s ServiceLB            | Exposes Traefik on node ports `80/443`                        |

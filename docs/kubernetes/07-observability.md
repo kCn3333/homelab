@@ -110,20 +110,53 @@ kubectl logs -n monitoring alertmanager-kube-prometheus-stack-alertmanager-0 --s
 
 ## Hubble
 
-Hubble Relay and the Hubble UI are deployed, but the current Hubble problem is still
-unresolved. Earlier hypotheses about VXLAN or routing mode are not confirmed.
+Hubble is enabled through the Flux-managed Cilium HelmRelease and is exposed at
+`https://hubble.cluster.kcn333.com`.
 
-Before changing Cilium routing or kube-proxy replacement settings, collect component
-status, Relay logs, peer information and connection errors. The diagnosis should be
-completed as a separate session.
+Traefik routes browser traffic through the Hubble UI Ingress to `Service/hubble-ui`.
+This is the normal operational path and does not require a manual port-forward.
+
+| Component | Version |
+|---|---|
+| Cilium agent and operator | `1.19.7` |
+| Hubble Relay | `1.19.7` |
+| Hubble UI and backend | `0.13.5` |
+
+Hubble Relay uses the local-backend `hubble-peer` Service for peer discovery, then
+connects directly over TLS to every Cilium agent at its NodeIP on TCP `4244`.
+
+The UI, live flows and service map were verified through the public Hubble URL after
+upgrading Cilium from `1.19.1` to `1.19.7`. The repair did not require `hostNetwork`,
+a manual port-forward, an additional UFW route rule, or changes to Traefik.
 
 ```bash
-cilium status
-cilium hubble port-forward &
-hubble status
+kubectl exec \
+  --namespace kube-system \
+  daemonset/cilium \
+  -- cilium-dbg status
+
+kubectl get ingress,service,endpointslices \
+  --namespace kube-system
+```
+
+For optional CLI diagnosis only, temporarily expose Hubble Relay locally. This does
+not replace the Hubble UI Ingress and is not required for normal use:
+
+```bash
+kubectl port-forward \
+  --namespace kube-system \
+  service/hubble-relay \
+  4245:80
+
+hubble status --server 127.0.0.1:4245
+hubble list nodes --server 127.0.0.1:4245
+
 kubectl get pods -n kube-system -l k8s-app=hubble-relay -o wide
 kubectl logs -n kube-system deployment/hubble-relay --since=30m
 ```
+
+The diagnosis and repair are documented in
+[Hubble data streams reconnecting](../troubleshooting/hubble-data-streams-reconnecting.md).
 
 ## Routine checks
 
