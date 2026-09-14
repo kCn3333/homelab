@@ -1554,6 +1554,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sealed-secrets-recovery-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sealed Secrets recovery keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#garage" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2376,6 +2387,34 @@
     
   
     24 - start remotedialera i naprawa Hubble
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25 - backup kluczy i aktualizacja Sealed Secrets
   
 
     
@@ -3521,6 +3560,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../troubleshooting/sealed-secrets-api-proxy-502/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sealed Secrets API proxy returns intermittent 502
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../troubleshooting/wireguard-relay/" class="md-nav__link">
         
   
@@ -3615,6 +3682,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sealed-secrets-recovery-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sealed Secrets recovery keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#garage" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3687,7 +3765,7 @@
 
 
 <h1 id="backup">Backup<a class="headerlink" href="#backup" title="Permanent link">&para;</a></h1>
-<p>The recovery plan has two independent data sets:</p>
+<p>The recovery plan has three independent data sets:</p>
 <table>
 <thead>
 <tr>
@@ -3707,9 +3785,14 @@
 <td>Persistent volume data</td>
 <td>Cluster object state</td>
 </tr>
+<tr>
+<td>Sealed Secrets key export</td>
+<td>Decryption of Git-managed SealedSecrets</td>
+<td>etcd state or persistent volumes</td>
+</tr>
 </tbody>
 </table>
-<p>Both are needed for full recovery.</p>
+<p>All three are required for a rebuild that does not rely on the original etcd state.</p>
 <h2 id="k3s-etcd-snapshots">K3s etcd snapshots<a class="headerlink" href="#k3s-etcd-snapshots" title="Permanent link">&para;</a></h2>
 <p>K3s creates scheduled snapshots in:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/var/lib/rancher/k3s/server/db/snapshots/
@@ -3723,6 +3806,20 @@ A copy on another machine in the same home location is a separate host copy, not
 true off-site backup.</p>
 <p>Snapshot restoration recovers Kubernetes objects. Repository state must still be
 consistent with the intended post-restore state because Flux will resume reconciliation.</p>
+<h2 id="sealed-secrets-recovery-keys">Sealed Secrets recovery keys<a class="headerlink" href="#sealed-secrets-recovery-keys" title="Permanent link">&para;</a></h2>
+<p>The controller rotates sealing keys and retains older active keys so that manifests
+created in earlier periods remain decryptable. Export every Secret selected by:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secrets<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--namespace<span class="w"> </span>flux-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--selector<span class="w"> </span>sealedsecrets.bitnami.com/sealed-secrets-key<span class="o">=</span>active
+</span></code></pre></div>
+<p>Stream the minimized result directly into encryption; do not persist plaintext YAML or
+JSON. The verified September 2026 export used symmetric GPG AES-256 and contained four
+<code>kubernetes.io/tls</code> Secrets with both <code>tls.crt</code> and <code>tls.key</code>. Decryption and a
+portable SHA-256 checksum were validated without displaying private material.</p>
+<p>Keep the encrypted payload and checksum outside the cluster, with at least one copy
+outside the workstation. Store the passphrase separately. Repeat the export after each
+key rotation and periodically test decryption without restoring into production.</p>
 <h2 id="garage">Garage<a class="headerlink" href="#garage" title="Permanent link">&para;</a></h2>
 <p>Garage runs on Logos and provides the S3-compatible backend used by Longhorn and Loki.</p>
 <table>
@@ -3754,22 +3851,22 @@ available. Its data directory must also be backed up independently.</p>
 as plaintext manifests.</p>
 <h2 id="longhorn-volume-backups">Longhorn volume backups<a class="headerlink" href="#longhorn-volume-backups" title="Permanent link">&para;</a></h2>
 <p>Longhorn <code>v1.11</code> uses a <code>BackupTarget</code> object:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn.io/v1beta2</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BackupTarget</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn-system</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">backupTargetURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3://longhorn-backup@garage/</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="nt">credentialSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn-s3-secret</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300s</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn.io/v1beta2</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BackupTarget</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn-system</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">backupTargetURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3://longhorn-backup@garage/</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">credentialSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn-s3-secret</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300s</span>
 </span></code></pre></div>
 <p>The daily recurring job keeps two backups per volume and runs with concurrency one.
 Retention controls the number of usable restore points; it does not replace a second
 copy of the Garage data.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>backuptarget<span class="w"> </span>-n<span class="w"> </span>longhorn-system
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>recurringjob<span class="w"> </span>-n<span class="w"> </span>longhorn-system
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>backupvolume,backup<span class="w"> </span>-n<span class="w"> </span>longhorn-system
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>backuptarget<span class="w"> </span>-n<span class="w"> </span>longhorn-system
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>recurringjob<span class="w"> </span>-n<span class="w"> </span>longhorn-system
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>backupvolume,backup<span class="w"> </span>-n<span class="w"> </span>longhorn-system
 </span></code></pre></div>
 <h2 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h2>
 <p>A scheduled Job with <code>Completed</code> status confirms only that the Job exited successfully.
@@ -3779,16 +3876,19 @@ Also verify that:</p>
 <li>recent backups exist for every protected volume;</li>
 <li>objects are present in Garage;</li>
 <li>etcd snapshots exist both locally and on the secondary host;</li>
+<li>the Sealed Secrets recovery export decrypts and contains every active key;</li>
 <li>the restore procedure is tested periodically.</li>
 </ul>
 <h2 id="recovery-order">Recovery order<a class="headerlink" href="#recovery-order" title="Permanent link">&para;</a></h2>
 <p>For a complete cluster loss:</p>
 <ol>
-<li>Restore the K3s control-plane state from an etcd snapshot.</li>
+<li>Restore the K3s control-plane state from an etcd snapshot when one is available.</li>
 <li>Confirm node membership and core controllers.</li>
+<li>Before applying SealedSecrets to a rebuilt cluster, restore all exported sealing-key Secrets.</li>
+<li>Start or restart the controller and confirm that it registers every key.</li>
 <li>Restore or reconnect Longhorn backups for required PVCs.</li>
 <li>Resume Flux only when Git contains the desired configuration.</li>
-<li>Verify applications and backup schedules.</li>
+<li>Verify SealedSecret synchronization, applications and backup schedules.</li>
 </ol>
 <p>Exact restore commands depend on whether the failure affects one node, the etcd
 cluster, Longhorn data or the Garage host. Do not use a single generic recovery command
@@ -3815,7 +3915,7 @@ for all cases.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 10, 2026 12:28:23 UTC"><span class="timeago" datetime="2026-09-10T12:28:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2026 12:28:23 UTC">2026-09-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 14, 2026 13:11:52 UTC"><span class="timeago" datetime="2026-09-14T13:11:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 14, 2026 13:11:52 UTC">2026-09-14</span>
   </span>
 
     

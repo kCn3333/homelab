@@ -1460,6 +1460,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="NetworkPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-server-proxy-traffic-to-sealed-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API server proxy traffic to Sealed Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2431,6 +2448,34 @@
     
   
     24 - start remotedialera i naprawa Hubble
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25 - backup kluczy i aktualizacja Sealed Secrets
   
 
     
@@ -3576,6 +3621,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../troubleshooting/sealed-secrets-api-proxy-502/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sealed Secrets API proxy returns intermittent 502
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../troubleshooting/wireguard-relay/" class="md-nav__link">
         
   
@@ -3743,6 +3816,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="NetworkPolicy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-server-proxy-traffic-to-sealed-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API server proxy traffic to Sealed Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4002,6 +4092,15 @@
 </span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
 </span></code></pre></div>
 <p>Cilium drops traffic denied by policy. A timeout can therefore indicate a policy drop; it does not prove a routing failure.</p>
+<h3 id="api-server-proxy-traffic-to-sealed-secrets">API server proxy traffic to Sealed Secrets<a class="headerlink" href="#api-server-proxy-traffic-to-sealed-secrets" title="Permanent link">&para;</a></h3>
+<p><code>kubeseal --fetch-cert</code> and <code>kubeseal --validate</code> reach the controller through the
+Kubernetes API server proxy. HAProxy may send the client request to an API server on a
+different node from the controller Pod. Cilium classifies the final hop as
+<code>remote-node</code>, not as a Pod.</p>
+<p>The Flux-managed CiliumNetworkPolicy permits only <code>remote-node</code> to reach the selected
+Sealed Secrets controller on <code>8080/TCP</code>. It does not expose the endpoint to the LAN or
+Internet and does not select other workloads. The existing Flux <code>allow-scraping</code>
+policy separately permits Pod-originated traffic to port 8080.</p>
 <p>Inspect policies and drops:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>networkpolicy<span class="w"> </span>-A
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>networkpolicy<span class="w"> </span>&lt;name&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;
@@ -4104,7 +4203,7 @@ and implemented by the <a href="https://github.com/kCn3333/homelab-ansible/tree/
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 13, 2026 13:47:16 UTC"><span class="timeago" datetime="2026-09-13T13:47:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 13, 2026 13:47:16 UTC">2026-09-13</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 14, 2026 13:11:52 UTC"><span class="timeago" datetime="2026-09-14T13:11:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 14, 2026 13:11:52 UTC">2026-09-14</span>
   </span>
 
     

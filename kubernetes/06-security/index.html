@@ -2400,6 +2400,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25 - backup kluczy i aktualizacja Sealed Secrets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3532,6 +3560,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../troubleshooting/sealed-secrets-api-proxy-502/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sealed Secrets API proxy returns intermittent 502
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../troubleshooting/wireguard-relay/" class="md-nav__link">
         
   
@@ -3802,8 +3858,17 @@ cluster and may be stored in Git. The controller decrypts them into ordinary Sec
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--cert<span class="w"> </span>~/.config/kubeseal/pub-sealed-secrets.pem<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>&lt;<span class="w"> </span>secret.yaml<span class="w"> </span>&gt;<span class="w"> </span>secret-sealed.yaml
 </span></code></pre></div>
-<p>Keep the private sealing key backed up. The public certificate is sufficient for
-creating new SealedSecrets but cannot decrypt existing data.</p>
+<p>The controller runs version <code>0.40.0</code> from Helm chart <code>2.20.0</code>. The public
+certificate is sufficient for creating new SealedSecrets but cannot decrypt existing
+data.</p>
+<p>Back up every active <code>sealed-secrets-key*</code> Secret, not only the newest one. Existing
+manifests may have been sealed during different key-rotation periods. The recovery copy
+must be encrypted before persistent storage, include both <code>tls.crt</code> and <code>tls.key</code>,
+remain outside the cluster, and be refreshed after a new key is created.</p>
+<p>The September 2026 recovery set contains four active key pairs. It was encrypted
+symmetrically with GPG AES-256, validated through streaming decryption without printing
+private values, protected by a SHA-256 checksum, and copied to removable storage. The
+passphrase must remain in a separate password manager.</p>
 <h2 id="tls">TLS<a class="headerlink" href="#tls" title="Permanent link">&para;</a></h2>
 <p>cert-manager uses a restricted Cloudflare API token for DNS-01 challenges. Grant only
 DNS edit and zone read permissions for the required zone. Traefik terminates TLS for
@@ -3843,7 +3908,7 @@ on it.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 10, 2026 12:28:23 UTC"><span class="timeago" datetime="2026-09-10T12:28:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2026 12:28:23 UTC">2026-09-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 14, 2026 13:11:52 UTC"><span class="timeago" datetime="2026-09-14T13:11:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 14, 2026 13:11:52 UTC">2026-09-14</span>
   </span>
 
     
