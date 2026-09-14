@@ -1,13 +1,14 @@
 # Backup
 
-The recovery plan has two independent data sets:
+The recovery plan has three independent data sets:
 
-| Backup            | Protects                | Does not protect     |
-| ----------------- | ----------------------- | -------------------- |
-| K3s etcd snapshot | Kubernetes object state | PVC contents         |
-| Longhorn backup   | Persistent volume data  | Cluster object state |
+| Backup                    | Protects                                | Does not protect                 |
+| ------------------------- | --------------------------------------- | -------------------------------- |
+| K3s etcd snapshot         | Kubernetes object state                 | PVC contents                     |
+| Longhorn backup           | Persistent volume data                  | Cluster object state             |
+| Sealed Secrets key export | Decryption of Git-managed SealedSecrets | etcd state or persistent volumes |
 
-Both are needed for full recovery.
+All three are required for a rebuild that does not rely on the original etcd state.
 
 ## K3s etcd snapshots
 
@@ -29,6 +30,26 @@ true off-site backup.
 
 Snapshot restoration recovers Kubernetes objects. Repository state must still be
 consistent with the intended post-restore state because Flux will resume reconciliation.
+
+## Sealed Secrets recovery keys
+
+The controller rotates sealing keys and retains older active keys so that manifests
+created in earlier periods remain decryptable. Export every Secret selected by:
+
+```bash
+kubectl get secrets \
+  --namespace flux-system \
+  --selector sealedsecrets.bitnami.com/sealed-secrets-key=active
+```
+
+Stream the minimized result directly into encryption; do not persist plaintext YAML or
+JSON. The verified September 2026 export used symmetric GPG AES-256 and contained four
+`kubernetes.io/tls` Secrets with both `tls.crt` and `tls.key`. Decryption and a
+portable SHA-256 checksum were validated without displaying private material.
+
+Keep the encrypted payload and checksum outside the cluster, with at least one copy
+outside the workstation. Store the passphrase separately. Repeat the export after each
+key rotation and periodically test decryption without restoring into production.
 
 ## Garage
 
@@ -82,18 +103,22 @@ Also verify that:
 * recent backups exist for every protected volume;
 * objects are present in Garage;
 * etcd snapshots exist both locally and on the secondary host;
+* the Sealed Secrets recovery export decrypts and contains every active key;
 * the restore procedure is tested periodically.
 
 ## Recovery order
 
 For a complete cluster loss:
 
-1. Restore the K3s control-plane state from an etcd snapshot.
+1. Restore the K3s control-plane state from an etcd snapshot when one is available.
 2. Confirm node membership and core controllers.
-3. Restore or reconnect Longhorn backups for required PVCs.
-4. Resume Flux only when Git contains the desired configuration.
-5. Verify applications and backup schedules.
+3. Before applying SealedSecrets to a rebuilt cluster, restore all exported sealing-key Secrets.
+4. Start or restart the controller and confirm that it registers every key.
+5. Restore or reconnect Longhorn backups for required PVCs.
+6. Resume Flux only when Git contains the desired configuration.
+7. Verify SealedSecret synchronization, applications and backup schedules.
 
 Exact restore commands depend on whether the failure affects one node, the etcd
 cluster, Longhorn data or the Garage host. Do not use a single generic recovery command
 for all cases.
+

@@ -57,7 +57,7 @@ HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates applicati
 | TLS                     | cert-manager             | Let's Encrypt certificates through DNS-01                     |
 | Storage                 | Longhorn `v1.11`         | Replicated persistent volumes                                 |
 | GitOps                  | Flux `v2.8.1`            | Reconciliation and image automation                           |
-| Secrets                 | Sealed Secrets           | Encrypted secrets stored in Git                               |
+| Secrets                 | Sealed Secrets `v0.40.0` | Encrypted secrets stored in Git                               |
 | Monitoring              | kube-prometheus-stack    | Prometheus, Grafana and Alertmanager                          |
 | Logging                 | Loki and Promtail        | Central log collection                                        |
 | Object storage          | Garage `v2.2.0` on Logos | S3 storage for Loki and Longhorn backups                      |
@@ -115,7 +115,7 @@ Flux is the source of truth for Kubernetes resources managed by the repository. 
 | [GitOps](05-gitops.md)                             | Flux structure and deployment workflow                 |
 | [Security](06-security.md)                         | UFW, Sealed Secrets and time synchronization           |
 | [Observability](07-observability.md)               | Metrics, logs, alerts and Hubble                       |
-| [Backup](08-backup.md)                             | etcd snapshots and Longhorn backups                    |
+| [Backup](08-backup.md)                             | etcd, volume and sealing-key recovery                  |
 | [Applications](09-applications.md)                 | `clients-api`, `k8s-badge` and delivery workflow       |
 
 The files above describe the current state. Migration history, incidents and experiments are kept in the [journal](../journal/).
@@ -124,3 +124,4 @@ Each Kubernetes learning session produces a Polish journal entry. A reusable fai
 and its verified solution may also become a troubleshooting article. The state
 documentation is updated only when the current architecture or operating procedure
 changes.
+

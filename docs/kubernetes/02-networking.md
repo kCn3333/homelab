@@ -228,6 +228,18 @@ spec:
 
 Cilium drops traffic denied by policy. A timeout can therefore indicate a policy drop; it does not prove a routing failure.
 
+### API server proxy traffic to Sealed Secrets
+
+`kubeseal --fetch-cert` and `kubeseal --validate` reach the controller through the
+Kubernetes API server proxy. HAProxy may send the client request to an API server on a
+different node from the controller Pod. Cilium classifies the final hop as
+`remote-node`, not as a Pod.
+
+The Flux-managed CiliumNetworkPolicy permits only `remote-node` to reach the selected
+Sealed Secrets controller on `8080/TCP`. It does not expose the endpoint to the LAN or
+Internet and does not select other workloads. The existing Flux `allow-scraping`
+policy separately permits Pod-originated traffic to port 8080.
+
 Inspect policies and drops:
 
 ```bash
@@ -271,3 +283,4 @@ kubectl get service,endpointslice -A
 sudo iptables-save -c -t nat | grep KUBE-SERVICES
 ip -4 route show table all
 ```
+

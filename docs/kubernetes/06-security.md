@@ -59,8 +59,19 @@ kubeseal --format yaml \
   < secret.yaml > secret-sealed.yaml
 ```
 
-Keep the private sealing key backed up. The public certificate is sufficient for
-creating new SealedSecrets but cannot decrypt existing data.
+The controller runs version `0.40.0` from Helm chart `2.20.0`. The public
+certificate is sufficient for creating new SealedSecrets but cannot decrypt existing
+data.
+
+Back up every active `sealed-secrets-key*` Secret, not only the newest one. Existing
+manifests may have been sealed during different key-rotation periods. The recovery copy
+must be encrypted before persistent storage, include both `tls.crt` and `tls.key`,
+remain outside the cluster, and be refreshed after a new key is created.
+
+The September 2026 recovery set contains four active key pairs. It was encrypted
+symmetrically with GPG AES-256, validated through streaming decryption without printing
+private values, protected by a SHA-256 checksum, and copied to removable storage. The
+passphrase must remain in a separate password manager.
 
 ## TLS
 
@@ -87,3 +98,4 @@ kubectl get sealedsecret -A
 kubectl get certificate -A
 kubectl auth can-i --list -n <namespace>
 ```
+
