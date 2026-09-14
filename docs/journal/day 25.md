@@ -1,16 +1,17 @@
-# 25 - backup kluczy i aktualizacja Sealed Secrets
+# 25 - aktualizacja metrics-server i Sealed Secrets
 
 **Data:** 2026-09-14
 
-**Środowisko:** 3× HP T630, k3s `v1.34.4+k3s1`, Cilium `1.19.7`, Flux `v2.8.1`, Sealed Secrets `0.36.1 → 0.40.0`
+**Środowisko:** 3× HP T630, k3s `v1.34.4+k3s1`, Cilium `1.19.7`, Flux `v2.8.1`, metrics-server `0.7.2 → 0.8.1`, Sealed Secrets `0.36.1 → 0.40.0`
 
 ## Cel sesji
 
 1. Sprawdzić stan klastra po uruchomieniu.
-2. Zabezpieczyć prywatne klucze Sealed Secrets poza klastrem.
-3. Zaktualizować chart i klienta.
-4. Rozwiązać niestabilne działanie `kubeseal --fetch-cert` i `--validate`.
-5. Potwierdzić pełną zbieżność Flux.
+2. Naprawić stan HelmRelease i zaktualizować metrics-server.
+3. Zabezpieczyć prywatne klucze Sealed Secrets poza klastrem.
+4. Zaktualizować chart i klienta Sealed Secrets.
+5. Rozwiązać niestabilne działanie `kubeseal --fetch-cert` i `--validate`.
+6. Potwierdzić pełną zbieżność Flux.
 
 ## Stan po uruchomieniu
 
@@ -24,7 +25,49 @@ Secrets miał jeden gotowy replikat, a wszystkie dziewięć zasobów raportował
 | k3s | `v1.34.4+k3s1` |
 | Cilium | `1.19.7` |
 | Flux | `v2.8.1` |
+| metrics-server | chart `3.12.2`, aplikacja `0.7.2` |
 | Sealed Secrets | chart `2.18.4`, controller `0.36.1` |
+
+## Naprawa i aktualizacja metrics-server
+
+Warstwa danych działała: Deployment miał `1/1` gotowych replik, APIService
+`v1beta1.metrics.k8s.io` raportował `Available=True`, a `kubectl top` zwracał
+metryki nodów i Podów. Niespójny był stan zarządzania przez Flux: HelmRelease miał
+`Ready=Unknown` i `Stalled=True` po wcześniejszych timeoutach upgrade'u.
+
+Najpierw uodporniono HelmRelease na wolny start klastra:
+
+```yaml
+timeout: 10m
+install:
+  remediation:
+    retries: 3
+upgrade:
+  remediation:
+    retries: 3
+```
+
+Commit:
+
+```text
+ab621e3 fix(metrics-server): tolerate slow cluster startup
+```
+
+Po wyzerowaniu nieudanych prób Flux mógł ponownie uzgodnić release. Następnie
+sprawdzono render docelowego chartu z bieżącymi wartościami. Zachowane zostały
+`hostNetwork`, port `4443`, mapowanie Service `443 → 4443`, połączenia do kubeletów
+na `10250`, obecne argumenty TLS oraz rozdzielczość metryk `15s`.
+
+Chart zaktualizowano z `3.12.2` do `3.13.1`, a obraz aplikacji z `0.7.2` do
+`0.8.1`:
+
+```text
+66be7dc chore(metrics-server): upgrade chart to 3.13.1
+```
+
+Po rolloutcie HelmRelease osiągnął `Ready=True`, APIService pozostał dostępny,
+`kubectl top nodes` i `kubectl top pods -A` działały, a logi nowego Poda nie
+zawierały błędów.
 
 ## Materiał odzyskiwania
 
@@ -131,6 +174,8 @@ wyłącznie tożsamość nodów klastra.
 
 ## Stan końcowy
 
+- metrics-server: chart `3.13.1`, aplikacja `0.8.1`, HelmRelease `Ready=True`;
+- Metrics API, `kubectl top nodes` i `kubectl top pods -A`: działają;
 - chart Sealed Secrets: `2.20.0`;
 - controller i klient: `0.40.0`;
 - cztery aktywne klucze: załadowane i objęte zaszyfrowanym backupem;
@@ -138,4 +183,3 @@ wyłącznie tożsamość nodów klastra.
 - API proxy: stabilne z każdego noda;
 - Flux: zbieżny;
 - backup i checksum: na dysku zewnętrznym.
-
