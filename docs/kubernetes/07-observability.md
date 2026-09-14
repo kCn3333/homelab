@@ -11,10 +11,35 @@
 | kube-state-metrics | Kubernetes object metrics |
 | Loki | Log storage and querying |
 | Promtail | Log collection |
+| metrics-server | Kubernetes resource Metrics API for `kubectl top` and HPA |
 | Hubble | Cilium network-flow visibility |
 
 `kube-prometheus-stack` is currently deployed as chart version `82.10.1` through Flux.
 The stack includes Grafana `12.4.0` and `kiwigrid/k8s-sidecar:2.5.0`.
+
+## Resource Metrics API
+
+metrics-server is deployed through Flux with Helm chart `3.13.1` and application
+version `0.8.1`. It runs as one `hostNetwork` replica and serves HTTPS on container
+port `4443`; its Service maps `443` to `4443`. It reads kubelet metrics through
+node `InternalIP` addresses on `10250/TCP` with a 15-second resolution.
+
+The HelmRelease uses a 10-minute action timeout and three remediation retries for both
+installation and upgrade. This prevents a slow cluster startup from leaving Flux
+permanently stalled after transient Helm timeouts.
+
+```bash
+kubectl get apiservice v1beta1.metrics.k8s.io
+kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes | jq '.items | length'
+kubectl top nodes
+kubectl top pods --all-namespaces
+flux get helmrelease metrics-server --namespace kube-system
+```
+
+A healthy Deployment alone is insufficient. Require the APIService to report
+`Available=True`, both `kubectl top` paths to return current samples, the
+HelmRelease to report `Ready=True`, and recent metrics-server logs to contain no
+scraping or TLS errors.
 
 ## Prometheus
 
@@ -166,3 +191,4 @@ kubectl get pvc -n monitoring
 flux get helmreleases -n monitoring
 kubectl get events -n monitoring --sort-by=.lastTimestamp | tail -n 30
 ```
+

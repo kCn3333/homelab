@@ -58,6 +58,7 @@ HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates applicati
 | Storage                 | Longhorn `v1.11`         | Replicated persistent volumes                                 |
 | GitOps                  | Flux `v2.8.1`            | Reconciliation and image automation                           |
 | Secrets                 | Sealed Secrets `v0.40.0` | Encrypted secrets stored in Git                               |
+| Resource metrics        | metrics-server `v0.8.1`  | Metrics API for `kubectl top` and HPA                       |
 | Monitoring              | kube-prometheus-stack    | Prometheus, Grafana and Alertmanager                          |
 | Logging                 | Loki and Promtail        | Central log collection                                        |
 | Object storage          | Garage `v2.2.0` on Logos | S3 storage for Loki and Longhorn backups                      |
@@ -124,4 +125,3 @@ Each Kubernetes learning session produces a Polish journal entry. A reusable fai
 and its verified solution may also become a troubleshooting article. The state
 documentation is updated only when the current architecture or operating procedure
 changes.
-
