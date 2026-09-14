@@ -1526,6 +1526,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#resource-metrics-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource Metrics API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prometheus" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3693,6 +3704,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#resource-metrics-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource Metrics API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prometheus" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3825,6 +3847,10 @@
 <td>Log collection</td>
 </tr>
 <tr>
+<td>metrics-server</td>
+<td>Kubernetes resource Metrics API for <code>kubectl top</code> and HPA</td>
+</tr>
+<tr>
 <td>Hubble</td>
 <td>Cilium network-flow visibility</td>
 </tr>
@@ -3832,6 +3858,24 @@
 </table>
 <p><code>kube-prometheus-stack</code> is currently deployed as chart version <code>82.10.1</code> through Flux.
 The stack includes Grafana <code>12.4.0</code> and <code>kiwigrid/k8s-sidecar:2.5.0</code>.</p>
+<h2 id="resource-metrics-api">Resource Metrics API<a class="headerlink" href="#resource-metrics-api" title="Permanent link">&para;</a></h2>
+<p>metrics-server is deployed through Flux with Helm chart <code>3.13.1</code> and application
+version <code>0.8.1</code>. It runs as one <code>hostNetwork</code> replica and serves HTTPS on container
+port <code>4443</code>; its Service maps <code>443</code> to <code>4443</code>. It reads kubelet metrics through
+node <code>InternalIP</code> addresses on <code>10250/TCP</code> with a 15-second resolution.</p>
+<p>The HelmRelease uses a 10-minute action timeout and three remediation retries for both
+installation and upgrade. This prevents a slow cluster startup from leaving Flux
+permanently stalled after transient Helm timeouts.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>apiservice<span class="w"> </span>v1beta1.metrics.k8s.io
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>--raw<span class="w"> </span>/apis/metrics.k8s.io/v1beta1/nodes<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">'.items | length'</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>kubectl<span class="w"> </span>top<span class="w"> </span>nodes
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>--all-namespaces
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>flux<span class="w"> </span>get<span class="w"> </span>helmrelease<span class="w"> </span>metrics-server<span class="w"> </span>--namespace<span class="w"> </span>kube-system
+</span></code></pre></div>
+<p>A healthy Deployment alone is insufficient. Require the APIService to report
+<code>Available=True</code>, both <code>kubectl top</code> paths to return current samples, the
+HelmRelease to report <code>Ready=True</code>, and recent metrics-server logs to contain no
+scraping or TLS errors.</p>
 <h2 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h2>
 <p>Prometheus uses <code>hostNetwork: true</code> and <code>hostPID: true</code> so it can scrape kubelet and
 node-exporter endpoints on node addresses. It therefore listens on TCP port <code>9090</code> in
@@ -3846,17 +3890,17 @@ form.</p>
 <p><code>kubeProxy.enabled: false</code> in chart values disables kube-proxy monitoring objects. It
 does not disable the kube-proxy process; kube-proxy still handles parts of the Service
 datapath in this cluster.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheus,servicemonitor,podmonitor<span class="w"> </span>-A
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span>wide
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>kubectl<span class="w"> </span>top<span class="w"> </span>nodes
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>-A
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheus,servicemonitor,podmonitor<span class="w"> </span>-A
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>kubectl<span class="w"> </span>top<span class="w"> </span>nodes
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>-A
 </span></code></pre></div>
 <h2 id="grafana">Grafana<a class="headerlink" href="#grafana" title="Permanent link">&para;</a></h2>
 <p>Grafana is exposed through Traefik at <code>grafana.cluster.kcn333.com</code>. Its Ingress points
 to the Grafana ClusterIP Service, while Traefik currently forwards to the ready Pod
 endpoint learned from EndpointSlice.</p>
 <p>The default Prometheus datasource uses:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://kube-prometheus-stack-prometheus.monitoring:9090/
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>http://kube-prometheus-stack-prometheus.monitoring:9090/
 </span></code></pre></div>
 <p>The earlier <code>An error occurred within the plugin</code> failure was caused by UFW blocking
 traffic from the Grafana node to the Prometheus <code>hostNetwork</code> endpoint on
@@ -3899,21 +3943,21 @@ the
 <p>Separate health ports prevent the sidecars from competing for port <code>8080</code> in the
 shared Pod network namespace. The extended retry window covers Grafana startup and
 provisioning before its API begins listening on port <code>3000</code>.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>deployment/kube-prometheus-stack-grafana<span class="w"> </span>--since<span class="o">=</span>30m
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,service,endpointslices<span class="w"> </span>-n<span class="w"> </span>monitoring
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>deployment/kube-prometheus-stack-grafana<span class="w"> </span>--since<span class="o">=</span>30m
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,service,endpointslices<span class="w"> </span>-n<span class="w"> </span>monitoring
 </span></code></pre></div>
 <h2 id="loki">Loki<a class="headerlink" href="#loki" title="Permanent link">&para;</a></h2>
 <p>Loki stores logs in the Garage S3-compatible backend on Logos at
 <code>http://192.168.0.56:3900</code>. Credentials are delivered through a SealedSecret.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>-o<span class="w"> </span>wide
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>loki-0<span class="w"> </span>-c<span class="w"> </span>loki<span class="w"> </span>--since<span class="o">=</span>30m
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>loki-0<span class="w"> </span>-c<span class="w"> </span>loki<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
 <h2 id="alertmanager">Alertmanager<a class="headerlink" href="#alertmanager" title="Permanent link">&para;</a></h2>
 <p>Alertmanager groups Prometheus alerts and sends notifications through ntfy. Its
 configuration is stored as an encrypted secret in Git.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>alertmanager<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheusrule<span class="w"> </span>-A
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>alertmanager-kube-prometheus-stack-alertmanager-0<span class="w"> </span>--since<span class="o">=</span>30m
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>alertmanager<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheusrule<span class="w"> </span>-A
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>alertmanager-kube-prometheus-stack-alertmanager-0<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
 <h2 id="hubble">Hubble<a class="headerlink" href="#hubble" title="Permanent link">&para;</a></h2>
 <p>Hubble is enabled through the Flux-managed Cilium HelmRelease and is exposed at
@@ -3947,34 +3991,34 @@ connects directly over TLS to every Cilium agent at its NodeIP on TCP <code>4244
 <p>The UI, live flows and service map were verified through the public Hubble URL after
 upgrading Cilium from <code>1.19.1</code> to <code>1.19.7</code>. The repair did not require <code>hostNetwork</code>,
 a manual port-forward, an additional UFW route rule, or changes to Traefik.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>daemonset/cilium<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>--<span class="w"> </span>cilium-dbg<span class="w"> </span>status
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,service,endpointslices<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>daemonset/cilium<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span>--<span class="w"> </span>cilium-dbg<span class="w"> </span>status
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,service,endpointslices<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system
 </span></code></pre></div>
 <p>For optional CLI diagnosis only, temporarily expose Hubble Relay locally. This does
 not replace the Hubble UI Ingress and is not required for normal use:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>service/hubble-relay<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="m">4245</span>:80
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>hubble<span class="w"> </span>status<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>hubble<span class="w"> </span>list<span class="w"> </span>nodes<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>hubble-relay<span class="w"> </span>-o<span class="w"> </span>wide
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>deployment/hubble-relay<span class="w"> </span>--since<span class="o">=</span>30m
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>service/hubble-relay<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="m">4245</span>:80
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>hubble<span class="w"> </span>status<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>hubble<span class="w"> </span>list<span class="w"> </span>nodes<span class="w"> </span>--server<span class="w"> </span><span class="m">127</span>.0.0.1:4245
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>hubble-relay<span class="w"> </span>-o<span class="w"> </span>wide
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>deployment/hubble-relay<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
 <p>The diagnosis and repair are documented in
 <a href="../../troubleshooting/hubble-data-streams-reconnecting/">Hubble data streams reconnecting</a>.</p>
 <h2 id="routine-checks">Routine checks<a class="headerlink" href="#routine-checks" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>flux<span class="w"> </span>get<span class="w"> </span>helmreleases<span class="w"> </span>-n<span class="w"> </span>monitoring
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>--sort-by<span class="o">=</span>.lastTimestamp<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>flux<span class="w"> </span>get<span class="w"> </span>helmreleases<span class="w"> </span>-n<span class="w"> </span>monitoring
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>--sort-by<span class="o">=</span>.lastTimestamp<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span>
 </span></code></pre></div>
 
 
@@ -3998,7 +4042,7 @@ not replace the Hubble UI Ingress and is not required for normal use:</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 13, 2026 13:47:16 UTC"><span class="timeago" datetime="2026-09-13T13:47:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 13, 2026 13:47:16 UTC">2026-09-13</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 14, 2026 13:26:10 UTC"><span class="timeago" datetime="2026-09-14T13:26:10+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 14, 2026 13:26:10 UTC">2026-09-14</span>
   </span>
 
     
