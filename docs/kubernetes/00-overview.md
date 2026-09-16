@@ -48,9 +48,9 @@ HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates applicati
 
 | Area                    | Component                | Current role                                                  |
 | ----------------------- | ------------------------ | ------------------------------------------------------------- |
-| Kubernetes              | k3s `v1.34.4+k3s1`       | Kubernetes distribution and embedded etcd                     |
+| Kubernetes              | k3s `v1.35.8+k3s1`       | Kubernetes distribution and embedded etcd                     |
 | External entry point    | HAProxy                  | Selects an API server or ingress node                         |
-| CNI                     | Cilium `v1.19.7`         | Pod networking, NetworkPolicy and VXLAN transport             |
+| CNI                     | Cilium `v1.20.2`         | Pod networking, NetworkPolicy and VXLAN transport             |
 | Service dataplane       | kube-proxy and Cilium    | iptables for tested host traffic; eBPF for tested Pod traffic |
 | Ingress                 | Traefik v3               | TLS termination and L7 routing                                |
 | Bare-metal LoadBalancer | K3s ServiceLB            | Exposes Traefik on node ports `80/443`                        |
@@ -60,7 +60,7 @@ HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates applicati
 | Secrets                 | Sealed Secrets `v0.40.0` | Encrypted secrets stored in Git                               |
 | Resource metrics        | metrics-server `v0.8.1`  | Metrics API for `kubectl top` and HPA                       |
 | Monitoring              | kube-prometheus-stack    | Prometheus, Grafana and Alertmanager                          |
-| Logging                 | Loki and Promtail        | Central log collection                                        |
+| Logging                 | Loki and Alloy `v1.19.2` | Central log collection                                        |
 | Object storage          | Garage `v2.2.0` on Logos | S3 storage for Loki and Longhorn backups                      |
 | Firewall                | UFW managed with Ansible | Restricts node access and cluster ports                       |
 

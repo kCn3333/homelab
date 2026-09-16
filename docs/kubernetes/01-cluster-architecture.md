@@ -115,7 +115,53 @@ Expected output includes:
 readyz check passed
 ```
 
-`Node Ready` confirms kubelet heartbeats and node conditions. It does not prove that every application, storage volume or network path is healthy.
+`Node Ready` confirms kubelet heartbeats and node conditions. It does not prove that every application, storage volume or network path is healthy. It also does not prove that every local API server can proxy requests to every kubelet.
+
+Verify the complete API server to kubelet matrix after a cold start or K3s upgrade:
+
+```bash
+for api_server in master worker1 worker2; do
+  for kubelet_node in master worker1 worker2; do
+    ssh "$api_server" \
+      sudo k3s kubectl \
+        --request-timeout=5s \
+        get \
+        "--raw=/api/v1/nodes/${kubelet_node}/proxy/healthz"
+  done
+done
+```
+
+The expected result is nine successful requests.
+
+---
+
+## Controlled K3s upgrade
+
+K3s upgrades use the `K3S | 40 Controlled Upgrade` Semaphore template backed by:
+
+```text
+cluster/playbooks/maintenance/k3s-upgrade.yml
+```
+
+The target must be an explicit complete release:
+
+```text
+k3s_target_version=v1.35.8+k3s1
+```
+
+The playbook requires the complete inventory and rejects `--limit`, downgrades and
+unsupported version jumps. It performs:
+
+1. binary, architecture, version, service, API and etcd preflight checks;
+2. one embedded-etcd snapshot before binary replacement;
+3. official SHA-256 verification of the target binary;
+4. atomic replacement with a backup of the previous binary;
+5. sequential upgrade in `worker1 -> worker2 -> master` order;
+6. service, API, etcd, version and `Node Ready` checks after each node;
+7. exact node-membership and full `3x3` kubelet-proxy validation.
+
+Use normal execution, not Semaphore Dry Run. Check mode skips command tasks whose
+output is required by later assertions.
 
 ---
 
@@ -127,7 +173,8 @@ List snapshots:
 sudo k3s etcd-snapshot ls
 ```
 
-Create a snapshot before a control-plane, CNI or storage change:
+For control-plane, CNI or storage work not covered by the controlled upgrade playbook,
+create a snapshot before the change:
 
 ```bash
 sudo k3s etcd-snapshot save \

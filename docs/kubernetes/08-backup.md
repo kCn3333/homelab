@@ -23,10 +23,18 @@ sudo k3s etcd-snapshot ls
 sudo k3s etcd-snapshot save --name pre-change
 ```
 
-Create a manual snapshot before K3s upgrades, CNI changes, etcd work and other
-cluster-wide operations. Verify that snapshots are copied away from the cluster node.
-A copy on another machine in the same home location is a separate host copy, not a
-true off-site backup.
+The controlled K3s upgrade playbook creates one snapshot before replacing any binary.
+Its snapshot name uses:
+
+```text
+pre-k3s-upgrade-<version>-master-<timestamp>
+```
+
+Do not create a duplicate manual snapshot when the playbook snapshot has completed
+successfully. Create a manual snapshot before CNI changes, direct etcd work and other
+cluster-wide operations not covered by the upgrade playbook. Verify that snapshots
+are copied away from the cluster node. A copy on another machine in the same home
+location is a separate host copy, not a true off-site backup.
 
 Snapshot restoration recovers Kubernetes objects. Repository state must still be
 consistent with the intended post-restore state because Flux will resume reconciliation.
@@ -121,4 +129,3 @@ For a complete cluster loss:
 Exact restore commands depend on whether the failure affects one node, the etcd
 cluster, Longhorn data or the Garage host. Do not use a single generic recovery command
 for all cases.
-

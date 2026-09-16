@@ -19,7 +19,7 @@ worker2: 10.42.2.0/24
 The current Cilium configuration uses Kubernetes IPAM:
 
 ```text
-version=1.19.7
+version=1.20.2
 ipam=kubernetes
 k8s-require-ipv4-pod-cidr=true
 routing=VXLAN
@@ -165,7 +165,12 @@ Hubble Relay Pod
   -> 192.168.55.12:4244
 ```
 
-The internal Relay-to-agent path requires Pod-to-NodeIP connectivity on TCP `4244`. This is cluster-internal traffic and is separate from browser access through Traefik. It was verified after upgrading Cilium from `1.19.1` to `1.19.7`; no `hostNetwork` workaround, manual port-forward or additional UFW route rule is required.
+The internal Relay-to-agent path requires Pod-to-NodeIP connectivity on TCP `4244`. This is cluster-internal traffic and is separate from browser access through Traefik. It was restored by upgrading Cilium from `1.19.1` to `1.19.7` and revalidated on `1.20.2`; no `hostNetwork` workaround, manual port-forward or additional UFW route rule is required.
+
+After the `1.20.2` upgrade, all three agents reported `cilium-dbg status --brief: OK`.
+Hubble Relay, Hubble UI, live flows and the service map were operational. Cluster DNS,
+the Sealed Secrets API proxy path and the existing CiliumNetworkPolicy were also
+verified.
 
 Useful checks:
 
@@ -283,4 +288,3 @@ kubectl get service,endpointslice -A
 sudo iptables-save -c -t nat | grep KUBE-SERVICES
 ip -4 route show table all
 ```
-

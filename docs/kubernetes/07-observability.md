@@ -10,7 +10,7 @@
 | node-exporter | Node metrics |
 | kube-state-metrics | Kubernetes object metrics |
 | Loki | Log storage and querying |
-| Promtail | Log collection |
+| Grafana Alloy | Per-node log collection |
 | metrics-server | Kubernetes resource Metrics API for `kubectl top` and HPA |
 | Hubble | Cilium network-flow visibility |
 
@@ -122,6 +122,62 @@ kubectl get pods -n loki -o wide
 kubectl logs -n loki loki-0 -c loki --since=30m
 ```
 
+## Grafana Alloy
+
+Alloy replaced Promtail as the cluster log collector. It is deployed through Flux as
+Helm chart `1.12.1` with application version `1.19.2`.
+
+The DaemonSet runs one Pod on every node. Each instance discovers only Pods assigned
+to its own node and reads their CRI log files from:
+
+```text
+/var/log/pods
+```
+
+Each node stores its own positions file in a persistent hostPath:
+
+```text
+/var/lib/alloy/loki.source.file.pod_logs/positions.yml
+```
+
+Separate files are required because every node has different local log files. The
+hostPath preserves offsets across Pod and node restarts.
+
+The Alloy container runs with UID `65534`, GID `0`, a read-only root filesystem,
+all capabilities dropped and `RuntimeDefault` seccomp. Group `0` provides read access
+to root-owned CRI logs without running the process as UID `0`.
+
+Alloy sends logs to:
+
+```text
+http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
+```
+
+New streams include:
+
+```text
+collector="alloy"
+```
+
+Streams without this label are historical data previously written by Promtail and
+remain queryable until Loki retention removes them. Promtail is no longer deployed.
+
+```bash
+kubectl get daemonset,pods \
+  --namespace loki \
+  --selector app.kubernetes.io/name=alloy \
+  --output wide
+
+kubectl logs \
+  --namespace loki \
+  --selector app.kubernetes.io/name=alloy \
+  --container alloy \
+  --since=30m \
+  --prefix
+
+flux get helmrelease alloy --namespace loki
+```
+
 ## Alertmanager
 
 Alertmanager groups Prometheus alerts and sends notifications through ntfy. Its
@@ -143,15 +199,16 @@ This is the normal operational path and does not require a manual port-forward.
 
 | Component | Version |
 |---|---|
-| Cilium agent and operator | `1.19.7` |
-| Hubble Relay | `1.19.7` |
+| Cilium agent and operator | `1.20.2` |
+| Hubble Relay | `1.20.2` |
 | Hubble UI and backend | `0.13.5` |
 
 Hubble Relay uses the local-backend `hubble-peer` Service for peer discovery, then
 connects directly over TLS to every Cilium agent at its NodeIP on TCP `4244`.
 
-The UI, live flows and service map were verified through the public Hubble URL after
-upgrading Cilium from `1.19.1` to `1.19.7`. The repair did not require `hostNetwork`,
+The Pod-to-NodeIP observer path was restored by upgrading Cilium from `1.19.1` to
+`1.19.7`. Hubble Relay, Hubble UI, live flows and the service map were revalidated
+after upgrading to `1.20.2`. The working configuration does not require `hostNetwork`,
 a manual port-forward, an additional UFW route rule, or changes to Traefik.
 
 ```bash
@@ -189,6 +246,7 @@ The diagnosis and repair are documented in
 kubectl get pods -n monitoring
 kubectl get pvc -n monitoring
 flux get helmreleases -n monitoring
+flux get helmrelease alloy -n loki
+kubectl get daemonset,pods -n loki -l app.kubernetes.io/name=alloy
 kubectl get events -n monitoring --sort-by=.lastTimestamp | tail -n 30
 ```
-
