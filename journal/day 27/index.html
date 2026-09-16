@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2026/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2027/">
       
       
-        <link rel="prev" href="../day%2025/">
+        <link rel="prev" href="../day%2026/">
       
       
-        <link rel="next" href="../day%2027/">
+        <link rel="next" href="../../pentesting/pentest_lab_notes/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>26 - migracja Promtail do Alloy - > Homelab Documentation</title>
+        <title>27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#26-migracja-promtail-do-alloy" class="md-skip">
+        <a href="#27-dokonczenie-migracji-alloy-i-aktualizacja-k3s-oraz-cilium" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              26 - migracja Promtail do Alloy
+              27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
             
           </span>
         </div>
@@ -2319,6 +2319,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../day%2026/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26 - migracja Promtail do Alloy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -2338,7 +2366,7 @@
   <span class="md-ellipsis">
     
   
-    26 - migracja Promtail do Alloy
+    27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
   
 
     
@@ -2356,7 +2384,7 @@
   <span class="md-ellipsis">
     
   
-    26 - migracja Promtail do Alloy
+    27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
   
 
     
@@ -2393,10 +2421,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stan-po-uruchomieniu" class="md-nav__link">
+  <a href="#zakonczenie-migracji-z-promtaila-do-alloy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stan po uruchomieniu
+        Zakończenie migracji z Promtaila do Alloy
       
     </span>
   </a>
@@ -2404,10 +2432,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resynchronizacja-remotedialera" class="md-nav__link">
+  <a href="#test-rownolegego-zapisu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resynchronizacja remotedialera
+        Test równoległego zapisu
       
     </span>
   </a>
@@ -2415,10 +2443,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stan-promtaila" class="md-nav__link">
+  <a href="#usuniecie-promtaila" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stan Promtaila
+        Usunięcie Promtaila
       
     </span>
   </a>
@@ -2426,10 +2454,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#wybor-alloy" class="md-nav__link">
+  <a href="#bad-remotedialera-po-starcie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wybór Alloy
+        Błąd remotedialera po starcie
       
     </span>
   </a>
@@ -2437,10 +2465,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prawa-dostepu-alloy" class="md-nav__link">
+  <a href="#resynchronizacja-tunelu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prawa dostępu Alloy
+        Resynchronizacja tunelu
       
     </span>
   </a>
@@ -2448,10 +2476,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#wdrozenie-etapowe" class="md-nav__link">
+  <a href="#kontrolowany-playbook-aktualizacji" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wdrożenie etapowe
+        Kontrolowany playbook aktualizacji
       
     </span>
   </a>
@@ -2459,10 +2487,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bad-zroda-plikowego" class="md-nav__link">
+  <a href="#aktualizacja-k3s-do-v13410k3s1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Błąd źródła plikowego
+        Aktualizacja K3s do v1.34.10+k3s1
       
     </span>
   </a>
@@ -2470,10 +2498,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#test-odtworzenia-poda" class="md-nav__link">
+  <a href="#aktualizacja-do-ostatniego-patcha-134" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test odtworzenia Poda
+        Aktualizacja do ostatniego patcha 1.34
       
     </span>
   </a>
@@ -2481,10 +2509,87 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#waczenie-zapisu-do-loki" class="md-nav__link">
+  <a href="#zimny-start-na-v13411k3s1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Włączenie zapisu do Loki
+        Zimny start na v1.34.11+k3s1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aktualizacja-k3s-do-v1358k3s1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacja K3s do v1.35.8+k3s1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zimny-start-na-v1358k3s1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zimny start na v1.35.8+k3s1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stan-cilium-przed-aktualizacja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stan Cilium przed aktualizacją
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aktualizacja-cilium-1197-1198" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacja Cilium 1.19.7 → 1.19.8
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preflight-przed-cilium-1202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preflight przed Cilium 1.20.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aktualizacja-cilium-1198-1202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacja Cilium 1.19.8 → 1.20.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#walidacja-sieci-po-aktualizacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Walidacja sieci po aktualizacji
       
     </span>
   </a>
@@ -2496,6 +2601,17 @@
     <span class="md-ellipsis">
       
         Stan końcowy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#najwazniejsze-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Najważniejsze wnioski
       
     </span>
   </a>
@@ -2517,34 +2633,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../day%2027/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -3804,10 +3892,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stan-po-uruchomieniu" class="md-nav__link">
+  <a href="#zakonczenie-migracji-z-promtaila-do-alloy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stan po uruchomieniu
+        Zakończenie migracji z Promtaila do Alloy
       
     </span>
   </a>
@@ -3815,10 +3903,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#resynchronizacja-remotedialera" class="md-nav__link">
+  <a href="#test-rownolegego-zapisu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resynchronizacja remotedialera
+        Test równoległego zapisu
       
     </span>
   </a>
@@ -3826,10 +3914,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stan-promtaila" class="md-nav__link">
+  <a href="#usuniecie-promtaila" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stan Promtaila
+        Usunięcie Promtaila
       
     </span>
   </a>
@@ -3837,10 +3925,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#wybor-alloy" class="md-nav__link">
+  <a href="#bad-remotedialera-po-starcie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wybór Alloy
+        Błąd remotedialera po starcie
       
     </span>
   </a>
@@ -3848,10 +3936,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prawa-dostepu-alloy" class="md-nav__link">
+  <a href="#resynchronizacja-tunelu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prawa dostępu Alloy
+        Resynchronizacja tunelu
       
     </span>
   </a>
@@ -3859,10 +3947,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#wdrozenie-etapowe" class="md-nav__link">
+  <a href="#kontrolowany-playbook-aktualizacji" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wdrożenie etapowe
+        Kontrolowany playbook aktualizacji
       
     </span>
   </a>
@@ -3870,10 +3958,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bad-zroda-plikowego" class="md-nav__link">
+  <a href="#aktualizacja-k3s-do-v13410k3s1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Błąd źródła plikowego
+        Aktualizacja K3s do v1.34.10+k3s1
       
     </span>
   </a>
@@ -3881,10 +3969,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#test-odtworzenia-poda" class="md-nav__link">
+  <a href="#aktualizacja-do-ostatniego-patcha-134" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Test odtworzenia Poda
+        Aktualizacja do ostatniego patcha 1.34
       
     </span>
   </a>
@@ -3892,10 +3980,87 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#waczenie-zapisu-do-loki" class="md-nav__link">
+  <a href="#zimny-start-na-v13411k3s1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Włączenie zapisu do Loki
+        Zimny start na v1.34.11+k3s1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aktualizacja-k3s-do-v1358k3s1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacja K3s do v1.35.8+k3s1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zimny-start-na-v1358k3s1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zimny start na v1.35.8+k3s1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stan-cilium-przed-aktualizacja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stan Cilium przed aktualizacją
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aktualizacja-cilium-1197-1198" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacja Cilium 1.19.7 → 1.19.8
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preflight-przed-cilium-1202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preflight przed Cilium 1.20.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aktualizacja-cilium-1198-1202" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacja Cilium 1.19.8 → 1.20.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#walidacja-sieci-po-aktualizacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Walidacja sieci po aktualizacji
       
     </span>
   </a>
@@ -3907,6 +4072,17 @@
     <span class="md-ellipsis">
       
         Stan końcowy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#najwazniejsze-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Najważniejsze wnioski
       
     </span>
   </a>
@@ -3945,284 +4121,495 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 26.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 27.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="26-migracja-promtail-do-alloy">26 - migracja Promtail do Alloy<a class="headerlink" href="#26-migracja-promtail-do-alloy" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-09-15</p>
-<p><strong>Środowisko:</strong> 3× HP T630, k3s <code>v1.34.4+k3s1</code>, Cilium <code>1.19.7</code>, Flux <code>v2.8.1</code>, Loki <code>3.6</code>, Promtail <code>3.5.1</code>, Alloy <code>1.19.2</code></p>
+<h1 id="27-dokonczenie-migracji-alloy-i-aktualizacja-k3s-oraz-cilium">27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium<a class="headerlink" href="#27-dokonczenie-migracji-alloy-i-aktualizacja-k3s-oraz-cilium" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 2026-09-16</p>
+<p><strong>Środowisko:</strong> 3× HP T630, K3s <code>v1.34.4+k3s1</code> → <code>v1.35.8+k3s1</code>, Cilium <code>1.19.7</code> → <code>1.20.2</code>, Flux <code>v2.8.1</code>, Loki <code>3.6</code>, Alloy <code>1.19.2</code></p>
 <h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Zdiagnozować błąd API server → kubelet po zimnym starcie klastra.</li>
-<li>Sprawdzić bezrestartową metodę resynchronizacji tuneli K3s.</li>
-<li>Zinwentaryzować obecną konfigurację Promtaila.</li>
-<li>Wdrożyć Alloy jako docelowy kolektor logów.</li>
-<li>Uruchomić Alloy najpierw w trybie shadow, a następnie równolegle z Promtailem.</li>
-<li>Potwierdzić odczyt lokalnych plików i zapis nowych logów do Loki.</li>
-<li>Zachować Promtail do testu po następnym zimnym starcie.</li>
+<li>Potwierdzić działanie Alloy po zimnym starcie klastra.</li>
+<li>Zakończyć migrację z Promtaila do Alloy bez luki w dostarczaniu logów.</li>
+<li>Zebrać dowody dotyczące kolejnego błędu remotedialera.</li>
+<li>Przygotować kontrolowany i powtarzalny proces aktualizacji K3s.</li>
+<li>Zaktualizować K3s z <code>v1.34.4+k3s1</code> do <code>v1.35.8+k3s1</code>.</li>
+<li>Sprawdzić nowe wersje przez pełne zimne starty klastra.</li>
+<li>Zaktualizować Cilium najpierw do <code>1.19.8</code>, a następnie do <code>1.20.2</code>.</li>
+<li>Potwierdzić działanie sieci, DNS, polityk Cilium, Sealed Secrets i Fluxa.</li>
 </ol>
-<h2 id="stan-po-uruchomieniu">Stan po uruchomieniu<a class="headerlink" href="#stan-po-uruchomieniu" title="Permanent link">&para;</a></h2>
-<p>Wszystkie trzy nody osiągnęły <code>Ready</code>, ale jedna z dziewięciu ścieżek API server →
-kubelet nie działała:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>worker1 API → worker2 kubelet: 502 Bad Gateway
+<h2 id="zakonczenie-migracji-z-promtaila-do-alloy">Zakończenie migracji z Promtaila do Alloy<a class="headerlink" href="#zakonczenie-migracji-z-promtaila-do-alloy" title="Permanent link">&para;</a></h2>
+<p>Po zimnym starcie oba kolektory działały równolegle:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Promtail: 3 desired / 3 ready / 3 available
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Alloy:    3 desired / 3 ready / 3 available
 </span></code></pre></div>
-<p><code>EndpointSlice/default/kubernetes</code> zawierał gotowe adresy wszystkich trzech nodów.
-Sam poprawny EndpointSlice nie gwarantuje jednak, że lokalny serwer remotedialera na
-każdym nodzie ma aktywne sesje do wszystkich kubeletów.</p>
-<p>Każdy API server potrzebuje własnej działającej ścieżki do każdego kubeleta. Tunelu
-nie należy traktować jako jednej wspólnej, symetrycznej sesji dla całego klastra.</p>
-<h2 id="resynchronizacja-remotedialera">Resynchronizacja remotedialera<a class="headerlink" href="#resynchronizacja-remotedialera" title="Permanent link">&para;</a></h2>
-<p>Użyto skryptu <code>~/k3s/remotedialer-resync.sh</code>, który dodaje, a następnie usuwa
-techniczną adnotację z EndpointSlice usługi <code>kubernetes</code>:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="ch">#!/usr/bin/env bash</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">annotation</span><span class="o">=</span><span class="s2">"diagnostics.kcn333.com/remotedialer-resync"</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Wymuszam ponowną synchronizację tuneli K3s..."</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>endpointslice<span class="w"> </span>kubernetes<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span>--namespace<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">annotation</span><span class="si">}</span><span class="s2">=</span><span class="k">$(</span>date<span class="w"> </span>-u<span class="w"> </span>+%s<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span>--overwrite
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>sleep<span class="w"> </span><span class="m">5</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>endpointslice<span class="w"> </span>kubernetes<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span>--namespace<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">annotation</span><span class="si">}</span><span class="s2">-"</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"Zdarzenie EndpointSlice wysłane."</span>
+<p>W logach Alloy z ostatnich trzech godzin nie było błędów, timeoutów, odpowiedzi
+<code>429</code>, odrzuconych batchy ani problemów z prawami dostępu.</p>
+<p>Na każdym nodzie istniał i był aktualizowany lokalny plik pozycji:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/var/lib/alloy/loki.source.file.pod_logs/positions.yml
 </span></code></pre></div>
-<p>Zmiana obiektu wywołała ponowne przetworzenie EndpointSlice bez restartowania K3s.
-Po wykonaniu skryptu macierz połączeń dała wynik:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>API server → kubelet matrix: 9/9 OK
-</span></code></pre></div>
-<p>Skrypt jest potwierdzoną metodą naprawczą. Nie znamy jeszcze przyczyny, dla której
-brakująca sesja nie została odtworzona automatycznie podczas uruchamiania klastra.
-Przy kolejnym wystąpieniu błędu należy najpierw zachować macierz i logi bieżącego
-bootu, a dopiero później uruchomić resynchronizację.</p>
-<h2 id="stan-promtaila">Stan Promtaila<a class="headerlink" href="#stan-promtaila" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chart:     6.17.1
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>aplikacja: 3.5.1
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>DaemonSet: 3 desired / 3 ready / 3 available
-</span></code></pre></div>
-<p>Jeden Pod Promtaila działał na każdym nodzie i wysyłał logi do:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>http://loki.loki.svc.cluster.local:3100/loki/api/v1/push
-</span></code></pre></div>
-<p>W logach z ostatnich 30 minut nie było błędów, timeoutów, odpowiedzi <code>429</code> ani
-informacji o odrzuconych wpisach. Liczniki restartów Podów odpowiadały uruchomieniu
-klastra, a nie awarii Promtaila.</p>
-<p>Promtail zapisywał pozycje w:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/run/promtail/positions.yaml
-</span></code></pre></div>
-<p><code>/run</code> jest <code>tmpfs</code>. Plik przeżywa restart Poda, ponieważ jest zamontowany z noda,
-ale znika po restarcie noda. Utrata pozycji nie uszkadza bazy Loki. Może natomiast
-spowodować ponowne wysłanie części logów albo ich pominięcie.</p>
-<p>Logi kontenerów miały właściciela <code>root:root</code>. Katalog <code>/var/log/pods</code> miał prawa
-<code>750</code>, a pliki przeważnie <code>640</code>. Promtail działał jako UID i GID <code>0</code>, dlatego mógł
-je odczytywać.</p>
-<h2 id="wybor-alloy">Wybór Alloy<a class="headerlink" href="#wybor-alloy" title="Permanent link">&para;</a></h2>
-<p>Promtail jest wycofywany, dlatego wybrano Grafana Alloy:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chart:     1.12.1
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aplikacja: 1.19.2
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>controller: DaemonSet
-</span></code></pre></div>
-<p>Każdy Pod Alloy ma czytać wyłącznie logi lokalnego noda. Discovery zostało
-ograniczone selektorem:</p>
-<div class="language-alloy highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">selectors</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="n">role</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">"pod"</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"spec.nodeName="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sys</span><span class="o">.</span><span class="n">env</span><span class="o">(</span><span class="s">"K8S_NODE_NAME"</span><span class="o">)</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="o">}</span>
-</span></code></pre></div>
-<p>Jeden współdzielony plik pozycji nie byłby poprawny. Każdy node ma inne lokalne
-pliki <code>/var/log/pods</code>, a równoczesny zapis wielu instancji do jednego pliku mógłby
-uszkodzić jego spójność.</p>
-<h2 id="prawa-dostepu-alloy">Prawa dostępu Alloy<a class="headerlink" href="#prawa-dostepu-alloy" title="Permanent link">&para;</a></h2>
-<p>Główny kontener działa z następującymi ograniczeniami:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">allowPrivilegeEscalation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">readOnlyRootFilesystem</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">runAsNonRoot</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nt">runAsUser</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65534</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nt">runAsGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nt">seccompProfile</span><span class="p">:</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RuntimeDefault</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nt">capabilities</span><span class="p">:</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nt">drop</span><span class="p">:</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ALL</span>
-</span></code></pre></div>
-<p>GID <code>0</code> pozwala korzystać z praw grupy <code>root</code>, co jest potrzebne do odczytu plików
-<code>640</code> i przechodzenia przez katalog <code>/var/log/pods</code> z prawami <code>750</code>. Nie jest to
-równoważne działaniu z UID <code>0</code>: proces nie jest właścicielem plików i nie ma
-capabilities roota.</p>
-<p>Stan Alloy jest przechowywany osobno na każdym nodzie:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>/var/lib/alloy
-</span></code></pre></div>
-<p>Init container tworzy właściwe prawa do katalogu, używając jedynie capabilities
-<code>CHOWN</code> i <code>FOWNER</code>, po czym kończy działanie. Jego status <code>Completed</code> oznacza
-prawidłowo zakończoną inicjalizację, a nie błąd Poda.</p>
-<h2 id="wdrozenie-etapowe">Wdrożenie etapowe<a class="headerlink" href="#wdrozenie-etapowe" title="Permanent link">&para;</a></h2>
-<p>Istotne rewizje:</p>
+<p>Pliki przetrwały restart nodów, ponieważ <code>/var/lib/alloy</code> jest hostPath, a nie
+<code>tmpfs</code>. Każdy node zachowuje własny plik pozycji odpowiadający lokalnym plikom
+<code>/var/log/pods</code>.</p>
+<h2 id="test-rownolegego-zapisu">Test równoległego zapisu<a class="headerlink" href="#test-rownolegego-zapisu" title="Permanent link">&para;</a></h2>
+<p>Utworzono kontrolny Pod <code>alloy-cutover-074958</code>, który wygenerował 12 unikalnych
+linii. Zapytanie LogQL zwróciło:</p>
 <table>
 <thead>
 <tr>
-<th>Rewizja</th>
-<th>Zmiana</th>
+<th>Kolektor</th>
+<th>Etykieta <code>collector</code></th>
+<th style="text-align: right;">Linie</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>167bb4b</code></td>
-<td>dodanie HelmRelease Alloy i DaemonSetu</td>
+<td>Promtail</td>
+<td>brak</td>
+<td style="text-align: right;">12</td>
 </tr>
 <tr>
-<td><code>d33cf466</code></td>
-<td>uruchomienie pipeline'u w trybie shadow</td>
-</tr>
-<tr>
-<td><code>395743a</code></td>
-<td>naprawa przekazywania znalezionych plików do źródła Loki</td>
-</tr>
-<tr>
-<td><code>2bdc935</code></td>
-<td>włączenie zapisu do Loki i etykiety <code>collector="alloy"</code></td>
-</tr>
-</tbody>
-</table>
-<p>Tryb shadow odczytywał pliki i przesuwał pozycje, ale nie wysyłał danych do Loki.
-Promtail cały czas pozostawał aktywny, dlatego nie powstała przerwa w zbieraniu
-logów. Ustawienie <code>tail_from_end = true</code> zapobiegło ponownemu wysłaniu całej historii.</p>
-<h2 id="bad-zroda-plikowego">Błąd źródła plikowego<a class="headerlink" href="#bad-zroda-plikowego" title="Permanent link">&para;</a></h2>
-<p>Pody Alloy były <code>Ready</code>, ale Alloy początkowo nie czytał aktywnych logów. W logach
-pojawiały się błędy <code>stat</code> dla ścieżek zawierających nierozwinięty znak <code>*</code>.</p>
-<p>Przyczyna: komponent <code>local.file_match</code> był skonfigurowany, lecz jego wynik nie był
-używany. <code>loki.source.file</code> otrzymywał bezpośrednio cele z <code>discovery.relabel</code>.</p>
-<p>Poprawne połączenie:</p>
-<div class="language-alloy highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">local</span><span class="o">.</span><span class="n">file_match</span><span class="w"> </span><span class="s">"pod_logs"</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="n">path_targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">discovery</span><span class="o">.</span><span class="n">relabel</span><span class="o">.</span><span class="n">pod_logs</span><span class="o">.</span><span class="n">output</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="n">sync_period</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">"10s"</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="o">}</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">loki</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">file</span><span class="w"> </span><span class="s">"pod_logs"</span><span class="w"> </span><span class="o">{</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="n">targets</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">local</span><span class="o">.</span><span class="n">file_match</span><span class="o">.</span><span class="n">pod_logs</span><span class="o">.</span><span class="n">targets</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span><span class="n">forward_to</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">loki</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">pod_logs</span><span class="o">.</span><span class="n">receiver</span><span class="o">]</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span><span class="n">tail_from_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">true</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="o">}</span>
-</span></code></pre></div>
-<p>Po poprawce liczba aktywnie obserwowanych plików wynosiła:</p>
-<table>
-<thead>
-<tr>
-<th>Node</th>
-<th style="text-align: right;">Pliki</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>master</code></td>
-<td style="text-align: right;">73</td>
-</tr>
-<tr>
-<td><code>worker1</code></td>
-<td style="text-align: right;">65</td>
-</tr>
-<tr>
-<td><code>worker2</code></td>
-<td style="text-align: right;">82</td>
-</tr>
-</tbody>
-</table>
-<p>Rosły liczniki odczytanych linii i bajtów. Pliki pozycji były niepuste, miały prawa
-<code>600</code> i właściciela <code>nobody:root</code>.</p>
-<h2 id="test-odtworzenia-poda">Test odtworzenia Poda<a class="headerlink" href="#test-odtworzenia-poda" title="Permanent link">&para;</a></h2>
-<p>Na <code>worker1</code> usunięto Pod <code>alloy-9z92z</code>. DaemonSet utworzył <code>alloy-kssgr</code>, który
-osiągnął <code>Ready</code> z zerową liczbą restartów. Nie wystąpiły błędy dostępu do plików.</p>
-<p>Plik pozycji przed i po odtworzeniu:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>przed: inode=169848 size=3540
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>po:    inode=169849 size=20251
-</span></code></pre></div>
-<p>Zmiana inode jest zgodna z atomowym zapisem pliku. Test potwierdził dostęp nowego
-Poda do trwałego katalogu hostPath. Nie potwierdził jeszcze zachowania po restarcie
-noda ani tego, że każdy offset został odtworzony bez utraty lub duplikacji wpisów.</p>
-<p>Do pełnego testu potrzebne są jednocześnie plik pozycji i odpowiadający mu plik logu,
-ponieważ sam offset bez źródłowego pliku nie pozwala wznowić odczytu.</p>
-<h2 id="waczenie-zapisu-do-loki">Włączenie zapisu do Loki<a class="headerlink" href="#waczenie-zapisu-do-loki" title="Permanent link">&para;</a></h2>
-<p>Do strumieni Alloy dodano etykietę:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>collector="alloy"
-</span></code></pre></div>
-<p>Następnie <code>loki.process</code> połączono z <code>loki.write</code> kierującym dane do obecnego
-Service Loki. Promtail pozostał aktywny, więc od tego momentu oba kolektory wysyłają
-logi równolegle.</p>
-<p>Próbka metryk po uruchomieniu zapisu:</p>
-<table>
-<thead>
-<tr>
-<th>Node</th>
-<th style="text-align: right;">Wpisy</th>
-<th style="text-align: right;">Bajty</th>
-<th style="text-align: right;">Odpowiedzi HTTP 204</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>master</code></td>
-<td style="text-align: right;">171</td>
-<td style="text-align: right;">34 926</td>
-<td style="text-align: right;">32</td>
-</tr>
-<tr>
-<td><code>worker1</code></td>
-<td style="text-align: right;">261</td>
-<td style="text-align: right;">39 265</td>
-<td style="text-align: right;">45</td>
-</tr>
-<tr>
-<td><code>worker2</code></td>
-<td style="text-align: right;">288</td>
-<td style="text-align: right;">42 231</td>
-<td style="text-align: right;">29</td>
+<td>Alloy</td>
+<td><code>alloy</code></td>
+<td style="text-align: right;">12</td>
 </tr>
 <tr>
 <td><strong>Razem</strong></td>
-<td style="text-align: right;"><strong>720</strong></td>
-<td style="text-align: right;"><strong>116 422</strong></td>
-<td style="text-align: right;"><strong>106</strong></td>
+<td></td>
+<td style="text-align: right;"><strong>24</strong></td>
 </tr>
 </tbody>
 </table>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>retries=0
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>dropped=0
+<p>Oba kolektory odczytały ten sam kompletny zestaw. Nie brakowało linii i żaden z
+kolektorów nie wysłał ich wielokrotnie w obrębie własnego strumienia.</p>
+<p>Test potwierdził jednocześnie, że:</p>
+<ul>
+<li>Alloy prawidłowo wykrywa nowe pliki logów;</li>
+<li>przesuwa lokalny offset;</li>
+<li>przetwarza format CRI;</li>
+<li>wysyła wpisy do Loki;</li>
+<li>zachowuje etykiety wymagane do filtrowania;</li>
+<li>działa po ponownym uruchomieniu nodów.</li>
+</ul>
+<h2 id="usuniecie-promtaila">Usunięcie Promtaila<a class="headerlink" href="#usuniecie-promtaila" title="Permanent link">&para;</a></h2>
+<p>Po udanym teście Promtail został usunięty z GitOps. Flux usunął HelmRelease,
+DaemonSet oraz release Helm:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>HelmRelease/promtail: NotFound
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>DaemonSet/promtail:   NotFound
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>helm list:            tylko alloy
 </span></code></pre></div>
-<p>HTTP <code>204</code> potwierdza przyjęcie batcha przez Loki, ale nie dowodzi jeszcze, że wpisy
-mają poprawny format i zestaw etykiet. Osobne zapytanie LogQL zwróciło świeże
-strumienie <code>collector="alloy"</code> ze wszystkich trzech nodów oraz oczekiwane etykiety:
-<code>namespace</code>, <code>pod</code>, <code>container</code>, <code>job</code>, <code>node_name</code>, <code>stream</code> i <code>collector</code>.</p>
-<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Promtail: 3 desired / 3 ready / 3 available
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Alloy:    3 desired / 3 ready / 3 available
+<p>Stan docelowego kolektora:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chart:      alloy 1.12.1
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>aplikacja:  Alloy v1.19.2
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>DaemonSet:  3 desired / 3 ready / 3 available
 </span></code></pre></div>
-<p>Alloy poprawnie wykrywa lokalne pliki, aktualizuje pozycje i wysyła nowe wpisy do
-Loki. Promtail nadal działa jako bezpieczna ścieżka podstawowa. Czasowe duplikaty są
-akceptowalne; ważniejsze jest uniknięcie luki w dostarczaniu logów.</p>
-<p>Migracja nie została jeszcze uznana za zakończoną. Stan przejściowy pozostaje tylko
-w journalu i nie jest wprowadzany do dokumentacji bieżącego stanu klastra.</p>
-<h2 id="nastepna-sesja">Następna sesja<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h2>
-<p>Po zimnym starcie należy:</p>
+<p>Stare strumienie bez etykiety <code>collector</code> nadal mogą być zwracane przez Loki do
+końca retencji. Są to dane historyczne wysłane przez Promtail, a nie dowód, że
+Promtail nadal działa.</p>
+<p>Migracja została zakończona bez przerwy w dostarczaniu logów. Okres równoległego
+zapisu celowo powodował duplikaty między kolektorami; był to koszt bezpiecznego
+cutoveru bez ryzyka pominięcia ważnych wpisów.</p>
+<h2 id="bad-remotedialera-po-starcie">Błąd remotedialera po starcie<a class="headerlink" href="#bad-remotedialera-po-starcie" title="Permanent link">&para;</a></h2>
+<p>Klaster uruchomiony na K3s <code>v1.34.4+k3s1</code> miał wszystkie nody <code>Ready</code>, ale jedna
+ścieżka API server → kubelet zwracała błąd:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>worker1 API → worker2 kubelet: 502 Bad Gateway
+</span></code></pre></div>
+<p>Pozostałe osiem ścieżek działało. <code>EndpointSlice/default/kubernetes</code> zawierał trzy
+gotowe adresy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>192.168.55.10
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>192.168.55.11
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>192.168.55.12
+</span></code></pre></div>
+<p>Poprawny EndpointSlice ponownie nie wystarczył do potwierdzenia kompletnego zestawu
+sesji remotedialera. Błąd dotyczył lokalnego API servera na <code>worker1</code>, który nie
+miał działającej ścieżki do kubeleta <code>worker2</code>.</p>
+<p>Przed naprawą zachowano pełne logi bieżącego bootu w:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>~/k3s-remotedialer-debug-20260916T063254Z
+</span></code></pre></div>
+<h2 id="resynchronizacja-tunelu">Resynchronizacja tunelu<a class="headerlink" href="#resynchronizacja-tunelu" title="Permanent link">&para;</a></h2>
+<p>Uruchomiono potwierdzony wcześniej skrypt:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>~/k3s/remotedialer-resync.sh
+</span></code></pre></div>
+<p>Zmiana adnotacji EndpointSlice wywołała na <code>worker2</code> ponowną synchronizację listy
+API serverów. Logi pokazały:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Syncing apiserver addresses from tunnel watch:
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>[192.168.55.10:6443 192.168.55.11:6443 192.168.55.12:6443]
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>Settled apiserver addresses sync:
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>[192.168.55.10:6443 192.168.55.11:6443 192.168.55.12:6443]
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>Started tunnel to 192.168.55.11:6443
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>Connected to proxy wss://192.168.55.11:6443/v1-k3s/connect
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>Remotedialer connected to proxy
+</span></code></pre></div>
+<p>Po resynchronizacji:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>API server → kubelet matrix: 9/9 OK
+</span></code></pre></div>
+<p>Skrypt naprawił stan bez restartu K3s. Nadal był to workaround, a nie usunięcie
+przyczyny. Z tego powodu nie dodano automatycznego resyncu do playbooka Power On.
+Automatyczna naprawa ukrywałaby wystąpienia błędu i utrudniała ocenę kolejnych wersji.</p>
+<h2 id="kontrolowany-playbook-aktualizacji">Kontrolowany playbook aktualizacji<a class="headerlink" href="#kontrolowany-playbook-aktualizacji" title="Permanent link">&para;</a></h2>
+<p>Do repozytorium Ansible dodano:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>cluster/playbooks/maintenance/k3s-upgrade.yml
+</span></code></pre></div>
+<p>Playbook wymaga pełnej wersji przekazanej jawnie jako:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>k3s_target_version=v1.35.8+k3s1
+</span></code></pre></div>
+<p>Najważniejsze zabezpieczenia:</p>
 <ol>
-<li>sprawdzić macierz API server → kubelet przed użyciem skryptu naprawczego;</li>
-<li>w razie błędu zachować logi remotedialera z bieżącego bootu;</li>
-<li>potwierdzić <code>3/3 Ready</code> dla Promtaila i Alloy;</li>
-<li>sprawdzić pliki pozycji Alloy oraz odpowiadające im pliki źródłowe;</li>
-<li>potwierdzić wzrost liczników odczytu i zapisu;</li>
-<li>znaleźć świeże strumienie <code>{collector="alloy"}</code> ze wszystkich trzech nodów;</li>
-<li>sprawdzić brak retry, odrzuconych batchy i dropped entries;</li>
-<li>dopiero po zaliczeniu testu usunąć Promtail z GitOps;</li>
-<li>zaktualizować README i dokumentację obserwowalności dopiero po zakończeniu migracji.</li>
+<li>wymagane pełne inventory: jeden master i dwa workery;</li>
+<li>zakaz użycia <code>--limit</code>;</li>
+<li>sprawdzenie pliku binarnego, architektury, wersji i aktywnej usługi;</li>
+<li>sprawdzenie lokalnego API i etcd na każdym serwerze;</li>
+<li>zakaz downgrade'u i przeskoku o więcej niż jeden minor;</li>
+<li>jeden snapshot embedded etcd przed zmianami;</li>
+<li>pobranie oficjalnego pliku sum SHA-256;</li>
+<li>weryfikacja pobranego binarium;</li>
+<li>atomowa podmiana <code>/usr/local/bin/k3s</code> z zachowaniem backupu;</li>
+<li>aktualizacja <code>worker1</code> → <code>worker2</code> → <code>master</code>, <code>serial: 1</code>;</li>
+<li>oczekiwanie na usługę, lokalne API, etcd i <code>Node Ready</code> po każdym serwerze;</li>
+<li>końcowa walidacja wersji, dokładnego członkostwa nodów i macierzy <code>3×3</code>.</li>
+</ol>
+<h2 id="aktualizacja-k3s-do-v13410k3s1">Aktualizacja K3s do <code>v1.34.10+k3s1</code><a class="headerlink" href="#aktualizacja-k3s-do-v13410k3s1" title="Permanent link">&para;</a></h2>
+<p>Pierwsza aktualizacja została wykonana przez zadanie Semaphore
+<code>K3S | 40 Controlled Upgrade</code>.</p>
+<p>Kolejność:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>worker1 → worker2 → master
+</span></code></pre></div>
+<p>Na każdym nodzie playbook:</p>
+<ul>
+<li>pobrał listę sum i binarium;</li>
+<li>zweryfikował SHA-256;</li>
+<li>zachował kopię starego <code>/usr/local/bin/k3s</code>;</li>
+<li>atomowo podmienił binarium;</li>
+<li>zrestartował wyłącznie usługę K3s;</li>
+<li>poczekał na lokalne API, etcd i <code>Node Ready</code>.</li>
+</ul>
+<p>Przed zmianą powstał snapshot:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pre-k3s-upgrade-v1.34.10_k3s1-master-1789548727
+</span></code></pre></div>
+<p>Końcowa macierz była kompletna, wszystkie nody działały na:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>K3s:       v1.34.10+k3s1
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>containerd: 2.2.5-k3s2
+</span></code></pre></div>
+<p>Podczas aktualizacji nie zaobserwowano utraty dostępu do klastra. Przy trzech
+serwerach control-plane aktualizowanych pojedynczo pozostałe serwery nadal
+obsługiwały API i quorum etcd.</p>
+<h2 id="aktualizacja-do-ostatniego-patcha-134">Aktualizacja do ostatniego patcha <code>1.34</code><a class="headerlink" href="#aktualizacja-do-ostatniego-patcha-134" title="Permanent link">&para;</a></h2>
+<p>Po sprawdzeniu klastra wykonano kolejny kontrolowany upgrade:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>v1.34.10+k3s1 → v1.34.11+k3s1
+</span></code></pre></div>
+<p>Stan po aktualizacji:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>K3s:        v1.34.11+k3s1
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>containerd: 2.2.7-k3s1
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Nodes:      3/3 Ready
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>matrix:     9/9 OK
+</span></code></pre></div>
+<h2 id="zimny-start-na-v13411k3s1">Zimny start na <code>v1.34.11+k3s1</code><a class="headerlink" href="#zimny-start-na-v13411k3s1" title="Permanent link">&para;</a></h2>
+<p>Klaster został całkowicie wyłączony i uruchomiony playbookiem <code>K3S | 10 Power On</code>.
+Playbook potwierdził:</p>
+<table>
+<thead>
+<tr>
+<th>Kontrola</th>
+<th>master</th>
+<th>worker1</th>
+<th>worker2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSH</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>Ansible</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>sudo</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>usługa K3s</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>lokalne API i etcd</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>Kubernetes Node Ready</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+</tbody>
+</table>
+<p>Macierz API server → kubelet:</p>
+<table>
+<thead>
+<tr>
+<th>API server / kubelet</th>
+<th>master</th>
+<th>worker1</th>
+<th>worker2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>master</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>worker1</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>worker2</td>
+<td>OK</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+</tbody>
+</table>
+<p>Resynchronizacja EndpointSlice nie była potrzebna.</p>
+<p>Wszystkie kontrole zakończyły się powodzeniem.</p>
+<h2 id="aktualizacja-k3s-do-v1358k3s1">Aktualizacja K3s do <code>v1.35.8+k3s1</code><a class="headerlink" href="#aktualizacja-k3s-do-v1358k3s1" title="Permanent link">&para;</a></h2>
+<p>Po zaliczeniu testu gałęzi <code>1.34</code> wykonano upgrade o jeden minor:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>v1.34.11+k3s1 → v1.35.8+k3s1
+</span></code></pre></div>
+<p>Ponownie utworzono snapshot, zweryfikowano binaria i zastosowano kolejność:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>worker1 → worker2 → master
+</span></code></pre></div>
+<p>Końcowy stan wszystkich nodów:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>K3s:        v1.35.8+k3s1
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>containerd: 2.2.7-k3s1
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Nodes:      3/3 Ready
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>matrix:     9/9 OK
+</span></code></pre></div>
+<p>Nie było Podów w stanie innym niż <code>Running</code> lub <code>Succeeded</code>. Wszystkie
+Kustomization i HelmRelease zarządzane przez Flux miały <code>Ready=True</code>.</p>
+<h2 id="zimny-start-na-v1358k3s1">Zimny start na <code>v1.35.8+k3s1</code><a class="headerlink" href="#zimny-start-na-v1358k3s1" title="Permanent link">&para;</a></h2>
+<p>Po aktualizacji minor wykonano drugi pełny zimny start. Power On ponownie potwierdził:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>SSH:                         3/3 OK
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Ansible:                     3/3 OK
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>sudo:                        3/3 OK
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>K3s service:                 3/3 OK
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>local API and etcd:          3/3 OK
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>Kubernetes Node Ready:       3/3 OK
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>API server → kubelet matrix: 9/9 OK
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>exact Node membership:       OK
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>WOL interface lifecycle:     OK
+</span></code></pre></div>
+<p>Skrypt <code>remotedialer-resync.sh</code> nie został użyty. Dwa zimne starty po aktualizacjach
+zakończyły się pełną macierzą, podczas gdy pierwszy start na <code>v1.34.4+k3s1</code> miał
+jedną niedziałającą ścieżkę.</p>
+<p>To jest mocny wynik testu regresji, ale nie dowodzi jeszcze definitywnie, że
+sporadyczny błąd remotedialera został usunięty. Należy nadal sprawdzać macierz przy
+kolejnych uruchomieniach i zachować konfigurację debug do czasu zebrania większej
+liczby poprawnych startów.</p>
+<h2 id="stan-cilium-przed-aktualizacja">Stan Cilium przed aktualizacją<a class="headerlink" href="#stan-cilium-przed-aktualizacja" title="Permanent link">&para;</a></h2>
+<p>Po aktualizacji K3s klaster działał na Cilium <code>1.19.7</code>. Konfiguracja obejmowała:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>IPAM:                    kubernetes
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>requireIPv4PodCIDR:      true
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>kube-apiserver:          192.168.55.10:6443
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>operator replicas:       1
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>Hubble:                  enabled
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>Hubble listen address:   :4244
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>Hubble TLS:              enabled
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>Hubble Relay:            enabled
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>Hubble UI ingress:       Traefik
+</span></code></pre></div>
+<p>W klastrze była jedna CiliumNetworkPolicy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>flux-system/sealed-secrets-allow-api-server-proxy
+</span></code></pre></div>
+<p>Pozwala ona encji <code>remote-node</code> łączyć się wyłącznie z Podem kontrolera Sealed
+Secrets na TCP/8080. Nie było CCNP, <code>CiliumNodeConfig</code> ani używanych zasobów
+<code>TLSRoute</code>.</p>
+<h2 id="aktualizacja-cilium-1197-1198">Aktualizacja Cilium <code>1.19.7</code> → <code>1.19.8</code><a class="headerlink" href="#aktualizacja-cilium-1197-1198" title="Permanent link">&para;</a></h2>
+<p>Najpierw zainstalowano ostatni patch obecnej gałęzi. Flux wdrożył chart <code>1.19.8</code>.</p>
+<p>Walidacja:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>DaemonSet/cilium:        3/3 available
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>cilium-dbg status:       OK na wszystkich nodach
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>cilium-operator:         rollout complete
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>hubble-relay:            rollout complete
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>HelmRelease/cilium:      Ready=True
+</span></code></pre></div>
+<p>Oddzielenie patch upgrade'u od zmiany minor ograniczyło liczbę zmiennych podczas
+diagnostyki.</p>
+<h2 id="preflight-przed-cilium-1202">Preflight przed Cilium <code>1.20.2</code><a class="headerlink" href="#preflight-przed-cilium-1202" title="Permanent link">&para;</a></h2>
+<p>Uruchomiono oficjalny preflight z chartu docelowej wersji:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>helm<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span>cilium-preflight<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span>cilium/cilium<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">  </span>--version<span class="w"> </span><span class="m">1</span>.20.2<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">  </span>--set<span class="w"> </span>preflight.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">  </span>--set<span class="w"> </span><span class="nv">agent</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">  </span>--set<span class="w"> </span>operator.enabled<span class="o">=</span><span class="nb">false</span>
+</span></code></pre></div>
+<p>DaemonSet preflight uruchomił po jednym Podzie na każdym nodzie:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>3 Pody, każdy 2/2 Running, 0 restartów
+</span></code></pre></div>
+<p>Walidator polityk zwrócił:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Validation OK! type=CiliumNetworkPolicy
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>name=flux-system/sealed-secrets-allow-api-server-proxy
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>All CCNPs and CNPs valid!
+</span></code></pre></div>
+<p>Preflight potwierdził, że istniejąca polityka jest akceptowana przez Cilium <code>1.20.2</code>.</p>
+<h2 id="aktualizacja-cilium-1198-1202">Aktualizacja Cilium <code>1.19.8</code> → <code>1.20.2</code><a class="headerlink" href="#aktualizacja-cilium-1198-1202" title="Permanent link">&para;</a></h2>
+<p>W HelmRelease ustawiono docelowy chart <code>1.20.2</code> oraz zgodność aktualizacji z linią
+źródłową:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nt">upgradeCompatibility</span><span class="p">:</span><span class="w"> </span><span class="s">"1.19"</span>
+</span></code></pre></div>
+<p>Flux wykonał upgrade release'u do rewizji <code>v43</code>. Rollout zakończyły:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>DaemonSet/cilium
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>Deployment/cilium-operator
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>Deployment/hubble-relay
+</span></code></pre></div>
+<p>Docelowy obraz agenta:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>quay.io/cilium/cilium:v1.20.2@sha256:2939231d0d3e3ebddcd80fffa168b7ddcc78fdf0dc864d1c8c126ff523c54f01
+</span></code></pre></div>
+<p>Każdy z trzech Podów Cilium miał <code>1/1 Running</code>, zero restartów i był uruchomiony na
+innym nodzie. <code>cilium-dbg status --brief</code> zwrócił <code>OK</code> dla wszystkich agentów.</p>
+<h2 id="walidacja-sieci-po-aktualizacji">Walidacja sieci po aktualizacji<a class="headerlink" href="#walidacja-sieci-po-aktualizacji" title="Permanent link">&para;</a></h2>
+<p>Istniejąca CiliumNetworkPolicy nadal miała:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Valid=True
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>Policy validation succeeded
+</span></code></pre></div>
+<p>Pobranie certyfikatu Sealed Secrets przez proxy API servera zakończyło się
+powodzeniem:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sha256 Fingerprint=
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>F3:30:60:71:95:36:2A:F8:C2:15:51:29:81:5D:46:B5:A6:B0:D8:FC:DE:D4:46:E3:B3:A6:16:0F:3C:6F:03:43
+</span></code></pre></div>
+<p>Potwierdza to działanie ścieżki, dla której wcześniej potrzebna była polityka
+<code>fromEntities: remote-node</code>.</p>
+<p>Test DNS z tymczasowego Poda zwrócił:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Server:  10.43.0.10
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>Name:    kubernetes.default.svc.cluster.local
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Address: 10.43.0.1
+</span></code></pre></div>
+<p>Pod testowy został usunięty automatycznie przez <code>kubectl run --rm</code>.</p>
+<p>Końcowe kontrole:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Pody poza Running/Succeeded: brak
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>Kustomization Flux Ready:    wszystkie
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>HelmRelease Flux Ready:      wszystkie
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>Cilium agents:               3/3 OK
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>Cilium policy:               Valid=True
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>DNS:                         OK
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>Sealed Secrets API proxy:    OK
+</span></code></pre></div>
+<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Komponent</th>
+<th>Wersja / stan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K3s</td>
+<td><code>v1.35.8+k3s1</code>, 3/3 Ready</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td><code>2.2.7-k3s1</code></td>
+</tr>
+<tr>
+<td>Cilium</td>
+<td><code>1.20.2</code>, 3/3 agentów OK</td>
+</tr>
+<tr>
+<td>Hubble Relay</td>
+<td>rollout complete</td>
+</tr>
+<tr>
+<td>Alloy</td>
+<td>chart <code>1.12.1</code>, aplikacja <code>v1.19.2</code>, 3/3 Ready</td>
+</tr>
+<tr>
+<td>Promtail</td>
+<td>usunięty</td>
+</tr>
+<tr>
+<td>Loki</td>
+<td>chart <code>6.53.0</code></td>
+</tr>
+<tr>
+<td>Sealed Secrets</td>
+<td>chart <code>2.20.0</code>, proxy test OK</td>
+</tr>
+<tr>
+<td>metrics-server</td>
+<td>chart <code>3.13.1</code></td>
+</tr>
+<tr>
+<td>kube-prometheus-stack</td>
+<td>chart <code>82.10.1</code></td>
+</tr>
+<tr>
+<td>Flux Kustomizations</td>
+<td>wszystkie Ready</td>
+</tr>
+<tr>
+<td>Flux HelmReleases</td>
+<td>wszystkie Ready</td>
+</tr>
+<tr>
+<td>API server → kubelet</td>
+<td><code>9/9 OK</code> po dwóch zimnych startach</td>
+</tr>
+</tbody>
+</table>
+<p>W jednej sesji zakończono migrację kolektora logów, wprowadzono kontrolowany proces
+aktualizacji K3s, podniesiono Kubernetes o jedną gałąź minor i zaktualizowano Cilium
+o jedną gałąź minor. Każdy większy etap miał osobny punkt kontrolny i test regresji.</p>
+<h2 id="najwazniejsze-wnioski">Najważniejsze wnioski<a class="headerlink" href="#najwazniejsze-wnioski" title="Permanent link">&para;</a></h2>
+<ol>
+<li><code>Node Ready</code> nie zastępuje testu pełnej macierzy API server → kubelet.</li>
+<li>Resync EndpointSlice jest skutecznym workaroundem, ale nie powinien automatycznie
+   ukrywać błędu przy każdym starcie.</li>
+<li>Upgrade K3s musi jawnie porównywać wersje.</li>
+<li>Aktualizacja serwerów pojedynczo zachowała dostępność API i quorum etcd.</li>
+<li>No-op jest ważnym testem playbooka utrzymaniowego: nie może tworzyć snapshotu ani
+   restartować usług, ale powinien nadal wykonać walidację końcową.</li>
+<li>Przed zmianą minor Cilium warto najpierw wejść na ostatni patch bieżącej gałęzi i
+   uruchomić preflight z chartu docelowego.</li>
+<li><code>Ready</code> Poda nie dowodzi działania całego pipeline'u logów. Cutover Alloy został
+   zatwierdzony dopiero po zapytaniu do Loki i porównaniu kompletnych strumieni.</li>
+<li>Historyczne strumienie Promtaila pozostają widoczne do końca retencji mimo
+   usunięcia samego kolektora.</li>
+</ol>
+<h2 id="nastepna-sesja">Następna sesja<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Powtórzyć zimny start i sprawdzić macierz <code>3×3</code> bez automatycznego resyncu.</li>
+<li>Zachować logi przed naprawą, jeżeli błąd remotedialera wróci.</li>
+<li>Sprawdzić Hubble Relay, Hubble UI oraz napływ nowych flows po Cilium <code>1.20.2</code>.</li>
+<li>Potwierdzić świeże logi <code>collector="alloy"</code> ze wszystkich trzech nodów.</li>
+<li>Zaktualizować README repozytorium Flux i dokumentację Kubernetes do stanu
+   docelowego: Alloy bez Promtaila, K3s <code>v1.35.8+k3s1</code>, Cilium <code>1.20.2</code>.</li>
+<li>Po kilku kolejnych poprawnych startach zdecydować, czy usunąć tymczasową
+   konfigurację debug remotedialera.</li>
 </ol>
 
 
@@ -4246,7 +4633,7 @@ w journalu i nie jest wprowadzany do dokumentacji bieżącego stanu klastra.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 15, 2026 12:34:12 UTC"><span class="timeago" datetime="2026-09-15T12:34:12+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 15, 2026 12:34:12 UTC">2026-09-15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 16, 2026 12:40:26 UTC"><span class="timeago" datetime="2026-09-16T12:40:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 16, 2026 12:40:26 UTC">2026-09-16</span>
   </span>
 
     
@@ -4256,7 +4643,7 @@ w journalu i nie jest wprowadzany do dokumentacji bieżącego stanu klastra.</p>
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 15, 2026 12:34:12 UTC"><span class="timeago" datetime="2026-09-15T12:34:12+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 15, 2026 12:34:12 UTC">2026-09-15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 16, 2026 12:40:26 UTC"><span class="timeago" datetime="2026-09-16T12:40:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 16, 2026 12:40:26 UTC">2026-09-16</span>
   </span>
 
     
