@@ -14,8 +14,21 @@
 | metrics-server | Kubernetes resource Metrics API for `kubectl top` and HPA |
 | Hubble | Cilium network-flow visibility |
 
-`kube-prometheus-stack` is currently deployed as chart version `82.10.1` through Flux.
-The stack includes Grafana `12.4.0` and `kiwigrid/k8s-sidecar:2.5.0`.
+As recorded in [Day 33](../journal/day%2033.md), `kube-prometheus-stack` is deployed
+through Flux as chart `91.8.1` (state as of **2026-09-29**).
+
+| Component | Version |
+|---|---|
+| Prometheus Operator | `v0.94.1` |
+| Prometheus | `v3.15.0-distroless` |
+| Alertmanager | `v0.34.1` |
+| Grafana | `13.2.2-distroless` |
+| Grafana sidecar | `2.11.2` |
+| kube-state-metrics | `v2.20.0` |
+| node-exporter | `v1.12.1-distroless` |
+
+The post-upgrade checks passed; a full monitoring regression check after the next
+cold start remains pending.
 
 ## Resource Metrics API
 
@@ -52,9 +65,12 @@ managed by the
 [K3s UFW playbook](https://github.com/kCn3333/homelab-ansible/blob/main/cluster/playbooks/power/k3s-ufw.yml)
 and is intentionally not open to the entire LAN or the Internet.
 
-Some kube-prometheus-stack integrations for embedded K3s control-plane components are
-disabled because their expected upstream endpoints are not exposed in the standard
-form.
+Prometheus runs one replica with `7d` retention and a `10Gi` Longhorn PVC.
+Alertmanager also runs one replica. The Prometheus volume was preserved throughout
+the chart upgrades and reported `attached` and `healthy`.
+
+Monitoring of kube-controller-manager, kube-scheduler and etcd is disabled because
+their expected upstream endpoints are not exposed in the standard form.
 
 `kubeProxy.enabled: false` in chart values disables kube-proxy monitoring objects. It
 does not disable the kube-proxy process; kube-proxy still handles parts of the Service
@@ -66,6 +82,36 @@ kubectl get pods -n monitoring -o wide
 kubectl top nodes
 kubectl top pods -A
 ```
+
+## ServiceMonitor authentication
+
+The chart `90.x` migration replaced file-based token and CA references in
+ServiceMonitors. The HelmRelease now declares:
+
+```yaml
+prometheus:
+  serviceAccount:
+    create: true
+    createTokenSecret: true
+kubelet:
+  serviceMonitor:
+    tlsConfig:
+      insecureSkipVerify: true
+```
+
+The previous `kubelet.serviceMonitor.insecureSkipVerify` value is no longer used.
+The kubelet ServiceMonitor references the `token` key in
+`kube-prometheus-stack-prometheus-token` through `authorization.credentials` and
+the `ca.crt` key in ConfigMap `kube-root-ca.crt` through `tlsConfig.ca`.
+Kubelet certificate verification remains skipped in this configuration.
+
+Kubernetes populates the long-lived ServiceAccount token Secret. Git contains only
+the creation settings, never the token value; the credential is stored in the
+cluster Secret and etcd.
+
+The post-upgrade checks confirmed API server `3/3`, kubelet `9/9` and CoreDNS `1/1`
+targets up, with empty `lastError` and no `401` or `403` responses. Each node has
+three kubelet scrape paths: `/metrics`, `/metrics/cadvisor` and `/metrics/probes`.
 
 ## Grafana
 
@@ -108,6 +154,91 @@ provisioning before its API begins listening on port `3000`.
 kubectl logs -n monitoring deployment/kube-prometheus-stack-grafana --since=30m
 kubectl get ingress,service,endpointslices -n monitoring
 ```
+
+### Resources and startup
+
+The current HelmRelease settings are:
+
+```yaml
+grafana:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1280Mi
+  env:
+    GOMEMLIMIT: 900MiB
+  grafana.ini:
+    plugins:
+      preinstall_disabled: true
+```
+
+The previous `200m` CPU and `512Mi` memory limits coincided with heavy throttling
+and readiness timeouts. Loss of the only ready Grafana endpoint caused Traefik to
+return `no available server`. After resource tuning, the recorded checks showed a
+stable EndpointSlice, working dashboards and no restarts or OOMKill.
+`GOMEMLIMIT` provides a Go runtime memory target below the container memory limit;
+it is not a hard cap on total process memory.
+
+Grafana retains `readOnlyRootFilesystem: true` and a writable `/tmp` `emptyDir`.
+The background plugin installer is disabled because it attempted to write bundled
+plugins to the read-only image filesystem. The rendered configuration also has
+`preinstall_auto_update = false`.
+
+Brief `SQLITE_BUSY` retries during startup require correlation with `/api/health`,
+HTTP errors, readiness and subsequent logs. The final checks reported
+`database=ok` and no new errors; persistent locks or readiness failures need
+investigation.
+
+## node-exporter resources
+
+The DaemonSet runs on all three nodes with the following settings:
+
+```yaml
+prometheus-node-exporter:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      memory: 64Mi
+```
+
+There is no CPU limit. Limits of `100m` and then `250m` caused high CFS throttling
+during short scrape bursts despite low average CPU usage. After removing the CPU
+limit and completing the rollout, no `CPUThrottlingHigh` alerts remained pending
+or firing. The scheduler CPU request remains `10m`.
+
+## Stack upgrades and validation
+
+Chart upgrades are committed to Git and reconciled by Flux. The Day 33 upgrade
+progressed through each major chart version from `82.10.1` to `91.8.1`, checking
+upgrade notes and rendering the HelmRelease values before each step.
+
+`crds.upgradeJob.enabled: true` enables the chart's CRD upgrade hook. Verify its
+completion and require all `monitoring.coreos.com` CRDs to report
+`Established=True`. The recorded `v1alpha1` stored versions for AlertmanagerConfig,
+PrometheusAgent and ScrapeConfig did not require manual storage-version edits.
+
+Chart `91.x` introduced explicit operator RBAC verbs in place of a wildcard.
+Check operator logs for authorization failures and confirm Prometheus and
+Alertmanager report reconciled and available, in addition to successful rollouts
+and a Flux HelmRelease with `Ready=True`.
+
+After upgrades and the next cold start, verify:
+
+- all Prometheus targets are `up`, with empty `lastError`;
+- all rules have `health=ok` and no evaluation errors;
+- Grafana `/api/health` reports `database=ok`, its endpoint stays ready, and
+  dashboards load without persistent timeouts or HTTP `500` responses;
+- Prometheus storage is attached and healthy in Longhorn;
+- operator logs contain no RBAC errors.
+
+During rolling updates, old and new exporter targets can briefly overlap. Check
+completed rollouts and ready EndpointSlices before treating transient duplicate
+targets as a permanent replica change.
 
 ## Loki
 

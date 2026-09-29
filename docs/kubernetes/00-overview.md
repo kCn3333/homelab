@@ -46,7 +46,7 @@ HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates applicati
 
 ## Current platform
 
-State as of **2026-09-25**.
+State as of **2026-09-29**, incorporating the [Day 33 monitoring update](../journal/day%2033.md).
 
 | Area | Component | Current role |
 |---|---|---|
@@ -63,7 +63,7 @@ State as of **2026-09-25**.
 | GitOps | Flux `v2.9.5` | Reconciliation and image automation |
 | Secrets | Sealed Secrets `v0.40.0` | Encrypted secrets stored in Git |
 | Resource metrics | metrics-server `v0.9.0` | Metrics API for `kubectl top` and HPA |
-| Monitoring | kube-prometheus-stack | Prometheus, Grafana and Alertmanager |
+| Monitoring | kube-prometheus-stack `91.8.1` | Prometheus, Grafana and Alertmanager |
 | Logging | Loki `3.7.6`, Alloy `1.19.2` | Central log collection |
 | Databases | CloudNativePG `1.30.0`, PostgreSQL `17.4` | Two instances per production and staging database |
 | Object storage | Garage `v2.2.0` on Logos | S3 storage for Loki and Longhorn backups |
