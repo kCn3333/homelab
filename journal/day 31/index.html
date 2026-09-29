@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2015/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2031/">
       
       
-        <link rel="prev" href="../day%2014/">
+        <link rel="prev" href="../day%2030/">
       
       
-        <link rel="next" href="../day%2016/">
+        <link rel="next" href="../day%2032/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>15 - Helm Chart - > Homelab Documentation</title>
+        <title>31 - przejęcie cert-managera przez Flux i aktualizacja Flux - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#15-helm-chart" class="md-skip">
+        <a href="#31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              15 - Helm Chart
+              31 - przejęcie cert-managera przez Flux i aktualizacja Flux
             
           </span>
         </div>
@@ -2011,19 +2011,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../day%2015/" class="md-nav__link">
         
   
   
@@ -2039,7 +2030,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -2469,10 +2459,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../day%2031/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31 - przejęcie cert-managera przez Flux i aktualizacja Flux
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2488,6 +2505,285 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-zimny-start-i-stan-wejsciowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Zimny start i stan wejściowy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-inwentaryzacja-cert-managera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inwentaryzacja cert-managera
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dodanie-cert-managera-do-gitops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Dodanie cert-managera do GitOps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-przejecie-istniejacego-release-bez-zmiany-wersji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Przejęcie istniejącego release bez zmiany wersji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-aktualizacja-cert-managera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Aktualizacja cert-managera
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-weryfikacja-certyfikatow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Weryfikacja certyfikatów
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-zachowanie-cert-managera-po-zimnym-starcie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Zachowanie cert-managera po zimnym starcie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-stan-flux-przed-aktualizacja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Stan Flux przed aktualizacją
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-migracja-api-image-toolkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Migracja API Image Toolkit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-migracja-zywych-zasobow-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Migracja żywych zasobów Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-punkt-odzyskiwania-przed-aktualizacja-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Punkt odzyskiwania przed aktualizacją Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-generowanie-manifestu-flux-v295" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Generowanie manifestu Flux v2.9.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-konflikty-podczas-recznego-dry-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Konflikty podczas ręcznego dry-run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-aktualizacja-flux-v281-v295" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Aktualizacja Flux v2.8.1 → v2.9.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-walidacja-koncowa-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Walidacja końcowa Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-stan-koncowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Stan końcowy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Stan końcowy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-i-bazy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage i bazy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cert-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cert-manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flux
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Następna sesja
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3757,6 +4053,273 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-zimny-start-i-stan-wejsciowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Zimny start i stan wejściowy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-inwentaryzacja-cert-managera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inwentaryzacja cert-managera
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dodanie-cert-managera-do-gitops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Dodanie cert-managera do GitOps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-przejecie-istniejacego-release-bez-zmiany-wersji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Przejęcie istniejącego release bez zmiany wersji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-aktualizacja-cert-managera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Aktualizacja cert-managera
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-weryfikacja-certyfikatow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Weryfikacja certyfikatów
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-zachowanie-cert-managera-po-zimnym-starcie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Zachowanie cert-managera po zimnym starcie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-stan-flux-przed-aktualizacja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Stan Flux przed aktualizacją
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-migracja-api-image-toolkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Migracja API Image Toolkit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-migracja-zywych-zasobow-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Migracja żywych zasobów Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-punkt-odzyskiwania-przed-aktualizacja-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Punkt odzyskiwania przed aktualizacją Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-generowanie-manifestu-flux-v295" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Generowanie manifestu Flux v2.9.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-konflikty-podczas-recznego-dry-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Konflikty podczas ręcznego dry-run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-aktualizacja-flux-v281-v295" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Aktualizacja Flux v2.8.1 → v2.9.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-walidacja-koncowa-flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Walidacja końcowa Flux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-stan-koncowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Stan końcowy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. Stan końcowy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-i-bazy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage i bazy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cert-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cert-manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flux
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Następna sesja
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3776,365 +4339,534 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 15.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 31.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="15-helm-chart">15 - Helm Chart<a class="headerlink" href="#15-helm-chart" title="Permanent link">&para;</a></h1>
-<h1 id="k3s-homelab-sesja-15-helm-chart-dla-clients-api">K3s Homelab — Sesja 15 (Helm Chart dla clients-api)<a class="headerlink" href="#k3s-homelab-sesja-15-helm-chart-dla-clients-api" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-02-28<br />
-<strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0</p>
+<h1 id="31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux">31 - przejęcie cert-managera przez Flux i aktualizacja Flux<a class="headerlink" href="#31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 2026-09-23\
+<strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.5 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Metrics Server <code>v0.9.0</code>, cert-manager <code>v1.21.2</code>, Flux <code>v2.9.5</code></p>
+<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Potwierdzić poprawny zimny start po aktualizacji Longhorna i Metrics Server.</li>
+<li>Zinwentaryzować instalację cert-managera <code>v1.19.4</code>.</li>
+<li>Przejąć istniejący release cert-managera pod zarządzanie Flux bez odtwarzania zasobów.</li>
+<li>Zaktualizować cert-manager etapami <code>v1.19.4 → v1.20.4 → v1.21.2</code>.</li>
+<li>Potwierdzić działanie issuerów, certyfikatów, webhooka i DNS po zimnym starcie.</li>
+<li>Przenieść zasoby Image Toolkit z <code>v1beta2</code> do stabilnego API <code>v1</code>.</li>
+<li>Zaktualizować dystrybucję Flux z <code>v2.8.1</code> do <code>v2.9.5</code>.</li>
+</ol>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
-<p>Własny Helm chart dla aplikacji clients-api w repozytorium aplikacji (opcja mono-repo), podłączony do klastra przez Flux GitOps.</p>
-<hr />
-<h3 id="1-struktura-helm-chart">1. Struktura Helm chart<a class="headerlink" href="#1-struktura-helm-chart" title="Permanent link">&para;</a></h3>
-<p>Helm chart to paczka szablonów YAML + konfiguracja. </p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Generowanie szkieletu:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>helm<span class="w"> </span>create<span class="w"> </span>helm/clients-api
-</span></code></pre></div>
-<p>Struktura plików:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>helm/clients-api/
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── Chart.yaml          ← metadane charta (nazwa, wersja, appVersion)
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── values.yaml         ← domyślne wartości konfiguracyjne
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── .helmignore         ← co ignorować przy pakowaniu
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>└── templates/
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    ├── _helpers.tpl    ← reużywalne fragmenty (jak funkcje)
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    ├── NOTES.txt       ← tekst wyświetlany po instalacji
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    ├── deployment.yaml
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    ├── service.yaml
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    ├── ingress.yaml
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    ├── hpa.yaml
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    ├── pdb.yaml            ← dodane ręcznie
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    ├── servicemonitor.yaml ← dodane ręcznie
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    └── networkpolicy.yaml  ← dodane ręcznie
-</span></code></pre></div>
-<h3 id="2-chartyaml-metadane">2. Chart.yaml — metadane<a class="headerlink" href="#2-chartyaml-metadane" title="Permanent link">&para;</a></h3>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v2</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Spring Boot REST API for client management</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">application</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1.0</span><span class="w">      </span><span class="c1"># ← wersja charta (templates + values)</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nt">appVersion</span><span class="p">:</span><span class="w"> </span><span class="s">"1.4.0"</span><span class="w"> </span><span class="c1"># ← wersja aplikacji (informacyjne)</span>
-</span></code></pre></div>
-<p><strong>Kluczowe rozróżnienie:</strong></p>
+<h2 id="1-zimny-start-i-stan-wejsciowy">1. Zimny start i stan wejściowy<a class="headerlink" href="#1-zimny-start-i-stan-wejsciowy" title="Permanent link">&para;</a></h2>
+<p>Playbook potwierdził:</p>
 <ul>
-<li><code>version</code> — zmienia się gdy modyfikujesz templates lub values</li>
-<li><code>appVersion</code> — zmienia się gdy wypuszczasz nową wersję aplikacji</li>
+<li>SSH, Ansible i <code>sudo</code> na wszystkich trzech nodach;</li>
+<li>aktywną usługę K3s na wszystkich nodach;</li>
+<li>lokalne API i embedded etcd <code>3/3</code>;</li>
+<li>dokładnie trzy oczekiwane obiekty Node;</li>
+<li>wszystkie nody <code>Ready</code>;</li>
+<li>macierz API server → kubelet <code>9/9</code>;</li>
+<li>prawidłowe włączenie i wyłączenie interfejsu WoL;</li>
+<li>brak konieczności wykonania resyncu remotedialera.</li>
 </ul>
-<p><strong>Konwencja wersjonowania charta:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>0.1.x  → bugfixy (zła nazwa secretu, port)
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>0.x.0  → nowe features (nowy zasób, nowy parametr w values)
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>x.0.0  → breaking changes (zmiana struktury values)
+<p>Po starcie klastra potwierdzono również:</p>
+<ul>
+<li>brak Podów poza fazami <code>Running</code> i <code>Succeeded</code>;</li>
+<li>wszystkie Kustomization Flux <code>Ready=True</code>;</li>
+<li>wszystkie HelmRelease <code>Ready=True</code>;</li>
+<li>sześć wolumenów Longhorna <code>attached</code> i <code>healthy</code>;</li>
+<li>wszystkie wolumeny na <code>longhorn-engine:v1.12.1</code>;</li>
+<li>brak uszkodzonych lub zatrzymanych replik Longhorna;</li>
+<li>oba klastry CloudNativePG <code>2/2 Ready</code>;</li>
+<li>Metrics API <code>Available=True</code>;</li>
+<li>działające <code>kubectl top nodes</code>.</li>
+</ul>
+<p>Aktualizacje Longhorna i Metrics Server z poprzedniej sesji przeszły test zimnego startu.</p>
+<hr />
+<h2 id="2-inwentaryzacja-cert-managera">2. Inwentaryzacja cert-managera<a class="headerlink" href="#2-inwentaryzacja-cert-managera" title="Permanent link">&para;</a></h2>
+<p>W klastrze działały trzy Deploymenty:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cert-manager              v1.19.4
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cert-manager-cainjector   v1.19.4
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cert-manager-webhook      v1.19.4
 </span></code></pre></div>
-<h3 id="3-valuesyaml-serce-charta">3. values.yaml — serce charta<a class="headerlink" href="#3-valuesyaml-serce-charta" title="Permanent link">&para;</a></h3>
-<p>Wszystko co może się różnić między środowiskami trafia do <code>values.yaml</code>. </p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Liczba replik — nadpisywana przez HPA</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">replicaCount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nt">image</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kcn333/clients-api</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w">  </span><span class="c1"># pusty = użyj appVersion z Chart.yaml</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Spring Boot profile</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nt">springProfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># Konfiguracja bazy danych</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nt">database</span><span class="p">:</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-db-rw</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients_db</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span><span class="nt">credentialsSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-db-secret</span><span class="w">  </span><span class="c1"># nazwa Kubernetes Secret</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="nt">service</span><span class="p">:</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">  </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span><span class="w">  </span><span class="c1"># named port — wymagany przez ServiceMonitor</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="nt">ingress</span><span class="p">:</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api.cluster.kcn333.com</span>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">  </span><span class="nt">tlsSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local-prod-kcn333-tls</span>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
-</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="nt">resources</span><span class="p">:</span>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="w">  </span><span class="nt">requests</span><span class="p">:</span>
-</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
-</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256Mi</span>
-</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
-</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000m</span>
-</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512Mi</span>
-</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>
-</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="nt">livenessProbe</span><span class="p">:</span>
-</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
-</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/actuator/health/liveness</span>
-</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
-</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>
-</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="nt">readinessProbe</span><span class="p">:</span>
-</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
-</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/actuator/health/readiness</span>
-</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>
-</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a><span class="nt">autoscaling</span><span class="p">:</span>
-</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a><span class="w">  </span><span class="nt">minReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a><span class="w">  </span><span class="nt">maxReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
-</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a><span class="w">  </span><span class="nt">targetCPUUtilizationPercentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">70</span>
-</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>
-</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a><span class="nt">pdb</span><span class="p">:</span>
-</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a><span class="w">  </span><span class="nt">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-</span><span id="__span-4-64"><a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a>
-</span><span id="__span-4-65"><a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a><span class="nt">networkPolicy</span><span class="p">:</span>
-</span><span id="__span-4-66"><a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-67"><a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a>
-</span><span id="__span-4-68"><a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a><span class="nt">serviceMonitor</span><span class="p">:</span>
-</span><span id="__span-4-69"><a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-70"><a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+<p>Zasoby miały etykiety i adnotacje Helm:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>app.kubernetes.io/managed-by=Helm
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>meta.helm.sh/release-name=cert-manager
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>meta.helm.sh/release-namespace=cert-manager
 </span></code></pre></div>
-<h3 id="4-go-templates-skadnia">4. Go templates — składnia<a class="headerlink" href="#4-go-templates-skadnia" title="Permanent link">&para;</a></h3>
-<p>Helm używa Go templates do generowania YAML:</p>
+<p>W repozytorium GitOps nie istniały jednak manifesty <code>HelmRepository</code> ani <code>HelmRelease</code> dla cert-managera. Operator był zainstalowany przez Helm, ale nie był deklaratywnie zarządzany przez Flux.</p>
+<p>Stan funkcjonalny przed migracją:</p>
+<ul>
+<li>CRD cert-managera istniały;</li>
+<li>oba <code>ClusterIssuer</code> miały <code>Ready=True</code>;</li>
+<li>pięć certyfikatów miało <code>Ready=True</code>;</li>
+<li>release Helm nazywał się <code>cert-manager</code>;</li>
+<li>release i workloady działały w namespace <code>cert-manager</code>.</li>
+</ul>
+<p>Przejęcie musiało zachować istniejące nazwy release i namespace, aby Flux wykonał aktualizację istniejącej instalacji zamiast tworzyć drugi zestaw zasobów.</p>
+<hr />
+<h2 id="3-dodanie-cert-managera-do-gitops">3. Dodanie cert-managera do GitOps<a class="headerlink" href="#3-dodanie-cert-managera-do-gitops" title="Permanent link">&para;</a></h2>
+<p>Dodano katalog:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>infrastructure/operators/cert-manager/
+</span></code></pre></div>
+<p>Zawiera on:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>namespace.yaml
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>helmrepository.yaml
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>helmrelease.yaml
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>kustomization.yaml
+</span></code></pre></div>
+<p>Główna Kustomization operatorów została rozszerzona o:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">resources</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
+</span></code></pre></div>
+<p>HelmRelease zachował:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">releaseName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">targetNamespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
+</span></code></pre></div>
+<p>CRD są zarządzane przez chart:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">values</span><span class="p">:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">crds</span><span class="p">:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>Repozytorium zawiera tylko konfigurację i zasoby SealedSecret. Nie dodano żadnych jawnych tokenów, haseł ani innych sekretów. Backup istniejących danych konfiguracyjnych pozostał poza publicznym repozytorium.</p>
+<p>Walidacja lokalna:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>kustomize<span class="w"> </span>infrastructure/operators/cert-manager
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>kustomize<span class="w"> </span>infrastructure/operators<span class="w"> </span>&gt;/dev/null
+</span></code></pre></div>
+<p>Oba polecenia zakończyły się poprawnie.</p>
+<hr />
+<h2 id="4-przejecie-istniejacego-release-bez-zmiany-wersji">4. Przejęcie istniejącego release bez zmiany wersji<a class="headerlink" href="#4-przejecie-istniejacego-release-bez-zmiany-wersji" title="Permanent link">&para;</a></h2>
+<p>Najpierw Flux wdrożył cert-manager w tej samej wersji <code>v1.19.4</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>HelmRelease: cert-manager/cert-manager
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>chart:       cert-manager v1.19.4
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Ready:       True
+</span></code></pre></div>
+<p>Historia Helm po przejęciu:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>revision 1: install v1.19.4
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>revision 2: upgrade v1.19.4
+</span></code></pre></div>
+<p>Oznacza to, że Flux zaktualizował istniejący release. Nie utworzył osobnej instalacji i nie zmienił nazw zasobów.</p>
+<p>Po przejęciu:</p>
+<ul>
+<li>wszystkie trzy Deploymenty były dostępne;</li>
+<li>obrazy nadal miały wersję <code>v1.19.4</code>;</li>
+<li>oba <code>ClusterIssuer</code> pozostały <code>Ready=True</code>;</li>
+<li>wszystkie certyfikaty pozostały <code>Ready=True</code>;</li>
+<li>nie wystąpiła ponowna emisja ani utrata certyfikatów.</li>
+</ul>
+<hr />
+<h2 id="5-aktualizacja-cert-managera">5. Aktualizacja cert-managera<a class="headerlink" href="#5-aktualizacja-cert-managera" title="Permanent link">&para;</a></h2>
+<p>Aktualizację wykonano dwoma osobnymi etapami:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>v1.19.4 → v1.20.4
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>v1.20.4 → v1.21.2
+</span></code></pre></div>
+<p>Po każdym etapie Flux zakończył Helm upgrade ze stanem <code>Ready=True</code>.</p>
+<p>Stan końcowy:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Składnia</th>
-<th style="text-align: left;">Znaczenie</th>
+<th>Deployment</th>
+<th style="text-align: right;">Ready</th>
+<th style="text-align: right;">Available</th>
+<th>Obraz</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>{{ .Values.image.repository }}</code></td>
-<td style="text-align: left;">Wartość z values.yaml</td>
+<td><code>cert-manager</code></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td><code>quay.io/jetstack/cert-manager-controller:v1.21.2</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>{{ .Chart.AppVersion }}</code></td>
-<td style="text-align: left;">Wartość z Chart.yaml</td>
+<td><code>cert-manager-cainjector</code></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td><code>quay.io/jetstack/cert-manager-cainjector:v1.21.2</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>{{ .Release.Namespace }}</code></td>
-<td style="text-align: left;">Namespace w którym instalujemy</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{ .Release.Name }}</code></td>
-<td style="text-align: left;">Nazwa release (helm install <strong>clients-api</strong> ...)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{ include "clients-api.fullname" . }}</code></td>
-<td style="text-align: left;">Wywołanie helpera z _helpers.tpl</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{- if .Values.ingress.enabled }}</code></td>
-<td style="text-align: left;">Warunkowe renderowanie</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{- toYaml .Values.resources \| nindent 12 }}</code></td>
-<td style="text-align: left;">Konwersja obiektu na YAML z wcięciem</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{ .Values.image.tag \| default .Chart.AppVersion }}</code></td>
-<td style="text-align: left;">Wartość z fallbackiem</td>
+<td><code>cert-manager-webhook</code></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td><code>quay.io/jetstack/cert-manager-webhook:v1.21.2</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Ważna zasada:</strong> nigdy nie wpisuj nazwy zasobu na twardo — zawsze przez helper:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">include "clients-api.fullname" .</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<p>Rollout wszystkich Deploymentów zakończył się poprawnie. W namespace <code>cert-manager</code> nie było Podów poza <code>Running</code> i <code>Succeeded</code>.</p>
+<p>Zweryfikowano również reguły roli <code>cert-manager-edit</code> dla API ACME. Uprawnienia do <code>challenges</code> i <code>orders</code> nie zawierały niepotrzebnych operacji odczytu sekretów ani szerszego zakresu niż wymagany przez nową wersję.</p>
+<hr />
+<h2 id="6-weryfikacja-certyfikatow">6. Weryfikacja certyfikatów<a class="headerlink" href="#6-weryfikacja-certyfikatow" title="Permanent link">&para;</a></h2>
+<p>Po aktualizacji oba issuery działały:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>letsencrypt-prod-cluster-issuer      Ready=True
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>letsencrypt-staging-cluster-issuer   Ready=True
 </span></code></pre></div>
-<h3 id="5-deploymentyaml-kluczowe-elementy">5. deployment.yaml — kluczowe elementy<a class="headerlink" href="#5-deploymentyaml-kluczowe-elementy" title="Permanent link">&para;</a></h3>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">containers</span><span class="p">:</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Chart.Name</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">.Values.image.repository</span><span class="nv"> </span><span class="s">}}:{{</span><span class="nv"> </span><span class="s">.Values.image.tag</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default</span><span class="nv"> </span><span class="s">.Chart.AppVersion</span><span class="nv"> </span><span class="s">}}"</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_PROFILES_ACTIVE</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.springProfile | quote</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_DATASOURCE_URL</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">"jdbc:postgresql://{{</span><span class="nv"> </span><span class="s">.Values.database.host</span><span class="nv"> </span><span class="s">}}:{{</span><span class="nv"> </span><span class="s">.Values.database.port</span><span class="nv"> </span><span class="s">}}/{{</span><span class="nv"> </span><span class="s">.Values.database.name</span><span class="nv"> </span><span class="s">}}"</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_DATASOURCE_USERNAME</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">          </span><span class="nt">secretKeyRef</span><span class="p">:</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.database.credentialsSecret</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">            </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">username</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_DATASOURCE_PASSWORD</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">          </span><span class="nt">secretKeyRef</span><span class="p">:</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.database.credentialsSecret</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">            </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="nt">livenessProbe</span><span class="p">:</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">      </span><span class="p p-Indicator">{{</span><span class="nv">- toYaml .Values.livenessProbe | nindent 12</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">    </span><span class="nt">readinessProbe</span><span class="p">:</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">      </span><span class="p p-Indicator">{{</span><span class="nv">- toYaml .Values.readinessProbe | nindent 12</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span><span class="nt">resources</span><span class="p">:</span>
-</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">      </span><span class="p p-Indicator">{{</span><span class="nv">- toYaml .Values.resources | nindent 12</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<p>Issuer staging potwierdził aktualny stan kontrolera:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>generation:         1
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>observedGeneration: 1
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>ready:              True
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>reason:             ACMEAccountRegistered
 </span></code></pre></div>
-<h3 id="6-walidacja-charta">6. Walidacja charta<a class="headerlink" href="#6-walidacja-charta" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Sprawdź poprawność składni</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>helm<span class="w"> </span>lint<span class="w"> </span>helm/clients-api
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Wygeneruj YAML bez instalacji</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>helm<span class="w"> </span>template<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Sprawdź jakie zasoby zostaną utworzone</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>helm<span class="w"> </span>template<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^kind:\|^  name:"</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Dry-run z klastra (walidacja przez API server)</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>helm<span class="w"> </span>install<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>--dry-run
+<p>Certyfikaty po aktualizacji:</p>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Certyfikat</th>
+<th style="text-align: right;">Ready</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td><code>local-cert-kcn333</code></td>
+<td style="text-align: right;"><code>True</code></td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td><code>local-prod-cert-kcn333</code></td>
+<td style="text-align: right;"><code>True</code></td>
+</tr>
+<tr>
+<td><code>kube-system</code></td>
+<td><code>hubble-tls</code></td>
+<td style="text-align: right;"><code>True</code></td>
+</tr>
+<tr>
+<td><code>monitoring</code></td>
+<td><code>grafana-tls</code></td>
+<td style="text-align: right;"><code>True</code></td>
+</tr>
+<tr>
+<td><code>traefik</code></td>
+<td><code>traefik-dashboard-tls</code></td>
+<td style="text-align: right;"><code>True</code></td>
+</tr>
+</tbody>
+</table>
+<p>Powiązane <code>CertificateRequest</code> były zatwierdzone i gotowe. Nie było aktywnych obiektów <code>Challenge</code>.</p>
+<hr />
+<h2 id="7-zachowanie-cert-managera-po-zimnym-starcie">7. Zachowanie cert-managera po zimnym starcie<a class="headerlink" href="#7-zachowanie-cert-managera-po-zimnym-starcie" title="Permanent link">&para;</a></h2>
+<p>Bezpośrednio po uruchomieniu klastra log kontrolera zawierał:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>dial tcp: lookup acme-staging-v02.api.letsencrypt.org on 10.43.0.10:53:
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>read: connection refused
 </span></code></pre></div>
-<h3 id="7-podaczenie-do-flux-gitrepository-helmrelease">7. Podłączenie do Flux — GitRepository + HelmRelease<a class="headerlink" href="#7-podaczenie-do-flux-gitrepository-helmrelease" title="Permanent link">&para;</a></h3>
-<p>W k3s-homelab repo:</p>
-<p><strong>GitRepository</strong> — mówi Fluxowi skąd pobrać chart:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source.toolkit.fluxcd.io/v1</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitRepository</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1m</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/kCn3333/clients-api</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nt">ref</span><span class="p">:</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<p>Następnie pojawiały się komunikaty:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ACME client for issuer not initialised/available
 </span></code></pre></div>
-<p><strong>HelmRelease</strong> — mówi Fluxowi jak zainstalować chart:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm.toolkit.fluxcd.io/v2</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HelmRelease</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="nt">chart</span><span class="p">:</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">      </span><span class="nt">chart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm/clients-api</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="nt">reconcileStrategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Revision</span><span class="w">  </span><span class="c1"># ← re-fetch przy każdym nowym commicie</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="nt">sourceRef</span><span class="p">:</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitRepository</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1m</span>
-</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">  </span><span class="nt">install</span><span class="p">:</span>
-</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="nt">remediation</span><span class="p">:</span>
-</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">  </span><span class="nt">upgrade</span><span class="p">:</span>
-</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="nt">remediation</span><span class="p">:</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">  </span><span class="nt">values</span><span class="p">:</span>
-</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span>
-</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">      </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"1.4.0"</span><span class="w"> </span><span class="c1"># {"$imagepolicy": "flux-system:clients-api:tag"}</span>
-</span></code></pre></div>
-<p><strong>Marker dla image automation</strong> — <code># {"$imagepolicy": "flux-system:clients-api:tag"}</code> mówi Fluxowi żeby automatycznie aktualizował tag gdy pojawi się nowy image.</p>
-<h3 id="8-reconcilestrategy">8. reconcileStrategy<a class="headerlink" href="#8-reconcilestrategy" title="Permanent link">&para;</a></h3>
-<p>Domyślna strategia to <code>ChartVersion</code> — Flux pobiera nowy chart <strong>tylko gdy zmieni się <code>version</code></strong> w Chart.yaml.</p>
-<p><code>Revision</code> — Flux pobiera chart <strong>przy każdym nowym commicie</strong> do repo.</p>
-<p>Dla developmentu <code>Revision</code> jest wygodniejsze. W produkcji <code>ChartVersion</code> daje lepszą kontrolę.</p>
-<h3 id="9-napotkane-problemy">9. Napotkane problemy<a class="headerlink" href="#9-napotkane-problemy" title="Permanent link">&para;</a></h3>
-<p><strong><code>reconcileStrategy: ChartVersion</code> blokuje update:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Bump version w Chart.yaml</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s/version: 0.1.0/version: 0.1.1/'</span><span class="w"> </span>helm/clients-api/Chart.yaml
-</span></code></pre></div>
-<p><strong><code>terminal error: exceeded maximum retries</code>:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>flux<span class="w"> </span><span class="nb">suspend</span><span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>flux<span class="w"> </span>resume<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span></code></pre></div>
-<p><strong>Helm ma zepsutą historię releasów:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span></code></pre></div>
-<p><strong>Stary HelmChart artifact w Flux:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>flux<span class="w"> </span>reconcile<span class="w"> </span><span class="nb">source</span><span class="w"> </span>git<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>flux-system
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>reconcile.fluxcd.io/requestedAt<span class="o">=</span><span class="s2">"</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span><span class="s2">"</span><span class="w"> </span>--overwrite
-</span></code></pre></div>
-<h3 id="10-mono-repo-vs-osobne-repo">10. mono-repo vs osobne repo<a class="headerlink" href="#10-mono-repo-vs-osobne-repo" title="Permanent link">&para;</a></h3>
+<p>Przyczyna była przejściowa: cert-manager rozpoczął pracę zanim CoreDNS zaczął obsługiwać Service <code>kube-dns</code> pod adresem <code>10.43.0.10</code>.</p>
+<p>Po ustabilizowaniu DNS potwierdzono:</p>
 <ul>
-<li>Mono-repo - chart i aplikacja wersjonowane razem.</li>
-<li>Chart w repo aplikacji (<code>helm/clients-api/</code>)</li>
-<li>Dedykowane repo dla chartów, większa platforma</li>
-<li>OCI Registry, Chart jako image (<code>ghcr.io/org/charts/app:1.0</code>)</li>
+<li>CoreDNS <code>1/1 Running</code>;</li>
+<li>EndpointSlice <code>kube-dns</code> z gotowym adresem;</li>
+<li>oba <code>ClusterIssuer</code> <code>Ready=True</code>;</li>
+<li>wszystkie certyfikaty <code>Ready=True</code>;</li>
+<li>brak nowych błędów cert-managera w kolejnej minucie logów.</li>
 </ul>
-<p><strong>OCI</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>helm<span class="w"> </span>package<span class="w"> </span>helm/clients-api
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>helm<span class="w"> </span>push<span class="w"> </span>clients-api-0.1.0.tgz<span class="w"> </span>oci://ghcr.io/kcn333/charts
+<p>Nie wykonywano restartu cert-managera ani ręcznej ingerencji w issuery. Kontroler sam ponowił operacje po odzyskaniu DNS.</p>
+<hr />
+<h2 id="8-stan-flux-przed-aktualizacja">8. Stan Flux przed aktualizacją<a class="headerlink" href="#8-stan-flux-przed-aktualizacja" title="Permanent link">&para;</a></h2>
+<p>Lokalny klient:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>flux: v2.9.5
 </span></code></pre></div>
-<p>W HelmRelease:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">chart</span><span class="p">:</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">chart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"0.1.*"</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">sourceRef</span><span class="p">:</span>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">      </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HelmRepository</span>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kcn333-charts</span>
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">      </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span>
+<p>Dystrybucja w klastrze:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>distribution: flux-v2.8.1
 </span></code></pre></div>
-<h3 id="11-przydatne-narzedzia">11. Przydatne narzędzia<a class="headerlink" href="#11-przydatne-narzedzia" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># helm-diff — podgląd zmian przed upgrade</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>helm<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/databus23/helm-diff
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>helm<span class="w"> </span>diff<span class="w"> </span>upgrade<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1"># Debugowanie</span>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>helm<span class="w"> </span>get<span class="w"> </span>values<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w">      </span><span class="c1"># aktualne values</span>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>helm<span class="w"> </span>get<span class="w"> </span>manifest<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w">    </span><span class="c1"># wygenerowane YAML</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>helm<span class="w"> </span><span class="nb">history</span><span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w">         </span><span class="c1"># historia releasów</span>
+<p>Kontrolery przed zmianą:</p>
+<table>
+<thead>
+<tr>
+<th>Kontroler</th>
+<th>Wersja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source-controller</code></td>
+<td><code>v1.8.0</code></td>
+</tr>
+<tr>
+<td><code>kustomize-controller</code></td>
+<td><code>v1.8.1</code></td>
+</tr>
+<tr>
+<td><code>helm-controller</code></td>
+<td><code>v1.5.1</code></td>
+</tr>
+<tr>
+<td><code>notification-controller</code></td>
+<td><code>v1.8.1</code></td>
+</tr>
+<tr>
+<td><code>image-reflector-controller</code></td>
+<td><code>v1.1.0</code></td>
+</tr>
+<tr>
+<td><code>image-automation-controller</code></td>
+<td><code>v1.1.0</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>flux check --pre</code> potwierdził zgodność Kubernetes <code>v1.36.4+k3s1</code> z wymaganiami nowej dystrybucji.</p>
+<hr />
+<h2 id="9-migracja-api-image-toolkit">9. Migracja API Image Toolkit<a class="headerlink" href="#9-migracja-api-image-toolkit" title="Permanent link">&para;</a></h2>
+<p>Repozytorium zawierało dziesięć deklaracji używających:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>image.toolkit.fluxcd.io/v1beta2
+</span></code></pre></div>
+<p>Dotyczyło to:</p>
+<ul>
+<li><code>ImageRepository</code>;</li>
+<li><code>ImagePolicy</code>;</li>
+<li><code>ImageUpdateAutomation</code>;</li>
+<li>zasobów na gałęziach <code>main</code> i <code>staging</code>.</li>
+</ul>
+<p>CRD w klastrze już obsługiwały stabilne <code>v1</code>, a ich wersją storage było <code>v1</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>served:        v1, v1beta2
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>storage:       v1
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>storedVersions: [v1]
+</span></code></pre></div>
+<p>Najpierw wykonano podgląd:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>flux<span class="w"> </span>migrate<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span>--version<span class="o">=</span><span class="m">2</span>.8<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>--path<span class="o">=</span>.<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span>--dry-run
+</span></code></pre></div>
+<p>Narzędzie wskazało wyłącznie migrację dziesięciu deklaracji z <code>v1beta2</code> do <code>v1</code>.</p>
+<p>Po migracji gałęzi <code>main</code> próba przeniesienia tego samego commita przez <code>cherry-pick</code> na <code>staging</code> ujawniła konflikt <code>modify/delete</code> dla zasobów <code>k8s-badge</code>. Pliki istniały na <code>main</code>, ale zostały celowo usunięte na <code>staging</code>.</p>
+<p>Nie przywracano ich na gałęzi staging. Migrację wykonano osobno na aktualnym drzewie każdej gałęzi. Końcowa kontrola:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>origin/main:    brak image.toolkit.fluxcd.io/v1beta2
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>origin/staging: brak image.toolkit.fluxcd.io/v1beta2
+</span></code></pre></div>
+<p>Wniosek: zmian strukturalnych pomiędzy gałęziami nie należy przenosić bezwarunkowym <code>cherry-pick</code>. Migracja uruchomiona w kontekście każdej gałęzi zachowuje jej zamierzony zestaw zasobów.</p>
+<hr />
+<h2 id="10-migracja-zywych-zasobow-flux">10. Migracja żywych zasobów Flux<a class="headerlink" href="#10-migracja-zywych-zasobow-flux" title="Permanent link">&para;</a></h2>
+<p>Po zastosowaniu nowych manifestów wykonano:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>flux<span class="w"> </span>migrate
+</span></code></pre></div>
+<p>Narzędzie zmigrowało działające zasoby do aktualnych wersji API:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>GitRepository          → v1
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>HelmRepository         → v1
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HelmChart              → v1
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>HelmRelease            → v2
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>Kustomization          → v1
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>ImageRepository        → v1
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>ImagePolicy            → v1
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>ImageUpdateAutomation  → v1
+</span></code></pre></div>
+<p>Migracja zakończyła się komunikatem:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>custom resources migrated successfully
+</span></code></pre></div>
+<p>Po migracji wszystkie źródła, polityki obrazów, automatyzacje, HelmRelease i Kustomization pozostały <code>Ready=True</code>.</p>
+<hr />
+<h2 id="11-punkt-odzyskiwania-przed-aktualizacja-flux">11. Punkt odzyskiwania przed aktualizacją Flux<a class="headerlink" href="#11-punkt-odzyskiwania-przed-aktualizacja-flux" title="Permanent link">&para;</a></h2>
+<p>Przed wymianą kontrolerów utworzono snapshot etcd:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>pre-flux-v2.9.5-master-1790156948
+</span></code></pre></div>
+Snapshot został zapisany poprawnie.</p>
+<hr />
+<h2 id="12-generowanie-manifestu-flux-v295">12. Generowanie manifestu Flux <code>v2.9.5</code><a class="headerlink" href="#12-generowanie-manifestu-flux-v295" title="Permanent link">&para;</a></h2>
+<p>Manifest wygenerowano klientem odpowiadającym wersji docelowej:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>flux<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span>--export<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span>--components-extra<span class="o">=</span>image-reflector-controller,image-automation-controller<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span>&gt;<span class="w"> </span>/tmp/gotk-components-v2.9.5.yaml
+</span></code></pre></div>
+<p>Zachowano dokładnie sześć dotychczasowych komponentów:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>source-controller
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>kustomize-controller
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>helm-controller
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>notification-controller
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>image-reflector-controller
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>image-automation-controller
+</span></code></pre></div>
+<p>Plik:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>clusters/k3s-homelab/flux-system/gotk-components.yaml
+</span></code></pre></div>
+<p>został zastąpiony pełnym wygenerowanym manifestem. Nie modyfikowano ręcznie jego CRD, RBAC ani Deploymentów.</p>
+<p>Duży diff wynikał z wymiany całego generowanego bundla oraz zmian schematów CRD, RBAC, NetworkPolicy i argumentów kontrolerów:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>1347 insertions
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>2628 deletions
+</span></code></pre></div>
+<p>Zakres commita obejmował wyłącznie <code>gotk-components.yaml</code>.</p>
+<hr />
+<h2 id="13-konflikty-podczas-recznego-dry-run">13. Konflikty podczas ręcznego dry-run<a class="headerlink" href="#13-konflikty-podczas-recznego-dry-run" title="Permanent link">&para;</a></h2>
+<p>Polecenie:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span>--server-side<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span>--dry-run<span class="o">=</span>server<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">  </span>--filename<span class="w"> </span>/tmp/flux-v2.9.5-rendered.yaml
+</span></code></pre></div>
+<p>zgłosiło konflikty właścicieli pól, między innymi dla:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>app.kubernetes.io/version
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>spec.versions
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>obrazu kontenera manager
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>limitów CPU
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>NetworkPolicy
+</span></code></pre></div>
+<p>Pola były już zarządzane przez field managerów:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>flux
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>kustomize-controller
+</span></code></pre></div>
+<p>Nie był to błąd składni ani niezgodność API. Ręczny <code>kubectl</code> próbował zostać kolejnym właścicielem pól zarządzanych przez Flux.</p>
+<p>Nie wykonano rzeczywistego <code>kubectl apply --force-conflicts</code>. Docelowa zmiana została wdrożona przez Kustomization Flux, czyli przez istniejącego właściciela zasobów.</p>
+<hr />
+<h2 id="14-aktualizacja-flux-v281-v295">14. Aktualizacja Flux <code>v2.8.1 → v2.9.5</code><a class="headerlink" href="#14-aktualizacja-flux-v281-v295" title="Permanent link">&para;</a></h2>
+<p>Commit aktualizacji:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>5dfc3e1 chore(flux): upgrade controllers to v2.9.5
+</span></code></pre></div>
+<p>Po push wykonano:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>kustomization<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span>flux-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">  </span>--namespace<span class="w"> </span>flux-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">  </span>--with-source
+</span></code></pre></div>
+<p>Flux pobrał i zastosował:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>main@sha1:5dfc3e15e7a0a867b708e47ec9d598eb801f9cb3
+</span></code></pre></div>
+<p>Rollout wszystkich sześciu kontrolerów zakończył się poprawnie.</p>
+<p>Wersje końcowe:</p>
+<table>
+<thead>
+<tr>
+<th>Kontroler</th>
+<th>Wersja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source-controller</code></td>
+<td><code>v1.9.5</code></td>
+</tr>
+<tr>
+<td><code>kustomize-controller</code></td>
+<td><code>v1.9.5</code></td>
+</tr>
+<tr>
+<td><code>helm-controller</code></td>
+<td><code>v1.6.4</code></td>
+</tr>
+<tr>
+<td><code>notification-controller</code></td>
+<td><code>v1.9.4</code></td>
+</tr>
+<tr>
+<td><code>image-reflector-controller</code></td>
+<td><code>v1.2.5</code></td>
+</tr>
+<tr>
+<td><code>image-automation-controller</code></td>
+<td><code>v1.2.5</code></td>
+</tr>
+</tbody>
+</table>
+<p>Każdy Deployment miał:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>READY=1
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>AVAILABLE=1
 </span></code></pre></div>
 <hr />
-<h2 id="finalna-struktura-clients-api-repo">Finalna struktura clients-api repo<a class="headerlink" href="#finalna-struktura-clients-api-repo" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>clients-api/
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>├── src/                      ← kod aplikacji Java
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>├── Dockerfile
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>├── .github/workflows/        ← CI/CD pipeline
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>└── helm/
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    └── clients-api/
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>        ├── Chart.yaml         version: 0.1.2, appVersion: "1.4.0"
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>        ├── values.yaml        wszystkie defaults
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>        └── templates/
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>            ├── _helpers.tpl
-</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>            ├── NOTES.txt
-</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>            ├── deployment.yaml
-</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>            ├── service.yaml
-</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>            ├── ingress.yaml
-</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>            ├── hpa.yaml
-</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>            ├── pdb.yaml
-</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>            ├── networkpolicy.yaml
-</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>            └── servicemonitor.yaml
+<h2 id="15-walidacja-koncowa-flux">15. Walidacja końcowa Flux<a class="headerlink" href="#15-walidacja-koncowa-flux" title="Permanent link">&para;</a></h2>
+<p><code>flux version</code> potwierdził:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>flux:        v2.9.5
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>distribution: flux-v2.9.5
 </span></code></pre></div>
+<p><code>flux check</code> zakończył się:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>all checks passed
+</span></code></pre></div>
+<p>Potwierdzono:</p>
+<ul>
+<li>wszystkie kontrolery <code>Ready</code>;</li>
+<li>wszystkie wymagane CRD dostępne w wersjach obsługiwanych przez Flux <code>v2.9.5</code>;</li>
+<li>oba <code>GitRepository</code> <code>Ready=True</code>;</li>
+<li>wszystkie <code>HelmRepository</code> i <code>HelmChart</code> <code>Ready=True</code>;</li>
+<li>wszystkie <code>HelmRelease</code> <code>Ready=True</code>;</li>
+<li>wszystkie <code>Kustomization</code> <code>Ready=True</code>;</li>
+<li>trzy <code>ImageRepository</code> <code>Ready=True</code>;</li>
+<li>pięć <code>ImagePolicy</code> <code>Ready=True</code>;</li>
+<li>trzy <code>ImageUpdateAutomation</code> <code>Ready=True</code>;</li>
+<li>brak nieprawidłowych Podów w <code>flux-system</code>;</li>
+<li>brak błędów <code>error</code>, <code>failed</code>, <code>panic</code> i <code>fatal</code> w logach sześciu kontrolerów.</li>
+</ul>
+<p>Kustomization korzystające z <code>main</code> zastosowały commit <code>5dfc3e15</code>. <code>apps-staging</code> prawidłowo pozostało na osobnym źródle i rewizji gałęzi <code>staging</code>.</p>
 <hr />
-<h2 id="backlog">Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Opcja B — opublikować chart jako OCI image na ghcr.io</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>helm test</code> — test po deploy sprawdzający endpoint</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> values-staging.yaml — osobne wartości dla środowiska staging</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Progressive delivery (staging/production branches)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hubble UI — native routing (zaplanować osobną sesję)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> HashiCorp Vault</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> External-dns</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RBAC</li>
+<h2 id="16-stan-koncowy">16. Stan końcowy<a class="headerlink" href="#16-stan-koncowy" title="Permanent link">&para;</a></h2>
+<h3 id="k3s">K3s<a class="headerlink" href="#k3s" title="Permanent link">&para;</a></h3>
+<ul>
+<li>trzy nody <code>Ready</code>;</li>
+<li>K3s <code>v1.36.4+k3s1</code>;</li>
+<li>lokalne API i embedded etcd działają na wszystkich nodach;</li>
+<li>macierz API server → kubelet <code>9/9</code>;</li>
+<li>kolejny zimny start bez błędu remotedialera.</li>
+</ul>
+<h3 id="storage-i-bazy">Storage i bazy<a class="headerlink" href="#storage-i-bazy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Longhorn <code>1.12.1</code>;</li>
+<li>sześć wolumenów <code>attached</code> i <code>healthy</code>;</li>
+<li>wszystkie wolumeny na silniku <code>v1.12.1</code>;</li>
+<li>brak uszkodzonych replik;</li>
+<li>oba klastry CloudNativePG <code>2/2 Ready</code> i <code>Cluster in healthy state</code>.</li>
+</ul>
+<h3 id="cert-manager">cert-manager<a class="headerlink" href="#cert-manager" title="Permanent link">&para;</a></h3>
+<ul>
+<li>instalacja jest deklaratywnie zarządzana przez Flux;</li>
+<li>chart i aplikacja <code>v1.21.2</code>;</li>
+<li>trzy Deploymenty dostępne;</li>
+<li>oba <code>ClusterIssuer</code> <code>Ready=True</code>;</li>
+<li>pięć certyfikatów <code>Ready=True</code>;</li>
+<li>brak aktywnych wyzwań ACME;</li>
+<li>przejściowy błąd DNS po starcie ustąpił bez ingerencji.</li>
+</ul>
+<h3 id="flux">Flux<a class="headerlink" href="#flux" title="Permanent link">&para;</a></h3>
+<ul>
+<li>klient i dystrybucja <code>v2.9.5</code>;</li>
+<li>wszystkie sześć kontrolerów w docelowych wersjach;</li>
+<li>deklaracje Image Toolkit używają stabilnego API <code>v1</code> na <code>main</code> i <code>staging</code>;</li>
+<li>żywe custom resources zostały zmigrowane;</li>
+<li>wszystkie zasoby GitOps są <code>Ready=True</code>;</li>
+<li>snapshot etcd sprzed aktualizacji istnieje.</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Helm</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>helm<span class="w"> </span>lint<span class="w"> </span>helm/clients-api
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>helm<span class="w"> </span>template<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^kind:\|^  name:"</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>helm<span class="w"> </span>install<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>--dry-run
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>helm<span class="w"> </span>list<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>helm<span class="w"> </span><span class="nb">history</span><span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>helm<span class="w"> </span>get<span class="w"> </span>values<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c1"># Flux</span>
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>flux<span class="w"> </span>reconcile<span class="w"> </span><span class="nb">source</span><span class="w"> </span>git<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>flux-system
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>flux<span class="w"> </span><span class="nb">suspend</span><span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>flux<span class="w"> </span>resume<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>kubectl<span class="w"> </span>get<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>kubectl<span class="w"> </span>get<span class="w"> </span>helmchart<span class="w"> </span>-A
+<h2 id="17-wnioski">17. Wnioski<a class="headerlink" href="#17-wnioski" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Istniejący release Helm można bezpiecznie przejąć przez Flux, jeśli zachowane zostaną jego nazwa, namespace i podstawowa konfiguracja.</li>
+<li>Pierwsze uzgodnienie należy wykonać bez podnoszenia wersji. Oddziela to migrację sposobu zarządzania od aktualizacji oprogramowania.</li>
+<li>Sekrety nie należą do publicznego repozytorium. W GitOps powinny występować wyłącznie w formie zaszyfrowanej lub jako referencje do zewnętrznego systemu.</li>
+<li>Błędy ACME podczas pierwszych sekund zimnego startu mogą być skutkiem niedostępnego jeszcze DNS. O wyniku decyduje stan po ustabilizowaniu zależności i kolejne logi.</li>
+<li><code>Ready=True</code> istniejącego certyfikatu nie zastępuje kontroli issuerów, webhooka i logów kontrolera.</li>
+<li>Przed aktualizacją Flux trzeba zmigrować deklaracje w repozytorium oraz działające custom resources.</li>
+<li>Gałęzie o różnej strukturze należy migrować osobno; automatyczny <code>cherry-pick</code> może przywrócić zasoby celowo usunięte na jednej z nich.</li>
+<li><code>storedVersions: [v1]</code> potwierdza format przechowywany w etcd, ale repozytorium nadal może zawierać manifesty <code>v1beta2</code>.</li>
+<li>Konflikt server-side apply może oznaczać konflikt field managerów, a nie wadliwy manifest.</li>
+<li>Generowanego <code>gotk-components.yaml</code> nie należy poprawiać ręcznie. Powinien pochodzić z klienta Flux odpowiadającego wersji docelowej.</li>
+<li>Snapshot etcd chroni stan API przed zmianą CRD i kontrolerów, lecz nie zastępuje repozytorium Git jako źródła deklaracji.</li>
+</ol>
+<hr />
+<h2 id="18-nastepna-sesja">18. Następna sesja<a class="headerlink" href="#18-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Wykonać zimny start klastra po aktualizacji Flux <code>v2.9.5</code>.</li>
+<li>Potwierdzić:</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>3/3 Node Ready
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>API i etcd 3/3
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>API server → kubelet 9/9
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>flux check: all checks passed
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>wszystkie Kustomization i HelmRelease: Ready=True
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>wszystkie ImageRepository, ImagePolicy i ImageUpdateAutomation: Ready=True
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>cert-manager: 3/3 Deployment Ready
+</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>ClusterIssuer: 2/2 Ready
+</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a>certyfikaty: 5/5 Ready
+</span><span id="__span-38-10"><a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a>Longhorn: 6/6 volumes healthy
+</span><span id="__span-38-11"><a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a>CloudNativePG: 2/2 Ready w obu klastrach
 </span></code></pre></div>
+<ol>
+<li>Po poprawnym starcie uznać aktualizacje cert-managera i Flux za definitywnie zamknięte.</li>
+<li>Następny komponent wybierać dopiero po osobnej inwentaryzacji wersji, zgodności i sposobu instalacji.</li>
+</ol>
 
 
 
@@ -4157,7 +4889,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 14:58:04 UTC"><span class="timeago" datetime="2026-04-16T14:58:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 14:58:04 UTC">2026-04-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     
@@ -4167,7 +4899,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 15:27:43 UTC"><span class="timeago" datetime="2026-03-22T15:27:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 15:27:43 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     

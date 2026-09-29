@@ -1570,6 +1570,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cloudnativepg-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CloudNativePG metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#grafana-alloy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2504,6 +2515,146 @@
     
   
     27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2028/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28 - zakończenie aktualizacji K3s i CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2029/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 - aktualizacja Longhorna i Metrics Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2031/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31 - przejęcie cert-managera przez Flux i aktualizacja Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2032/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32 - migracja repozytorium Helm i aktualizacja Loki
   
 
     
@@ -3815,6 +3966,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cloudnativepg-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CloudNativePG metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#grafana-alloy" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3937,8 +4099,8 @@
 <p><code>kube-prometheus-stack</code> is currently deployed as chart version <code>82.10.1</code> through Flux.
 The stack includes Grafana <code>12.4.0</code> and <code>kiwigrid/k8s-sidecar:2.5.0</code>.</p>
 <h2 id="resource-metrics-api">Resource Metrics API<a class="headerlink" href="#resource-metrics-api" title="Permanent link">&para;</a></h2>
-<p>metrics-server is deployed through Flux with Helm chart <code>3.13.1</code> and application
-version <code>0.8.1</code>. It runs as one <code>hostNetwork</code> replica and serves HTTPS on container
+<p>metrics-server is deployed through Flux with Helm chart <code>3.14.0</code> and application
+version <code>0.9.0</code>. It runs as one <code>hostNetwork</code> replica and serves HTTPS on container
 port <code>4443</code>; its Service maps <code>443</code> to <code>4443</code>. It reads kubelet metrics through
 node <code>InternalIP</code> addresses on <code>10250/TCP</code> with a 15-second resolution.</p>
 <p>The HelmRelease uses a 10-minute action timeout and three remediation retries for both
@@ -3980,11 +4142,8 @@ endpoint learned from EndpointSlice.</p>
 <p>The default Prometheus datasource uses:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>http://kube-prometheus-stack-prometheus.monitoring:9090/
 </span></code></pre></div>
-<p>The earlier <code>An error occurred within the plugin</code> failure was caused by UFW blocking
-traffic from the Grafana node to the Prometheus <code>hostNetwork</code> endpoint on
-<code>9090/tcp</code>. Grafana logs showed a timeout to the Prometheus ClusterIP, while packet
-capture on the Prometheus node showed incoming SYN packets without a SYN-ACK. Adding
-the cluster-scoped UFW rule restored queries immediately.</p>
+<p>Grafana requires access to the Prometheus endpoint on TCP <code>9090</code> through the
+cluster-scoped UFW rule described above.</p>
 <p>Grafana currently stores <code>/var/lib/grafana</code> in <code>emptyDir</code>. Local users, sessions and
 objects created only through the UI do not survive Pod replacement. Required objects
 must therefore be provisioned from Git:</p>
@@ -4030,8 +4189,23 @@ provisioning before its API begins listening on port <code>3000</code>.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>-o<span class="w"> </span>wide
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>loki-0<span class="w"> </span>-c<span class="w"> </span>loki<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
+<p>Loki <code>3.7.6</code> uses chart <code>18.7.6</code> from <code>grafana-community</code>, reconciled by Flux.
+It runs one monolithic StatefulSet replica (<code>loki-0</code>).
+The <code>storage-loki-0</code> PVC is <code>10Gi</code> on Longhorn, with StatefulSet
+PVC retention <code>Retain/Retain</code>.</p>
+<p>The object store remains Garage bucket <code>loki-logs</code>, using schema <code>v13</code>, TSDB
+indexes and <code>7d</code> retention. S3 credentials come from <code>loki-s3-secret</code>. Gateway,
+canary, chart tests, chunks cache and results cache remain disabled.</p>
+<p>Loki metrics scraping and alert rules are not configured through the chart:
+its ServiceMonitor and PrometheusRule resources are disabled.</p>
+<h2 id="cloudnativepg-metrics">CloudNativePG metrics<a class="headerlink" href="#cloudnativepg-metrics" title="Permanent link">&para;</a></h2>
+<p>CloudNativePG <code>1.30.0</code> uses the non-superuser <code>cnpg_metrics_exporter</code> login with
+<code>pg_monitor</code> membership. The clusters reference <code>cnpg-default-monitoring</code> custom
+queries with default queries enabled.</p>
+<p><code>enablePodMonitor</code> is <code>false</code>. CNPG has no PodMonitor or ingress rule allowing
+Prometheus to TCP <code>9187</code>, so its database metrics are not scraped by Prometheus.</p>
 <h2 id="grafana-alloy">Grafana Alloy<a class="headerlink" href="#grafana-alloy" title="Permanent link">&para;</a></h2>
-<p>Alloy replaced Promtail as the cluster log collector. It is deployed through Flux as
+<p>Alloy is the cluster log collector. It is deployed through Flux as
 Helm chart <code>1.12.1</code> with application version <code>1.19.2</code>.</p>
 <p>The DaemonSet runs one Pod on every node. Each instance discovers only Pods assigned
 to its own node and reads their CRI log files from:</p>
@@ -4051,8 +4225,7 @@ to root-owned CRI logs without running the process as UID <code>0</code>.</p>
 <p>New streams include:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>collector="alloy"
 </span></code></pre></div>
-<p>Streams without this label are historical data previously written by Promtail and
-remain queryable until Loki retention removes them. Promtail is no longer deployed.</p>
+<p>Promtail is not deployed.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>daemonset,pods<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>--namespace<span class="w"> </span>loki<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>--selector<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>alloy<span class="w"> </span><span class="se">\</span>
@@ -4103,10 +4276,8 @@ This is the normal operational path and does not require a manual port-forward.<
 </table>
 <p>Hubble Relay uses the local-backend <code>hubble-peer</code> Service for peer discovery, then
 connects directly over TLS to every Cilium agent at its NodeIP on TCP <code>4244</code>.</p>
-<p>The Pod-to-NodeIP observer path was restored by upgrading Cilium from <code>1.19.1</code> to
-<code>1.19.7</code>. Hubble Relay, Hubble UI, live flows and the service map were revalidated
-after upgrading to <code>1.20.2</code>. The working configuration does not require <code>hostNetwork</code>,
-a manual port-forward, an additional UFW route rule, or changes to Traefik.</p>
+<p>Hubble UI provides live flows and the service map. Relay-to-agent connectivity
+uses the Pod network without <code>hostNetwork</code> or additional UFW route rules.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>daemonset/cilium<span class="w"> </span><span class="se">\</span>
@@ -4160,7 +4331,7 @@ not replace the Hubble UI Ingress and is not required for normal use:</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 16, 2026 12:57:28 UTC"><span class="timeago" datetime="2026-09-16T12:57:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 16, 2026 12:57:28 UTC">2026-09-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     

@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2015/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2029/">
       
       
-        <link rel="prev" href="../day%2014/">
+        <link rel="prev" href="../day%2028/">
       
       
-        <link rel="next" href="../day%2016/">
+        <link rel="next" href="../day%2030/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>15 - Helm Chart - > Homelab Documentation</title>
+        <title>29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#15-helm-chart" class="md-skip">
+        <a href="#29-playbook-aktualizacji-ubuntu-i-replikacja-cloudnativepg" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              15 - Helm Chart
+              29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
             
           </span>
         </div>
@@ -2011,19 +2011,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../day%2015/" class="md-nav__link">
         
   
   
@@ -2039,7 +2030,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -2413,10 +2403,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../day%2029/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2432,6 +2449,208 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-start-klastra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Start klastra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-zaozenia-kontrolowanej-aktualizacji-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Założenia kontrolowanej aktualizacji Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pliki-implementacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pliki implementacji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-optymalizacja-sciezki-bez-dostepnych-aktualizacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Optymalizacja ścieżki bez dostępnych aktualizacji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-problem-jednoinstancyjnych-baz-podczas-drainu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Problem jednoinstancyjnych baz podczas drainu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-repliki-nie-konczyy-inicjalizacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Repliki nie kończyły inicjalizacji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-przyczyna-brak-reguy-dla-ruchu-wewnetrznego-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Przyczyna: brak reguły dla ruchu wewnętrznego PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-stan-cloudnativepg-po-poprawce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Stan CloudNativePG po poprawce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-wniosek-dla-playbooka-aktualizacji-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Wniosek dla playbooka aktualizacji Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-stan-koncowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Stan końcowy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Stan końcowy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aktualizacje-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacje Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudnativepg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CloudNativePG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longhorn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Longhorn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Następna sesja
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3757,6 +3976,196 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-start-klastra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Start klastra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-zaozenia-kontrolowanej-aktualizacji-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Założenia kontrolowanej aktualizacji Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pliki-implementacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pliki implementacji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-optymalizacja-sciezki-bez-dostepnych-aktualizacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Optymalizacja ścieżki bez dostępnych aktualizacji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-problem-jednoinstancyjnych-baz-podczas-drainu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Problem jednoinstancyjnych baz podczas drainu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-repliki-nie-konczyy-inicjalizacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Repliki nie kończyły inicjalizacji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-przyczyna-brak-reguy-dla-ruchu-wewnetrznego-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Przyczyna: brak reguły dla ruchu wewnętrznego PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-stan-cloudnativepg-po-poprawce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Stan CloudNativePG po poprawce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-wniosek-dla-playbooka-aktualizacji-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Wniosek dla playbooka aktualizacji Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-stan-koncowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Stan końcowy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Stan końcowy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aktualizacje-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aktualizacje Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudnativepg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CloudNativePG
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longhorn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Longhorn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Następna sesja
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3776,365 +4185,364 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 15.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 29.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="15-helm-chart">15 - Helm Chart<a class="headerlink" href="#15-helm-chart" title="Permanent link">&para;</a></h1>
-<h1 id="k3s-homelab-sesja-15-helm-chart-dla-clients-api">K3s Homelab — Sesja 15 (Helm Chart dla clients-api)<a class="headerlink" href="#k3s-homelab-sesja-15-helm-chart-dla-clients-api" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-02-28<br />
-<strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0</p>
+<h1 id="29-playbook-aktualizacji-ubuntu-i-replikacja-cloudnativepg">29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG<a class="headerlink" href="#29-playbook-aktualizacji-ubuntu-i-replikacja-cloudnativepg" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 2026-09-21\
+<strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.4 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Longhorn <code>1.11.0</code></p>
+<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Potwierdzić kolejny poprawny zimny start klastra.</li>
+<li>Przygotować prosty, kontrolowany playbook aktualizacji pakietów Ubuntu.</li>
+<li>Przetestować playbook w Semaphore bez wykonywania niepotrzebnego maintenance.</li>
+<li>Usunąć konieczność ręcznego przełączania <code>nodeMaintenanceWindow</code> przed każdym uruchomieniem.</li>
+<li>Zwiększyć klastry CloudNativePG z jednej do dwóch instancji.</li>
+<li>Zdiagnozować i usunąć blokadę tworzenia replik PostgreSQL.</li>
+</ol>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
-<p>Własny Helm chart dla aplikacji clients-api w repozytorium aplikacji (opcja mono-repo), podłączony do klastra przez Flux GitOps.</p>
-<hr />
-<h3 id="1-struktura-helm-chart">1. Struktura Helm chart<a class="headerlink" href="#1-struktura-helm-chart" title="Permanent link">&para;</a></h3>
-<p>Helm chart to paczka szablonów YAML + konfiguracja. </p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Generowanie szkieletu:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>helm<span class="w"> </span>create<span class="w"> </span>helm/clients-api
-</span></code></pre></div>
-<p>Struktura plików:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>helm/clients-api/
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── Chart.yaml          ← metadane charta (nazwa, wersja, appVersion)
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── values.yaml         ← domyślne wartości konfiguracyjne
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── .helmignore         ← co ignorować przy pakowaniu
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>└── templates/
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    ├── _helpers.tpl    ← reużywalne fragmenty (jak funkcje)
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    ├── NOTES.txt       ← tekst wyświetlany po instalacji
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    ├── deployment.yaml
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    ├── service.yaml
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    ├── ingress.yaml
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    ├── hpa.yaml
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    ├── pdb.yaml            ← dodane ręcznie
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    ├── servicemonitor.yaml ← dodane ręcznie
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    └── networkpolicy.yaml  ← dodane ręcznie
-</span></code></pre></div>
-<h3 id="2-chartyaml-metadane">2. Chart.yaml — metadane<a class="headerlink" href="#2-chartyaml-metadane" title="Permanent link">&para;</a></h3>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v2</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Spring Boot REST API for client management</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">application</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1.0</span><span class="w">      </span><span class="c1"># ← wersja charta (templates + values)</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nt">appVersion</span><span class="p">:</span><span class="w"> </span><span class="s">"1.4.0"</span><span class="w"> </span><span class="c1"># ← wersja aplikacji (informacyjne)</span>
-</span></code></pre></div>
-<p><strong>Kluczowe rozróżnienie:</strong></p>
+<h2 id="1-start-klastra">1. Start klastra<a class="headerlink" href="#1-start-klastra" title="Permanent link">&para;</a></h2>
+<p>Kolejny pełny start klastra zakończył się bez błędów.</p>
+<p>Potwierdzony stan bazowy:</p>
 <ul>
-<li><code>version</code> — zmienia się gdy modyfikujesz templates lub values</li>
-<li><code>appVersion</code> — zmienia się gdy wypuszczasz nową wersję aplikacji</li>
+<li>trzy nody uruchomione;</li>
+<li>wszystkie nody <code>Ready</code>;</li>
+<li>K3s działa na wszystkich serwerach;</li>
+<li>nie wystąpił błąd remotedialera;</li>
+<li>klaster nadawał się do testu nowego playbooka maintenance.</li>
 </ul>
-<p><strong>Konwencja wersjonowania charta:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>0.1.x  → bugfixy (zła nazwa secretu, port)
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>0.x.0  → nowe features (nowy zasób, nowy parametr w values)
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>x.0.0  → breaking changes (zmiana struktury values)
+<p>Był to kolejny poprawny start po aktualizacji K3s do <code>v1.36.4+k3s1</code>.</p>
+<hr />
+<h2 id="2-zaozenia-kontrolowanej-aktualizacji-ubuntu">2. Założenia kontrolowanej aktualizacji Ubuntu<a class="headerlink" href="#2-zaozenia-kontrolowanej-aktualizacji-ubuntu" title="Permanent link">&para;</a></h2>
+<p>Przyjęty przebieg:</p>
+<ol>
+<li>jawne zatwierdzenie operacji;</li>
+<li>sprawdzenie kompletnego inventory i braku <code>--limit</code>;</li>
+<li>preflight systemu i K3s na wszystkich nodach;</li>
+<li>sprawdzenie zdrowia całego klastra;</li>
+<li>odświeżenie cache APT i symulacja <code>dist-upgrade</code> przed <code>cordon</code>;</li>
+<li>pominięcie maintenance dla noda bez aktualizacji i bez wymaganego restartu;</li>
+<li>jeden snapshot etcd tylko wtedy, gdy przynajmniej jeden node wymaga maintenance;</li>
+<li>aktualizacja jednego noda naraz:</li>
+<li><code>cordon</code>;</li>
+<li><code>drain</code> przez eviction API;</li>
+<li><code>apt dist-upgrade</code>;</li>
+<li>reboot tylko przy <code>/var/run/reboot-required</code>;</li>
+<li>oczekiwanie na SSH, K3s, API, etcd, Node i Cilium;</li>
+<li><code>uncordon</code> dopiero po pełnym odzyskaniu;</li>
+<li>sprawdzenie całego klastra i macierzy API server → kubelet <code>9/9</code>;</li>
+<li>przejście do następnego noda.</li>
+</ol>
+<p>Playbook nie używa:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--force
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>--disable-eviction
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ignore_errors
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>autoremove
 </span></code></pre></div>
-<h3 id="3-valuesyaml-serce-charta">3. values.yaml — serce charta<a class="headerlink" href="#3-valuesyaml-serce-charta" title="Permanent link">&para;</a></h3>
-<p>Wszystko co może się różnić między środowiskami trafia do <code>values.yaml</code>. </p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Liczba replik — nadpisywana przez HPA</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">replicaCount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nt">image</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kcn333/clients-api</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IfNotPresent</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w">  </span><span class="c1"># pusty = użyj appVersion z Chart.yaml</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Spring Boot profile</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nt">springProfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># Konfiguracja bazy danych</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nt">database</span><span class="p">:</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-db-rw</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients_db</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">  </span><span class="nt">credentialsSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-db-secret</span><span class="w">  </span><span class="c1"># nazwa Kubernetes Secret</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="nt">service</span><span class="p">:</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">  </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span><span class="w">  </span><span class="c1"># named port — wymagany przez ServiceMonitor</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="nt">ingress</span><span class="p">:</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">  </span><span class="nt">className</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">traefik</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api.cluster.kcn333.com</span>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">  </span><span class="nt">tlsSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local-prod-kcn333-tls</span>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
-</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="nt">resources</span><span class="p">:</span>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="w">  </span><span class="nt">requests</span><span class="p">:</span>
-</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
-</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256Mi</span>
-</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
-</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000m</span>
-</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512Mi</span>
-</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>
-</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="nt">livenessProbe</span><span class="p">:</span>
-</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
-</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/actuator/health/liveness</span>
-</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
-</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>
-</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="nt">readinessProbe</span><span class="p">:</span>
-</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
-</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/actuator/health/readiness</span>
-</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a><span class="w">  </span><span class="nt">periodSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a><span class="w">  </span><span class="nt">failureThreshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>
-</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a><span class="nt">autoscaling</span><span class="p">:</span>
-</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a><span class="w">  </span><span class="nt">minReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a><span class="w">  </span><span class="nt">maxReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
-</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a><span class="w">  </span><span class="nt">targetCPUUtilizationPercentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">70</span>
-</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>
-</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a><span class="nt">pdb</span><span class="p">:</span>
-</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a><span class="w">  </span><span class="nt">minAvailable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-</span><span id="__span-4-64"><a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a>
-</span><span id="__span-4-65"><a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a><span class="nt">networkPolicy</span><span class="p">:</span>
-</span><span id="__span-4-66"><a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-67"><a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a>
-</span><span id="__span-4-68"><a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a><span class="nt">serviceMonitor</span><span class="p">:</span>
-</span><span id="__span-4-69"><a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-4-70"><a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+<p>Awaria zatrzymuje kolejkę. Ścieżka ratunkowa nie wykonuje automatycznego <code>uncordon</code> uszkodzonego noda.</p>
+<hr />
+<h2 id="3-pliki-implementacji">3. Pliki implementacji<a class="headerlink" href="#3-pliki-implementacji" title="Permanent link">&para;</a></h2>
+<p>Dodano:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cluster/playbooks/maintenance/k3s-os-upgrade.yml
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>cluster/tasks/k3s-os-cluster-health.yml
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>cluster/tasks/k3s-os-proxy-matrix.yml
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>docs/k3s-os-upgrade.md
 </span></code></pre></div>
-<h3 id="4-go-templates-skadnia">4. Go templates — składnia<a class="headerlink" href="#4-go-templates-skadnia" title="Permanent link">&para;</a></h3>
-<p>Helm używa Go templates do generowania YAML:</p>
+<p>Zaktualizowano:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cluster/README.md
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>tests/test-k3s-lifecycle.py
+</span></code></pre></div>
+<p>Playbook wymaga:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">k3s_os_upgrade_confirm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>Opcjonalna kolejność jest przekazywana jako zmienna uruchomienia, bez modyfikowania inventory:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">k3s_os_upgrade_order</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker1</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker2</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span>
+</span></code></pre></div>
+<hr />
+<h2 id="4-optymalizacja-sciezki-bez-dostepnych-aktualizacji">4. Optymalizacja ścieżki bez dostępnych aktualizacji<a class="headerlink" href="#4-optymalizacja-sciezki-bez-dostepnych-aktualizacji" title="Permanent link">&para;</a></h2>
+<p>Pierwotny przebieg wykonywałby <code>cordon</code>, <code>drain</code> i snapshot również wtedy, gdy APT nie miał nic do zainstalowania.</p>
+<p>Zmieniono kolejność:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pełny preflight
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  ↓
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>apt update
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  ↓
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>apt dist-upgrade --simulate
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  ↓
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>kontrola reboot-required
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  ↓
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>decyzja CURRENT albo MAINTENANCE
+</span></code></pre></div>
+<p>Node wymaga maintenance tylko wtedy, gdy:</p>
+<ul>
+<li>symulacja APT wykazuje pakiety do aktualizacji; lub</li>
+<li>istnieje <code>/var/run/reboot-required</code>.</li>
+</ul>
+<p>Jeżeli żaden node nie wymaga zmian:</p>
+<ul>
+<li>snapshot etcd jest pomijany;</li>
+<li><code>cordon</code> i <code>drain</code> są pomijane;</li>
+<li>APT nie wykonuje instalacji;</li>
+<li>nie ma rebootu;</li>
+<li>wykonywana jest końcowa walidacja klastra;</li>
+<li>raport oznacza wszystkie nody jako <code>CURRENT</code>.</li>
+</ul>
+<hr />
+<h2 id="5-problem-jednoinstancyjnych-baz-podczas-drainu">5. Problem jednoinstancyjnych baz podczas drainu<a class="headerlink" href="#5-problem-jednoinstancyjnych-baz-podczas-drainu" title="Permanent link">&para;</a></h2>
+<p>Oba klastry CloudNativePG działały wcześniej z:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">instances</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</span></code></pre></div>
+<p>Przy jednej instancji drain noda z primary zawsze powoduje przerwę. <code>nodeMaintenanceWindow.inProgress: true</code> usuwa PDB i pozwala przeprowadzić maintenance, ale nie zapewnia dostępności bazy.</p>
+<p>Ręczne przełączanie tego pola przed i po każdym uruchomieniu playbooka nie jest właściwym modelem operacyjnym.</p>
+<p>Przyjęto docelowo:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">instances</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span></code></pre></div>
+<p>dla:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>clients/clients-db
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>clients-staging/clients-db-staging
+</span></code></pre></div>
+<p><code>nodeMaintenanceWindow</code> pozostaje wyłączone podczas zwykłej pracy. CloudNativePG utrzymuje PDB i może wykonać switchover przed eksmisją primary.</p>
+<p>PDB z:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ALLOWED DISRUPTIONS: 0
+</span></code></pre></div>
+<p>nie jest sam w sobie błędem. Chroni primary do czasu, aż operator potwierdzi gotową replikę i bezpieczną zmianę roli.</p>
+<hr />
+<h2 id="6-repliki-nie-konczyy-inicjalizacji">6. Repliki nie kończyły inicjalizacji<a class="headerlink" href="#6-repliki-nie-konczyy-inicjalizacji" title="Permanent link">&para;</a></h2>
+<p>Po ustawieniu <code>instances: 2</code> oba klastry przez kilkanaście minut pozostawały w stanie:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>instances: 2
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>readyInstances: 1
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>phase: Creating a new replica
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Ready: false
+</span></code></pre></div>
+<p>Primary działały na <code>worker1</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>clients-db-1          primary   worker1
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>clients-db-staging-1  primary   worker1
+</span></code></pre></div>
+<p>Operator utworzył Pody zadań join na <code>master</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>clients-db-2-join-...
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>clients-db-staging-2-join-...
+</span></code></pre></div>
+<p>Nowe PVC zostały poprawnie utworzone i związane przez Longhorn:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Składnia</th>
-<th style="text-align: left;">Znaczenie</th>
+<th>Namespace</th>
+<th>PVC</th>
+<th>Wolumen</th>
+<th>Stan</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>{{ .Values.image.repository }}</code></td>
-<td style="text-align: left;">Wartość z values.yaml</td>
+<td><code>clients</code></td>
+<td><code>clients-db-2</code></td>
+<td><code>pvc-583d8934-49bb-4fc1-890a-0779d64c1fe5</code></td>
+<td><code>Bound</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>{{ .Chart.AppVersion }}</code></td>
-<td style="text-align: left;">Wartość z Chart.yaml</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{ .Release.Namespace }}</code></td>
-<td style="text-align: left;">Namespace w którym instalujemy</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{ .Release.Name }}</code></td>
-<td style="text-align: left;">Nazwa release (helm install <strong>clients-api</strong> ...)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{ include "clients-api.fullname" . }}</code></td>
-<td style="text-align: left;">Wywołanie helpera z _helpers.tpl</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{- if .Values.ingress.enabled }}</code></td>
-<td style="text-align: left;">Warunkowe renderowanie</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{- toYaml .Values.resources \| nindent 12 }}</code></td>
-<td style="text-align: left;">Konwersja obiektu na YAML z wcięciem</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>{{ .Values.image.tag \| default .Chart.AppVersion }}</code></td>
-<td style="text-align: left;">Wartość z fallbackiem</td>
+<td><code>clients-staging</code></td>
+<td><code>clients-db-staging-2</code></td>
+<td><code>pvc-b9b16f17-ece3-4ce9-8dd5-c1c57ae4cee5</code></td>
+<td><code>Bound</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Ważna zasada:</strong> nigdy nie wpisuj nazwy zasobu na twardo — zawsze przez helper:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">include "clients-api.fullname" .</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<p>Storage i scheduling działały. Problem występował podczas łączenia nowej instancji z primary.</p>
+<p>Logi join pokazywały cykliczne timeouty TCP/5432:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>clients-db-rw:5432          timeout after 10 seconds
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>clients-db-staging-rw:5432  timeout after 10 seconds
 </span></code></pre></div>
-<h3 id="5-deploymentyaml-kluczowe-elementy">5. deployment.yaml — kluczowe elementy<a class="headerlink" href="#5-deploymentyaml-kluczowe-elementy" title="Permanent link">&para;</a></h3>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">containers</span><span class="p">:</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Chart.Name</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">.Values.image.repository</span><span class="nv"> </span><span class="s">}}:{{</span><span class="nv"> </span><span class="s">.Values.image.tag</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default</span><span class="nv"> </span><span class="s">.Chart.AppVersion</span><span class="nv"> </span><span class="s">}}"</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_PROFILES_ACTIVE</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.springProfile | quote</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_DATASOURCE_URL</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">"jdbc:postgresql://{{</span><span class="nv"> </span><span class="s">.Values.database.host</span><span class="nv"> </span><span class="s">}}:{{</span><span class="nv"> </span><span class="s">.Values.database.port</span><span class="nv"> </span><span class="s">}}/{{</span><span class="nv"> </span><span class="s">.Values.database.name</span><span class="nv"> </span><span class="s">}}"</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_DATASOURCE_USERNAME</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">          </span><span class="nt">secretKeyRef</span><span class="p">:</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.database.credentialsSecret</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">            </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">username</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_DATASOURCE_PASSWORD</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="nt">valueFrom</span><span class="p">:</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">          </span><span class="nt">secretKeyRef</span><span class="p">:</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.database.credentialsSecret</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">            </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="nt">livenessProbe</span><span class="p">:</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">      </span><span class="p p-Indicator">{{</span><span class="nv">- toYaml .Values.livenessProbe | nindent 12</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">    </span><span class="nt">readinessProbe</span><span class="p">:</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">      </span><span class="p p-Indicator">{{</span><span class="nv">- toYaml .Values.readinessProbe | nindent 12</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span><span class="nt">resources</span><span class="p">:</span>
-</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">      </span><span class="p p-Indicator">{{</span><span class="nv">- toYaml .Values.resources | nindent 12</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+<p>Service i EndpointSlice były poprawne:</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Endpoint</th>
+<th style="text-align: right;">Ready</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clients-db-rw</code></td>
+<td><code>10.42.1.182:5432</code></td>
+<td style="text-align: right;"><code>true</code></td>
+</tr>
+<tr>
+<td><code>clients-db-staging-rw</code></td>
+<td><code>10.42.1.230:5432</code></td>
+<td style="text-align: right;"><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<p>Nie był to problem DNS, Service, EndpointSlice, PVC ani operatora.</p>
+<hr />
+<h2 id="7-przyczyna-brak-reguy-dla-ruchu-wewnetrznego-postgresql">7. Przyczyna: brak reguły dla ruchu wewnętrznego PostgreSQL<a class="headerlink" href="#7-przyczyna-brak-reguy-dla-ruchu-wewnetrznego-postgresql" title="Permanent link">&para;</a></h2>
+<p>W obu namespace obowiązywały polityki ingress wybierające Pody baz.</p>
+<p>Polityka aplikacyjna dopuszczała:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>clients-api → PostgreSQL
 </span></code></pre></div>
-<h3 id="6-walidacja-charta">6. Walidacja charta<a class="headerlink" href="#6-walidacja-charta" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Sprawdź poprawność składni</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>helm<span class="w"> </span>lint<span class="w"> </span>helm/clients-api
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Wygeneruj YAML bez instalacji</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>helm<span class="w"> </span>template<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Sprawdź jakie zasoby zostaną utworzone</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>helm<span class="w"> </span>template<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^kind:\|^  name:"</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Dry-run z klastra (walidacja przez API server)</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>helm<span class="w"> </span>install<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>--dry-run
+<p>Polityka operatora dopuszczała:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>cnpg-system/cloudnative-pg → TCP/8000
 </span></code></pre></div>
-<h3 id="7-podaczenie-do-flux-gitrepository-helmrelease">7. Podłączenie do Flux — GitRepository + HelmRelease<a class="headerlink" href="#7-podaczenie-do-flux-gitrepository-helmrelease" title="Permanent link">&para;</a></h3>
-<p>W k3s-homelab repo:</p>
-<p><strong>GitRepository</strong> — mówi Fluxowi skąd pobrać chart:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source.toolkit.fluxcd.io/v1</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitRepository</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1m</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/kCn3333/clients-api</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nt">ref</span><span class="p">:</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<p>Brakowało reguły:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>instancja CNPG → instancja CNPG → TCP/5432
 </span></code></pre></div>
-<p><strong>HelmRelease</strong> — mówi Fluxowi jak zainstalować chart:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm.toolkit.fluxcd.io/v2</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HelmRelease</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="nt">chart</span><span class="p">:</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">      </span><span class="nt">chart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">helm/clients-api</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="nt">reconcileStrategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Revision</span><span class="w">  </span><span class="c1"># ← re-fetch przy każdym nowym commicie</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="nt">sourceRef</span><span class="p">:</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitRepository</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1m</span>
-</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">  </span><span class="nt">install</span><span class="p">:</span>
-</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="nt">remediation</span><span class="p">:</span>
-</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">  </span><span class="nt">upgrade</span><span class="p">:</span>
-</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="nt">remediation</span><span class="p">:</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">  </span><span class="nt">values</span><span class="p">:</span>
-</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span>
-</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">      </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"1.4.0"</span><span class="w"> </span><span class="c1"># {"$imagepolicy": "flux-system:clients-api:tag"}</span>
+<p>Zadanie join miało etykietę klastra, więc było objęte izolacją ingress, ale nie pasowało do żadnego dozwolonego źródła dla portu PostgreSQL.</p>
+<p>Pliki wymagające uzupełnienia:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>apps/base/clients-api/networkpolicy-cnpg-operator.yaml
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>apps/staging/networkpolicy-cnpg-operator.yaml
 </span></code></pre></div>
-<p><strong>Marker dla image automation</strong> — <code># {"$imagepolicy": "flux-system:clients-api:tag"}</code> mówi Fluxowi żeby automatycznie aktualizował tag gdy pojawi się nowy image.</p>
-<h3 id="8-reconcilestrategy">8. reconcileStrategy<a class="headerlink" href="#8-reconcilestrategy" title="Permanent link">&para;</a></h3>
-<p>Domyślna strategia to <code>ChartVersion</code> — Flux pobiera nowy chart <strong>tylko gdy zmieni się <code>version</code></strong> w Chart.yaml.</p>
-<p><code>Revision</code> — Flux pobiera chart <strong>przy każdym nowym commicie</strong> do repo.</p>
-<p>Dla developmentu <code>Revision</code> jest wygodniejsze. W produkcji <code>ChartVersion</code> daje lepszą kontrolę.</p>
-<h3 id="9-napotkane-problemy">9. Napotkane problemy<a class="headerlink" href="#9-napotkane-problemy" title="Permanent link">&para;</a></h3>
-<p><strong><code>reconcileStrategy: ChartVersion</code> blokuje update:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Bump version w Chart.yaml</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s/version: 0.1.0/version: 0.1.1/'</span><span class="w"> </span>helm/clients-api/Chart.yaml
+<p>Dodano osobną, czytelną regułę dla ruchu wewnętrznego każdej bazy:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">      </span><span class="nt">cnpg.io/cluster</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;cluster&gt;</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">      </span><span class="nt">cnpg.io/podRole</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instance</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">  </span><span class="nt">policyTypes</span><span class="p">:</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">  </span><span class="nt">ingress</span><span class="p">:</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">podSelector</span><span class="p">:</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">              </span><span class="nt">cnpg.io/cluster</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;cluster&gt;</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
 </span></code></pre></div>
-<p><strong><code>terminal error: exceeded maximum retries</code>:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>flux<span class="w"> </span><span class="nb">suspend</span><span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>flux<span class="w"> </span>resume<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
+<p>Reguła jest ograniczona do Podów tego samego klastra i portu PostgreSQL. Nie otwiera ruchu z innych namespace ani innych workloadów.</p>
+<hr />
+<h2 id="8-stan-cloudnativepg-po-poprawce">8. Stan CloudNativePG po poprawce<a class="headerlink" href="#8-stan-cloudnativepg-po-poprawce" title="Permanent link">&para;</a></h2>
+<p>Po wdrożeniu polityk zadania join zakończyły się, a operator utworzył właściwe repliki.</p>
+<p>Stan Podów:</p>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Pod</th>
+<th>Rola</th>
+<th style="text-align: right;">Ready</th>
+<th>Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clients</code></td>
+<td><code>clients-db-1</code></td>
+<td>primary</td>
+<td style="text-align: right;"><code>true</code></td>
+<td><code>worker1</code></td>
+</tr>
+<tr>
+<td><code>clients</code></td>
+<td><code>clients-db-2</code></td>
+<td>replica</td>
+<td style="text-align: right;"><code>true</code></td>
+<td><code>master</code></td>
+</tr>
+<tr>
+<td><code>clients-staging</code></td>
+<td><code>clients-db-staging-1</code></td>
+<td>primary</td>
+<td style="text-align: right;"><code>true</code></td>
+<td><code>worker1</code></td>
+</tr>
+<tr>
+<td><code>clients-staging</code></td>
+<td><code>clients-db-staging-2</code></td>
+<td>replica</td>
+<td style="text-align: right;"><code>true</code></td>
+<td><code>master</code></td>
+</tr>
+</tbody>
+</table>
+<p>Osiągnięta topologia:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>worker1: primary produkcji + primary stagingu
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>master:  replika produkcji + replika stagingu
 </span></code></pre></div>
-<p><strong>Helm ma zepsutą historię releasów:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>helm<span class="w"> </span>uninstall<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
+<p>Samo pojawienie się obu replik w stanie <code>Ready</code> potwierdziło, że przyczyną blokady była brakująca reguła <code>NetworkPolicy</code> dla TCP/5432.</p>
+<hr />
+<h2 id="9-wniosek-dla-playbooka-aktualizacji-ubuntu">9. Wniosek dla playbooka aktualizacji Ubuntu<a class="headerlink" href="#9-wniosek-dla-playbooka-aktualizacji-ubuntu" title="Permanent link">&para;</a></h2>
+<p>Preflight playbooka przeszedł wcześniej mimo stanu:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>spec.instances: 2
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>status.readyInstances: 1
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Ready: false
 </span></code></pre></div>
-<p><strong>Stary HelmChart artifact w Flux:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>flux<span class="w"> </span>reconcile<span class="w"> </span><span class="nb">source</span><span class="w"> </span>git<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>flux-system
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>reconcile.fluxcd.io/requestedAt<span class="o">=</span><span class="s2">"</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span><span class="s2">"</span><span class="w"> </span>--overwrite
+<p>Kontrola samych faz Podów i zdrowia Longhorna nie wykrywa degradacji klastra CloudNativePG.</p>
+<p>Helper zdrowia klastra powinien dodatkowo odczytywać wszystkie zasoby:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>clusters.postgresql.cnpg.io
 </span></code></pre></div>
-<h3 id="10-mono-repo-vs-osobne-repo">10. mono-repo vs osobne repo<a class="headerlink" href="#10-mono-repo-vs-osobne-repo" title="Permanent link">&para;</a></h3>
+<p>i dla każdego wymagać:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>status.readyInstances == spec.instances
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>condition Ready == True
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>status.phase == Cluster in healthy state
+</span></code></pre></div>
+<p>Kontrola powinna działać:</p>
+<ol>
+<li>przed utworzeniem snapshotu;</li>
+<li>przed <code>cordon</code> każdego noda;</li>
+<li>po odzyskaniu noda, przed przejściem do następnego;</li>
+<li>w końcowej walidacji.</li>
+</ol>
+<p>Nie należy globalnie wymagać <code>disruptionsAllowed &gt; 0</code> dla wszystkich PDB. W przypadku CloudNativePG wartość <code>0</code> przed rozpoczęciem kontrolowanego switchoveru może być poprawna.</p>
+<hr />
+<h2 id="10-stan-koncowy">10. Stan końcowy<a class="headerlink" href="#10-stan-koncowy" title="Permanent link">&para;</a></h2>
+<h3 id="k3s">K3s<a class="headerlink" href="#k3s" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Mono-repo - chart i aplikacja wersjonowane razem.</li>
-<li>Chart w repo aplikacji (<code>helm/clients-api/</code>)</li>
-<li>Dedykowane repo dla chartów, większa platforma</li>
-<li>OCI Registry, Chart jako image (<code>ghcr.io/org/charts/app:1.0</code>)</li>
+<li>trzy nody działają;</li>
+<li>wersja <code>v1.36.4+k3s1</code> pozostaje bez zmian;</li>
+<li>kolejny zimny start zakończył się poprawnie;</li>
+<li>macierz API server → kubelet działa <code>9/9</code>.</li>
 </ul>
-<p><strong>OCI</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>helm<span class="w"> </span>package<span class="w"> </span>helm/clients-api
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>helm<span class="w"> </span>push<span class="w"> </span>clients-api-0.1.0.tgz<span class="w"> </span>oci://ghcr.io/kcn333/charts
-</span></code></pre></div>
-<p>W HelmRelease:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">chart</span><span class="p">:</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">chart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"0.1.*"</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">sourceRef</span><span class="p">:</span>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">      </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HelmRepository</span>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kcn333-charts</span>
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">      </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span>
-</span></code></pre></div>
-<h3 id="11-przydatne-narzedzia">11. Przydatne narzędzia<a class="headerlink" href="#11-przydatne-narzedzia" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># helm-diff — podgląd zmian przed upgrade</span>
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>helm<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/databus23/helm-diff
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>helm<span class="w"> </span>diff<span class="w"> </span>upgrade<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1"># Debugowanie</span>
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>helm<span class="w"> </span>get<span class="w"> </span>values<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w">      </span><span class="c1"># aktualne values</span>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>helm<span class="w"> </span>get<span class="w"> </span>manifest<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w">    </span><span class="c1"># wygenerowane YAML</span>
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>helm<span class="w"> </span><span class="nb">history</span><span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w">         </span><span class="c1"># historia releasów</span>
-</span></code></pre></div>
-<hr />
-<h2 id="finalna-struktura-clients-api-repo">Finalna struktura clients-api repo<a class="headerlink" href="#finalna-struktura-clients-api-repo" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>clients-api/
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>├── src/                      ← kod aplikacji Java
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>├── Dockerfile
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>├── .github/workflows/        ← CI/CD pipeline
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>└── helm/
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    └── clients-api/
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>        ├── Chart.yaml         version: 0.1.2, appVersion: "1.4.0"
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>        ├── values.yaml        wszystkie defaults
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>        └── templates/
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>            ├── _helpers.tpl
-</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>            ├── NOTES.txt
-</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>            ├── deployment.yaml
-</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>            ├── service.yaml
-</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>            ├── ingress.yaml
-</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>            ├── hpa.yaml
-</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>            ├── pdb.yaml
-</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>            ├── networkpolicy.yaml
-</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>            └── servicemonitor.yaml
-</span></code></pre></div>
-<hr />
-<h2 id="backlog">Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Opcja B — opublikować chart jako OCI image na ghcr.io</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>helm test</code> — test po deploy sprawdzający endpoint</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> values-staging.yaml — osobne wartości dla środowiska staging</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Progressive delivery (staging/production branches)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hubble UI — native routing (zaplanować osobną sesję)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> HashiCorp Vault</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> External-dns</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RBAC</li>
+<h3 id="aktualizacje-ubuntu">Aktualizacje Ubuntu<a class="headerlink" href="#aktualizacje-ubuntu" title="Permanent link">&para;</a></h3>
+<ul>
+<li>playbook został wdrożony w repozytorium i uruchomiony z Semaphore;</li>
+<li>wszystkie preflighty przeszły;</li>
+<li>brak dostępnych aktualizacji na trzech nodach;</li>
+<li>brak wymaganego restartu;</li>
+<li>snapshot, cordon, drain, instalacja i reboot zostały prawidłowo pominięte;</li>
+<li>przetestowana jest tylko ścieżka <code>CURRENT</code>.</li>
+</ul>
+<h3 id="cloudnativepg">CloudNativePG<a class="headerlink" href="#cloudnativepg" title="Permanent link">&para;</a></h3>
+<ul>
+<li>oba klastry mają <code>instances: 2</code>;</li>
+<li>oba primary są <code>Ready</code> na <code>worker1</code>;</li>
+<li>obie repliki są <code>Ready</code> na <code>master</code>;</li>
+<li><code>nodeMaintenanceWindow</code> nie wymaga ręcznego przełączania przed każdym maintenance;</li>
+<li>wewnętrzny ruch replikacji i join na TCP/5432 jest jawnie dozwolony przez <code>NetworkPolicy</code>.</li>
+</ul>
+<h3 id="longhorn">Longhorn<a class="headerlink" href="#longhorn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>PVC nowych replik zostały utworzone i związane;</li>
+<li>storage nie był przyczyną opóźnienia inicjalizacji replik.</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Helm</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>helm<span class="w"> </span>lint<span class="w"> </span>helm/clients-api
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>helm<span class="w"> </span>template<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^kind:\|^  name:"</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>helm<span class="w"> </span>install<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>--dry-run
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>helm<span class="w"> </span>list<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>helm<span class="w"> </span><span class="nb">history</span><span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>helm<span class="w"> </span>get<span class="w"> </span>values<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c1"># Flux</span>
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>flux<span class="w"> </span>reconcile<span class="w"> </span><span class="nb">source</span><span class="w"> </span>git<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>flux-system
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>flux<span class="w"> </span><span class="nb">suspend</span><span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>flux<span class="w"> </span>resume<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>kubectl<span class="w"> </span>get<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>kubectl<span class="w"> </span>get<span class="w"> </span>helmchart<span class="w"> </span>-A
+<h2 id="11-nastepna-sesja">11. Następna sesja<a class="headerlink" href="#11-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Dodać kontrolę CloudNativePG do <code>k3s-os-cluster-health.yml</code>.</li>
+<li>Potwierdzić dla obu klastrów:</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>spec.instances = 2
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>status.readyInstances = 2
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>Ready = True
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>phase = Cluster in healthy state
 </span></code></pre></div>
+<ol>
+<li>Sprawdzić stan replikacji SQL przez <code>pg_stat_replication</code>.</li>
+<li>Zweryfikować rozłożenie nowych wolumenów Longhorn i ich replik.</li>
+<li>Wykonać kontrolowany test drain noda z primary.</li>
+<li>Potwierdzić automatyczny switchover, działanie Service <code>*-rw</code> i powrót klastra do <code>2/2 Ready</code>.</li>
+<li>Przy pierwszych rzeczywistych aktualizacjach Ubuntu zachować pełny log ścieżki <code>snapshot → drain → reboot → recovery</code>.</li>
+</ol>
 
 
 
@@ -4157,7 +4565,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="April 16, 2026 14:58:04 UTC"><span class="timeago" datetime="2026-04-16T14:58:04+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 16, 2026 14:58:04 UTC">2026-04-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     
@@ -4167,7 +4575,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 22, 2026 15:27:43 UTC"><span class="timeago" datetime="2026-03-22T15:27:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 22, 2026 15:27:43 UTC">2026-03-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     

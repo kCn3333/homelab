@@ -1442,6 +1442,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#persistent-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persistent volumes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#storageclasses" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2460,6 +2471,146 @@
     
   
     27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2028/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28 - zakończenie aktualizacji K3s i CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2029/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 - aktualizacja Longhorna i Metrics Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2031/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31 - przejęcie cert-managera przez Flux i aktualizacja Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2032/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32 - migracja repozytorium Helm i aktualizacja Loki
   
 
     
@@ -3727,6 +3878,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#persistent-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persistent volumes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#storageclasses" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3800,10 +3962,51 @@
 
 <h1 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h1>
 <h2 id="longhorn">Longhorn<a class="headerlink" href="#longhorn" title="Permanent link">&para;</a></h2>
-<p>Longhorn <code>v1.11</code> provides replicated persistent storage. The default replica count is
+<p>Longhorn <code>v1.12.1</code> provides replicated persistent storage. The default replica count is
 two, so a healthy volume has copies on two eligible nodes.</p>
 <p>Required node packages are <code>open-iscsi</code>, <code>nfs-common</code> and <code>util-linux</code>. The <code>iscsid</code>
 service must be enabled. Longhorn is installed and configured through Flux and Helm.</p>
+<h2 id="persistent-volumes">Persistent volumes<a class="headerlink" href="#persistent-volumes" title="Permanent link">&para;</a></h2>
+<p>The cluster uses six Longhorn volumes with engine <code>v1.12.1</code> and two data replicas
+per volume.</p>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>PVCs</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loki</code></td>
+<td><code>storage-loki-0</code> (<code>10Gi</code>)</td>
+<td>Local Loki storage</td>
+</tr>
+<tr>
+<td><code>monitoring</code></td>
+<td>Prometheus database PVC</td>
+<td>Metrics storage</td>
+</tr>
+<tr>
+<td><code>clients</code></td>
+<td><code>clients-db-1</code>, <code>clients-db-2</code></td>
+<td>Production PostgreSQL instances</td>
+</tr>
+<tr>
+<td><code>clients-staging</code></td>
+<td><code>clients-db-staging-1</code>, <code>clients-db-staging-2</code></td>
+<td>Staging PostgreSQL instances</td>
+</tr>
+</tbody>
+</table>
+<p>Data replicas reside on <code>worker1</code> and <code>worker2</code>. Volume attachment
+(<code>currentNodeID</code>) identifies the node using the volume; replica placement
+(<code>spec.nodeID</code>) identifies the node storing a copy of its data.</p>
+<p>Loki uses a <code>10Gi</code> PVC. Its StatefulSet uses <code>Retain</code> for both
+<code>whenDeleted</code> and <code>whenScaled</code>, set through
+<code>singleBinary.persistence.enableStatefulSetAutoDeletePVC: false</code>. This protects
+against automatic PVC deletion with the StatefulSet; it is not a backup.</p>
 <h2 id="storageclasses">StorageClasses<a class="headerlink" href="#storageclasses" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3837,10 +4040,6 @@ share it. RWX supports read-write mounts from multiple nodes.</p>
 <p>Longhorn engines, replicas, Instance Managers and RWX share managers communicate over
 the cluster network. A ready node is not sufficient if those components still refer
 to stale Pod addresses.</p>
-<p>During the Cilium IPAM migration, replica processes remained associated with the old
-Pod address pool. The affected volumes stayed attached but became degraded. After the
-Instance Managers were recreated with current <code>10.42.x.x</code> addresses, Longhorn rebuilt
-the missing replicas and returned the volumes to <code>healthy</code>.</p>
 <p>For network changes or node restarts:</p>
 <ol>
 <li>Work on one node at a time.</li>
@@ -3887,7 +4086,7 @@ protect Kubernetes object state. Both are required for a full recovery plan. See
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 10, 2026 12:28:23 UTC"><span class="timeago" datetime="2026-09-10T12:28:23+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2026 12:28:23 UTC">2026-09-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     

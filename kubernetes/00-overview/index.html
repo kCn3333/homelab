@@ -2484,6 +2484,146 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2028/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28 - zakończenie aktualizacji K3s i CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2029/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 - aktualizacja Longhorna i Metrics Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2031/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31 - przejęcie cert-managera przez Flux i aktualizacja Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2032/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32 - migracja repozytorium Helm i aktualizacja Loki
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3875,6 +4015,7 @@
 <p>HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates application TLS and performs HTTP routing.</p>
 <hr />
 <h2 id="current-platform">Current platform<a class="headerlink" href="#current-platform" title="Permanent link">&para;</a></h2>
+<p>State as of <strong>2026-09-25</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -3885,8 +4026,18 @@
 </thead>
 <tbody>
 <tr>
+<td>Host OS</td>
+<td>Ubuntu <code>24.04.5 LTS</code></td>
+<td>Kernel <code>6.8.0-139-generic</code></td>
+</tr>
+<tr>
+<td>Container runtime</td>
+<td>containerd <code>2.3.4-k3s1.36</code></td>
+<td>Runtime on all three K3s servers</td>
+</tr>
+<tr>
 <td>Kubernetes</td>
-<td>k3s <code>v1.35.8+k3s1</code></td>
+<td>K3s <code>v1.36.4+k3s1</code></td>
 <td>Kubernetes distribution and embedded etcd</td>
 </tr>
 <tr>
@@ -3906,7 +4057,7 @@
 </tr>
 <tr>
 <td>Ingress</td>
-<td>Traefik v3</td>
+<td>Traefik <code>3.7.8</code></td>
 <td>TLS termination and L7 routing</td>
 </tr>
 <tr>
@@ -3916,17 +4067,17 @@
 </tr>
 <tr>
 <td>TLS</td>
-<td>cert-manager</td>
+<td>cert-manager <code>v1.21.2</code></td>
 <td>Let's Encrypt certificates through DNS-01</td>
 </tr>
 <tr>
 <td>Storage</td>
-<td>Longhorn <code>v1.11</code></td>
+<td>Longhorn <code>v1.12.1</code></td>
 <td>Replicated persistent volumes</td>
 </tr>
 <tr>
 <td>GitOps</td>
-<td>Flux <code>v2.8.1</code></td>
+<td>Flux <code>v2.9.5</code></td>
 <td>Reconciliation and image automation</td>
 </tr>
 <tr>
@@ -3936,7 +4087,7 @@
 </tr>
 <tr>
 <td>Resource metrics</td>
-<td>metrics-server <code>v0.8.1</code></td>
+<td>metrics-server <code>v0.9.0</code></td>
 <td>Metrics API for <code>kubectl top</code> and HPA</td>
 </tr>
 <tr>
@@ -3946,8 +4097,13 @@
 </tr>
 <tr>
 <td>Logging</td>
-<td>Loki and Alloy <code>v1.19.2</code></td>
+<td>Loki <code>3.7.6</code>, Alloy <code>1.19.2</code></td>
 <td>Central log collection</td>
+</tr>
+<tr>
+<td>Databases</td>
+<td>CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code></td>
+<td>Two instances per production and staging database</td>
 </tr>
 <tr>
 <td>Object storage</td>
@@ -4063,7 +4219,7 @@ changes.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 16, 2026 12:57:28 UTC"><span class="timeago" datetime="2026-09-16T12:57:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 16, 2026 12:57:28 UTC">2026-09-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     

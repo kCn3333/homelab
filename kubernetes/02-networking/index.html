@@ -1464,6 +1464,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#cloudnativepg-replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CloudNativePG replication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#api-server-proxy-traffic-to-sealed-secrets" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2532,6 +2543,146 @@
     
   
     27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2028/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28 - zakończenie aktualizacji K3s i CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2029/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 - aktualizacja Longhorna i Metrics Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2031/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31 - przejęcie cert-managera przez Flux i aktualizacja Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2032/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32 - migracja repozytorium Helm i aktualizacja Loki
   
 
     
@@ -3877,6 +4028,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#cloudnativepg-replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CloudNativePG replication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#api-server-proxy-traffic-to-sealed-secrets" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4103,11 +4265,10 @@
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  -&gt; 192.168.55.11:4244
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>  -&gt; 192.168.55.12:4244
 </span></code></pre></div>
-<p>The internal Relay-to-agent path requires Pod-to-NodeIP connectivity on TCP <code>4244</code>. This is cluster-internal traffic and is separate from browser access through Traefik. It was restored by upgrading Cilium from <code>1.19.1</code> to <code>1.19.7</code> and revalidated on <code>1.20.2</code>; no <code>hostNetwork</code> workaround, manual port-forward or additional UFW route rule is required.</p>
-<p>After the <code>1.20.2</code> upgrade, all three agents reported <code>cilium-dbg status --brief: OK</code>.
-Hubble Relay, Hubble UI, live flows and the service map were operational. Cluster DNS,
-the Sealed Secrets API proxy path and the existing CiliumNetworkPolicy were also
-verified.</p>
+<p>The internal Relay-to-agent path requires Pod-to-NodeIP connectivity on TCP <code>4244</code>.
+This is cluster-internal traffic, separate from browser access through Traefik.
+The configuration uses the Pod network without <code>hostNetwork</code> or an additional
+UFW route rule. Hubble UI provides live flows and the service map.</p>
 <p>Useful checks:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>service<span class="w"> </span>hubble-peer<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
@@ -4130,7 +4291,7 @@ verified.</p>
 <hr />
 <h2 id="networkpolicy">NetworkPolicy<a class="headerlink" href="#networkpolicy" title="Permanent link">&para;</a></h2>
 <p>Without a policy, Pods can communicate across namespaces. A NetworkPolicy selects Pods and restricts ingress, egress or both.</p>
-<p>Example: allow PostgreSQL traffic only from <code>clients-api</code> Pods in the same namespace:</p>
+<p>The application-access policy allows PostgreSQL traffic from <code>clients-api</code> Pods in the same namespace:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NetworkPolicy</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4152,6 +4313,16 @@ verified.</p>
 </span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
 </span></code></pre></div>
 <p>Cilium drops traffic denied by policy. A timeout can therefore indicate a policy drop; it does not prove a routing failure.</p>
+<h3 id="cloudnativepg-replication">CloudNativePG replication<a class="headerlink" href="#cloudnativepg-replication" title="Permanent link">&para;</a></h3>
+<p>Both <code>clients/clients-db</code> and <code>clients-staging/clients-db-staging</code> have two
+instances. Their policies also allow the CNPG operator in <code>cnpg-system</code> to reach
+TCP <code>8000</code>, and Pods bearing the same <code>cnpg.io/cluster</code> label in the same namespace
+to reach database instances on TCP <code>5432</code>.</p>
+<p>The replication rule selects destination Pods by both <code>cnpg.io/cluster</code> and
+<code>cnpg.io/podRole: instance</code>; the source selector uses only the cluster label so
+that replica join Jobs are included. It does not allow other namespaces or
+unrelated workloads.</p>
+<p>The current policies do not allow Prometheus to scrape CNPG metrics on TCP <code>9187</code>.</p>
 <h3 id="api-server-proxy-traffic-to-sealed-secrets">API server proxy traffic to Sealed Secrets<a class="headerlink" href="#api-server-proxy-traffic-to-sealed-secrets" title="Permanent link">&para;</a></h3>
 <p><code>kubeseal --fetch-cert</code> and <code>kubeseal --validate</code> reach the controller through the
 Kubernetes API server proxy. HAProxy may send the client request to an API server on a
@@ -4263,7 +4434,7 @@ and implemented by the <a href="https://github.com/kCn3333/homelab-ansible/tree/
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 16, 2026 12:57:28 UTC"><span class="timeago" datetime="2026-09-16T12:57:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 16, 2026 12:57:28 UTC">2026-09-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     

@@ -1358,6 +1358,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#control-plane-availability" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1428,6 +1439,17 @@
     <span class="md-ellipsis">
       
         Node maintenance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ubuntu-package-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ubuntu package maintenance
       
     </span>
   </a>
@@ -2504,6 +2526,146 @@
     
   
     27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2028/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28 - zakończenie aktualizacji K3s i CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2029/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30 - aktualizacja Longhorna i Metrics Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2031/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31 - przejęcie cert-managera przez Flux i aktualizacja Flux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../journal/day%2032/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32 - migracja repozytorium Helm i aktualizacja Loki
   
 
     
@@ -3771,6 +3933,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#control-plane-availability" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3848,6 +4021,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ubuntu-package-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ubuntu package maintenance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#useful-commands" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3917,6 +4101,10 @@
 </table>
 <p>There is no dedicated worker-only node. The hostnames do not define scheduling priority or control-plane authority.</p>
 <hr />
+<h2 id="runtime">Runtime<a class="headerlink" href="#runtime" title="Permanent link">&para;</a></h2>
+<p>All three servers run K3s <code>v1.36.4+k3s1</code> with containerd <code>2.3.4-k3s1.36</code>
+on Ubuntu <code>24.04.5 LTS</code>, kernel <code>6.8.0-139-generic</code>.</p>
+<hr />
 <h2 id="control-plane-availability">Control-plane availability<a class="headerlink" href="#control-plane-availability" title="Permanent link">&para;</a></h2>
 <p>Embedded etcd uses three voting members. The cluster tolerates the loss of one member while retaining quorum.</p>
 <p>Control-plane availability and application availability are separate:</p>
@@ -3935,8 +4123,7 @@
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>→ one of 192.168.55.10/11/12:6443
 </span></code></pre></div>
 <p>HAProxy forwards raw TCP. TLS terminates at the selected kube-apiserver.</p>
-<p>HAProxy runs in an LXC container on the Proxmox server at <code>192.168.0.45</code>. Its
-configuration stayed unchanged after the move to LXC.</p>
+<p>HAProxy runs in an LXC container on the Proxmox server at <code>192.168.0.45</code>.</p>
 <p>The API certificate includes <code>cluster.kcn333.com</code> as a Subject Alternative Name. The kubeconfig must use that name:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">clusters</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cluster</span><span class="p">:</span>
@@ -3959,6 +4146,9 @@ configuration stayed unchanged after the move to LXC.</p>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>--disable-network-policy
 </span></code></pre></div>
 <p><code>--flannel-backend=none</code> disables the bundled CNI. <code>--disable-network-policy</code> disables the bundled policy controller because Cilium provides both functions.</p>
+<p><code>/etc/rancher/k3s/config.yaml</code> disables the bundled <code>metrics-server</code>; its
+replacement is a Flux-managed HelmRelease. Traefik remains packaged by K3s,
+with its <code>HelmChartConfig</code> managed through Flux.</p>
 <p>The effective systemd command can be checked with:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>show<span class="w"> </span>k3s<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--property<span class="o">=</span>ExecStart<span class="w"> </span><span class="se">\</span>
@@ -3999,7 +4189,7 @@ manual edits to generated systemd units are not the source of truth.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cluster/playbooks/maintenance/k3s-upgrade.yml
 </span></code></pre></div>
 <p>The target must be an explicit complete release:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>k3s_target_version=v1.35.8+k3s1
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>k3s_target_version=v1.36.4+k3s1
 </span></code></pre></div>
 <p>The playbook requires the complete inventory and rejects <code>--limit</code>, downgrades and
 unsupported version jumps. It performs:</p>
@@ -4046,6 +4236,18 @@ create a snapshot before the change:</p>
 </span></code></pre></div>
 <p>Before restarting another node, verify that Longhorn volumes have returned to <code>healthy</code>.</p>
 <hr />
+<h2 id="ubuntu-package-maintenance">Ubuntu package maintenance<a class="headerlink" href="#ubuntu-package-maintenance" title="Permanent link">&para;</a></h2>
+<p>The Ansible playbook <code>cluster/playbooks/maintenance/k3s-os-upgrade.yml</code> handles
+host package maintenance. It requires <code>k3s_os_upgrade_confirm: true</code> and the full
+inventory, rejects <code>--limit</code>, and accepts <code>k3s_os_upgrade_order</code> for the node sequence.</p>
+<p>It checks APT updates and <code>/var/run/reboot-required</code> before cordon. Nodes needing
+neither packages nor reboot are reported as <code>CURRENT</code>. Maintenance runs one node
+at a time, with an etcd snapshot before changes and readiness checks before
+uncordon. A failure stops the sequence.</p>
+<p>CNPG health requires a separate check before disruption: both clusters must have
+<code>readyInstances == spec.instances</code>, <code>Ready=True</code> and phase <code>Cluster in healthy state</code>.
+A CNPG PDB reporting zero allowed disruptions can be protecting the current primary.</p>
+<hr />
 <h2 id="useful-commands">Useful commands<a class="headerlink" href="#useful-commands" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>wide
@@ -4082,7 +4284,7 @@ create a snapshot before the change:</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 16, 2026 12:57:28 UTC"><span class="timeago" datetime="2026-09-16T12:57:28+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 16, 2026 12:57:28 UTC">2026-09-16</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
   </span>
 
     
