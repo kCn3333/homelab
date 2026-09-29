@@ -2,11 +2,32 @@
 
 ## Longhorn
 
-Longhorn `v1.11` provides replicated persistent storage. The default replica count is
+Longhorn `v1.12.1` provides replicated persistent storage. The default replica count is
 two, so a healthy volume has copies on two eligible nodes.
 
 Required node packages are `open-iscsi`, `nfs-common` and `util-linux`. The `iscsid`
 service must be enabled. Longhorn is installed and configured through Flux and Helm.
+
+## Persistent volumes
+
+The cluster uses six Longhorn volumes with engine `v1.12.1` and two data replicas
+per volume.
+
+| Namespace | PVCs | Purpose |
+|---|---|---|
+| `loki` | `storage-loki-0` (`10Gi`) | Local Loki storage |
+| `monitoring` | Prometheus database PVC | Metrics storage |
+| `clients` | `clients-db-1`, `clients-db-2` | Production PostgreSQL instances |
+| `clients-staging` | `clients-db-staging-1`, `clients-db-staging-2` | Staging PostgreSQL instances |
+
+Data replicas reside on `worker1` and `worker2`. Volume attachment
+(`currentNodeID`) identifies the node using the volume; replica placement
+(`spec.nodeID`) identifies the node storing a copy of its data.
+
+Loki uses a `10Gi` PVC. Its StatefulSet uses `Retain` for both
+`whenDeleted` and `whenScaled`, set through
+`singleBinary.persistence.enableStatefulSetAutoDeletePVC: false`. This protects
+against automatic PVC deletion with the StatefulSet; it is not a backup.
 
 ## StorageClasses
 
@@ -31,11 +52,6 @@ kubectl get volumes.longhorn.io -n longhorn-system
 Longhorn engines, replicas, Instance Managers and RWX share managers communicate over
 the cluster network. A ready node is not sufficient if those components still refer
 to stale Pod addresses.
-
-During the Cilium IPAM migration, replica processes remained associated with the old
-Pod address pool. The affected volumes stayed attached but became degraded. After the
-Instance Managers were recreated with current `10.42.x.x` addresses, Longhorn rebuilt
-the missing replicas and returned the volumes to `healthy`.
 
 For network changes or node restarts:
 

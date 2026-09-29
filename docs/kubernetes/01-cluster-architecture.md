@@ -14,6 +14,13 @@ There is no dedicated worker-only node. The hostnames do not define scheduling p
 
 ---
 
+## Runtime
+
+All three servers run K3s `v1.36.4+k3s1` with containerd `2.3.4-k3s1.36`
+on Ubuntu `24.04.5 LTS`, kernel `6.8.0-139-generic`.
+
+---
+
 ## Control-plane availability
 
 Embedded etcd uses three voting members. The cluster tolerates the loss of one member while retaining quorum.
@@ -41,8 +48,7 @@ kubectl
 
 HAProxy forwards raw TCP. TLS terminates at the selected kube-apiserver.
 
-HAProxy runs in an LXC container on the Proxmox server at `192.168.0.45`. Its
-configuration stayed unchanged after the move to LXC.
+HAProxy runs in an LXC container on the Proxmox server at `192.168.0.45`.
 
 The API certificate includes `cluster.kcn333.com` as a Subject Alternative Name. The kubeconfig must use that name:
 
@@ -78,6 +84,10 @@ k3s server
 ```
 
 `--flannel-backend=none` disables the bundled CNI. `--disable-network-policy` disables the bundled policy controller because Cilium provides both functions.
+
+`/etc/rancher/k3s/config.yaml` disables the bundled `metrics-server`; its
+replacement is a Flux-managed HelmRelease. Traefik remains packaged by K3s,
+with its `HelmChartConfig` managed through Flux.
 
 The effective systemd command can be checked with:
 
@@ -146,7 +156,7 @@ cluster/playbooks/maintenance/k3s-upgrade.yml
 The target must be an explicit complete release:
 
 ```text
-k3s_target_version=v1.35.8+k3s1
+k3s_target_version=v1.36.4+k3s1
 ```
 
 The playbook requires the complete inventory and rejects `--limit`, downgrades and
@@ -215,6 +225,23 @@ kubectl uncordon <node>
 ```
 
 Before restarting another node, verify that Longhorn volumes have returned to `healthy`.
+
+---
+
+## Ubuntu package maintenance
+
+The Ansible playbook `cluster/playbooks/maintenance/k3s-os-upgrade.yml` handles
+host package maintenance. It requires `k3s_os_upgrade_confirm: true` and the full
+inventory, rejects `--limit`, and accepts `k3s_os_upgrade_order` for the node sequence.
+
+It checks APT updates and `/var/run/reboot-required` before cordon. Nodes needing
+neither packages nor reboot are reported as `CURRENT`. Maintenance runs one node
+at a time, with an etcd snapshot before changes and readiness checks before
+uncordon. A failure stops the sequence.
+
+CNPG health requires a separate check before disruption: both clusters must have
+`readyInstances == spec.instances`, `Ready=True` and phase `Cluster in healthy state`.
+A CNPG PDB reporting zero allowed disruptions can be protecting the current primary.
 
 ---
 

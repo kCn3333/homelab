@@ -51,9 +51,9 @@ kubectl get secrets \
 ```
 
 Stream the minimized result directly into encryption; do not persist plaintext YAML or
-JSON. The verified September 2026 export used symmetric GPG AES-256 and contained four
-`kubernetes.io/tls` Secrets with both `tls.crt` and `tls.key`. Decryption and a
-portable SHA-256 checksum were validated without displaying private material.
+JSON. The recovery set contains four `kubernetes.io/tls` Secrets with both
+`tls.crt` and `tls.key`, encrypted with symmetric GPG AES-256 and accompanied by
+a SHA-256 checksum.
 
 Keep the encrypted payload and checksum outside the cluster, with at least one copy
 outside the workstation. Store the passphrase separately. Repeat the export after each
@@ -78,7 +78,7 @@ as plaintext manifests.
 
 ## Longhorn volume backups
 
-Longhorn `v1.11` uses a `BackupTarget` object:
+Longhorn `v1.12.1` uses a `BackupTarget` object:
 
 ```yaml
 apiVersion: longhorn.io/v1beta2
@@ -101,6 +101,16 @@ kubectl get backuptarget -n longhorn-system
 kubectl get recurringjob -n longhorn-system
 kubectl get backupvolume,backup -n longhorn-system
 ```
+
+## PostgreSQL backups
+
+The CNPG databases have manual logical dumps and PVCs covered by Longhorn volume
+backups. CNPG-native backups are not configured: there are no `ScheduledBackup`
+or `Backup` resources or a dedicated CNPG backup destination.
+
+Asynchronous streaming replication provides a second running database instance;
+it does not protect against accidental deletion or logical corruption. Database
+restore procedures are not yet validated.
 
 ## Verification
 

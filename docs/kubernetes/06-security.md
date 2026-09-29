@@ -68,10 +68,9 @@ manifests may have been sealed during different key-rotation periods. The recove
 must be encrypted before persistent storage, include both `tls.crt` and `tls.key`,
 remain outside the cluster, and be refreshed after a new key is created.
 
-The September 2026 recovery set contains four active key pairs. It was encrypted
-symmetrically with GPG AES-256, validated through streaming decryption without printing
-private values, protected by a SHA-256 checksum, and copied to removable storage. The
-passphrase must remain in a separate password manager.
+The recovery set contains four active key pairs, encrypted with symmetric GPG
+AES-256 and protected by a SHA-256 checksum. A copy is stored on removable storage;
+the passphrase is kept separately in a password manager.
 
 ## TLS
 

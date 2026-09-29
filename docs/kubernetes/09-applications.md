@@ -7,8 +7,8 @@ The main application Kustomization currently includes:
 * [clients-api](https://github.com/kCn3333/clients-api);
 * [k8s-badge](https://github.com/kCn3333/k8s-badge).
 
-The old nginx test is no longer active. Its files may remain as reference material,
-but they are not listed in `apps/base/kustomization.yaml` and Flux does not deploy them.
+The nginx test files are outside the active `apps/base/kustomization.yaml`
+resource list and are not deployed by Flux.
 
 ```bash
 kubectl get deployments,statefulsets,services,ingress -A
@@ -80,8 +80,25 @@ A PodDisruptionBudget protects at least one API replica during voluntary disrupt
 It does not protect against all simultaneous failures and does not make the database
 or ingress path highly available by itself.
 
-CloudNativePG manages PostgreSQL instances, Services, failover and storage claims.
-Database health must be checked independently from application readiness.
+CloudNativePG `1.30.0` (chart `0.29.0`) manages PostgreSQL `17.4`:
+
+| Namespace | Cluster | Instances | Replication |
+|---|---|---:|---|
+| `clients` | `clients-db` | 2 | Asynchronous streaming |
+| `clients-staging` | `clients-db-staging` | 2 | Asynchronous streaming |
+
+Each cluster has a primary and a replica, with a separate Longhorn PVC per
+instance. Clients use the `*-rw` Service, which follows the current primary.
+
+`nodeMaintenanceWindow` is disabled in normal operation. CNPG maintains PDBs and
+manages role changes for primary eviction. Asynchronous replication does not
+guarantee zero data loss if the primary fails before its replica receives all WAL.
+
+Database health must be checked independently from application readiness: require
+`readyInstances == spec.instances`, `Ready=True` and `Cluster in healthy state`.
+Same-cluster join and replication traffic on TCP `5432` is explicitly allowed by
+[NetworkPolicy](02-networking.md#cloudnativepg-replication).
+See [Backup](08-backup.md#postgresql-backups) for backup coverage and recovery limitations.
 
 ```bash
 kubectl get pdb -n clients

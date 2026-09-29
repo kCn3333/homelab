@@ -165,12 +165,10 @@ Hubble Relay Pod
   -> 192.168.55.12:4244
 ```
 
-The internal Relay-to-agent path requires Pod-to-NodeIP connectivity on TCP `4244`. This is cluster-internal traffic and is separate from browser access through Traefik. It was restored by upgrading Cilium from `1.19.1` to `1.19.7` and revalidated on `1.20.2`; no `hostNetwork` workaround, manual port-forward or additional UFW route rule is required.
-
-After the `1.20.2` upgrade, all three agents reported `cilium-dbg status --brief: OK`.
-Hubble Relay, Hubble UI, live flows and the service map were operational. Cluster DNS,
-the Sealed Secrets API proxy path and the existing CiliumNetworkPolicy were also
-verified.
+The internal Relay-to-agent path requires Pod-to-NodeIP connectivity on TCP `4244`.
+This is cluster-internal traffic, separate from browser access through Traefik.
+The configuration uses the Pod network without `hostNetwork` or an additional
+UFW route rule. Hubble UI provides live flows and the service map.
 
 Useful checks:
 
@@ -207,7 +205,7 @@ Application traffic through ServiceLB is described in [Ingress and TLS](03-ingre
 
 Without a policy, Pods can communicate across namespaces. A NetworkPolicy selects Pods and restricts ingress, egress or both.
 
-Example: allow PostgreSQL traffic only from `clients-api` Pods in the same namespace:
+The application-access policy allows PostgreSQL traffic from `clients-api` Pods in the same namespace:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -232,6 +230,20 @@ spec:
 ```
 
 Cilium drops traffic denied by policy. A timeout can therefore indicate a policy drop; it does not prove a routing failure.
+
+### CloudNativePG replication
+
+Both `clients/clients-db` and `clients-staging/clients-db-staging` have two
+instances. Their policies also allow the CNPG operator in `cnpg-system` to reach
+TCP `8000`, and Pods bearing the same `cnpg.io/cluster` label in the same namespace
+to reach database instances on TCP `5432`.
+
+The replication rule selects destination Pods by both `cnpg.io/cluster` and
+`cnpg.io/podRole: instance`; the source selector uses only the cluster label so
+that replica join Jobs are included. It does not allow other namespaces or
+unrelated workloads.
+
+The current policies do not allow Prometheus to scrape CNPG metrics on TCP `9187`.
 
 ### API server proxy traffic to Sealed Secrets
 

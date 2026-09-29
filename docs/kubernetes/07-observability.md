@@ -19,8 +19,8 @@ The stack includes Grafana `12.4.0` and `kiwigrid/k8s-sidecar:2.5.0`.
 
 ## Resource Metrics API
 
-metrics-server is deployed through Flux with Helm chart `3.13.1` and application
-version `0.8.1`. It runs as one `hostNetwork` replica and serves HTTPS on container
+metrics-server is deployed through Flux with Helm chart `3.14.0` and application
+version `0.9.0`. It runs as one `hostNetwork` replica and serves HTTPS on container
 port `4443`; its Service maps `443` to `4443`. It reads kubelet metrics through
 node `InternalIP` addresses on `10250/TCP` with a 15-second resolution.
 
@@ -79,11 +79,8 @@ The default Prometheus datasource uses:
 http://kube-prometheus-stack-prometheus.monitoring:9090/
 ```
 
-The earlier `An error occurred within the plugin` failure was caused by UFW blocking
-traffic from the Grafana node to the Prometheus `hostNetwork` endpoint on
-`9090/tcp`. Grafana logs showed a timeout to the Prometheus ClusterIP, while packet
-capture on the Prometheus node showed incoming SYN packets without a SYN-ACK. Adding
-the cluster-scoped UFW rule restored queries immediately.
+Grafana requires access to the Prometheus endpoint on TCP `9090` through the
+cluster-scoped UFW rule described above.
 
 Grafana currently stores `/var/lib/grafana` in `emptyDir`. Local users, sessions and
 objects created only through the UI do not survive Pod replacement. Required objects
@@ -122,9 +119,30 @@ kubectl get pods -n loki -o wide
 kubectl logs -n loki loki-0 -c loki --since=30m
 ```
 
+Loki `3.7.6` uses chart `18.7.6` from `grafana-community`, reconciled by Flux.
+It runs one monolithic StatefulSet replica (`loki-0`).
+The `storage-loki-0` PVC is `10Gi` on Longhorn, with StatefulSet
+PVC retention `Retain/Retain`.
+
+The object store remains Garage bucket `loki-logs`, using schema `v13`, TSDB
+indexes and `7d` retention. S3 credentials come from `loki-s3-secret`. Gateway,
+canary, chart tests, chunks cache and results cache remain disabled.
+
+Loki metrics scraping and alert rules are not configured through the chart:
+its ServiceMonitor and PrometheusRule resources are disabled.
+
+## CloudNativePG metrics
+
+CloudNativePG `1.30.0` uses the non-superuser `cnpg_metrics_exporter` login with
+`pg_monitor` membership. The clusters reference `cnpg-default-monitoring` custom
+queries with default queries enabled.
+
+`enablePodMonitor` is `false`. CNPG has no PodMonitor or ingress rule allowing
+Prometheus to TCP `9187`, so its database metrics are not scraped by Prometheus.
+
 ## Grafana Alloy
 
-Alloy replaced Promtail as the cluster log collector. It is deployed through Flux as
+Alloy is the cluster log collector. It is deployed through Flux as
 Helm chart `1.12.1` with application version `1.19.2`.
 
 The DaemonSet runs one Pod on every node. Each instance discovers only Pods assigned
@@ -159,8 +177,7 @@ New streams include:
 collector="alloy"
 ```
 
-Streams without this label are historical data previously written by Promtail and
-remain queryable until Loki retention removes them. Promtail is no longer deployed.
+Promtail is not deployed.
 
 ```bash
 kubectl get daemonset,pods \
@@ -206,10 +223,8 @@ This is the normal operational path and does not require a manual port-forward.
 Hubble Relay uses the local-backend `hubble-peer` Service for peer discovery, then
 connects directly over TLS to every Cilium agent at its NodeIP on TCP `4244`.
 
-The Pod-to-NodeIP observer path was restored by upgrading Cilium from `1.19.1` to
-`1.19.7`. Hubble Relay, Hubble UI, live flows and the service map were revalidated
-after upgrading to `1.20.2`. The working configuration does not require `hostNetwork`,
-a manual port-forward, an additional UFW route rule, or changes to Traefik.
+Hubble UI provides live flows and the service map. Relay-to-agent connectivity
+uses the Pod network without `hostNetwork` or additional UFW route rules.
 
 ```bash
 kubectl exec \

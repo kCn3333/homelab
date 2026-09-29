@@ -19,8 +19,7 @@ HAProxy chooses a node. ServiceLB does not balance traffic between nodes; it mak
 Traefik `LoadBalancer` Service reachable on each node. The Kubernetes API on port
 `6443` follows a separate path and does not pass through ServiceLB or Traefik.
 
-The HAProxy LXC uses `192.168.0.45`; the application and API forwarding configuration
-remained unchanged after moving HAProxy into the container.
+The HAProxy LXC uses `192.168.0.45` for application and API forwarding.
 
 ## Traefik Service
 
@@ -72,7 +71,8 @@ kubectl get endpointslices -n monitoring \
 
 ## Traefik configuration
 
-Traefik is packaged by K3s. Persistent changes belong in a `HelmChartConfig` named
+Traefik `3.7.8` is packaged by K3s and runs as one replica. Persistent changes
+belong in a Flux-managed `HelmChartConfig` named
 `traefik` in `kube-system`, not in the generated Deployment or HelmChart.
 
 Current customizations include HTTP-to-HTTPS redirection and the dashboard. The
@@ -80,7 +80,16 @@ dashboard is exposed through an authenticated `IngressRoute` using `api@internal
 
 ## TLS
 
-cert-manager uses a cluster-scoped Let's Encrypt issuer and DNS-01 validation through
+cert-manager chart and application `v1.21.2` are managed by Flux through
+`HelmRelease/cert-manager` in namespace `cert-manager`, with the release name
+`cert-manager`. Chart values enable CRD management with `crds.enabled: true`.
+
+The controller, cainjector and webhook each run one replica. The cluster has two
+issuers: `letsencrypt-prod-cluster-issuer` and `letsencrypt-staging-cluster-issuer`.
+Certificates cover the local test and production endpoints, Hubble, Grafana and
+the Traefik dashboard.
+
+cert-manager uses cluster-scoped Let's Encrypt issuers and DNS-01 validation through
 Cloudflare. DNS-01 does not require the cluster to be reachable from the public
 internet.
 
