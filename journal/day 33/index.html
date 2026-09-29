@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2031/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2033/">
       
       
-        <link rel="prev" href="../day%2030/">
+        <link rel="prev" href="../day%2032/">
       
       
-        <link rel="next" href="../day%2032/">
+        <link rel="next" href="../../pentesting/pentest_lab_notes/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>31 - przejęcie cert-managera przez Flux i aktualizacja Flux - > Homelab Documentation</title>
+        <title>33 - aktualizacja kube-prometheus-stack i stabilizacja Grafany - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux" class="md-skip">
+        <a href="#33-aktualizacja-kube-prometheus-stack-i-stabilizacja-grafany" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              31 - przejęcie cert-managera przez Flux i aktualizacja Flux
+              33 - aktualizacja kube-prometheus-stack i stabilizacja Grafany
             
           </span>
         </div>
@@ -2459,37 +2459,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31 - przejęcie cert-managera przez Flux i aktualizacja Flux
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../day%2031/" class="md-nav__link">
         
   
   
@@ -2505,285 +2478,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#cel-sesji" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cel sesji
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-zimny-start-i-stan-wejsciowy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Zimny start i stan wejściowy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-inwentaryzacja-cert-managera" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Inwentaryzacja cert-managera
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-dodanie-cert-managera-do-gitops" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Dodanie cert-managera do GitOps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-przejecie-istniejacego-release-bez-zmiany-wersji" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Przejęcie istniejącego release bez zmiany wersji
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-aktualizacja-cert-managera" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Aktualizacja cert-managera
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-weryfikacja-certyfikatow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Weryfikacja certyfikatów
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-zachowanie-cert-managera-po-zimnym-starcie" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Zachowanie cert-managera po zimnym starcie
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-stan-flux-przed-aktualizacja" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Stan Flux przed aktualizacją
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-migracja-api-image-toolkit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9. Migracja API Image Toolkit
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-migracja-zywych-zasobow-flux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        10. Migracja żywych zasobów Flux
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-punkt-odzyskiwania-przed-aktualizacja-flux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        11. Punkt odzyskiwania przed aktualizacją Flux
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-generowanie-manifestu-flux-v295" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        12. Generowanie manifestu Flux v2.9.5
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#13-konflikty-podczas-recznego-dry-run" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        13. Konflikty podczas ręcznego dry-run
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#14-aktualizacja-flux-v281-v295" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        14. Aktualizacja Flux v2.8.1 → v2.9.5
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-walidacja-koncowa-flux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        15. Walidacja końcowa Flux
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#16-stan-koncowy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        16. Stan końcowy
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="16. Stan końcowy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#k3s" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        K3s
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#storage-i-bazy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Storage i bazy
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cert-manager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        cert-manager
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Flux
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#17-wnioski" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        17. Wnioski
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#18-nastepna-sesja" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        18. Następna sesja
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2821,10 +2515,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../day%2033/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33 - aktualizacja kube-prometheus-stack i stabilizacja Grafany
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2840,6 +2561,263 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-zimny-start-klastra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Zimny start klastra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-stan-poczatkowy-kube-prometheus-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Stan początkowy kube-prometheus-stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-strategia-aktualizacji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Strategia aktualizacji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-aktualizacje-83x86x" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Aktualizacje 83.x–86.x
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-przejsciowe-podwojne-targety-po-rolloutach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Przejściowe podwójne targety po rolloutach
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-niedostepnosc-grafany-po-aktualizacji-87210" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Niedostępność Grafany po aktualizacji 87.21.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-zmiana-zasobow-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Zmiana zasobów Grafany
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-cpu-throttling-node-exportera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. CPU throttling node-exportera
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-grafana-1321-distroless-i-read-only-root-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Grafana 13.2.1-distroless i read-only root filesystem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-migracja-servicemonitor-w-chartcie-9020" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Migracja ServiceMonitor w chartcie 90.2.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-aktualizacja-do-9181-i-zaostrzony-rbac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Aktualizacja do 91.8.1 i zaostrzony RBAC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-stan-crd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Stan CRD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-koncowa-walidacja-prometheusa-i-grafany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Końcowa walidacja Prometheusa i Grafany
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-stan-koncowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Stan końcowy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Stan końcowy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k3s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        K3s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kube-prometheus-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        kube-prometheus-stack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grafana
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-i-sekrety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage i sekrety
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Następna sesja
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4099,10 +4077,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-zimny-start-i-stan-wejsciowy" class="md-nav__link">
+  <a href="#1-zimny-start-klastra" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Zimny start i stan wejściowy
+        1. Zimny start klastra
       
     </span>
   </a>
@@ -4110,10 +4088,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-inwentaryzacja-cert-managera" class="md-nav__link">
+  <a href="#2-stan-poczatkowy-kube-prometheus-stack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Inwentaryzacja cert-managera
+        2. Stan początkowy kube-prometheus-stack
       
     </span>
   </a>
@@ -4121,10 +4099,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-dodanie-cert-managera-do-gitops" class="md-nav__link">
+  <a href="#3-strategia-aktualizacji" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Dodanie cert-managera do GitOps
+        3. Strategia aktualizacji
       
     </span>
   </a>
@@ -4132,10 +4110,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-przejecie-istniejacego-release-bez-zmiany-wersji" class="md-nav__link">
+  <a href="#4-aktualizacje-83x86x" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Przejęcie istniejącego release bez zmiany wersji
+        4. Aktualizacje 83.x–86.x
       
     </span>
   </a>
@@ -4143,10 +4121,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-aktualizacja-cert-managera" class="md-nav__link">
+  <a href="#5-przejsciowe-podwojne-targety-po-rolloutach" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Aktualizacja cert-managera
+        5. Przejściowe podwójne targety po rolloutach
       
     </span>
   </a>
@@ -4154,10 +4132,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-weryfikacja-certyfikatow" class="md-nav__link">
+  <a href="#6-niedostepnosc-grafany-po-aktualizacji-87210" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Weryfikacja certyfikatów
+        6. Niedostępność Grafany po aktualizacji 87.21.0
       
     </span>
   </a>
@@ -4165,10 +4143,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-zachowanie-cert-managera-po-zimnym-starcie" class="md-nav__link">
+  <a href="#7-zmiana-zasobow-grafany" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Zachowanie cert-managera po zimnym starcie
+        7. Zmiana zasobów Grafany
       
     </span>
   </a>
@@ -4176,10 +4154,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-stan-flux-przed-aktualizacja" class="md-nav__link">
+  <a href="#8-cpu-throttling-node-exportera" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Stan Flux przed aktualizacją
+        8. CPU throttling node-exportera
       
     </span>
   </a>
@@ -4187,10 +4165,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-migracja-api-image-toolkit" class="md-nav__link">
+  <a href="#9-grafana-1321-distroless-i-read-only-root-filesystem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Migracja API Image Toolkit
+        9. Grafana 13.2.1-distroless i read-only root filesystem
       
     </span>
   </a>
@@ -4198,10 +4176,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-migracja-zywych-zasobow-flux" class="md-nav__link">
+  <a href="#10-migracja-servicemonitor-w-chartcie-9020" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Migracja żywych zasobów Flux
+        10. Migracja ServiceMonitor w chartcie 90.2.0
       
     </span>
   </a>
@@ -4209,10 +4187,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-punkt-odzyskiwania-przed-aktualizacja-flux" class="md-nav__link">
+  <a href="#11-aktualizacja-do-9181-i-zaostrzony-rbac" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Punkt odzyskiwania przed aktualizacją Flux
+        11. Aktualizacja do 91.8.1 i zaostrzony RBAC
       
     </span>
   </a>
@@ -4220,10 +4198,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-generowanie-manifestu-flux-v295" class="md-nav__link">
+  <a href="#12-stan-crd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. Generowanie manifestu Flux v2.9.5
+        12. Stan CRD
       
     </span>
   </a>
@@ -4231,10 +4209,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-konflikty-podczas-recznego-dry-run" class="md-nav__link">
+  <a href="#13-koncowa-walidacja-prometheusa-i-grafany" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13. Konflikty podczas ręcznego dry-run
+        13. Końcowa walidacja Prometheusa i Grafany
       
     </span>
   </a>
@@ -4242,37 +4220,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#14-aktualizacja-flux-v281-v295" class="md-nav__link">
+  <a href="#14-stan-koncowy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        14. Aktualizacja Flux v2.8.1 → v2.9.5
+        14. Stan końcowy
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-walidacja-koncowa-flux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        15. Walidacja końcowa Flux
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#16-stan-koncowy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        16. Stan końcowy
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="16. Stan końcowy">
+    <nav class="md-nav" aria-label="14. Stan końcowy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4287,10 +4243,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#storage-i-bazy" class="md-nav__link">
+  <a href="#kube-prometheus-stack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Storage i bazy
+        kube-prometheus-stack
       
     </span>
   </a>
@@ -4298,10 +4254,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cert-manager" class="md-nav__link">
+  <a href="#grafana" class="md-nav__link">
     <span class="md-ellipsis">
       
-        cert-manager
+        Grafana
       
     </span>
   </a>
@@ -4309,10 +4265,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#flux" class="md-nav__link">
+  <a href="#storage-i-sekrety" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Flux
+        Storage i sekrety
       
     </span>
   </a>
@@ -4325,10 +4281,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#17-wnioski" class="md-nav__link">
+  <a href="#15-wnioski" class="md-nav__link">
     <span class="md-ellipsis">
       
-        17. Wnioski
+        15. Wnioski
       
     </span>
   </a>
@@ -4336,10 +4292,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#18-nastepna-sesja" class="md-nav__link">
+  <a href="#16-nastepna-sesja" class="md-nav__link">
     <span class="md-ellipsis">
       
-        18. Następna sesja
+        16. Następna sesja
       
     </span>
   </a>
@@ -4367,533 +4323,614 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 31.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 33.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux">31 - przejęcie cert-managera przez Flux i aktualizacja Flux<a class="headerlink" href="#31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux" title="Permanent link">&para;</a></h1>
-<p><strong>Data:</strong> 2026-09-23\
-<strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.5 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Metrics Server <code>v0.9.0</code>, cert-manager <code>v1.21.2</code>, Flux <code>v2.9.5</code></p>
+<h1 id="33-aktualizacja-kube-prometheus-stack-i-stabilizacja-grafany">33 - aktualizacja kube-prometheus-stack i stabilizacja Grafany<a class="headerlink" href="#33-aktualizacja-kube-prometheus-stack-i-stabilizacja-grafany" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 2026-09-29\
+<strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.5 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, Flux <code>v2.9.5</code>, kube-prometheus-stack chart <code>91.8.1</code>, Prometheus Operator <code>v0.94.1</code>, Prometheus <code>v3.15.0</code>, Alertmanager <code>v0.34.1</code>, Grafana <code>13.2.2</code></p>
 <h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Potwierdzić poprawny zimny start po aktualizacji Longhorna i Metrics Server.</li>
-<li>Zinwentaryzować instalację cert-managera <code>v1.19.4</code>.</li>
-<li>Przejąć istniejący release cert-managera pod zarządzanie Flux bez odtwarzania zasobów.</li>
-<li>Zaktualizować cert-manager etapami <code>v1.19.4 → v1.20.4 → v1.21.2</code>.</li>
-<li>Potwierdzić działanie issuerów, certyfikatów, webhooka i DNS po zimnym starcie.</li>
-<li>Przenieść zasoby Image Toolkit z <code>v1beta2</code> do stabilnego API <code>v1</code>.</li>
-<li>Zaktualizować dystrybucję Flux z <code>v2.8.1</code> do <code>v2.9.5</code>.</li>
+<li>Potwierdzić kolejny poprawny zimny start klastra po aktualizacji K3s.</li>
+<li>Zamknąć problem niepełnej macierzy połączeń API server → kubelet.</li>
+<li>Zinwentaryzować instalację kube-prometheus-stack oraz sposób aktualizacji CRD.</li>
+<li>Zaktualizować chart etapami z <code>82.10.1</code> do <code>91.8.1</code>.</li>
+<li>Walidować po każdej wersji Prometheusa, Alertmanagera, Grafanę, kube-state-metrics, node-exporter i operator.</li>
+<li>Usunąć przyczyny przejściowej niedostępności Grafany i alertów <code>CPUThrottlingHigh</code>.</li>
+<li>Przeprowadzić migrację uwierzytelniania ServiceMonitor wymaganą przez chart <code>90.x</code>.</li>
+<li>Potwierdzić działanie zaostrzonego RBAC Prometheus Operatora w chartcie <code>91.x</code>.</li>
 </ol>
 <hr />
-<h2 id="1-zimny-start-i-stan-wejsciowy">1. Zimny start i stan wejściowy<a class="headerlink" href="#1-zimny-start-i-stan-wejsciowy" title="Permanent link">&para;</a></h2>
+<h2 id="1-zimny-start-klastra">1. Zimny start klastra<a class="headerlink" href="#1-zimny-start-klastra" title="Permanent link">&para;</a></h2>
 <p>Playbook potwierdził:</p>
 <ul>
-<li>SSH, Ansible i <code>sudo</code> na wszystkich trzech nodach;</li>
+<li>prawidłową walidację pełnego inventory;</li>
+<li>wysłanie WoL do wszystkich trzech hostów;</li>
+<li>poprawny cykl aktywacji i dezaktywacji interfejsu WoL na <code>logos</code>;</li>
+<li>dostępność SSH na <code>master</code>, <code>worker1</code> i <code>worker2</code>;</li>
+<li>łączność Ansible i działające nieinteraktywne <code>sudo</code>;</li>
 <li>aktywną usługę K3s na wszystkich nodach;</li>
 <li>lokalne API i embedded etcd <code>3/3</code>;</li>
-<li>dokładnie trzy oczekiwane obiekty Node;</li>
-<li>wszystkie nody <code>Ready</code>;</li>
+<li>dokładny skład klastra;</li>
+<li>wszystkie trzy nody <code>Ready</code>;</li>
 <li>macierz API server → kubelet <code>9/9</code>;</li>
-<li>prawidłowe włączenie i wyłączenie interfejsu WoL;</li>
-<li>brak konieczności wykonania resyncu remotedialera.</li>
+<li>brak użycia resyncu remotedialera.</li>
 </ul>
-<p>Po starcie klastra potwierdzono również:</p>
+<p>K3s potrzebował kilku ponowień podczas oczekiwania na stan <code>active</code>. Wszystkie trzy usługi uruchomiły się w dopuszczalnym czasie, a końcowy wynik playbooka nie zawierał błędów.</p>
+<p>Był to kolejny pełny zimny start z macierzą <code>9/9</code>. Problem niepełnych tuneli remotedialera można uznać za rozwiązany przez aktualizację K3s do <code>v1.36.4+k3s1</code>. Skrypt resync pozostaje narzędziem diagnostycznym i nie musiał ingerować w start klastra.</p>
+<hr />
+<h2 id="2-stan-poczatkowy-kube-prometheus-stack">2. Stan początkowy kube-prometheus-stack<a class="headerlink" href="#2-stan-poczatkowy-kube-prometheus-stack" title="Permanent link">&para;</a></h2>
+<p>Przed aktualizacją działający release miał stan:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Helm release: kube-prometheus-stack
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>namespace:    monitoring
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>revision:     4
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>chart:        82.10.1
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>app version:  v0.89.0
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>status:       deployed
+</span></code></pre></div>
+<p>Instalacja była zarządzana przez Flux za pomocą:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>infrastructure/operators/monitoring/helmrelease.yaml
+</span></code></pre></div>
+<p>Wartości obejmowały:</p>
 <ul>
-<li>brak Podów poza fazami <code>Running</code> i <code>Succeeded</code>;</li>
-<li>wszystkie Kustomization Flux <code>Ready=True</code>;</li>
-<li>wszystkie HelmRelease <code>Ready=True</code>;</li>
-<li>sześć wolumenów Longhorna <code>attached</code> i <code>healthy</code>;</li>
-<li>wszystkie wolumeny na <code>longhorn-engine:v1.12.1</code>;</li>
-<li>brak uszkodzonych lub zatrzymanych replik Longhorna;</li>
-<li>oba klastry CloudNativePG <code>2/2 Ready</code>;</li>
-<li>Metrics API <code>Available=True</code>;</li>
-<li>działające <code>kubectl top nodes</code>.</li>
+<li>Prometheus z retencją <code>7d</code>;</li>
+<li>PVC Prometheusa <code>10Gi</code> w StorageClass <code>longhorn</code>;</li>
+<li>jedną replikę Prometheusa i Alertmanagera;</li>
+<li>Grafanę z dashboardami dostarczanymi przez sidecar;</li>
+<li>kube-state-metrics;</li>
+<li>node-exporter jako DaemonSet na trzech nodach;</li>
+<li>monitoring kubeleta przez HTTPS;</li>
+<li>wyłączony kube-proxy, ponieważ jego funkcję realizuje Cilium;</li>
+<li>wyłączony monitoring kube-controller-manager, kube-scheduler i etcd;</li>
+<li>automatyczny hook aktualizujący CRD:</li>
 </ul>
-<p>Aktualizacje Longhorna i Metrics Server z poprzedniej sesji przeszły test zimnego startu.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">crds</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">upgradeJob</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>CRD nie były aktualizowane ręcznie. Helm uruchamiał Job <code>kube-prometheus-stack-crds-upgrade</code> przed każdą aktualizacją.</p>
 <hr />
-<h2 id="2-inwentaryzacja-cert-managera">2. Inwentaryzacja cert-managera<a class="headerlink" href="#2-inwentaryzacja-cert-managera" title="Permanent link">&para;</a></h2>
-<p>W klastrze działały trzy Deploymenty:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cert-manager              v1.19.4
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cert-manager-cainjector   v1.19.4
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cert-manager-webhook      v1.19.4
-</span></code></pre></div>
-<p>Zasoby miały etykiety i adnotacje Helm:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>app.kubernetes.io/managed-by=Helm
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>meta.helm.sh/release-name=cert-manager
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>meta.helm.sh/release-namespace=cert-manager
-</span></code></pre></div>
-<p>W repozytorium GitOps nie istniały jednak manifesty <code>HelmRepository</code> ani <code>HelmRelease</code> dla cert-managera. Operator był zainstalowany przez Helm, ale nie był deklaratywnie zarządzany przez Flux.</p>
-<p>Stan funkcjonalny przed migracją:</p>
-<ul>
-<li>CRD cert-managera istniały;</li>
-<li>oba <code>ClusterIssuer</code> miały <code>Ready=True</code>;</li>
-<li>pięć certyfikatów miało <code>Ready=True</code>;</li>
-<li>release Helm nazywał się <code>cert-manager</code>;</li>
-<li>release i workloady działały w namespace <code>cert-manager</code>.</li>
-</ul>
-<p>Przejęcie musiało zachować istniejące nazwy release i namespace, aby Flux wykonał aktualizację istniejącej instalacji zamiast tworzyć drugi zestaw zasobów.</p>
-<hr />
-<h2 id="3-dodanie-cert-managera-do-gitops">3. Dodanie cert-managera do GitOps<a class="headerlink" href="#3-dodanie-cert-managera-do-gitops" title="Permanent link">&para;</a></h2>
-<p>Dodano katalog:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>infrastructure/operators/cert-manager/
-</span></code></pre></div>
-<p>Zawiera on:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>namespace.yaml
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>helmrepository.yaml
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>helmrelease.yaml
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>kustomization.yaml
-</span></code></pre></div>
-<p>Główna Kustomization operatorów została rozszerzona o:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">resources</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
-</span></code></pre></div>
-<p>HelmRelease zachował:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">metadata</span><span class="p">:</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">releaseName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">targetNamespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager</span>
-</span></code></pre></div>
-<p>CRD są zarządzane przez chart:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">values</span><span class="p">:</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">crds</span><span class="p">:</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span></code></pre></div>
-<p>Repozytorium zawiera tylko konfigurację i zasoby SealedSecret. Nie dodano żadnych jawnych tokenów, haseł ani innych sekretów. Backup istniejących danych konfiguracyjnych pozostał poza publicznym repozytorium.</p>
-<p>Walidacja lokalna:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>kustomize<span class="w"> </span>infrastructure/operators/cert-manager
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>kustomize<span class="w"> </span>infrastructure/operators<span class="w"> </span>&gt;/dev/null
-</span></code></pre></div>
-<p>Oba polecenia zakończyły się poprawnie.</p>
-<hr />
-<h2 id="4-przejecie-istniejacego-release-bez-zmiany-wersji">4. Przejęcie istniejącego release bez zmiany wersji<a class="headerlink" href="#4-przejecie-istniejacego-release-bez-zmiany-wersji" title="Permanent link">&para;</a></h2>
-<p>Najpierw Flux wdrożył cert-manager w tej samej wersji <code>v1.19.4</code>.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>HelmRelease: cert-manager/cert-manager
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>chart:       cert-manager v1.19.4
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Ready:       True
-</span></code></pre></div>
-<p>Historia Helm po przejęciu:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>revision 1: install v1.19.4
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>revision 2: upgrade v1.19.4
-</span></code></pre></div>
-<p>Oznacza to, że Flux zaktualizował istniejący release. Nie utworzył osobnej instalacji i nie zmienił nazw zasobów.</p>
-<p>Po przejęciu:</p>
-<ul>
-<li>wszystkie trzy Deploymenty były dostępne;</li>
-<li>obrazy nadal miały wersję <code>v1.19.4</code>;</li>
-<li>oba <code>ClusterIssuer</code> pozostały <code>Ready=True</code>;</li>
-<li>wszystkie certyfikaty pozostały <code>Ready=True</code>;</li>
-<li>nie wystąpiła ponowna emisja ani utrata certyfikatów.</li>
-</ul>
-<hr />
-<h2 id="5-aktualizacja-cert-managera">5. Aktualizacja cert-managera<a class="headerlink" href="#5-aktualizacja-cert-managera" title="Permanent link">&para;</a></h2>
-<p>Aktualizację wykonano dwoma osobnymi etapami:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>v1.19.4 → v1.20.4
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>v1.20.4 → v1.21.2
-</span></code></pre></div>
-<p>Po każdym etapie Flux zakończył Helm upgrade ze stanem <code>Ready=True</code>.</p>
-<p>Stan końcowy:</p>
+<h2 id="3-strategia-aktualizacji">3. Strategia aktualizacji<a class="headerlink" href="#3-strategia-aktualizacji" title="Permanent link">&para;</a></h2>
+<p>Chart został zaktualizowany kolejno przez wszystkie główne wersje:</p>
 <table>
 <thead>
 <tr>
-<th>Deployment</th>
-<th style="text-align: right;">Ready</th>
-<th style="text-align: right;">Available</th>
-<th>Obraz</th>
+<th style="text-align: right;">Etap</th>
+<th style="text-align: right;">Chart</th>
+<th style="text-align: right;">Prometheus Operator</th>
+<th style="text-align: right;">Prometheus</th>
+<th style="text-align: right;">Alertmanager</th>
+<th style="text-align: right;">Grafana</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>cert-manager</code></td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td><code>quay.io/jetstack/cert-manager-controller:v1.21.2</code></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;"><code>82.10.1</code></td>
+<td style="text-align: right;"><code>v0.89.0</code></td>
+<td style="text-align: right;">stan początkowy</td>
+<td style="text-align: right;">stan początkowy</td>
+<td style="text-align: right;">stan początkowy</td>
 </tr>
 <tr>
-<td><code>cert-manager-cainjector</code></td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td><code>quay.io/jetstack/cert-manager-cainjector:v1.21.2</code></td>
+<td style="text-align: right;"><code>83.7.0</code></td>
+<td style="text-align: right;"><code>v0.90.1</code></td>
+<td style="text-align: right;">zgodny z chartem</td>
+<td style="text-align: right;">zgodny z chartem</td>
+<td style="text-align: right;">zgodna z chartem</td>
 </tr>
 <tr>
-<td><code>cert-manager-webhook</code></td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td><code>quay.io/jetstack/cert-manager-webhook:v1.21.2</code></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;"><code>84.5.0</code></td>
+<td style="text-align: right;"><code>v0.90.1</code></td>
+<td style="text-align: right;">zgodny z chartem</td>
+<td style="text-align: right;">zgodny z chartem</td>
+<td style="text-align: right;"><code>13.0.1</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;"><code>85.4.0</code></td>
+<td style="text-align: right;"><code>v0.90.1</code></td>
+<td style="text-align: right;"><code>v3.11.3-distroless</code></td>
+<td style="text-align: right;"><code>v0.32.1</code></td>
+<td style="text-align: right;"><code>13.0.1-security-01</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;"><code>86.3.2</code></td>
+<td style="text-align: right;"><code>v0.91.0</code></td>
+<td style="text-align: right;"><code>v3.12.0-distroless</code></td>
+<td style="text-align: right;"><code>v0.33.0</code></td>
+<td style="text-align: right;"><code>13.0.2</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;"><code>87.21.0</code></td>
+<td style="text-align: right;"><code>v0.92.1</code></td>
+<td style="text-align: right;"><code>v3.13.1-distroless</code></td>
+<td style="text-align: right;"><code>v0.33.1</code></td>
+<td style="text-align: right;"><code>13.1.1</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;"><code>88.6.5</code></td>
+<td style="text-align: right;"><code>v0.93.1</code></td>
+<td style="text-align: right;"><code>v3.14.0-distroless</code></td>
+<td style="text-align: right;"><code>v0.34.0</code></td>
+<td style="text-align: right;"><code>13.2.0</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;"><code>89.2.4</code></td>
+<td style="text-align: right;"><code>v0.93.1</code></td>
+<td style="text-align: right;"><code>v3.14.0-distroless</code></td>
+<td style="text-align: right;"><code>v0.34.0</code></td>
+<td style="text-align: right;"><code>13.2.1-distroless</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;"><code>90.2.0</code></td>
+<td style="text-align: right;"><code>v0.93.1</code></td>
+<td style="text-align: right;"><code>v3.14.0-distroless</code></td>
+<td style="text-align: right;"><code>v0.34.0</code></td>
+<td style="text-align: right;"><code>13.2.1-distroless</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;"><code>91.8.1</code></td>
+<td style="text-align: right;"><code>v0.94.1</code></td>
+<td style="text-align: right;"><code>v3.15.0-distroless</code></td>
+<td style="text-align: right;"><code>v0.34.1</code></td>
+<td style="text-align: right;"><code>13.2.2-distroless</code></td>
 </tr>
 </tbody>
 </table>
-<p>Rollout wszystkich Deploymentów zakończył się poprawnie. W namespace <code>cert-manager</code> nie było Podów poza <code>Running</code> i <code>Succeeded</code>.</p>
-<p>Zweryfikowano również reguły roli <code>cert-manager-edit</code> dla API ACME. Uprawnienia do <code>challenges</code> i <code>orders</code> nie zawierały niepotrzebnych operacji odczytu sekretów ani szerszego zakresu niż wymagany przez nową wersję.</p>
+<p>Każdy etap został:</p>
+<ol>
+<li>sprawdzony w oficjalnym <code>UPGRADE.md</code>;</li>
+<li>wyrenderowany lokalnie z wartościami z HelmRelease;</li>
+<li>skontrolowany pod kątem obrazów, hooków i zmian zasobów;</li>
+<li>wdrożony przez commit i Flux;</li>
+<li>zakończony sprawdzeniem rolloutów, Podów, logów, targetów i reguł.</li>
+</ol>
+<p>Nie wykonywano bezpośredniego <code>helm upgrade</code> ani ręcznego <code>kubectl apply</code> na zasobach zarządzanych przez Flux.</p>
 <hr />
-<h2 id="6-weryfikacja-certyfikatow">6. Weryfikacja certyfikatów<a class="headerlink" href="#6-weryfikacja-certyfikatow" title="Permanent link">&para;</a></h2>
-<p>Po aktualizacji oba issuery działały:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>letsencrypt-prod-cluster-issuer      Ready=True
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>letsencrypt-staging-cluster-issuer   Ready=True
+<h2 id="4-aktualizacje-83x86x">4. Aktualizacje <code>83.x–86.x</code><a class="headerlink" href="#4-aktualizacje-83x86x" title="Permanent link">&para;</a></h2>
+<p>Aktualizacje do <code>83.7.0</code>, <code>84.5.0</code>, <code>85.4.0</code> i <code>86.3.2</code> zakończyły się poprawnie.</p>
+<p>Po każdym etapie potwierdzano rollout:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>deployment/kube-prometheus-stack-operator
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>deployment/kube-prometheus-stack-grafana
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>deployment/kube-prometheus-stack-kube-state-metrics
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>daemonset/kube-prometheus-stack-prometheus-node-exporter
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>statefulset/prometheus-kube-prometheus-stack-prometheus
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>statefulset/alertmanager-kube-prometheus-stack-alertmanager
 </span></code></pre></div>
-<p>Issuer staging potwierdził aktualny stan kontrolera:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>generation:         1
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>observedGeneration: 1
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>ready:              True
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>reason:             ACMEAccountRegistered
+<p>Sprawdzano także:</p>
+<ul>
+<li>stan Prometheus i Alertmanager CR;</li>
+<li>endpoint kube-state-metrics;</li>
+<li>metrykę <code>up{job="kube-state-metrics"}</code>;</li>
+<li>obecność metryki <code>kube_resourcequota</code>;</li>
+<li>stan reguł przez <code>/api/v1/rules</code>;</li>
+<li>logi Prometheusa pod kątem <code>many-to-many</code> i błędów ewaluacji;</li>
+<li>zdrowie API Grafany;</li>
+<li>stan wolumenu Prometheusa w Longhornie.</li>
+</ul>
+<p>Wolumen Prometheusa zachował tożsamość:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>PVC: prometheus-kube-prometheus-stack-prometheus-db-prometheus-kube-prometheus-stack-prometheus-0
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>PV:  pvc-e3b84907-a0e1-4843-b522-02da79e01a75
 </span></code></pre></div>
-<p>Certyfikaty po aktualizacji:</p>
+<p>Longhorn raportował wolumen jako <code>attached</code> i <code>healthy</code>.</p>
+<hr />
+<h2 id="5-przejsciowe-podwojne-targety-po-rolloutach">5. Przejściowe podwójne targety po rolloutach<a class="headerlink" href="#5-przejsciowe-podwojne-targety-po-rolloutach" title="Permanent link">&para;</a></h2>
+<p>Podczas kolejnych rolloutów Prometheus chwilowo widział stare i nowe Pody kube-state-metrics oraz node-exportera.</p>
+<p>Przykładowo zapytania zwróciły:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kube-state-metrics: 2 zdrowe targety
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>node-exporter:       6 zdrowych targetów
+</span></code></pre></div>
+<p>Nie oznaczało to utworzenia dodatkowych stałych replik. W czasie rolling update stare Pody nadal istniały w TSDB i przez krótki czas pozostawały aktywnymi targetami. Po zakończeniu rolloutów EndpointSlice zawierał wyłącznie nowy gotowy endpoint, a liczba targetów wróciła do oczekiwanej wartości.</p>
+<hr />
+<h2 id="6-niedostepnosc-grafany-po-aktualizacji-87210">6. Niedostępność Grafany po aktualizacji <code>87.21.0</code><a class="headerlink" href="#6-niedostepnosc-grafany-po-aktualizacji-87210" title="Permanent link">&para;</a></h2>
+<p>Po wdrożeniu chartu <code>87.21.0</code> Grafana okresowo zwracała przez Traefik:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>no available server
+</span></code></pre></div>
+<p>Wszystkie dashboardy traciły jednocześnie dostęp, a po odświeżeniu GUI chwilowo wracały. EndpointSlice Grafany przechodził między stanem gotowym i niegotowym, mimo braku restartu kontenera.</p>
+<p>Początkowe zasoby Grafany wynosiły:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">requests</span><span class="p">:</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50m</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256Mi</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200m</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512Mi</span>
+</span></code></pre></div>
+<p>Pomiary historyczne wykazały:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>maksymalne CPU:                    200m
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>maksymalne użycie pamięci:         510.14Mi
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>maksymalne CPU throttling:         100%
+</span></code></pre></div>
+<p>Grafana jednocześnie osiągała limit CPU i prawie cały limit pamięci. Readiness probe <code>/api/health</code> nie odpowiadał w wymaganym czasie, dlatego Kubernetes usuwał Pod z EndpointSlice. Traefik nie miał wtedy gotowego backendu i zwracał <code>no available server</code>.</p>
+<p>Logi zawierały między innymi:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>database is locked (SQLITE_BUSY)
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>context canceled
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>failed to fetch dashboards
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>status=500 /api/annotations
+</span></code></pre></div>
+<p>Nie była to awaria Prometheusa ani pojedynczego dashboardu. Problem dotyczył procesu Grafany i jego zasobów.</p>
+<hr />
+<h2 id="7-zmiana-zasobow-grafany">7. Zmiana zasobów Grafany<a class="headerlink" href="#7-zmiana-zasobow-grafany" title="Permanent link">&para;</a></h2>
+<p>Zasoby zwiększono najpierw do:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">requests</span><span class="p">:</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">384Mi</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500m</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">768Mi</span>
+</span></code></pre></div>
+<p>CPU throttling Grafany spadł do około <code>3.2%</code>, a dashboardy zaczęły działać stabilnie. Podczas dalszych aktualizacji Grafana <code>13.2.0</code> osiągała jednak ponad <code>1Gi</code> pamięci:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>1021Mi
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>1019Mi
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>1049Mi
+</span></code></pre></div>
+<p>Ostateczna konfiguracja otrzymała:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">grafana</span><span class="p">:</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512Mi</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500m</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1280Mi</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="nt">env</span><span class="p">:</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="nt">GOMEMLIMIT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900MiB</span>
+</span></code></pre></div>
+<p><code>GOMEMLIMIT=900MiB</code> wymusza wcześniejszą pracę garbage collectora Go, pozostawiając zapas między celem sterty a limitem cgroup <code>1280Mi</code>.</p>
+<p>Po zmianie:</p>
+<ul>
+<li>Grafana pozostawała <code>Ready</code>;</li>
+<li>liczba restartów wynosiła <code>0</code>;</li>
+<li>EndpointSlice pozostawał gotowy;</li>
+<li>dashboardy działały;</li>
+<li>nie pojawiało się <code>no available server</code>;</li>
+<li>nie występowały OOMKill ani trwałe timeouty.</li>
+</ul>
+<p>W końcowym stanie Grafana używała około <code>735Mi</code> pamięci przy limicie <code>1280Mi</code>.</p>
+<hr />
+<h2 id="8-cpu-throttling-node-exportera">8. CPU throttling node-exportera<a class="headerlink" href="#8-cpu-throttling-node-exportera" title="Permanent link">&para;</a></h2>
+<p>Po aktualizacji chartu alert <code>CPUThrottlingHigh</code> dotyczył wszystkich trzech Podów node-exportera.</p>
+<p>Początkowa konfiguracja:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">prometheus-node-exporter</span><span class="p">:</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10m</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32Mi</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">64Mi</span>
+</span></code></pre></div>
+<p>Prometheus raportował throttling około:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>worker1: 57–62%
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>worker2: 57–62%
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>master:  57–62%
+</span></code></pre></div>
+<p>Zwiększenie limitu CPU do <code>250m</code> nie usunęło alertu. Node-exporter wykonuje krótkie, gwałtowne serie pracy podczas scrape, dlatego liczba okresów ograniczonych przez CFS nadal była wysoka mimo małego średniego użycia CPU.</p>
+<p>Limit CPU został usunięty, pozostawiając request i limit pamięci:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">prometheus-node-exporter</span><span class="p">:</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">requests</span><span class="p">:</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">      </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10m</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32Mi</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">      </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">64Mi</span>
+</span></code></pre></div>
+<p>Po rolloutcie nowych Podów zapytanie:</p>
+<div class="language-promql highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">ALERTS</span><span class="p">{</span><span class="nl">alertname</span><span class="o">=</span><span class="p">"</span><span class="s">CPUThrottlingHigh</span><span class="p">",</span><span class="nl">alertstate</span><span class="o">=~</span><span class="p">"</span><span class="s">pending|firing</span><span class="p">"}</span>
+</span></code></pre></div>
+<p>zwróciło pusty wynik.</p>
+<p>Usunięcie limitu CPU nie zmienia rezerwacji schedulera. Node-exporter nadal rezerwuje <code>10m</code>, ale nie podlega sztucznemu ograniczeniu CFS podczas krótkich skoków pracy.</p>
+<hr />
+<h2 id="9-grafana-1321-distroless-i-read-only-root-filesystem">9. Grafana <code>13.2.1-distroless</code> i read-only root filesystem<a class="headerlink" href="#9-grafana-1321-distroless-i-read-only-root-filesystem" title="Permanent link">&para;</a></h2>
+<p>Chart <code>89.2.4</code> wprowadził:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker.io/grafana/grafana:13.2.1-distroless
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>readOnlyRootFilesystem: true
+</span></code></pre></div>
+<p>Render potwierdził dodatkowy zapisywalny wolumen <code>emptyDir</code> zamontowany pod <code>/tmp</code>. Pod uruchomił się poprawnie, ale logi zawierały błędy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>plugin.backgroundinstaller
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>Failed to install plugin
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>read-only file system
+</span></code></pre></div>
+<p>Background Plugin Installer próbował aktualizować wbudowane pluginy w:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>/usr/share/grafana/data/plugins-bundled
+</span></code></pre></div>
+<p>Ścieżka znajduje się w read-only root filesystem obrazu distroless. Ponieważ nie instalujemy dodatkowych pluginów w czasie startu, automatyczny instalator został wyłączony:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">grafana</span><span class="p">:</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">grafana.ini</span><span class="p">:</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">      </span><span class="nt">preinstall_disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>W końcowym renderze Grafany znajdowało się:</p>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">[plugins]</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="na">preinstall_auto_update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">false</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="na">preinstall_disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+</span></code></pre></div>
+<p>Po rolloutcie logi nie zawierały już błędów instalatora pluginów ani filesystemu. Grafana zachowała read-only root filesystem.</p>
+<hr />
+<h2 id="10-migracja-servicemonitor-w-chartcie-9020">10. Migracja ServiceMonitor w chartcie <code>90.2.0</code><a class="headerlink" href="#10-migracja-servicemonitor-w-chartcie-9020" title="Permanent link">&para;</a></h2>
+<p>Chart <code>90.x</code> usunął pola odwołujące się do plików z tokenem i CA znajdujących się w filesystemie Prometheusa. Dotychczasowa wartość:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nt">kubelet</span><span class="p">:</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nt">serviceMonitor</span><span class="p">:</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="nt">insecureSkipVerify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>została zastąpiona przez:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">kubelet</span><span class="p">:</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nt">serviceMonitor</span><span class="p">:</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="nt">tlsConfig</span><span class="p">:</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">      </span><span class="nt">insecureSkipVerify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>Jawnie włączono utworzenie tokenu ServiceAccount:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nt">prometheus</span><span class="p">:</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nt">serviceAccount</span><span class="p">:</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nt">create</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="nt">createTokenSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>Chart utworzył:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Secret:         kube-prometheus-stack-prometheus-token
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>type:           kubernetes.io/service-account-token
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>serviceAccount: kube-prometheus-stack-prometheus
+</span></code></pre></div>
+<p>Secret zawierał token, CA oraz namespace. Wartość tokenu nie została wyświetlona ani zapisana w repozytorium. Repo zawiera wyłącznie deklarację utworzenia Secretu. Sam token został wygenerowany przez Kubernetes i jest przechowywany w Secret oraz etcd.</p>
+<p>Wyrenderowany i żywy ServiceMonitor kubeleta używał:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nt">authorization</span><span class="p">:</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bearer</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span><span class="nt">credentials</span><span class="p">:</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kube-prometheus-stack-prometheus-token</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">token</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="nt">tlsConfig</span><span class="p">:</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">  </span><span class="nt">ca</span><span class="p">:</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="nt">configMap</span><span class="p">:</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kube-root-ca.crt</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">      </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ca.crt</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">  </span><span class="nt">insecureSkipVerify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>Po aktualizacji aktywne targety obejmowały:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>API server: 3/3 up
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>kubelet:    9/9 up
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>CoreDNS:    1/1 up
+</span></code></pre></div>
+<p>Dla każdego noda kubelet udostępniał trzy pule scrape:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>/metrics
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>/metrics/cadvisor
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>/metrics/probes
+</span></code></pre></div>
+<p>Wszystkie targety miały pusty <code>lastError</code>. Nie wystąpiły odpowiedzi <code>401</code> ani <code>403</code>.</p>
+<hr />
+<h2 id="11-aktualizacja-do-9181-i-zaostrzony-rbac">11. Aktualizacja do <code>91.8.1</code> i zaostrzony RBAC<a class="headerlink" href="#11-aktualizacja-do-9181-i-zaostrzony-rbac" title="Permanent link">&para;</a></h2>
+<p>Chart <code>91.x</code> zaktualizował Prometheus Operator do <code>v0.94.1</code>. Nowy ClusterRole nie używa wildcardu <code>"*"</code> w <code>verbs</code>, lecz jawnie wymienia potrzebne operacje.</p>
+<p>Przed wdrożeniem sprawdzono render RBAC. Operator zachował dostęp do wymaganych zasobów:</p>
+<ul>
+<li>obiektów API <code>monitoring.coreos.com</code>;</li>
+<li>ich subresource <code>status</code> i <code>finalizers</code>;</li>
+<li>StatefulSetów;</li>
+<li>ConfigMap i Secretów;</li>
+<li>Podów, Service, Endpoint i EndpointSlice;</li>
+<li>Node, Namespace i Event;</li>
+<li>Ingress i StorageClass.</li>
+</ul>
+<p>Hook CRD miał konfigurację:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>name:          kube-prometheus-stack-crds-upgrade
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>hook:          pre-install,pre-upgrade,pre-rollback
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>hook-weight:   5
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>delete-policy: before-hook-creation,hook-succeeded
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>image:         registry.k8s.io/kubectl:v1.36.4
+</span></code></pre></div>
+<p>Job zakończył się stanem <code>Completed</code>, a Flux zgłosił <code>UpgradeSucceeded</code> dla rewizji Helm <code>19</code>.</p>
+<p>Po rolloutcie logi operatora nie zawierały:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Forbidden
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>permission denied
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>unauthorized
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>error
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>failed
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>panic
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>fatal
+</span></code></pre></div>
+<p>Zaostrzenie RBAC nie spowodowało regresji w tym klastrze.</p>
+<hr />
+<h2 id="12-stan-crd">12. Stan CRD<a class="headerlink" href="#12-stan-crd" title="Permanent link">&para;</a></h2>
+<p>Wszystkie CRD z grupy <code>monitoring.coreos.com</code> miały:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Established=True
+</span></code></pre></div>
+<p>Wersje przechowywane w etcd:</p>
 <table>
 <thead>
 <tr>
-<th>Namespace</th>
-<th>Certyfikat</th>
-<th style="text-align: right;">Ready</th>
+<th>CRD</th>
+<th>storedVersions</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>default</code></td>
-<td><code>local-cert-kcn333</code></td>
-<td style="text-align: right;"><code>True</code></td>
+<td><code>alertmanagerconfigs.monitoring.coreos.com</code></td>
+<td><code>v1alpha1</code></td>
 </tr>
 <tr>
-<td><code>default</code></td>
-<td><code>local-prod-cert-kcn333</code></td>
-<td style="text-align: right;"><code>True</code></td>
+<td><code>alertmanagers.monitoring.coreos.com</code></td>
+<td><code>v1</code></td>
 </tr>
 <tr>
-<td><code>kube-system</code></td>
-<td><code>hubble-tls</code></td>
-<td style="text-align: right;"><code>True</code></td>
+<td><code>podmonitors.monitoring.coreos.com</code></td>
+<td><code>v1</code></td>
 </tr>
 <tr>
-<td><code>monitoring</code></td>
-<td><code>grafana-tls</code></td>
-<td style="text-align: right;"><code>True</code></td>
+<td><code>probes.monitoring.coreos.com</code></td>
+<td><code>v1</code></td>
 </tr>
 <tr>
-<td><code>traefik</code></td>
-<td><code>traefik-dashboard-tls</code></td>
-<td style="text-align: right;"><code>True</code></td>
+<td><code>prometheusagents.monitoring.coreos.com</code></td>
+<td><code>v1alpha1</code></td>
+</tr>
+<tr>
+<td><code>prometheuses.monitoring.coreos.com</code></td>
+<td><code>v1</code></td>
+</tr>
+<tr>
+<td><code>prometheusrules.monitoring.coreos.com</code></td>
+<td><code>v1</code></td>
+</tr>
+<tr>
+<td><code>scrapeconfigs.monitoring.coreos.com</code></td>
+<td><code>v1alpha1</code></td>
+</tr>
+<tr>
+<td><code>servicemonitors.monitoring.coreos.com</code></td>
+<td><code>v1</code></td>
+</tr>
+<tr>
+<td><code>thanosrulers.monitoring.coreos.com</code></td>
+<td><code>v1</code></td>
 </tr>
 </tbody>
 </table>
-<p>Powiązane <code>CertificateRequest</code> były zatwierdzone i gotowe. Nie było aktywnych obiektów <code>Challenge</code>.</p>
+<p><code>v1alpha1</code> dla AlertmanagerConfig, PrometheusAgent i ScrapeConfig jest prawidłowym stanem tych API. Nie oznacza niedokończonej migracji i nie wymaga ręcznej modyfikacji <code>status.storedVersions</code>.</p>
 <hr />
-<h2 id="7-zachowanie-cert-managera-po-zimnym-starcie">7. Zachowanie cert-managera po zimnym starcie<a class="headerlink" href="#7-zachowanie-cert-managera-po-zimnym-starcie" title="Permanent link">&para;</a></h2>
-<p>Bezpośrednio po uruchomieniu klastra log kontrolera zawierał:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>dial tcp: lookup acme-staging-v02.api.letsencrypt.org on 10.43.0.10:53:
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>read: connection refused
+<h2 id="13-koncowa-walidacja-prometheusa-i-grafany">13. Końcowa walidacja Prometheusa i Grafany<a class="headerlink" href="#13-koncowa-walidacja-prometheusa-i-grafany" title="Permanent link">&para;</a></h2>
+<p>Końcowy release:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Helm revision: 19
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>chart:         kube-prometheus-stack-91.8.1
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>app version:   v0.94.1
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>status:        deployed
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>Flux:          Ready=True
 </span></code></pre></div>
-<p>Następnie pojawiały się komunikaty:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ACME client for issuer not initialised/available
+<p>Prometheus:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>version:     v3.15.0-distroless
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>desired:     1
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>ready:       1
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>reconciled:  True
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>available:   True
 </span></code></pre></div>
-<p>Przyczyna była przejściowa: cert-manager rozpoczął pracę zanim CoreDNS zaczął obsługiwać Service <code>kube-dns</code> pod adresem <code>10.43.0.10</code>.</p>
-<p>Po ustabilizowaniu DNS potwierdzono:</p>
-<ul>
-<li>CoreDNS <code>1/1 Running</code>;</li>
-<li>EndpointSlice <code>kube-dns</code> z gotowym adresem;</li>
-<li>oba <code>ClusterIssuer</code> <code>Ready=True</code>;</li>
-<li>wszystkie certyfikaty <code>Ready=True</code>;</li>
-<li>brak nowych błędów cert-managera w kolejnej minucie logów.</li>
-</ul>
-<p>Nie wykonywano restartu cert-managera ani ręcznej ingerencji w issuery. Kontroler sam ponowił operacje po odzyskaniu DNS.</p>
-<hr />
-<h2 id="8-stan-flux-przed-aktualizacja">8. Stan Flux przed aktualizacją<a class="headerlink" href="#8-stan-flux-przed-aktualizacja" title="Permanent link">&para;</a></h2>
-<p>Lokalny klient:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>flux: v2.9.5
+<p>Alertmanager:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>version:     v0.34.1
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>replicas:    1
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>ready:       1
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>reconciled:  True
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>available:   True
 </span></code></pre></div>
-<p>Dystrybucja w klastrze:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>distribution: flux-v2.8.1
+<p>Pozostałe obrazy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Prometheus Operator: v0.94.1
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>Grafana:             13.2.2-distroless
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>Grafana sidecar:     2.11.2
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>kube-state-metrics:  v2.20.0
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>node-exporter:       v1.12.1-distroless
 </span></code></pre></div>
-<p>Kontrolery przed zmianą:</p>
-<table>
-<thead>
-<tr>
-<th>Kontroler</th>
-<th>Wersja</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>source-controller</code></td>
-<td><code>v1.8.0</code></td>
-</tr>
-<tr>
-<td><code>kustomize-controller</code></td>
-<td><code>v1.8.1</code></td>
-</tr>
-<tr>
-<td><code>helm-controller</code></td>
-<td><code>v1.5.1</code></td>
-</tr>
-<tr>
-<td><code>notification-controller</code></td>
-<td><code>v1.8.1</code></td>
-</tr>
-<tr>
-<td><code>image-reflector-controller</code></td>
-<td><code>v1.1.0</code></td>
-</tr>
-<tr>
-<td><code>image-automation-controller</code></td>
-<td><code>v1.1.0</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>flux check --pre</code> potwierdził zgodność Kubernetes <code>v1.36.4+k3s1</code> z wymaganiami nowej dystrybucji.</p>
-<hr />
-<h2 id="9-migracja-api-image-toolkit">9. Migracja API Image Toolkit<a class="headerlink" href="#9-migracja-api-image-toolkit" title="Permanent link">&para;</a></h2>
-<p>Repozytorium zawierało dziesięć deklaracji używających:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>image.toolkit.fluxcd.io/v1beta2
+<p>Grafana:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Pod:       3/3 Ready
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>Restarts:  0,0,0
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>database:  ok
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>memory:    około 735Mi
 </span></code></pre></div>
-<p>Dotyczyło to:</p>
-<ul>
-<li><code>ImageRepository</code>;</li>
-<li><code>ImagePolicy</code>;</li>
-<li><code>ImageUpdateAutomation</code>;</li>
-<li>zasobów na gałęziach <code>main</code> i <code>staging</code>.</li>
-</ul>
-<p>CRD w klastrze już obsługiwały stabilne <code>v1</code>, a ich wersją storage było <code>v1</code>:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>served:        v1, v1beta2
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>storage:       v1
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>storedVersions: [v1]
+<p>Bezpośrednio po starcie pojawiło się kilka krótkich retry SQLite:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>database is locked (SQLITE_BUSY)
 </span></code></pre></div>
-<p>Najpierw wykonano podgląd:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>flux<span class="w"> </span>migrate<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span>--version<span class="o">=</span><span class="m">2</span>.8<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>--path<span class="o">=</span>.<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span>--dry-run
+<p>Nie towarzyszyły im błędy HTTP <code>500</code>, utrata gotowości ani restarty. Kolejna kontrola logów z ostatnich dwóch minut zwróciła:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>Brak nowych błędów Grafany
 </span></code></pre></div>
-<p>Narzędzie wskazało wyłącznie migrację dziesięciu deklaracji z <code>v1beta2</code> do <code>v1</code>.</p>
-<p>Po migracji gałęzi <code>main</code> próba przeniesienia tego samego commita przez <code>cherry-pick</code> na <code>staging</code> ujawniła konflikt <code>modify/delete</code> dla zasobów <code>k8s-badge</code>. Pliki istniały na <code>main</code>, ale zostały celowo usunięte na <code>staging</code>.</p>
-<p>Nie przywracano ich na gałęzi staging. Migrację wykonano osobno na aktualnym drzewie każdej gałęzi. Końcowa kontrola:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>origin/main:    brak image.toolkit.fluxcd.io/v1beta2
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>origin/staging: brak image.toolkit.fluxcd.io/v1beta2
-</span></code></pre></div>
-<p>Wniosek: zmian strukturalnych pomiędzy gałęziami nie należy przenosić bezwarunkowym <code>cherry-pick</code>. Migracja uruchomiona w kontekście każdej gałęzi zachowuje jej zamierzony zestaw zasobów.</p>
-<hr />
-<h2 id="10-migracja-zywych-zasobow-flux">10. Migracja żywych zasobów Flux<a class="headerlink" href="#10-migracja-zywych-zasobow-flux" title="Permanent link">&para;</a></h2>
-<p>Po zastosowaniu nowych manifestów wykonano:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>flux<span class="w"> </span>migrate
-</span></code></pre></div>
-<p>Narzędzie zmigrowało działające zasoby do aktualnych wersji API:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>GitRepository          → v1
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>HelmRepository         → v1
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>HelmChart              → v1
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>HelmRelease            → v2
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>Kustomization          → v1
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>ImageRepository        → v1
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>ImagePolicy            → v1
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>ImageUpdateAutomation  → v1
-</span></code></pre></div>
-<p>Migracja zakończyła się komunikatem:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>custom resources migrated successfully
-</span></code></pre></div>
-<p>Po migracji wszystkie źródła, polityki obrazów, automatyzacje, HelmRelease i Kustomization pozostały <code>Ready=True</code>.</p>
-<hr />
-<h2 id="11-punkt-odzyskiwania-przed-aktualizacja-flux">11. Punkt odzyskiwania przed aktualizacją Flux<a class="headerlink" href="#11-punkt-odzyskiwania-przed-aktualizacja-flux" title="Permanent link">&para;</a></h2>
-<p>Przed wymianą kontrolerów utworzono snapshot etcd:</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>pre-flux-v2.9.5-master-1790156948
-</span></code></pre></div>
-Snapshot został zapisany poprawnie.</p>
-<hr />
-<h2 id="12-generowanie-manifestu-flux-v295">12. Generowanie manifestu Flux <code>v2.9.5</code><a class="headerlink" href="#12-generowanie-manifestu-flux-v295" title="Permanent link">&para;</a></h2>
-<p>Manifest wygenerowano klientem odpowiadającym wersji docelowej:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>flux<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span>--export<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span>--components-extra<span class="o">=</span>image-reflector-controller,image-automation-controller<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span>&gt;<span class="w"> </span>/tmp/gotk-components-v2.9.5.yaml
-</span></code></pre></div>
-<p>Zachowano dokładnie sześć dotychczasowych komponentów:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>source-controller
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>kustomize-controller
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>helm-controller
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>notification-controller
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>image-reflector-controller
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>image-automation-controller
-</span></code></pre></div>
-<p>Plik:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>clusters/k3s-homelab/flux-system/gotk-components.yaml
-</span></code></pre></div>
-<p>został zastąpiony pełnym wygenerowanym manifestem. Nie modyfikowano ręcznie jego CRD, RBAC ani Deploymentów.</p>
-<p>Duży diff wynikał z wymiany całego generowanego bundla oraz zmian schematów CRD, RBAC, NetworkPolicy i argumentów kontrolerów:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>1347 insertions
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>2628 deletions
-</span></code></pre></div>
-<p>Zakres commita obejmował wyłącznie <code>gotk-components.yaml</code>.</p>
-<hr />
-<h2 id="13-konflikty-podczas-recznego-dry-run">13. Konflikty podczas ręcznego dry-run<a class="headerlink" href="#13-konflikty-podczas-recznego-dry-run" title="Permanent link">&para;</a></h2>
-<p>Polecenie:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span>--server-side<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span>--dry-run<span class="o">=</span>server<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">  </span>--filename<span class="w"> </span>/tmp/flux-v2.9.5-rendered.yaml
-</span></code></pre></div>
-<p>zgłosiło konflikty właścicieli pól, między innymi dla:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>app.kubernetes.io/version
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>spec.versions
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>obrazu kontenera manager
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>limitów CPU
-</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>NetworkPolicy
-</span></code></pre></div>
-<p>Pola były już zarządzane przez field managerów:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>flux
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>kustomize-controller
-</span></code></pre></div>
-<p>Nie był to błąd składni ani niezgodność API. Ręczny <code>kubectl</code> próbował zostać kolejnym właścicielem pól zarządzanych przez Flux.</p>
-<p>Nie wykonano rzeczywistego <code>kubectl apply --force-conflicts</code>. Docelowa zmiana została wdrożona przez Kustomization Flux, czyli przez istniejącego właściciela zasobów.</p>
-<hr />
-<h2 id="14-aktualizacja-flux-v281-v295">14. Aktualizacja Flux <code>v2.8.1 → v2.9.5</code><a class="headerlink" href="#14-aktualizacja-flux-v281-v295" title="Permanent link">&para;</a></h2>
-<p>Commit aktualizacji:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>5dfc3e1 chore(flux): upgrade controllers to v2.9.5
-</span></code></pre></div>
-<p>Po push wykonano:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>flux<span class="w"> </span>reconcile<span class="w"> </span>kustomization<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span>flux-system<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">  </span>--namespace<span class="w"> </span>flux-system<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">  </span>--with-source
-</span></code></pre></div>
-<p>Flux pobrał i zastosował:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>main@sha1:5dfc3e15e7a0a867b708e47ec9d598eb801f9cb3
-</span></code></pre></div>
-<p>Rollout wszystkich sześciu kontrolerów zakończył się poprawnie.</p>
-<p>Wersje końcowe:</p>
-<table>
-<thead>
-<tr>
-<th>Kontroler</th>
-<th>Wersja</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>source-controller</code></td>
-<td><code>v1.9.5</code></td>
-</tr>
-<tr>
-<td><code>kustomize-controller</code></td>
-<td><code>v1.9.5</code></td>
-</tr>
-<tr>
-<td><code>helm-controller</code></td>
-<td><code>v1.6.4</code></td>
-</tr>
-<tr>
-<td><code>notification-controller</code></td>
-<td><code>v1.9.4</code></td>
-</tr>
-<tr>
-<td><code>image-reflector-controller</code></td>
-<td><code>v1.2.5</code></td>
-</tr>
-<tr>
-<td><code>image-automation-controller</code></td>
-<td><code>v1.2.5</code></td>
-</tr>
-</tbody>
-</table>
-<p>Każdy Deployment miał:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>READY=1
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>AVAILABLE=1
+<p>Globalne kontrole Prometheusa zwróciły:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>targety health != up:       []
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>reguły health != ok:        []
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>reguły z niepustym błędem:  []
 </span></code></pre></div>
 <hr />
-<h2 id="15-walidacja-koncowa-flux">15. Walidacja końcowa Flux<a class="headerlink" href="#15-walidacja-koncowa-flux" title="Permanent link">&para;</a></h2>
-<p><code>flux version</code> potwierdził:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>flux:        v2.9.5
-</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>distribution: flux-v2.9.5
-</span></code></pre></div>
-<p><code>flux check</code> zakończył się:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>all checks passed
-</span></code></pre></div>
-<p>Potwierdzono:</p>
-<ul>
-<li>wszystkie kontrolery <code>Ready</code>;</li>
-<li>wszystkie wymagane CRD dostępne w wersjach obsługiwanych przez Flux <code>v2.9.5</code>;</li>
-<li>oba <code>GitRepository</code> <code>Ready=True</code>;</li>
-<li>wszystkie <code>HelmRepository</code> i <code>HelmChart</code> <code>Ready=True</code>;</li>
-<li>wszystkie <code>HelmRelease</code> <code>Ready=True</code>;</li>
-<li>wszystkie <code>Kustomization</code> <code>Ready=True</code>;</li>
-<li>trzy <code>ImageRepository</code> <code>Ready=True</code>;</li>
-<li>pięć <code>ImagePolicy</code> <code>Ready=True</code>;</li>
-<li>trzy <code>ImageUpdateAutomation</code> <code>Ready=True</code>;</li>
-<li>brak nieprawidłowych Podów w <code>flux-system</code>;</li>
-<li>brak błędów <code>error</code>, <code>failed</code>, <code>panic</code> i <code>fatal</code> w logach sześciu kontrolerów.</li>
-</ul>
-<p>Kustomization korzystające z <code>main</code> zastosowały commit <code>5dfc3e15</code>. <code>apps-staging</code> prawidłowo pozostało na osobnym źródle i rewizji gałęzi <code>staging</code>.</p>
-<hr />
-<h2 id="16-stan-koncowy">16. Stan końcowy<a class="headerlink" href="#16-stan-koncowy" title="Permanent link">&para;</a></h2>
+<h2 id="14-stan-koncowy">14. Stan końcowy<a class="headerlink" href="#14-stan-koncowy" title="Permanent link">&para;</a></h2>
 <h3 id="k3s">K3s<a class="headerlink" href="#k3s" title="Permanent link">&para;</a></h3>
 <ul>
 <li>trzy nody <code>Ready</code>;</li>
 <li>K3s <code>v1.36.4+k3s1</code>;</li>
-<li>lokalne API i embedded etcd działają na wszystkich nodach;</li>
+<li>lokalne API i embedded etcd <code>3/3</code>;</li>
 <li>macierz API server → kubelet <code>9/9</code>;</li>
-<li>kolejny zimny start bez błędu remotedialera.</li>
+<li>zimny start bez użycia remotedialer resync;</li>
+<li>problem niepełnej macierzy po zimnym starcie uznany za rozwiązany.</li>
 </ul>
-<h3 id="storage-i-bazy">Storage i bazy<a class="headerlink" href="#storage-i-bazy" title="Permanent link">&para;</a></h3>
+<h3 id="kube-prometheus-stack">kube-prometheus-stack<a class="headerlink" href="#kube-prometheus-stack" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Longhorn <code>1.12.1</code>;</li>
-<li>sześć wolumenów <code>attached</code> i <code>healthy</code>;</li>
-<li>wszystkie wolumeny na silniku <code>v1.12.1</code>;</li>
-<li>brak uszkodzonych replik;</li>
-<li>oba klastry CloudNativePG <code>2/2 Ready</code> i <code>Cluster in healthy state</code>.</li>
+<li>chart <code>91.8.1</code>;</li>
+<li>Helm revision <code>19</code>;</li>
+<li>Flux <code>Ready=True</code>;</li>
+<li>wszystkie workloady zakończyły rollout;</li>
+<li>Prometheus <code>v3.15.0-distroless</code>;</li>
+<li>Alertmanager <code>v0.34.1</code>;</li>
+<li>Prometheus Operator <code>v0.94.1</code>;</li>
+<li>Grafana <code>13.2.2-distroless</code>;</li>
+<li>kube-state-metrics <code>v2.20.0</code>;</li>
+<li>node-exporter <code>v1.12.1-distroless</code>;</li>
+<li>wszystkie targety <code>up</code>;</li>
+<li>wszystkie reguły zdrowe;</li>
+<li>brak błędów RBAC operatora.</li>
 </ul>
-<h3 id="cert-manager">cert-manager<a class="headerlink" href="#cert-manager" title="Permanent link">&para;</a></h3>
+<h3 id="grafana">Grafana<a class="headerlink" href="#grafana" title="Permanent link">&para;</a></h3>
 <ul>
-<li>instalacja jest deklaratywnie zarządzana przez Flux;</li>
-<li>chart i aplikacja <code>v1.21.2</code>;</li>
-<li>trzy Deploymenty dostępne;</li>
-<li>oba <code>ClusterIssuer</code> <code>Ready=True</code>;</li>
-<li>pięć certyfikatów <code>Ready=True</code>;</li>
-<li>brak aktywnych wyzwań ACME;</li>
-<li>przejściowy błąd DNS po starcie ustąpił bez ingerencji.</li>
+<li>stabilny EndpointSlice;</li>
+<li>brak <code>no available server</code> po korekcie zasobów;</li>
+<li>brak restartów i OOMKill;</li>
+<li>read-only root filesystem zachowany;</li>
+<li>automatyczny instalator pluginów wyłączony;</li>
+<li><code>GOMEMLIMIT=900MiB</code>;</li>
+<li>limit pamięci <code>1280Mi</code>;</li>
+<li>przejściowe blokady SQLite ograniczone do krótkich retry podczas startu.</li>
 </ul>
-<h3 id="flux">Flux<a class="headerlink" href="#flux" title="Permanent link">&para;</a></h3>
+<h3 id="storage-i-sekrety">Storage i sekrety<a class="headerlink" href="#storage-i-sekrety" title="Permanent link">&para;</a></h3>
 <ul>
-<li>klient i dystrybucja <code>v2.9.5</code>;</li>
-<li>wszystkie sześć kontrolerów w docelowych wersjach;</li>
-<li>deklaracje Image Toolkit używają stabilnego API <code>v1</code> na <code>main</code> i <code>staging</code>;</li>
-<li>żywe custom resources zostały zmigrowane;</li>
-<li>wszystkie zasoby GitOps są <code>Ready=True</code>;</li>
-<li>snapshot etcd sprzed aktualizacji istnieje.</li>
+<li>PVC Prometheusa pozostał na Longhornie;</li>
+<li>wolumen był <code>attached</code> i <code>healthy</code> podczas aktualizacji;</li>
+<li>token ServiceAccount Prometheusa istnieje wyłącznie jako Kubernetes Secret;</li>
+<li>repozytorium zawiera tylko deklarację <code>createTokenSecret: true</code>;</li>
+<li>wartość tokenu nie trafiła do Git.</li>
 </ul>
 <hr />
-<h2 id="17-wnioski">17. Wnioski<a class="headerlink" href="#17-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="15-wnioski">15. Wnioski<a class="headerlink" href="#15-wnioski" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Istniejący release Helm można bezpiecznie przejąć przez Flux, jeśli zachowane zostaną jego nazwa, namespace i podstawowa konfiguracja.</li>
-<li>Pierwsze uzgodnienie należy wykonać bez podnoszenia wersji. Oddziela to migrację sposobu zarządzania od aktualizacji oprogramowania.</li>
-<li>Sekrety nie należą do publicznego repozytorium. W GitOps powinny występować wyłącznie w formie zaszyfrowanej lub jako referencje do zewnętrznego systemu.</li>
-<li>Błędy ACME podczas pierwszych sekund zimnego startu mogą być skutkiem niedostępnego jeszcze DNS. O wyniku decyduje stan po ustabilizowaniu zależności i kolejne logi.</li>
-<li><code>Ready=True</code> istniejącego certyfikatu nie zastępuje kontroli issuerów, webhooka i logów kontrolera.</li>
-<li>Przed aktualizacją Flux trzeba zmigrować deklaracje w repozytorium oraz działające custom resources.</li>
-<li>Gałęzie o różnej strukturze należy migrować osobno; automatyczny <code>cherry-pick</code> może przywrócić zasoby celowo usunięte na jednej z nich.</li>
-<li><code>storedVersions: [v1]</code> potwierdza format przechowywany w etcd, ale repozytorium nadal może zawierać manifesty <code>v1beta2</code>.</li>
-<li>Konflikt server-side apply może oznaczać konflikt field managerów, a nie wadliwy manifest.</li>
-<li>Generowanego <code>gotk-components.yaml</code> nie należy poprawiać ręcznie. Powinien pochodzić z klienta Flux odpowiadającego wersji docelowej.</li>
-<li>Snapshot etcd chroni stan API przed zmianą CRD i kontrolerów, lecz nie zastępuje repozytorium Git jako źródła deklaracji.</li>
+<li>Duży skok chartu należy dzielić na kolejne wersje główne, nawet gdy wersja aplikacji przez kilka etapów się nie zmienia.</li>
+<li><code>HelmRelease Ready=True</code> nie wystarcza do zaliczenia aktualizacji systemu monitoringu. Trzeba sprawdzić targety, reguły, logi, API Grafany i storage.</li>
+<li>Render manifestów przed wdrożeniem wykrywa zmiany obrazów, RBAC, hooków, securityContext i usuniętych wartości.</li>
+<li>Hook aktualizacji CRD jest konieczny, ponieważ standardowy upgrade Helm nie aktualizuje automatycznie zawartości katalogu <code>crds/</code>.</li>
+<li><code>no available server</code> w Traefiku może oznaczać utratę gotowości jedynego backendu, a nie awarię samego reverse proxy.</li>
+<li>Limit CPU <code>200m</code> i pamięci <code>512Mi</code> był zbyt niski dla Grafany 13 w tym środowisku.</li>
+<li><code>GOMEMLIMIT</code> powinien pozostawiać zapas względem limitu pamięci cgroup.</li>
+<li>CPU limit node-exportera powodował wysoki CFS throttling mimo małego średniego użycia CPU. Usunięcie limitu było lepsze niż dalsze zwiększanie go.</li>
+<li>Obrazy distroless i read-only root filesystem wymagają sprawdzenia pluginów, initContainerów, poleceń shellowych i zapisywalnych mountów.</li>
+<li>Background Plugin Installer nie powinien modyfikować wbudowanych pluginów na read-only filesystem. Wyłączenie go usunęło trwałe błędy bez osłabiania securityContext.</li>
+<li>Migracja chartu <code>90.x</code> zmieniła sposób uwierzytelniania ServiceMonitor. Po zmianie trzeba sprawdzić wszystkie targety pod kątem <code>401</code>, <code>403</code> i brakującego Secretu.</li>
+<li>Długowieczny token ServiceAccount jest przechowywany w Kubernetes Secret i etcd. Do Git trafia jedynie deklaracja jego utworzenia.</li>
+<li><code>storedVersions: v1alpha1</code> nie zawsze oznacza dług techniczny. Dla części CRD Prometheus Operatora pozostaje to prawidłowa wersja storage.</li>
+<li>Zaostrzenie RBAC należy weryfikować przez logi operatora i stan zarządzanych CR, a nie tylko przez obecność nowego ClusterRole.</li>
+<li>Przejściowe <code>SQLITE_BUSY</code> podczas startu nie oznacza awarii, jeśli retry kończy się powodzeniem, <code>/api/health</code> zwraca <code>database=ok</code>, a kolejne logi są czyste.</li>
 </ol>
 <hr />
-<h2 id="18-nastepna-sesja">18. Następna sesja<a class="headerlink" href="#18-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="16-nastepna-sesja">16. Następna sesja<a class="headerlink" href="#16-nastepna-sesja" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Wykonać zimny start klastra po aktualizacji Flux <code>v2.9.5</code>.</li>
-<li>Potwierdzić:</li>
+<li>Po zimnym starcie potwierdzić:</li>
 </ol>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>3/3 Node Ready
-</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>API i etcd 3/3
-</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>API server → kubelet 9/9
-</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>flux check: all checks passed
-</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>wszystkie Kustomization i HelmRelease: Ready=True
-</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>wszystkie ImageRepository, ImagePolicy i ImageUpdateAutomation: Ready=True
-</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>cert-manager: 3/3 Deployment Ready
-</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>ClusterIssuer: 2/2 Ready
-</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a>certyfikaty: 5/5 Ready
-</span><span id="__span-38-10"><a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a>Longhorn: 6/6 volumes healthy
-</span><span id="__span-38-11"><a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a>CloudNativePG: 2/2 Ready w obu klastrach
+<div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>3/3 Node Ready
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>lokalne API i etcd 3/3
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>API server → kubelet 9/9
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>brak użycia remotedialer resync
+</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>Prometheus PVC attached/healthy
+</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>Prometheus i Alertmanager reconciled/available
+</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>wszystkie targety Prometheusa up
+</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a>wszystkie reguły health=ok
+</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a>Grafana bez no available server
+</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>Grafana bez trwałych SQLITE_BUSY i timeoutów
+</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a>Prometheus Operator bez błędów RBAC
 </span></code></pre></div>
 <ol>
-<li>Po poprawnym starcie uznać aktualizacje cert-managera i Flux za definitywnie zamknięte.</li>
-<li>Następny komponent wybierać dopiero po osobnej inwentaryzacji wersji, zgodności i sposobu instalacji.</li>
+<li>
+<p>Jeżeli test przejdzie, zamknąć aktualizację kube-prometheus-stack <code>82.10.1 → 91.8.1</code>.</p>
+</li>
+<li>
+<p>Następny komponent wybrać dopiero po zamknięciu testu regresji całego monitoringu.</p>
+</li>
 </ol>
 
 
@@ -4917,7 +4954,7 @@ Snapshot został zapisany poprawnie.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 14:17:41 UTC"><span class="timeago" datetime="2026-09-29T14:17:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 14:17:41 UTC">2026-09-29</span>
   </span>
 
     
@@ -4927,7 +4964,7 @@ Snapshot został zapisany poprawnie.</p>
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 07:05:52 UTC"><span class="timeago" datetime="2026-09-29T07:05:52+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 07:05:52 UTC">2026-09-29</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="September 29, 2026 14:17:41 UTC"><span class="timeago" datetime="2026-09-29T14:17:41+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 29, 2026 14:17:41 UTC">2026-09-29</span>
   </span>
 
     
