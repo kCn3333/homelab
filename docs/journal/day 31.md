@@ -1,6 +1,6 @@
 # 31 - przejęcie cert-managera przez Flux i aktualizacja Flux
 
-**Data:** 2026-09-23\
+**Data:** 2026-09-23
 **Środowisko końcowe:** 3× HP T630, Ubuntu 24.04.5 LTS, K3s `v1.36.4+k3s1`, Cilium `1.20.2`, Longhorn `1.12.1`, CloudNativePG `1.30.0`, PostgreSQL `17.4`, Metrics Server `v0.9.0`, cert-manager `v1.21.2`, Flux `v2.9.5`
 
 ## Cel sesji

@@ -1,6 +1,6 @@
 # 32 - migracja repozytorium Helm i aktualizacja Loki
 
-**Data:** 2026-09-24–2026-09-25\
+**Data:** 2026-09-24–2026-09-25
 **Środowisko końcowe:** 3× HP T630, Ubuntu 24.04.5 LTS, K3s `v1.36.4+k3s1`, Cilium `1.20.2`, Longhorn `1.12.1`, CloudNativePG `1.30.0`, PostgreSQL `17.4`, Metrics Server `v0.9.0`, cert-manager `v1.21.2`, Flux `v2.9.5`, Loki chart `18.7.6`, Loki `3.7.6`
 
 ## Cel sesji

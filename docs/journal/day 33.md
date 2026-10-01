@@ -1,6 +1,6 @@
 # 33 - aktualizacja kube-prometheus-stack i stabilizacja Grafany
 
-**Data:** 2026-09-29\
+**Data:** 2026-09-29
 **Środowisko końcowe:** 3× HP T630, Ubuntu 24.04.5 LTS, K3s `v1.36.4+k3s1`, Cilium `1.20.2`, Longhorn `1.12.1`, Flux `v2.9.5`, kube-prometheus-stack chart `91.8.1`, Prometheus Operator `v0.94.1`, Prometheus `v3.15.0`, Alertmanager `v0.34.1`, Grafana `13.2.2`
 
 ## Cel sesji

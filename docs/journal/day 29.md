@@ -1,6 +1,6 @@
 # 29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG
 
-**Data:** 2026-09-21\
+**Data:** 2026-09-21
 **Środowisko końcowe:** 3× HP T630, Ubuntu 24.04.4 LTS, K3s `v1.36.4+k3s1`, Cilium `1.20.2`, CloudNativePG `1.30.0`, PostgreSQL `17.4`, Longhorn `1.11.0`
 
 ## Cel sesji
