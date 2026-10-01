@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/provisioning/1-custom-image/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/journal/day%2034/">
       
       
-        <link rel="prev" href="../0-pxe-tftp/">
+        <link rel="prev" href="../day%2033/">
       
       
-        <link rel="next" href="../2-cluster-deployment-maas/">
+        <link rel="next" href="../../pentesting/pentest_lab_notes/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Image with Packer - > Homelab Documentation</title>
+        <title>34 - aktualizacja stosu obserwowalności i baz danych - > Homelab Documentation</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#image-with-packer" class="md-skip">
+        <a href="#34-aktualizacja-stosu-obserwowalnosci-i-baz-danych" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Image with Packer
+              34 - aktualizacja stosu obserwowalności i baz danych
             
           </span>
         </div>
@@ -1040,20 +1040,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_1" >
         
           
           <label class="md-nav__link" for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
@@ -1074,7 +1072,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_3_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1092,7 +1090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../0-pxe-tftp/" class="md-nav__link">
+      <a href="../../provisioning/0-pxe-tftp/" class="md-nav__link">
         
   
   
@@ -1117,37 +1115,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Image with Packer
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../provisioning/1-custom-image/" class="md-nav__link">
         
   
   
@@ -1163,220 +1134,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 Goal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-tools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🛠️ Environment &amp; Tools
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-packer-configuration-wsl2qemu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Packer Configuration (WSL2/QEMU)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Packer Configuration (WSL2/QEMU)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-kvm-acceleration-fix-crucial-for-wsl2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1. KVM Acceleration Fix (Crucial for WSL2)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-boot-mode-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2. Boot Mode Configuration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-build-the-image" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3. Build the Image
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-maas-deployment-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. MAAS Deployment Steps
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. MAAS Deployment Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-file-transfer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1. File Transfer
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-upload-image-to-maas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2. Upload Image to MAAS
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-verify-image-upload" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Verify Image Upload
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-deploy-to-nodes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4. Deploy to Nodes
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🐛 Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🐛 Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#build-fails-with-permission-denied-kvm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build Fails with "Permission denied" (KVM)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#build-is-very-slow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build is Very Slow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ovmfuefi-boot-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OVMF/UEFI Boot Issues
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📚 Additional Resources
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1389,7 +1146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2-cluster-deployment-maas/" class="md-nav__link">
+      <a href="../../provisioning/2-cluster-deployment-maas/" class="md-nav__link">
         
   
   
@@ -1417,7 +1174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3-ssh-configuration/" class="md-nav__link">
+      <a href="../../provisioning/3-ssh-configuration/" class="md-nav__link">
         
   
   
@@ -1785,18 +1542,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" checked>
         
           
           <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
@@ -1817,7 +1576,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_3_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1835,7 +1594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2000/" class="md-nav__link">
+      <a href="../day%2000/" class="md-nav__link">
         
   
   
@@ -1863,7 +1622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2001/" class="md-nav__link">
+      <a href="../day%2001/" class="md-nav__link">
         
   
   
@@ -1891,7 +1650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2002/" class="md-nav__link">
+      <a href="../day%2002/" class="md-nav__link">
         
   
   
@@ -1919,7 +1678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2003/" class="md-nav__link">
+      <a href="../day%2003/" class="md-nav__link">
         
   
   
@@ -1947,7 +1706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2004/" class="md-nav__link">
+      <a href="../day%2004/" class="md-nav__link">
         
   
   
@@ -1975,7 +1734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2005/" class="md-nav__link">
+      <a href="../day%2005/" class="md-nav__link">
         
   
   
@@ -2003,7 +1762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2006/" class="md-nav__link">
+      <a href="../day%2006/" class="md-nav__link">
         
   
   
@@ -2031,7 +1790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2007/" class="md-nav__link">
+      <a href="../day%2007/" class="md-nav__link">
         
   
   
@@ -2059,7 +1818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2008/" class="md-nav__link">
+      <a href="../day%2008/" class="md-nav__link">
         
   
   
@@ -2087,7 +1846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2009/" class="md-nav__link">
+      <a href="../day%2009/" class="md-nav__link">
         
   
   
@@ -2115,7 +1874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2010/" class="md-nav__link">
+      <a href="../day%2010/" class="md-nav__link">
         
   
   
@@ -2143,7 +1902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2011/" class="md-nav__link">
+      <a href="../day%2011/" class="md-nav__link">
         
   
   
@@ -2171,7 +1930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2012/" class="md-nav__link">
+      <a href="../day%2012/" class="md-nav__link">
         
   
   
@@ -2199,7 +1958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2013/" class="md-nav__link">
+      <a href="../day%2013/" class="md-nav__link">
         
   
   
@@ -2227,7 +1986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2014/" class="md-nav__link">
+      <a href="../day%2014/" class="md-nav__link">
         
   
   
@@ -2255,7 +2014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2015/" class="md-nav__link">
+      <a href="../day%2015/" class="md-nav__link">
         
   
   
@@ -2283,7 +2042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2016/" class="md-nav__link">
+      <a href="../day%2016/" class="md-nav__link">
         
   
   
@@ -2311,7 +2070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2017/" class="md-nav__link">
+      <a href="../day%2017/" class="md-nav__link">
         
   
   
@@ -2339,7 +2098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2018/" class="md-nav__link">
+      <a href="../day%2018/" class="md-nav__link">
         
   
   
@@ -2367,7 +2126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2019/" class="md-nav__link">
+      <a href="../day%2019/" class="md-nav__link">
         
   
   
@@ -2395,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2020/" class="md-nav__link">
+      <a href="../day%2020/" class="md-nav__link">
         
   
   
@@ -2423,7 +2182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2021/" class="md-nav__link">
+      <a href="../day%2021/" class="md-nav__link">
         
   
   
@@ -2451,7 +2210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2022/" class="md-nav__link">
+      <a href="../day%2022/" class="md-nav__link">
         
   
   
@@ -2479,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2023/" class="md-nav__link">
+      <a href="../day%2023/" class="md-nav__link">
         
   
   
@@ -2507,7 +2266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2024/" class="md-nav__link">
+      <a href="../day%2024/" class="md-nav__link">
         
   
   
@@ -2535,7 +2294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2025/" class="md-nav__link">
+      <a href="../day%2025/" class="md-nav__link">
         
   
   
@@ -2563,7 +2322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2026/" class="md-nav__link">
+      <a href="../day%2026/" class="md-nav__link">
         
   
   
@@ -2591,7 +2350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2027/" class="md-nav__link">
+      <a href="../day%2027/" class="md-nav__link">
         
   
   
@@ -2619,7 +2378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2028/" class="md-nav__link">
+      <a href="../day%2028/" class="md-nav__link">
         
   
   
@@ -2647,7 +2406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2029/" class="md-nav__link">
+      <a href="../day%2029/" class="md-nav__link">
         
   
   
@@ -2675,7 +2434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2030/" class="md-nav__link">
+      <a href="../day%2030/" class="md-nav__link">
         
   
   
@@ -2703,7 +2462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2031/" class="md-nav__link">
+      <a href="../day%2031/" class="md-nav__link">
         
   
   
@@ -2731,7 +2490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2032/" class="md-nav__link">
+      <a href="../day%2032/" class="md-nav__link">
         
   
   
@@ -2759,7 +2518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../journal/day%2033/" class="md-nav__link">
+      <a href="../day%2033/" class="md-nav__link">
         
   
   
@@ -2784,10 +2543,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../journal/day%2034/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34 - aktualizacja stosu obserwowalności i baz danych
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2803,6 +2589,258 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cel-sesji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cel sesji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-kontrola-klastra-po-starcie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Kontrola klastra po starcie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Kontrola klastra po starcie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uwaga-dotyczaca-powoki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uwaga dotycząca powłoki
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-aktualizacja-kube-prometheus-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Aktualizacja kube-prometheus-stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aktualizacja-operatora-cloudnativepg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aktualizacja operatora CloudNativePG
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-backup-logiczny-przed-aktualizacja-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Backup logiczny przed aktualizacją PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-kontrole-zgodnosci-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Kontrole zgodności PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-aktualizacja-postgresql-na-stagingu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Aktualizacja PostgreSQL na stagingu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-aktualizacja-postgresql-na-produkcji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Aktualizacja PostgreSQL na produkcji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-aktualizacja-alloy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Aktualizacja Alloy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-przygotowanie-aktualizacji-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Przygotowanie aktualizacji Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-aktualizacja-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Aktualizacja Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-przejsciowe-komunikaty-memberlist-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Przejściowe komunikaty memberlist Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-stan-koncowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Stan końcowy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Stan końcowy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-wnioski" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Wnioski
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-nastepna-sesja" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Następna sesja
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4051,10 +4089,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
+  <a href="#cel-sesji" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Goal
+        Cel sesji
       
     </span>
   </a>
@@ -4062,55 +4100,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#environment-tools" class="md-nav__link">
+  <a href="#1-kontrola-klastra-po-starcie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛠️ Environment &amp; Tools
+        1. Kontrola klastra po starcie
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-packer-configuration-wsl2qemu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Packer Configuration (WSL2/QEMU)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Packer Configuration (WSL2/QEMU)">
+    <nav class="md-nav" aria-label="1. Kontrola klastra po starcie">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-kvm-acceleration-fix-crucial-for-wsl2" class="md-nav__link">
+  <a href="#uwaga-dotyczaca-powoki" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. KVM Acceleration Fix (Crucial for WSL2)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-boot-mode-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2. Boot Mode Configuration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-build-the-image" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3. Build the Image
+        Uwaga dotycząca powłoki
       
     </span>
   </a>
@@ -4123,22 +4128,132 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-maas-deployment-steps" class="md-nav__link">
+  <a href="#2-aktualizacja-kube-prometheus-stack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. MAAS Deployment Steps
+        2. Aktualizacja kube-prometheus-stack
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. MAAS Deployment Steps">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-aktualizacja-operatora-cloudnativepg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aktualizacja operatora CloudNativePG
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-backup-logiczny-przed-aktualizacja-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Backup logiczny przed aktualizacją PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-kontrole-zgodnosci-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Kontrole zgodności PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-aktualizacja-postgresql-na-stagingu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Aktualizacja PostgreSQL na stagingu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-aktualizacja-postgresql-na-produkcji" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Aktualizacja PostgreSQL na produkcji
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-aktualizacja-alloy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Aktualizacja Alloy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-przygotowanie-aktualizacji-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Przygotowanie aktualizacji Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-aktualizacja-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Aktualizacja Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-przejsciowe-komunikaty-memberlist-loki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Przejściowe komunikaty memberlist Loki
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-stan-koncowy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Stan końcowy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Stan końcowy">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-file-transfer" class="md-nav__link">
+  <a href="#monitoring" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. File Transfer
+        Monitoring
       
     </span>
   </a>
@@ -4146,10 +4261,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-upload-image-to-maas" class="md-nav__link">
+  <a href="#postgresql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Upload Image to MAAS
+        PostgreSQL
       
     </span>
   </a>
@@ -4157,10 +4272,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-verify-image-upload" class="md-nav__link">
+  <a href="#logi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Verify Image Upload
+        Logi
       
     </span>
   </a>
@@ -4168,10 +4283,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-deploy-to-nodes" class="md-nav__link">
+  <a href="#storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Deploy to Nodes
+        Storage
       
     </span>
   </a>
@@ -4184,60 +4299,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#14-wnioski" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🐛 Troubleshooting
+        14. Wnioski
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="🐛 Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#build-fails-with-permission-denied-kvm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build Fails with "Permission denied" (KVM)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#build-is-very-slow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build is Very Slow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ovmfuefi-boot-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OVMF/UEFI Boot Issues
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-resources" class="md-nav__link">
+  <a href="#15-nastepna-sesja" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📚 Additional Resources
+        15. Następna sesja
       
     </span>
   </a>
@@ -4265,145 +4341,461 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/provisioning/1-custom-image.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/journal/day 34.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="image-with-packer"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 13.25A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25V2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75ZM1.75 2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h.94l.03-.03 6.077-6.078a1.75 1.75 0 0 1 2.412-.06L14.5 10.31V2.75a.25.25 0 0 0-.25-.25Zm12.5 11a.25.25 0 0 0 .25-.25v-.917l-4.298-3.889a.25.25 0 0 0-.344.009L4.81 13.5ZM7 6a2 2 0 1 1-3.999.001A2 2 0 0 1 7 6M5.5 6a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0"/></svg></span> Image with Packer<a class="headerlink" href="#image-with-packer" title="Permanent link">&para;</a></h1>
-<div class="admonition info">
-<p class="admonition-title">MAAS Custom Images</p>
-<p>By default, MAAS only includes an image for Ubuntu. If you want to add an image for another operating system, you need to build it in the appropriate format using the Packer application.</p>
-<p><a href="https://developer.hashicorp.com/packer/docs"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 0H8C6.9 0 6 .9 6 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6zm4 18H8V2h7v5h5zM4 4v18h16v2H4c-1.1 0-2-.9-2-2V4zm6 6v2h8v-2zm0 4v2h5v-2z"/></svg></span> Packer Docs</a></p>
-</div>
-<h2 id="goal">🎯 Goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
-<p>To build a clean <code>debian-custom-cloudimg.tar.gz</code> image for MAAS deployment.</p>
-<hr />
-<h2 id="environment-tools">🛠️ Environment &amp; Tools<a class="headerlink" href="#environment-tools" title="Permanent link">&para;</a></h2>
-<p><strong>Host Environment:</strong></p>
-<ul>
-<li>Windows 11 / WSL2 (Ubuntu)</li>
-<li>Builder: Packer with QEMU builder</li>
-</ul>
-<p><strong>Repository:</strong></p>
-<p>Clone Canonical's MAAS Image Builder (based on HCL format):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/canonical/packer-maas.git
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>packer-maas
-</span></code></pre></div>
-<hr />
-<h2 id="1-packer-configuration-wsl2qemu">1. Packer Configuration (WSL2/QEMU)<a class="headerlink" href="#1-packer-configuration-wsl2qemu" title="Permanent link">&para;</a></h2>
-<p>The default configuration required modifications primarily due to the Nested Virtualization environment (QEMU running inside WSL2/Hyper-V).</p>
-<h3 id="11-kvm-acceleration-fix-crucial-for-wsl2">1.1. KVM Acceleration Fix (Crucial for WSL2)<a class="headerlink" href="#11-kvm-acceleration-fix-crucial-for-wsl2" title="Permanent link">&para;</a></h3>
-<p>The main build may fail because QEMU attempts to use KVM acceleration (<code>accel=kvm</code>), which is inaccessible from within WSL2, resulting in a <strong>"Permission denied"</strong> error.</p>
-<p><strong>File Modified:</strong> <code>debian-cloudimg.pkr.hcl</code></p>
-<p><strong>Original configuration:</strong></p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Original (doesn't work in WSL2)</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">qemu_machine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"amd64"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"accel=kvm"</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">qemu_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"amd64"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"host"</span><span class="w"> </span><span class="p">}</span>
-</span></code></pre></div>
-<p><strong>Fixed configuration for WSL2 emulation:</strong></p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">locals</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nb">qemu_machine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"amd64"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"q35"</span><span class="w"> </span><span class="p">}</span><span class="c1">   # Use standard machine without KVM flag</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nb">qemu_cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"amd64"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"max"</span><span class="w"> </span><span class="p">}</span><span class="c1">       # Use safe CPU setting</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
-</span></code></pre></div>
-<p><strong>Explanation:</strong></p>
-<ul>
-<li>Removed hardcoded KVM flags in the <code>locals</code> block</li>
-<li>Forces pure software emulation (slower but works in WSL2)</li>
-<li>Uses <code>q35</code> machine type (standard x86_64 chipset)</li>
-<li>Uses <code>max</code> CPU model (safe fallback without host-passthrough)</li>
-</ul>
-<h3 id="12-boot-mode-configuration">1.2. Boot Mode Configuration<a class="headerlink" href="#12-boot-mode-configuration" title="Permanent link">&para;</a></h3>
-<p>Switched the boot mode to <strong>BIOS</strong> (<code>BOOT=bios</code>) to avoid potential conflicts with UEFI/OVMF firmware copying and usage within the QEMU environment.</p>
-<h3 id="13-build-the-image">1.3. Build the Image<a class="headerlink" href="#13-build-the-image" title="Permanent link">&para;</a></h3>
-<p>Run the build command:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>debian<span class="w"> </span><span class="nv">SERIES</span><span class="o">=</span>trixie<span class="w"> </span><span class="nv">BOOT</span><span class="o">=</span>bios
-</span></code></pre></div>
-<p><strong>Build process:</strong></p>
+<h1 id="34-aktualizacja-stosu-obserwowalnosci-i-baz-danych">34 - aktualizacja stosu obserwowalności i baz danych<a class="headerlink" href="#34-aktualizacja-stosu-obserwowalnosci-i-baz-danych" title="Permanent link">&para;</a></h1>
+<p><strong>Data:</strong> 2026-10-01<br />
+<strong>Środowisko końcowe:</strong> 3× HP T630, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, kube-prometheus-stack <code>91.8.2</code>, Prometheus <code>3.15.0</code>, Alertmanager <code>0.34.1</code>, Grafana <code>13.2.3</code>, CloudNativePG <code>1.30.1</code>, PostgreSQL <code>17.11</code>, Alloy <code>1.20.0</code>, Loki <code>3.7.8</code></p>
+<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Packer downloads the Debian Trixie ISO</li>
-<li>QEMU starts the VM in software emulation mode</li>
-<li>Automated installation proceeds via preseed</li>
-<li>Image is packaged as <code>debian-custom-cloudimg.tar.gz</code></li>
+<li>Sprawdzić stan klastra po ponownym uruchomieniu.</li>
+<li>Zaktualizować kube-prometheus-stack w obrębie wersji <code>91.x</code>.</li>
+<li>Zaktualizować operator CloudNativePG.</li>
+<li>Wykonać zabezpieczoną aktualizację PostgreSQL <code>17.4 → 17.11</code>, najpierw na stagingu, a następnie na produkcji.</li>
+<li>Zaktualizować Alloy i potwierdzić dalsze wysyłanie logów.</li>
+<li>Zaktualizować Loki w obrębie wersji głównej chartu <code>18.x</code>.</li>
+<li>Ocenić możliwość aktualizacji Longhorna bez wykonywania ryzykownej zmiany.</li>
 </ol>
-<p><strong>Expected output:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>==&gt; Builds finished. The artifacts of successful builds are:
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>--&gt; qemu.debian: debian-custom-cloudimg.tar.gz
+<hr />
+<h2 id="1-kontrola-klastra-po-starcie">1. Kontrola klastra po starcie<a class="headerlink" href="#1-kontrola-klastra-po-starcie" title="Permanent link">&para;</a></h2>
+<p>Prometheus po starcie klastra osiągnął stan:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Pod:        prometheus-kube-prometheus-stack-prometheus-0
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Ready:      2/2
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Status:     Running
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Restarts:   0
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Node:       master
+</span></code></pre></div>
+<p>Custom Resource Prometheusa miał:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Desired:     1
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Ready:       1
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Reconciled:  True
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Available:   True
+</span></code></pre></div>
+<p>Wolumen Prometheusa:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PVC:          prometheus-kube-prometheus-stack-prometheus-db-prometheus-kube-prometheus-stack-prometheus-0
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Longhorn:     attached, healthy
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Node:         master
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Replicas:     2
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Scheduled:    True
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Restore:      niewymagany
+</span></code></pre></div>
+<p>Obie repliki Longhorna działały na <code>worker1</code> i <code>worker2</code>, bez błędów ani prób przebudowy.</p>
+<p>Prometheus ocenił wszystkie reguły poprawnie:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"healthCounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="nt">"health"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">      </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">229</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">"problematic"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Grafana nie zgłaszała nowych timeoutów, blokad SQLite ani błędów HTTP 5xx.</p>
+<h3 id="uwaga-dotyczaca-powoki">Uwaga dotycząca powłoki<a class="headerlink" href="#uwaga-dotyczaca-powoki" title="Permanent link">&para;</a></h3>
+<p>Pierwsza próba uruchomienia <code>kubectl port-forward</code> zakończyła się lokalnym błędem:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>bash: /tmp/prometheus-pf.log: nie można nadpisać istniejącego pliku
+</span></code></pre></div>
+<p>Przyczyną było aktywne <code>noclobber</code>, a nie awaria klastra. Do kontrolowanego nadpisania pliku użyto operatora:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;<span class="p">|</span>/tmp/prometheus-pf.log
 </span></code></pre></div>
 <hr />
-<h2 id="2-maas-deployment-steps">2. MAAS Deployment Steps<a class="headerlink" href="#2-maas-deployment-steps" title="Permanent link">&para;</a></h2>
-<p>After a successful build, the image is ready for deployment.</p>
-<h3 id="21-file-transfer">2.1. File Transfer<a class="headerlink" href="#21-file-transfer" title="Permanent link">&para;</a></h3>
-<p>Copy the image to the MAAS server:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>scp<span class="w"> </span>debian-custom-cloudimg.tar.gz<span class="w"> </span>user@maas_server_ip:/home/user/
+<h2 id="2-aktualizacja-kube-prometheus-stack">2. Aktualizacja kube-prometheus-stack<a class="headerlink" href="#2-aktualizacja-kube-prometheus-stack" title="Permanent link">&para;</a></h2>
+<p>Stan początkowy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chart:    91.8.1
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Grafana:  13.2.2-distroless
 </span></code></pre></div>
-<h3 id="22-upload-image-to-maas">2.2. Upload Image to MAAS<a class="headerlink" href="#22-upload-image-to-maas" title="Permanent link">&para;</a></h3>
-<p>SSH to the MAAS server and upload the custom image:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ssh<span class="w"> </span>user@maas_server_ip
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Upload the custom image</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>maas<span class="w"> </span>admin<span class="w"> </span>boot-resources<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s1">'custom/debian-trixie'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nv">title</span><span class="o">=</span><span class="s1">'Debian 13 Trixie Custom'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nv">architecture</span><span class="o">=</span><span class="s1">'amd64/generic'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nv">filetype</span><span class="o">=</span><span class="s1">'tgz'</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>content@<span class="o">=</span>debian-custom-cloudimg.tar.gz
+<p>W repozytorium Helm dostępna była wersja:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chart:      91.8.2
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>appVersion: v0.94.1
 </span></code></pre></div>
-<h3 id="23-verify-image-upload">2.3. Verify Image Upload<a class="headerlink" href="#23-verify-image-upload" title="Permanent link">&para;</a></h3>
-<p>Check if the image was uploaded successfully:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>maas<span class="w"> </span>admin<span class="w"> </span>boot-resources<span class="w"> </span><span class="nb">read</span>
+<p>Porównanie renderów <code>91.8.1</code> i <code>91.8.2</code> wykazało zmianę wyłącznie w podcharcie Grafany:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>grafana chart: 13.2.6 → 13.2.7
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Grafana:       13.2.2 → 13.2.3
 </span></code></pre></div>
-<p>Look for your custom image in the list:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>custom/debian-trixie (amd64/generic)
+<p>Pozostałe obrazy nie zmieniły wersji.</p>
+<p>Po aktualizacji Flux zgłosił:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>HelmRelease: kube-prometheus-stack
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Revision:    91.8.2
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Ready:       True
 </span></code></pre></div>
-<h3 id="24-deploy-to-nodes">2.4. Deploy to Nodes<a class="headerlink" href="#24-deploy-to-nodes" title="Permanent link">&para;</a></h3>
-<p><strong>Via MAAS UI:</strong></p>
+<p>Grafana po rollout:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>image:       docker.io/grafana/grafana:13.2.3-distroless
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Ready:       true,true,true
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Restarts:    0,0,0
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>database:    ok
+</span></code></pre></div>
+<p>Zachowano wcześniej dobrane parametry:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">resources</span><span class="p">:</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">requests</span><span class="p">:</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">512Mi</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500m</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1280Mi</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nt">env</span><span class="p">:</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">  </span><span class="nt">GOMEMLIMIT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">900MiB</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="nt">grafana.ini</span><span class="p">:</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">  </span><span class="nt">plugins</span><span class="p">:</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="nt">preinstall_disabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>Bezpośrednio po starcie wystąpiła pojedyncza krótka blokada SQLite:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>database is locked (SQLITE_BUSY), retry=0
+</span></code></pre></div>
+<p>Ponowne sprawdzenie ostatniej minuty logów nie wykazało dalszych blokad ani błędów. Dashboardy i API Grafany działały prawidłowo.</p>
+<hr />
+<h2 id="3-aktualizacja-operatora-cloudnativepg">3. Aktualizacja operatora CloudNativePG<a class="headerlink" href="#3-aktualizacja-operatora-cloudnativepg" title="Permanent link">&para;</a></h2>
+<p>Przed zmianą oba klastry PostgreSQL były zdrowe:</p>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Cluster</th>
+<th style="text-align: right;">Instancje</th>
+<th style="text-align: right;">Ready</th>
+<th>Primary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clients</code></td>
+<td><code>clients-db</code></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td><code>clients-db-2</code></td>
+</tr>
+<tr>
+<td><code>clients-staging</code></td>
+<td><code>clients-db-staging</code></td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td><code>clients-db-staging-1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Stan początkowy operatora:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>chart:    0.29.0
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>operator: 1.30.0
+</span></code></pre></div>
+<p>Wersja docelowa:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>chart:    0.29.1
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>operator: 1.30.1
+</span></code></pre></div>
+<p>Porównanie renderów wykazało:</p>
+<ul>
+<li>aktualizację obrazu operatora <code>1.30.0 → 1.30.1</code>;</li>
+<li>zmianę checksum konfiguracji i RBAC;</li>
+<li>brak zmian wersji i trybu przechowywania CRD;</li>
+<li>brak zmian w zasobach i konfiguracji operatora ustawionych w HelmRelease.</li>
+</ul>
+<p>Po aktualizacji:</p>
+<ul>
+<li>operator działał w wersji <code>1.30.1</code>;</li>
+<li>init container każdej instancji PostgreSQL używał <code>cloudnative-pg:1.30.1</code>;</li>
+<li>oba klastry pozostały <code>2/2 Ready</code>;</li>
+<li>role primary/replica były prawidłowe;</li>
+<li>usługi <code>-rw</code>, <code>-ro</code> i <code>-r</code> wskazywały właściwe endpointy;</li>
+<li>logi operatora po ustabilizowaniu nie zawierały błędów.</li>
+</ul>
+<hr />
+<h2 id="4-backup-logiczny-przed-aktualizacja-postgresql">4. Backup logiczny przed aktualizacją PostgreSQL<a class="headerlink" href="#4-backup-logiczny-przed-aktualizacja-postgresql" title="Permanent link">&para;</a></h2>
+<p>Przed zmianą obrazu PostgreSQL wykonano lokalny backup logiczny obu klastrów.</p>
+<p>Katalog backupu:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>/var/tmp/cnpg-preupgrade-20261001T091713Z
+</span></code></pre></div>
+<p>Katalog utworzono z prawami <code>0700</code>, a pliki z prawami <code>0600</code>.</p>
+<p>Dla każdego klastra wykonano:</p>
 <ol>
-<li>Navigate to <strong>Machines</strong></li>
-<li>Select a node in <strong>Ready</strong> state</li>
-<li>Click <strong>Deploy</strong></li>
-<li>Choose <strong>custom/debian-trixie</strong> from the OS dropdown</li>
-<li>Confirm deployment</li>
+<li><code>pg_dumpall --globals-only</code>;</li>
+<li>listę baz użytkownika;</li>
+<li><code>pg_dump --format custom --create</code> każdej bazy;</li>
+<li>weryfikację każdego pliku przez <code>pg_restore --list</code>;</li>
+<li>zapis i sprawdzenie sum <code>SHA256SUMS</code>.</li>
 </ol>
-<p><strong>Via CLI:</strong></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>maas<span class="w"> </span>admin<span class="w"> </span>machine<span class="w"> </span>deploy<span class="w"> </span>&lt;system_id&gt;<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nv">distro_series</span><span class="o">=</span><span class="s1">'custom/debian-trixie'</span>
+<p>Zabezpieczone bazy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>clients/clients_db
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>clients/postgres
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>clients-staging/clients_db_staging
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>clients-staging/postgres
 </span></code></pre></div>
+<p>Weryfikacja dumpów aplikacyjnych wykazała po <code>12</code> obiektów i po <code>3</code> sekcje <code>TABLE DATA</code>. Wszystkie sumy SHA-256 były poprawne.</p>
+<p>Istotne ograniczenie: klastry CloudNativePG nadal nie mają skonfigurowanych zasobów <code>Backup</code> ani <code>ScheduledBackup</code>. Lokalny backup logiczny zabezpieczał tę aktualizację, ale nie zastępuje docelowej polityki regularnych backupów.</p>
 <hr />
-<h2 id="troubleshooting">🐛 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="build-fails-with-permission-denied-kvm">Build Fails with "Permission denied" (KVM)<a class="headerlink" href="#build-fails-with-permission-denied-kvm" title="Permanent link">&para;</a></h3>
-<p><strong>Symptom:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>qemu-system-x86_64: failed to initialize kvm: Permission denied
-</span></code></pre></div>
-<p><strong>Solution:</strong></p>
-<p>Apply the KVM fix in section 1.1 - force software emulation by removing <code>accel=kvm</code>.</p>
-<h3 id="build-is-very-slow">Build is Very Slow<a class="headerlink" href="#build-is-very-slow" title="Permanent link">&para;</a></h3>
-<p><strong>Cause:</strong></p>
-<p>Software emulation (no KVM) is significantly slower than hardware acceleration.</p>
-<p><strong>Expected time:</strong></p>
+<h2 id="5-kontrole-zgodnosci-postgresql">5. Kontrole zgodności PostgreSQL<a class="headerlink" href="#5-kontrole-zgodnosci-postgresql" title="Permanent link">&para;</a></h2>
+<p>Przed aktualizacją potwierdzono:</p>
 <ul>
-<li>With KVM: 5-10 minutes</li>
-<li>Without KVM (WSL2): 30-60 minutes</li>
+<li>bieżącą wersję PostgreSQL <code>17.4</code>;</li>
+<li>system kolacji <code>C</code> dla baz aplikacyjnych i <code>postgres</code>;</li>
+<li>brak dodatkowych rozszerzeń poza <code>plpgsql</code>;</li>
+<li>brak indeksów BRIN;</li>
+<li>brak samoodwołujących kluczy obcych na tabelach partycjonowanych;</li>
+<li>wyłącznie fizyczne sloty replikacji CloudNativePG;</li>
+<li>mały rozmiar baz, około <code>8 MiB</code> dla każdej bazy aplikacyjnej;</li>
+<li>brak konieczności wykonania <code>pg_upgrade</code>, ponieważ była to aktualizacja patch w obrębie PostgreSQL 17.</li>
 </ul>
-<p><strong>Solution:</strong></p>
-<p>Be patient. Consider building on native Linux with KVM support for faster builds.</p>
-<h3 id="ovmfuefi-boot-issues">OVMF/UEFI Boot Issues<a class="headerlink" href="#ovmfuefi-boot-issues" title="Permanent link">&para;</a></h3>
-<p><strong>Symptom:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Could not find firmware for UEFI boot
+<p>Wybrany obraz:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>ghcr.io/cloudnative-pg/postgresql:17.11-standard-bookworm
 </span></code></pre></div>
-<p><strong>Solution:</strong></p>
-<p>Use <code>BOOT=bios</code> flag as shown in section 1.2.</p>
+<p>Obraz przypięto również do digestu:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>sha256:61207ab4e051645dcb9901e1ec9358b01e4adb45624cb4425be1eab27eac6508
+</span></code></pre></div>
+<p>Wybór wariantu <code>standard-bookworm</code> zachował bazę Debian 12 i nie wprowadzał jednoczesnej migracji systemu bazowego do Trixie.</p>
 <hr />
-<h2 id="additional-resources">📚 Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">&para;</a></h2>
+<h2 id="6-aktualizacja-postgresql-na-stagingu">6. Aktualizacja PostgreSQL na stagingu<a class="headerlink" href="#6-aktualizacja-postgresql-na-stagingu" title="Permanent link">&para;</a></h2>
+<p>Najpierw zmieniono manifest na branchu <code>staging</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>apps/staging/db-cluster.yaml
+</span></code></pre></div>
+<p>Render Kustomize potwierdził:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>instances: 2
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>storage:   1Gi, longhorn
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>image:     PostgreSQL 17.11 przypięty do digestu
+</span></code></pre></div>
+<p>Server-side dry-run zakończył się powodzeniem przed zastosowaniem zmiany przez GitOps.</p>
+<p>Po rollout:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Cluster:        clients-db-staging
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Ready:          2/2
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Primary:        clients-db-staging-1
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>PostgreSQL:     17.11
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>OS:             Debian 12
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>Restarts:       0
+</span></code></pre></div>
+<p>Primary zwracał <code>pg_is_in_recovery() = false</code>, a replika <code>true</code>.</p>
+<p>Dane aplikacyjne po aktualizacji:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>app_authorities: 6
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>app_users:       3
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>clients:         20
+</span></code></pre></div>
+<p>Endpoint aplikacji staging zwracał:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p">{</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UP"</span><span class="p">,</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="nt">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UP"</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>W czasie restartu instancji pojawiły się spodziewane ostrzeżenia HikariCP dotyczące zamkniętych połączeń oraz chwilowy błąd operatora podczas startu PostgreSQL. Po minucie aplikacja i operator miały czyste logi.</p>
+<hr />
+<h2 id="7-aktualizacja-postgresql-na-produkcji">7. Aktualizacja PostgreSQL na produkcji<a class="headerlink" href="#7-aktualizacja-postgresql-na-produkcji" title="Permanent link">&para;</a></h2>
+<p>Po pozytywnym teście stagingu zmieniono:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>apps/base/clients-api/db-cluster.yaml
+</span></code></pre></div>
+<p>Przed aktualizacją zapisano stan tabel produkcyjnych. Manifest przeszedł:</p>
 <ul>
-<li><a href="https://developer.hashicorp.com/packer/plugins/builders/qemu">Packer QEMU Builder Docs</a></li>
-<li><a href="https://github.com/canonical/packer-maas">MAAS Image Builder Repository</a></li>
-<li><a href="https://maas.io/docs/custom-images">MAAS Custom Images Documentation</a></li>
+<li>render Kustomize;</li>
+<li><code>git diff --check</code>;</li>
+<li>server-side dry-run API Kubernetes.</li>
 </ul>
+<p>Po rollout:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Cluster:        clients-db
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>Ready:          2/2
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>Primary:        clients-db-2
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>PostgreSQL:     17.11
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>OS:             Debian 12
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>Restarts:       0
+</span></code></pre></div>
+<p>Obie instancje używały dokładnie tego samego digestu obrazu. Porównanie statystyk tabel przed i po zmianie nie wykazało różnic.</p>
+<p>API produkcyjne zwracało:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">{</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UP"</span><span class="p">,</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span><span class="nt">"components"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UP"</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Podczas przełączania instancji aplikacja rejestrowała krótkotrwałe ostrzeżenia HikariCP o zamkniętych połączeniach. Po 90 sekundach oba Pody aplikacji oraz operator miały czyste logi.</p>
+<p>Endpoint <code>clients-db-rw</code> wskazywał wyłącznie gotowy Pod primary:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>clients-db-2 → 10.42.0.182
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>ready=true
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>terminating=false
+</span></code></pre></div>
 <hr />
+<h2 id="8-aktualizacja-alloy">8. Aktualizacja Alloy<a class="headerlink" href="#8-aktualizacja-alloy" title="Permanent link">&para;</a></h2>
+<p>Alloy został zaktualizowany przez Flux:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>chart:           1.12.1 → 1.13.0
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>Alloy:           1.19.2 → 1.20.0
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>config-reloader: 0.91.0 → 0.94.0
+</span></code></pre></div>
+<p>Stan DaemonSetu po rollout:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>Desired:    3
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>Current:    3
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>Updated:    3
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>Ready:      3
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>Available:  3
+</span></code></pre></div>
+<p>Na każdym nodzie działał jeden Pod Alloy. Wszystkie kontenery były gotowe i miały <code>0</code> restartów.</p>
+<p>Logi Alloy i config-reloadera nie zawierały błędów, odpowiedzi HTTP 429/5xx ani problemów z autoryzacją.</p>
+<p>Kontrolne zapytanie Loki:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sum(count_over_time({collector="alloy"}[5m]))
+</span></code></pre></div>
+<p>zwróciło <code>1750</code> linii. Potwierdziło to dalsze zbieranie logów po aktualizacji kolektora.</p>
+<hr />
+<h2 id="9-przygotowanie-aktualizacji-loki">9. Przygotowanie aktualizacji Loki<a class="headerlink" href="#9-przygotowanie-aktualizacji-loki" title="Permanent link">&para;</a></h2>
+<p>Bieżące źródło chartu:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>HelmRepository: grafana-community
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>URL:            https://grafana-community.github.io/helm-charts
+</span></code></pre></div>
+<p>Repozytorium zostało również dodane lokalnie do klienta Helm w celu poprawnego renderowania chartu.</p>
+<p>Stan początkowy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>chart:   18.7.6
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>Loki:    3.7.6
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>sidecar: 2.10.1
+</span></code></pre></div>
+<p>Wersja docelowa:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>chart:   18.13.7
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>Loki:    3.7.8
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>sidecar: 2.11.2
+</span></code></pre></div>
+<p>Nie była to ponowna duża migracja Loki. Migrację przez kolejne wersje główne chartu, zmianę repozytorium oraz przejście do jawnego trybu <code>Monolithic</code> wykonano wcześniej. Dzisiejsza zmiana pozostała w obrębie wersji głównej chartu <code>18.x</code>.</p>
+<p>Porównanie renderów potwierdziło:</p>
+<ul>
+<li>jeden StatefulSet <code>loki</code>;</li>
+<li>jedną replikę;</li>
+<li>niezmieniony <code>config.yaml</code>;</li>
+<li>niezmienione volumes i volume mounts;</li>
+<li>niezmieniony claim <code>storage</code> o wielkości <code>10Gi</code>;</li>
+<li>brak zmiany sposobu użycia Garage S3;</li>
+<li>zmianę wyłącznie obrazów Loki i sidecara.</li>
+</ul>
+<p>Zabezpieczenie PVC nadal było aktywne:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nt">singleBinary</span><span class="p">:</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="nt">persistence</span><span class="p">:</span>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="nt">enableStatefulSetAutoDeletePVC</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></code></pre></div>
+<p>Istniejący PVC przed zmianą:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>PVC:          storage-loki-0
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>Status:       Bound
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>PV:           pvc-54bdf342-b185-48d4-a829-c90c4cd93f07
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>StorageClass: longhorn
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>Capacity:     10Gi
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>AccessMode:   ReadWriteOnce
+</span></code></pre></div>
+<hr />
+<h2 id="10-aktualizacja-loki">10. Aktualizacja Loki<a class="headerlink" href="#10-aktualizacja-loki" title="Permanent link">&para;</a></h2>
+<p>HelmRelease został zaktualizowany:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>chart: 18.7.6 → 18.13.7
+</span></code></pre></div>
+<p>Flux zakończył operację:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Helm revision: 17
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>Ready:         True
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>Status:        Helm upgrade succeeded
+</span></code></pre></div>
+<p>StatefulSet wykonał poprawny rollout. Stan końcowy Poda:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>Pod:       loki-0
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>Node:      worker2
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>Phase:     Running
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>Ready:     true,true
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>Restarts:  0,0
+</span></code></pre></div>
+<p>Obrazy:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>docker.io/grafana/loki:3.7.8
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>docker.io/kiwigrid/k8s-sidecar:2.11.2
+</span></code></pre></div>
+<p>Pod zachował claim:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>storage → storage-loki-0
+</span></code></pre></div>
+<p>Longhorn poprawnie przepiął wolumen na <code>worker2</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>State:        attached
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>Robustness:   healthy
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>Replicas:     2
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>Scheduled:    True
+</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>Restore:      niewymagany
+</span></code></pre></div>
+<p>API buildinfo zwróciło:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>version:   3.7.8
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>revision:  09e6ce2f
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>branch:    release-3.7.x
+</span></code></pre></div>
+<p>Kontrolne zapytanie z ostatnich pięciu minut zwróciło <code>1853</code> linie z kolektora Alloy.</p>
+<hr />
+<h2 id="11-przejsciowe-komunikaty-memberlist-loki">11. Przejściowe komunikaty memberlist Loki<a class="headerlink" href="#11-przejsciowe-komunikaty-memberlist-loki" title="Permanent link">&para;</a></h2>
+<p>Podczas startu pojedynczego Poda ponownie wystąpiły komunikaty:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>failed to resolve loki-memberlist.loki.svc.cluster.local
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>empty ring
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>failed to fast-join the memberlist cluster
+</span></code></pre></div>
+<p>Przyczyną była kolejność startu:</p>
+<ol>
+<li>Pod Loki nie był jeszcze gotowy.</li>
+<li>Headless Service nie miał gotowego endpointu.</li>
+<li>CoreDNS chwilowo zwracał <code>no such host</code>.</li>
+<li>Loki automatycznie utworzył jednoelementowy ring.</li>
+<li>Po uzyskaniu readiness EndpointSlice opublikował adres Poda.</li>
+</ol>
+<p>Stan po ustabilizowaniu:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>Endpoint:    10.42.2.105
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>Ready:       true
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>Terminating: false
+</span></code></pre></div>
+<p>Log Loki potwierdził:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>phase=periodic_rejoin
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>msg="re-joined memberlist cluster"
+</span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>reached_nodes=1
+</span></code></pre></div>
+<p>Nie był to trwały błąd DNS ani regresja po aktualizacji.</p>
+<hr />
+<h2 id="12-stan-koncowy">12. Stan końcowy<a class="headerlink" href="#12-stan-koncowy" title="Permanent link">&para;</a></h2>
+<h3 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>kube-prometheus-stack: 91.8.2
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>Prometheus:             3.15.0
+</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>Alertmanager:           0.34.1
+</span><span id="__span-46-4"><a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>Grafana:                13.2.3-distroless
+</span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>Grafana database:       ok
+</span><span id="__span-46-6"><a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>Prometheus rules:       229 ok, 0 problematycznych
+</span></code></pre></div>
+<h3 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>CloudNativePG chart:    0.29.1
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>CloudNativePG operator: 1.30.1
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>PostgreSQL:             17.11, Debian 12
+</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>clients-db:             2/2 Ready
+</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>clients-db-staging:     2/2 Ready
+</span></code></pre></div>
+<h3 id="logi">Logi<a class="headerlink" href="#logi" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>Alloy chart: 1.13.0
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>Alloy:       1.20.0
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>Alloy DS:    3/3 Ready
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>Loki chart:  18.13.7
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>Loki:        3.7.8
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>Loki Pod:    2/2 Ready, 0 restartów
+</span></code></pre></div>
+<h3 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>Longhorn:          1.12.1
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>Nodes:             3/3 Ready i Schedulable
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>Volumes:           6/6 attached i healthy
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>Failed replicas:   0
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>Upgrade do 1.13.0: odłożony
+</span></code></pre></div>
+<hr />
+<h2 id="14-wnioski">14. Wnioski<a class="headerlink" href="#14-wnioski" title="Permanent link">&para;</a></h2>
+<ol>
+<li>PVC nie jest samym wolumenem. Jest żądaniem storage, które Kubernetes wiąże z PV; Longhorn dostarcza implementację storage, repliki, attach/detach, odbudowę i kontrolę zdrowia.</li>
+<li>Aktualizacje operatora i zarządzanego przez niego operand muszą być rozdzielone. Najpierw zaktualizowano CloudNativePG, później PostgreSQL.</li>
+<li>Aktualizację bazy należy rozpocząć od stagingu i przejść na produkcję dopiero po sprawdzeniu danych, replikacji, endpointów oraz aplikacji.</li>
+<li>Backup logiczny należy nie tylko utworzyć, lecz także zweryfikować przez <code>pg_restore --list</code> i sumy kontrolne.</li>
+<li>Przypięcie obrazu do digestu gwarantuje identyczny artefakt na wszystkich instancjach.</li>
+<li>Przy aktualizacji PostgreSQL krótkie ostrzeżenia puli połączeń są spodziewane, jeśli znikają po zakończeniu restartów, a health check wraca do <code>UP</code>.</li>
+<li>Pusty diff konfiguracji Loki oraz identyczny szablon PVC ograniczyły zakres aktualizacji do wymiany obrazów.</li>
+<li>Przejściowy błąd memberlist podczas startu jednej repliki Loki nie oznacza awarii, jeśli później EndpointSlice jest gotowy, ring się łączy, a nowe logi są zapisywane.</li>
+<li>Poprawny stan bieżącej wersji jest ważniejszy niż samo posiadanie najnowszego wydania. Longhorn <code>1.13.0</code> świadomie odłożono ze względu na świeżość i znaczenie warstwy storage.</li>
+<li>Aktualizacje były wykonywane przez GitOps i kontrolowane za pomocą renderów Helm/Kustomize, dry-runów, rollout status, logów, endpointów oraz testów aplikacyjnych.</li>
+</ol>
+<hr />
+<h2 id="15-nastepna-sesja">15. Następna sesja<a class="headerlink" href="#15-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Skonfigurować regularny backup klastrów CloudNativePG zamiast polegać wyłącznie na ręcznych dumpach.</li>
+<li>Zinwentaryzować Data Engine wszystkich wolumenów Longhorna.</li>
+<li>Sprawdzić możliwość wykonania Longhorn System Backup i backupów danych przed przyszłą aktualizacją.</li>
+<li>Poczekać na ustabilizowanie linii <code>1.13.x</code>, preferencyjnie co najmniej <code>1.13.1</code>, przed aktualizacją krytycznej warstwy storage.</li>
+<li>Osobno rozważyć ServiceMonitor i reguły Prometheus dla komponentów, które nadal nie eksportują metryk do bieżącego stosu monitoringu.</li>
+</ol>
 
 
 
@@ -4426,7 +4818,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 13, 2025 09:00:20 UTC"><span class="timeago" datetime="2025-12-13T09:00:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 13, 2025 09:00:20 UTC">2025-12-13</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="October 1, 2026 10:43:33 UTC"><span class="timeago" datetime="2026-10-01T10:43:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="October 1, 2026 10:43:33 UTC">2026-10-01</span>
   </span>
 
     
@@ -4436,7 +4828,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 11, 2025 20:54:16 UTC"><span class="timeago" datetime="2025-12-11T20:54:16+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 11, 2025 20:54:16 UTC">2025-12-11</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="October 1, 2026 10:43:33 UTC"><span class="timeago" datetime="2026-10-01T10:43:33+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="October 1, 2026 10:43:33 UTC">2026-10-01</span>
   </span>
 
     
