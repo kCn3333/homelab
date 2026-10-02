@@ -7,6 +7,7 @@ Zion runs continuously, but most of the time it is lightly loaded. The goal is t
 ## :material-target: What is optimized
 
 - CPU and package idle states;
+CPU frequency policy and Energy-Performance Preference (EPP);
 - PCIe, DMI and chipset link power management;
 - unused onboard devices;
 - standby behaviour of the mechanical data disk;
@@ -105,14 +106,13 @@ The tested PowerTOP tunables are reapplied by `/etc/systemd/system/powertop.serv
 
 ```ini
 [Unit]
-Description=Apply PowerTOP tunables
-After=multi-user.target
-ConditionPathExists=/usr/sbin/powertop
+Description=PowerTOP auto-tune and CPU power profile
 
 [Service]
 Type=oneshot
 ExecStart=/usr/sbin/powertop --auto-tune
-RemainAfterExit=yes
+ExecStartPost=/bin/sh -ec 'for policy in /sys/devices/system/cpu/cpufreq/policy*; do echo powersave > "$$policy/scaling_governor"; echo balance_performance > "$$policy/energy_performance_preference"; done'
+RemainAfterExit=true
 
 [Install]
 WantedBy=multi-user.target
@@ -167,9 +167,9 @@ Complete-system power was also measured at the wall:
 
 | System state | Measured draw |
 |---|---:|
-| Zion idle, with the IronWolf HDD spinning | **24–25 W** |
+| Zion idle, with the IronWolf HDD spinning | **22–24 W** |
 | Zion under heavier workloads | **40–60 W** |
-| Dell Wyse 5070 idle, with two 2.5-inch drives | **12–13 W** |
+| Dell Wyse 5070 idle, with two 2.5-inch drives | **11–12 W** |
 
 Moving from the Dell Wyse 5070 to Zion roughly doubled idle consumption. In return, Zion provides a six-core CPU, NVMe storage, substantially more memory, hardware expansion and enough capacity to separate workloads into VMs and LXC containers. An idle draw of 24–25 W is a reasonable trade-off for that increase in capability.
 
