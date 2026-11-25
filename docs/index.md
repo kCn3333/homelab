@@ -49,6 +49,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 - <span class="color-green">**🖧 Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>
 - <span class="color-green">**⏻ Provisioning**</span> - <span class="color-grey">:simple-virtualbox: VM and :simple-linux: bare-metal deployment workflows</span>
+- <span class="color-green">**⛨ Pentesting**</span> - <span class="color-grey">:material-shield-search: Lab building and :simple-hackthebox: Hack The Box write-ups</span>
 - <span class="color-green">**⛯ Applications**</span> - <span class="color-grey">:simple-docker: Docker compose, :simple-kubernetes: k8s manifests, ⛭ service configs</span>
 - <span class="color-green">**➤ Automation**</span> - <span class="color-grey">:material-ansible: Playbooks, :simple-n8n: workflows, infrastructure as code</span>
 - <span class="color-green">**🕮 Troubleshooting**</span> - <span class="color-grey">:material-head-lightbulb: Common issues and their solutions</span>

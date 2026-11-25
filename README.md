@@ -130,15 +130,16 @@ The cluster is powered on when needed and is used mainly for learning Kubernetes
 
 ## Documentation Map
 
-The documentation is organized around how the homelab was designed, built, and operated:
+The site navigation is organized into the following documentation sections:
 
 ```text
-docs/
-├── infrastructure/   physical infrastructure and network design
-├── provisioning/     system deployment and platform configuration
-├── applications/     applications and reusable configurations
-├── automation/       playbooks, workflows, and infrastructure as code
-└── troubleshooting/  incidents, root causes, and verified fixes
+Documentation
+├── Infrastructure   physical infrastructure and network design
+├── Provisioning     system deployment and platform configuration
+├── Pentesting       lab building and Hack The Box write-ups
+├── Applications     applications and reusable configurations
+├── Automation       playbooks, workflows, and infrastructure as code
+└── Troubleshooting  incidents, root causes, and verified fixes
 ```
 
 The site navigation also links to dedicated application, configuration, and automation repositories where the implementations themselves are maintained. This repository focuses on architecture, decisions, operational knowledge, and lessons learned.
