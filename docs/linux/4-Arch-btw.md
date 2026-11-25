@@ -1,4 +1,4 @@
-# Arch Linux Installation Guide
+# :material-arch: Arch Linux Installation Guide
 
 This guide covers everything from initial disk encryption with LUKS through to a fully functional desktop environment with i3 window manager, audio, Bluetooth, power management, and media playback inhibitors. 
 
@@ -17,7 +17,7 @@ This is a minimalist configuration tailored for my laptop, designed to use as li
 - ✅ Few modern tools and utilities
 ---
 
-## Pre-Installation
+## :material-clipboard-check-outline: Pre-Installation
 
 ### Identify Current Mounts
 ```bash
@@ -37,7 +37,7 @@ lsblk -f
 
 ---
 
-## Arch ISO Environment
+## :material-disc: Arch ISO Environment
 
 ### Connect to WiFi
 ```bash
@@ -65,7 +65,7 @@ systemctl status sshd
 
 ---
 
-## SSH Connection (Optional)
+## :material-ssh: SSH Connection (Optional)
 
 Connect from another machine for easier copy-paste:
 ```bash
@@ -74,7 +74,7 @@ ssh root@<IP-ADDRESS>
 
 ---
 
-## Disk Partitioning
+## :material-harddisk: Disk Partitioning
 
 ### Partition Scheme
 ```bash
@@ -132,7 +132,7 @@ mount /dev/sda1 /mnt/boot/efi
 
 ---
 
-## Base System Installation
+## :material-package-variant-closed: Base System Installation
 
 ### Install Base Packages
 ```bash
@@ -151,7 +151,7 @@ arch-chroot /mnt /bin/bash
 
 ---
 
-## System Configuration
+## :material-cog: System Configuration
 
 ### Install Text Editor
 ```bash
@@ -187,7 +187,7 @@ mkinitcpio -P
 
 ---
 
-## Bootloader (GRUB)
+## :material-power: Bootloader (GRUB)
 
 ### Install GRUB
 ```bash
@@ -224,7 +224,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ---
 
-## Automatic Decryption (Keyfiles)
+## :material-key: Automatic Decryption (Keyfiles)
 
 ### Set Permissions and Generate Keys
 ```bash
@@ -276,7 +276,7 @@ sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 q
 
 ---
 
-## Final System Configuration
+## :material-check-circle-outline: Final System Configuration
 
 ### Set Timezone
 ```bash
@@ -353,7 +353,7 @@ Uncomment this line:
 
 ---
 
-## Essential System Tools
+## :material-tools: Essential System Tools
 
 ### iwd (WiFi Management)
 
@@ -412,7 +412,7 @@ reboot now
 
 ---
 
-## Desktop Environment Setup
+## :material-monitor: Desktop Environment Setup
 
 ### Xorg Display Server
 
@@ -501,7 +501,7 @@ exec_always --no-startup-id picom
 
 ---
 
-## Fonts
+## :material-format-font: Fonts
 
 ### Install Fonts
 
@@ -550,7 +550,7 @@ font pango:JetBrainsMono Nerd Font 7
 
 ---
 
-## Terminal Emulator (Alacritty)
+## :material-console: Terminal Emulator (Alacritty)
 
 ### Install Alacritty
 
@@ -599,7 +599,7 @@ bindsym $mod+Return exec alacritty
 
 ---
 
-## Audio (PipeWire)
+## :material-volume-high: Audio (PipeWire)
 
 ### Install PipeWire
 
@@ -640,7 +640,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 
 ---
 
-## Screen Brightness
+## :material-brightness-6: Screen Brightness
 
 ### Install Brightness Control
 
@@ -665,7 +665,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 
 ---
 
-## Bluetooth
+## :material-bluetooth: Bluetooth
 
 ### Install Bluetooth Stack
 
@@ -711,7 +711,7 @@ exec --no-startup-id blueman-applet
 
 ---
 
-## Web Browser (Brave)
+## :material-web: Web Browser (Brave)
 
 ### Install AUR Helper (yay)
 
@@ -760,7 +760,7 @@ bindsym $mod+Shift+y exec brave
 
 ---
 
-## Additional Tools
+## :material-toolbox-outline: Additional Tools
 
 ### System Utilities
 
@@ -786,7 +786,7 @@ echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 ---
 
-## Laptop Hardware Keys
+## :material-keyboard: Laptop Hardware Keys
 
 ### Unblock Wireless Devices
 
@@ -845,7 +845,7 @@ IdleActionSec=1h
 
 ---
 
-## Prevent Suspend During Media Playback
+## :material-play-circle-outline: Prevent Suspend During Media Playback
 
 ### Install PlayerCTL
 
