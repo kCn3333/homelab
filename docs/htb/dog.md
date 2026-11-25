@@ -1,7 +1,7 @@
 # Dog
 
-**Platform:** :simple-hackthebox: Hack The Box 
-**OS:** Linux 
+**Platform:** :simple-hackthebox: Hack The Box<br>
+**OS:** Linux<br>
 **Lab date:** 2025-03-19
 
 ## Repository enumeration
