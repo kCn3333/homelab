@@ -6,15 +6,16 @@ This is a minimalist configuration tailored for my laptop, designed to use as li
 
 ![archi](../img/archi.png)
 
-- :material-check-circle-outline: Full disk encryption (LUKS) and automatic decryption with keyfiles
-- :material-check-circle-outline: i3 window manager
-- :material-check-circle-outline: Alacritty terminal
-- :material-check-circle-outline: Brave with GPU acceleration
-- :material-check-circle-outline: Audio (PipeWire)
-- :material-check-circle-outline: Bluetooth
-- :material-check-circle-outline: WiFi
-- :material-check-circle-outline: Power management
-- :material-check-circle-outline: Few modern tools and utilities
+:material-check-circle-outline:{ .color-green } Full disk encryption (LUKS) and automatic decryption with keyfiles<br>
+:material-check-circle-outline:{ .color-green } i3 window manager<br>
+:material-check-circle-outline:{ .color-green } Alacritty terminal<br>
+:material-check-circle-outline:{ .color-green } Brave with GPU acceleration<br>
+:material-check-circle-outline:{ .color-green } Audio (PipeWire)<br>
+:material-check-circle-outline:{ .color-green } Bluetooth<br>
+:material-check-circle-outline:{ .color-green } WiFi<br>
+:material-check-circle-outline:{ .color-green } Power management<br>
+:material-check-circle-outline:{ .color-green } Few modern tools and utilities
+
 ---
 
 ## :material-clipboard-check-outline: Pre-Installation

@@ -1,0 +1,3 @@
+collapse: true
+nav:
+  - ":material-lan: Network": home.md
