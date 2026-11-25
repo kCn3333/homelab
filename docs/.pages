@@ -1,8 +1,8 @@
 # docs/.pages
 nav:
-  - 🏠︎ Home: index.md
+  - ":material-home: Home": index.md
 
-  - 🗠 Currently running: https://status.kcn333.com
+  - ":material-chart-line: Currently running": https://status.kcn333.com
 
   - 🖧 Infrastructure: 
     - 모 Network:  infrastructure
@@ -22,7 +22,7 @@ nav:
       - 🗁 Flux Repo: https://github.com/kCn3333/k3s-homelab
     - 🖳 Custom Arch Linux Setup: linux
 
-  - ⛨ Pentesting:
+  - ":material-shield-search: Pentesting":
     - ⚒︎ Lab Building: lab
     - ⌬ Hack The Box: htb
 
