@@ -1,23 +1,23 @@
-/* GitHub Dark-inspired syntax colors, rendered by Pygments. */
+/* Syntax colors matched to the documentation's neutral and green palette. */
 [data-md-color-scheme="slate"] {
-    --md-code-bg-color: #151b23 !important;
-    --md-code-fg-color: #f0f6fc;
-    --md-code-hl-color: #388bfd;
-    --md-code-hl-color--light: #388bfd1a;
-    --md-code-hl-number-color: #79c0ff;
-    --md-code-hl-special-color: #ffa657;
-    --md-code-hl-function-color: #d2a8ff;
-    --md-code-hl-constant-color: #79c0ff;
-    --md-code-hl-keyword-color: #ff7b72;
-    --md-code-hl-string-color: #a5d6ff;
-    --md-code-hl-name-color: #f0f6fc;
-    --md-code-hl-operator-color: #ff7b72;
-    --md-code-hl-punctuation-color: #f0f6fc;
-    --md-code-hl-comment-color: #9198a1;
-    --md-code-hl-generic-color: #ffa657;
-    --md-code-hl-variable-color: #ffa657;
-    --code-border-color: #3d444d;
-    --code-muted-color: #9198a1;
+    --md-code-bg-color: var(--retro-mid-bg) !important;
+    --md-code-fg-color: var(--retro-grey-text);
+    --md-code-hl-color: var(--retro-green-main);
+    --md-code-hl-color--light: rgba(76, 175, 80, 0.1);
+    --md-code-hl-number-color: #c3ba9c;
+    --md-code-hl-special-color: #b7c4a0;
+    --md-code-hl-function-color: #a8c7b0;
+    --md-code-hl-constant-color: #b7c4a0;
+    --md-code-hl-keyword-color: var(--retro-green-light);
+    --md-code-hl-string-color: #c4c9b1;
+    --md-code-hl-name-color: var(--retro-grey-text);
+    --md-code-hl-operator-color: #a8b3a3;
+    --md-code-hl-punctuation-color: var(--retro-grey-text);
+    --md-code-hl-comment-color: var(--retro-grey-text2);
+    --md-code-hl-generic-color: #b7c4a0;
+    --md-code-hl-variable-color: #cad3c0;
+    --code-border-color: #333333;
+    --code-muted-color: var(--retro-grey-text2);
 }
 
 /* One border around each block, with scrolling handled by the code element. */
@@ -46,7 +46,7 @@
     margin: 0;
     color: var(--code-muted-color);
     font-weight: 500;
-    background-color: #0d1117;
+    background-color: var(--retro-dark-bg);
     border-bottom: 1px solid var(--code-border-color);
     border-radius: 0;
 }
@@ -81,12 +81,12 @@
 }
 
 .md-typeset div.highlight .md-code__button:hover {
-    color: var(--md-code-fg-color);
+    color: var(--retro-green-light);
 }
 
 /* Inline snippets stay compact and do not inherit the block border. */
 .md-typeset :not(pre) > code {
     padding: 0.2em 0.4em;
-    background-color: #6e768133;
+    background-color: var(--retro-mid-bg);
     border-radius: 4px;
 }
