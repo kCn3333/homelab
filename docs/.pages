@@ -4,50 +4,50 @@ nav:
 
   - ":material-chart-line: Currently running": https://status.kcn333.com
 
-  - 🖧 Infrastructure: 
-    - 모 Network:  infrastructure
-    - ⛃ project cluster: https://kcn333.com/#/projects/cluster
-    - ⛂ project server: https://kcn333.com/#/projects/home-server
-    - ⛂ project server v2: https://kcn333.com/#/projects/home-server-v2
-    - 🌡 project fan-controller: https://github.com/kCn3333/rack-fan-controller
+  - ":material-server-network: Infrastructure":
+    - ":material-lan: Network":  infrastructure
+    - ":material-server-network-outline: project cluster": https://kcn333.com/#/projects/cluster
+    - ":material-server-outline: project server": https://kcn333.com/#/projects/home-server
+    - ":material-server: project server v2": https://kcn333.com/#/projects/home-server-v2
+    - ":material-fan: project fan-controller": https://github.com/kCn3333/rack-fan-controller
 
-  - ⏻ Provisioning:
-    - ⛂ Main Server: zion
-    - ☁︎ Cloud Infrastructure: relay 
+  - ":material-package-down: Provisioning":
+    - ":material-server: Main Server": zion
+    - ":material-cloud-outline: Cloud Infrastructure": relay
 
-    - ⛃ Cluster Deployment: 
-      - 🖴 Bare Metal: provisioning
-      - ⛭ Kubernetes: kubernetes
-      - 🗐 Build Journal (Polish): journal 
-      - 🗁 Flux Repo: https://github.com/kCn3333/k3s-homelab
-    - 🖳 Custom Arch Linux Setup: linux
+    - ":simple-kubernetes: Cluster Deployment":
+      - ":material-harddisk: Bare Metal": provisioning
+      - ":simple-kubernetes: Kubernetes": kubernetes
+      - ":material-notebook-edit-outline: Build Journal (Polish)": journal
+      - ":simple-flux: Flux Repo": https://github.com/kCn3333/k3s-homelab
+    - ":material-arch: Custom Arch Linux Setup": linux
 
   - ":material-shield-search: Pentesting":
-    - ⚒︎ Lab Building: lab
-    - ⌬ Hack The Box: htb
+    - ":material-flask-outline: Lab Building": lab
+    - ":simple-hackthebox: Hack The Box": htb
 
-  - ⛯ Applications:
+  - ":material-apps: Applications":
       
-    - 🗐 Docker Compose Repo: https://github.com/kCn3333/docker-compose
-    - 🗅 cluster stats: https://github.com/kCn3333/k8s-badge
-    - 🗅 server stats: https://github.com/kCn3333/server-stats
-    - 🗁 Config Files: 
-      - 🗏 .bashrc: https://github.com/kCn3333/linux-bash/blob/main/.bashrc
-      - ⛭ starship config: https://github.com/kCn3333/starship-config
-      - ⛭ conky config: https://github.com/kCn3333/linux-conky/blob/main/conky.conf
-      - 🗲 wireshark config: https://github.com/kCn3333/wireshark
+    - ":simple-docker: Docker Compose Repo": https://github.com/kCn3333/docker-compose
+    - ":material-chart-box-outline: cluster stats": https://github.com/kCn3333/k8s-badge
+    - ":material-chart-line: server stats": https://github.com/kCn3333/server-stats
+    - ":material-file-cog-outline: Config Files":
+      - ":material-bash: .bashrc": https://github.com/kCn3333/linux-bash/blob/main/.bashrc
+      - ":simple-starship: starship config": https://github.com/kCn3333/starship-config
+      - ":material-monitor-dashboard: conky config": https://github.com/kCn3333/linux-conky/blob/main/conky.conf
+      - ":simple-wireshark: wireshark config": https://github.com/kCn3333/wireshark
 
-    - 🗁 Bash Scripts: 
-      - 🗅 backup: https://github.com/kCn3333/linux-bash/tree/main/backup
-      - 🗅 db backup: https://github.com/kCn3333/linux-bash/tree/main/db_backup
-      - 🗅 ssh login alert: https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
-      - 🗅 temp monitor: https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
+    - ":material-script-text-outline: Bash Scripts":
+      - ":material-backup-restore: backup": https://github.com/kCn3333/linux-bash/tree/main/backup
+      - ":material-database-arrow-up-outline: db backup": https://github.com/kCn3333/linux-bash/tree/main/db_backup
+      - ":material-ssh: ssh login alert": https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
+      - ":material-thermometer: temp monitor": https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
   
-  - ➤ Automation: 
-    - ▷ Server automation: automation
-    - ☁︎ IaC AWS DevOps: https://github.com/kCn3333/aws-devops
-    - 🅰 Ansible playbooks: https://github.com/kCn3333/homelab-ansible
-    - 𝓣 Terraform IaC: https://github.com/kCn3333/homelab-terraform
-    - ☍ n8n workflows: https://github.com/kCn3333/n8n_workflows
+  - ":material-cog-sync-outline: Automation":
+    - ":material-console: Server automation": automation
+    - ":material-aws: IaC AWS DevOps": https://github.com/kCn3333/aws-devops
+    - ":simple-ansible: Ansible playbooks": https://github.com/kCn3333/homelab-ansible
+    - ":simple-terraform: Terraform IaC": https://github.com/kCn3333/homelab-terraform
+    - ":simple-n8n: n8n workflows": https://github.com/kCn3333/n8n_workflows
       
-  - 🕮 Troubleshooting: troubleshooting 
+  - ":material-wrench-outline: Troubleshooting": troubleshooting
