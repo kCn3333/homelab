@@ -22,7 +22,9 @@ nav:
       - 🗁 Flux Repo: https://github.com/kCn3333/k3s-homelab
     - 🖳 Custom Arch Linux Setup: linux
 
-  - ⛨ Pentesting: pentesting
+  - ⛨ Pentesting:
+    - ⚒︎ Lab Building: lab
+    - ⌬ Hack The Box: htb
 
   - ⛯ Applications:
       
