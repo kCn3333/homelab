@@ -6,13 +6,13 @@ nav:
 
   - ":material-server-network: Infrastructure":
     - ":material-lan: Network":  infrastructure
-    - ":material-server-network-outline: project cluster": https://kcn333.com/#/projects/cluster
-    - ":material-server-outline: project server": https://kcn333.com/#/projects/home-server
-    - ":material-server: project server v2": https://kcn333.com/#/projects/home-server-v2
+    - ":material-server-network-outline: project server": https://kcn333.com/#/projects/home-server
+    - ":material-server-outline: project server v2": https://kcn333.com/#/projects/home-server-v2
+    - ":material-server: project cluster": https://kcn333.com/#/projects/cluster
     - ":material-fan: project fan-controller": https://github.com/kCn3333/rack-fan-controller
 
   - ":material-package-down: Provisioning":
-    - ":material-server: Main Server": zion
+    - ":material-server-outline:  Main Server": zion
     - ":material-cloud-outline: Cloud Infrastructure": relay
 
     - ":simple-kubernetes: Cluster Deployment":
@@ -37,7 +37,7 @@ nav:
       - ":material-monitor-dashboard: conky config": https://github.com/kCn3333/linux-conky/blob/main/conky.conf
       - ":simple-wireshark: wireshark config": https://github.com/kCn3333/wireshark
 
-    - ":material-script-text-outline: Bash Scripts":
+    - ":octicons-terminal-16: Bash Scripts":
       - ":material-backup-restore: backup": https://github.com/kCn3333/linux-bash/tree/main/backup
       - ":material-database-arrow-up-outline: db backup": https://github.com/kCn3333/linux-bash/tree/main/db_backup
       - ":material-ssh: ssh login alert": https://github.com/kCn3333/linux-bash/tree/main/ssh_login_alert
