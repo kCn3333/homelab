@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://kcn3333.github.io/homelab/pentesting/lab/pentest_lab_notes/">
+        <link rel="canonical" href="https://kcn3333.github.io/homelab/htb/linkvortex/">
       
       
-        <link rel="prev" href="../../../linux/4-Arch-btw/">
+        <link rel="prev" href="../dog/">
       
       
-        <link rel="next" href="../pfsense-config-notes/">
+        <link rel="next" href="../underpass/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
     
     
       
-        <title>Penetration Testing Lab Setup - > Homelab Documentation</title>
+        <title>LinkVortex - > Homelab Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -51,15 +51,15 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/timeago.css">
+      <link rel="stylesheet" href="../../css/timeago.css">
     
-      <link rel="stylesheet" href="../../../stylesheets/retro.css">
+      <link rel="stylesheet" href="../../stylesheets/retro.css">
     
-      <link rel="stylesheet" href="../../../stylesheets/code-blocks.css">
+      <link rel="stylesheet" href="../../stylesheets/code-blocks.css">
     
-      <link rel="stylesheet" href="../../../stylesheets/admonitions.css">
+      <link rel="stylesheet" href="../../stylesheets/admonitions.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#penetration-testing-lab-setup" class="md-skip">
+        <a href="#linkvortex" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="&gt; Homelab Documentation" class="md-header__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
+    <a href="../.." title="&gt; Homelab Documentation" class="md-header__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Penetration Testing Lab Setup
+              LinkVortex
             
           </span>
         </div>
@@ -222,7 +222,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="&gt; Homelab Documentation" class="md-nav__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
+    <a href="../.." title="&gt; Homelab Documentation" class="md-nav__button md-logo" aria-label="> Homelab Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/></svg>
@@ -252,7 +252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -400,7 +400,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../infrastructure/home/" class="md-nav__link">
+      <a href="../../infrastructure/home/" class="md-nav__link">
         
   
   
@@ -649,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/0-platform/" class="md-nav__link">
+      <a href="../../zion/0-platform/" class="md-nav__link">
         
   
   
@@ -677,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/0-power-management/" class="md-nav__link">
+      <a href="../../zion/0-power-management/" class="md-nav__link">
         
   
   
@@ -705,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/1-migration/" class="md-nav__link">
+      <a href="../../zion/1-migration/" class="md-nav__link">
         
   
   
@@ -733,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/3-backup-and-recovery/" class="md-nav__link">
+      <a href="../../zion/3-backup-and-recovery/" class="md-nav__link">
         
   
   
@@ -761,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/caddy/" class="md-nav__link">
+      <a href="../../zion/caddy/" class="md-nav__link">
         
   
   
@@ -789,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/docker-media/" class="md-nav__link">
+      <a href="../../zion/docker-media/" class="md-nav__link">
         
   
   
@@ -817,7 +817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/haproxy/" class="md-nav__link">
+      <a href="../../zion/haproxy/" class="md-nav__link">
         
   
   
@@ -845,7 +845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/home-assistant/" class="md-nav__link">
+      <a href="../../zion/home-assistant/" class="md-nav__link">
         
   
   
@@ -873,7 +873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zion/supporting-services/" class="md-nav__link">
+      <a href="../../zion/supporting-services/" class="md-nav__link">
         
   
   
@@ -956,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../relay/relay/" class="md-nav__link">
+      <a href="../../relay/relay/" class="md-nav__link">
         
   
   
@@ -1086,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../provisioning/0-pxe-tftp/" class="md-nav__link">
+      <a href="../../provisioning/0-pxe-tftp/" class="md-nav__link">
         
   
   
@@ -1114,7 +1114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../provisioning/1-custom-image/" class="md-nav__link">
+      <a href="../../provisioning/1-custom-image/" class="md-nav__link">
         
   
   
@@ -1142,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../provisioning/2-cluster-deployment-maas/" class="md-nav__link">
+      <a href="../../provisioning/2-cluster-deployment-maas/" class="md-nav__link">
         
   
   
@@ -1170,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../provisioning/3-ssh-configuration/" class="md-nav__link">
+      <a href="../../provisioning/3-ssh-configuration/" class="md-nav__link">
         
   
   
@@ -1253,7 +1253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/00-overview/" class="md-nav__link">
+      <a href="../../kubernetes/00-overview/" class="md-nav__link">
         
   
   
@@ -1281,7 +1281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/01-cluster-architecture/" class="md-nav__link">
+      <a href="../../kubernetes/01-cluster-architecture/" class="md-nav__link">
         
   
   
@@ -1309,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/02-networking/" class="md-nav__link">
+      <a href="../../kubernetes/02-networking/" class="md-nav__link">
         
   
   
@@ -1337,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/03-ingress-tls/" class="md-nav__link">
+      <a href="../../kubernetes/03-ingress-tls/" class="md-nav__link">
         
   
   
@@ -1365,7 +1365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/04-storage/" class="md-nav__link">
+      <a href="../../kubernetes/04-storage/" class="md-nav__link">
         
   
   
@@ -1393,7 +1393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/05-gitops/" class="md-nav__link">
+      <a href="../../kubernetes/05-gitops/" class="md-nav__link">
         
   
   
@@ -1421,7 +1421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/06-security/" class="md-nav__link">
+      <a href="../../kubernetes/06-security/" class="md-nav__link">
         
   
   
@@ -1449,7 +1449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/07-observability/" class="md-nav__link">
+      <a href="../../kubernetes/07-observability/" class="md-nav__link">
         
   
   
@@ -1477,7 +1477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/08-backup/" class="md-nav__link">
+      <a href="../../kubernetes/08-backup/" class="md-nav__link">
         
   
   
@@ -1505,7 +1505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/09-applications/" class="md-nav__link">
+      <a href="../../kubernetes/09-applications/" class="md-nav__link">
         
   
   
@@ -1588,7 +1588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2000/" class="md-nav__link">
+      <a href="../../journal/day%2000/" class="md-nav__link">
         
   
   
@@ -1616,7 +1616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2001/" class="md-nav__link">
+      <a href="../../journal/day%2001/" class="md-nav__link">
         
   
   
@@ -1644,7 +1644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2002/" class="md-nav__link">
+      <a href="../../journal/day%2002/" class="md-nav__link">
         
   
   
@@ -1672,7 +1672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2003/" class="md-nav__link">
+      <a href="../../journal/day%2003/" class="md-nav__link">
         
   
   
@@ -1700,7 +1700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2004/" class="md-nav__link">
+      <a href="../../journal/day%2004/" class="md-nav__link">
         
   
   
@@ -1728,7 +1728,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2005/" class="md-nav__link">
+      <a href="../../journal/day%2005/" class="md-nav__link">
         
   
   
@@ -1756,7 +1756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2006/" class="md-nav__link">
+      <a href="../../journal/day%2006/" class="md-nav__link">
         
   
   
@@ -1784,7 +1784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2007/" class="md-nav__link">
+      <a href="../../journal/day%2007/" class="md-nav__link">
         
   
   
@@ -1812,7 +1812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2008/" class="md-nav__link">
+      <a href="../../journal/day%2008/" class="md-nav__link">
         
   
   
@@ -1840,7 +1840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2009/" class="md-nav__link">
+      <a href="../../journal/day%2009/" class="md-nav__link">
         
   
   
@@ -1868,7 +1868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2010/" class="md-nav__link">
+      <a href="../../journal/day%2010/" class="md-nav__link">
         
   
   
@@ -1896,7 +1896,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2011/" class="md-nav__link">
+      <a href="../../journal/day%2011/" class="md-nav__link">
         
   
   
@@ -1924,7 +1924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2012/" class="md-nav__link">
+      <a href="../../journal/day%2012/" class="md-nav__link">
         
   
   
@@ -1952,7 +1952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2013/" class="md-nav__link">
+      <a href="../../journal/day%2013/" class="md-nav__link">
         
   
   
@@ -1980,7 +1980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2014/" class="md-nav__link">
+      <a href="../../journal/day%2014/" class="md-nav__link">
         
   
   
@@ -2008,7 +2008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2015/" class="md-nav__link">
+      <a href="../../journal/day%2015/" class="md-nav__link">
         
   
   
@@ -2036,7 +2036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2016/" class="md-nav__link">
+      <a href="../../journal/day%2016/" class="md-nav__link">
         
   
   
@@ -2064,7 +2064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2017/" class="md-nav__link">
+      <a href="../../journal/day%2017/" class="md-nav__link">
         
   
   
@@ -2092,7 +2092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2018/" class="md-nav__link">
+      <a href="../../journal/day%2018/" class="md-nav__link">
         
   
   
@@ -2120,7 +2120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2019/" class="md-nav__link">
+      <a href="../../journal/day%2019/" class="md-nav__link">
         
   
   
@@ -2148,7 +2148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2020/" class="md-nav__link">
+      <a href="../../journal/day%2020/" class="md-nav__link">
         
   
   
@@ -2176,7 +2176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2021/" class="md-nav__link">
+      <a href="../../journal/day%2021/" class="md-nav__link">
         
   
   
@@ -2204,7 +2204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2022/" class="md-nav__link">
+      <a href="../../journal/day%2022/" class="md-nav__link">
         
   
   
@@ -2232,7 +2232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2023/" class="md-nav__link">
+      <a href="../../journal/day%2023/" class="md-nav__link">
         
   
   
@@ -2260,7 +2260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2024/" class="md-nav__link">
+      <a href="../../journal/day%2024/" class="md-nav__link">
         
   
   
@@ -2288,7 +2288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2025/" class="md-nav__link">
+      <a href="../../journal/day%2025/" class="md-nav__link">
         
   
   
@@ -2316,7 +2316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2026/" class="md-nav__link">
+      <a href="../../journal/day%2026/" class="md-nav__link">
         
   
   
@@ -2344,7 +2344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2027/" class="md-nav__link">
+      <a href="../../journal/day%2027/" class="md-nav__link">
         
   
   
@@ -2372,7 +2372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2028/" class="md-nav__link">
+      <a href="../../journal/day%2028/" class="md-nav__link">
         
   
   
@@ -2400,7 +2400,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2029/" class="md-nav__link">
+      <a href="../../journal/day%2029/" class="md-nav__link">
         
   
   
@@ -2428,7 +2428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2030/" class="md-nav__link">
+      <a href="../../journal/day%2030/" class="md-nav__link">
         
   
   
@@ -2456,7 +2456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2031/" class="md-nav__link">
+      <a href="../../journal/day%2031/" class="md-nav__link">
         
   
   
@@ -2484,7 +2484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2032/" class="md-nav__link">
+      <a href="../../journal/day%2032/" class="md-nav__link">
         
   
   
@@ -2512,7 +2512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2033/" class="md-nav__link">
+      <a href="../../journal/day%2033/" class="md-nav__link">
         
   
   
@@ -2540,7 +2540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../journal/day%2034/" class="md-nav__link">
+      <a href="../../journal/day%2034/" class="md-nav__link">
         
   
   
@@ -2659,7 +2659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/4-Arch-btw/" class="md-nav__link">
+      <a href="../../linux/4-Arch-btw/" class="md-nav__link">
         
   
   
@@ -2748,20 +2748,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
         
           
           <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
@@ -2782,7 +2780,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2797,37 +2795,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Penetration Testing Lab Setup
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../lab/pentest_lab_notes/" class="md-nav__link">
         
   
   
@@ -2843,37 +2814,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Introduction
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2886,7 +2826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pfsense-config-notes/" class="md-nav__link">
+      <a href="../../lab/pfsense-config-notes/" class="md-nav__link">
         
   
   
@@ -2919,18 +2859,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
         
           
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
@@ -2951,7 +2893,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2969,7 +2911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/code/" class="md-nav__link">
+      <a href="../code/" class="md-nav__link">
         
   
   
@@ -2997,7 +2939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/dog/" class="md-nav__link">
+      <a href="../dog/" class="md-nav__link">
         
   
   
@@ -3022,10 +2964,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../htb/linkvortex/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LinkVortex
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -3041,6 +3010,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-host-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Virtual host discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exposed-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exposed Git repository
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ghost-cms-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ghost CMS credentials
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authenticated-file-disclosure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authenticated file disclosure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-access-and-privileged-file-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host access and privileged file read
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3053,7 +3108,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../htb/underpass/" class="md-nav__link">
+      <a href="../underpass/" class="md-nav__link">
         
   
   
@@ -3662,7 +3717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../automation/update-strategy/" class="md-nav__link">
+      <a href="../../automation/update-strategy/" class="md-nav__link">
         
   
   
@@ -3864,7 +3919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/cilium-ipam-cidr-mismatch-longhorn-recovery/" class="md-nav__link">
+      <a href="../../troubleshooting/cilium-ipam-cidr-mismatch-longhorn-recovery/" class="md-nav__link">
         
   
   
@@ -3892,7 +3947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/docker-route-collision/" class="md-nav__link">
+      <a href="../../troubleshooting/docker-route-collision/" class="md-nav__link">
         
   
   
@@ -3920,7 +3975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/hubble-data-streams-reconnecting/" class="md-nav__link">
+      <a href="../../troubleshooting/hubble-data-streams-reconnecting/" class="md-nav__link">
         
   
   
@@ -3948,7 +4003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/proxmox-link-recovery/" class="md-nav__link">
+      <a href="../../troubleshooting/proxmox-link-recovery/" class="md-nav__link">
         
   
   
@@ -3976,7 +4031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/sealed-secrets-api-proxy-502/" class="md-nav__link">
+      <a href="../../troubleshooting/sealed-secrets-api-proxy-502/" class="md-nav__link">
         
   
   
@@ -4004,7 +4059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/wireguard-relay/" class="md-nav__link">
+      <a href="../../troubleshooting/wireguard-relay/" class="md-nav__link">
         
   
   
@@ -4032,7 +4087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../troubleshooting/wol-vlan-route-asymmetry/" class="md-nav__link">
+      <a href="../../troubleshooting/wol-vlan-route-asymmetry/" class="md-nav__link">
         
   
   
@@ -4087,10 +4142,65 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
+  <a href="#virtual-host-discovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Introduction
+        Virtual host discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exposed-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exposed Git repository
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ghost-cms-credentials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ghost CMS credentials
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authenticated-file-disclosure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authenticated file disclosure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-access-and-privileged-file-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host access and privileged file read
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
       
     </span>
   </a>
@@ -4118,124 +4228,40 @@
     
       
     
-    <a href="https://github.com/kCn3333/homelab/raw/main/docs/pentesting/lab/pentest_lab_notes.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/kCn3333/homelab/raw/main/docs/htb/linkvortex.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="penetration-testing-lab-setup">Penetration Testing Lab Setup<a class="headerlink" href="#penetration-testing-lab-setup" title="Permanent link">&para;</a></h1>
-<div class="admonition info">
-<p class="admonition-title">Lab Pentesting</p>
-<p>There are many websites where you can test various vulnerabilities, and entire services providing complete infrastructure like Hack The Box or HackMe. However, you can also build your own laboratory and test it in a closed environment. This gives you full control over the setup and allows for offline practice. Popular vulnerable resources include:  </p>
+<h1 id="linkvortex">LinkVortex<a class="headerlink" href="#linkvortex" title="Permanent link">&para;</a></h1>
+<p><strong>Platform:</strong> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.51 6.457.001-.013a.89.89 0 0 0-.271-.638l-.027-.024q-.028-.025-.057-.048-.03-.022-.06-.04l-.029-.02-9.61-5.547a.89.89 0 0 0-.922.004L1.933 5.674l-.03.02-.023.014-.02.015a1 1 0 0 0-.147.134l-.003.003a.9.9 0 0 0-.221.584v.014l-.001.027v11.07c0 .328.18.63.469.784l9.599 5.542.023.011a1 1 0 0 0 .166.07l.04.01.072.015q.018.004.035.006a.8.8 0 0 0 .216 0q.018-.002.035-.006l.072-.014.04-.012.064-.022a1 1 0 0 0 .102-.047l.023-.011 9.599-5.542a.89.89 0 0 0 .469-.784V6.478zM5.255 6.082l6.537-3.774a.42.42 0 0 1 .418 0l6.537 3.774a.418.418 0 0 1 0 .725l-6.537 3.774a.42.42 0 0 1-.418 0L5.254 6.807a.418.418 0 0 1 0-.725m5.614 14.345a.417.417 0 0 1-.626.361l-6.524-3.766a.42.42 0 0 1-.209-.361V9.127a.417.417 0 0 1 .626-.361l6.524 3.766a.42.42 0 0 1 .209.362zm9.623-3.766a.42.42 0 0 1-.209.36l-6.524 3.767a.417.417 0 0 1-.626-.36v-7.533c0-.15.08-.287.209-.362l6.524-3.766a.417.417 0 0 1 .626.36z"/></svg></span> Hack The Box 
+<strong>OS:</strong> Linux 
+<strong>Lab date:</strong> 2025-03-09</p>
+<h2 id="virtual-host-discovery">Virtual host discovery<a class="headerlink" href="#virtual-host-discovery" title="Permanent link">&para;</a></h2>
+<p>Virtual-host enumeration identified the development subdomain. A separate endpoint enumeration attempt did not produce a useful result.</p>
+<p><img alt="Virtual host discovery — evidence 1" src="../assets/linkvortex/4_LinkVortex_image.jpg" /></p>
+<p><img alt="Virtual host discovery — evidence 2" src="../assets/linkvortex/7_LinkVortex_image.jpg" /></p>
+<h2 id="exposed-git-repository">Exposed Git repository<a class="headerlink" href="#exposed-git-repository" title="Permanent link">&para;</a></h2>
+<p>Content enumeration of the development site revealed an exposed Git repository. The repository was recovered for offline inspection.</p>
+<p><img alt="Exposed Git repository — evidence 1" src="../assets/linkvortex/8_LinkVortex_image.jpg" /></p>
+<p><img alt="Exposed Git repository — evidence 2" src="../assets/linkvortex/2_LinkVortex_image.jpg" /></p>
+<h2 id="ghost-cms-credentials">Ghost CMS credentials<a class="headerlink" href="#ghost-cms-credentials" title="Permanent link">&para;</a></h2>
+<p>Searching the recovered source revealed hardcoded test credentials associated with Ghost authentication.</p>
+<p><img alt="Ghost CMS credentials — evidence 1" src="../assets/linkvortex/LinkVortex_image.jpg" /></p>
+<h2 id="authenticated-file-disclosure">Authenticated file disclosure<a class="headerlink" href="#authenticated-file-disclosure" title="Permanent link">&para;</a></h2>
+<p>CVE-2023-40028 enabled file disclosure within Ghost. The screenshots show the account listing and the production configuration, including credentials later used for host access.</p>
+<p><img alt="Authenticated file disclosure — evidence 1" src="../assets/linkvortex/5_LinkVortex_image.jpg" /></p>
+<p><img alt="Authenticated file disclosure — evidence 2" src="../assets/linkvortex/6_LinkVortex_image.jpg" /></p>
+<h2 id="host-access-and-privileged-file-read">Host access and privileged file read<a class="headerlink" href="#host-access-and-privileged-file-read" title="Permanent link">&para;</a></h2>
+<p>The SSH session as bob and inspection of the privileged cleanup script are recorded below. The script mishandled symbolic links, allowing a protected file to be read. The final screenshot documents the disclosed flag-like value, not an interactive root shell.</p>
+<p><img alt="Host access and privileged file read — evidence 1" src="../assets/linkvortex/3_LinkVortex_image.jpg" /></p>
+<p><img alt="Host access and privileged file read — evidence 2" src="../assets/linkvortex/1_LinkVortex_image.jpg" /></p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://www.vulnhub.com/entry/damn-vulnerable-web-application-dvwa-107,43/">Damn Vulnerable Web Application (DVWA)</a></li>
-<li><a href="https://owasp.org/www-project-webgoat/">OWASP WebGoat</a></li>
-<li><a href="https://owasp.org/www-project-juice-shop/">OWASP Juice Shop</a></li>
-<li><a href="https://sourceforge.net/projects/metasploitable/">Metasploitable</a></li>
-<li><a href="https://www.vulnhub.com/">VulnHub</a> - Collection of vulnerable VMs  </li>
+<li><a href="https://www.hackthebox.com/machines/linkvortex">Machine reference</a></li>
 </ul>
-</div>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Virtual penetration testing laboratory provides a controlled, isolated environment for practicing and testing various cybersecurity attack techniques, vulnerability assessments, and security tool usage. It includes a diverse range of systems spanning different operating systems, vulnerable applications, and network infrastructure components. This setup allows for hands-on experience with common attack vectors including Active Directory exploitation, web application vulnerabilities, and exploitation of legacy systems. The lab is designed to be entirely self-contained, making it safe for testing without risk to production systems or external networks.</p>
-<hr />
-<h1 id="environment"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M.5 10.1a.5.5 0 0 0-.197.048.497.497 0 0 0-.25.68l1.138 2.475c.179.38.38.592.721.592.342 0 .542-.22.72-.592l1.003-2.186a.144.144 0 0 1 .144-.092.16.16 0 0 1 .157.16v2.118a.535.535 0 1 0 1.066 0v-1.73a.53.53 0 0 1 .566-.552.52.52 0 0 1 .541.551v1.73a.53.53 0 0 0 .53.593.54.54 0 0 0 .535-.592v-1.73a.53.53 0 0 1 .564-.552.52.52 0 0 1 .543.551v1.73a.53.53 0 0 0 .528.593.535.535 0 0 0 .535-.592v-1.969a1.234 1.234 0 0 0-1.283-1.23 1.65 1.65 0 0 0-1.14.486 1.26 1.26 0 0 0-1.095-.483 1.8 1.8 0 0 0-1.074.483 1.29 1.29 0 0 0-.961-.483 1.18 1.18 0 0 0-1.158.786l-.729 1.716-.933-2.203.011-.004A.505.505 0 0 0 .5 10.1m18.43.06a.27.27 0 0 0-.266.274h.002v3.142a.27.27 0 1 0 .535 0v-1.222c0-1.037.571-1.56 1.27-1.643a.266.266 0 0 0 .238-.274.26.26 0 0 0-.266-.269 1.47 1.47 0 0 0-1.242.88v-.614a.266.266 0 0 0-.271-.274m-6.735.008a.27.27 0 0 0-.25.217l-.912 2.627-.902-2.62a.28.28 0 0 0-.274-.22.266.266 0 0 0-.27.258.5.5 0 0 0 .034.144l1.09 3.037.02-.007a.32.32 0 0 0 .298.242.3.3 0 0 0 .293-.242l.903-2.583.896 2.583a.3.3 0 0 0 .293.242h.018a.32.32 0 0 0 .293-.242l1.097-3.038a.5.5 0 0 0 .033-.144.26.26 0 0 0-.265-.25.26.26 0 0 0-.258.209l-.918 2.63-.904-2.626a.285.285 0 0 0-.278-.217h-.037m10.168.008a1.75 1.75 0 0 0-1.691 1.851 1.765 1.765 0 0 0 1.76 1.858l-.008.013a1.78 1.78 0 0 0 1.33-.539.23.23 0 0 0 .082-.17.228.228 0 0 0-.379-.168 1.44 1.44 0 0 1-1.018.415 1.237 1.237 0 0 1-1.24-1.207h2.555a.247.247 0 0 0 .246-.247c0-.945-.593-1.806-1.637-1.806m-5.744.002a2 2 0 0 0-.158.006 2.4 2.4 0 0 0-1.078.205.22.22 0 0 0-.143.222.24.24 0 0 0 .235.229.3.3 0 0 0 .095-.024 1.8 1.8 0 0 1 .834-.162c.691 0 1.07.334 1.07.979v.125a3.8 3.8 0 0 0-1.103-.15c-.892 0-1.52.4-1.52 1.16l-.003-.004c0 .736.671 1.117 1.34 1.117a1.58 1.58 0 0 0 1.298-.62v.343a.247.247 0 0 0 .254.25.254.254 0 0 0 .258-.262v-1.983a1.42 1.42 0 0 0-.379-1.046 1.57 1.57 0 0 0-1-.385m5.719.43c.714 0 1.085.565 1.139 1.214h-2.278a1.22 1.22 0 0 1 1.139-1.215zm-5.885 1.382a3.8 3.8 0 0 1 1.057.153v.347c0 .57-.539.973-1.2.973-.485 0-.904-.261-.904-.713 0-.467.375-.76 1.047-.76"/></svg></span> Environment<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h1>
-<h2 id="prerequisites">👉 Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<ul>
-<li>VMware Workstation Pro</li>
-<li>Sufficient host resources (recommended: 32GB+ RAM, 6+ CPU Cores, 200GB+ free disk space)</li>
-<li>Downloaded ISO images and virtual appliances for all systems</li>
-</ul>
-<h2 id="lab-components">💻⚙️ Lab Components<a class="headerlink" href="#lab-components" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Role / System</th>
-<th>Capabilities</th>
-<th>Resources</th>
-<th>IP Address</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Firewall, DNS, vLAN</strong><br><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.013 0C.898 0 0 .929 0 2.044v17.775L3.252 8.27h3.282L6.1 9.785h.063c.186-.217.433-.403.742-.62.31-.216.62-.402.96-.588.342-.186.713-.31 1.116-.433.402-.124.805-.155 1.208-.155.867 0 1.579.154 2.198.433.62.279 1.084.712 1.455 1.239.31.464.5 1.019.593 1.669.006.06.027.135.027.189.062.712-.031 1.518-.28 2.385a8.6 8.6 0 0 1-1.02 2.322 10 10 0 0 1-1.58 1.95 8.1 8.1 0 0 1-2.044 1.364 5.5 5.5 0 0 1-2.354.495 5.7 5.7 0 0 1-1.982-.34c-.588-.217-.99-.62-1.238-1.177h-.062L2.353 24h19.603A2.04 2.04 0 0 0 24 21.956V4.706c-.093-.03-.186-.06-.248-.092a2.8 2.8 0 0 0-.557-.062q-.836 0-1.394.372c-.34.248-.65.743-.867 1.518l-.526 1.826h2.013l.495 1.58-1.3 1.27h-2.014l-2.446 8.67h-3.53l2.446-8.67h-1.455l.805-2.85h1.425l.557-2.044c.185-.619.403-1.238.681-1.795a5 5 0 0 1 1.053-1.487c.433-.434.99-.775 1.641-1.022.65-.248 1.487-.372 2.447-.372.248 0 .464 0 .712.031A2.08 2.08 0 0 0 21.988 0zm6.565 11.118c-.898 0-1.672.278-2.323.805-.65.526-1.083 1.239-1.331 2.106s-.217 1.579.155 2.105c.31.557.929.805 1.858.805.898 0 1.672-.278 2.322-.805.65-.526 1.115-1.238 1.363-2.105.247-.867.185-1.58-.155-2.106-.34-.527-.991-.805-1.89-.805Z"/></svg></span> pfSense</td>
-<td>Filters traffic, isolates network segments, and manages internet access. Provides routing between VLANs and DNS services.</td>
-<td>1 CPU / 1GB RAM / 8GB Disk</td>
-<td><code>192.168.10.1</code> (WAN)<br><code>10.0.0.1</code> (LAN)</td>
-</tr>
-<tr>
-<td><strong>Active Directory, DNS</strong><br><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.67 5.3v.61l-.71.3V5.6zm0 5.94v.62l-.71.29v-.59zm0 6.03v.62l-.71.29v-.59zM2.6 7.29v.55l-.57.26v-.54zm0 1.99v.54l-.57.26v-.54zm0 4.03v.53l-.57.26v-.54zm0 2.02v.54l-.57.26v-.53zm1.9-9.69v.72l-1 .37V6zm0 6.02v.71l-1 .37v-.71zm0 6.04v.71l-1 .4v-.71zm-.07-9.98v.66l-.79.3V8zm0 2.01v.64l-.78.3V10zm0 4.01v.64l-.78.31v-.66zm0 2.02v.65l-.78.31v-.66zm1.88-9.67v.85l-1.26.49v-.84zm0 6.02v.85l-1.26.49v-.84zm0 5.97v.85l-1.26.5v-.85zm-.06-9.9v.76l-1.06.4v-.73zm0 2v.75l-1.06.42v-.75zm0 4.01v.75l-1.06.43v-.75zm0 1.95v.76l-1.06.42v-.75zm2.04-10.1v1.12l-1.57.62V6.67zm0 6.02v1.13l-1.57.61v-1.12zm0 5.97v1.12l-1.57.62v-1.11zm-.09-9.9v1.03l-1.31.53V8.66zm0 2v1.02l-1.31.53v-1.03zm0 4.02v1.03l-1.31.52v-1.03zm0 1.95v1.02l-1.31.52v-1.01zm2.14-10.25v1.47L8.61 8V6.56zm0 6.02v1.46l-1.73.7v-1.47zm0 5.97v1.46l-1.73.7v-1.46zm-.08-9.79v1.23l-1.48.59V8.64zm0 1.92v1.23l-1.48.58v-1.22zm0 4.09v1.25l-1.48.57v-1.23zm0 1.94v1.25l-1.48.59V16.6zm2.19-10.88v2l-1.86.77V6c.64-.35 1.26-.65 1.86-.88m0 2.21v1.73l-1.86.78V8.1zm0 1.95v1.76l-1.86.78v-1.76zm0 1.97V13l-1.86.77V12zm0 1.96V15l-1.86.78V14zm0 2v1.75l-1.86.8V16zm0 1.96v1.87c-.73.28-1.35.55-1.86.8v-1.88zm9.59-11.99v14.05c-1.19-.79-2.67-1.18-4.45-1.18-1.47 0-3.12.3-4.94.91v-1.9c.97-.37 2.03-.64 3.19-.8v-4.57c-.98.12-2.04.46-3.19 1.02V11.4c.99-.46 2.06-.77 3.19-.94V6c-1.02.18-2.08.53-3.19 1V5.03C14.27 4.34 15.86 4 17.41 4c1.68 0 3.22.39 4.63 1.18m-1.89 1.23c-.76-.41-1.65-.59-2.73-.59-.13 0-.25.01-.37.02v4.54l.41-.01c.91 0 1.81.13 2.69.43zm0 5.69c-.81-.36-1.72-.54-2.71-.54-.13 0-.26.01-.39.02v4.58h.41c.99 0 1.89.12 2.69.37z"/></svg></span> Windows Server 2003/2008</td>
-<td>Enables testing of attacks on Active Directory, outdated Windows services, and legacy authentication mechanisms.</td>
-<td>1-2 CPU / 4GB RAM / 40GB Disk</td>
-<td><code>10.0.0.10</code></td>
-</tr>
-<tr>
-<td><strong>Workstation</strong><br><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 12V6.75l6-1.32v6.48zm17-9v8.75l-10 .15V5.21zM3 13l6 .09v6.81l-6-1.15zm17 .25V22l-10-1.91V13.1z"/></svg></span> Windows 7 (or XP)</td>
-<td>Older systems with vulnerabilities like SMBv1 (e.g., EternalBlue exploit). Useful for testing privilege escalation and lateral movement.</td>
-<td>1 CPU / 1-2GB RAM / 30GB Disk</td>
-<td><code>10.0.0.20</code></td>
-</tr>
-<tr>
-<td><strong>Attacker Tool</strong><br><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.778 5.943s-1.97-.13-5.327.92c-3.42 1.07-5.36 2.587-5.36 2.587s5.098-2.847 10.852-3.008zm7.351 3.095.257-.017s-1.468-1.78-4.278-2.648c1.58.642 2.954 1.493 4.021 2.665m.42.74c.039-.068.166.217.263.337.004.024.01.039-.045.027-.005-.025-.013-.032-.013-.032s-.135-.08-.177-.137-.049-.157-.028-.195m3.448 8.479s.312-3.578-5.31-4.403a18 18 0 0 0-2.524-.187c-4.506.06-4.67-5.197-1.275-5.462 1.407-.116 3.087.643 4.73 1.408-.007.204.002.385.136.552s.648.35.813.445c.164.094.691.43 1.014.85.07-.131.654-.512.654-.512s-.14.003-.465-.119c-.326-.122-.713-.49-.722-.511s-.015-.055.06-.07c.059-.049-.072-.207-.13-.265s-.445-.716-.454-.73c-.009-.016-.012-.031-.04-.05-.085-.027-.46.04-.46.04s-.575-.283-.774-.893c.003.107-.099.224 0 .469-.3-.127-.558-.344-.762-.88-.12.305 0 .499 0 .499s-.707-.198-.82-.85c-.124.293 0 .469 0 .469s-1.153-.602-3.069-.61c-1.283-.118-1.55-2.374-1.43-2.754 0 0-1.85-.975-5.493-1.406-3.642-.43-6.628-.065-6.628-.065s6.45-.31 11.617 1.783c.176.785.704 2.094.989 2.723-.815.563-1.733 1.092-1.876 2.97s1.472 3.53 3.474 3.58c1.9.102 3.214.116 4.806.942 1.52.84 2.766 3.4 2.89 5.703.132-1.709-.509-5.383-3.5-6.498 4.181.732 4.549 3.832 4.549 3.832M12.68 5.663l-.15-.485s-2.484-.441-5.822-.204S0 6.38 0 6.38s6.896-1.735 12.68-.717"/></svg></span> Kali Linux</td>
-<td>Standard distribution for penetration testing with pre-installed security tools (Metasploit, Nmap, Burp Suite, etc.).</td>
-<td>2 CPU / 2-4GB RAM / 40GB Disk</td>
-<td><code>10.0.0.100</code></td>
-</tr>
-<tr>
-<td><strong>SSH, FTP, MySQL</strong><br><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.61.455a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41M12.92.8C8.923.777 5.137 2.941 3.148 6.451a5 5 0 0 1 .26-.007 4.9 4.9 0 0 1 2.585.737A8.32 8.32 0 0 1 12.688 3.6 4.94 4.94 0 0 1 13.723.834 11 11 0 0 0 12.92.8m9.226 4.994a4.9 4.9 0 0 1-1.918 2.246 8.36 8.36 0 0 1-.273 8.303 4.9 4.9 0 0 1 1.632 2.54 11.16 11.16 0 0 0 .559-13.089M3.41 7.932A3.41 3.41 0 0 0 0 11.342a3.41 3.41 0 0 0 3.41 3.409 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41zm2.027 7.866a4.9 4.9 0 0 1-2.915.358 11.1 11.1 0 0 0 7.991 6.698 11.2 11.2 0 0 0 2.422.249 4.88 4.88 0 0 1-.999-2.85 9 9 0 0 1-.836-.136 8.3 8.3 0 0 1-5.663-4.32zm11.405.928a3.41 3.41 0 0 0-3.41 3.41 3.41 3.41 0 0 0 3.41 3.41 3.41 3.41 0 0 0 3.41-3.41 3.41 3.41 0 0 0-3.41-3.41"/></svg></span> Ubuntu Linux</td>
-<td>Used for testing password attacks, brute force, service exploitation, and privilege escalation on Linux systems.</td>
-<td>1 CPU / 1-2GB RAM / 20GB Disk</td>
-<td><code>10.0.0.30</code></td>
-</tr>
-<tr>
-<td><strong>Test Target</strong><br><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.353 0h1.368q4.19.218 8.144 1.616.217.077.216.309-.015 4.033-.002 12.102 0 .81-.093 1.173c-.217.845-.76 1.635-1.326 2.325q-.318.388-1.024 1.046-2.955 2.75-6.01 5.094-.183.14-.516.335h-.17q-.627-.42-.945-.673-3.992-3.184-5.442-4.459-1.348-1.185-2.169-2.611c-.369-.64-.466-1.287-.465-2.099q.01-6.048.002-12.218c0-.183.09-.264.261-.325Q7.145.227 11.352 0ZM7.474 7.864q0-.094.069-.031l2.797 2.516a.374.372 21.2 0 1 .122.276l-.006 4.333a.18.18 0 0 0 .183.184l2.524-.018a.11.11 89.8 0 0 .108-.11q-.007-2.201.01-4.461.002-.173.146-.29 1.397-1.145 2.946-2.393.068-.055.068.032v10.881q0 .092.063.024.794-.865 1.628-1.838.71-.83.984-1.87.26-.989.262-1.997.007-4.754.009-9.768a.136.136 0 0 0-.137-.136q-1.15.004-2.424 0c-.287-.002-.441-.022-.619.149Q14.16 5.317 11.982 7.4a.046.046 0 0 1-.062 0Q9.782 5.437 7.769 3.525c-.234-.222-.515-.381-.843-.373q-1.09.026-2.33.005-.184-.004-.184.18-.003 4.54.005 9.032.002.536.036 1.027c.076 1.093.2 2.126.803 3.021.574.852 1.329 1.656 2.126 2.405q.023.022.054.026.04.006.04-.034z"/></svg></span> Metasploitable 2, 3</td>
-<td>Pre-configured with numerous vulnerable services ready for exploitation (FTP, SSH, Samba, web services, databases).</td>
-<td>1 CPU / 512MB RAM / 8GB Disk</td>
-<td><code>10.0.0.40</code></td>
-</tr>
-<tr>
-<td><strong>Vulnerable Web Applications</strong><br><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.03 19H5V5h2v2h10V5h2v4.5c.72.3 1.4.74 2 1.32V5a2 2 0 0 0-2-2h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h8.06c-.41-.26-.8-.55-1.16-.9-.33-.34-.63-.71-.87-1.1M12 3c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1m8.31 14.9c.44-.69.69-1.52.69-2.4 0-2.5-2-4.5-4.5-4.5S12 13 12 15.5s2 4.5 4.5 4.5c.87 0 1.69-.25 2.38-.68L22 22.39 23.39 21zm-3.81.1a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5"/></svg></span> OWASP Dojo (Juice Shop, WebGoat, bWAPP, Mutillidae, DVWA)</td>
-<td>Collection of intentionally vulnerable web applications for testing XSS, SQLi, RCE, SSRF, authentication bypass, and other OWASP Top 10 vulnerabilities.</td>
-<td>1-2 CPU / 2GB RAM / 20GB Disk</td>
-<td><code>10.0.0.50</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="network-configuration">📡🔧 Network Configuration<a class="headerlink" href="#network-configuration" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>WAN Network</strong>: <code>192.168.10.0/24</code> (simulated external network/internet access)</li>
-<li><strong>pfSense</strong>: <ul>
-<li>Network Adapter 1: <code>192.168.10.1</code> (bridged) WAN</li>
-<li>Network Adapter 2: <code>10.0.0.1</code> (LAN Segment) LAN </li>
-</ul>
-</li>
-<li><strong>LAN Network</strong>: <code>10.0.0.0/24</code> (internal lab network)</li>
-<li><strong>Gateway</strong>: pfSense <code>10.0.0.1</code></li>
-<li><strong>DNS Server</strong>: pfSense / Windows Server</li>
-</ul>
-<h2 id="key-features">🔑 Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Isolated Environment</strong>: Complete network segmentation from production systems</li>
-<li><strong>Realistic Attack Scenarios</strong>: Multiple vulnerable targets representing real-world systems</li>
-<li><strong>Active Directory Testing</strong>: Full AD environment for testing domain attacks</li>
-<li><strong>Web Application Security</strong>: Comprehensive OWASP vulnerability testing platform</li>
-<li><strong>Network Services</strong>: Various services (SSH, FTP, SMB, HTTP, MySQL) for exploitation practice</li>
-<li><strong>Scalable Design</strong>: Easy to add additional systems or modify network topology</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Important Lab Configuration Notes</p>
-<ul>
-<li><strong>Network Adapter Configuration</strong>: Remember to set the Network Adapter for each VM to the LAN Segment that is assigned to the LAN port on pfSense to ensure proper network connectivity</li>
-<li><strong>Startup Sequence</strong>: Always start pfSense before launching other VMs to avoid network connectivity issues and ensure proper DHCP/DNS services are available</li>
-<li><strong>Firewall Rules</strong>: Configure proper firewall rules to prevent access to your physical network. Consciously control traffic within the virtual network to maintain isolation and security</li>
-<li><strong>Windows Firewall</strong>: Remember to configure Windows Firewall settings appropriately on the host machine, as overly restrictive rules may block virtual machines from accessing the internet through the hypervisor</li>
-<li><strong>Network Isolation</strong>: Ensure all systems are set to use pfSense as their gateway to prevent unauthorized external access</li>
-<li><strong>VLANs</strong>: Use separate VLANs for additional segmentation if needed</li>
-</ul>
-</div>
-<p><br></p>
-<hr />
 
 
 
@@ -4258,7 +4284,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="November 25, 2026 08:15:20 UTC"><span class="timeago" datetime="2026-11-25T08:15:20+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="November 25, 2026 08:15:20 UTC">2026-11-25</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="November 25, 2026 08:14:29 UTC"><span class="timeago" datetime="2026-11-25T08:14:29+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="November 25, 2026 08:14:29 UTC">2026-11-25</span>
   </span>
 
     
@@ -4268,7 +4294,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="December 13, 2025 14:26:46 UTC"><span class="timeago" datetime="2025-12-13T14:26:46+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="December 13, 2025 14:26:46 UTC">2025-12-13</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="November 25, 2026 08:06:18 UTC"><span class="timeago" datetime="2026-11-25T08:06:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="November 25, 2026 08:06:18 UTC">2026-11-25</span>
   </span>
 
     
@@ -4363,14 +4389,14 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["announce.dismiss", "content.action.view", "content.code.annotate", "content.code.copy", "content.tabs.link", "content.tooltips", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
-        <script src="../../../js/timeago.min.js"></script>
+        <script src="../../js/timeago.min.js"></script>
       
-        <script src="../../../js/timeago_mkdocs_material.js"></script>
+        <script src="../../js/timeago_mkdocs_material.js"></script>
       
     
   </body>
