@@ -15,7 +15,7 @@
 
 ## MAAS Deployment & Initial Configuration
 
-### 1. 💾 MAAS Core Installation
+### 1. :material-package-down: MAAS Core Installation
 
 Install the MAAS packages and the required database components.
 
@@ -29,7 +29,7 @@ sudo apt update
 sudo apt install maas
 ```
 
-### 2. ⚙️ Initial Configuration
+### 2. :material-cog-outline: Initial Configuration
 
 Initialize the MAAS region controller. You will be prompted to choose a user (create a new one).
 
@@ -37,7 +37,7 @@ Initialize the MAAS region controller. You will be prompted to choose a user (cr
 sudo maas init
 ```
 
-### 3. 🌐 Access UI
+### 3. :material-web: Access UI
 
 Open a web browser and navigate to:
 
@@ -49,7 +49,7 @@ Open a web browser and navigate to:
 
 ## MAAS Networking & Domain Configuration
 
-### 1. 🛑 Disable DHCP on the VLAN
+### 1. :material-network-off: Disable DHCP on the VLAN
 
 By default, MAAS provides DHCP. To avoid conflicts with your router, you must disable the dynamic range and only use MAAS for IP reservations.
 
@@ -60,7 +60,7 @@ By default, MAAS provides DHCP. To avoid conflicts with your router, you must di
 3. In the DHCP section, delete the dynamic IP range
 4. Ensure the DHCP mode for the VLAN is set to **"Unmanaged"** or that the DHCP range is empty
 
-### 2. 📝 Configure Domain and Hostnames
+### 2. :material-card-text-outline: Configure Domain and Hostnames
 
 Set a cleaner domain name and ensure MAAS uses consistent naming conventions.
 
@@ -70,7 +70,7 @@ Set a cleaner domain name and ensure MAAS uses consistent naming conventions.
 2. Change the default (e.g., `maas`) to something cleaner (e.g., `homelab`)
 3. In the **DNS** tab, verify that MAAS is configured to manage DNS records for your domain
 
-### 3. 🔑 SSH Key Registration
+### 3. :material-key: SSH Key Registration
 
 You can securely import your keys directly from GitHub, which is faster than pasting them manually.
 
@@ -80,7 +80,7 @@ You can securely import your keys directly from GitHub, which is faster than pas
 2. In the **SSH keys** section, choose **"Import from GitHub"**
 3. Enter your GitHub username - MAAS will automatically fetch and register all your public keys
 
-### 4. ⚙️ Commissioning and IP Assignment
+### 4. :material-cog-outline: Commissioning and IP Assignment
 
 **Steps:**
 
@@ -96,13 +96,13 @@ You can securely import your keys directly from GitHub, which is faster than pas
 |Agent 1|worker-01|192.168.55.11|
 |Agent 2|worker-02|192.168.55.12|
 
-### 5. 🚀 Deploying the Nodes
+### 5. :material-rocket-launch-outline: Deploying the Nodes
 
 1. Select **Ubuntu 24.04 LTS** or your custom image for each node
 2. Ensure the static IP from the table above is assigned during deployment
 3. After deployment, remember to **change boot sequence from PXE to External Disk**
 
-### 6. 🧹 Post-Deployment Cleanup
+### 6. :material-broom: Post-Deployment Cleanup
 
 After deployment, the nodes are running Ubuntu 24.04 with the user `ubuntu` by default and some MAAS settings.
 

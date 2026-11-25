@@ -87,8 +87,8 @@ Cilium Helm chart nie ma opcji `hostNetwork` dla relay — nie jest to wspierana
 
 |Tryb|Opis|Pod→NodeIP|KubeProxy needed|
 |:--|:--|:--|:--|
-|VXLAN (tunnel)|Enkapsulacja L3, działa wszędzie|❌|Tak (lub kubeProxyReplacement)|
-|Native routing|Bezpośredni routing L2, wymaga tej samej podsieci|✅|Nie (kubeProxyReplacement)|
+|VXLAN (tunnel)|Enkapsulacja L3, działa wszędzie|:material-close-circle-outline:|Tak (lub kubeProxyReplacement)|
+|Native routing|Bezpośredni routing L2, wymaga tej samej podsieci|:material-check-circle-outline:|Nie (kubeProxyReplacement)|
 
 ### Dlaczego Prometheus działa z hostNetwork a relay nie może
 
@@ -129,20 +129,20 @@ Przy jednoczesnym usunięciu wszystkich podów — wszystkie nody tracą CNI jed
 
 **Działa:**
 
-- Cilium VXLAN ✅
-- kube-proxy k3s ✅ (przywrócony)
-- Traefik + TLS ✅
-- Grafana / Prometheus / Loki ✅
-- AlertManager + ntfy ✅
-- clients-api + CloudNativePG ✅
-- Longhorn + S3 backup ✅
-- metrics-server ✅ (z flagą `--authentication-tolerate-lookup-failure=true`)
-- Sealed Secrets ✅
-- Flux image automation ✅
+- Cilium VXLAN :material-check-circle-outline:
+- kube-proxy k3s :material-check-circle-outline: (przywrócony)
+- Traefik + TLS :material-check-circle-outline:
+- Grafana / Prometheus / Loki :material-check-circle-outline:
+- AlertManager + ntfy :material-check-circle-outline:
+- clients-api + CloudNativePG :material-check-circle-outline:
+- Longhorn + S3 backup :material-check-circle-outline:
+- metrics-server :material-check-circle-outline: (z flagą `--authentication-tolerate-lookup-failure=true`)
+- Sealed Secrets :material-check-circle-outline:
+- Flux image automation :material-check-circle-outline:
 
 **Nie działa:**
 
-- Hubble relay ❌ — wymaga native routing
+- Hubble relay :material-close-circle-outline: — wymaga native routing
 
 **Konfiguracja Cilium (aktualna):**
 

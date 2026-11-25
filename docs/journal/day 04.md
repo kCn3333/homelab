@@ -280,9 +280,9 @@ Traefik (HTTP→HTTPS redirect) → Pody
 API Server (TLS, cert-manager)
 ```
 
-**Bezpośredni dostęp do nodów:** zablokowany przez ufw ✅  
-**Ruch klastrowy:** dozwolony w podsieci `192.168.55.0/24` ✅  
-**Sieć podów:** dozwolona `10.42.0.0/16` ✅
+**Bezpośredni dostęp do nodów:** zablokowany przez ufw :material-check-circle-outline:  
+**Ruch klastrowy:** dozwolony w podsieci `192.168.55.0/24` :material-check-circle-outline:  
+**Sieć podów:** dozwolona `10.42.0.0/16` :material-check-circle-outline:
 
 ---
 

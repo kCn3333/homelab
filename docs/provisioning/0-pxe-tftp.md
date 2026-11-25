@@ -6,7 +6,7 @@
     [:fontawesome-brands-wikipedia-w: TFTP Wikipedia page](https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol)  
 
 
-## 📋 Overview
+## :material-clipboard-text-outline: Overview
 
 This guide covers setting up a TFTP server for PXE network booting on Debian.
 
@@ -227,7 +227,7 @@ sudo iptables -A INPUT -p udp --dport 69 -j ACCEPT
 
 ---
 
-## ✅ Verification Checklist
+## :material-clipboard-check-outline: Verification Checklist
 
 - [ ] TFTP service is running: `systemctl status tftpd-hpa`
 - [ ] TFTP listens on VLAN 5 only: `ss -ulnp | grep :69`
@@ -238,7 +238,7 @@ sudo iptables -A INPUT -p udp --dport 69 -j ACCEPT
 
 ---
 
-## 🐛 Troubleshooting
+## :material-bug: Troubleshooting
 
 ### TFTP Service Won't Start
 
@@ -297,7 +297,7 @@ sudo chmod 755 /srv/tftp/pxelinux.cfg
 
 ---
 
-## 📚 Additional Resources
+## :material-book-open-page-variant: Additional Resources
 
 - [TFTP-HPA Documentation](https://git.kernel.org/pub/scm/network/tftp/tftp-hpa.git)
 - [Syslinux PXELinux Guide](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX)

@@ -6,13 +6,13 @@
     [:material-file-document-multiple-outline: Packer Docs](https://developer.hashicorp.com/packer/docs)
 
 
-## 🎯 Goal
+## :material-target: Goal
 
 To build a clean `debian-custom-cloudimg.tar.gz` image for MAAS deployment.
 
 ---
 
-## 🛠️ Environment & Tools
+## :material-tools: Environment & Tools
 
 **Host Environment:**
 
@@ -153,7 +153,7 @@ maas admin machine deploy <system_id> \
 
 ---
 
-## 🐛 Troubleshooting
+## :material-bug: Troubleshooting
 
 ### Build Fails with "Permission denied" (KVM)
 
@@ -196,7 +196,7 @@ Use `BOOT=bios` flag as shown in section 1.2.
 
 ---
 
-## 📚 Additional Resources
+## :material-book-open-page-variant: Additional Resources
 
 - [Packer QEMU Builder Docs](https://developer.hashicorp.com/packer/plugins/builders/qemu)
 - [MAAS Image Builder Repository](https://github.com/canonical/packer-maas)

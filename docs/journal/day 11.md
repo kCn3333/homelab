@@ -217,7 +217,7 @@ Sprawdź przed debugowaniem czy Prometheus w ogóle skanuje właściwy namespace
 kubectl get prometheus -n monitoring -o yaml | grep -A5 serviceMonitorNamespaceSelector
 ```
 
-- `{}` — skanuje wszystkie namespace ✅
+- `{}` — skanuje wszystkie namespace :material-check-circle-outline:
 - `matchLabels: ...` — tylko namespace z tym labelem
 
 Przy `{}` i poprawnych labelach na ServiceMonitor — problem zawsze leży w samym Service (brak label w metadata lub brak nazwy portu).

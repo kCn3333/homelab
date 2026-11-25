@@ -5,7 +5,7 @@
 
     [:fontawesome-brands-wikipedia-w: SSH-keygen Wikipedia page](https://en.wikipedia.org/wiki/Ssh-keygen)  
 
-## 🔐 Generate SSH Keys
+## :material-key-chain: Generate SSH Keys
 
 ### For Windows (PowerShell)
 
@@ -57,7 +57,7 @@ chmod 644 ~/.ssh/id_ed25519.pub
 
 ---
 
-## 🔑 Configure SSH Agent
+## :material-key: Configure SSH Agent
 
 ### For Windows 10/11
 
@@ -102,7 +102,7 @@ source ~/.zshrc
 
 ---
 
-## ⚙️ Configure Local SSH Aliases
+## :material-cog-outline: Configure Local SSH Aliases
 
 Works the same for Windows and Linux/WSL.
 
@@ -152,7 +152,7 @@ ssh worker-02
 
 ---
 
-## 📝 Configure Hostnames
+## :material-card-text-outline: Configure Hostnames
 
 ### For Windows
 
@@ -186,7 +186,7 @@ Save and exit (`Ctrl+X`, `Y`, `Enter` in nano).
 
 ---
 
-## 🚀 Copy SSH Key to Remote Hosts
+## :material-key-arrow-right: Copy SSH Key to Remote Hosts
 
 ### Using ssh-copy-id (Linux/WSL)
 
@@ -218,7 +218,7 @@ exit
 
 ---
 
-## ✅ Verify SSH Connection
+## :material-check-circle-outline: Verify SSH Connection
 
 Test passwordless SSH:
 

@@ -256,7 +256,7 @@ spec:
     kind: ClusterIssuer
 ```
 
-⚠️ Uwaga: `secretName` w Certificate to certyfikat TLS — nie mylić z `grafana-admin-secret` który trzyma hasło!
+:material-alert-outline: Uwaga: `secretName` w Certificate to certyfikat TLS — nie mylić z `grafana-admin-secret` który trzyma hasło!
 
 ---
 
@@ -264,7 +264,7 @@ spec:
 
 Podczas `flux reconcile` HelmRelease kube-prometheus-stack pojawia się Job `admission-patch` który crashuje przez chwilę. To normalne — webhook musi poczekać na stabilizację operatora.
 
-**Rozwiązanie:** Poczekaj — samo się naprawia po 1-2 minutach. Nie panikuj. 🙂
+**Rozwiązanie:** Poczekaj — samo się naprawia po 1-2 minutach. Nie panikuj. :material-emoticon-outline:
 
 ---
 

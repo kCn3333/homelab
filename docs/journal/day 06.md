@@ -110,8 +110,8 @@ kubeseal --format yaml \
 
 **Które Sekrety warto zapieczętować:**
 
-- Tokeny API (Cloudflare, GitHub, etc.) ✅
-- Hasła do dashboardów ✅
+- Tokeny API (Cloudflare, GitHub, etc.) :material-check-circle-outline:
+- Hasła do dashboardów :material-check-circle-outline:
 - Certyfikaty TLS zarządzane przez cert-manager — **nie trzeba**, cert-manager regeneruje je automatycznie
 
 ---

@@ -254,7 +254,7 @@ for ns in flux-test monitoring loki; do
 done
 ```
 
-Wszystkie pody: `Burstable` ✅
+Wszystkie pody: `Burstable` :material-check-circle-outline:
 
 **Ustawione resources (obserwowane zużycie → ustawione wartości):**
 

@@ -136,7 +136,7 @@ curl -X POST http://localhost:9093/api/v2/alerts \
 **Aktywne alerty:**
 
 - `NodeClockNotSynchronising` — NTP nie działa
-- `Watchdog` — heartbeat, powinien być zawsze aktywny ✅
+- `Watchdog` — heartbeat, powinien być zawsze aktywny :material-check-circle-outline:
 - `KubeAggregatedAPIDown` — metrics-server ma problemy
 - `KubeDeploymentReplicasMismatch` — przejściowe, samo się naprawiło
 

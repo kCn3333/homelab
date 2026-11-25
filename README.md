@@ -1,4 +1,4 @@
-# 🏠 [kCn3333/homelab] Documentation
+# <img src="docs/img/icons/home.svg" width="24" height="24" alt=""> [kCn3333/homelab] Documentation
 
 
 

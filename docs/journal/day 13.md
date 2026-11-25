@@ -231,7 +231,7 @@ Hubble UI → https://hubble.cluster.kcn333.com
 3. CIDR podów `/8` zamiast `/16` → część ruchu blokowana
 4. Wielokrotna zmiana TLS on/off → niespójny stan certyfikatów relay
 
-**Po naprawach:** `Cluster health: 3/3 reachable` ✅ ale relay nadal niestabilny przez niespójne certyfikaty — wymaga reinstalacji Cilium.
+**Po naprawach:** `Cluster health: 3/3 reachable` :material-check-circle-outline: ale relay nadal niestabilny przez niespójne certyfikaty — wymaga reinstalacji Cilium.
 
 **Wniosek:** Nigdy nie przełączaj TLS Cilium w działającym klastrze bez pełnego restartu — zostawia niespójny stan wewnętrznych certyfikatów.
 

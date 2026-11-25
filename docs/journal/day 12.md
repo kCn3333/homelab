@@ -415,7 +415,7 @@ kubectl run test-isolation --rm -it \
   -n clients \
   -- psql -h clients-db-rw -U app -d clients_db -c "SELECT 1"
 
-# Jeśli pod wisi bez odpowiedzi → NetworkPolicy działa ✅
+# Jeśli pod wisi bez odpowiedzi → NetworkPolicy działa [OK]
 # DROP (Cilium) = cisza, nie "connection refused"
 # Atakujący nie wie czy port w ogóle istnieje
 ```

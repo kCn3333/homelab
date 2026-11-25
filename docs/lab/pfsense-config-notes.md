@@ -15,7 +15,7 @@
     
     **For production environments, always install pfSense on bare metal (dedicated physical hardware).**   
 
-## 🔌🛠️ Initial Setup - Port Assignment and IP Configuration
+## :material-ethernet: Initial Setup - Port Assignment and IP Configuration
 
 ### Console Configuration
 
@@ -44,7 +44,7 @@ After the initial boot, pfSense will present a console menu.
 
 ---  
 
-## ⚙️🔧 Web Interface Configuration
+## :material-monitor-dashboard: Web Interface Configuration
 
 ### Basic Settings
 
@@ -64,7 +64,7 @@ Navigate to **Services > DNS Resolver**
     - DHCP Registration: Enable (allows DHCP clients to register in DNS)  
     - Static DHCP: Enable (registers static DHCP mappings)  
 
-## 🧱 Firewall Rules
+## :material-shield-lock-outline: Firewall Rules
 
 Navigate to **Firewall > Rules > LAN**
 
@@ -73,7 +73,7 @@ Create rules to control lab traffic. **Rule order matters** - rules are processe
 !!! danger "Critical Security Rules"
     **Never allow vulnerable systems (Metasploitable, OWASP applications, Windows XP/7) to access the internet!** These systems are intentionally vulnerable and should remain completely isolated from external networks.
 
-**⚠️ Recommended Rule Configuration:**
+**:material-alert-outline: Recommended Rule Configuration:**
 
 | Rule | Action | Protocol | Source | Destination | Description |
 |-----------|--------|----------|--------|-------------|-------------|
@@ -99,7 +99,7 @@ This allows RFC1918 private addresses (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
 !!! danger "Security Warning"
     Only disable RFC1918 blocking if your WAN interface is connected to a trusted network (like your host-only adapter). Never disable this on internet-facing interfaces.
 
-## 🤝 Local DNS Configuration for Web Applications
+## :material-dns: Local DNS Configuration for Web Applications
 
 For hosting multiple web applications on a single IP using domain names, configure DNS Host Overrides and set up a reverse proxy.
 
@@ -189,7 +189,7 @@ tail -f /var/log/apache2/casino_error.log
 tail -f /var/log/apache2/casino_access.log
 ```
 
-## 🐛 Common Issues
+## :material-bug: Common Issues
 
 - **Seeing default Apache page**: Ensure the virtual host is enabled and `ServerName` matches exactly  
 - **DNS not resolving**: Verify Host Overrides are saved and DNS Resolver is running  
@@ -200,13 +200,13 @@ tail -f /var/log/apache2/casino_access.log
 
 Your pfSense lab setup should now include:
 
-- ✅ WAN and LAN interfaces properly assigned
-- ✅ Static IP addressing for LAN network
-- ✅ DHCP server for automatic client configuration
-- ✅ DNS Resolver for internal name resolution
-- ✅ Firewall rules controlling lab traffic
-- ✅ Local DNS entries for web applications
-- ✅ RFC1918 settings configured for host connectivity
+- :material-check-circle-outline: WAN and LAN interfaces properly assigned
+- :material-check-circle-outline: Static IP addressing for LAN network
+- :material-check-circle-outline: DHCP server for automatic client configuration
+- :material-check-circle-outline: DNS Resolver for internal name resolution
+- :material-check-circle-outline: Firewall rules controlling lab traffic
+- :material-check-circle-outline: Local DNS entries for web applications
+- :material-check-circle-outline: RFC1918 settings configured for host connectivity
 
 This configuration provides a secure, isolated environment for penetration testing while maintaining necessary connectivity and services.
 
