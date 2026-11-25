@@ -1,5 +1,6 @@
 site_name: "> Homelab Documentation"
-site_url: https://kcn3333.github.io/homelab/
+site_url: https://homelab.kcn333.com/
+site_description: Personal homelab documentation covering infrastructure, provisioning, Kubernetes, automation, pentesting labs, and troubleshooting.
 repo_url: https://github.com/kCn3333/homelab
 repo_name: kCn3333/homelab
 edit_uri: edit/main/docs/
@@ -22,7 +23,7 @@ theme:
   features:
     - announce.dismiss
     #- content.action.edit
-    - content.action.view
+    #- content.action.view
     - content.code.annotate
     - content.code.copy
     - content.tabs.link
@@ -71,8 +72,8 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -80,7 +81,6 @@ markdown_extensions:
       #auto_title: true
       #pygments_style: one-dark 
       use_pygments: true   
-  - pymdownx.superfences 
   - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink:
@@ -110,9 +110,6 @@ extra:
     - icon: fontawesome/solid/envelope
       link: mailto:kcn@kcn333.com
   generator: false
-
-extra_files:
-  - CNAME
 
 extra_css:
   - stylesheets/retro.css

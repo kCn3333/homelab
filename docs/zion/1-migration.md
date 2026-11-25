@@ -42,7 +42,7 @@ Three old components were deliberately replaced rather than copied:
 
 Caddy and AdGuard were separated because proxying and DNS are needed by many other services. They can be updated, restarted and restored without touching the main Docker VM.
 
-The detailed cutovers are documented in [Caddy](caddy.md), [Supporting LXC services](supporting-services.md) and [Backup and recovery](backup-and-recovery.md).
+The detailed cutovers are documented in [Caddy](caddy.md), [Supporting LXC services](supporting-services.md) and [Backup and recovery](3-backup-and-recovery.md).
 
 ## :material-server-network: Dedicated LXC containers
 
@@ -238,9 +238,9 @@ The move was performed in stages. Oracle Legacy stayed available until each repl
 
 The migration exposed several issues that deserve their own runbooks:
 
-- [Docker route collision](../../troubleshooting/docker-route-collision.md);
-- [Proxmox link recovery](../../troubleshooting/proxmox-link-recovery.md);
-- [WireGuard relay troubleshooting](../../troubleshooting/wireguard-relay.md);
+- [Docker route collision](../troubleshooting/docker-route-collision.md);
+- [Proxmox link recovery](../troubleshooting/proxmox-link-recovery.md);
+- [WireGuard relay troubleshooting](../troubleshooting/wireguard-relay.md);
 - incorrect UID/GID ownership after changing an LXC between unprivileged and privileged operation;
 - old Garage endpoints left in Longhorn and Loki after the container itself had moved.
 
