@@ -16,7 +16,7 @@ nav:
     - ":material-cloud-outline: Cloud Infrastructure": relay
 
     - ":simple-kubernetes: Cluster Deployment":
-      - ":material-harddisk: Bare Metal": provisioning
+      - ":material-server: Bare Metal": provisioning
       - ":simple-kubernetes: Kubernetes": kubernetes
       - ":material-notebook-edit-outline: Build Journal (Polish)": journal
       - ":simple-flux: Flux Repo": https://github.com/kCn3333/k3s-homelab
@@ -44,7 +44,7 @@ nav:
       - ":material-thermometer: temp monitor": https://github.com/kCn3333/linux-bash/tree/main/temp_monitor
   
   - ":material-cog-sync-outline: Automation":
-    - ":material-console: Server automation": automation
+    - ":material-robot-outline: Server automation": automation
     - ":material-aws: IaC AWS DevOps": https://github.com/kCn3333/aws-devops
     - ":simple-ansible: Ansible playbooks": https://github.com/kCn3333/homelab-ansible
     - ":simple-terraform: Terraform IaC": https://github.com/kCn3333/homelab-terraform

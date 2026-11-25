@@ -44,7 +44,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
   ![homelab](img/homelab0.png)
 </div>
 
-## :material-folder-outline: Documentation Sections
+## :material-folder-open-outline: Documentation Sections
 
 
 - <span class="color-green">**:material-server-network: Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>

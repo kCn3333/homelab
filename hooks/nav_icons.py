@@ -1,11 +1,11 @@
-"""Render leading Material and Simple Icons shortcodes in navigation titles."""
+"""Render leading Material, Simple Icons and Octicons navigation shortcodes."""
 
 import re
 
 from mkdocs.plugins import event_priority
 
 
-ICON_TITLE = re.compile(r"^:(material|simple)-([a-z0-9-]+):\s+(.+)$")
+ICON_TITLE = re.compile(r"^:(material|simple|octicons)-([a-z0-9-]+):\s+(.+)$")
 
 
 def _apply_icons(items):
