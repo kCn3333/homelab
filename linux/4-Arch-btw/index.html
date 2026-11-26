@@ -2752,10 +2752,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enable-ssh-server" class="md-nav__link">
+  <a href="#start-and-check-ssh-server" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Enable SSH Server
+        Start and Check SSH Server
       
     </span>
   </a>
@@ -5304,10 +5304,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enable-ssh-server" class="md-nav__link">
+  <a href="#start-and-check-ssh-server" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Enable SSH Server
+        Start and Check SSH Server
       
     </span>
   </a>
@@ -6427,8 +6427,9 @@
 <h3 id="set-root-password">Set Root Password<a class="headerlink" href="#set-root-password" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>passwd
 </span></code></pre></div>
-<h3 id="enable-ssh-server">Enable SSH Server<a class="headerlink" href="#enable-ssh-server" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>systemctl<span class="w"> </span>status<span class="w"> </span>sshd
+<h3 id="start-and-check-ssh-server">Start and Check SSH Server<a class="headerlink" href="#start-and-check-ssh-server" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>systemctl<span class="w"> </span>start<span class="w"> </span>sshd
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>systemctl<span class="w"> </span>status<span class="w"> </span>sshd
 </span></code></pre></div>
 <hr />
 <h2 id="ssh-connection-optional"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.5 9c-.6 0-1 .5-1 1v1.75c0 .5.4 1 1 1H7v.75H3.5V15h4c.6 0 1-.5 1-1v-1.75c0-.5-.4-1-1-1H5v-.75h3.5V9zm6 0c-.6 0-1 .5-1 1v1.75c0 .5.4 1 1 1H13v.75H9.5V15h4c.6 0 1-.5 1-1v-1.75c0-.5-.4-1-1-1H11v-.75h3.5V9zm5 0v6H17v-2.5h2V15h1.5V9H19v2h-2V9z"/></svg></span> SSH Connection (Optional)<a class="headerlink" href="#ssh-connection-optional" title="Permanent link">&para;</a></h2>
@@ -6450,8 +6451,10 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>modprobe<span class="w"> </span>dm-mod
 </span></code></pre></div>
 <h3 id="encrypt-partitions-with-luks">Encrypt Partitions with LUKS<a class="headerlink" href="#encrypt-partitions-with-luks" title="Permanent link">&para;</a></h3>
+<p><code>/boot</code> resides on the encrypted root partition; only <code>/boot/efi</code> is unencrypted.
+The root container uses LUKS2 with PBKDF2 because <a href="https://www.gnu.org/software/grub/manual/grub/html_node/cryptomount.html">GRUB does not support Argon2 for LUKS2</a>.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Encrypt root partition</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>cryptsetup<span class="w"> </span>luksFormat<span class="w"> </span>-v<span class="w"> </span>-s<span class="w"> </span><span class="m">512</span><span class="w"> </span>-h<span class="w"> </span>sha512<span class="w"> </span>/dev/sda2
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>cryptsetup<span class="w"> </span>luksFormat<span class="w"> </span>--type<span class="w"> </span>luks2<span class="w"> </span>--pbkdf<span class="w"> </span>pbkdf2<span class="w"> </span>-v<span class="w"> </span>-s<span class="w"> </span><span class="m">512</span><span class="w"> </span>-h<span class="w"> </span>sha512<span class="w"> </span>/dev/sda2
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Encrypt home partition</span>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>cryptsetup<span class="w"> </span>luksFormat<span class="w"> </span>-v<span class="w"> </span>-s<span class="w"> </span><span class="m">512</span><span class="w"> </span>-h<span class="w"> </span>sha512<span class="w"> </span>/dev/sda3
@@ -6526,10 +6529,13 @@
 <p>Edit <code>/etc/default/grub</code>:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>nvim<span class="w"> </span>/etc/default/grub
 </span></code></pre></div></p>
-<p>Set the following lines:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=YOUR-UUID-SDA2=cryptroot root=/dev/mapper/cryptroot rw"
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>GRUB_DISABLE_OS_PROBER=false
+<p>Set the following lines. <a href="https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html">Enable cryptodisk support</a> before running <code>grub-install</code> so GRUB can read the encrypted <code>/boot</code>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>GRUB_ENABLE_CRYPTODISK=y
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=&lt;ROOT-UUID&gt;=cryptroot root=/dev/mapper/cryptroot rw"
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>GRUB_DISABLE_OS_PROBER=false
 </span></code></pre></div></p>
+<p>Replace <code>&lt;ROOT-UUID&gt;</code> with the LUKS UUID returned by <code>blkid</code> above.</p>
+<p>GRUB asks for the root passphrase to unlock <code>/boot</code>. The initramfs keyfile configured below unlocks root during Linux startup; it does not remove the GRUB passphrase prompt.</p>
 <h3 id="install-grub-to-efi">Install GRUB to EFI<a class="headerlink" href="#install-grub-to-efi" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>grub-install<span class="w"> </span>--target<span class="o">=</span>x86_64-efi<span class="w"> </span>--efi-directory<span class="o">=</span>/boot/efi<span class="w"> </span>--bootloader-id<span class="o">=</span>ARCH<span class="w"> </span>--recheck
 </span></code></pre></div>
@@ -6539,17 +6545,18 @@
 <hr />
 <h2 id="automatic-decryption-keyfiles"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m5.6-4c-.8-2.3-3-4-5.6-4-3.3 0-6 2.7-6 6s2.7 6 6 6c2.6 0 4.8-1.7 5.6-4H16v4h4v-4h3v-4z"/></svg></span> Automatic Decryption (Keyfiles)<a class="headerlink" href="#automatic-decryption-keyfiles" title="Permanent link">&para;</a></h2>
 <h3 id="set-permissions-and-generate-keys">Set Permissions and Generate Keys<a class="headerlink" href="#set-permissions-and-generate-keys" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/etc/cryptsetup-keys.d
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
-</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="c1"># Generate key for ROOT (sda2)</span>
-</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/etc/cryptsetup-keys.d/root.key<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">4</span>
-</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/cryptsetup-keys.d/root.key
-</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>cryptsetup<span class="w"> </span>luksAddKey<span class="w"> </span>/dev/sda2<span class="w"> </span>/etc/cryptsetup-keys.d/root.key
-</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>
-</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="c1"># Generate key for HOME (sda3)</span>
-</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/etc/cryptsetup-keys.d/home.key<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">4</span>
-</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/cryptsetup-keys.d/home.key
-</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>cryptsetup<span class="w"> </span>luksAddKey<span class="w"> </span>/dev/sda3<span class="w"> </span>/etc/cryptsetup-keys.d/home.key
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/cryptsetup-keys.d
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/etc/cryptsetup-keys.d
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1"># Generate key for ROOT (sda2)</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/etc/cryptsetup-keys.d/root.key<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">4</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/cryptsetup-keys.d/root.key
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>cryptsetup<span class="w"> </span>luksAddKey<span class="w"> </span>/dev/sda2<span class="w"> </span>/etc/cryptsetup-keys.d/root.key
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="c1"># Generate key for HOME (sda3)</span>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/etc/cryptsetup-keys.d/home.key<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">4</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/etc/cryptsetup-keys.d/home.key
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>cryptsetup<span class="w"> </span>luksAddKey<span class="w"> </span>/dev/sda3<span class="w"> </span>/etc/cryptsetup-keys.d/home.key
 </span></code></pre></div>
 <h3 id="add-root-key-to-initramfs">Add Root Key to Initramfs<a class="headerlink" href="#add-root-key-to-initramfs" title="Permanent link">&para;</a></h3>
 <p>Edit <code>/etc/mkinitcpio.conf</code>:
@@ -6565,7 +6572,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>mkinitcpio<span class="w"> </span>-P
 </span></code></pre></div>
 <h3 id="add-root-key-to-grub">Add Root Key to GRUB<a class="headerlink" href="#add-root-key-to-grub" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=&lt;ROOT-KEY&gt;=cryptroot root=/dev/mapper/cryptroot rd.luks.key=&lt;ROOT-KEY&gt;=/etc/cryptsetup-keys.d/root.key rw"|'</span><span class="w"> </span>/etc/default/grub
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=&lt;ROOT-UUID&gt;=cryptroot root=/dev/mapper/cryptroot rd.luks.key=&lt;ROOT-UUID&gt;=/etc/cryptsetup-keys.d/root.key rw"|'</span><span class="w"> </span>/etc/default/grub
 </span></code></pre></div>
 <p><strong>Tip:</strong> Use this nvim command to insert UUID:</p>
 <ol>
@@ -6573,92 +6580,95 @@
 <li>Type: <code>:r !blkid -s UUID -o value /dev/sda2</code></li>
 <li>UUID will be inserted at cursor position</li>
 </ol>
+<p>Replace both <code>&lt;ROOT-UUID&gt;</code> placeholders before applying the command, then regenerate the boot menu:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>grub-mkconfig<span class="w"> </span>-o<span class="w"> </span>/boot/grub/grub.cfg
+</span></code></pre></div></p>
 <hr />
 <h2 id="final-system-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/></svg></span> Final System Configuration<a class="headerlink" href="#final-system-configuration" title="Permanent link">&para;</a></h2>
 <h3 id="set-timezone">Set Timezone<a class="headerlink" href="#set-timezone" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>ln<span class="w"> </span>-sf<span class="w"> </span>/usr/share/zoneinfo/Europe/Warsaw<span class="w"> </span>/etc/localtime
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>ln<span class="w"> </span>-sf<span class="w"> </span>/usr/share/zoneinfo/Europe/Warsaw<span class="w"> </span>/etc/localtime
 </span></code></pre></div>
 <h3 id="configure-ntp-time-synchronization">Configure NTP (Time Synchronization)<a class="headerlink" href="#configure-ntp-time-synchronization" title="Permanent link">&para;</a></h3>
 <p>Edit <code>/etc/systemd/timesyncd.conf</code>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org 
-</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>FallbackNTP=0.pool.ntp.org 1.pool.ntp.org
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org 
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>FallbackNTP=0.pool.ntp.org 1.pool.ntp.org
 </span></code></pre></div></p>
 <p>Enable time synchronization:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>systemd-timesyncd
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>systemd-timesyncd
 </span></code></pre></div></p>
 <h3 id="set-locale">Set Locale<a class="headerlink" href="#set-locale" title="Permanent link">&para;</a></h3>
 <p>Edit <code>/etc/locale.gen</code> and uncomment:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>en_US.UTF-8 UTF-8
+<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>en_US.UTF-8 UTF-8
 </span></code></pre></div></p>
 <p>Generate locale files:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>locale-gen<span class="w"> </span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>locale-gen<span class="w"> </span>
 </span></code></pre></div></p>
 <p>Set system language:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"LANG=en_US.UTF-8"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/locale.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"LANG=en_US.UTF-8"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/locale.conf
 </span></code></pre></div></p>
 <h3 id="set-hostname">Set Hostname<a class="headerlink" href="#set-hostname" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"archi"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"archi"</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/hostname
 </span></code></pre></div>
 <h3 id="create-user">Create User<a class="headerlink" href="#create-user" title="Permanent link">&para;</a></h3>
 <p>Create user with home directory and add to wheel group for sudo:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>useradd<span class="w"> </span>-m<span class="w"> </span>-G<span class="w"> </span>wheel<span class="w"> </span>kcn
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>useradd<span class="w"> </span>-m<span class="w"> </span>-G<span class="w"> </span>wheel<span class="w"> </span>kcn
 </span></code></pre></div></p>
 <p>Set user password:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>passwd<span class="w"> </span>kcn
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>passwd<span class="w"> </span>kcn
 </span></code></pre></div></p>
 <h3 id="install-and-configure-sudo">Install and Configure Sudo<a class="headerlink" href="#install-and-configure-sudo" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>sudo
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>sudo
 </span></code></pre></div>
 <p>Set system editor:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">EDITOR</span><span class="o">=</span>nvim
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">EDITOR</span><span class="o">=</span>nvim
 </span></code></pre></div></p>
 <p>Edit sudoers file:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>visudo
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>visudo
 </span></code></pre></div></p>
 <p>Uncomment this line:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>%wheel ALL=(ALL:ALL) ALL
+<div class="language-text highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>%wheel ALL=(ALL:ALL) ALL
 </span></code></pre></div></p>
 <hr />
 <h2 id="essential-system-tools"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21.71 20.29-1.42 1.42a1 1 0 0 1-1.41 0L7 9.85A3.8 3.8 0 0 1 6 10a4 4 0 0 1-3.78-5.3l2.54 2.54.53-.53 1.42-1.42.53-.53L4.7 2.22A4 4 0 0 1 10 6a3.8 3.8 0 0 1-.15 1l11.86 11.88a1 1 0 0 1 0 1.41M2.29 18.88a1 1 0 0 0 0 1.41l1.42 1.42a1 1 0 0 0 1.41 0l5.47-5.46-2.83-2.83M20 2l-4 2v2l-2.17 2.17 2 2L18 8h2l2-4Z"/></svg></span> Essential System Tools<a class="headerlink" href="#essential-system-tools" title="Permanent link">&para;</a></h2>
 <h3 id="iwd-wifi-management">iwd (WiFi Management)<a class="headerlink" href="#iwd-wifi-management" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>iwd
-</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>iwd
-</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>systemd-resolved
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>iwd
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>iwd
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>systemd-resolved
 </span></code></pre></div>
 <p>Create DNS symlink:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>ln<span class="w"> </span>-sf<span class="w"> </span>/run/systemd/resolve/stub-resolv.conf<span class="w"> </span>/etc/resolv.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>ln<span class="w"> </span>-sf<span class="w"> </span>/run/systemd/resolve/stub-resolv.conf<span class="w"> </span>/etc/resolv.conf
 </span></code></pre></div></p>
 <p>Configure iwd:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/iwd/main.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/iwd/main.conf
 </span></code></pre></div></p>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">[General]</span>
-</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="na">EnableNetworkConfiguration</span><span class="o">=</span><span class="s">true</span>
-</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="na">NameResolvingService</span><span class="o">=</span><span class="s">systemd</span>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="k">[General]</span>
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="na">EnableNetworkConfiguration</span><span class="o">=</span><span class="s">true</span>
+</span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="na">NameResolvingService</span><span class="o">=</span><span class="s">systemd</span>
 </span></code></pre></div>
 <h3 id="ssh-server">SSH Server<a class="headerlink" href="#ssh-server" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>openssh
-</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>sshd
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>openssh
+</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>sshd
 </span></code></pre></div>
 <h3 id="zram-compressed-swap-in-ram">zRAM (Compressed Swap in RAM)<a class="headerlink" href="#zram-compressed-swap-in-ram" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>zram-generator
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>zram-generator
 </span></code></pre></div>
 <p>Configure zRAM:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/systemd/zram-generator.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/systemd/zram-generator.conf
 </span></code></pre></div></p>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="k">[zram0]</span>
-</span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="na">zram-size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ram / 2</span>
-</span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="na">compression-algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">zstd</span>
-</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="na">swap-priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">100</span>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="k">[zram0]</span>
+</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="na">zram-size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ram / 2</span>
+</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="na">compression-algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">zstd</span>
+</span><span id="__span-54-4"><a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a><span class="na">swap-priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">100</span>
 </span></code></pre></div>
 <h3 id="reboot-into-new-system">Reboot into New System<a class="headerlink" href="#reboot-into-new-system" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nb">exit</span>
-</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>umount<span class="w"> </span>-R<span class="w"> </span>/mnt
-</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>reboot<span class="w"> </span>now
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="nb">exit</span>
+</span><span id="__span-55-2"><a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>umount<span class="w"> </span>-R<span class="w"> </span>/mnt
+</span><span id="__span-55-3"><a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>reboot<span class="w"> </span>now
 </span></code></pre></div>
 <hr />
 <h2 id="desktop-environment-setup"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16H3V4h18m0-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2"/></svg></span> Desktop Environment Setup<a class="headerlink" href="#desktop-environment-setup" title="Permanent link">&para;</a></h2>
 <h3 id="xorg-display-server">Xorg Display Server<a class="headerlink" href="#xorg-display-server" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>xorg-server<span class="w"> </span>xorg-xinit<span class="w"> </span>xorg-xrandr
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>xorg-server<span class="w"> </span>xorg-xinit<span class="w"> </span>xorg-xrandr
 </span></code></pre></div>
 <ul>
 <li><code>xorg-server</code> – core display server</li>
@@ -6668,197 +6678,197 @@
 <p><strong>Note:</strong> We don't install <code>xorg-drivers</code> meta-package (too much bloat)</p>
 <h3 id="auto-start-x-on-login">Auto-start X on Login<a class="headerlink" href="#auto-start-x-on-login" title="Permanent link">&para;</a></h3>
 <p>Edit bash profile:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>nvim<span class="w"> </span>~/.bash_profile
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nvim<span class="w"> </span>~/.bash_profile
 </span></code></pre></div></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>tty<span class="k">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/dev/tty1<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-</span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="w">    </span><span class="nb">exec</span><span class="w"> </span>startx
-</span><span id="__span-57-3"><a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="k">fi</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="nv">$DISPLAY</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>tty<span class="k">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/dev/tty1<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="w">    </span><span class="nb">exec</span><span class="w"> </span>startx
+</span><span id="__span-58-3"><a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="k">fi</span>
 </span></code></pre></div>
 <p>Create xinitrc:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>nvim<span class="w"> </span>~/.xinitrc
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>nvim<span class="w"> </span>~/.xinitrc
 </span></code></pre></div></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nb">exec</span><span class="w"> </span>i3
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="nb">exec</span><span class="w"> </span>i3
 </span></code></pre></div>
 <h3 id="intel-gpu-driver">Intel GPU Driver<a class="headerlink" href="#intel-gpu-driver" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-60-1"><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>xf86-video-intel<span class="w"> </span>mesa
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>xf86-video-intel<span class="w"> </span>mesa
 </span></code></pre></div>
 <h3 id="i3-window-manager">i3 (Window Manager)<a class="headerlink" href="#i3-window-manager" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>i3-wm<span class="w"> </span>i3status<span class="w"> </span>dmenu
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>i3-wm<span class="w"> </span>i3status<span class="w"> </span>dmenu
 </span></code></pre></div>
 <h3 id="picom-compositor">Picom (Compositor)<a class="headerlink" href="#picom-compositor" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>picom
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>picom
 </span></code></pre></div>
 <p>Create config directory:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.config/picom
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.config/picom
 </span></code></pre></div></p>
 <p>Configure picom:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>nvim<span class="w"> </span>~/.config/picom/picom.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>nvim<span class="w"> </span>~/.config/picom/picom.conf
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>backend = "glx";
-</span><span id="__span-65-2"><a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>vsync = true;
-</span><span id="__span-65-3"><a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a>
-</span><span id="__span-65-4"><a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>shadow = true;
-</span><span id="__span-65-5"><a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a>shadow-radius = 8;
-</span><span id="__span-65-6"><a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a>shadow-offset-x = -4;
-</span><span id="__span-65-7"><a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a>shadow-offset-y = -4;
-</span><span id="__span-65-8"><a id="__codelineno-65-8" name="__codelineno-65-8" href="#__codelineno-65-8"></a>
-</span><span id="__span-65-9"><a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a>opacity-rule = [
-</span><span id="__span-65-10"><a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a>  "90:class_g = 'Alacritty'"
-</span><span id="__span-65-11"><a id="__codelineno-65-11" name="__codelineno-65-11" href="#__codelineno-65-11"></a>];
+<div class="language-text highlight"><pre><span></span><code><span id="__span-66-1"><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>backend = "glx";
+</span><span id="__span-66-2"><a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a>vsync = true;
+</span><span id="__span-66-3"><a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a>
+</span><span id="__span-66-4"><a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a>shadow = true;
+</span><span id="__span-66-5"><a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a>shadow-radius = 8;
+</span><span id="__span-66-6"><a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a>shadow-offset-x = -4;
+</span><span id="__span-66-7"><a id="__codelineno-66-7" name="__codelineno-66-7" href="#__codelineno-66-7"></a>shadow-offset-y = -4;
+</span><span id="__span-66-8"><a id="__codelineno-66-8" name="__codelineno-66-8" href="#__codelineno-66-8"></a>
+</span><span id="__span-66-9"><a id="__codelineno-66-9" name="__codelineno-66-9" href="#__codelineno-66-9"></a>opacity-rule = [
+</span><span id="__span-66-10"><a id="__codelineno-66-10" name="__codelineno-66-10" href="#__codelineno-66-10"></a>  "90:class_g = 'Alacritty'"
+</span><span id="__span-66-11"><a id="__codelineno-66-11" name="__codelineno-66-11" href="#__codelineno-66-11"></a>];
 </span></code></pre></div>
 <p>Auto-start in i3:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-66-1"><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nvim<span class="w"> </span>~/.config/i3/config
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-67-1"><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>nvim<span class="w"> </span>~/.config/i3/config
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-67-1"><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>exec_always --no-startup-id picom
+<div class="language-text highlight"><pre><span></span><code><span id="__span-68-1"><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>exec_always --no-startup-id picom
 </span></code></pre></div>
 <hr />
 <h2 id="fonts"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 8h3v12h1v1h-4v-1h1v-3h-4l-1.5 3H14v1h-4v-1h1zm1 1-3.5 7H18zM5 3h5c1.11 0 2 .89 2 2v11H9v-5H6v5H3V5c0-1.11.89-2 2-2m1 2v4h3V5z"/></svg></span> Fonts<a class="headerlink" href="#fonts" title="Permanent link">&para;</a></h2>
 <h3 id="install-fonts">Install Fonts<a class="headerlink" href="#install-fonts" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-68-1"><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>ttf-jetbrains-mono<span class="w">  </span>
-</span><span id="__span-68-2"><a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>ttf-jetbrains-mono-nerd<span class="w">  </span>
-</span><span id="__span-68-3"><a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>ttf-font-awesome
-</span><span id="__span-68-4"><a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>fontconfig
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-69-1"><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>ttf-jetbrains-mono<span class="w">  </span>
+</span><span id="__span-69-2"><a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>ttf-jetbrains-mono-nerd<span class="w">  </span>
+</span><span id="__span-69-3"><a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>ttf-font-awesome
+</span><span id="__span-69-4"><a id="__codelineno-69-4" name="__codelineno-69-4" href="#__codelineno-69-4"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>fontconfig
 </span></code></pre></div>
 <h3 id="configure-font-rendering">Configure Font Rendering<a class="headerlink" href="#configure-font-rendering" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-69-1"><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>nvim<span class="w"> </span>~/.config/fontconfig/fonts.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>nvim<span class="w"> </span>~/.config/fontconfig/fonts.conf
 </span></code></pre></div>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="cp">&lt;?xml version="1.0"?&gt;</span><span class="w"> </span>
-</span><span id="__span-70-2"><a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a><span class="cp">&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;</span><span class="w"> </span>
-</span><span id="__span-70-3"><a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="nt">&lt;fontconfig&gt;</span><span class="w"> </span>
-</span><span id="__span-70-4"><a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a><span class="w">    </span><span class="nt">&lt;match</span><span class="w"> </span><span class="na">target=</span><span class="s">"font"</span><span class="nt">&gt;</span><span class="w"> </span>
-</span><span id="__span-70-5"><a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"hinting"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
-</span><span id="__span-70-6"><a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"hintstyle"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;const&gt;</span>hintslight<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
-</span><span id="__span-70-7"><a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"antialias"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
-</span><span id="__span-70-8"><a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"rgba"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;const&gt;</span>rgb<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
-</span><span id="__span-70-9"><a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a><span class="w">    </span><span class="nt">&lt;/match&gt;</span><span class="w"> </span>
-</span><span id="__span-70-10"><a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a><span class="nt">&lt;/fontconfig&gt;</span>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-71-1"><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="cp">&lt;?xml version="1.0"?&gt;</span><span class="w"> </span>
+</span><span id="__span-71-2"><a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a><span class="cp">&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;</span><span class="w"> </span>
+</span><span id="__span-71-3"><a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a><span class="nt">&lt;fontconfig&gt;</span><span class="w"> </span>
+</span><span id="__span-71-4"><a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a><span class="w">    </span><span class="nt">&lt;match</span><span class="w"> </span><span class="na">target=</span><span class="s">"font"</span><span class="nt">&gt;</span><span class="w"> </span>
+</span><span id="__span-71-5"><a id="__codelineno-71-5" name="__codelineno-71-5" href="#__codelineno-71-5"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"hinting"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-71-6"><a id="__codelineno-71-6" name="__codelineno-71-6" href="#__codelineno-71-6"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"hintstyle"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;const&gt;</span>hintslight<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-71-7"><a id="__codelineno-71-7" name="__codelineno-71-7" href="#__codelineno-71-7"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"antialias"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;bool&gt;</span>true<span class="nt">&lt;/bool&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-71-8"><a id="__codelineno-71-8" name="__codelineno-71-8" href="#__codelineno-71-8"></a><span class="w">        </span><span class="nt">&lt;edit</span><span class="w"> </span><span class="na">name=</span><span class="s">"rgba"</span><span class="w"> </span><span class="na">mode=</span><span class="s">"assign"</span><span class="nt">&gt;&lt;const&gt;</span>rgb<span class="nt">&lt;/const&gt;&lt;/edit&gt;</span><span class="w"> </span>
+</span><span id="__span-71-9"><a id="__codelineno-71-9" name="__codelineno-71-9" href="#__codelineno-71-9"></a><span class="w">    </span><span class="nt">&lt;/match&gt;</span><span class="w"> </span>
+</span><span id="__span-71-10"><a id="__codelineno-71-10" name="__codelineno-71-10" href="#__codelineno-71-10"></a><span class="nt">&lt;/fontconfig&gt;</span>
 </span></code></pre></div>
 <h3 id="refresh-font-cache">Refresh Font Cache<a class="headerlink" href="#refresh-font-cache" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-71-1"><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>fc-cache<span class="w"> </span>-fv
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-72-1"><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>fc-cache<span class="w"> </span>-fv
 </span></code></pre></div>
 <h3 id="set-i3-font">Set i3 Font<a class="headerlink" href="#set-i3-font" title="Permanent link">&para;</a></h3>
 <p>Edit i3 config:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-72-1"><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>nvim<span class="w"> </span>~/.config/i3/config
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-73-1"><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>nvim<span class="w"> </span>~/.config/i3/config
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-73-1"><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>font pango:JetBrainsMono Nerd Font 7
+<div class="language-text highlight"><pre><span></span><code><span id="__span-74-1"><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>font pango:JetBrainsMono Nerd Font 7
 </span></code></pre></div>
 <hr />
 <h2 id="terminal-emulator-alacritty"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg></span> Terminal Emulator (Alacritty)<a class="headerlink" href="#terminal-emulator-alacritty" title="Permanent link">&para;</a></h2>
 <h3 id="install-alacritty">Install Alacritty<a class="headerlink" href="#install-alacritty" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-74-1"><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>alacritty
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-75-1"><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>alacritty
 </span></code></pre></div>
 <h3 id="configure-alacritty">Configure Alacritty<a class="headerlink" href="#configure-alacritty" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-75-1"><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>nvim<span class="w"> </span>~/.config/alacritty/alacritty.toml
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-76-1"><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>nvim<span class="w"> </span>~/.config/alacritty/alacritty.toml
 </span></code></pre></div>
-<div class="language-toml highlight"><pre><span></span><code><span id="__span-76-1"><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="k">[font]</span><span class="w">  </span>
-</span><span id="__span-76-2"><a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">8.5</span><span class="w">  </span>
-</span><span id="__span-76-3"><a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a>
-</span><span id="__span-76-4"><a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a><span class="k">[font.normal]</span><span class="w">  </span>
-</span><span id="__span-76-5"><a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
-</span><span id="__span-76-6"><a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Regular"</span><span class="w">  </span>
-</span><span id="__span-76-7"><a id="__codelineno-76-7" name="__codelineno-76-7" href="#__codelineno-76-7"></a>
-</span><span id="__span-76-8"><a id="__codelineno-76-8" name="__codelineno-76-8" href="#__codelineno-76-8"></a><span class="k">[font.bold]</span><span class="w">  </span>
-</span><span id="__span-76-9"><a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
-</span><span id="__span-76-10"><a id="__codelineno-76-10" name="__codelineno-76-10" href="#__codelineno-76-10"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Bold"</span><span class="w">  </span>
-</span><span id="__span-76-11"><a id="__codelineno-76-11" name="__codelineno-76-11" href="#__codelineno-76-11"></a>
-</span><span id="__span-76-12"><a id="__codelineno-76-12" name="__codelineno-76-12" href="#__codelineno-76-12"></a><span class="k">[font.italic]</span><span class="w">  </span>
-</span><span id="__span-76-13"><a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
-</span><span id="__span-76-14"><a id="__codelineno-76-14" name="__codelineno-76-14" href="#__codelineno-76-14"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Italic"</span><span class="w">  </span>
-</span><span id="__span-76-15"><a id="__codelineno-76-15" name="__codelineno-76-15" href="#__codelineno-76-15"></a>
-</span><span id="__span-76-16"><a id="__codelineno-76-16" name="__codelineno-76-16" href="#__codelineno-76-16"></a><span class="k">[window]</span><span class="w">  </span>
-</span><span id="__span-76-17"><a id="__codelineno-76-17" name="__codelineno-76-17" href="#__codelineno-76-17"></a><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">}</span><span class="w">  </span>
-</span><span id="__span-76-18"><a id="__codelineno-76-18" name="__codelineno-76-18" href="#__codelineno-76-18"></a>
-</span><span id="__span-76-19"><a id="__codelineno-76-19" name="__codelineno-76-19" href="#__codelineno-76-19"></a><span class="k">[env]</span><span class="w">  </span>
-</span><span id="__span-76-20"><a id="__codelineno-76-20" name="__codelineno-76-20" href="#__codelineno-76-20"></a><span class="n">TERM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"xterm-256color"</span>
+<div class="language-toml highlight"><pre><span></span><code><span id="__span-77-1"><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="k">[font]</span><span class="w">  </span>
+</span><span id="__span-77-2"><a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">8.5</span><span class="w">  </span>
+</span><span id="__span-77-3"><a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a>
+</span><span id="__span-77-4"><a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="k">[font.normal]</span><span class="w">  </span>
+</span><span id="__span-77-5"><a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
+</span><span id="__span-77-6"><a id="__codelineno-77-6" name="__codelineno-77-6" href="#__codelineno-77-6"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Regular"</span><span class="w">  </span>
+</span><span id="__span-77-7"><a id="__codelineno-77-7" name="__codelineno-77-7" href="#__codelineno-77-7"></a>
+</span><span id="__span-77-8"><a id="__codelineno-77-8" name="__codelineno-77-8" href="#__codelineno-77-8"></a><span class="k">[font.bold]</span><span class="w">  </span>
+</span><span id="__span-77-9"><a id="__codelineno-77-9" name="__codelineno-77-9" href="#__codelineno-77-9"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
+</span><span id="__span-77-10"><a id="__codelineno-77-10" name="__codelineno-77-10" href="#__codelineno-77-10"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Bold"</span><span class="w">  </span>
+</span><span id="__span-77-11"><a id="__codelineno-77-11" name="__codelineno-77-11" href="#__codelineno-77-11"></a>
+</span><span id="__span-77-12"><a id="__codelineno-77-12" name="__codelineno-77-12" href="#__codelineno-77-12"></a><span class="k">[font.italic]</span><span class="w">  </span>
+</span><span id="__span-77-13"><a id="__codelineno-77-13" name="__codelineno-77-13" href="#__codelineno-77-13"></a><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"JetBrainsMono Nerd Font Mono"</span><span class="w">  </span>
+</span><span id="__span-77-14"><a id="__codelineno-77-14" name="__codelineno-77-14" href="#__codelineno-77-14"></a><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Italic"</span><span class="w">  </span>
+</span><span id="__span-77-15"><a id="__codelineno-77-15" name="__codelineno-77-15" href="#__codelineno-77-15"></a>
+</span><span id="__span-77-16"><a id="__codelineno-77-16" name="__codelineno-77-16" href="#__codelineno-77-16"></a><span class="k">[window]</span><span class="w">  </span>
+</span><span id="__span-77-17"><a id="__codelineno-77-17" name="__codelineno-77-17" href="#__codelineno-77-17"></a><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">}</span><span class="w">  </span>
+</span><span id="__span-77-18"><a id="__codelineno-77-18" name="__codelineno-77-18" href="#__codelineno-77-18"></a>
+</span><span id="__span-77-19"><a id="__codelineno-77-19" name="__codelineno-77-19" href="#__codelineno-77-19"></a><span class="k">[env]</span><span class="w">  </span>
+</span><span id="__span-77-20"><a id="__codelineno-77-20" name="__codelineno-77-20" href="#__codelineno-77-20"></a><span class="n">TERM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"xterm-256color"</span>
 </span></code></pre></div>
 <h3 id="add-terminal-keybinding-to-i3">Add Terminal Keybinding to i3<a class="headerlink" href="#add-terminal-keybinding-to-i3" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-77-1"><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>nvim<span class="w"> </span>~/.config/i3/config
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-78-1"><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>nvim<span class="w"> </span>~/.config/i3/config
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-78-1"><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>bindsym $mod+Return exec alacritty
+<div class="language-text highlight"><pre><span></span><code><span id="__span-79-1"><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>bindsym $mod+Return exec alacritty
 </span></code></pre></div>
 <hr />
 <h2 id="audio-pipewire"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.84-5 6.7v2.07c4-.91 7-4.49 7-8.77s-3-7.86-7-8.77M16.5 12c0-1.77-1-3.29-2.5-4.03V16c1.5-.71 2.5-2.24 2.5-4M3 9v6h4l5 5V4L7 9z"/></svg></span> Audio (PipeWire)<a class="headerlink" href="#audio-pipewire" title="Permanent link">&para;</a></h2>
 <h3 id="install-pipewire">Install PipeWire<a class="headerlink" href="#install-pipewire" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-79-1"><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>pipewire<span class="w"> </span>pipewire-pulse<span class="w"> </span>wireplumber<span class="w"> </span>pavucontrol<span class="w"> </span>brightnessctl
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-80-1"><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>pipewire<span class="w"> </span>pipewire-pulse<span class="w"> </span>wireplumber<span class="w"> </span>pavucontrol<span class="w"> </span>brightnessctl
 </span></code></pre></div>
 <h3 id="enable-audio-services">Enable Audio Services<a class="headerlink" href="#enable-audio-services" title="Permanent link">&para;</a></h3>
 <p><strong>Important:</strong> Use <code>--user</code> flag (user service, not system-wide):
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-80-1"><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>pipewire<span class="w"> </span>pipewire-pulse<span class="w"> </span>wireplumber
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-81-1"><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>pipewire<span class="w"> </span>pipewire-pulse<span class="w"> </span>wireplumber
 </span></code></pre></div></p>
 <h3 id="verify-audio-works">Verify Audio Works<a class="headerlink" href="#verify-audio-works" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-81-1"><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>pactl<span class="w"> </span>info
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-82-1"><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>pactl<span class="w"> </span>info
 </span></code></pre></div>
 <h3 id="volume-control-keybindings">Volume Control Keybindings<a class="headerlink" href="#volume-control-keybindings" title="Permanent link">&para;</a></h3>
 <p>Edit i3 config:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-82-1"><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>nvim<span class="w"> </span>~/.config/i3/config
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-83-1"><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>nvim<span class="w"> </span>~/.config/i3/config
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-83-1"><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a># Auto-start audio services
-</span><span id="__span-83-2"><a id="__codelineno-83-2" name="__codelineno-83-2" href="#__codelineno-83-2"></a>exec --no-startup-id /usr/bin/pipewire 
-</span><span id="__span-83-3"><a id="__codelineno-83-3" name="__codelineno-83-3" href="#__codelineno-83-3"></a>exec --no-startup-id /usr/bin/wireplumber
-</span><span id="__span-83-4"><a id="__codelineno-83-4" name="__codelineno-83-4" href="#__codelineno-83-4"></a>
-</span><span id="__span-83-5"><a id="__codelineno-83-5" name="__codelineno-83-5" href="#__codelineno-83-5"></a># Volume keybindings
-</span><span id="__span-83-6"><a id="__codelineno-83-6" name="__codelineno-83-6" href="#__codelineno-83-6"></a>bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% 
-</span><span id="__span-83-7"><a id="__codelineno-83-7" name="__codelineno-83-7" href="#__codelineno-83-7"></a>bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% 
-</span><span id="__span-83-8"><a id="__codelineno-83-8" name="__codelineno-83-8" href="#__codelineno-83-8"></a>bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+<div class="language-text highlight"><pre><span></span><code><span id="__span-84-1"><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a># Auto-start audio services
+</span><span id="__span-84-2"><a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a>exec --no-startup-id /usr/bin/pipewire 
+</span><span id="__span-84-3"><a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a>exec --no-startup-id /usr/bin/wireplumber
+</span><span id="__span-84-4"><a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a>
+</span><span id="__span-84-5"><a id="__codelineno-84-5" name="__codelineno-84-5" href="#__codelineno-84-5"></a># Volume keybindings
+</span><span id="__span-84-6"><a id="__codelineno-84-6" name="__codelineno-84-6" href="#__codelineno-84-6"></a>bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% 
+</span><span id="__span-84-7"><a id="__codelineno-84-7" name="__codelineno-84-7" href="#__codelineno-84-7"></a>bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% 
+</span><span id="__span-84-8"><a id="__codelineno-84-8" name="__codelineno-84-8" href="#__codelineno-84-8"></a>bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 </span></code></pre></div>
 <hr />
 <h2 id="screen-brightness"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18V6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-2.69L23.31 12 20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20z"/></svg></span> Screen Brightness<a class="headerlink" href="#screen-brightness" title="Permanent link">&para;</a></h2>
 <h3 id="install-brightness-control">Install Brightness Control<a class="headerlink" href="#install-brightness-control" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-84-1"><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>brightnessctl
-</span><span id="__span-84-2"><a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a>
-</span><span id="__span-84-3"><a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a><span class="c1"># Add user to video group (allows control without sudo)</span>
-</span><span id="__span-84-4"><a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>video<span class="w"> </span><span class="nv">$USER</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-85-1"><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>brightnessctl
+</span><span id="__span-85-2"><a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>
+</span><span id="__span-85-3"><a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="c1"># Add user to video group (allows control without sudo)</span>
+</span><span id="__span-85-4"><a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>video<span class="w"> </span><span class="nv">$USER</span>
 </span></code></pre></div>
 <h3 id="brightness-keybindings">Brightness Keybindings<a class="headerlink" href="#brightness-keybindings" title="Permanent link">&para;</a></h3>
 <p>Edit i3 config:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-85-1"><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>nvim<span class="w"> </span>~/.config/i3/config
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-86-1"><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>nvim<span class="w"> </span>~/.config/i3/config
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-86-1"><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
-</span><span id="__span-86-2"><a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a>bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
+<div class="language-text highlight"><pre><span></span><code><span id="__span-87-1"><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
+</span><span id="__span-87-2"><a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 </span></code></pre></div>
 <hr />
 <h2 id="bluetooth"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.88 16.29 13 18.17v-3.76m0-8.58 1.88 1.88L13 9.58m4.71-1.87L12 2h-1v7.58L6.41 5 5 6.41 10.59 12 5 17.58 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29z"/></svg></span> Bluetooth<a class="headerlink" href="#bluetooth" title="Permanent link">&para;</a></h2>
 <h3 id="install-bluetooth-stack">Install Bluetooth Stack<a class="headerlink" href="#install-bluetooth-stack" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-87-1"><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a><span class="c1"># Install bluetooth backend</span>
-</span><span id="__span-87-2"><a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>bluez<span class="w"> </span>bluez-utils
-</span><span id="__span-87-3"><a id="__codelineno-87-3" name="__codelineno-87-3" href="#__codelineno-87-3"></a>
-</span><span id="__span-87-4"><a id="__codelineno-87-4" name="__codelineno-87-4" href="#__codelineno-87-4"></a><span class="c1"># Enable bluetooth service</span>
-</span><span id="__span-87-5"><a id="__codelineno-87-5" name="__codelineno-87-5" href="#__codelineno-87-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>bluetooth
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-88-1"><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a><span class="c1"># Install bluetooth backend</span>
+</span><span id="__span-88-2"><a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>bluez<span class="w"> </span>bluez-utils
+</span><span id="__span-88-3"><a id="__codelineno-88-3" name="__codelineno-88-3" href="#__codelineno-88-3"></a>
+</span><span id="__span-88-4"><a id="__codelineno-88-4" name="__codelineno-88-4" href="#__codelineno-88-4"></a><span class="c1"># Enable bluetooth service</span>
+</span><span id="__span-88-5"><a id="__codelineno-88-5" name="__codelineno-88-5" href="#__codelineno-88-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>bluetooth
 </span></code></pre></div>
 <h3 id="manage-bluetooth-devices">Manage Bluetooth Devices<a class="headerlink" href="#manage-bluetooth-devices" title="Permanent link">&para;</a></h3>
 <p>Use <code>bluetoothctl</code> command-line tool:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-88-1"><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>bluetoothctl
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-89-1"><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>bluetoothctl
 </span></code></pre></div></p>
 <p>Commands inside <code>bluetoothctl</code>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-89-1"><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>power on
-</span><span id="__span-89-2"><a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a>scan on
-</span><span id="__span-89-3"><a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a>pair XX:XX:XX:XX:XX:XX
-</span><span id="__span-89-4"><a id="__codelineno-89-4" name="__codelineno-89-4" href="#__codelineno-89-4"></a>connect XX:XX:XX:XX:XX:XX
-</span><span id="__span-89-5"><a id="__codelineno-89-5" name="__codelineno-89-5" href="#__codelineno-89-5"></a>trust XX:XX:XX:XX:XX:XX
-</span><span id="__span-89-6"><a id="__codelineno-89-6" name="__codelineno-89-6" href="#__codelineno-89-6"></a>exit
+<div class="language-text highlight"><pre><span></span><code><span id="__span-90-1"><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>power on
+</span><span id="__span-90-2"><a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a>scan on
+</span><span id="__span-90-3"><a id="__codelineno-90-3" name="__codelineno-90-3" href="#__codelineno-90-3"></a>pair XX:XX:XX:XX:XX:XX
+</span><span id="__span-90-4"><a id="__codelineno-90-4" name="__codelineno-90-4" href="#__codelineno-90-4"></a>connect XX:XX:XX:XX:XX:XX
+</span><span id="__span-90-5"><a id="__codelineno-90-5" name="__codelineno-90-5" href="#__codelineno-90-5"></a>trust XX:XX:XX:XX:XX:XX
+</span><span id="__span-90-6"><a id="__codelineno-90-6" name="__codelineno-90-6" href="#__codelineno-90-6"></a>exit
 </span></code></pre></div></p>
 <h3 id="optional-blueman-gui">Optional: Blueman GUI<a class="headerlink" href="#optional-blueman-gui" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-90-1"><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>blueman
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-91-1"><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>blueman
 </span></code></pre></div>
 <p>Auto-start in i3:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-91-1"><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>nvim<span class="w"> </span>~/.config/i3/config
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-92-1"><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>nvim<span class="w"> </span>~/.config/i3/config
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-92-1"><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>exec --no-startup-id blueman-applet
+<div class="language-text highlight"><pre><span></span><code><span id="__span-93-1"><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>exec --no-startup-id blueman-applet
 </span></code></pre></div>
 <hr />
 <h2 id="web-browser-brave"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg></span> Web Browser (Brave)<a class="headerlink" href="#web-browser-brave" title="Permanent link">&para;</a></h2>
 <h3 id="install-aur-helper-yay">Install AUR Helper (yay)<a class="headerlink" href="#install-aur-helper-yay" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-93-1"><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>base-devel<span class="w"> </span>git<span class="w">  </span>
-</span><span id="__span-93-2"><a id="__codelineno-93-2" name="__codelineno-93-2" href="#__codelineno-93-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://aur.archlinux.org/yay-bin.git<span class="w">  </span>
-</span><span id="__span-93-3"><a id="__codelineno-93-3" name="__codelineno-93-3" href="#__codelineno-93-3"></a><span class="nb">cd</span><span class="w"> </span>yay-bin<span class="w">  </span>
-</span><span id="__span-93-4"><a id="__codelineno-93-4" name="__codelineno-93-4" href="#__codelineno-93-4"></a>makepkg<span class="w"> </span>-si
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-94-1"><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>base-devel<span class="w"> </span>git<span class="w">  </span>
+</span><span id="__span-94-2"><a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>git<span class="w"> </span>clone<span class="w"> </span>https://aur.archlinux.org/yay-bin.git<span class="w">  </span>
+</span><span id="__span-94-3"><a id="__codelineno-94-3" name="__codelineno-94-3" href="#__codelineno-94-3"></a><span class="nb">cd</span><span class="w"> </span>yay-bin<span class="w">  </span>
+</span><span id="__span-94-4"><a id="__codelineno-94-4" name="__codelineno-94-4" href="#__codelineno-94-4"></a>makepkg<span class="w"> </span>-si
 </span></code></pre></div>
 <h3 id="install-brave-browser">Install Brave Browser<a class="headerlink" href="#install-brave-browser" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-94-1"><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>yay<span class="w"> </span>-S<span class="w"> </span>--noconfirm<span class="w"> </span>brave-bin
-</span><span id="__span-94-2"><a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>
-</span><span id="__span-94-3"><a id="__codelineno-94-3" name="__codelineno-94-3" href="#__codelineno-94-3"></a><span class="c1"># Clean up</span>
-</span><span id="__span-94-4"><a id="__codelineno-94-4" name="__codelineno-94-4" href="#__codelineno-94-4"></a><span class="nb">cd</span><span class="w"> </span>..<span class="w"> </span>
-</span><span id="__span-94-5"><a id="__codelineno-94-5" name="__codelineno-94-5" href="#__codelineno-94-5"></a>rm<span class="w"> </span>-rf<span class="w"> </span>yay-bin
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-95-1"><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>yay<span class="w"> </span>-S<span class="w"> </span>--noconfirm<span class="w"> </span>brave-bin
+</span><span id="__span-95-2"><a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a>
+</span><span id="__span-95-3"><a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a><span class="c1"># Clean up</span>
+</span><span id="__span-95-4"><a id="__codelineno-95-4" name="__codelineno-95-4" href="#__codelineno-95-4"></a><span class="nb">cd</span><span class="w"> </span>..<span class="w"> </span>
+</span><span id="__span-95-5"><a id="__codelineno-95-5" name="__codelineno-95-5" href="#__codelineno-95-5"></a>rm<span class="w"> </span>-rf<span class="w"> </span>yay-bin
 </span></code></pre></div>
 <h3 id="enable-gpu-acceleration-in-brave">Enable GPU Acceleration in Brave<a class="headerlink" href="#enable-gpu-acceleration-in-brave" title="Permanent link">&para;</a></h3>
 <ol>
@@ -6876,18 +6886,18 @@
 </ol>
 <h3 id="brave-keybindings">Brave Keybindings<a class="headerlink" href="#brave-keybindings" title="Permanent link">&para;</a></h3>
 <p>Edit i3 config:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-95-1"><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>nvim<span class="w"> </span>~/.config/i3/config
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-96-1"><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>nvim<span class="w"> </span>~/.config/i3/config
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-96-1"><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a># Launch YouTube as web app
-</span><span id="__span-96-2"><a id="__codelineno-96-2" name="__codelineno-96-2" href="#__codelineno-96-2"></a>bindsym $mod+y exec brave --app=https://youtube.com --class=YoutubeApp
-</span><span id="__span-96-3"><a id="__codelineno-96-3" name="__codelineno-96-3" href="#__codelineno-96-3"></a>
-</span><span id="__span-96-4"><a id="__codelineno-96-4" name="__codelineno-96-4" href="#__codelineno-96-4"></a># Launch full Brave browser
-</span><span id="__span-96-5"><a id="__codelineno-96-5" name="__codelineno-96-5" href="#__codelineno-96-5"></a>bindsym $mod+Shift+y exec brave
+<div class="language-text highlight"><pre><span></span><code><span id="__span-97-1"><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a># Launch YouTube as web app
+</span><span id="__span-97-2"><a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>bindsym $mod+y exec brave --app=https://youtube.com --class=YoutubeApp
+</span><span id="__span-97-3"><a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a>
+</span><span id="__span-97-4"><a id="__codelineno-97-4" name="__codelineno-97-4" href="#__codelineno-97-4"></a># Launch full Brave browser
+</span><span id="__span-97-5"><a id="__codelineno-97-5" name="__codelineno-97-5" href="#__codelineno-97-5"></a>bindsym $mod+Shift+y exec brave
 </span></code></pre></div>
 <hr />
 <h2 id="additional-tools"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 8h-3V6c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10h20V10c0-1.1-.9-2-2-2M9 6h6v2H9zm11 12H4v-3h2v1h2v-1h8v1h2v-1h2zm-2-5v-1h-2v1H8v-1H6v1H4v-3h16v3z"/></svg></span> Additional Tools<a class="headerlink" href="#additional-tools" title="Permanent link">&para;</a></h2>
 <h3 id="system-utilities">System Utilities<a class="headerlink" href="#system-utilities" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-97-1"><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>btop<span class="w"> </span>screenfetch<span class="w"> </span>bat<span class="w"> </span>eza<span class="w"> </span>fzf<span class="w"> </span>fd<span class="w"> </span>ripgrep<span class="w"> </span>tmux<span class="w"> </span>yazi
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-98-1"><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>btop<span class="w"> </span>screenfetch<span class="w"> </span>bat<span class="w"> </span>eza<span class="w"> </span>fzf<span class="w"> </span>fd<span class="w"> </span>ripgrep<span class="w"> </span>tmux<span class="w"> </span>yazi
 </span></code></pre></div>
 <ul>
 <li><code>btop</code> – system monitor</li>
@@ -6899,93 +6909,93 @@
 <li><code>ripgrep</code> – grep replacement</li>
 </ul>
 <h3 id="starship-prompt">Starship Prompt<a class="headerlink" href="#starship-prompt" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-98-1"><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>starship
-</span><span id="__span-98-2"><a id="__codelineno-98-2" name="__codelineno-98-2" href="#__codelineno-98-2"></a>
-</span><span id="__span-98-3"><a id="__codelineno-98-3" name="__codelineno-98-3" href="#__codelineno-98-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'eval "$(starship init bash)"'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-99-1"><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>starship
+</span><span id="__span-99-2"><a id="__codelineno-99-2" name="__codelineno-99-2" href="#__codelineno-99-2"></a>
+</span><span id="__span-99-3"><a id="__codelineno-99-3" name="__codelineno-99-3" href="#__codelineno-99-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">'eval "$(starship init bash)"'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 </span></code></pre></div>
 <hr />
 <h2 id="laptop-hardware-keys"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 10h-2V8h2m0 5h-2v-2h2m-3-1h-2V8h2m0 5h-2v-2h2m0 6H8v-2h8m-9-5H5V8h2m0 5H5v-2h2m1 0h2v2H8m0-5h2v2H8m3 1h2v2h-2m0-5h2v2h-2m9-5H4c-1.11 0-2 .89-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2"/></svg></span> Laptop Hardware Keys<a class="headerlink" href="#laptop-hardware-keys" title="Permanent link">&para;</a></h2>
 <h3 id="unblock-wireless-devices">Unblock Wireless Devices<a class="headerlink" href="#unblock-wireless-devices" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-99-1"><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a><span class="c1"># Check blocked devices</span>
-</span><span id="__span-99-2"><a id="__codelineno-99-2" name="__codelineno-99-2" href="#__codelineno-99-2"></a>rfkill<span class="w"> </span>list
-</span><span id="__span-99-3"><a id="__codelineno-99-3" name="__codelineno-99-3" href="#__codelineno-99-3"></a>
-</span><span id="__span-99-4"><a id="__codelineno-99-4" name="__codelineno-99-4" href="#__codelineno-99-4"></a><span class="c1"># Unblock WiFi</span>
-</span><span id="__span-99-5"><a id="__codelineno-99-5" name="__codelineno-99-5" href="#__codelineno-99-5"></a>sudo<span class="w"> </span>rfkill<span class="w"> </span>unblock<span class="w"> </span>wifi
-</span><span id="__span-99-6"><a id="__codelineno-99-6" name="__codelineno-99-6" href="#__codelineno-99-6"></a>
-</span><span id="__span-99-7"><a id="__codelineno-99-7" name="__codelineno-99-7" href="#__codelineno-99-7"></a><span class="c1"># Unblock Bluetooth</span>
-</span><span id="__span-99-8"><a id="__codelineno-99-8" name="__codelineno-99-8" href="#__codelineno-99-8"></a>sudo<span class="w"> </span>rfkill<span class="w"> </span>unblock<span class="w"> </span>bluetooth
-</span><span id="__span-99-9"><a id="__codelineno-99-9" name="__codelineno-99-9" href="#__codelineno-99-9"></a>
-</span><span id="__span-99-10"><a id="__codelineno-99-10" name="__codelineno-99-10" href="#__codelineno-99-10"></a><span class="c1"># Or unblock everything</span>
-</span><span id="__span-99-11"><a id="__codelineno-99-11" name="__codelineno-99-11" href="#__codelineno-99-11"></a>sudo<span class="w"> </span>rfkill<span class="w"> </span>unblock<span class="w"> </span>all
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-100-1"><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a><span class="c1"># Check blocked devices</span>
+</span><span id="__span-100-2"><a id="__codelineno-100-2" name="__codelineno-100-2" href="#__codelineno-100-2"></a>rfkill<span class="w"> </span>list
+</span><span id="__span-100-3"><a id="__codelineno-100-3" name="__codelineno-100-3" href="#__codelineno-100-3"></a>
+</span><span id="__span-100-4"><a id="__codelineno-100-4" name="__codelineno-100-4" href="#__codelineno-100-4"></a><span class="c1"># Unblock WiFi</span>
+</span><span id="__span-100-5"><a id="__codelineno-100-5" name="__codelineno-100-5" href="#__codelineno-100-5"></a>sudo<span class="w"> </span>rfkill<span class="w"> </span>unblock<span class="w"> </span>wifi
+</span><span id="__span-100-6"><a id="__codelineno-100-6" name="__codelineno-100-6" href="#__codelineno-100-6"></a>
+</span><span id="__span-100-7"><a id="__codelineno-100-7" name="__codelineno-100-7" href="#__codelineno-100-7"></a><span class="c1"># Unblock Bluetooth</span>
+</span><span id="__span-100-8"><a id="__codelineno-100-8" name="__codelineno-100-8" href="#__codelineno-100-8"></a>sudo<span class="w"> </span>rfkill<span class="w"> </span>unblock<span class="w"> </span>bluetooth
+</span><span id="__span-100-9"><a id="__codelineno-100-9" name="__codelineno-100-9" href="#__codelineno-100-9"></a>
+</span><span id="__span-100-10"><a id="__codelineno-100-10" name="__codelineno-100-10" href="#__codelineno-100-10"></a><span class="c1"># Or unblock everything</span>
+</span><span id="__span-100-11"><a id="__codelineno-100-11" name="__codelineno-100-11" href="#__codelineno-100-11"></a>sudo<span class="w"> </span>rfkill<span class="w"> </span>unblock<span class="w"> </span>all
 </span></code></pre></div>
 <h3 id="suspend-on-lid-close">Suspend on Lid Close<a class="headerlink" href="#suspend-on-lid-close" title="Permanent link">&para;</a></h3>
 <p>Check if hardware detects lid state:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-100-1"><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>cat<span class="w"> </span>/proc/acpi/button/lid/LID*/state
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-101-1"><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>cat<span class="w"> </span>/proc/acpi/button/lid/LID*/state
 </span></code></pre></div></p>
 <p>If you see <code>open</code>/<code>closed</code> → hardware works correctly.</p>
 <h3 id="configure-lid-switch-behavior">Configure Lid Switch Behavior<a class="headerlink" href="#configure-lid-switch-behavior" title="Permanent link">&para;</a></h3>
 <p>Edit logind configuration:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-101-1"><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/systemd/logind.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-102-1"><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/systemd/logind.conf
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-102-1"><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>HandleLidSwitch=suspend
-</span><span id="__span-102-2"><a id="__codelineno-102-2" name="__codelineno-102-2" href="#__codelineno-102-2"></a>HandleLidSwitchExternalPower=suspend
-</span><span id="__span-102-3"><a id="__codelineno-102-3" name="__codelineno-102-3" href="#__codelineno-102-3"></a>HandleLidSwitchDocked=ignore
+<div class="language-text highlight"><pre><span></span><code><span id="__span-103-1"><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>HandleLidSwitch=suspend
+</span><span id="__span-103-2"><a id="__codelineno-103-2" name="__codelineno-103-2" href="#__codelineno-103-2"></a>HandleLidSwitchExternalPower=suspend
+</span><span id="__span-103-3"><a id="__codelineno-103-3" name="__codelineno-103-3" href="#__codelineno-103-3"></a>HandleLidSwitchDocked=ignore
 </span></code></pre></div>
 <p>Apply changes:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-103-1"><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>systemd-logind
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-104-1"><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>systemd-logind
 </span></code></pre></div></p>
 <h3 id="suspend-after-idle-time">Suspend After Idle Time<a class="headerlink" href="#suspend-after-idle-time" title="Permanent link">&para;</a></h3>
 <p>Edit logind configuration:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-104-1"><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/systemd/logind.conf
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-105-1"><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>sudo<span class="w"> </span>nvim<span class="w"> </span>/etc/systemd/logind.conf
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-105-1"><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>IdleAction=suspend
-</span><span id="__span-105-2"><a id="__codelineno-105-2" name="__codelineno-105-2" href="#__codelineno-105-2"></a>IdleActionSec=1h
+<div class="language-text highlight"><pre><span></span><code><span id="__span-106-1"><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>IdleAction=suspend
+</span><span id="__span-106-2"><a id="__codelineno-106-2" name="__codelineno-106-2" href="#__codelineno-106-2"></a>IdleActionSec=1h
 </span></code></pre></div>
 <hr />
 <h2 id="prevent-suspend-during-media-playback"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-2 14.5 6-4.5-6-4.5z"/></svg></span> Prevent Suspend During Media Playback<a class="headerlink" href="#prevent-suspend-during-media-playback" title="Permanent link">&para;</a></h2>
 <h3 id="install-playerctl">Install PlayerCTL<a class="headerlink" href="#install-playerctl" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-106-1"><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>playerctl
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-107-1"><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>playerctl
 </span></code></pre></div>
 <h3 id="create-inhibitor-script">Create Inhibitor Script<a class="headerlink" href="#create-inhibitor-script" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-107-1"><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>nvim<span class="w"> </span>~/.local/bin/media-inhibit.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-108-1"><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a>nvim<span class="w"> </span>~/.local/bin/media-inhibit.sh
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-108-1"><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a><span class="ch">#!/bin/bash</span>
-</span><span id="__span-108-2"><a id="__codelineno-108-2" name="__codelineno-108-2" href="#__codelineno-108-2"></a>
-</span><span id="__span-108-3"><a id="__codelineno-108-3" name="__codelineno-108-3" href="#__codelineno-108-3"></a><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-</span><span id="__span-108-4"><a id="__codelineno-108-4" name="__codelineno-108-4" href="#__codelineno-108-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span>playerctl<span class="w"> </span>status<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>Playing<span class="p">;</span><span class="w"> </span><span class="k">then</span>
-</span><span id="__span-108-5"><a id="__codelineno-108-5" name="__codelineno-108-5" href="#__codelineno-108-5"></a><span class="w">        </span>systemd-inhibit<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-108-6"><a id="__codelineno-108-6" name="__codelineno-108-6" href="#__codelineno-108-6"></a><span class="w">          </span>--what<span class="o">=</span>sleep<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-108-7"><a id="__codelineno-108-7" name="__codelineno-108-7" href="#__codelineno-108-7"></a><span class="w">          </span>--why<span class="o">=</span><span class="s2">"Media playback"</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-108-8"><a id="__codelineno-108-8" name="__codelineno-108-8" href="#__codelineno-108-8"></a><span class="w">          </span>--mode<span class="o">=</span>block<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-108-9"><a id="__codelineno-108-9" name="__codelineno-108-9" href="#__codelineno-108-9"></a><span class="w">          </span>sleep<span class="w"> </span><span class="m">30</span>
-</span><span id="__span-108-10"><a id="__codelineno-108-10" name="__codelineno-108-10" href="#__codelineno-108-10"></a><span class="w">    </span><span class="k">else</span>
-</span><span id="__span-108-11"><a id="__codelineno-108-11" name="__codelineno-108-11" href="#__codelineno-108-11"></a><span class="w">        </span>sleep<span class="w"> </span><span class="m">30</span>
-</span><span id="__span-108-12"><a id="__codelineno-108-12" name="__codelineno-108-12" href="#__codelineno-108-12"></a><span class="w">    </span><span class="k">fi</span>
-</span><span id="__span-108-13"><a id="__codelineno-108-13" name="__codelineno-108-13" href="#__codelineno-108-13"></a><span class="k">done</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-109-1"><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-109-2"><a id="__codelineno-109-2" name="__codelineno-109-2" href="#__codelineno-109-2"></a>
+</span><span id="__span-109-3"><a id="__codelineno-109-3" name="__codelineno-109-3" href="#__codelineno-109-3"></a><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-109-4"><a id="__codelineno-109-4" name="__codelineno-109-4" href="#__codelineno-109-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span>playerctl<span class="w"> </span>status<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>Playing<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-109-5"><a id="__codelineno-109-5" name="__codelineno-109-5" href="#__codelineno-109-5"></a><span class="w">        </span>systemd-inhibit<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-109-6"><a id="__codelineno-109-6" name="__codelineno-109-6" href="#__codelineno-109-6"></a><span class="w">          </span>--what<span class="o">=</span>sleep<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-109-7"><a id="__codelineno-109-7" name="__codelineno-109-7" href="#__codelineno-109-7"></a><span class="w">          </span>--why<span class="o">=</span><span class="s2">"Media playback"</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-109-8"><a id="__codelineno-109-8" name="__codelineno-109-8" href="#__codelineno-109-8"></a><span class="w">          </span>--mode<span class="o">=</span>block<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-109-9"><a id="__codelineno-109-9" name="__codelineno-109-9" href="#__codelineno-109-9"></a><span class="w">          </span>sleep<span class="w"> </span><span class="m">30</span>
+</span><span id="__span-109-10"><a id="__codelineno-109-10" name="__codelineno-109-10" href="#__codelineno-109-10"></a><span class="w">    </span><span class="k">else</span>
+</span><span id="__span-109-11"><a id="__codelineno-109-11" name="__codelineno-109-11" href="#__codelineno-109-11"></a><span class="w">        </span>sleep<span class="w"> </span><span class="m">30</span>
+</span><span id="__span-109-12"><a id="__codelineno-109-12" name="__codelineno-109-12" href="#__codelineno-109-12"></a><span class="w">    </span><span class="k">fi</span>
+</span><span id="__span-109-13"><a id="__codelineno-109-13" name="__codelineno-109-13" href="#__codelineno-109-13"></a><span class="k">done</span>
 </span></code></pre></div>
 <p>Make executable:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-109-1"><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>~/.local/bin/media-inhibit.sh
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-110-1"><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>~/.local/bin/media-inhibit.sh
 </span></code></pre></div></p>
 <h3 id="create-systemd-user-service">Create systemd User Service<a class="headerlink" href="#create-systemd-user-service" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-110-1"><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>nvim<span class="w"> </span>~/.config/systemd/user/media-inhibit.service
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-111-1"><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a>nvim<span class="w"> </span>~/.config/systemd/user/media-inhibit.service
 </span></code></pre></div>
-<div class="language-ini highlight"><pre><span></span><code><span id="__span-111-1"><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a><span class="k">[Unit]</span>
-</span><span id="__span-111-2"><a id="__codelineno-111-2" name="__codelineno-111-2" href="#__codelineno-111-2"></a><span class="na">Description</span><span class="o">=</span><span class="s">Block suspend while media is playing</span>
-</span><span id="__span-111-3"><a id="__codelineno-111-3" name="__codelineno-111-3" href="#__codelineno-111-3"></a>
-</span><span id="__span-111-4"><a id="__codelineno-111-4" name="__codelineno-111-4" href="#__codelineno-111-4"></a><span class="k">[Service]</span>
-</span><span id="__span-111-5"><a id="__codelineno-111-5" name="__codelineno-111-5" href="#__codelineno-111-5"></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">%h/.local/bin/media-inhibit.sh</span>
-</span><span id="__span-111-6"><a id="__codelineno-111-6" name="__codelineno-111-6" href="#__codelineno-111-6"></a><span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
-</span><span id="__span-111-7"><a id="__codelineno-111-7" name="__codelineno-111-7" href="#__codelineno-111-7"></a>
-</span><span id="__span-111-8"><a id="__codelineno-111-8" name="__codelineno-111-8" href="#__codelineno-111-8"></a><span class="k">[Install]</span>
-</span><span id="__span-111-9"><a id="__codelineno-111-9" name="__codelineno-111-9" href="#__codelineno-111-9"></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">default.target</span>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-112-1"><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a><span class="k">[Unit]</span>
+</span><span id="__span-112-2"><a id="__codelineno-112-2" name="__codelineno-112-2" href="#__codelineno-112-2"></a><span class="na">Description</span><span class="o">=</span><span class="s">Block suspend while media is playing</span>
+</span><span id="__span-112-3"><a id="__codelineno-112-3" name="__codelineno-112-3" href="#__codelineno-112-3"></a>
+</span><span id="__span-112-4"><a id="__codelineno-112-4" name="__codelineno-112-4" href="#__codelineno-112-4"></a><span class="k">[Service]</span>
+</span><span id="__span-112-5"><a id="__codelineno-112-5" name="__codelineno-112-5" href="#__codelineno-112-5"></a><span class="na">ExecStart</span><span class="o">=</span><span class="s">%h/.local/bin/media-inhibit.sh</span>
+</span><span id="__span-112-6"><a id="__codelineno-112-6" name="__codelineno-112-6" href="#__codelineno-112-6"></a><span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+</span><span id="__span-112-7"><a id="__codelineno-112-7" name="__codelineno-112-7" href="#__codelineno-112-7"></a>
+</span><span id="__span-112-8"><a id="__codelineno-112-8" name="__codelineno-112-8" href="#__codelineno-112-8"></a><span class="k">[Install]</span>
+</span><span id="__span-112-9"><a id="__codelineno-112-9" name="__codelineno-112-9" href="#__codelineno-112-9"></a><span class="na">WantedBy</span><span class="o">=</span><span class="s">default.target</span>
 </span></code></pre></div>
 <h3 id="enable-service">Enable Service<a class="headerlink" href="#enable-service" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-112-1"><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reexec
-</span><span id="__span-112-2"><a id="__codelineno-112-2" name="__codelineno-112-2" href="#__codelineno-112-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>media-inhibit.service
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-113-1"><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>systemctl<span class="w"> </span>--user<span class="w"> </span>daemon-reexec
+</span><span id="__span-113-2"><a id="__codelineno-113-2" name="__codelineno-113-2" href="#__codelineno-113-2"></a>systemctl<span class="w"> </span>--user<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>media-inhibit.service
 </span></code></pre></div>
 <h3 id="test-inhibitor">Test Inhibitor<a class="headerlink" href="#test-inhibitor" title="Permanent link">&para;</a></h3>
 <p>Check if inhibitor is active during media playback:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-113-1"><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>systemd-inhibit<span class="w"> </span>--list
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-114-1"><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a>systemd-inhibit<span class="w"> </span>--list
 </span></code></pre></div></p>
 <hr />
 
@@ -7010,7 +7020,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="November 25, 2026 10:59:38 UTC"><span class="timeago" datetime="2026-11-25T10:59:38+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="November 25, 2026 10:59:38 UTC">2026-11-25</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="November 26, 2026 07:57:18 UTC"><span class="timeago" datetime="2026-11-26T07:57:18+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="November 26, 2026 07:57:18 UTC">2026-11-26</span>
   </span>
 
     
