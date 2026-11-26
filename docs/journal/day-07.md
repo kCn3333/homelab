@@ -1,6 +1,6 @@
 # 7 - Cilium
 
-# K3s Homelab — Sesja 07
+## K3s Homelab — Sesja 07
 
 **Data:** 2026-02-01  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1

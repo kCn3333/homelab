@@ -1,6 +1,6 @@
 # 2 - Let's Encrypt
 
-# K3s Homelab — Sesja 02
+## K3s Homelab — Sesja 02
 
 **Data:** 2026-01-13  
 **Środowisko:** 3x HP T630, k3s v1.34.4, HAProxy, Traefik

@@ -2,8 +2,11 @@
 
 ## Network boundaries
 
-The cluster nodes are protected by the router and UFW. Public DNS names resolve to the
-HAProxy address; clients should not use node addresses directly.
+The cluster nodes are protected by the router and UFW. Names in the public DNS zone
+resolve to HAProxy's private LAN address. These DNS records do not expose HAProxy or
+the cluster to the Internet: the Kubernetes API on `6443/tcp` and application ports
+are not publicly reachable. Only the relay is exposed to the Internet.
+Clients on trusted networks should use HAProxy rather than node addresses directly.
 
 Expected inbound UFW policy on every cluster node:
 
@@ -17,7 +20,8 @@ Expected inbound UFW policy on every cluster node:
 | cluster node subnet     | `2379-2380/tcp`                    | embedded etcd                  |
 | cluster node subnet     | `9100/tcp`                         | node-exporter                  |
 | cluster node subnet     | `123/udp`                          | NTP                            |
-| cluster node subnet     | `4443/tcp`, `4240/tcp`, `4244/tcp` | Cilium and Hubble components   |
+| cluster node subnet     | `4443/tcp`                        | metrics-server webhook         |
+| cluster node subnet     | `4240/tcp`, `4244/tcp`             | Cilium and Hubble components   |
 | Pod CIDR `10.42.0.0/16` | required cluster traffic           | Pod-to-node services           |
 
 The exact management and HAProxy addresses belong in inventory variables, not in the

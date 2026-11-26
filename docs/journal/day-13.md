@@ -1,6 +1,6 @@
 # 13 - Alerts 
 
-# K3s Homelab — Sesja 13
+## K3s Homelab — Sesja 13
 
 **Data:** 2026-02-18  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1

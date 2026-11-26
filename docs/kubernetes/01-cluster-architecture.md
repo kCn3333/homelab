@@ -143,7 +143,7 @@ done
 
 The expected result is nine successful requests.
 
-The cold-start check recorded on [2026-09-29](../journal/day%2033.md) confirmed
+The cold-start check recorded on [2026-09-29](../journal/day-33.md) confirmed
 three ready nodes, local API and etcd readiness on all three servers, and the full
 `9/9` proxy matrix without remotedialer resync. Following repeated successful cold
 starts on K3s `v1.36.4+k3s1`, the incomplete-tunnel incident is considered resolved

@@ -51,7 +51,7 @@ The API and HTTPS frontends use TCP mode. TLS passes through HAProxy and is term
 
 The old HAProxy ran in Docker on Oracle Legacy and used an additional address assigned to that host. This created two dependencies for a critical cluster endpoint: the Docker engine and the network configuration of a general-purpose server.
 
-The replacement LXC owns IP address directly. It can start, stop, update and restore without Logos or another Docker host.
+The replacement LXC has the HAProxy IP address assigned directly to its network interface. It can start, stop, update and restore without Logos or another Docker host.
 
 The previous deployment is retained as a reference:
 
@@ -75,7 +75,7 @@ The migration was deliberately simple because HAProxy has no application data:
 
 ### Why K3s clients did not change
 
-The network identity and ports stayed the same. Internal DNS for the cluster continued to resolve same IP address, so:
+The network identity and ports stayed the same. Internal DNS names for the cluster continued to resolve to the same IP address, so:
 
 - kubeconfig API endpoints remained valid;
 - K3s `--server` references remained valid;

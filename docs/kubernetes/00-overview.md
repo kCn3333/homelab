@@ -46,7 +46,7 @@ HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates applicati
 
 ## Current platform
 
-State as of **2026-09-29**, incorporating the [Day 33 monitoring update](../journal/day%2033.md).
+State as of **2026-09-29**, incorporating the [Day 33 monitoring update](../journal/day-33.md).
 
 | Area | Component | Current role |
 |---|---|---|
@@ -124,7 +124,7 @@ Flux is the source of truth for Kubernetes resources managed by the repository. 
 | [Backup](08-backup.md)                             | etcd, volume and sealing-key recovery                  |
 | [Applications](09-applications.md)                 | `clients-api`, `k8s-badge` and delivery workflow       |
 
-The files above describe the current state. Migration history, incidents and experiments are kept in the [journal](../journal/).
+The files above describe the current state. Migration history, incidents and experiments are kept in the [journal](../journal/day-00.md).
 
 Each Kubernetes learning session produces a Polish journal entry. A reusable failure
 and its verified solution may also become a troubleshooting article. The state

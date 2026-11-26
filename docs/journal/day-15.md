@@ -1,6 +1,6 @@
 # 15 - Helm Chart
 
-# K3s Homelab — Sesja 15 (Helm Chart dla clients-api)
+## K3s Homelab — Sesja 15 (Helm Chart dla clients-api)
 
 **Data:** 2026-02-28  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0

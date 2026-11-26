@@ -1,6 +1,8 @@
-# 7 - Sealed Secrets + Longhorn
+# 6 - Sealed Secrets + Longhorn
 
-# K3s Homelab — Sesja 06
+<span id="7-sealed-secrets-longhorn"></span>
+
+## K3s Homelab — Sesja 06
 
 **Data:** 2026-01-23  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1

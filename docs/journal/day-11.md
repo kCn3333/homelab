@@ -1,6 +1,6 @@
 # 11 - CI/CD 
 
-# K3s Homelab — Sesja 11
+## K3s Homelab — Sesja 11
 
 **Data:** 2026-02-12  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1

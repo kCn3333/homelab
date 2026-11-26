@@ -1,6 +1,6 @@
 # 5 - Flux
 
-# K3s Homelab — Sesja 05
+## K3s Homelab — Sesja 05
 
 **Data:** 2026-01-21  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1

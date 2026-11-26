@@ -1,6 +1,6 @@
 # 16 - OCI
 
-# K3s Homelab — Sesja 16 (OCI Helm Chart + Progressive Delivery Setup)
+## K3s Homelab — Sesja 16 (OCI Helm Chart + Progressive Delivery Setup)
 
 **Data:** 2026-03-03  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0

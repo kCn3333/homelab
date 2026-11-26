@@ -1,6 +1,6 @@
 # 4 - UFW + backup
 
-# K3s Homelab — Sesja 04
+## K3s Homelab — Sesja 04
 
 **Data:** 2026-01-20  
 **Środowisko:** 3x HP T630, k3s v1.34.4, HAProxy, Traefik v3.6.7

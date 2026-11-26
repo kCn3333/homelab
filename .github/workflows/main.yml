@@ -28,6 +28,7 @@ jobs:
           pip install mkdocs-git-revision-date-localized-plugin
           pip install mkdocs-git-authors-plugin
           pip install mkdocs-awesome-pages-plugin
+          pip install mkdocs-redirects
 
       - name: Build MkDocs
         run: mkdocs build --clean

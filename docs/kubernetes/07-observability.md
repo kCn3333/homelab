@@ -14,7 +14,7 @@
 | metrics-server | Kubernetes resource Metrics API for `kubectl top` and HPA |
 | Hubble | Cilium network-flow visibility |
 
-As recorded in [Day 33](../journal/day%2033.md), `kube-prometheus-stack` is deployed
+As recorded in [Day 33](../journal/day-33.md), `kube-prometheus-stack` is deployed
 through Flux as chart `91.8.1` (state as of **2026-09-29**).
 
 | Component | Version |

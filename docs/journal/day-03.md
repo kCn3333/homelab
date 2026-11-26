@@ -1,6 +1,6 @@
 # 3 - HAProxy 
 
-# K3s Homelab — Sesja 03
+## K3s Homelab — Sesja 03
 
 **Data:** 2026-01-16  
 **Środowisko:** 3x HP T630, k3s v1.34.4, HAProxy, Traefik v3.6.7

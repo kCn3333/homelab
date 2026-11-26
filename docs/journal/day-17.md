@@ -1,6 +1,6 @@
 # 17 - Progressive Delivery
 
-# K3s Homelab — Sesja 17 (Progressive Delivery)
+## K3s Homelab — Sesja 17 (Progressive Delivery)
 
 **Data:** 2026-03-11  
 **Środowisko:** 3x HP T630, k3s v1.34.4, Flux v2.8.1

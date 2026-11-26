@@ -1,6 +1,6 @@
 # 1 - HA k3s embedded etcd
 
-# K3s Homelab — Sesja 01
+## K3s Homelab — Sesja 01
 
 **Data:** 2026-01-12  
 **Środowisko:** 3x HP T630 (8GB RAM, 128GB SSD), Ubuntu Server 24.04

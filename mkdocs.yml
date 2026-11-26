@@ -46,6 +46,43 @@ theme:
 
 plugins:
   - awesome-pages
+  - redirects:
+      redirect_maps:
+        "journal/day 00.md": journal/day-00.md
+        "journal/day 01.md": journal/day-01.md
+        "journal/day 02.md": journal/day-02.md
+        "journal/day 03.md": journal/day-03.md
+        "journal/day 04.md": journal/day-04.md
+        "journal/day 05.md": journal/day-05.md
+        "journal/day 06.md": journal/day-06.md
+        "journal/day 07.md": journal/day-07.md
+        "journal/day 08.md": journal/day-08.md
+        "journal/day 09.md": journal/day-09.md
+        "journal/day 10.md": journal/day-10.md
+        "journal/day 11.md": journal/day-11.md
+        "journal/day 12.md": journal/day-12.md
+        "journal/day 13.md": journal/day-13.md
+        "journal/day 14.md": journal/day-14.md
+        "journal/day 15.md": journal/day-15.md
+        "journal/day 16.md": journal/day-16.md
+        "journal/day 17.md": journal/day-17.md
+        "journal/day 18.md": journal/day-18.md
+        "journal/day 19.md": journal/day-19.md
+        "journal/day 20.md": journal/day-20.md
+        "journal/day 21.md": journal/day-21.md
+        "journal/day 22.md": journal/day-22.md
+        "journal/day 23.md": journal/day-23.md
+        "journal/day 24.md": journal/day-24.md
+        "journal/day 25.md": journal/day-25.md
+        "journal/day 26.md": journal/day-26.md
+        "journal/day 27.md": journal/day-27.md
+        "journal/day 28.md": journal/day-28.md
+        "journal/day 29.md": journal/day-29.md
+        "journal/day 30.md": journal/day-30.md
+        "journal/day 31.md": journal/day-31.md
+        "journal/day 32.md": journal/day-32.md
+        "journal/day 33.md": journal/day-33.md
+        "journal/day 34.md": journal/day-34.md
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   #- roamlinks
