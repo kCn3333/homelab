@@ -40,15 +40,17 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 ## :material-server-network: My Setup
 
-<div class="retro-image-frame" markdown="1">
-  ![homelab](img/homelab0.png)
-</div>
 
+- <span class="color-green">**:simple-proxmox: Proxmox**</span> — <span class="color-grey">Proxmox VE server running LXC containers and virtual machines (with Docker)</span>
 - <span class="color-green">**:simple-kubernetes: Kubernetes**</span> — <span class="color-grey">3-node HA K3s with embedded etcd, Cilium and Flux GitOps; bare-metal provisioning via PXE and MAAS</span>
 - <span class="color-green">**:material-source-branch: CI/CD**</span> — <span class="color-grey">Spring Boot → Helm → Flux image automation</span>
 - <span class="color-green">**:material-chart-line: Observability**</span> — <span class="color-grey">Prometheus, Loki and Alloy</span>
-- <span class="color-green">**:material-code-braces: Infrastructure as Code**</span> — <span class="color-grey">Terraform and Ansible (Semaphore)</span>
-- <span class="color-green">**:material-backup-restore: Backup**</span> — <span class="color-grey">Proxmox Backup Server (PBS), Kopia and MEGA</span>
+- <span class="color-green">**:material-code-braces: Infrastructure as Code**</span> — <span class="color-grey">Terraform and Ansible</span>
+- <span class="color-green">**:material-backup-restore: Backup**</span> — <span class="color-grey">Proxmox Backup Server, Kopia, Garage (S3) and MEGA</span>
+
+<div class="retro-image-frame" markdown="1">
+  ![homelab](img/homelab0.png)
+</div>
 
 ## :material-folder-open-outline: Documentation Sections
 
