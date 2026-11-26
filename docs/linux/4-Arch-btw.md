@@ -59,8 +59,9 @@ ping 192.168.0.1
 passwd
 ```
 
-### Enable SSH Server
+### Start and Check SSH Server
 ```bash
+systemctl start sshd
 systemctl status sshd
 ```
 
@@ -94,9 +95,13 @@ modprobe dm-mod
 ```
 
 ### Encrypt Partitions with LUKS
+
+`/boot` resides on the encrypted root partition; only `/boot/efi` is unencrypted.
+The root container uses LUKS2 with PBKDF2 because [GRUB does not support Argon2 for LUKS2](https://www.gnu.org/software/grub/manual/grub/html_node/cryptomount.html).
+
 ```bash
 # Encrypt root partition
-cryptsetup luksFormat -v -s 512 -h sha512 /dev/sda2
+cryptsetup luksFormat --type luks2 --pbkdf pbkdf2 -v -s 512 -h sha512 /dev/sda2
 
 # Encrypt home partition
 cryptsetup luksFormat -v -s 512 -h sha512 /dev/sda3
@@ -207,11 +212,16 @@ Edit `/etc/default/grub`:
 nvim /etc/default/grub
 ```
 
-Set the following lines:
+Set the following lines. [Enable cryptodisk support](https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html) before running `grub-install` so GRUB can read the encrypted `/boot`:
 ```
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=YOUR-UUID-SDA2=cryptroot root=/dev/mapper/cryptroot rw"
+GRUB_ENABLE_CRYPTODISK=y
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=<ROOT-UUID>=cryptroot root=/dev/mapper/cryptroot rw"
 GRUB_DISABLE_OS_PROBER=false
 ```
+
+Replace `<ROOT-UUID>` with the LUKS UUID returned by `blkid` above.
+
+GRUB asks for the root passphrase to unlock `/boot`. The initramfs keyfile configured below unlocks root during Linux startup; it does not remove the GRUB passphrase prompt.
 
 ### Install GRUB to EFI
 ```bash
@@ -229,6 +239,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ### Set Permissions and Generate Keys
 ```bash
+mkdir -p /etc/cryptsetup-keys.d
 chmod 700 /etc/cryptsetup-keys.d
 
 # Generate key for ROOT (sda2)
@@ -266,7 +277,7 @@ mkinitcpio -P
 
 ### Add Root Key to GRUB
 ```bash
-sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=<ROOT-KEY>=cryptroot root=/dev/mapper/cryptroot rd.luks.key=<ROOT-KEY>=/etc/cryptsetup-keys.d/root.key rw"|' /etc/default/grub
+sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet rd.luks.name=<ROOT-UUID>=cryptroot root=/dev/mapper/cryptroot rd.luks.key=<ROOT-UUID>=/etc/cryptsetup-keys.d/root.key rw"|' /etc/default/grub
 ```
 
 **Tip:** Use this nvim command to insert UUID:
@@ -274,6 +285,11 @@ sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 q
 1. Position cursor where UUID should go
 2. Type: `:r !blkid -s UUID -o value /dev/sda2`
 3. UUID will be inserted at cursor position
+
+Replace both `<ROOT-UUID>` placeholders before applying the command, then regenerate the boot menu:
+```bash
+grub-mkconfig -o /boot/grub/grub.cfg
+```
 
 ---
 
