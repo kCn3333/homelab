@@ -2,7 +2,7 @@
 
 Package updates, container updates and reboots are separate operations. Routine APT maintenance may be automated for approved Debian hosts; infrastructure with a larger failure domain remains manually supervised.
 
-The playbooks live in [`homelab-ansible`](https://github.com/kCn3333/homelab-ansible) and run through Semaphore. Inventory, addresses, SSH material, notification credentials and exact schedules remain private.
+The playbooks live in [`homelab-ansible`](https://github.com/kCn3333/homelab-ansible) and run through Semaphore.
 
 ## :material-layers-triple: Scope
 

@@ -24,9 +24,8 @@ Expected inbound UFW policy on every cluster node:
 | cluster node subnet     | `4240/tcp`, `4244/tcp`             | Cilium and Hubble components   |
 | Pod CIDR `10.42.0.0/16` | required cluster traffic           | Pod-to-node services           |
 
-The exact management and HAProxy addresses belong in inventory variables, not in the
-public playbook. The [cluster Ansible playbooks](https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks)
-expand them into rules for each node.
+The [cluster Ansible playbooks](https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks)
+generate firewall rules for each node from inventory variables.
 
 The playbook must be idempotent. A second run against a correct cluster should finish
 with `changed=0` on every node. It must not reset UFW or delete unrelated rules unless

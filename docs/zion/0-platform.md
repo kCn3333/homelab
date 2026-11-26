@@ -111,7 +111,6 @@ The exact firmware values, disk commands, measured result, and the ErP versus Wa
 - Kali stays powered off unless it is being used.
 - The PBS container root filesystem and the backup datastore are treated as separate components.
 - A successful backup job is not a restore test.
-- Exact addresses, credentials, recovery keys, and full configuration files stay outside the public repository.
 
 ## :fontawesome-solid-book: Related documents
 
