@@ -4347,19 +4347,19 @@
   
 
 
-<h1 id="11-cicd">11 - CI/CD<a class="headerlink" href="#11-cicd" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-11">K3s Homelab — Sesja 11<a class="headerlink" href="#k3s-homelab-sesja-11" title="Permanent link">&para;</a></h2>
+<h1 id="11-cicd">11 - CI/CD</h1>
+<h2 id="k3s-homelab-sesja-11">K3s Homelab — Sesja 11</h2>
 <p><strong>Data:</strong> 2026-02-12<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li><strong>GitHub Actions CI/CD pipeline</strong> — automatyczny build i push do DockerHub z semver tagowaniem</li>
 <li><strong>clients-api deployment</strong> — Spring Boot + CloudNativePG na klastrze przez GitOps</li>
 <li><strong>ServiceMonitor</strong> — integracja z Prometheus, metryki aplikacji widoczne w Grafanie</li>
 </ol>
 <hr />
-<h3 id="1-github-actions-semver-tagging">1. GitHub Actions — semver tagging<a class="headerlink" href="#1-github-actions-semver-tagging" title="Permanent link">&para;</a></h3>
+<h3 id="1-github-actions-semver-tagging">1. GitHub Actions — semver tagging</h3>
 <p><strong>Problem z tagowaniem SHA:</strong></p>
 <p>Tagi w formacie <code>sha-&lt;short-commit&gt;</code> nie są sortowalny chronologicznie. Flux używa porównania alfabetycznego — <code>sha-e984bdc</code> &gt; <code>sha-9cb3301</code> literowo, ale <code>e984bdc</code> był starszym commitem. Flux wybierałby losowo "najnowszy" obraz.</p>
 <p><strong>Prawidłowe podejście — semver:</strong></p>
@@ -4395,7 +4395,7 @@
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>v1.1.1  ← patch: bugfix
 </span></code></pre></div>
 <hr />
-<h3 id="2-flux-imagepolicy-semver-vs-alphabetical">2. Flux ImagePolicy — semver vs alphabetical<a class="headerlink" href="#2-flux-imagepolicy-semver-vs-alphabetical" title="Permanent link">&para;</a></h3>
+<h3 id="2-flux-imagepolicy-semver-vs-alphabetical">2. Flux ImagePolicy — semver vs alphabetical</h3>
 <p><strong>Kiedy używać semver:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Tagi: 1.1.0, 1.0.5, 1.0.4 → wybierze 1.1.0</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">policy</span><span class="p">:</span>
@@ -4410,7 +4410,7 @@
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># clients-api  kcn333/clients-api     1.1.0  True   Latest image tag resolved to 1.1.0</span>
 </span></code></pre></div>
 <hr />
-<h3 id="3-deploy-aplikacji-spring-boot-na-k3s">3. Deploy aplikacji Spring Boot na k3s<a class="headerlink" href="#3-deploy-aplikacji-spring-boot-na-k3s" title="Permanent link">&para;</a></h3>
+<h3 id="3-deploy-aplikacji-spring-boot-na-k3s">3. Deploy aplikacji Spring Boot na k3s</h3>
 <p><strong>Minimalne zasoby do działającego deploymentu:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Namespace → Deployment → Service → Ingress
 </span></code></pre></div>
@@ -4441,7 +4441,7 @@
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>"Exposing 4 endpoints beneath base path '/actuator'"
 </span></code></pre></div>
 <hr />
-<h3 id="4-servicemonitor-integracja-z-prometheus">4. ServiceMonitor — integracja z Prometheus<a class="headerlink" href="#4-servicemonitor-integracja-z-prometheus" title="Permanent link">&para;</a></h3>
+<h3 id="4-servicemonitor-integracja-z-prometheus">4. ServiceMonitor — integracja z Prometheus</h3>
 <p><strong>Trzy warunki żeby ServiceMonitor działał:</strong></p>
 <ol>
 <li><strong>Label na Service metadata</strong> (nie tylko spec.selector!) — Prometheus relabeling sprawdza <code>__meta_kubernetes_service_label_&lt;label&gt;</code>:</li>
@@ -4501,7 +4501,7 @@
 </span></code></pre></div>
 <p>To są dwie niezależne konfiguracje — obie muszą być ustawione.</p>
 <hr />
-<h3 id="5-prometheus-servicemonitornamespaceselector">5. Prometheus serviceMonitorNamespaceSelector<a class="headerlink" href="#5-prometheus-servicemonitornamespaceselector" title="Permanent link">&para;</a></h3>
+<h3 id="5-prometheus-servicemonitornamespaceselector">5. Prometheus serviceMonitorNamespaceSelector</h3>
 <p>Sprawdź przed debugowaniem czy Prometheus w ogóle skanuje właściwy namespace:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheus<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A5<span class="w"> </span>serviceMonitorNamespaceSelector
 </span></code></pre></div>
@@ -4511,7 +4511,7 @@
 </ul>
 <p>Przy <code>{}</code> i poprawnych labelach na ServiceMonitor — problem zawsze leży w samym Service (brak label w metadata lub brak nazwy portu).</p>
 <hr />
-<h3 id="6-metryki-spring-boot-actuator-w-prometheusie">6. Metryki Spring Boot Actuator w Prometheusie<a class="headerlink" href="#6-metryki-spring-boot-actuator-w-prometheusie" title="Permanent link">&para;</a></h3>
+<h3 id="6-metryki-spring-boot-actuator-w-prometheusie">6. Metryki Spring Boot Actuator w Prometheusie</h3>
 <p><strong>Przydatne PromQL queries dla Spring Boot:</strong></p>
 <div class="language-promql highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Request rate per endpoint</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kr">rate</span><span class="o">(</span><span class="nv">http_server_requests_seconds_count</span><span class="p">{</span><span class="nl">application</span><span class="o">=</span><span class="p">"</span><span class="s">clients-api</span><span class="p">"}[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
@@ -4535,7 +4535,7 @@
 <div class="language-properties highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="na">management.metrics.tags.application</span><span class="o">=</span><span class="s">${spring.application.name}</span>
 </span></code></pre></div>
 <hr />
-<h2 id="pena-petla-cicd-gitops">Pełna pętla CI/CD → GitOps<a class="headerlink" href="#pena-petla-cicd-gitops" title="Permanent link">&para;</a></h2>
+<h2 id="pena-petla-cicd-gitops">Pełna pętla CI/CD → GitOps</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Developer: git tag v1.2.0 &amp;&amp; git push origin v1.2.0
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>                    ↓
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>GitHub Actions: mvn test → docker build → docker push
@@ -4556,7 +4556,7 @@
 </span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>Grafana: metryki aplikacji
 </span></code></pre></div>
 <hr />
-<h2 id="finalna-struktura-plikow-clients-api">Finalna struktura plików clients-api<a class="headerlink" href="#finalna-struktura-plikow-clients-api" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-struktura-plikow-clients-api">Finalna struktura plików clients-api</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>apps/base/clients-api/
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>├── namespace.yaml
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>├── db-cluster.yaml          ← CloudNativePG cluster
@@ -4570,7 +4570,7 @@
 </span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>└── kustomization.yaml
 </span></code></pre></div>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Grafana dashboard dla clients-api</strong> — HTTP metrics, JVM, HikariCP ← następna sesja</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>PrometheusRule dla clients-api</strong> — alerty na error rate, latency</li>
@@ -4584,7 +4584,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> External-dns</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># CI/CD — git tagging</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>git<span class="w"> </span>tag<span class="w"> </span>v1.x.0
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>v1.x.0

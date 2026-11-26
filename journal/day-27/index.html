@@ -4511,10 +4511,10 @@
   
 
 
-<h1 id="27-dokonczenie-migracji-alloy-i-aktualizacja-k3s-oraz-cilium">27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium<a class="headerlink" href="#27-dokonczenie-migracji-alloy-i-aktualizacja-k3s-oraz-cilium" title="Permanent link">&para;</a></h1>
+<h1 id="27-dokonczenie-migracji-alloy-i-aktualizacja-k3s-oraz-cilium">27 - dokończenie migracji Alloy i aktualizacja K3s oraz Cilium</h1>
 <p><strong>Data:</strong> 2026-09-16</p>
 <p><strong>Środowisko:</strong> 3× HP T630, K3s <code>v1.34.4+k3s1</code> → <code>v1.35.8+k3s1</code>, Cilium <code>1.19.7</code> → <code>1.20.2</code>, Flux <code>v2.8.1</code>, Loki <code>3.6</code>, Alloy <code>1.19.2</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Potwierdzić działanie Alloy po zimnym starcie klastra.</li>
 <li>Zakończyć migrację z Promtaila do Alloy bez luki w dostarczaniu logów.</li>
@@ -4525,7 +4525,7 @@
 <li>Zaktualizować Cilium najpierw do <code>1.19.8</code>, a następnie do <code>1.20.2</code>.</li>
 <li>Potwierdzić działanie sieci, DNS, polityk Cilium, Sealed Secrets i Fluxa.</li>
 </ol>
-<h2 id="zakonczenie-migracji-z-promtaila-do-alloy">Zakończenie migracji z Promtaila do Alloy<a class="headerlink" href="#zakonczenie-migracji-z-promtaila-do-alloy" title="Permanent link">&para;</a></h2>
+<h2 id="zakonczenie-migracji-z-promtaila-do-alloy">Zakończenie migracji z Promtaila do Alloy</h2>
 <p>Po zimnym starcie oba kolektory działały równolegle:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Promtail: 3 desired / 3 ready / 3 available
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Alloy:    3 desired / 3 ready / 3 available
@@ -4538,7 +4538,7 @@
 <p>Pliki przetrwały restart nodów, ponieważ <code>/var/lib/alloy</code> jest hostPath, a nie
 <code>tmpfs</code>. Każdy node zachowuje własny plik pozycji odpowiadający lokalnym plikom
 <code>/var/log/pods</code>.</p>
-<h2 id="test-rownolegego-zapisu">Test równoległego zapisu<a class="headerlink" href="#test-rownolegego-zapisu" title="Permanent link">&para;</a></h2>
+<h2 id="test-rownolegego-zapisu">Test równoległego zapisu</h2>
 <p>Utworzono kontrolny Pod <code>alloy-cutover-074958</code>, który wygenerował 12 unikalnych
 linii. Zapytanie LogQL zwróciło:</p>
 <table>
@@ -4578,7 +4578,7 @@ kolektorów nie wysłał ich wielokrotnie w obrębie własnego strumienia.</p>
 <li>zachowuje etykiety wymagane do filtrowania;</li>
 <li>działa po ponownym uruchomieniu nodów.</li>
 </ul>
-<h2 id="usuniecie-promtaila">Usunięcie Promtaila<a class="headerlink" href="#usuniecie-promtaila" title="Permanent link">&para;</a></h2>
+<h2 id="usuniecie-promtaila">Usunięcie Promtaila</h2>
 <p>Po udanym teście Promtail został usunięty z GitOps. Flux usunął HelmRelease,
 DaemonSet oraz release Helm:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>HelmRelease/promtail: NotFound
@@ -4596,7 +4596,7 @@ Promtail nadal działa.</p>
 <p>Migracja została zakończona bez przerwy w dostarczaniu logów. Okres równoległego
 zapisu celowo powodował duplikaty między kolektorami; był to koszt bezpiecznego
 cutoveru bez ryzyka pominięcia ważnych wpisów.</p>
-<h2 id="bad-remotedialera-po-starcie">Błąd remotedialera po starcie<a class="headerlink" href="#bad-remotedialera-po-starcie" title="Permanent link">&para;</a></h2>
+<h2 id="bad-remotedialera-po-starcie">Błąd remotedialera po starcie</h2>
 <p>Klaster uruchomiony na K3s <code>v1.34.4+k3s1</code> miał wszystkie nody <code>Ready</code>, ale jedna
 ścieżka API server → kubelet zwracała błąd:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>worker1 API → worker2 kubelet: 502 Bad Gateway
@@ -4613,7 +4613,7 @@ miał działającej ścieżki do kubeleta <code>worker2</code>.</p>
 <p>Przed naprawą zachowano pełne logi bieżącego bootu w:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>~/k3s-remotedialer-debug-20260916T063254Z
 </span></code></pre></div>
-<h2 id="resynchronizacja-tunelu">Resynchronizacja tunelu<a class="headerlink" href="#resynchronizacja-tunelu" title="Permanent link">&para;</a></h2>
+<h2 id="resynchronizacja-tunelu">Resynchronizacja tunelu</h2>
 <p>Uruchomiono potwierdzony wcześniej skrypt:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>~/k3s/remotedialer-resync.sh
 </span></code></pre></div>
@@ -4635,7 +4635,7 @@ API serverów. Logi pokazały:</p>
 <p>Skrypt naprawił stan bez restartu K3s. Nadal był to workaround, a nie usunięcie
 przyczyny. Z tego powodu nie dodano automatycznego resyncu do playbooka Power On.
 Automatyczna naprawa ukrywałaby wystąpienia błędu i utrudniała ocenę kolejnych wersji.</p>
-<h2 id="kontrolowany-playbook-aktualizacji">Kontrolowany playbook aktualizacji<a class="headerlink" href="#kontrolowany-playbook-aktualizacji" title="Permanent link">&para;</a></h2>
+<h2 id="kontrolowany-playbook-aktualizacji">Kontrolowany playbook aktualizacji</h2>
 <p>Do repozytorium Ansible dodano:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>cluster/playbooks/maintenance/k3s-upgrade.yml
 </span></code></pre></div>
@@ -4657,7 +4657,7 @@ Automatyczna naprawa ukrywałaby wystąpienia błędu i utrudniała ocenę kolej
 <li>oczekiwanie na usługę, lokalne API, etcd i <code>Node Ready</code> po każdym serwerze;</li>
 <li>końcowa walidacja wersji, dokładnego członkostwa nodów i macierzy <code>3×3</code>.</li>
 </ol>
-<h2 id="aktualizacja-k3s-do-v13410k3s1">Aktualizacja K3s do <code>v1.34.10+k3s1</code><a class="headerlink" href="#aktualizacja-k3s-do-v13410k3s1" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja-k3s-do-v13410k3s1">Aktualizacja K3s do <code>v1.34.10+k3s1</code></h2>
 <p>Pierwsza aktualizacja została wykonana przez zadanie Semaphore
 <code>K3S | 40 Controlled Upgrade</code>.</p>
 <p>Kolejność:</p>
@@ -4682,7 +4682,7 @@ Automatyczna naprawa ukrywałaby wystąpienia błędu i utrudniała ocenę kolej
 <p>Podczas aktualizacji nie zaobserwowano utraty dostępu do klastra. Przy trzech
 serwerach control-plane aktualizowanych pojedynczo pozostałe serwery nadal
 obsługiwały API i quorum etcd.</p>
-<h2 id="aktualizacja-do-ostatniego-patcha-134">Aktualizacja do ostatniego patcha <code>1.34</code><a class="headerlink" href="#aktualizacja-do-ostatniego-patcha-134" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja-do-ostatniego-patcha-134">Aktualizacja do ostatniego patcha <code>1.34</code></h2>
 <p>Po sprawdzeniu klastra wykonano kolejny kontrolowany upgrade:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>v1.34.10+k3s1 → v1.34.11+k3s1
 </span></code></pre></div>
@@ -4692,7 +4692,7 @@ obsługiwały API i quorum etcd.</p>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Nodes:      3/3 Ready
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>matrix:     9/9 OK
 </span></code></pre></div>
-<h2 id="zimny-start-na-v13411k3s1">Zimny start na <code>v1.34.11+k3s1</code><a class="headerlink" href="#zimny-start-na-v13411k3s1" title="Permanent link">&para;</a></h2>
+<h2 id="zimny-start-na-v13411k3s1">Zimny start na <code>v1.34.11+k3s1</code></h2>
 <p>Klaster został całkowicie wyłączony i uruchomiony playbookiem <code>K3S | 10 Power On</code>.
 Playbook potwierdził:</p>
 <table>
@@ -4776,7 +4776,7 @@ Playbook potwierdził:</p>
 </table>
 <p>Resynchronizacja EndpointSlice nie była potrzebna.</p>
 <p>Wszystkie kontrole zakończyły się powodzeniem.</p>
-<h2 id="aktualizacja-k3s-do-v1358k3s1">Aktualizacja K3s do <code>v1.35.8+k3s1</code><a class="headerlink" href="#aktualizacja-k3s-do-v1358k3s1" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja-k3s-do-v1358k3s1">Aktualizacja K3s do <code>v1.35.8+k3s1</code></h2>
 <p>Po zaliczeniu testu gałęzi <code>1.34</code> wykonano upgrade o jeden minor:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>v1.34.11+k3s1 → v1.35.8+k3s1
 </span></code></pre></div>
@@ -4791,7 +4791,7 @@ Playbook potwierdził:</p>
 </span></code></pre></div>
 <p>Nie było Podów w stanie innym niż <code>Running</code> lub <code>Succeeded</code>. Wszystkie
 Kustomization i HelmRelease zarządzane przez Flux miały <code>Ready=True</code>.</p>
-<h2 id="zimny-start-na-v1358k3s1">Zimny start na <code>v1.35.8+k3s1</code><a class="headerlink" href="#zimny-start-na-v1358k3s1" title="Permanent link">&para;</a></h2>
+<h2 id="zimny-start-na-v1358k3s1">Zimny start na <code>v1.35.8+k3s1</code></h2>
 <p>Po aktualizacji minor wykonano drugi pełny zimny start. Power On ponownie potwierdził:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>SSH:                         3/3 OK
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Ansible:                     3/3 OK
@@ -4810,7 +4810,7 @@ jedną niedziałającą ścieżkę.</p>
 sporadyczny błąd remotedialera został usunięty. Należy nadal sprawdzać macierz przy
 kolejnych uruchomieniach i zachować konfigurację debug do czasu zebrania większej
 liczby poprawnych startów.</p>
-<h2 id="stan-cilium-przed-aktualizacja">Stan Cilium przed aktualizacją<a class="headerlink" href="#stan-cilium-przed-aktualizacja" title="Permanent link">&para;</a></h2>
+<h2 id="stan-cilium-przed-aktualizacja">Stan Cilium przed aktualizacją</h2>
 <p>Po aktualizacji K3s klaster działał na Cilium <code>1.19.7</code>. Konfiguracja obejmowała:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>IPAM:                    kubernetes
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>requireIPv4PodCIDR:      true
@@ -4828,7 +4828,7 @@ liczby poprawnych startów.</p>
 <p>Pozwala ona encji <code>remote-node</code> łączyć się wyłącznie z Podem kontrolera Sealed
 Secrets na TCP/8080. Nie było CCNP, <code>CiliumNodeConfig</code> ani używanych zasobów
 <code>TLSRoute</code>.</p>
-<h2 id="aktualizacja-cilium-1197-1198">Aktualizacja Cilium <code>1.19.7</code> → <code>1.19.8</code><a class="headerlink" href="#aktualizacja-cilium-1197-1198" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja-cilium-1197-1198">Aktualizacja Cilium <code>1.19.7</code> → <code>1.19.8</code></h2>
 <p>Najpierw zainstalowano ostatni patch obecnej gałęzi. Flux wdrożył chart <code>1.19.8</code>.</p>
 <p>Walidacja:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>DaemonSet/cilium:        3/3 available
@@ -4839,7 +4839,7 @@ Secrets na TCP/8080. Nie było CCNP, <code>CiliumNodeConfig</code> ani używanyc
 </span></code></pre></div>
 <p>Oddzielenie patch upgrade'u od zmiany minor ograniczyło liczbę zmiennych podczas
 diagnostyki.</p>
-<h2 id="preflight-przed-cilium-1202">Preflight przed Cilium <code>1.20.2</code><a class="headerlink" href="#preflight-przed-cilium-1202" title="Permanent link">&para;</a></h2>
+<h2 id="preflight-przed-cilium-1202">Preflight przed Cilium <code>1.20.2</code></h2>
 <p>Uruchomiono oficjalny preflight z chartu docelowej wersji:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>helm<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span>cilium-preflight<span class="w"> </span><span class="se">\</span>
@@ -4859,7 +4859,7 @@ diagnostyki.</p>
 </span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>All CCNPs and CNPs valid!
 </span></code></pre></div>
 <p>Preflight potwierdził, że istniejąca polityka jest akceptowana przez Cilium <code>1.20.2</code>.</p>
-<h2 id="aktualizacja-cilium-1198-1202">Aktualizacja Cilium <code>1.19.8</code> → <code>1.20.2</code><a class="headerlink" href="#aktualizacja-cilium-1198-1202" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja-cilium-1198-1202">Aktualizacja Cilium <code>1.19.8</code> → <code>1.20.2</code></h2>
 <p>W HelmRelease ustawiono docelowy chart <code>1.20.2</code> oraz zgodność aktualizacji z linią
 źródłową:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nt">upgradeCompatibility</span><span class="p">:</span><span class="w"> </span><span class="s">"1.19"</span>
@@ -4874,7 +4874,7 @@ diagnostyki.</p>
 </span></code></pre></div>
 <p>Każdy z trzech Podów Cilium miał <code>1/1 Running</code>, zero restartów i był uruchomiony na
 innym nodzie. <code>cilium-dbg status --brief</code> zwrócił <code>OK</code> dla wszystkich agentów.</p>
-<h2 id="walidacja-sieci-po-aktualizacji">Walidacja sieci po aktualizacji<a class="headerlink" href="#walidacja-sieci-po-aktualizacji" title="Permanent link">&para;</a></h2>
+<h2 id="walidacja-sieci-po-aktualizacji">Walidacja sieci po aktualizacji</h2>
 <p>Istniejąca CiliumNetworkPolicy nadal miała:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Valid=True
 </span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>Policy validation succeeded
@@ -4901,7 +4901,7 @@ powodzeniem:</p>
 </span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>DNS:                         OK
 </span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>Sealed Secrets API proxy:    OK
 </span></code></pre></div>
-<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
+<h2 id="stan-koncowy">Stan końcowy</h2>
 <table>
 <thead>
 <tr>
@@ -4967,7 +4967,7 @@ powodzeniem:</p>
 <p>W jednej sesji zakończono migrację kolektora logów, wprowadzono kontrolowany proces
 aktualizacji K3s, podniesiono Kubernetes o jedną gałąź minor i zaktualizowano Cilium
 o jedną gałąź minor. Każdy większy etap miał osobny punkt kontrolny i test regresji.</p>
-<h2 id="najwazniejsze-wnioski">Najważniejsze wnioski<a class="headerlink" href="#najwazniejsze-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="najwazniejsze-wnioski">Najważniejsze wnioski</h2>
 <ol>
 <li><code>Node Ready</code> nie zastępuje testu pełnej macierzy API server → kubelet.</li>
 <li>Resync EndpointSlice jest skutecznym workaroundem, ale nie powinien automatycznie
@@ -4983,7 +4983,7 @@ o jedną gałąź minor. Każdy większy etap miał osobny punkt kontrolny i tes
 <li>Historyczne strumienie Promtaila pozostają widoczne do końca retencji mimo
    usunięcia samego kolektora.</li>
 </ol>
-<h2 id="nastepna-sesja">Następna sesja<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="nastepna-sesja">Następna sesja</h2>
 <ol>
 <li>Powtórzyć zimny start i sprawdzić macierz <code>3×3</code> bez automatycznego resyncu.</li>
 <li>Zachować logi przed naprawą, jeżeli błąd remotedialera wróci.</li>

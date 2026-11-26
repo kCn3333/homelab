@@ -4435,10 +4435,10 @@
   
 
 
-<h1 id="29-playbook-aktualizacji-ubuntu-i-replikacja-cloudnativepg">29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG<a class="headerlink" href="#29-playbook-aktualizacji-ubuntu-i-replikacja-cloudnativepg" title="Permanent link">&para;</a></h1>
+<h1 id="29-playbook-aktualizacji-ubuntu-i-replikacja-cloudnativepg">29 - playbook aktualizacji Ubuntu i replikacja CloudNativePG</h1>
 <p><strong>Data:</strong> 2026-09-21
 <strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.4 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Longhorn <code>1.11.0</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Potwierdzić kolejny poprawny zimny start klastra.</li>
 <li>Przygotować prosty, kontrolowany playbook aktualizacji pakietów Ubuntu.</li>
@@ -4448,7 +4448,7 @@
 <li>Zdiagnozować i usunąć blokadę tworzenia replik PostgreSQL.</li>
 </ol>
 <hr />
-<h2 id="1-start-klastra">1. Start klastra<a class="headerlink" href="#1-start-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="1-start-klastra">1. Start klastra</h2>
 <p>Kolejny pełny start klastra zakończył się bez błędów.</p>
 <p>Potwierdzony stan bazowy:</p>
 <ul>
@@ -4460,7 +4460,7 @@
 </ul>
 <p>Był to kolejny poprawny start po aktualizacji K3s do <code>v1.36.4+k3s1</code>.</p>
 <hr />
-<h2 id="2-zaozenia-kontrolowanej-aktualizacji-ubuntu">2. Założenia kontrolowanej aktualizacji Ubuntu<a class="headerlink" href="#2-zaozenia-kontrolowanej-aktualizacji-ubuntu" title="Permanent link">&para;</a></h2>
+<h2 id="2-zaozenia-kontrolowanej-aktualizacji-ubuntu">2. Założenia kontrolowanej aktualizacji Ubuntu</h2>
 <p>Przyjęty przebieg:</p>
 <ol>
 <li>jawne zatwierdzenie operacji;</li>
@@ -4488,7 +4488,7 @@
 </span></code></pre></div>
 <p>Awaria zatrzymuje kolejkę. Ścieżka ratunkowa nie wykonuje automatycznego <code>uncordon</code> uszkodzonego noda.</p>
 <hr />
-<h2 id="3-pliki-implementacji">3. Pliki implementacji<a class="headerlink" href="#3-pliki-implementacji" title="Permanent link">&para;</a></h2>
+<h2 id="3-pliki-implementacji">3. Pliki implementacji</h2>
 <p>Dodano:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cluster/playbooks/maintenance/k3s-os-upgrade.yml
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>cluster/tasks/k3s-os-cluster-health.yml
@@ -4509,7 +4509,7 @@
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">master</span>
 </span></code></pre></div>
 <hr />
-<h2 id="4-optymalizacja-sciezki-bez-dostepnych-aktualizacji">4. Optymalizacja ścieżki bez dostępnych aktualizacji<a class="headerlink" href="#4-optymalizacja-sciezki-bez-dostepnych-aktualizacji" title="Permanent link">&para;</a></h2>
+<h2 id="4-optymalizacja-sciezki-bez-dostepnych-aktualizacji">4. Optymalizacja ścieżki bez dostępnych aktualizacji</h2>
 <p>Pierwotny przebieg wykonywałby <code>cordon</code>, <code>drain</code> i snapshot również wtedy, gdy APT nie miał nic do zainstalowania.</p>
 <p>Zmieniono kolejność:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pełny preflight
@@ -4537,7 +4537,7 @@
 <li>raport oznacza wszystkie nody jako <code>CURRENT</code>.</li>
 </ul>
 <hr />
-<h2 id="5-problem-jednoinstancyjnych-baz-podczas-drainu">5. Problem jednoinstancyjnych baz podczas drainu<a class="headerlink" href="#5-problem-jednoinstancyjnych-baz-podczas-drainu" title="Permanent link">&para;</a></h2>
+<h2 id="5-problem-jednoinstancyjnych-baz-podczas-drainu">5. Problem jednoinstancyjnych baz podczas drainu</h2>
 <p>Oba klastry CloudNativePG działały wcześniej z:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">spec</span><span class="p">:</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">instances</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
@@ -4558,7 +4558,7 @@
 </span></code></pre></div>
 <p>nie jest sam w sobie błędem. Chroni primary do czasu, aż operator potwierdzi gotową replikę i bezpieczną zmianę roli.</p>
 <hr />
-<h2 id="6-repliki-nie-konczyy-inicjalizacji">6. Repliki nie kończyły inicjalizacji<a class="headerlink" href="#6-repliki-nie-konczyy-inicjalizacji" title="Permanent link">&para;</a></h2>
+<h2 id="6-repliki-nie-konczyy-inicjalizacji">6. Repliki nie kończyły inicjalizacji</h2>
 <p>Po ustawieniu <code>instances: 2</code> oba klastry przez kilkanaście minut pozostawały w stanie:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>instances: 2
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>readyInstances: 1
@@ -4627,7 +4627,7 @@
 </table>
 <p>Nie był to problem DNS, Service, EndpointSlice, PVC ani operatora.</p>
 <hr />
-<h2 id="7-przyczyna-brak-reguy-dla-ruchu-wewnetrznego-postgresql">7. Przyczyna: brak reguły dla ruchu wewnętrznego PostgreSQL<a class="headerlink" href="#7-przyczyna-brak-reguy-dla-ruchu-wewnetrznego-postgresql" title="Permanent link">&para;</a></h2>
+<h2 id="7-przyczyna-brak-reguy-dla-ruchu-wewnetrznego-postgresql">7. Przyczyna: brak reguły dla ruchu wewnętrznego PostgreSQL</h2>
 <p>W obu namespace obowiązywały polityki ingress wybierające Pody baz.</p>
 <p>Polityka aplikacyjna dopuszczała:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>clients-api → PostgreSQL
@@ -4664,7 +4664,7 @@
 </span></code></pre></div>
 <p>Reguła jest ograniczona do Podów tego samego klastra i portu PostgreSQL. Nie otwiera ruchu z innych namespace ani innych workloadów.</p>
 <hr />
-<h2 id="8-stan-cloudnativepg-po-poprawce">8. Stan CloudNativePG po poprawce<a class="headerlink" href="#8-stan-cloudnativepg-po-poprawce" title="Permanent link">&para;</a></h2>
+<h2 id="8-stan-cloudnativepg-po-poprawce">8. Stan CloudNativePG po poprawce</h2>
 <p>Po wdrożeniu polityk zadania join zakończyły się, a operator utworzył właściwe repliki.</p>
 <p>Stan Podów:</p>
 <table>
@@ -4714,7 +4714,7 @@
 </span></code></pre></div>
 <p>Samo pojawienie się obu replik w stanie <code>Ready</code> potwierdziło, że przyczyną blokady była brakująca reguła <code>NetworkPolicy</code> dla TCP/5432.</p>
 <hr />
-<h2 id="9-wniosek-dla-playbooka-aktualizacji-ubuntu">9. Wniosek dla playbooka aktualizacji Ubuntu<a class="headerlink" href="#9-wniosek-dla-playbooka-aktualizacji-ubuntu" title="Permanent link">&para;</a></h2>
+<h2 id="9-wniosek-dla-playbooka-aktualizacji-ubuntu">9. Wniosek dla playbooka aktualizacji Ubuntu</h2>
 <p>Preflight playbooka przeszedł wcześniej mimo stanu:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>spec.instances: 2
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>status.readyInstances: 1
@@ -4738,15 +4738,15 @@
 </ol>
 <p>Nie należy globalnie wymagać <code>disruptionsAllowed &gt; 0</code> dla wszystkich PDB. W przypadku CloudNativePG wartość <code>0</code> przed rozpoczęciem kontrolowanego switchoveru może być poprawna.</p>
 <hr />
-<h2 id="10-stan-koncowy">10. Stan końcowy<a class="headerlink" href="#10-stan-koncowy" title="Permanent link">&para;</a></h2>
-<h3 id="k3s">K3s<a class="headerlink" href="#k3s" title="Permanent link">&para;</a></h3>
+<h2 id="10-stan-koncowy">10. Stan końcowy</h2>
+<h3 id="k3s">K3s</h3>
 <ul>
 <li>trzy nody działają;</li>
 <li>wersja <code>v1.36.4+k3s1</code> pozostaje bez zmian;</li>
 <li>kolejny zimny start zakończył się poprawnie;</li>
 <li>macierz API server → kubelet działa <code>9/9</code>.</li>
 </ul>
-<h3 id="aktualizacje-ubuntu">Aktualizacje Ubuntu<a class="headerlink" href="#aktualizacje-ubuntu" title="Permanent link">&para;</a></h3>
+<h3 id="aktualizacje-ubuntu">Aktualizacje Ubuntu</h3>
 <ul>
 <li>playbook został wdrożony w repozytorium i uruchomiony z Semaphore;</li>
 <li>wszystkie preflighty przeszły;</li>
@@ -4755,7 +4755,7 @@
 <li>snapshot, cordon, drain, instalacja i reboot zostały prawidłowo pominięte;</li>
 <li>przetestowana jest tylko ścieżka <code>CURRENT</code>.</li>
 </ul>
-<h3 id="cloudnativepg">CloudNativePG<a class="headerlink" href="#cloudnativepg" title="Permanent link">&para;</a></h3>
+<h3 id="cloudnativepg">CloudNativePG</h3>
 <ul>
 <li>oba klastry mają <code>instances: 2</code>;</li>
 <li>oba primary są <code>Ready</code> na <code>worker1</code>;</li>
@@ -4763,13 +4763,13 @@
 <li><code>nodeMaintenanceWindow</code> nie wymaga ręcznego przełączania przed każdym maintenance;</li>
 <li>wewnętrzny ruch replikacji i join na TCP/5432 jest jawnie dozwolony przez <code>NetworkPolicy</code>.</li>
 </ul>
-<h3 id="longhorn">Longhorn<a class="headerlink" href="#longhorn" title="Permanent link">&para;</a></h3>
+<h3 id="longhorn">Longhorn</h3>
 <ul>
 <li>PVC nowych replik zostały utworzone i związane;</li>
 <li>storage nie był przyczyną opóźnienia inicjalizacji replik.</li>
 </ul>
 <hr />
-<h2 id="11-nastepna-sesja">11. Następna sesja<a class="headerlink" href="#11-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="11-nastepna-sesja">11. Następna sesja</h2>
 <ol>
 <li>Dodać kontrolę CloudNativePG do <code>k3s-os-cluster-health.yml</code>.</li>
 <li>Potwierdzić dla obu klastrów:</li>

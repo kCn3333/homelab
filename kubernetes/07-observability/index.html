@@ -4391,8 +4391,8 @@
   
 
 
-<h1 id="observability">Observability<a class="headerlink" href="#observability" title="Permanent link">&para;</a></h1>
-<h2 id="stack">Stack<a class="headerlink" href="#stack" title="Permanent link">&para;</a></h2>
+<h1 id="observability">Observability</h1>
+<h2 id="stack">Stack</h2>
 <table>
 <thead>
 <tr>
@@ -4481,7 +4481,7 @@ through Flux as chart <code>91.8.1</code> (state as of <strong>2026-09-29</stron
 </table>
 <p>The post-upgrade checks passed; a full monitoring regression check after the next
 cold start remains pending.</p>
-<h2 id="resource-metrics-api">Resource Metrics API<a class="headerlink" href="#resource-metrics-api" title="Permanent link">&para;</a></h2>
+<h2 id="resource-metrics-api">Resource Metrics API</h2>
 <p>metrics-server is deployed through Flux with Helm chart <code>3.14.0</code> and application
 version <code>0.9.0</code>. It runs as one <code>hostNetwork</code> replica and serves HTTPS on container
 port <code>4443</code>; its Service maps <code>443</code> to <code>4443</code>. It reads kubelet metrics through
@@ -4499,7 +4499,7 @@ permanently stalled after transient Helm timeouts.</p>
 <code>Available=True</code>, both <code>kubectl top</code> paths to return current samples, the
 HelmRelease to report <code>Ready=True</code>, and recent metrics-server logs to contain no
 scraping or TLS errors.</p>
-<h2 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h2>
+<h2 id="prometheus">Prometheus</h2>
 <p>Prometheus uses <code>hostNetwork: true</code> and <code>hostPID: true</code> so it can scrape kubelet and
 node-exporter endpoints on node addresses. It therefore listens on TCP port <code>9090</code> in
 the network namespace of its node instead of using only a Pod IP.</p>
@@ -4520,7 +4520,7 @@ datapath in this cluster.</p>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>kubectl<span class="w"> </span>top<span class="w"> </span>nodes
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>-A
 </span></code></pre></div>
-<h2 id="servicemonitor-authentication">ServiceMonitor authentication<a class="headerlink" href="#servicemonitor-authentication" title="Permanent link">&para;</a></h2>
+<h2 id="servicemonitor-authentication">ServiceMonitor authentication</h2>
 <p>The chart <code>90.x</code> migration replaced file-based token and CA references in
 ServiceMonitors. The HelmRelease now declares:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">prometheus</span><span class="p">:</span>
@@ -4543,7 +4543,7 @@ cluster Secret and etcd.</p>
 <p>The post-upgrade checks confirmed API server <code>3/3</code>, kubelet <code>9/9</code> and CoreDNS <code>1/1</code>
 targets up, with empty <code>lastError</code> and no <code>401</code> or <code>403</code> responses. Each node has
 three kubelet scrape paths: <code>/metrics</code>, <code>/metrics/cadvisor</code> and <code>/metrics/probes</code>.</p>
-<h2 id="grafana">Grafana<a class="headerlink" href="#grafana" title="Permanent link">&para;</a></h2>
+<h2 id="grafana">Grafana</h2>
 <p>Grafana is exposed through Traefik at <code>grafana.cluster.kcn333.com</code>. Its Ingress points
 to the Grafana ClusterIP Service, while Traefik currently forwards to the ready Pod
 endpoint learned from EndpointSlice.</p>
@@ -4591,7 +4591,7 @@ provisioning before its API begins listening on port <code>3000</code>.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>deployment/kube-prometheus-stack-grafana<span class="w"> </span>--since<span class="o">=</span>30m
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,service,endpointslices<span class="w"> </span>-n<span class="w"> </span>monitoring
 </span></code></pre></div>
-<h3 id="resources-and-startup">Resources and startup<a class="headerlink" href="#resources-and-startup" title="Permanent link">&para;</a></h3>
+<h3 id="resources-and-startup">Resources and startup</h3>
 <p>The current HelmRelease settings are:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">grafana</span><span class="p">:</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
@@ -4621,7 +4621,7 @@ plugins to the read-only image filesystem. The rendered configuration also has
 HTTP errors, readiness and subsequent logs. The final checks reported
 <code>database=ok</code> and no new errors; persistent locks or readiness failures need
 investigation.</p>
-<h2 id="node-exporter-resources">node-exporter resources<a class="headerlink" href="#node-exporter-resources" title="Permanent link">&para;</a></h2>
+<h2 id="node-exporter-resources">node-exporter resources</h2>
 <p>The DaemonSet runs on all three nodes with the following settings:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">prometheus-node-exporter</span><span class="p">:</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
@@ -4635,7 +4635,7 @@ investigation.</p>
 during short scrape bursts despite low average CPU usage. After removing the CPU
 limit and completing the rollout, no <code>CPUThrottlingHigh</code> alerts remained pending
 or firing. The scheduler CPU request remains <code>10m</code>.</p>
-<h2 id="stack-upgrades-and-validation">Stack upgrades and validation<a class="headerlink" href="#stack-upgrades-and-validation" title="Permanent link">&para;</a></h2>
+<h2 id="stack-upgrades-and-validation">Stack upgrades and validation</h2>
 <p>Chart upgrades are committed to Git and reconciled by Flux. The Day 33 upgrade
 progressed through each major chart version from <code>82.10.1</code> to <code>91.8.1</code>, checking
 upgrade notes and rendering the HelmRelease values before each step.</p>
@@ -4659,7 +4659,7 @@ and a Flux HelmRelease with <code>Ready=True</code>.</p>
 <p>During rolling updates, old and new exporter targets can briefly overlap. Check
 completed rollouts and ready EndpointSlices before treating transient duplicate
 targets as a permanent replica change.</p>
-<h2 id="loki">Loki<a class="headerlink" href="#loki" title="Permanent link">&para;</a></h2>
+<h2 id="loki">Loki</h2>
 <p>Loki stores logs in the Garage S3-compatible backend on Logos at
 <code>http://192.168.0.56:3900</code>. Credentials are delivered through a SealedSecret.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>loki<span class="w"> </span>-o<span class="w"> </span>wide
@@ -4674,13 +4674,13 @@ indexes and <code>7d</code> retention. S3 credentials come from <code>loki-s3-se
 canary, chart tests, chunks cache and results cache remain disabled.</p>
 <p>Loki metrics scraping and alert rules are not configured through the chart:
 its ServiceMonitor and PrometheusRule resources are disabled.</p>
-<h2 id="cloudnativepg-metrics">CloudNativePG metrics<a class="headerlink" href="#cloudnativepg-metrics" title="Permanent link">&para;</a></h2>
+<h2 id="cloudnativepg-metrics">CloudNativePG metrics</h2>
 <p>CloudNativePG <code>1.30.0</code> uses the non-superuser <code>cnpg_metrics_exporter</code> login with
 <code>pg_monitor</code> membership. The clusters reference <code>cnpg-default-monitoring</code> custom
 queries with default queries enabled.</p>
 <p><code>enablePodMonitor</code> is <code>false</code>. CNPG has no PodMonitor or ingress rule allowing
 Prometheus to TCP <code>9187</code>, so its database metrics are not scraped by Prometheus.</p>
-<h2 id="grafana-alloy">Grafana Alloy<a class="headerlink" href="#grafana-alloy" title="Permanent link">&para;</a></h2>
+<h2 id="grafana-alloy">Grafana Alloy</h2>
 <p>Alloy is the cluster log collector. It is deployed through Flux as
 Helm chart <code>1.12.1</code> with application version <code>1.19.2</code>.</p>
 <p>The DaemonSet runs one Pod on every node. Each instance discovers only Pods assigned
@@ -4716,14 +4716,14 @@ to root-owned CRI logs without running the process as UID <code>0</code>.</p>
 </span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
 </span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>flux<span class="w"> </span>get<span class="w"> </span>helmrelease<span class="w"> </span>alloy<span class="w"> </span>--namespace<span class="w"> </span>loki
 </span></code></pre></div>
-<h2 id="alertmanager">Alertmanager<a class="headerlink" href="#alertmanager" title="Permanent link">&para;</a></h2>
+<h2 id="alertmanager">Alertmanager</h2>
 <p>Alertmanager groups Prometheus alerts and sends notifications through ntfy. Its
 configuration is stored as an encrypted secret in Git.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>alertmanager<span class="w"> </span>-n<span class="w"> </span>monitoring
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>prometheusrule<span class="w"> </span>-A
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>alertmanager-kube-prometheus-stack-alertmanager-0<span class="w"> </span>--since<span class="o">=</span>30m
 </span></code></pre></div>
-<h2 id="hubble">Hubble<a class="headerlink" href="#hubble" title="Permanent link">&para;</a></h2>
+<h2 id="hubble">Hubble</h2>
 <p>Hubble is enabled through the Flux-managed Cilium HelmRelease and is exposed at
 <code>https://hubble.cluster.kcn333.com</code>.</p>
 <p>Traefik routes browser traffic through the Hubble UI Ingress to <code>Service/hubble-ui</code>.
@@ -4777,7 +4777,7 @@ not replace the Hubble UI Ingress and is not required for normal use:</p>
 </span></code></pre></div>
 <p>The diagnosis and repair are documented in
 <a href="../../troubleshooting/hubble-data-streams-reconnecting/">Hubble data streams reconnecting</a>.</p>
-<h2 id="routine-checks">Routine checks<a class="headerlink" href="#routine-checks" title="Permanent link">&para;</a></h2>
+<h2 id="routine-checks">Routine checks</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>-n<span class="w"> </span>monitoring
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>flux<span class="w"> </span>get<span class="w"> </span>helmreleases<span class="w"> </span>-n<span class="w"> </span>monitoring

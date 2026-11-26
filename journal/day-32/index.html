@@ -4501,10 +4501,10 @@
   
 
 
-<h1 id="32-migracja-repozytorium-helm-i-aktualizacja-loki">32 - migracja repozytorium Helm i aktualizacja Loki<a class="headerlink" href="#32-migracja-repozytorium-helm-i-aktualizacja-loki" title="Permanent link">&para;</a></h1>
+<h1 id="32-migracja-repozytorium-helm-i-aktualizacja-loki">32 - migracja repozytorium Helm i aktualizacja Loki</h1>
 <p><strong>Data:</strong> 2026-09-24–2026-09-25
 <strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.5 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Metrics Server <code>v0.9.0</code>, cert-manager <code>v1.21.2</code>, Flux <code>v2.9.5</code>, Loki chart <code>18.7.6</code>, Loki <code>3.7.6</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Potwierdzić poprawny zimny start po migracji cert-managera i aktualizacji Flux.</li>
 <li>Zinwentaryzować instalację Loki i zależności jej HelmRelease.</li>
@@ -4515,7 +4515,7 @@
 <li>Potwierdzić działanie Loki po pełnym zimnym starcie klastra.</li>
 </ol>
 <hr />
-<h2 id="1-zimny-start-i-zamkniecie-poprzedniej-migracji">1. Zimny start i zamknięcie poprzedniej migracji<a class="headerlink" href="#1-zimny-start-i-zamkniecie-poprzedniej-migracji" title="Permanent link">&para;</a></h2>
+<h2 id="1-zimny-start-i-zamkniecie-poprzedniej-migracji">1. Zimny start i zamknięcie poprzedniej migracji</h2>
 <p>Playbook potwierdził:</p>
 <ul>
 <li>SSH, Ansible i <code>sudo</code> na wszystkich trzech nodach;</li>
@@ -4535,7 +4535,7 @@
 <li>nie wystąpiła regresja control plane ani remotedialera.</li>
 </ul>
 <hr />
-<h2 id="2-stan-loki-przed-aktualizacja">2. Stan Loki przed aktualizacją<a class="headerlink" href="#2-stan-loki-przed-aktualizacja" title="Permanent link">&para;</a></h2>
+<h2 id="2-stan-loki-przed-aktualizacja">2. Stan Loki przed aktualizacją</h2>
 <p>Stan początkowy:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>HelmRelease: loki/loki
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>chart:       6.53.0
@@ -4563,7 +4563,7 @@
 </span></code></pre></div>
 <p>Dane dostępowe do S3 nie zostały zapisane jawnie w publicznym repozytorium. Loki pobiera je z istniejącego Secretu <code>loki-s3-secret</code>.</p>
 <hr />
-<h2 id="3-migracja-zroda-chartu">3. Migracja źródła chartu<a class="headerlink" href="#3-migracja-zroda-chartu" title="Permanent link">&para;</a></h2>
+<h2 id="3-migracja-zroda-chartu">3. Migracja źródła chartu</h2>
 <p>Dotychczasowe źródło chartu Loki zostało zastąpione repozytorium:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>name: grafana-community
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>url:  https://grafana-community.github.io/helm-charts
@@ -4583,7 +4583,7 @@
 </ul>
 <p>Flux pobrał nowe źródło i zastosował Kustomization <code>infrastructure-operators</code> ze stanem <code>Ready=True</code>.</p>
 <hr />
-<h2 id="4-pierwszy-etap-aktualizacji-6530-6560">4. Pierwszy etap aktualizacji <code>6.53.0 → 6.56.0</code><a class="headerlink" href="#4-pierwszy-etap-aktualizacji-6530-6560" title="Permanent link">&para;</a></h2>
+<h2 id="4-pierwszy-etap-aktualizacji-6530-6560">4. Pierwszy etap aktualizacji <code>6.53.0 → 6.56.0</code></h2>
 <p>Najpierw wykonano aktualizację w obrębie tej samej głównej wersji chartu:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chart: 6.53.0 → 6.56.0
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Loki:  3.6.5  → 3.6.7
@@ -4600,7 +4600,7 @@
 </ul>
 <p>Podczas pierwszych sekund startu pojawiły się przejściowe komunikaty o braku rekordu DNS dla <code>loki-memberlist.loki.svc.cluster.local</code> oraz <code>empty ring</code>. Po utworzeniu gotowego EndpointSlice memberlist kolejne logi nie zawierały błędów.</p>
 <hr />
-<h2 id="5-aktualizacja-przez-kolejne-gowne-wersje-chartu">5. Aktualizacja przez kolejne główne wersje chartu<a class="headerlink" href="#5-aktualizacja-przez-kolejne-gowne-wersje-chartu" title="Permanent link">&para;</a></h2>
+<h2 id="5-aktualizacja-przez-kolejne-gowne-wersje-chartu">5. Aktualizacja przez kolejne główne wersje chartu</h2>
 <p>Aktualizacja była wykonywana etapami, po jednej głównej wersji chartu:</p>
 <table>
 <thead>
@@ -4693,7 +4693,7 @@
 </ol>
 <p>Nie wykonywano bezpośredniego <code>helm upgrade</code> ani ręcznego <code>kubectl apply</code> na zasobach zarządzanych przez Flux.</p>
 <hr />
-<h2 id="6-obsuga-zmian-niezgodnych-chartu">6. Obsługa zmian niezgodnych chartu<a class="headerlink" href="#6-obsuga-zmian-niezgodnych-chartu" title="Permanent link">&para;</a></h2>
+<h2 id="6-obsuga-zmian-niezgodnych-chartu">6. Obsługa zmian niezgodnych chartu</h2>
 <p>Przed każdą wersją główną porównywano chart, wartości live i wyrenderowane manifesty.</p>
 <p>Najważniejsze ustalenia:</p>
 <table>
@@ -4757,7 +4757,7 @@
 <li>brak zbędnych komponentów rozproszonych.</li>
 </ul>
 <hr />
-<h2 id="7-ochrona-pvc-przed-usunieciem">7. Ochrona PVC przed usunięciem<a class="headerlink" href="#7-ochrona-pvc-przed-usunieciem" title="Permanent link">&para;</a></h2>
+<h2 id="7-ochrona-pvc-przed-usunieciem">7. Ochrona PVC przed usunięciem</h2>
 <p>Podczas kontroli chartu <code>18.0.0</code> wykryto politykę StatefulSetu:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"whenDeleted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Delete"</span><span class="p">,</span>
@@ -4785,7 +4785,7 @@
 </span></code></pre></div>
 <p>Zmiana chroni PVC przy usunięciu lub przeskalowaniu StatefulSetu. Nie zastępuje backupu danych Loki w zewnętrznym storage obiektowym.</p>
 <hr />
-<h2 id="8-stan-koncowy-przed-zimnym-startem">8. Stan końcowy przed zimnym startem<a class="headerlink" href="#8-stan-koncowy-przed-zimnym-startem" title="Permanent link">&para;</a></h2>
+<h2 id="8-stan-koncowy-przed-zimnym-startem">8. Stan końcowy przed zimnym startem</h2>
 <p>Historia Helm zakończyła się rewizją:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>revision:    16
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>chart:       loki-18.7.6
@@ -4821,7 +4821,7 @@
 <p>Zwrócone etykiety obejmowały między innymi <code>namespace</code>, <code>pod</code>, <code>container</code>, <code>node_name</code>, <code>job</code> i <code>service_name</code>.</p>
 <p>W ostatniej minucie logów nie było nowych błędów <code>empty ring</code>, <code>panic</code>, <code>fatal</code>, <code>corrupt</code>, <code>failed</code>, <code>error</code> ani odpowiedzi HTTP <code>500</code>.</p>
 <hr />
-<h2 id="9-monitoring-loki">9. Monitoring Loki<a class="headerlink" href="#9-monitoring-loki" title="Permanent link">&para;</a></h2>
+<h2 id="9-monitoring-loki">9. Monitoring Loki</h2>
 <p>Po aktualizacji nie istniały zasoby:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ServiceMonitor
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>PrometheusRule
@@ -4832,7 +4832,7 @@
 <p>Nie jest to regresja aktualizacji. Monitoring generowany przez chart nie był włączony również przed migracją. Loki nadal przyjmował i udostępniał logi, a Alloy pozostał oddzielnym komponentem.</p>
 <p>Dodanie monitoringu metryk Loki pozostaje osobnym zadaniem i nie zostało połączone z aktualizacją chartu.</p>
 <hr />
-<h2 id="10-test-zimnego-startu-po-aktualizacji">10. Test zimnego startu po aktualizacji<a class="headerlink" href="#10-test-zimnego-startu-po-aktualizacji" title="Permanent link">&para;</a></h2>
+<h2 id="10-test-zimnego-startu-po-aktualizacji">10. Test zimnego startu po aktualizacji</h2>
 <p>Następnego dnia wykonano pełny cykl Power Off/Power On. Semaphore uruchomił:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>K3S | 10 Power On
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>task #387
@@ -4851,7 +4851,7 @@
 </ul>
 <p>Oczekiwanie na adres IPv4 interfejsu WoL oraz start K3s wymagały kilku ponowień. Wszystkie kontrole zakończyły się jednak stanem <code>OK</code>; ponowienia były częścią oczekiwania na gotowość, a nie końcową awarią.</p>
 <hr />
-<h2 id="11-loki-po-zimnym-starcie">11. Loki po zimnym starcie<a class="headerlink" href="#11-loki-po-zimnym-starcie" title="Permanent link">&para;</a></h2>
+<h2 id="11-loki-po-zimnym-starcie">11. Loki po zimnym starcie</h2>
 <p>Po starcie klastra potwierdzono:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Pod:       loki-0
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>Ready:     true,true
@@ -4882,8 +4882,8 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Brak nowych błędów Loki
 </span></code></pre></div>
 <hr />
-<h2 id="12-stan-koncowy">12. Stan końcowy<a class="headerlink" href="#12-stan-koncowy" title="Permanent link">&para;</a></h2>
-<h3 id="k3s">K3s<a class="headerlink" href="#k3s" title="Permanent link">&para;</a></h3>
+<h2 id="12-stan-koncowy">12. Stan końcowy</h2>
+<h3 id="k3s">K3s</h3>
 <ul>
 <li>trzy nody <code>Ready</code>;</li>
 <li>K3s <code>v1.36.4+k3s1</code>;</li>
@@ -4891,7 +4891,7 @@
 <li>macierz API server → kubelet <code>9/9</code>;</li>
 <li>zimny start bez resyncu remotedialera.</li>
 </ul>
-<h3 id="loki">Loki<a class="headerlink" href="#loki" title="Permanent link">&para;</a></h3>
+<h3 id="loki">Loki</h3>
 <ul>
 <li>HelmRelease zarządzany przez Flux;</li>
 <li>chart <code>18.7.6</code>;</li>
@@ -4903,7 +4903,7 @@
 <li>logi są dostępne;</li>
 <li>brak trwałych błędów po zimnym starcie.</li>
 </ul>
-<h3 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h3>
+<h3 id="storage">Storage</h3>
 <ul>
 <li>PVC <code>storage-loki-0</code> nadal <code>Bound</code>;</li>
 <li>zachowany ten sam UID PVC i PV;</li>
@@ -4913,7 +4913,7 @@
 <li>zewnętrzny Garage S3 pozostaje magazynem obiektowym Loki;</li>
 <li>sekrety pozostają poza publicznym repozytorium.</li>
 </ul>
-<h3 id="gitops">GitOps<a class="headerlink" href="#gitops" title="Permanent link">&para;</a></h3>
+<h3 id="gitops">GitOps</h3>
 <ul>
 <li>chart pobierany z <code>grafana-community</code>;</li>
 <li>wszystkie aktualizacje wykonane przez Flux;</li>
@@ -4922,7 +4922,7 @@
 <li>żadna zmiana nie wymagała ręcznego modyfikowania zasobów zarządzanych przez Flux.</li>
 </ul>
 <hr />
-<h2 id="13-wnioski">13. Wnioski<a class="headerlink" href="#13-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="13-wnioski">13. Wnioski</h2>
 <ol>
 <li>Dużą aktualizację chartu należy dzielić na kolejne wersje główne i walidować po każdym etapie.</li>
 <li>Wersja chartu i wersja aplikacji są niezależne. Chart przeszedł z <code>6.53.0</code> do <code>18.7.6</code>, a Loki z <code>3.6.5</code> do <code>3.7.6</code>.</li>
@@ -4936,7 +4936,7 @@
 <li>Dane dostępowe do Garage S3 pozostają w Kubernetes Secret i nie mogą trafić do publicznego repozytorium.</li>
 </ol>
 <hr />
-<h2 id="14-nastepna-sesja">14. Następna sesja<a class="headerlink" href="#14-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="14-nastepna-sesja">14. Następna sesja</h2>
 <ol>
 <li>Uznać migrację Loki <code>6.53.0 → 18.7.6</code> oraz aktualizację aplikacji <code>3.6.5 → 3.7.6</code> za zakończone.</li>
 <li>Zinwentaryzować pozostałe HelmRelease i wybrać następny komponent na podstawie:</li>

@@ -4391,12 +4391,12 @@
   
 
 
-<h1 id="8-monitoring">8 - Monitoring<a class="headerlink" href="#8-monitoring" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-08">K3s Homelab — Sesja 08<a class="headerlink" href="#k3s-homelab-sesja-08" title="Permanent link">&para;</a></h2>
+<h1 id="8-monitoring">8 - Monitoring</h1>
+<h2 id="k3s-homelab-sesja-08">K3s Homelab — Sesja 08</h2>
 <p><strong>Data:</strong> 2026-02-03<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ul>
 <li>kube-prometheus-stack v82.10.1 (Prometheus + Grafana + AlertManager + node-exporter)</li>
 <li>Grafana dostępna przez Ingress z TLS: <code>grafana.cluster.kcn333.com</code></li>
@@ -4405,7 +4405,7 @@
 <li>Pełne metryki klastra — wszystkie 3 nody widoczne w Grafanie</li>
 </ul>
 <hr />
-<h3 id="1-kube-prometheus-stack-instalacja-przez-flux">1. kube-prometheus-stack — instalacja przez Flux<a class="headerlink" href="#1-kube-prometheus-stack-instalacja-przez-flux" title="Permanent link">&para;</a></h3>
+<h3 id="1-kube-prometheus-stack-instalacja-przez-flux">1. kube-prometheus-stack — instalacja przez Flux</h3>
 <p>Jeden Helm chart instaluje cały stack:</p>
 <ul>
 <li><strong>Prometheus</strong> — zbiera metryki</li>
@@ -4493,7 +4493,7 @@
 </span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="w">                  </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10Gi</span>
 </span></code></pre></div>
 <hr />
-<h3 id="2-wyaczone-komponenty-k3s">2. Wyłączone komponenty k3s<a class="headerlink" href="#2-wyaczone-komponenty-k3s" title="Permanent link">&para;</a></h3>
+<h3 id="2-wyaczone-komponenty-k3s">2. Wyłączone komponenty k3s</h3>
 <p>k3s nie uruchamia niektórych komponentów w standardowej formie — wyłącz je żeby uniknąć błędów scrape'owania:</p>
 <table>
 <thead>
@@ -4522,7 +4522,7 @@
 </tbody>
 </table>
 <hr />
-<h3 id="3-problem-no-data-w-grafanie-cilium-blokuje-pod-node-ip">3. Problem: No data w Grafanie — Cilium blokuje pod → node IP<a class="headerlink" href="#3-problem-no-data-w-grafanie-cilium-blokuje-pod-node-ip" title="Permanent link">&para;</a></h3>
+<h3 id="3-problem-no-data-w-grafanie-cilium-blokuje-pod-node-ip">3. Problem: No data w Grafanie — Cilium blokuje pod → node IP</h3>
 <p><strong>Objaw:</strong> Dashboardy <code>Kubernetes / Compute Resources</code> pokazują <code>No data</code> dla CPU/Memory Utilisation.</p>
 <p><strong>Diagnoza:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Test z poda Prometheusa</span>
@@ -4563,7 +4563,7 @@
 <li>Standardowe podejście dla k3s w dokumentacji kube-prometheus-stack</li>
 </ul>
 <hr />
-<h3 id="4-problem-ufw-blokuje-port-9100-miedzy-nodami">4. Problem: UFW blokuje port 9100 między nodami<a class="headerlink" href="#4-problem-ufw-blokuje-port-9100-miedzy-nodami" title="Permanent link">&para;</a></h3>
+<h3 id="4-problem-ufw-blokuje-port-9100-miedzy-nodami">4. Problem: UFW blokuje port 9100 między nodami</h3>
 <p><strong>Objaw:</strong> Node Exporter / Nodes w Grafanie pokazywał tylko 1 node (worker2 — ten na którym działał Prometheus).</p>
 <p><strong>Diagnoza:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># worker2 działa (Prometheus jest na tym samym nodzie)</span>
@@ -4584,7 +4584,7 @@
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">proto</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tcp</span>
 </span></code></pre></div>
 <hr />
-<h3 id="5-haso-grafany-przez-sealedsecret">5. Hasło Grafany przez SealedSecret<a class="headerlink" href="#5-haso-grafany-przez-sealedsecret" title="Permanent link">&para;</a></h3>
+<h3 id="5-haso-grafany-przez-sealedsecret">5. Hasło Grafany przez SealedSecret</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>grafana-admin-secret<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>--namespace<span class="w"> </span>monitoring<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>--from-literal<span class="o">=</span>admin-user<span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
@@ -4602,7 +4602,7 @@
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">passwordKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">admin-password</span>
 </span></code></pre></div>
 <hr />
-<h3 id="6-certyfikat-tls-dla-grafany">6. Certyfikat TLS dla Grafany<a class="headerlink" href="#6-certyfikat-tls-dla-grafany" title="Permanent link">&para;</a></h3>
+<h3 id="6-certyfikat-tls-dla-grafany">6. Certyfikat TLS dla Grafany</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># apps/base/monitoring/certificate.yaml</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager.io/v1</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Certificate</span>
@@ -4619,11 +4619,11 @@
 </span></code></pre></div>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Uwaga: <code>secretName</code> w Certificate to certyfikat TLS — nie mylić z <code>grafana-admin-secret</code> który trzyma hasło!</p>
 <hr />
-<h3 id="7-admission-webhook-crashloopbackoff-przy-upgrade">7. Admission webhook — CrashLoopBackOff przy upgrade<a class="headerlink" href="#7-admission-webhook-crashloopbackoff-przy-upgrade" title="Permanent link">&para;</a></h3>
+<h3 id="7-admission-webhook-crashloopbackoff-przy-upgrade">7. Admission webhook — CrashLoopBackOff przy upgrade</h3>
 <p>Podczas <code>flux reconcile</code> HelmRelease kube-prometheus-stack pojawia się Job <code>admission-patch</code> który crashuje przez chwilę. To normalne — webhook musi poczekać na stabilizację operatora.</p>
 <p><strong>Rozwiązanie:</strong> Poczekaj — samo się naprawia po 1-2 minutach. Nie panikuj. <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.5c2.33 0 4.3-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5M8.5 11A1.5 1.5 0 0 0 10 9.5 1.5 1.5 0 0 0 8.5 8 1.5 1.5 0 0 0 7 9.5 1.5 1.5 0 0 0 8.5 11m7 0A1.5 1.5 0 0 0 17 9.5 1.5 1.5 0 0 0 15.5 8 1.5 1.5 0 0 0 14 9.5a1.5 1.5 0 0 0 1.5 1.5M12 20a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8m0-18C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg></span></p>
 <hr />
-<h2 id="struktura-plikow-monitoringu">Struktura plików monitoringu<a class="headerlink" href="#struktura-plikow-monitoringu" title="Permanent link">&para;</a></h2>
+<h2 id="struktura-plikow-monitoringu">Struktura plików monitoringu</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>apps/base/monitoring/
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>├── namespace.yaml
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>├── helmrepository.yaml
@@ -4633,7 +4633,7 @@
 </span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>└── kustomization.yaml
 </span></code></pre></div>
 <hr />
-<h2 id="przydatne-dashboardy-grafana">Przydatne dashboardy Grafana<a class="headerlink" href="#przydatne-dashboardy-grafana" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-dashboardy-grafana">Przydatne dashboardy Grafana</h2>
 <table>
 <thead>
 <tr>
@@ -4671,7 +4671,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="finalne-zuzycie-zasobow-klastra">Finalne zużycie zasobów klastra<a class="headerlink" href="#finalne-zuzycie-zasobow-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="finalne-zuzycie-zasobow-klastra">Finalne zużycie zasobów klastra</h2>
 <table>
 <thead>
 <tr>
@@ -4707,7 +4707,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>AlertManager</strong> — skonfigurować alerty (np. node down, high CPU)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Hubble UI</strong> — Cilium network observability</li>
@@ -4719,7 +4719,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RBAC</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Status monitoringu</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>monitoring
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>flux<span class="w"> </span>get<span class="w"> </span>helmrelease<span class="w"> </span>kube-prometheus-stack<span class="w"> </span>-n<span class="w"> </span>monitoring

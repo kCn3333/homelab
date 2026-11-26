@@ -4325,12 +4325,12 @@
   
 
 
-<h1 id="10-metrics-alerts">10 - Metrics + Alerts<a class="headerlink" href="#10-metrics-alerts" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-10">K3s Homelab — Sesja 10<a class="headerlink" href="#k3s-homelab-sesja-10" title="Permanent link">&para;</a></h2>
+<h1 id="10-metrics-alerts">10 - Metrics + Alerts</h1>
+<h2 id="k3s-homelab-sesja-10">K3s Homelab — Sesja 10</h2>
 <p><strong>Data:</strong> 2026-02-10<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li><strong>metrics-server</strong> — diagnostyka i naprawa intermittent timeouts</li>
 <li><strong>Flux image automation</strong> — upgrade v1beta2 → v1 (deprecation fix)</li>
@@ -4338,7 +4338,7 @@
 <li><strong>Custom AlertManager rules</strong> — CPU, Memory, Disk, PodCrashLoop, Longhorn</li>
 </ol>
 <hr />
-<h3 id="1-debugowanie-przez-eliminacje-warstw-metrics-server">1. Debugowanie przez eliminację warstw — metrics-server<a class="headerlink" href="#1-debugowanie-przez-eliminacje-warstw-metrics-server" title="Permanent link">&para;</a></h3>
+<h3 id="1-debugowanie-przez-eliminacje-warstw-metrics-server">1. Debugowanie przez eliminację warstw — metrics-server</h3>
 <p><strong>Objaw:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl top nodes  → timeout ~60s lub "Metrics API not available"
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes → działa natychmiast
@@ -4363,7 +4363,7 @@
 </span></code></pre></div>
 <p><strong>Uproszczenie metrics-server:</strong> 3 repliki bez leader election dawały 3x obciążenie kubeletów bez realnego HA benefitu. Zredukowałem do 1 repliki. Zmieniono też <code>metric-resolution</code> z <code>55s</code> na domyślne <code>15s</code> — przy 55s margines do 60s timeout <code>kubectl top</code> był zbyt mały.</p>
 <hr />
-<h3 id="2-flux-image-automation-api-versioning">2. Flux image automation — API versioning<a class="headerlink" href="#2-flux-image-automation-api-versioning" title="Permanent link">&para;</a></h3>
+<h3 id="2-flux-image-automation-api-versioning">2. Flux image automation — API versioning</h3>
 <p><strong>wersjonowanie:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>v1alpha1 → v1beta1 → v1beta2 → v1 (stable)
 </span></code></pre></div>
@@ -4391,7 +4391,7 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--author<span class="o">=</span><span class="s2">"fluxbot"</span><span class="w">  </span><span class="c1"># tylko automatyczne commity</span>
 </span></code></pre></div>
 <hr />
-<h3 id="3-resource-requestslimits-fundamenty">3. Resource Requests/Limits — fundamenty<a class="headerlink" href="#3-resource-requestslimits-fundamenty" title="Permanent link">&para;</a></h3>
+<h3 id="3-resource-requestslimits-fundamenty">3. Resource Requests/Limits — fundamenty</h3>
 <p><strong>Dwa różne pojęcia:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Requests                          Limits
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>────────────────────              ────────────────────
@@ -4426,7 +4426,7 @@
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Limit   ≈ 2-3x request (headroom na piki)</span>
 </span></code></pre></div>
 <hr />
-<h3 id="4-helm-values-subcharty">4. Helm values — subcharty<a class="headerlink" href="#4-helm-values-subcharty" title="Permanent link">&para;</a></h3>
+<h3 id="4-helm-values-subcharty">4. Helm values — subcharty</h3>
 <p>kube-prometheus-stack składa się z subchartów. Każdy subchart ma <strong>dwa klucze</strong> — wrapper kube-prometheus-stack i bezpośredni klucz subchartu:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># WRAPPER — tylko włącz/wyłącz, dashboardy</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">nodeExporter</span><span class="p">:</span>
@@ -4471,7 +4471,7 @@
 </span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="w"> </span><span class="nv">...</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="w">     </span><span class="c1"># poziom kontenera</span>
 </span></code></pre></div>
 <hr />
-<h3 id="5-custom-prometheusrule-wasne-alerty">5. Custom PrometheusRule — własne alerty<a class="headerlink" href="#5-custom-prometheusrule-wasne-alerty" title="Permanent link">&para;</a></h3>
+<h3 id="5-custom-prometheusrule-wasne-alerty">5. Custom PrometheusRule — własne alerty</h3>
 <p>Własne reguły alertów jako CRD zarządzany przez Flux:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring.coreos.com/v1</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PrometheusRule</span>
@@ -4546,7 +4546,7 @@
 </table>
 <p><strong>Ważne:</strong> etykieta <code>release: kube-prometheus-stack</code> musi być obecna — bez niej Prometheus ignoruje PrometheusRule.</p>
 <hr />
-<h3 id="6-finalne-qos-klastra-po-sesji">6. Finalne QoS klastra po sesji<a class="headerlink" href="#6-finalne-qos-klastra-po-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="6-finalne-qos-klastra-po-sesji">6. Finalne QoS klastra po sesji</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">for</span><span class="w"> </span>ns<span class="w"> </span><span class="k">in</span><span class="w"> </span>flux-test<span class="w"> </span>monitoring<span class="w"> </span>loki<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{" → "}{.status.qosClass}{"\n"}{end}'</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">done</span>
@@ -4659,7 +4659,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="finalna-struktura-repo-zmiany-w-sesji-10">Finalna struktura repo (zmiany w sesji 10)<a class="headerlink" href="#finalna-struktura-repo-zmiany-w-sesji-10" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-struktura-repo-zmiany-w-sesji-10">Finalna struktura repo (zmiany w sesji 10)</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>k3s-homelab/
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>├── ansible/
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>│   └── ufw.yml                              # ← dodano port 4443/tcp
@@ -4682,7 +4682,7 @@
 </span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>        └── image-update-automation.yaml     # ← v1beta2 → v1
 </span></code></pre></div>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Własna aplikacja (Spring Boot) + CI/CD pipeline z GitHub Actions</strong> ← następny krok</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> HPA — Horizontal Pod Autoscaler (mamy działający metrics-server!)</li>
@@ -4695,7 +4695,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> External-dns</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># QoS status wszystkich podów</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .items[*]}{.metadata.name}{" → "}{.status.qosClass}{"\n"}{end}'</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>

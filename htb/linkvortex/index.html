@@ -4201,30 +4201,30 @@
   
 
 
-<h1 id="linkvortex">LinkVortex<a class="headerlink" href="#linkvortex" title="Permanent link">&para;</a></h1>
+<h1 id="linkvortex">LinkVortex</h1>
 <p><strong>Platform:</strong> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.51 6.457.001-.013a.89.89 0 0 0-.271-.638l-.027-.024q-.028-.025-.057-.048-.03-.022-.06-.04l-.029-.02-9.61-5.547a.89.89 0 0 0-.922.004L1.933 5.674l-.03.02-.023.014-.02.015a1 1 0 0 0-.147.134l-.003.003a.9.9 0 0 0-.221.584v.014l-.001.027v11.07c0 .328.18.63.469.784l9.599 5.542.023.011a1 1 0 0 0 .166.07l.04.01.072.015q.018.004.035.006a.8.8 0 0 0 .216 0q.018-.002.035-.006l.072-.014.04-.012.064-.022a1 1 0 0 0 .102-.047l.023-.011 9.599-5.542a.89.89 0 0 0 .469-.784V6.478zM5.255 6.082l6.537-3.774a.42.42 0 0 1 .418 0l6.537 3.774a.418.418 0 0 1 0 .725l-6.537 3.774a.42.42 0 0 1-.418 0L5.254 6.807a.418.418 0 0 1 0-.725m5.614 14.345a.417.417 0 0 1-.626.361l-6.524-3.766a.42.42 0 0 1-.209-.361V9.127a.417.417 0 0 1 .626-.361l6.524 3.766a.42.42 0 0 1 .209.362zm9.623-3.766a.42.42 0 0 1-.209.36l-6.524 3.767a.417.417 0 0 1-.626-.36v-7.533c0-.15.08-.287.209-.362l6.524-3.766a.417.417 0 0 1 .626.36z"/></svg></span> Hack The Box<br>
 <strong>OS:</strong> Linux<br>
 <strong>Lab date:</strong> 2025-03-09</p>
-<h2 id="virtual-host-discovery">Virtual host discovery<a class="headerlink" href="#virtual-host-discovery" title="Permanent link">&para;</a></h2>
+<h2 id="virtual-host-discovery">Virtual host discovery</h2>
 <p>Virtual-host enumeration identified the development subdomain. A separate endpoint enumeration attempt did not produce a useful result.</p>
 <p><img alt="Virtual host discovery — evidence 1" src="../assets/linkvortex/4_LinkVortex_image.jpg" /></p>
 <p><img alt="Virtual host discovery — evidence 2" src="../assets/linkvortex/7_LinkVortex_image.jpg" /></p>
-<h2 id="exposed-git-repository">Exposed Git repository<a class="headerlink" href="#exposed-git-repository" title="Permanent link">&para;</a></h2>
+<h2 id="exposed-git-repository">Exposed Git repository</h2>
 <p>Content enumeration of the development site revealed an exposed Git repository. The repository was recovered for offline inspection.</p>
 <p><img alt="Exposed Git repository — evidence 1" src="../assets/linkvortex/8_LinkVortex_image.jpg" /></p>
 <p><img alt="Exposed Git repository — evidence 2" src="../assets/linkvortex/2_LinkVortex_image.jpg" /></p>
-<h2 id="ghost-cms-credentials">Ghost CMS credentials<a class="headerlink" href="#ghost-cms-credentials" title="Permanent link">&para;</a></h2>
+<h2 id="ghost-cms-credentials">Ghost CMS credentials</h2>
 <p>Searching the recovered source revealed hardcoded test credentials associated with Ghost authentication.</p>
 <p><img alt="Ghost CMS credentials — evidence 1" src="../assets/linkvortex/LinkVortex_image.jpg" /></p>
-<h2 id="authenticated-file-disclosure">Authenticated file disclosure<a class="headerlink" href="#authenticated-file-disclosure" title="Permanent link">&para;</a></h2>
+<h2 id="authenticated-file-disclosure">Authenticated file disclosure</h2>
 <p>CVE-2023-40028 enabled file disclosure within Ghost. The screenshots show the account listing and the production configuration, including credentials later used for host access.</p>
 <p><img alt="Authenticated file disclosure — evidence 1" src="../assets/linkvortex/5_LinkVortex_image.jpg" /></p>
 <p><img alt="Authenticated file disclosure — evidence 2" src="../assets/linkvortex/6_LinkVortex_image.jpg" /></p>
-<h2 id="host-access-and-privileged-file-read">Host access and privileged file read<a class="headerlink" href="#host-access-and-privileged-file-read" title="Permanent link">&para;</a></h2>
+<h2 id="host-access-and-privileged-file-read">Host access and privileged file read</h2>
 <p>The SSH session as bob and inspection of the privileged cleanup script are recorded below. The script mishandled symbolic links, allowing a protected file to be read. The final screenshot documents the disclosed flag-like value, not an interactive root shell.</p>
 <p><img alt="Host access and privileged file read — evidence 1" src="../assets/linkvortex/3_LinkVortex_image.jpg" /></p>
 <p><img alt="Host access and privileged file read — evidence 2" src="../assets/linkvortex/1_LinkVortex_image.jpg" /></p>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<h2 id="references">References</h2>
 <ul>
 <li><a href="https://www.hackthebox.com/machines/linkvortex">Machine reference</a></li>
 </ul>

@@ -4203,13 +4203,13 @@
   
 
 
-<h1 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h1>
-<h2 id="longhorn">Longhorn<a class="headerlink" href="#longhorn" title="Permanent link">&para;</a></h2>
+<h1 id="storage">Storage</h1>
+<h2 id="longhorn">Longhorn</h2>
 <p>Longhorn <code>v1.12.1</code> provides replicated persistent storage. The default replica count is
 two, so a healthy volume has copies on two eligible nodes.</p>
 <p>Required node packages are <code>open-iscsi</code>, <code>nfs-common</code> and <code>util-linux</code>. The <code>iscsid</code>
 service must be enabled. Longhorn is installed and configured through Flux and Helm.</p>
-<h2 id="persistent-volumes">Persistent volumes<a class="headerlink" href="#persistent-volumes" title="Permanent link">&para;</a></h2>
+<h2 id="persistent-volumes">Persistent volumes</h2>
 <p>The cluster uses six Longhorn volumes with engine <code>v1.12.1</code> and two data replicas
 per volume.</p>
 <table>
@@ -4250,7 +4250,7 @@ per volume.</p>
 <code>whenDeleted</code> and <code>whenScaled</code>, set through
 <code>singleBinary.persistence.enableStatefulSetAutoDeletePVC: false</code>. This protects
 against automatic PVC deletion with the StatefulSet; it is not a backup.</p>
-<h2 id="storageclasses">StorageClasses<a class="headerlink" href="#storageclasses" title="Permanent link">&para;</a></h2>
+<h2 id="storageclasses">StorageClasses</h2>
 <table>
 <thead>
 <tr>
@@ -4279,7 +4279,7 @@ share it. RWX supports read-write mounts from multiple nodes.</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc,pv<span class="w"> </span>-A
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>volumes.longhorn.io<span class="w"> </span>-n<span class="w"> </span>longhorn-system
 </span></code></pre></div>
-<h2 id="network-dependency">Network dependency<a class="headerlink" href="#network-dependency" title="Permanent link">&para;</a></h2>
+<h2 id="network-dependency">Network dependency</h2>
 <p>Longhorn engines, replicas, Instance Managers and RWX share managers communicate over
 the cluster network. A ready node is not sufficient if those components still refer
 to stale Pod addresses.</p>
@@ -4295,12 +4295,12 @@ to stale Pod addresses.</p>
 </span></code></pre></div>
 <p><code>degraded</code> means redundancy is reduced; it does not necessarily mean the volume is
 unavailable. Do not start another disruptive operation in that state.</p>
-<h2 id="node-maintenance">Node maintenance<a class="headerlink" href="#node-maintenance" title="Permanent link">&para;</a></h2>
+<h2 id="node-maintenance">Node maintenance</h2>
 <p><code>kubectl cordon</code> prevents new scheduling but does not evict existing workloads.
 <code>kubectl drain</code> evicts ordinary Pods and exercises PDBs. Drain is appropriate for
 planned maintenance, but it can trigger Longhorn detach, attach and replica rebuild
 work. Check workload redundancy and volume health first.</p>
-<h2 id="backups">Backups<a class="headerlink" href="#backups" title="Permanent link">&para;</a></h2>
+<h2 id="backups">Backups</h2>
 <p>Longhorn volume backups are stored in Garage. They protect PVC data; etcd snapshots
 protect Kubernetes object state. Both are required for a full recovery plan. See
 <a href="../08-backup/">Backup</a>.</p>

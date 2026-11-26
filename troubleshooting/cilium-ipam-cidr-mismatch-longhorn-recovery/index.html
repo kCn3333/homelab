@@ -4443,9 +4443,9 @@
   
 
 
-<h1 id="cilium-ipam-cidr-mismatch-and-longhorn-recovery"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2H1v2h12V9h-3c1.11 0 2-.89 2-2V3c0-1.11-.89-2-2-2zm0 2h6v4H4zM3 13v7h7v-2H5v-5zm11 0c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h-3v2h12v-2h-3c1.11 0 2-.89 2-2v-4c0-1.11-.89-2-2-2zm0 2h6v4h-6z"/></svg></span> Cilium IPAM CIDR mismatch and Longhorn recovery<a class="headerlink" href="#cilium-ipam-cidr-mismatch-and-longhorn-recovery" title="Permanent link">&para;</a></h1>
+<h1 id="cilium-ipam-cidr-mismatch-and-longhorn-recovery"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 1c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2H1v2h12V9h-3c1.11 0 2-.89 2-2V3c0-1.11-.89-2-2-2zm0 2h6v4H4zM3 13v7h7v-2H5v-5zm11 0c-1.11 0-2 .89-2 2v4c0 1.11.89 2 2 2h-3v2h12v-2h-3c1.11 0 2-.89 2-2v-4c0-1.11-.89-2-2-2zm0 2h6v4h-6z"/></svg></span> Cilium IPAM CIDR mismatch and Longhorn recovery</h1>
 <p>Cilium used an independent cluster-pool while K3s assigned different PodCIDRs to Kubernetes Nodes. The cluster initially remained functional, but the overlapping address plan created routing risk and left existing Pod sandboxes on the legacy range during migration. Rolling node restarts then exposed Longhorn processes still referencing an unreachable legacy Instance Manager address.</p>
-<h2 id="symptoms"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Symptoms<a class="headerlink" href="#symptoms" title="Permanent link">&para;</a></h2>
+<h2 id="symptoms"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4m-2 6v2h2v-2"/></svg></span> Symptoms</h2>
 <ul>
 <li>Kubernetes Nodes and CiliumNode resources reported different per-node PodCIDRs;</li>
 <li>newly created Pods used the Cilium-managed range instead of <code>Node.spec.podCIDR</code>;</li>
@@ -4456,7 +4456,7 @@
 <li>Longhorn replicas on another node remained reported as <code>running</code> through an unreachable legacy Instance Manager address;</li>
 <li>affected workloads remained in init or container creation states while waiting for storage.</li>
 </ul>
-<h2 id="component-boundaries"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg></span> Component boundaries<a class="headerlink" href="#component-boundaries" title="Permanent link">&para;</a></h2>
+<h2 id="component-boundaries"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg></span> Component boundaries</h2>
 <p>The cluster intentionally keeps kube-proxy enabled:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubeProxyReplacement=false
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>routing-mode=tunnel
@@ -4490,8 +4490,8 @@
 </tbody>
 </table>
 <p>Cilium service-map entries are useful diagnostics, but they do not prove kube-proxy replacement is active. The active <code>KUBE-SERVICES</code>, <code>KUBE-SVC-*</code> and <code>KUBE-SEP-*</code> NAT chains confirmed that kube-proxy implemented ClusterIP translation.</p>
-<h2 id="diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span> Diagnosis<a class="headerlink" href="#diagnosis" title="Permanent link">&para;</a></h2>
-<h3 id="1-compare-kubernetes-and-cilium-allocation-state">1. Compare Kubernetes and Cilium allocation state<a class="headerlink" href="#1-compare-kubernetes-and-cilium-allocation-state" title="Permanent link">&para;</a></h3>
+<h2 id="diagnosis"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span> Diagnosis</h2>
+<h3 id="1-compare-kubernetes-and-cilium-allocation-state">1. Compare Kubernetes and Cilium allocation state</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span>-o<span class="w"> </span>custom-columns<span class="o">=</span><span class="s1">'NAME:.metadata.name,POD_CIDR:.spec.podCIDR,POD_CIDRS:.spec.podCIDRs'</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -4504,13 +4504,13 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'ipam={.data.ipam}{"\n"}kpr={.data.kube-proxy-replacement}{"\n"}routing={.data.routing-mode}{"\n"}'</span>
 </span></code></pre></div>
-<h3 id="2-verify-the-service-dataplane">2. Verify the service dataplane<a class="headerlink" href="#2-verify-the-service-dataplane" title="Permanent link">&para;</a></h3>
+<h3 id="2-verify-the-service-dataplane">2. Verify the service dataplane</h3>
 <p>Inspect kube-proxy NAT rules for a known Service:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>iptables-save<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span><span class="p">|</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'KUBE-SERVICES|KUBE-SVC-|KUBE-SEP-'</span>
 </span></code></pre></div>
 <p>The rules are programmed proactively from Service and EndpointSlice state. They are not created by an individual DNS lookup or application request.</p>
-<h3 id="3-identify-legacy-pod-sandboxes">3. Identify legacy Pod sandboxes<a class="headerlink" href="#3-identify-legacy-pod-sandboxes" title="Permanent link">&para;</a></h3>
+<h3 id="3-identify-legacy-pod-sandboxes">3. Identify legacy Pod sandboxes</h3>
 <p>After the IPAM change, list active Pods still using the old range:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--all-namespaces<span class="w"> </span>--output<span class="w"> </span>json<span class="w"> </span><span class="p">|</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">'</span>
@@ -4521,7 +4521,7 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="s1">    '</span>
 </span></code></pre></div>
 <p>Changing IPAM affects new network sandboxes only. Existing Pods keep their addresses until recreated.</p>
-<h3 id="4-inspect-faulted-longhorn-volumes-before-mutation">4. Inspect faulted Longhorn volumes before mutation<a class="headerlink" href="#4-inspect-faulted-longhorn-volumes-before-mutation" title="Permanent link">&para;</a></h3>
+<h3 id="4-inspect-faulted-longhorn-volumes-before-mutation">4. Inspect faulted Longhorn volumes before mutation</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>volumes.longhorn.io<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span>--namespace<span class="w"> </span>longhorn-system<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span>-o<span class="w"> </span>custom-columns<span class="o">=</span><span class="s1">'NAME:.metadata.name,STATE:.status.state,ROBUSTNESS:.status.robustness,NODE:.status.currentNodeID'</span>
@@ -4546,7 +4546,7 @@
 </span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="s1">    '</span>
 </span></code></pre></div>
 <p>Do not delete VolumeAttachment or replica resources at this stage. First identify at least one recoverable replica and verify that its data directory exists on disk.</p>
-<h2 id="root-cause"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span> Root cause<a class="headerlink" href="#root-cause" title="Permanent link">&para;</a></h2>
+<h2 id="root-cause"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 7h-2.81c-.45-.8-1.07-1.5-1.82-2L16 3.41 14.59 2l-2.17 2.17a6 6 0 0 0-2.83 0L7.41 2 6 3.41 7.62 5c-.75.5-1.36 1.21-1.81 2H3v2h2.09c-.06.33-.09.66-.09 1v1H3v2h2v1c0 .34.03.67.09 1H3v2h2.81A6 6 0 0 0 13 19.65V19c0-.57.09-1.14.25-1.69-.66.45-1.45.69-2.25.69-2.21 0-4-1.79-4-4v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4c0 .19 0 .39-.05.58.59-.54 1.29-.96 2.05-1.23V13h2v-2h-2v-1c0-.34-.03-.67-.09-1H19zm2.34 9-3.59 3.59L16.16 18 15 19.16l2.75 3 4.75-4.75zM13 9v2H9V9zm0 4v2H9v-2z"/></svg></span> Root cause</h2>
 <p>The Cilium chart used its default <code>cluster-pool</code> IPAM mode. K3s simultaneously populated <code>Node.spec.podCIDR</code> from its own cluster CIDR. Cilium therefore allocated Pod addresses independently instead of consuming the Kubernetes-assigned ranges.</p>
 <p>During migration, restarted Cilium agents began allocating from <code>Node.spec.podCIDR</code>, while existing Pods and Longhorn Instance Managers retained legacy addresses. A node restart killed volume engines and marked some replicas failed. The only replicas not marked failed were still reported through a legacy Instance Manager that was no longer reachable from the migrated network.</p>
 <p>Longhorn could not complete detach because replica state remained inconsistent:</p>
@@ -4555,8 +4555,8 @@
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>instance manager: unreachable legacy Pod IP
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>engine destination: empty address and port
 </span></code></pre></div>
-<h2 id="corrective-action"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Corrective action<a class="headerlink" href="#corrective-action" title="Permanent link">&para;</a></h2>
-<h3 id="1-align-cilium-with-kubernetes-podcidrs">1. Align Cilium with Kubernetes PodCIDRs<a class="headerlink" href="#1-align-cilium-with-kubernetes-podcidrs" title="Permanent link">&para;</a></h3>
+<h2 id="corrective-action"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.61 19-9.08-9.09c.93-2.34.47-5.1-1.44-7C9.79.61 6.21.4 3.66 2.26L7.5 6.11 6.08 7.5 2.25 3.69C.39 6.23.6 9.82 2.9 12.11c1.86 1.86 4.57 2.35 6.89 1.48l9.11 9.11c.39.39 1.02.39 1.41 0l2.3-2.3c.39-.4.39-1.01 0-1.4m-3 1.59-9.46-9.46c-.61.45-1.29.72-2 .82-1.36.2-2.79-.21-3.83-1.25C3.37 9.76 2.93 8.5 3 7.26l3.09 3.09 4.24-4.24L7.24 3c1.26-.05 2.49.39 3.44 1.33a4.47 4.47 0 0 1 1.24 3.96 4.35 4.35 0 0 1-.88 1.96l9.46 9.45z"/></svg></span> Corrective action</h2>
+<h3 id="1-align-cilium-with-kubernetes-podcidrs">1. Align Cilium with Kubernetes PodCIDRs</h3>
 <p>Configure the Flux-managed Cilium HelmRelease:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">values</span><span class="p">:</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">ipam</span><span class="p">:</span>
@@ -4567,7 +4567,7 @@
 <p>Take an embedded-etcd snapshot and export the relevant Kubernetes, Helm and Cilium state before deployment.</p>
 <p>Apply the change through the resource owner. A direct Helm upgrade against a Flux-managed release can conflict with fields owned by <code>helm-controller</code>, especially with Server-Side Apply. Suspend the necessary reconciliation layers, update the HelmRelease source of truth, and let the Helm controller perform the upgrade.</p>
 <p>Restart Cilium agents after the ConfigMap changes. A ConfigMap data update does not necessarily change the DaemonSet Pod template and therefore may not trigger an automatic rollout.</p>
-<h3 id="2-validate-new-allocation-before-recycling-existing-workloads">2. Validate new allocation before recycling existing workloads<a class="headerlink" href="#2-validate-new-allocation-before-recycling-existing-workloads" title="Permanent link">&para;</a></h3>
+<h3 id="2-validate-new-allocation-before-recycling-existing-workloads">2. Validate new allocation before recycling existing workloads</h3>
 <p>Create one disposable Pod on each node and verify:</p>
 <ul>
 <li>its address belongs to that node's <code>Node.spec.podCIDR</code>;</li>
@@ -4575,7 +4575,7 @@
 <li>cross-node Pod communication works through VXLAN;</li>
 <li>the Kubernetes API remains reachable through an independent management path.</li>
 </ul>
-<h3 id="3-recycle-nodes-sequentially">3. Recycle nodes sequentially<a class="headerlink" href="#3-recycle-nodes-sequentially" title="Permanent link">&para;</a></h3>
+<h3 id="3-recycle-nodes-sequentially">3. Recycle nodes sequentially</h3>
 <p>Restart only one node at a time. Before continuing, require:</p>
 <ul>
 <li>the node is <code>Ready</code>;</li>
@@ -4583,7 +4583,7 @@
 <li>routes contain only the intended PodCIDRs;</li>
 <li>Longhorn volumes have returned to <code>healthy</code>.</li>
 </ul>
-<h3 id="4-recover-an-unreachable-longhorn-instance-manager">4. Recover an unreachable Longhorn Instance Manager<a class="headerlink" href="#4-recover-an-unreachable-longhorn-instance-manager" title="Permanent link">&para;</a></h3>
+<h3 id="4-recover-an-unreachable-longhorn-instance-manager">4. Recover an unreachable Longhorn Instance Manager</h3>
 <p>Before deleting any process Pod:</p>
 <ol>
 <li>confirm <code>auto-salvage=true</code>;</li>
@@ -4594,7 +4594,7 @@
 </ol>
 <p>Delete only the stale Instance Manager Pod. If the node-local Longhorn manager also retains a legacy address and fails readiness, recreate only that DaemonSet Pod. The controllers then recreate the Instance Manager using the aligned PodCIDR and reconcile the stale replica state.</p>
 <p>Do not manually create an Instance Manager Pod. It is owned by the Longhorn InstanceManager resource.</p>
-<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<h2 id="validation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m23 12-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68zm-13 5-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg></span> Validation</h2>
 <p>Validate Cilium runtime state on every node:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
@@ -4625,7 +4625,7 @@
 <li>the Cilium HelmRelease and active ConfigMap matched the Git declaration.</li>
 </ul>
 <p>Longhorn temporarily reported <code>attached/degraded</code> after a node restart. This meant the volume remained available with reduced redundancy. After the configured replica replenishment delay, replacement replicas were built and the volumes returned to <code>healthy</code>.</p>
-<h2 id="prevention"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m-2-4-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9"/></svg></span> Prevention<a class="headerlink" href="#prevention" title="Permanent link">&para;</a></h2>
+<h2 id="prevention"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m-2-4-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9"/></svg></span> Prevention</h2>
 <ul>
 <li>define one authoritative Pod CIDR allocation model;</li>
 <li>compare <code>Node.spec.podCIDR</code> and CiliumNode allocation after CNI installation;</li>
@@ -4637,7 +4637,7 @@
 <li>operate Flux-managed Helm releases through their HelmRelease source of truth;</li>
 <li>merge the desired state into the branch observed by Flux before resuming reconciliation.</li>
 </ul>
-<h2 id="related-documents"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M384 512H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h304c26.5 0 48 21.5 48 48v288c0 20.9-13.4 38.7-32 45.3V448c17.7 0 32 14.3 32 32s-14.3 32-32 32zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32h256v-64zm32-232c0 13.3 10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24H152c-13.3 0-24 10.7-24 24m24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></svg></span> Related documents<a class="headerlink" href="#related-documents" title="Permanent link">&para;</a></h2>
+<h2 id="related-documents"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M384 512H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h304c26.5 0 48 21.5 48 48v288c0 20.9-13.4 38.7-32 45.3V448c17.7 0 32 14.3 32 32s-14.3 32-32 32zM96 384c-17.7 0-32 14.3-32 32s14.3 32 32 32h256v-64zm32-232c0 13.3 10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24H152c-13.3 0-24 10.7-24 24m24 72c-13.3 0-24 10.7-24 24s10.7 24 24 24h176c13.3 0 24-10.7 24-24s-10.7-24-24-24z"/></svg></span> Related documents</h2>
 <ul>
 <li><a href="../../kubernetes/02-networking/">Kubernetes networking</a></li>
 <li><a href="../../kubernetes/04-storage/">Kubernetes storage</a></li>

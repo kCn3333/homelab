@@ -4313,10 +4313,10 @@
   
 
 
-<h1 id="25-aktualizacja-metrics-server-i-sealed-secrets">25 - aktualizacja metrics-server i Sealed Secrets<a class="headerlink" href="#25-aktualizacja-metrics-server-i-sealed-secrets" title="Permanent link">&para;</a></h1>
+<h1 id="25-aktualizacja-metrics-server-i-sealed-secrets">25 - aktualizacja metrics-server i Sealed Secrets</h1>
 <p><strong>Data:</strong> 2026-09-14</p>
 <p><strong>Środowisko:</strong> 3× HP T630, k3s <code>v1.34.4+k3s1</code>, Cilium <code>1.19.7</code>, Flux <code>v2.8.1</code>, metrics-server <code>0.7.2 → 0.8.1</code>, Sealed Secrets <code>0.36.1 → 0.40.0</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Sprawdzić stan klastra po uruchomieniu.</li>
 <li>Naprawić stan HelmRelease i zaktualizować metrics-server.</li>
@@ -4325,7 +4325,7 @@
 <li>Rozwiązać niestabilne działanie <code>kubeseal --fetch-cert</code> i <code>--validate</code>.</li>
 <li>Potwierdzić pełną zbieżność Flux.</li>
 </ol>
-<h2 id="stan-po-uruchomieniu">Stan po uruchomieniu<a class="headerlink" href="#stan-po-uruchomieniu" title="Permanent link">&para;</a></h2>
+<h2 id="stan-po-uruchomieniu">Stan po uruchomieniu</h2>
 <p>Wszystkie trzy nody osiągnęły <code>Ready</code>, podstawowe workloady systemowe działały,
 a API <code>metrics.k8s.io</code> oraz <code>kubectl top nodes</code> zwracały dane. Kontroler Sealed
 Secrets miał jeden gotowy replikat, a wszystkie dziewięć zasobów raportowało
@@ -4360,7 +4360,7 @@ Secrets miał jeden gotowy replikat, a wszystkie dziewięć zasobów raportował
 </tr>
 </tbody>
 </table>
-<h2 id="naprawa-i-aktualizacja-metrics-server">Naprawa i aktualizacja metrics-server<a class="headerlink" href="#naprawa-i-aktualizacja-metrics-server" title="Permanent link">&para;</a></h2>
+<h2 id="naprawa-i-aktualizacja-metrics-server">Naprawa i aktualizacja metrics-server</h2>
 <p>Warstwa danych działała: Deployment miał <code>1/1</code> gotowych replik, APIService
 <code>v1beta1.metrics.k8s.io</code> raportował <code>Available=True</code>, a <code>kubectl top</code> zwracał
 metryki nodów i Podów. Niespójny był stan zarządzania przez Flux: HelmRelease miał
@@ -4388,7 +4388,7 @@ na <code>10250</code>, obecne argumenty TLS oraz rozdzielczość metryk <code>15
 <p>Po rolloutcie HelmRelease osiągnął <code>Ready=True</code>, APIService pozostał dostępny,
 <code>kubectl top nodes</code> i <code>kubectl top pods -A</code> działały, a logi nowego Poda nie
 zawierały błędów.</p>
-<h2 id="materia-odzyskiwania">Materiał odzyskiwania<a class="headerlink" href="#materia-odzyskiwania" title="Permanent link">&para;</a></h2>
+<h2 id="materia-odzyskiwania">Materiał odzyskiwania</h2>
 <p>Znaleziony wcześniej <code>pub-sealed-secrets.pem</code> zawierał tylko certyfikat publiczny.
 Pozwala szyfrować nowe manifesty, ale nie odszyfruje istniejących danych i nie odtworzy
 kontrolera po utracie etcd.</p>
@@ -4423,7 +4423,7 @@ kontrolera po utracie etcd.</p>
 szyfrowane różnymi certyfikatami. Aktualny fingerprint SHA-256 zaczynał się od
 <code>F3:30:60:71</code> i odpowiadał kluczowi z 12 września. Przegląd wcześniejszego journala
 nie wykazał żadnego eksportu prywatnych kluczy.</p>
-<h2 id="zaszyfrowany-backup">Zaszyfrowany backup<a class="headerlink" href="#zaszyfrowany-backup" title="Permanent link">&para;</a></h2>
+<h2 id="zaszyfrowany-backup">Zaszyfrowany backup</h2>
 <p>Cztery Secrety pobrano przez API, ograniczono do danych potrzebnych do odtworzenia i
 przekazano strumieniowo do symetrycznego GPG AES-256. Jawny JSON nie został zapisany
 na dysku. Plik wynikowy i checksum miały prawa <code>600</code>.</p>
@@ -4433,7 +4433,7 @@ plik SHA-256 przeszedł <code>sha256sum --check</code>. Zaszyfrowany backup i ch
 skopiowano na dysk zewnętrzny poza klastrem i stacją roboczą.</p>
 <p>Backup trzeba odświeżać po każdej rotacji tworzącej nowy
 <code>sealed-secrets-key*</code>.</p>
-<h2 id="aktualizacja">Aktualizacja<a class="headerlink" href="#aktualizacja" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja">Aktualizacja</h2>
 <p>Porównanie chartów <code>2.18.4</code> i <code>2.20.0</code> wykazało zmianę aplikacji
 <code>0.36.1 → 0.40.0</code> oraz dodatkowe zabezpieczenia kontenera, między innymi
 <code>seccompProfile: RuntimeDefault</code> i <code>allowPrivilegeEscalation: false</code>.</p>
@@ -4444,7 +4444,7 @@ skopiowano na dysk zewnętrzny poza klastrem i stacją roboczą.</p>
 załadował wszystkie cztery klucze, miał zero restartów, a dziewięć SealedSecrets
 pozostało zsynchronizowanych. Klient <code>kubeseal</code> zaktualizowano do <code>0.40.0</code> po
 sprawdzeniu checksumy oficjalnego archiwum.</p>
-<h2 id="objaw-i-diagnostyka">Objaw i diagnostyka<a class="headerlink" href="#objaw-i-diagnostyka" title="Permanent link">&para;</a></h2>
+<h2 id="objaw-i-diagnostyka">Objaw i diagnostyka</h2>
 <p>Po aktualizacji <code>kubeseal --fetch-cert</code> okresowo zwracał:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>proxy error from 127.0.0.1:6443 while dialing 10.42.0.201:8080,
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>code 502: 502 Bad Gateway
@@ -4457,21 +4457,21 @@ pozostałe dwa nody miały timeout.</p>
 właściwą granicę awarii:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>remote-node -&gt; sealed-secrets-controller:8080 Policy denied DROPPED
 </span></code></pre></div>
-<h2 id="przyczyna">Przyczyna<a class="headerlink" href="#przyczyna" title="Permanent link">&para;</a></h2>
+<h2 id="przyczyna">Przyczyna</h2>
 <p><code>kubeseal</code> łączy się przez HAProxy, który wybiera jeden z trzech API serverów.
 API server proxyuje żądanie do Poda kontrolera. Gdy działa na innym nodzie niż Pod,
 Cilium widzi źródło jako <code>remote-node</code>, a istniejące polityki Flux dopuszczały na
 port 8080 Pody, lecz nie nody.</p>
 <p>Aktualizacja nie uszkodziła VXLAN ani kluczy. Rollout przeniósł Pod i ujawnił
 istniejącą lukę, której wcześniejszy wynik zależał od backendu wybranego przez HAProxy.</p>
-<h2 id="poprawka">Poprawka<a class="headerlink" href="#poprawka" title="Permanent link">&para;</a></h2>
+<h2 id="poprawka">Poprawka</h2>
 <p>Dodano wąską <code>CiliumNetworkPolicy</code> dla <code>remote-node</code> do kontrolera na
 <code>8080/TCP</code> i dołączono ją do Kustomization operatora. Commit:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>c086537 fix(sealed-secrets): allow API server proxy traffic
 </span></code></pre></div>
 <p>Reguła nie otwiera dostępu z LAN ani Internetu. Wybiera jeden workload, jeden port i
 wyłącznie tożsamość nodów klastra.</p>
-<h2 id="walidacja-koncowa">Walidacja końcowa<a class="headerlink" href="#walidacja-koncowa" title="Permanent link">&para;</a></h2>
+<h2 id="walidacja-koncowa">Walidacja końcowa</h2>
 <ul>
 <li>polityka: <code>Valid=True</code>;</li>
 <li>trzy próby HTTP z każdego noda: <code>200</code>;</li>
@@ -4480,7 +4480,7 @@ wyłącznie tożsamość nodów klastra.</p>
 <li>brak nowych dropów Hubble do kontrolera;</li>
 <li>wszystkie Kustomizations Flux: <code>Ready=True</code>.</li>
 </ul>
-<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
+<h2 id="stan-koncowy">Stan końcowy</h2>
 <ul>
 <li>metrics-server: chart <code>3.13.1</code>, aplikacja <code>0.8.1</code>, HelmRelease <code>Ready=True</code>;</li>
 <li>Metrics API, <code>kubectl top nodes</code> i <code>kubectl top pods -A</code>: działają;</li>

@@ -4391,12 +4391,12 @@
   
 
 
-<h1 id="5-flux">5 - Flux<a class="headerlink" href="#5-flux" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-05">K3s Homelab — Sesja 05<a class="headerlink" href="#k3s-homelab-sesja-05" title="Permanent link">&para;</a></h2>
+<h1 id="5-flux">5 - Flux</h1>
+<h2 id="k3s-homelab-sesja-05">K3s Homelab — Sesja 05</h2>
 <p><strong>Data:</strong> 2026-01-21<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <p>Pełna pętla GitOps z automatyczną aktualizacją obrazów:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>GitHub repo (źródło prawdy)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       ↓ (Flux obserwuje co 1 min)
@@ -4407,7 +4407,7 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>ImagePolicy wykrywa nowszy tag → Flux commituje do repo
 </span></code></pre></div>
 <hr />
-<h3 id="1-gitops-filozofia">1. GitOps — filozofia<a class="headerlink" href="#1-gitops-filozofia" title="Permanent link">&para;</a></h3>
+<h3 id="1-gitops-filozofia">1. GitOps — filozofia</h3>
 <p><strong>Problem z klasycznym podejściem (<code>kubectl apply</code>):</strong></p>
 <ul>
 <li>Brak jednego źródła prawdy o stanie klastra</li>
@@ -4427,7 +4427,7 @@
 <li>Pull (GitOps): agent wewnątrz klastra sam pobiera zmiany — bezpieczniejsze, klaster nie musi być dostępny z zewnątrz</li>
 </ul>
 <hr />
-<h3 id="2-flux-komponenty">2. Flux — komponenty<a class="headerlink" href="#2-flux-komponenty" title="Permanent link">&para;</a></h3>
+<h3 id="2-flux-komponenty">2. Flux — komponenty</h3>
 <p><strong>Instalacja:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Sprawdź wymagania</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>flux<span class="w"> </span>check<span class="w"> </span>--pre
@@ -4456,7 +4456,7 @@
 </ul>
 <p><strong>Nie są instalowane domyślnie</strong> — trzeba dodać <code>--components-extra</code>.</p>
 <hr />
-<h3 id="3-struktura-repo-gitops">3. Struktura repo GitOps<a class="headerlink" href="#3-struktura-repo-gitops" title="Permanent link">&para;</a></h3>
+<h3 id="3-struktura-repo-gitops">3. Struktura repo GitOps</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>k3s-homelab/                          ← root repo
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── apps/
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   └── base/
@@ -4482,7 +4482,7 @@
 </ul>
 <p><strong>Dlaczego taka separacja:</strong> jedna aplikacja może działać na wielu klastrach. Manifesty aplikacji są niezależne od klastra.</p>
 <hr />
-<h3 id="4-dwa-rodzaje-kustomization">4. Dwa rodzaje Kustomization<a class="headerlink" href="#4-dwa-rodzaje-kustomization" title="Permanent link">&para;</a></h3>
+<h3 id="4-dwa-rodzaje-kustomization">4. Dwa rodzaje Kustomization</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># kustomize.config.k8s.io — natywny Kustomize, składa pliki YAML</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize.config.k8s.io/v1beta1</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Kustomization</span>
@@ -4505,7 +4505,7 @@
 </span></code></pre></div>
 <p><strong><code>prune: true</code></strong> — Flux usuwa zasoby które zniknęły z repo. Jeśli usuniesz plik, Flux usunie też odpowiadający zasób w klastrze.</p>
 <hr />
-<h3 id="5-image-automation-pena-petla">5. Image Automation — pełna pętla<a class="headerlink" href="#5-image-automation-pena-petla" title="Permanent link">&para;</a></h3>
+<h3 id="5-image-automation-pena-petla">5. Image Automation — pełna pętla</h3>
 <p>Trzy zasoby potrzebne do automatycznej aktualizacji tagów:</p>
 <p><strong>ImageRepository</strong> — obserwuje registry:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image.toolkit.fluxcd.io/v1beta2</span>
@@ -4560,7 +4560,7 @@
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.29.5</span><span class="w"> </span><span class="c1"># {"$imagepolicy": "flux-system:nginx"}</span>
 </span></code></pre></div>
 <hr />
-<h3 id="6-deploy-key-uprawnienia-do-zapisu">6. Deploy key — uprawnienia do zapisu<a class="headerlink" href="#6-deploy-key-uprawnienia-do-zapisu" title="Permanent link">&para;</a></h3>
+<h3 id="6-deploy-key-uprawnienia-do-zapisu">6. Deploy key — uprawnienia do zapisu</h3>
 <p>Flux używa SSH deploy key do komunikacji z repo (nie token). Domyślny bootstrap tworzy klucz <strong>read-only</strong>.</p>
 <p>Do Image Automation potrzebny jest klucz <strong>read/write</strong> — flaga <code>--read-write-key</code> w bootstrap.</p>
 <p><strong>Jeśli klucz jest read-only:</strong></p>
@@ -4570,7 +4570,7 @@
 <li>Dodaj na GitHubie z <strong>Allow write access</strong></li>
 </ol>
 <hr />
-<h3 id="7-flux-i-konflikty-git">7. Flux i konflikty Git<a class="headerlink" href="#7-flux-i-konflikty-git" title="Permanent link">&para;</a></h3>
+<h3 id="7-flux-i-konflikty-git">7. Flux i konflikty Git</h3>
 <p>Flux commituje do repo automatycznie. Gdy jednocześnie Ty pchasz zmiany, może wystąpić konflikt.</p>
 <p><strong>Rozwiązanie — rebase:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>git<span class="w"> </span>config<span class="w"> </span>pull.rebase<span class="w"> </span><span class="nb">true</span><span class="w">  </span><span class="c1"># ustaw globalnie raz</span>
@@ -4579,7 +4579,7 @@
 </span></code></pre></div>
 <p>Rebase zachowuje czystą historię commitów — lepszy niż merge w repo zarządzanym przez automaty.</p>
 <hr />
-<h3 id="8-conventional-commits">8. Conventional Commits<a class="headerlink" href="#8-conventional-commits" title="Permanent link">&para;</a></h3>
+<h3 id="8-conventional-commits">8. Conventional Commits</h3>
 <p>Standard commit messages używany w branży:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&lt;typ&gt;(&lt;scope&gt;): &lt;opis&gt;
 </span></code></pre></div>
@@ -4599,7 +4599,7 @@
 </span></code></pre></div>
 <p>Wiele narzędzi (generatory changelogów, semantic versioning) opiera się na tej konwencji.</p>
 <hr />
-<h3 id="9-flux-vs-argocd">9. Flux vs ArgoCD<a class="headerlink" href="#9-flux-vs-argocd" title="Permanent link">&para;</a></h3>
+<h3 id="9-flux-vs-argocd">9. Flux vs ArgoCD</h3>
 <table>
 <thead>
 <tr>
@@ -4639,7 +4639,7 @@
 </ul>
 <p>Znajomość Flux = znajomość fundamentów dla wszystkich platform.</p>
 <hr />
-<h3 id="10-progressive-delivery-architektura-srodowisk">10. Progressive Delivery — architektura środowisk<a class="headerlink" href="#10-progressive-delivery-architektura-srodowisk" title="Permanent link">&para;</a></h3>
+<h3 id="10-progressive-delivery-architektura-srodowisk">10. Progressive Delivery — architektura środowisk</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>apps/
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>├── base/          ← bazowe manifesty
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>├── staging/       ← nadpisania dla staging (auto-deploy z main)
@@ -4651,7 +4651,7 @@
 <li><code>production</code> Kustomization → obserwuje branch <code>production</code> → zmiana tylko przez PR</li>
 </ul>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Własna aplikacja (Python/Java) + CI/CD pipeline z GitHub Actions</strong> ← następny krok</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Helm charts dla własnych aplikacji</li>
@@ -4666,7 +4666,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> NetworkPolicy dla izolacji między aplikacjami</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Flux status</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>flux<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-n<span class="w"> </span>flux-system
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>flux<span class="w"> </span>get<span class="w"> </span>kustomizations

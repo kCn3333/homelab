@@ -4413,17 +4413,17 @@
   
 
 
-<h1 id="17-progressive-delivery">17 - Progressive Delivery<a class="headerlink" href="#17-progressive-delivery" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-17-progressive-delivery">K3s Homelab — Sesja 17 (Progressive Delivery)<a class="headerlink" href="#k3s-homelab-sesja-17-progressive-delivery" title="Permanent link">&para;</a></h2>
+<h1 id="17-progressive-delivery">17 - Progressive Delivery</h1>
+<h2 id="k3s-homelab-sesja-17-progressive-delivery">K3s Homelab — Sesja 17 (Progressive Delivery)</h2>
 <p><strong>Data:</strong> 2026-03-11<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <p>Pełny pipeline progressive delivery z trzema środowiskami i różnymi triggerami deploy:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git tag v*  →  dev (auto)  →  staging (auto)  →  prod (PR review)
 </span></code></pre></div>
 <hr />
-<h3 id="1-progressive-delivery-koncepcja">1. Progressive Delivery — koncepcja<a class="headerlink" href="#1-progressive-delivery-koncepcja" title="Permanent link">&para;</a></h3>
+<h3 id="1-progressive-delivery-koncepcja">1. Progressive Delivery — koncepcja</h3>
 <p>Progressive delivery to strategia deploymentu gdzie nowa wersja przechodzi przez kolejne środowiska zanim dotrze do produkcji. Każde środowisko daje możliwość wykrycia błędów przed wpłynięciem na użytkowników końcowych.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>clients-api repo
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>       │ git tag v1.5.4
@@ -4439,7 +4439,7 @@
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>       │
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>       └──→ prod (clients)        manual PR → merge → deploy
 </span></code></pre></div>
-<h3 id="2-branch-based-environments">2. Branch-based environments<a class="headerlink" href="#2-branch-based-environments" title="Permanent link">&para;</a></h3>
+<h3 id="2-branch-based-environments">2. Branch-based environments</h3>
 <p>Każde środowisko ma osobne źródło Git które Flux obserwuje:</p>
 <table>
 <thead>
@@ -4472,7 +4472,7 @@
 </tbody>
 </table>
 <p><strong>Kluczowe:</strong> staging Kustomization obserwuje branch <code>staging</code>, nie <code>main</code>. Fluxbot commituje aktualizacje tagu do odpowiedniego brancha.</p>
-<h3 id="3-osobne-gitrepository-dla-staging">3. Osobne GitRepository dla staging<a class="headerlink" href="#3-osobne-gitrepository-dla-staging" title="Permanent link">&para;</a></h3>
+<h3 id="3-osobne-gitrepository-dla-staging">3. Osobne GitRepository dla staging</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source.toolkit.fluxcd.io/v1</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GitRepository</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4487,7 +4487,7 @@
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span><span class="w">  </span><span class="c1"># ← ten sam deploy key co główny flux-system</span>
 </span></code></pre></div>
 <p><strong>Wniosek:</strong> URL musi być SSH (<code>ssh://git@github.com/...</code>) — deploy key w <code>flux-system</code> secret jest kluczem SSH i nie działa z HTTPS URL.</p>
-<h3 id="4-osobne-imagepolicy-per-srodowisko">4. Osobne ImagePolicy per środowisko<a class="headerlink" href="#4-osobne-imagepolicy-per-srodowisko" title="Permanent link">&para;</a></h3>
+<h3 id="4-osobne-imagepolicy-per-srodowisko">4. Osobne ImagePolicy per środowisko</h3>
 <p>Każde środowisko ma własną ImagePolicy żeby fluxbot wiedział do którego pliku zapisać aktualizację tagu:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># flux-system/imagepolicy dla dev</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4514,7 +4514,7 @@
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nt">image</span><span class="p">:</span>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"1.5.3"</span><span class="w"> </span><span class="c1"># {"$imagepolicy": "flux-system:clients-api:tag"}</span>
 </span></code></pre></div>
-<h3 id="5-osobne-imageupdateautomation-per-srodowisko">5. Osobne ImageUpdateAutomation per środowisko<a class="headerlink" href="#5-osobne-imageupdateautomation-per-srodowisko" title="Permanent link">&para;</a></h3>
+<h3 id="5-osobne-imageupdateautomation-per-srodowisko">5. Osobne ImageUpdateAutomation per środowisko</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Dev automation — commituje do main, aktualizuje ./apps/dev</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">image.toolkit.fluxcd.io/v1beta2</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ImageUpdateAutomation</span>
@@ -4545,7 +4545,7 @@
 </span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">  </span><span class="nt">update</span><span class="p">:</span>
 </span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./apps/staging</span><span class="w">       </span><span class="c1"># ← tylko staging pliki</span>
 </span></code></pre></div>
-<h3 id="6-flow-deploy-na-produkcje-manual-pr">6. Flow deploy na produkcję (manual PR)<a class="headerlink" href="#6-flow-deploy-na-produkcje-manual-pr" title="Permanent link">&para;</a></h3>
+<h3 id="6-flow-deploy-na-produkcje-manual-pr">6. Flow deploy na produkcję (manual PR)</h3>
 <p>Produkcja nie ma ImageUpdateAutomation — tag jest pinned i zmienia się tylko przez PR:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 1. Stwórz feature branch</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>release/1.5.4
@@ -4575,7 +4575,7 @@
 </span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>### Changes in this release
 </span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>- opis zmian
 </span></code></pre></div>
-<h3 id="7-synchronizacja-branchy">7. Synchronizacja branchy<a class="headerlink" href="#7-synchronizacja-branchy" title="Permanent link">&para;</a></h3>
+<h3 id="7-synchronizacja-branchy">7. Synchronizacja branchy</h3>
 <p>Branch <code>staging</code> jest osobnym długożyjącym branchem. Gdy robisz zmiany infrastruktury na <code>main</code> — musisz je manualne zmergować do <code>staging</code>:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>staging
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>git<span class="w"> </span>merge<span class="w"> </span>main
@@ -4583,7 +4583,7 @@
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>git<span class="w"> </span>checkout<span class="w"> </span>main
 </span></code></pre></div>
 <p><strong>Ważne:</strong> fluxbot pushuje na <code>staging</code> — więc przed merge musisz zrobić <code>git pull origin staging</code> żeby uniknąć konfliktu.</p>
-<h3 id="8-struktura-repo-po-implementacji">8. Struktura repo po implementacji<a class="headerlink" href="#8-struktura-repo-po-implementacji" title="Permanent link">&para;</a></h3>
+<h3 id="8-struktura-repo-po-implementacji">8. Struktura repo po implementacji</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>k3s-homelab/
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>├── apps/
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>│   ├── base/clients-api/    ← production manifests
@@ -4609,7 +4609,7 @@
 </span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>    ├── image-update-automation.yaml     ← dev automation (main)
 </span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    └── image-update-automation-staging.yaml ← staging automation
 </span></code></pre></div>
-<h3 id="9-roznice-konfiguracyjne-miedzy-srodowiskami">9. Różnice konfiguracyjne między środowiskami<a class="headerlink" href="#9-roznice-konfiguracyjne-miedzy-srodowiskami" title="Permanent link">&para;</a></h3>
+<h3 id="9-roznice-konfiguracyjne-miedzy-srodowiskami">9. Różnice konfiguracyjne między środowiskami</h3>
 <table>
 <thead>
 <tr>
@@ -4682,7 +4682,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="10-napotkane-problemy">10. Napotkane problemy<a class="headerlink" href="#10-napotkane-problemy" title="Permanent link">&para;</a></h3>
+<h3 id="10-napotkane-problemy">10. Napotkane problemy</h3>
 <p><strong><code>authentication required: No anonymous write access</code></strong></p>
 <ul>
 <li>Przyczyna: <code>flux-system-staging</code> GitRepository używał HTTPS URL</li>
@@ -4694,7 +4694,7 @@
 <li>Fix: <code>git pull origin staging</code> przed <code>git push</code></li>
 </ul>
 <hr />
-<h2 id="finalna-weryfikacja">Finalna weryfikacja<a class="headerlink" href="#finalna-weryfikacja" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-weryfikacja">Finalna weryfikacja</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Wszystkie ImagePolicy</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>imagepolicy<span class="w"> </span>-n<span class="w"> </span>flux-system
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># clients-api:         1.5.4 (prod)</span>
@@ -4712,7 +4712,7 @@
 </span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="c1"># flux-system-staging: True  repository up-to-date</span>
 </span></code></pre></div>
 <hr />
-<h2 id="backlog">Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h2>
+<h2 id="backlog">Backlog</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hubble UI — native routing migration (?)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> HashiCorp Vault</li>
@@ -4721,7 +4721,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> helm test dodać do CI/CD pipeline (automatyczne po deploy na staging)</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Synchronizacja staging branch</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>git<span class="w"> </span>checkout<span class="w"> </span>staging
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>staging

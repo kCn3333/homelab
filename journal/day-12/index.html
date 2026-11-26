@@ -4391,12 +4391,12 @@
   
 
 
-<h1 id="12-grafana-hpa">12 - Grafana + HPA<a class="headerlink" href="#12-grafana-hpa" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-12">K3s Homelab — Sesja 12<a class="headerlink" href="#k3s-homelab-sesja-12" title="Permanent link">&para;</a></h2>
+<h1 id="12-grafana-hpa">12 - Grafana + HPA</h1>
+<h2 id="k3s-homelab-sesja-12">K3s Homelab — Sesja 12</h2>
 <p><strong>Data:</strong> 2026-02-15<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li><strong>HTTP request logging</strong> — CommonsRequestLoggingFilter w Spring Boot</li>
 <li><strong>Grafana dashboard</strong> — Request Rate, Error Rate, p99 Latency, JVM Heap, DB Connection Pool, Loki logs</li>
@@ -4405,7 +4405,7 @@
 <li><strong>NetworkPolicy</strong> — izolacja sieciowa: DB dostępna tylko dla clients-api</li>
 </ol>
 <hr />
-<h3 id="1-http-request-logging-w-spring-boot">1. HTTP Request Logging w Spring Boot<a class="headerlink" href="#1-http-request-logging-w-spring-boot" title="Permanent link">&para;</a></h3>
+<h3 id="1-http-request-logging-w-spring-boot">1. HTTP Request Logging w Spring Boot</h3>
 <p>Spring Boot domyślnie nie loguje requestów HTTP. Potrzebujesz dwóch rzeczy:</p>
 <p><strong>Bean w kodzie Java:</strong></p>
 <div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Configuration</span>
@@ -4426,7 +4426,7 @@
 </span></code></pre></div>
 <p><strong>Ważne:</strong> konfiguracja musi być w profilu który jest aktywny na klastrze (<code>application-prod.properties</code>), nie tylko w lokalnym (<code>application-local.properties</code>).</p>
 <hr />
-<h3 id="2-logql-podstawy-i-puapki">2. LogQL — podstawy i pułapki<a class="headerlink" href="#2-logql-podstawy-i-puapki" title="Permanent link">&para;</a></h3>
+<h3 id="2-logql-podstawy-i-puapki">2. LogQL — podstawy i pułapki</h3>
 <p><strong>Składnia:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{selektor} | operator "tekst"
 </span></code></pre></div>
@@ -4460,7 +4460,7 @@
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>| line_format "{{.level}} | {{.thread_name}} | {{.message}}"
 </span></code></pre></div>
 <hr />
-<h3 id="3-prometheus-metryki-spring-boot-actuator">3. Prometheus — metryki Spring Boot Actuator<a class="headerlink" href="#3-prometheus-metryki-spring-boot-actuator" title="Permanent link">&para;</a></h3>
+<h3 id="3-prometheus-metryki-spring-boot-actuator">3. Prometheus — metryki Spring Boot Actuator</h3>
 <p><strong>Histogramy muszą być jawnie włączone:</strong></p>
 <p>Domyślnie Spring Boot eksportuje tylko <code>_count</code> i <code>_sum</code> dla HTTP metrics. Bez histogramów nie można liczyć percentyli (p50/p95/p99).</p>
 <div class="language-properties highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># application-prod.properties</span>
@@ -4509,7 +4509,7 @@
 <li>Join z <code>kube_pod_info</code>: <code>* on(pod) group_left() kube_pod_info{namespace="clients"}</code></li>
 </ul>
 <hr />
-<h3 id="4-diagnoza-bottlenecka-cpu-throttling">4. Diagnoza bottlenecka — CPU throttling<a class="headerlink" href="#4-diagnoza-bottlenecka-cpu-throttling" title="Permanent link">&para;</a></h3>
+<h3 id="4-diagnoza-bottlenecka-cpu-throttling">4. Diagnoza bottlenecka — CPU throttling</h3>
 <p><strong>Jak wykryć CPU throttling:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>clients
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># clients-api-xxx   499m/500m  ← prawie dokładnie limit = throttling</span>
@@ -4532,7 +4532,7 @@
 </span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">"2000m"</span><span class="w">   </span><span class="c1"># JVM może używać do 2 cores podczas GC i pików</span>
 </span></code></pre></div>
 <hr />
-<h3 id="5-load-testing-z-hey">5. Load testing z <code>hey</code><a class="headerlink" href="#5-load-testing-z-hey" title="Permanent link">&para;</a></h3>
+<h3 id="5-load-testing-z-hey">5. Load testing z <code>hey</code></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Instalacja</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>wget<span class="w"> </span>https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>hey_linux_amd64
@@ -4558,7 +4558,7 @@
 </span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>context deadline exceeded — klient timeout (aplikacja za wolna)
 </span></code></pre></div>
 <hr />
-<h3 id="6-hpa-horizontal-pod-autoscaler">6. HPA — Horizontal Pod Autoscaler<a class="headerlink" href="#6-hpa-horizontal-pod-autoscaler" title="Permanent link">&para;</a></h3>
+<h3 id="6-hpa-horizontal-pod-autoscaler">6. HPA — Horizontal Pod Autoscaler</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autoscaling/v2</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HorizontalPodAutoscaler</span>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4616,7 +4616,7 @@
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Optymum → 4-6 replik
 </span></code></pre></div>
 <hr />
-<h3 id="7-readiness-i-liveness-probes">7. Readiness i Liveness Probes<a class="headerlink" href="#7-readiness-i-liveness-probes" title="Permanent link">&para;</a></h3>
+<h3 id="7-readiness-i-liveness-probes">7. Readiness i Liveness Probes</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">readinessProbe</span><span class="p">:</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/actuator/health/readiness</span><span class="w">   </span><span class="c1"># Spring Boot dedykowany endpoint</span>
@@ -4644,7 +4644,7 @@
 </span></code></pre></div>
 <p><strong>Dlaczego <code>initialDelaySeconds</code> jest krytyczny dla JVM:</strong> Bez odpowiedniego opóźnienia Kubernetes uznaje pod za gotowy zanim JVM skończy warmup → pierwsze requesty trafiają na zimny pod → wysokie latency lub błędy 500.</p>
 <hr />
-<h3 id="8-networkpolicy-izolacja-sieciowa">8. NetworkPolicy — izolacja sieciowa<a class="headerlink" href="#8-networkpolicy-izolacja-sieciowa" title="Permanent link">&para;</a></h3>
+<h3 id="8-networkpolicy-izolacja-sieciowa">8. NetworkPolicy — izolacja sieciowa</h3>
 <p><strong>Domyślne zachowanie bez NetworkPolicy:</strong> Każdy pod może połączyć się z każdym — brak izolacji.</p>
 <p><strong>Dwa typy polityk:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>policyTypes:
@@ -4713,7 +4713,7 @@
 </span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>Cilium domyślnie używa DROP
 </span></code></pre></div>
 <hr />
-<h2 id="podsumowanie-optymalizacji-wydajnosci">Podsumowanie optymalizacji wydajności<a class="headerlink" href="#podsumowanie-optymalizacji-wydajnosci" title="Permanent link">&para;</a></h2>
+<h2 id="podsumowanie-optymalizacji-wydajnosci">Podsumowanie optymalizacji wydajności</h2>
 <table>
 <thead>
 <tr>
@@ -4741,7 +4741,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="finalna-struktura-plikow-clients-api">Finalna struktura plików clients-api<a class="headerlink" href="#finalna-struktura-plikow-clients-api" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-struktura-plikow-clients-api">Finalna struktura plików clients-api</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>apps/base/clients-api/
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>├── namespace.yaml
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>├── db-cluster.yaml
@@ -4757,7 +4757,7 @@
 </span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>└── kustomization.yaml
 </span></code></pre></div>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>PrometheusRule dla clients-api</strong> — alerty na error rate, p99 latency ← następna sesja</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Grafana dashboard</strong> — zapisać i dopracować panele</li>
@@ -4769,7 +4769,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> External-dns</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Load testing</span>
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>hey<span class="w"> </span>-n<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-c<span class="w"> </span><span class="m">20</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Authorization: Basic dXNlcjp1c2Vy'</span><span class="w"> </span>https://HOST/PATH
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>

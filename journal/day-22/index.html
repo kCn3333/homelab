@@ -4401,11 +4401,11 @@
   
 
 
-<h1 id="22-droga-ruchu-z-haproxy-do-aplikacji">22 - droga ruchu z HAProxy do aplikacji<a class="headerlink" href="#22-droga-ruchu-z-haproxy-do-aplikacji" title="Permanent link">&para;</a></h1>
+<h1 id="22-droga-ruchu-z-haproxy-do-aplikacji">22 - droga ruchu z HAProxy do aplikacji</h1>
 <p><strong>Data:</strong> 2026-09-10</p>
 <p><strong>Środowisko:</strong> k3s v1.34.4+k3s1, ServiceLB, Traefik v3, kube-proxy/iptables, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li>Rozróżnienie typów Service: <code>ClusterIP</code>, <code>NodePort</code> i <code>LoadBalancer</code>.</li>
 <li>Ustalenie ról HAProxy, ServiceLB, <code>klipper-lb</code> i Traefika.</li>
@@ -4414,7 +4414,7 @@
 <li>Ustalenie, czy Traefik korzysta z ClusterIP backendu, czy łączy się bezpośrednio z Podem.</li>
 </ol>
 <hr />
-<h3 id="1-typy-service">1. Typy Service<a class="headerlink" href="#1-typy-service" title="Permanent link">&para;</a></h3>
+<h3 id="1-typy-service">1. Typy Service</h3>
 <table>
 <thead>
 <tr>
@@ -4439,14 +4439,14 @@
 </table>
 <p><code>NodePort</code> nie wymaga osobnego procesu nasłuchującego w userspace. kube-proxy programuje reguły iptables przechwytujące ruch do portu noda.</p>
 <p><code>kubectl port-forward</code> jest innym mechanizmem. Utrzymuje tymczasowy proces i tunel związany z działającym poleceniem. Nie jest typem Service.</p>
-<h3 id="2-usuniecie-nieuzywanego-testu-nginx">2. Usunięcie nieużywanego testu Nginx<a class="headerlink" href="#2-usuniecie-nieuzywanego-testu-nginx" title="Permanent link">&para;</a></h3>
+<h3 id="2-usuniecie-nieuzywanego-testu-nginx">2. Usunięcie nieużywanego testu Nginx</h3>
 <p>Pozostałość w namespace <code>flux-test</code> zawierała Deployment z trzema niedziałającymi replikami, Service typu NodePort, Ingress i PVC w stanie <code>Terminating</code>.</p>
 <p>Przyczyną <code>Pending</code> był brak usuwanego PVC:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>persistentvolumeclaim "nginx-pvc" is being deleted
 </span></code></pre></div>
 <p>Po usunięciu katalogu <code>nginx</code> z aktywnej listy zasobów <code>apps/base/kustomization.yaml</code> i uzgodnieniu Fluxa pruning usunął zasoby oraz namespace. Potwierdzono również brak PV i wolumenu Longhorna powiązanego z dawnym PVC.</p>
 <p>Pliki testu mogły pozostać w repo jako nieaktywne materiały, o ile nie są dołączone przez żadną Kustomization.</p>
-<h3 id="3-service-traefika">3. Service Traefika<a class="headerlink" href="#3-service-traefika" title="Permanent link">&para;</a></h3>
+<h3 id="3-service-traefika">3. Service Traefika</h3>
 <p>Aktualny Service:</p>
 <table>
 <thead>
@@ -4488,7 +4488,7 @@
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>192.168.55.12
 </span></code></pre></div>
 <p>NodePort odpowiadał na wszystkich trzech nodach. Porty <code>80/443</code> również odpowiadały bezpośrednio na wszystkich trzech adresach nodów.</p>
-<h3 id="4-servicelb-svclb-i-klipper-lb">4. ServiceLB, svclb i klipper-lb<a class="headerlink" href="#4-servicelb-svclb-i-klipper-lb" title="Permanent link">&para;</a></h3>
+<h3 id="4-servicelb-svclb-i-klipper-lb">4. ServiceLB, svclb i klipper-lb</h3>
 <p>ServiceLB jest kontrolerem dostarczanym przez K3s. Obserwuje Service typu <code>LoadBalancer</code> i dla każdego z nich tworzy DaemonSet nazwany od Service.</p>
 <p>Dla <code>Service/traefik</code> utworzono:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>DaemonSet/svclb-traefik-33d14f91
@@ -4519,20 +4519,20 @@
 </table>
 <p>Pod miał <code>hostNetwork=false</code>, ale używał <code>hostPort</code>. <code>klipper-lb</code> jest programem i obrazem realizującym dataplane ServiceLB. Nie jest trzecią, niezależną warstwą load balancera.</p>
 <p>Nazwa <code>svclb-traefik-*</code> pochodzi od obsługiwanego Service. ServiceLB nie jest częścią Traefika; utworzył zasoby nazwane od niego, ponieważ to <code>Service/traefik</code> ma typ <code>LoadBalancer</code>.</p>
-<h3 id="5-rola-zewnetrznego-haproxy">5. Rola zewnętrznego HAProxy<a class="headerlink" href="#5-rola-zewnetrznego-haproxy" title="Permanent link">&para;</a></h3>
+<h3 id="5-rola-zewnetrznego-haproxy">5. Rola zewnętrznego HAProxy</h3>
 <p>HAProxy działa poza klastrem i wybiera jeden z adresów nodów dla ruchu aplikacyjnego. W badanej ścieżce działa na L4 i przekazuje TCP do portu <code>80</code> lub <code>443</code> noda.</p>
 <p>ServiceLB nie wybiera noda za HAProxy. Jego zadaniem jest zapewnienie punktu wejścia na wybranym już nodzie:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>HAProxy → node:80/443 → svclb/klipper-lb → Service/traefik
 </span></code></pre></div>
 <p>API Kubernetes na porcie <code>6443</code> korzysta z oddzielnego frontendu HAProxy i trafia bezpośrednio do serwerów API. Nie przechodzi przez ServiceLB ani Traefika.</p>
-<h3 id="6-endpoint-traefika">6. Endpoint Traefika<a class="headerlink" href="#6-endpoint-traefika" title="Permanent link">&para;</a></h3>
+<h3 id="6-endpoint-traefika">6. Endpoint Traefika</h3>
 <p>EndpointSlice dla <code>Service/traefik</code> zawierał jeden gotowy backend:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Pod:  traefik-6c78dd64c-95g7v
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>IP:   10.42.2.112
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Node: worker2
 </span></code></pre></div>
 <p>Service Traefika przyjmował ruch pod stabilnym ClusterIP, a kube-proxy kierował go do bieżącego Poda Traefika. Traefik działał jako pojedyncza replika, dlatego w EndpointSlice znajdował się jeden backend.</p>
-<h3 id="7-ingress-grafany">7. Ingress Grafany<a class="headerlink" href="#7-ingress-grafany" title="Permanent link">&para;</a></h3>
+<h3 id="7-ingress-grafany">7. Ingress Grafany</h3>
 <p>Obiekt Ingress deklarował:</p>
 <table>
 <thead>
@@ -4581,7 +4581,7 @@
 <li>wybiera backend Grafany;</li>
 <li>otwiera nowe połączenie do backendu.</li>
 </ol>
-<h3 id="8-backend-grafany">8. Backend Grafany<a class="headerlink" href="#8-backend-grafany" title="Permanent link">&para;</a></h3>
+<h3 id="8-backend-grafany">8. Backend Grafany</h3>
 <p>Service backendu:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Service:   monitoring/kube-prometheus-stack-grafana
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Type:      ClusterIP
@@ -4602,7 +4602,7 @@
 </ul>
 <p>Domyślna wartość <code>nativeLBByDefault</code> w providerze Kubernetes Ingress wynosi <code>false</code>. Traefik używa więc Service jako deklaracji backendu i źródła informacji o porcie, pobiera jego EndpointSlice, a następnie łączy się bezpośrednio z Podem <code>10.42.2.61</code>.</p>
 <p>Traefik nie zastępuje obiektu Service. Service nadal wiąże nazwę backendu, selektor, port i endpointy. W tej konfiguracji jego ClusterIP nie znajduje się jednak w faktycznej ścieżce połączenia Traefik → Grafana.</p>
-<h3 id="9-pena-sciezka-ruchu">9. Pełna ścieżka ruchu<a class="headerlink" href="#9-pena-sciezka-ruchu" title="Permanent link">&para;</a></h3>
+<h3 id="9-pena-sciezka-ruchu">9. Pełna ścieżka ruchu</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>przeglądarka
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>→ HAProxy
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>→ wybrany node:80/443
@@ -4618,7 +4618,7 @@
 <li>Traefik zaktualizowałby listę swoich backendów.</li>
 <li>Cilium przesłałoby nowe połączenie do zdalnego PodCIDR przez VXLAN.</li>
 </ol>
-<h3 id="10-podzia-warstw">10. Podział warstw<a class="headerlink" href="#10-podzia-warstw" title="Permanent link">&para;</a></h3>
+<h3 id="10-podzia-warstw">10. Podział warstw</h3>
 <table>
 <thead>
 <tr>
@@ -4656,7 +4656,7 @@
 </tbody>
 </table>
 <p>Cilium może realizować dodatkowe funkcje L7, ale nie były one używane ani testowane w tej ścieżce.</p>
-<h3 id="11-ocena-konfiguracji">11. Ocena konfiguracji<a class="headerlink" href="#11-ocena-konfiguracji" title="Permanent link">&para;</a></h3>
+<h3 id="11-ocena-konfiguracji">11. Ocena konfiguracji</h3>
 <p>Konfiguracja jest funkcjonalna i spójna:</p>
 <ul>
 <li>HAProxy zapewnia zewnętrzny punkt wejścia;</li>
@@ -4665,7 +4665,7 @@
 <li>Cilium zapewnia transport pomiędzy Podami.</li>
 </ul>
 <p>ServiceLB można byłoby pominąć, kierując HAProxy bezpośrednio do NodePort Traefika, ale oznaczałoby to zmianę działającej architektury. W tej sesji pozostawiono aktualny układ bez modyfikacji.</p>
-<h3 id="12-otwarte-problemy">12. Otwarte problemy<a class="headerlink" href="#12-otwarte-problemy" title="Permanent link">&para;</a></h3>
+<h3 id="12-otwarte-problemy">12. Otwarte problemy</h3>
 <ol>
 <li>Hubble wymaga oddzielnej diagnozy i naprawy.</li>
 <li>Dashboardy Grafany wyświetlają komunikat:</li>
@@ -4673,7 +4673,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>An error occurred within the plugin
 </span></code></pre></div>
 <p>Problem należy zbadać niezależnie: stan Podów, logi Grafany, wersje pluginów, zapytania datasource i błędy w przeglądarce.</p>
-<h3 id="13-najwazniejsze-wnioski">13. Najważniejsze wnioski<a class="headerlink" href="#13-najwazniejsze-wnioski" title="Permanent link">&para;</a></h3>
+<h3 id="13-najwazniejsze-wnioski">13. Najważniejsze wnioski</h3>
 <ol>
 <li><code>Ingress</code> jest deklaracją routingu, a Traefik jej wykonawcą.</li>
 <li>ServiceLB jest kontrolerem K3s, <code>svclb-*</code> wygenerowanym DaemonSetem, a <code>klipper-lb</code> jego dataplane.</li>
@@ -4684,7 +4684,7 @@
 <li>Cilium zapewnia transport L3/L4 po wyborze backendu przez Traefika.</li>
 <li>VXLAN jest potrzebny tylko wtedy, gdy źródłowy i docelowy Pod znajdują się na różnych nodach.</li>
 </ol>
-<h3 id="nastepna-sesja">Następna sesja:<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h3>
+<h3 id="nastepna-sesja">Następna sesja:</h3>
 <p>Diagnoza Hubble oraz błędu dashboardów Grafany <code>An error occurred within the plugin</code>. </p>
 
 

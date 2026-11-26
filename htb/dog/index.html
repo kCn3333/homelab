@@ -4179,27 +4179,27 @@
   
 
 
-<h1 id="dog">Dog<a class="headerlink" href="#dog" title="Permanent link">&para;</a></h1>
+<h1 id="dog">Dog</h1>
 <p><strong>Platform:</strong> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.51 6.457.001-.013a.89.89 0 0 0-.271-.638l-.027-.024q-.028-.025-.057-.048-.03-.022-.06-.04l-.029-.02-9.61-5.547a.89.89 0 0 0-.922.004L1.933 5.674l-.03.02-.023.014-.02.015a1 1 0 0 0-.147.134l-.003.003a.9.9 0 0 0-.221.584v.014l-.001.027v11.07c0 .328.18.63.469.784l9.599 5.542.023.011a1 1 0 0 0 .166.07l.04.01.072.015q.018.004.035.006a.8.8 0 0 0 .216 0q.018-.002.035-.006l.072-.014.04-.012.064-.022a1 1 0 0 0 .102-.047l.023-.011 9.599-5.542a.89.89 0 0 0 .469-.784V6.478zM5.255 6.082l6.537-3.774a.42.42 0 0 1 .418 0l6.537 3.774a.418.418 0 0 1 0 .725l-6.537 3.774a.42.42 0 0 1-.418 0L5.254 6.807a.418.418 0 0 1 0-.725m5.614 14.345a.417.417 0 0 1-.626.361l-6.524-3.766a.42.42 0 0 1-.209-.361V9.127a.417.417 0 0 1 .626-.361l6.524 3.766a.42.42 0 0 1 .209.362zm9.623-3.766a.42.42 0 0 1-.209.36l-6.524 3.767a.417.417 0 0 1-.626-.36v-7.533c0-.15.08-.287.209-.362l6.524-3.766a.417.417 0 0 1 .626.36z"/></svg></span> Hack The Box<br>
 <strong>OS:</strong> Linux<br>
 <strong>Lab date:</strong> 2025-03-19</p>
-<h2 id="repository-enumeration">Repository enumeration<a class="headerlink" href="#repository-enumeration" title="Permanent link">&para;</a></h2>
+<h2 id="repository-enumeration">Repository enumeration</h2>
 <p>An exposed Git repository provided application source, email addresses and a database credential in settings.php.</p>
 <p><img alt="Repository enumeration — evidence 1" src="../assets/dog/Dog_image.jpg" /></p>
 <p><img alt="Repository enumeration — evidence 2" src="../assets/dog/4_Dog_image.jpg" /></p>
-<h2 id="backdrop-cms-access">Backdrop CMS access<a class="headerlink" href="#backdrop-cms-access" title="Permanent link">&para;</a></h2>
+<h2 id="backdrop-cms-access">Backdrop CMS access</h2>
 <p>The published machine solution confirms that credential reuse enabled administrative CMS access. The screenshots show preparation of a module and the authenticated installation interface.</p>
 <p><img alt="Backdrop CMS access — evidence 1" src="../assets/dog/3_Dog_image.jpg" /></p>
 <p><img alt="Backdrop CMS access — evidence 2" src="../assets/dog/Dog_image.png" /></p>
-<h2 id="web-execution">Web execution<a class="headerlink" href="#web-execution" title="Permanent link">&para;</a></h2>
+<h2 id="web-execution">Web execution</h2>
 <p>The module installation succeeded. The resulting web interface returned the system account listing, including the local account johncusack.</p>
 <p><img alt="Web execution — evidence 1" src="../assets/dog/1_Dog_image.png" /></p>
 <p><img alt="Web execution — evidence 2" src="../assets/dog/2_Dog_image.png" /></p>
 <p><img alt="Web execution — evidence 3" src="../assets/dog/2_Dog_image.jpg" /></p>
-<h2 id="privilege-escalation-and-root-evidence">Privilege escalation and root evidence<a class="headerlink" href="#privilege-escalation-and-root-evidence" title="Permanent link">&para;</a></h2>
+<h2 id="privilege-escalation-and-root-evidence">Privilege escalation and root evidence</h2>
 <p>The local account reused the application credential for SSH. Its sudo permissions allowed the Backdrop Bee utility to execute code with elevated privileges. The final capture shows the root flag and an interactive root prompt, as well as unsuccessful intermediate attempts.</p>
 <p><img alt="Privilege escalation and root evidence — evidence 1" src="../assets/dog/1_Dog_image.jpg" /></p>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<h2 id="references">References</h2>
 <ul>
 <li><a href="https://0xdf.gitlab.io/2025/07/12/htb-dog.html">Machine reference</a></li>
 </ul>

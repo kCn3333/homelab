@@ -4325,19 +4325,19 @@
   
 
 
-<h1 id="7-cilium">7 - Cilium<a class="headerlink" href="#7-cilium" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-07">K3s Homelab — Sesja 07<a class="headerlink" href="#k3s-homelab-sesja-07" title="Permanent link">&para;</a></h2>
+<h1 id="7-cilium">7 - Cilium</h1>
+<h2 id="k3s-homelab-sesja-07">K3s Homelab — Sesja 07</h2>
 <p><strong>Data:</strong> 2026-02-01<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ul>
 <li>Migracja CNI: Flannel → Cilium v1.19.1 (eBPF)</li>
 <li>Cilium zarządzany przez Flux jako HelmRelease</li>
 <li>Klaster w pełni operacyjny po migracji</li>
 </ul>
 <hr />
-<h3 id="1-problem-z-flannel-po-twardym-wyaczeniu">1. Problem z flannel po twardym wyłączeniu<a class="headerlink" href="#1-problem-z-flannel-po-twardym-wyaczeniu" title="Permanent link">&para;</a></h3>
+<h3 id="1-problem-z-flannel-po-twardym-wyaczeniu">1. Problem z flannel po twardym wyłączeniu</h3>
 <p><strong>Objaw:</strong> Wszystkie pody w stanie <code>ContainerCreating</code> / <code>Unknown</code> po restarcie klastra przez przycisk zasilania.</p>
 <p><strong>Przyczyna:</strong> Flannel trzyma <code>subnet.env</code> w <code>/run/flannel/</code> który jest <code>tmpfs</code> (RAM). Po twardym wyłączeniu ten plik znika. Flannel nie może zainicjalizować sieci bez tego pliku.</p>
 <p><strong>Tymczasowe rozwiązanie:</strong></p>
@@ -4348,7 +4348,7 @@
 <p><strong>Prawdziwe rozwiązanie:</strong> Migracja na Cilium</p>
 <p><strong>Wniosek:</strong> Zawsze używaj Ansible graceful shutdown playbooka zamiast przycisku zasilania!</p>
 <hr />
-<h3 id="2-migracja-cni-flannel-cilium">2. Migracja CNI: Flannel → Cilium<a class="headerlink" href="#2-migracja-cni-flannel-cilium" title="Permanent link">&para;</a></h3>
+<h3 id="2-migracja-cni-flannel-cilium">2. Migracja CNI: Flannel → Cilium</h3>
 <p><strong>Dlaczego Cilium jest lepszy:</strong></p>
 <ul>
 <li>eBPF zamiast iptables — wyższa wydajność, niższy overhead</li>
@@ -4460,7 +4460,7 @@
 </span><span id="__span-8-40"><a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="w">      </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </span></code></pre></div>
 <hr />
-<h3 id="3-problemy-ktore-napotkaem">3. Problemy które napotkałem<a class="headerlink" href="#3-problemy-ktore-napotkaem" title="Permanent link">&para;</a></h3>
+<h3 id="3-problemy-ktore-napotkaem">3. Problemy które napotkałem</h3>
 <p><strong>Problem 1: Cilium crashuje i zabiera sieć</strong></p>
 <p>Cilium DaemonSet crashował w pętli (nie mógł połączyć się z API) i przy tym uszkadzał interfejsy sieciowe. Master i worker1 przestały odpowiadać nawet na ping.</p>
 <p><strong>Rozwiązanie — rescue przez worker2:</strong></p>
@@ -4483,7 +4483,7 @@
 <p>Przy starcie tylko mastera — etcd czekał na pozostałe nody i k3s nie przechodził w stan <code>active</code>.</p>
 <p><strong>Rozwiązanie:</strong> Uruchamiaj workery równolegle z masterem gdy widzisz że etcd loguje <code>prober detected unhealthy status</code>.</p>
 <hr />
-<h3 id="4-weryfikacja-cilium">4. Weryfikacja Cilium<a class="headerlink" href="#4-weryfikacja-cilium" title="Permanent link">&para;</a></h3>
+<h3 id="4-weryfikacja-cilium">4. Weryfikacja Cilium</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Status</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>cilium<span class="w"> </span>status
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
@@ -4500,7 +4500,7 @@
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>Cluster Pods:       53/53 managed by Cilium
 </span></code></pre></div>
 <hr />
-<h3 id="5-ratowanie-klastra-procedury-awaryjne">5. Ratowanie klastra — procedury awaryjne<a class="headerlink" href="#5-ratowanie-klastra-procedury-awaryjne" title="Permanent link">&para;</a></h3>
+<h3 id="5-ratowanie-klastra-procedury-awaryjne">5. Ratowanie klastra — procedury awaryjne</h3>
 <p><strong>Wymuś usunięcie podów:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;<span class="w"> </span>--field-selector<span class="w"> </span>status.phase<span class="o">=</span>Unknown
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>&lt;namespace&gt;<span class="w"> </span>--field-selector<span class="w"> </span>status.phase<span class="o">=</span>Failed
@@ -4519,7 +4519,7 @@
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>ssh<span class="w"> </span>master<span class="w"> </span><span class="s2">"sudo k3s etcd-snapshot ls"</span>
 </span></code></pre></div>
 <hr />
-<h3 id="6-dlaczego-graceful-shutdown-jest-kluczowy">6. Dlaczego graceful shutdown jest kluczowy<a class="headerlink" href="#6-dlaczego-graceful-shutdown-jest-kluczowy" title="Permanent link">&para;</a></h3>
+<h3 id="6-dlaczego-graceful-shutdown-jest-kluczowy">6. Dlaczego graceful shutdown jest kluczowy</h3>
 <p>Twardy restart (przycisk zasilania) może spowodować:</p>
 <ul>
 <li>Utratę <code>tmpfs</code> danych (np. flannel subnet.env)</li>
@@ -4533,7 +4533,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>ansible<span class="w"> </span>all<span class="w"> </span>-m<span class="w"> </span>shell<span class="w"> </span>-a<span class="w"> </span><span class="s2">"shutdown -h +1"</span><span class="w"> </span>-b
 </span></code></pre></div>
 <hr />
-<h2 id="finalna-struktura-repo">Finalna struktura repo<a class="headerlink" href="#finalna-struktura-repo" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-struktura-repo">Finalna struktura repo</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>k3s-homelab/
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>├── README.md
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>├── apps/
@@ -4556,7 +4556,7 @@
 </span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>        └── flux-system/
 </span></code></pre></div>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Prometheus + Grafana monitoring</strong> ← następna sesja</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hubble UI — Cilium network observability</li>
@@ -4568,7 +4568,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RBAC</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Cilium</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>cilium<span class="w"> </span>status
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>cilium<span class="w"> </span>status<span class="w"> </span>--wait

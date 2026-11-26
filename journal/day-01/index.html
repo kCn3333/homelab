@@ -4369,12 +4369,12 @@
   
 
 
-<h1 id="1-ha-k3s-embedded-etcd">1 - HA k3s embedded etcd<a class="headerlink" href="#1-ha-k3s-embedded-etcd" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-01">K3s Homelab — Sesja 01<a class="headerlink" href="#k3s-homelab-sesja-01" title="Permanent link">&para;</a></h2>
+<h1 id="1-ha-k3s-embedded-etcd">1 - HA k3s embedded etcd</h1>
+<h2 id="k3s-homelab-sesja-01">K3s Homelab — Sesja 01</h2>
 <p><strong>Data:</strong> 2026-01-12<br />
 <strong>Środowisko:</strong> 3x HP T630 (8GB RAM, 128GB SSD), Ubuntu Server 24.04</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ul>
 <li>uruchomienie klastra k3s w trybie High Availability (3× <code>control-plane,etcd</code>)  </li>
 <li>wystawienie API i ingress przez HAProxy  </li>
@@ -4387,20 +4387,20 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                                              [Service → Pods]
 </span></code></pre></div>
 <hr />
-<h3 id="zaozenia-architektoniczne">Założenia architektoniczne:<a class="headerlink" href="#zaozenia-architektoniczne" title="Permanent link">&para;</a></h3>
+<h3 id="zaozenia-architektoniczne">Założenia architektoniczne:</h3>
 <ul>
 <li>brak dedykowanych workerów — każdy node pełni rolę control-plane + etcd</li>
 <li>HA na poziomie control-plane (quorum etcd)</li>
 <li>jeden punkt wejścia (HAProxy jako L4/L7 LB)</li>
 </ul>
-<h3 id="uzasadnienie">Uzasadnienie:<a class="headerlink" href="#uzasadnienie" title="Permanent link">&para;</a></h3>
+<h3 id="uzasadnienie">Uzasadnienie:</h3>
 <ul>
 <li>uproszczenie architektury</li>
 <li>maksymalne wykorzystanie zasobów</li>
 <li>pełne HA już przy 3 nodach</li>
 </ul>
 <hr />
-<h3 id="1-high-availability-w-kubernetes">1. High Availability w Kubernetes<a class="headerlink" href="#1-high-availability-w-kubernetes" title="Permanent link">&para;</a></h3>
+<h3 id="1-high-availability-w-kubernetes">1. High Availability w Kubernetes</h3>
 <p><strong>HA ma dwa wymiary:</strong></p>
 <ul>
 <li><strong>Control-plane HA</strong> — scheduler, controller-manager, API server muszą działać żeby klaster mógł reagować na awarie (np. ewakuować pody z martwego noda)</li>
@@ -4410,7 +4410,7 @@
 <p><strong>Test który przeprowadziłem:</strong> wyłączyłem mastera i obserwowałem przez <code>watch kubectl get pods -A</code>. Po ~2-3 minutach pody z martwego noda zostały zreplikowane na pozostałych nodach. Dostęp do API nie został przerwany.</p>
 <p><strong><code>node-monitor-grace-period</code></strong> — czas po którym k8s uznaje node za martwy i zaczyna ewakuację. Domyślnie ~40s, ale pody mogą wisieć w stanie <code>Terminating</code> długo jeśli kubelet nie potwierdzi ich zatrzymania (<code>--force</code> wymusza usunięcie).</p>
 <hr />
-<h3 id="2-etcd-w-k3s">2. etcd w k3s<a class="headerlink" href="#2-etcd-w-k3s" title="Permanent link">&para;</a></h3>
+<h3 id="2-etcd-w-k3s">2. etcd w k3s</h3>
 <ul>
 <li>etcd jest <strong>wbudowany w proces k3s</strong> — nie ma osobnego <code>etcd</code> w <code>kubectl get pods</code></li>
 <li>Pliki danych: <code>/var/lib/rancher/k3s/server/db/etcd/</code></li>
@@ -4418,7 +4418,7 @@
 <li><strong>Błąd który popełniłem:</strong> <code>k3s server etcdctl member list</code> próbuje uruchomić nowy proces k3s server zamiast odpytać działający — stąd błąd z lockiem. To nie był problem z klastrem.</li>
 </ul>
 <hr />
-<h3 id="3-haproxy-jako-zewnetrzny-load-balancer">3. HAProxy jako zewnętrzny Load Balancer<a class="headerlink" href="#3-haproxy-jako-zewnetrzny-load-balancer" title="Permanent link">&para;</a></h3>
+<h3 id="3-haproxy-jako-zewnetrzny-load-balancer">3. HAProxy jako zewnętrzny Load Balancer</h3>
 <p><strong>Rola HAProxy w architekturze:</strong></p>
 <ul>
 <li>Przyjmuje ruch z zewnątrz i rozdziela na nody</li>
@@ -4442,7 +4442,7 @@
 </ul>
 <p><strong>Wniosek:</strong> najpierw usuń health check żeby potwierdzić że routing działa, potem napraw health check.</p>
 <hr />
-<h3 id="4-kubectl-z-poziomu-pc">4. kubectl z poziomu PC<a class="headerlink" href="#4-kubectl-z-poziomu-pc" title="Permanent link">&para;</a></h3>
+<h3 id="4-kubectl-z-poziomu-pc">4. kubectl z poziomu PC</h3>
 <p><strong>kubeconfig</strong> (<code>/etc/rancher/k3s/k3s.yaml</code>) zawiera:</p>
 <ul>
 <li>adres API servera</li>
@@ -4457,7 +4457,7 @@
 </span></code></pre></div>
 <p>Na samych nodach <code>127.0.0.1</code> jest poprawne — każdy jest control-plane i ma lokalny API server.</p>
 <hr />
-<h3 id="5-siec-i-service-w-kubernetes">5. Sieć i Service w Kubernetes<a class="headerlink" href="#5-siec-i-service-w-kubernetes" title="Permanent link">&para;</a></h3>
+<h3 id="5-siec-i-service-w-kubernetes">5. Sieć i Service w Kubernetes</h3>
 <p><strong>Jak ruch trafia do poda:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>HAProxy (L4) → Traefik (L7, Ingress Controller) → Service → Pod
 </span></code></pre></div>
@@ -4473,7 +4473,7 @@ To był mój błąd przy <code>k create svc</code> — nie dodałem selectora, w
 </span></code></pre></div>
 <p>Puste Endpoints = selector nie pasuje do żadnego poda.</p>
 <hr />
-<h3 id="6-ingress-i-traefik">6. Ingress i Traefik<a class="headerlink" href="#6-ingress-i-traefik" title="Permanent link">&para;</a></h3>
+<h3 id="6-ingress-i-traefik">6. Ingress i Traefik</h3>
 <p><strong>IngressClass</strong> to "połączenie" między zasobem <code>Ingress</code> a konkretną implementacją Ingress Controllera. Bez poprawnego <code>ingressClassName</code> Ingress jest ignorowany.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingressclass
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># traefik   traefik.io/ingress-controller</span>
@@ -4486,11 +4486,11 @@ To był mój błąd przy <code>k create svc</code> — nie dodałem selectora, w
 <li><strong>Ingress</strong> — z poprawnym <code>ingressClassName</code></li>
 </ol>
 <hr />
-<h3 id="7-dns-coredns-vs-zewnetrzny-dns">7. DNS — CoreDNS vs zewnętrzny DNS<a class="headerlink" href="#7-dns-coredns-vs-zewnetrzny-dns" title="Permanent link">&para;</a></h3>
+<h3 id="7-dns-coredns-vs-zewnetrzny-dns">7. DNS — CoreDNS vs zewnętrzny DNS</h3>
 <p><strong>CoreDNS</strong> — DNS wewnątrz klastra, tylko dla podów. Pozwala używać nazw <code>svc.namespace.svc.cluster.local</code> zamiast IP.</p>
 <p><strong>PiHole / zewnętrzny DNS</strong> — dla urządzeń w sieci lokalnej. Żeby <code>cluster.kcn.lan</code> działało zarówno z PC jak i z podów, oba muszą używać tego samego DNS lub DNS musi być skonfigurowany w obu miejscach.</p>
 <hr />
-<h2 id="co-zostao-do-zrobienia-backlog">Co zostało do zrobienia (backlog)<a class="headerlink" href="#co-zostao-do-zrobienia-backlog" title="Permanent link">&para;</a></h2>
+<h2 id="co-zostao-do-zrobienia-backlog">Co zostało do zrobienia (backlog)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Naprawić health checki w HAProxy dla Traefika</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Skonfigurować DNS w PiHole dla lokalnej domeny klastra</li>
@@ -4505,7 +4505,7 @@ To był mój błąd przy <code>k create svc</code> — nie dodałem selectora, w
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Pełne CI/CD pipeline</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Stan klastra</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>wide

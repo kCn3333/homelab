@@ -4335,10 +4335,10 @@
   
 
 
-<h1 id="26-migracja-promtail-do-alloy">26 - migracja Promtail do Alloy<a class="headerlink" href="#26-migracja-promtail-do-alloy" title="Permanent link">&para;</a></h1>
+<h1 id="26-migracja-promtail-do-alloy">26 - migracja Promtail do Alloy</h1>
 <p><strong>Data:</strong> 2026-09-15</p>
 <p><strong>Środowisko:</strong> 3× HP T630, k3s <code>v1.34.4+k3s1</code>, Cilium <code>1.19.7</code>, Flux <code>v2.8.1</code>, Loki <code>3.6</code>, Promtail <code>3.5.1</code>, Alloy <code>1.19.2</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Zdiagnozować błąd API server → kubelet po zimnym starcie klastra.</li>
 <li>Sprawdzić bezrestartową metodę resynchronizacji tuneli K3s.</li>
@@ -4348,7 +4348,7 @@
 <li>Potwierdzić odczyt lokalnych plików i zapis nowych logów do Loki.</li>
 <li>Zachować Promtail do testu po następnym zimnym starcie.</li>
 </ol>
-<h2 id="stan-po-uruchomieniu">Stan po uruchomieniu<a class="headerlink" href="#stan-po-uruchomieniu" title="Permanent link">&para;</a></h2>
+<h2 id="stan-po-uruchomieniu">Stan po uruchomieniu</h2>
 <p>Wszystkie trzy nody osiągnęły <code>Ready</code>, ale jedna z dziewięciu ścieżek API server →
 kubelet nie działała:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>worker1 API → worker2 kubelet: 502 Bad Gateway
@@ -4358,7 +4358,7 @@ Sam poprawny EndpointSlice nie gwarantuje jednak, że lokalny serwer remotediale
 każdym nodzie ma aktywne sesje do wszystkich kubeletów.</p>
 <p>Każdy API server potrzebuje własnej działającej ścieżki do każdego kubeleta. Tunelu
 nie należy traktować jako jednej wspólnej, symetrycznej sesji dla całego klastra.</p>
-<h2 id="resynchronizacja-remotedialera">Resynchronizacja remotedialera<a class="headerlink" href="#resynchronizacja-remotedialera" title="Permanent link">&para;</a></h2>
+<h2 id="resynchronizacja-remotedialera">Resynchronizacja remotedialera</h2>
 <p>Użyto skryptu <code>~/k3s/remotedialer-resync.sh</code>, który dodaje, a następnie usuwa
 techniczną adnotację z EndpointSlice usługi <code>kubernetes</code>:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="ch">#!/usr/bin/env bash</span>
@@ -4390,7 +4390,7 @@ Po wykonaniu skryptu macierz połączeń dała wynik:</p>
 brakująca sesja nie została odtworzona automatycznie podczas uruchamiania klastra.
 Przy kolejnym wystąpieniu błędu należy najpierw zachować macierz i logi bieżącego
 bootu, a dopiero później uruchomić resynchronizację.</p>
-<h2 id="stan-promtaila">Stan Promtaila<a class="headerlink" href="#stan-promtaila" title="Permanent link">&para;</a></h2>
+<h2 id="stan-promtaila">Stan Promtaila</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chart:     6.17.1
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>aplikacja: 3.5.1
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>DaemonSet: 3 desired / 3 ready / 3 available
@@ -4410,7 +4410,7 @@ spowodować ponowne wysłanie części logów albo ich pominięcie.</p>
 <p>Logi kontenerów miały właściciela <code>root:root</code>. Katalog <code>/var/log/pods</code> miał prawa
 <code>750</code>, a pliki przeważnie <code>640</code>. Promtail działał jako UID i GID <code>0</code>, dlatego mógł
 je odczytywać.</p>
-<h2 id="wybor-alloy">Wybór Alloy<a class="headerlink" href="#wybor-alloy" title="Permanent link">&para;</a></h2>
+<h2 id="wybor-alloy">Wybór Alloy</h2>
 <p>Promtail jest wycofywany, dlatego wybrano Grafana Alloy:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chart:     1.12.1
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>aplikacja: 1.19.2
@@ -4426,7 +4426,7 @@ ograniczone selektorem:</p>
 <p>Jeden współdzielony plik pozycji nie byłby poprawny. Każdy node ma inne lokalne
 pliki <code>/var/log/pods</code>, a równoczesny zapis wielu instancji do jednego pliku mógłby
 uszkodzić jego spójność.</p>
-<h2 id="prawa-dostepu-alloy">Prawa dostępu Alloy<a class="headerlink" href="#prawa-dostepu-alloy" title="Permanent link">&para;</a></h2>
+<h2 id="prawa-dostepu-alloy">Prawa dostępu Alloy</h2>
 <p>Główny kontener działa z następującymi ograniczeniami:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">allowPrivilegeEscalation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">readOnlyRootFilesystem</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -4449,7 +4449,7 @@ capabilities roota.</p>
 <p>Init container tworzy właściwe prawa do katalogu, używając jedynie capabilities
 <code>CHOWN</code> i <code>FOWNER</code>, po czym kończy działanie. Jego status <code>Completed</code> oznacza
 prawidłowo zakończoną inicjalizację, a nie błąd Poda.</p>
-<h2 id="wdrozenie-etapowe">Wdrożenie etapowe<a class="headerlink" href="#wdrozenie-etapowe" title="Permanent link">&para;</a></h2>
+<h2 id="wdrozenie-etapowe">Wdrożenie etapowe</h2>
 <p>Istotne rewizje:</p>
 <table>
 <thead>
@@ -4480,7 +4480,7 @@ prawidłowo zakończoną inicjalizację, a nie błąd Poda.</p>
 <p>Tryb shadow odczytywał pliki i przesuwał pozycje, ale nie wysyłał danych do Loki.
 Promtail cały czas pozostawał aktywny, dlatego nie powstała przerwa w zbieraniu
 logów. Ustawienie <code>tail_from_end = true</code> zapobiegło ponownemu wysłaniu całej historii.</p>
-<h2 id="bad-zroda-plikowego">Błąd źródła plikowego<a class="headerlink" href="#bad-zroda-plikowego" title="Permanent link">&para;</a></h2>
+<h2 id="bad-zroda-plikowego">Błąd źródła plikowego</h2>
 <p>Pody Alloy były <code>Ready</code>, ale Alloy początkowo nie czytał aktywnych logów. W logach
 pojawiały się błędy <code>stat</code> dla ścieżek zawierających nierozwinięty znak <code>*</code>.</p>
 <p>Przyczyna: komponent <code>local.file_match</code> był skonfigurowany, lecz jego wynik nie był
@@ -4522,7 +4522,7 @@ używany. <code>loki.source.file</code> otrzymywał bezpośrednio cele z <code>d
 </table>
 <p>Rosły liczniki odczytanych linii i bajtów. Pliki pozycji były niepuste, miały prawa
 <code>600</code> i właściciela <code>nobody:root</code>.</p>
-<h2 id="test-odtworzenia-poda">Test odtworzenia Poda<a class="headerlink" href="#test-odtworzenia-poda" title="Permanent link">&para;</a></h2>
+<h2 id="test-odtworzenia-poda">Test odtworzenia Poda</h2>
 <p>Na <code>worker1</code> usunięto Pod <code>alloy-9z92z</code>. DaemonSet utworzył <code>alloy-kssgr</code>, który
 osiągnął <code>Ready</code> z zerową liczbą restartów. Nie wystąpiły błędy dostępu do plików.</p>
 <p>Plik pozycji przed i po odtworzeniu:</p>
@@ -4534,7 +4534,7 @@ Poda do trwałego katalogu hostPath. Nie potwierdził jeszcze zachowania po rest
 noda ani tego, że każdy offset został odtworzony bez utraty lub duplikacji wpisów.</p>
 <p>Do pełnego testu potrzebne są jednocześnie plik pozycji i odpowiadający mu plik logu,
 ponieważ sam offset bez źródłowego pliku nie pozwala wznowić odczytu.</p>
-<h2 id="waczenie-zapisu-do-loki">Włączenie zapisu do Loki<a class="headerlink" href="#waczenie-zapisu-do-loki" title="Permanent link">&para;</a></h2>
+<h2 id="waczenie-zapisu-do-loki">Włączenie zapisu do Loki</h2>
 <p>Do strumieni Alloy dodano etykietę:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>collector="alloy"
 </span></code></pre></div>
@@ -4585,7 +4585,7 @@ logi równolegle.</p>
 mają poprawny format i zestaw etykiet. Osobne zapytanie LogQL zwróciło świeże
 strumienie <code>collector="alloy"</code> ze wszystkich trzech nodów oraz oczekiwane etykiety:
 <code>namespace</code>, <code>pod</code>, <code>container</code>, <code>job</code>, <code>node_name</code>, <code>stream</code> i <code>collector</code>.</p>
-<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
+<h2 id="stan-koncowy">Stan końcowy</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Promtail: 3 desired / 3 ready / 3 available
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Alloy:    3 desired / 3 ready / 3 available
 </span></code></pre></div>
@@ -4594,7 +4594,7 @@ Loki. Promtail nadal działa jako bezpieczna ścieżka podstawowa. Czasowe dupli
 akceptowalne; ważniejsze jest uniknięcie luki w dostarczaniu logów.</p>
 <p>Migracja nie została jeszcze uznana za zakończoną. Stan przejściowy pozostaje tylko
 w journalu i nie jest wprowadzany do dokumentacji bieżącego stanu klastra.</p>
-<h2 id="nastepna-sesja">Następna sesja<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="nastepna-sesja">Następna sesja</h2>
 <p>Po zimnym starcie należy:</p>
 <ol>
 <li>sprawdzić macierz API server → kubelet przed użyciem skryptu naprawczego;</li>

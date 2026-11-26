@@ -4535,10 +4535,10 @@
   
 
 
-<h1 id="34-aktualizacja-stosu-obserwowalnosci-i-baz-danych">34 - aktualizacja stosu obserwowalności i baz danych<a class="headerlink" href="#34-aktualizacja-stosu-obserwowalnosci-i-baz-danych" title="Permanent link">&para;</a></h1>
+<h1 id="34-aktualizacja-stosu-obserwowalnosci-i-baz-danych">34 - aktualizacja stosu obserwowalności i baz danych</h1>
 <p><strong>Data:</strong> 2026-10-01<br />
 <strong>Środowisko końcowe:</strong> 3× HP T630, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, kube-prometheus-stack <code>91.8.2</code>, Prometheus <code>3.15.0</code>, Alertmanager <code>0.34.1</code>, Grafana <code>13.2.3</code>, CloudNativePG <code>1.30.1</code>, PostgreSQL <code>17.11</code>, Alloy <code>1.20.0</code>, Loki <code>3.7.8</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Sprawdzić stan klastra po ponownym uruchomieniu.</li>
 <li>Zaktualizować kube-prometheus-stack w obrębie wersji <code>91.x</code>.</li>
@@ -4549,7 +4549,7 @@
 <li>Ocenić możliwość aktualizacji Longhorna bez wykonywania ryzykownej zmiany.</li>
 </ol>
 <hr />
-<h2 id="1-kontrola-klastra-po-starcie">1. Kontrola klastra po starcie<a class="headerlink" href="#1-kontrola-klastra-po-starcie" title="Permanent link">&para;</a></h2>
+<h2 id="1-kontrola-klastra-po-starcie">1. Kontrola klastra po starcie</h2>
 <p>Prometheus po starcie klastra osiągnął stan:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Pod:        prometheus-kube-prometheus-stack-prometheus-0
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Ready:      2/2
@@ -4584,7 +4584,7 @@
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Grafana nie zgłaszała nowych timeoutów, blokad SQLite ani błędów HTTP 5xx.</p>
-<h3 id="uwaga-dotyczaca-powoki">Uwaga dotycząca powłoki<a class="headerlink" href="#uwaga-dotyczaca-powoki" title="Permanent link">&para;</a></h3>
+<h3 id="uwaga-dotyczaca-powoki">Uwaga dotycząca powłoki</h3>
 <p>Pierwsza próba uruchomienia <code>kubectl port-forward</code> zakończyła się lokalnym błędem:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>bash: /tmp/prometheus-pf.log: nie można nadpisać istniejącego pliku
 </span></code></pre></div>
@@ -4592,7 +4592,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;<span class="p">|</span>/tmp/prometheus-pf.log
 </span></code></pre></div>
 <hr />
-<h2 id="2-aktualizacja-kube-prometheus-stack">2. Aktualizacja kube-prometheus-stack<a class="headerlink" href="#2-aktualizacja-kube-prometheus-stack" title="Permanent link">&para;</a></h2>
+<h2 id="2-aktualizacja-kube-prometheus-stack">2. Aktualizacja kube-prometheus-stack</h2>
 <p>Stan początkowy:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chart:    91.8.1
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Grafana:  13.2.2-distroless
@@ -4636,7 +4636,7 @@
 </span></code></pre></div>
 <p>Ponowne sprawdzenie ostatniej minuty logów nie wykazało dalszych blokad ani błędów. Dashboardy i API Grafany działały prawidłowo.</p>
 <hr />
-<h2 id="3-aktualizacja-operatora-cloudnativepg">3. Aktualizacja operatora CloudNativePG<a class="headerlink" href="#3-aktualizacja-operatora-cloudnativepg" title="Permanent link">&para;</a></h2>
+<h2 id="3-aktualizacja-operatora-cloudnativepg">3. Aktualizacja operatora CloudNativePG</h2>
 <p>Przed zmianą oba klastry PostgreSQL były zdrowe:</p>
 <table>
 <thead>
@@ -4690,7 +4690,7 @@
 <li>logi operatora po ustabilizowaniu nie zawierały błędów.</li>
 </ul>
 <hr />
-<h2 id="4-backup-logiczny-przed-aktualizacja-postgresql">4. Backup logiczny przed aktualizacją PostgreSQL<a class="headerlink" href="#4-backup-logiczny-przed-aktualizacja-postgresql" title="Permanent link">&para;</a></h2>
+<h2 id="4-backup-logiczny-przed-aktualizacja-postgresql">4. Backup logiczny przed aktualizacją PostgreSQL</h2>
 <p>Przed zmianą obrazu PostgreSQL wykonano lokalny backup logiczny obu klastrów.</p>
 <p>Katalog backupu:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>/var/tmp/cnpg-preupgrade-20261001T091713Z
@@ -4713,7 +4713,7 @@
 <p>Weryfikacja dumpów aplikacyjnych wykazała po <code>12</code> obiektów i po <code>3</code> sekcje <code>TABLE DATA</code>. Wszystkie sumy SHA-256 były poprawne.</p>
 <p>Istotne ograniczenie: klastry CloudNativePG nadal nie mają skonfigurowanych zasobów <code>Backup</code> ani <code>ScheduledBackup</code>. Lokalny backup logiczny zabezpieczał tę aktualizację, ale nie zastępuje docelowej polityki regularnych backupów.</p>
 <hr />
-<h2 id="5-kontrole-zgodnosci-postgresql">5. Kontrole zgodności PostgreSQL<a class="headerlink" href="#5-kontrole-zgodnosci-postgresql" title="Permanent link">&para;</a></h2>
+<h2 id="5-kontrole-zgodnosci-postgresql">5. Kontrole zgodności PostgreSQL</h2>
 <p>Przed aktualizacją potwierdzono:</p>
 <ul>
 <li>bieżącą wersję PostgreSQL <code>17.4</code>;</li>
@@ -4733,7 +4733,7 @@
 </span></code></pre></div>
 <p>Wybór wariantu <code>standard-bookworm</code> zachował bazę Debian 12 i nie wprowadzał jednoczesnej migracji systemu bazowego do Trixie.</p>
 <hr />
-<h2 id="6-aktualizacja-postgresql-na-stagingu">6. Aktualizacja PostgreSQL na stagingu<a class="headerlink" href="#6-aktualizacja-postgresql-na-stagingu" title="Permanent link">&para;</a></h2>
+<h2 id="6-aktualizacja-postgresql-na-stagingu">6. Aktualizacja PostgreSQL na stagingu</h2>
 <p>Najpierw zmieniono manifest na branchu <code>staging</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>apps/staging/db-cluster.yaml
 </span></code></pre></div>
@@ -4769,7 +4769,7 @@
 </span></code></pre></div>
 <p>W czasie restartu instancji pojawiły się spodziewane ostrzeżenia HikariCP dotyczące zamkniętych połączeń oraz chwilowy błąd operatora podczas startu PostgreSQL. Po minucie aplikacja i operator miały czyste logi.</p>
 <hr />
-<h2 id="7-aktualizacja-postgresql-na-produkcji">7. Aktualizacja PostgreSQL na produkcji<a class="headerlink" href="#7-aktualizacja-postgresql-na-produkcji" title="Permanent link">&para;</a></h2>
+<h2 id="7-aktualizacja-postgresql-na-produkcji">7. Aktualizacja PostgreSQL na produkcji</h2>
 <p>Po pozytywnym teście stagingu zmieniono:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>apps/base/clients-api/db-cluster.yaml
 </span></code></pre></div>
@@ -4805,7 +4805,7 @@
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>terminating=false
 </span></code></pre></div>
 <hr />
-<h2 id="8-aktualizacja-alloy">8. Aktualizacja Alloy<a class="headerlink" href="#8-aktualizacja-alloy" title="Permanent link">&para;</a></h2>
+<h2 id="8-aktualizacja-alloy">8. Aktualizacja Alloy</h2>
 <p>Alloy został zaktualizowany przez Flux:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>chart:           1.12.1 → 1.13.0
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>Alloy:           1.19.2 → 1.20.0
@@ -4825,7 +4825,7 @@
 </span></code></pre></div>
 <p>zwróciło <code>1750</code> linii. Potwierdziło to dalsze zbieranie logów po aktualizacji kolektora.</p>
 <hr />
-<h2 id="9-przygotowanie-aktualizacji-loki">9. Przygotowanie aktualizacji Loki<a class="headerlink" href="#9-przygotowanie-aktualizacji-loki" title="Permanent link">&para;</a></h2>
+<h2 id="9-przygotowanie-aktualizacji-loki">9. Przygotowanie aktualizacji Loki</h2>
 <p>Bieżące źródło chartu:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>HelmRepository: grafana-community
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>URL:            https://grafana-community.github.io/helm-charts
@@ -4866,7 +4866,7 @@
 </span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>AccessMode:   ReadWriteOnce
 </span></code></pre></div>
 <hr />
-<h2 id="10-aktualizacja-loki">10. Aktualizacja Loki<a class="headerlink" href="#10-aktualizacja-loki" title="Permanent link">&para;</a></h2>
+<h2 id="10-aktualizacja-loki">10. Aktualizacja Loki</h2>
 <p>HelmRelease został zaktualizowany:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>chart: 18.7.6 → 18.13.7
 </span></code></pre></div>
@@ -4903,7 +4903,7 @@
 </span></code></pre></div>
 <p>Kontrolne zapytanie z ostatnich pięciu minut zwróciło <code>1853</code> linie z kolektora Alloy.</p>
 <hr />
-<h2 id="11-przejsciowe-komunikaty-memberlist-loki">11. Przejściowe komunikaty memberlist Loki<a class="headerlink" href="#11-przejsciowe-komunikaty-memberlist-loki" title="Permanent link">&para;</a></h2>
+<h2 id="11-przejsciowe-komunikaty-memberlist-loki">11. Przejściowe komunikaty memberlist Loki</h2>
 <p>Podczas startu pojedynczego Poda ponownie wystąpiły komunikaty:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>failed to resolve loki-memberlist.loki.svc.cluster.local
 </span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>empty ring
@@ -4929,8 +4929,8 @@
 </span></code></pre></div>
 <p>Nie był to trwały błąd DNS ani regresja po aktualizacji.</p>
 <hr />
-<h2 id="12-stan-koncowy">12. Stan końcowy<a class="headerlink" href="#12-stan-koncowy" title="Permanent link">&para;</a></h2>
-<h3 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h3>
+<h2 id="12-stan-koncowy">12. Stan końcowy</h2>
+<h3 id="monitoring">Monitoring</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>kube-prometheus-stack: 91.8.2
 </span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>Prometheus:             3.15.0
 </span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>Alertmanager:           0.34.1
@@ -4938,14 +4938,14 @@
 </span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>Grafana database:       ok
 </span><span id="__span-46-6"><a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>Prometheus rules:       229 ok, 0 problematycznych
 </span></code></pre></div>
-<h3 id="postgresql">PostgreSQL<a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h3>
+<h3 id="postgresql">PostgreSQL</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>CloudNativePG chart:    0.29.1
 </span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>CloudNativePG operator: 1.30.1
 </span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>PostgreSQL:             17.11, Debian 12
 </span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>clients-db:             2/2 Ready
 </span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>clients-db-staging:     2/2 Ready
 </span></code></pre></div>
-<h3 id="logi">Logi<a class="headerlink" href="#logi" title="Permanent link">&para;</a></h3>
+<h3 id="logi">Logi</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>Alloy chart: 1.13.0
 </span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>Alloy:       1.20.0
 </span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>Alloy DS:    3/3 Ready
@@ -4953,7 +4953,7 @@
 </span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>Loki:        3.7.8
 </span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>Loki Pod:    2/2 Ready, 0 restartów
 </span></code></pre></div>
-<h3 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h3>
+<h3 id="storage">Storage</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>Longhorn:          1.12.1
 </span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>Nodes:             3/3 Ready i Schedulable
 </span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>Volumes:           6/6 attached i healthy
@@ -4961,7 +4961,7 @@
 </span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>Upgrade do 1.13.0: odłożony
 </span></code></pre></div>
 <hr />
-<h2 id="14-wnioski">14. Wnioski<a class="headerlink" href="#14-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="14-wnioski">14. Wnioski</h2>
 <ol>
 <li>PVC nie jest samym wolumenem. Jest żądaniem storage, które Kubernetes wiąże z PV; Longhorn dostarcza implementację storage, repliki, attach/detach, odbudowę i kontrolę zdrowia.</li>
 <li>Aktualizacje operatora i zarządzanego przez niego operand muszą być rozdzielone. Najpierw zaktualizowano CloudNativePG, później PostgreSQL.</li>
@@ -4975,7 +4975,7 @@
 <li>Aktualizacje były wykonywane przez GitOps i kontrolowane za pomocą renderów Helm/Kustomize, dry-runów, rollout status, logów, endpointów oraz testów aplikacyjnych.</li>
 </ol>
 <hr />
-<h2 id="15-nastepna-sesja">15. Następna sesja<a class="headerlink" href="#15-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="15-nastepna-sesja">15. Następna sesja</h2>
 <ol>
 <li>Skonfigurować regularny backup klastrów CloudNativePG zamiast polegać wyłącznie na ręcznych dumpach.</li>
 <li>Zinwentaryzować Data Engine wszystkich wolumenów Longhorna.</li>

@@ -4481,7 +4481,7 @@
   
 
 
-<h1 id="pfsense-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.013 0C.898 0 0 .929 0 2.044v17.775L3.252 8.27h3.282L6.1 9.785h.063c.186-.217.433-.403.742-.62.31-.216.62-.402.96-.588.342-.186.713-.31 1.116-.433.402-.124.805-.155 1.208-.155.867 0 1.579.154 2.198.433.62.279 1.084.712 1.455 1.239.31.464.5 1.019.593 1.669.006.06.027.135.027.189.062.712-.031 1.518-.28 2.385a8.6 8.6 0 0 1-1.02 2.322 10 10 0 0 1-1.58 1.95 8.1 8.1 0 0 1-2.044 1.364 5.5 5.5 0 0 1-2.354.495 5.7 5.7 0 0 1-1.982-.34c-.588-.217-.99-.62-1.238-1.177h-.062L2.353 24h19.603A2.04 2.04 0 0 0 24 21.956V4.706c-.093-.03-.186-.06-.248-.092a2.8 2.8 0 0 0-.557-.062q-.836 0-1.394.372c-.34.248-.65.743-.867 1.518l-.526 1.826h2.013l.495 1.58-1.3 1.27h-2.014l-2.446 8.67h-3.53l2.446-8.67h-1.455l.805-2.85h1.425l.557-2.044c.185-.619.403-1.238.681-1.795a5 5 0 0 1 1.053-1.487c.433-.434.99-.775 1.641-1.022.65-.248 1.487-.372 2.447-.372.248 0 .464 0 .712.031A2.08 2.08 0 0 0 21.988 0zm6.565 11.118c-.898 0-1.672.278-2.323.805-.65.526-1.083 1.239-1.331 2.106s-.217 1.579.155 2.105c.31.557.929.805 1.858.805.898 0 1.672-.278 2.322-.805.65-.526 1.115-1.238 1.363-2.105.247-.867.185-1.58-.155-2.106-.34-.527-.991-.805-1.89-.805Z"/></svg></span> pfSense Configuration<a class="headerlink" href="#pfsense-configuration" title="Permanent link">&para;</a></h1>
+<h1 id="pfsense-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.013 0C.898 0 0 .929 0 2.044v17.775L3.252 8.27h3.282L6.1 9.785h.063c.186-.217.433-.403.742-.62.31-.216.62-.402.96-.588.342-.186.713-.31 1.116-.433.402-.124.805-.155 1.208-.155.867 0 1.579.154 2.198.433.62.279 1.084.712 1.455 1.239.31.464.5 1.019.593 1.669.006.06.027.135.027.189.062.712-.031 1.518-.28 2.385a8.6 8.6 0 0 1-1.02 2.322 10 10 0 0 1-1.58 1.95 8.1 8.1 0 0 1-2.044 1.364 5.5 5.5 0 0 1-2.354.495 5.7 5.7 0 0 1-1.982-.34c-.588-.217-.99-.62-1.238-1.177h-.062L2.353 24h19.603A2.04 2.04 0 0 0 24 21.956V4.706c-.093-.03-.186-.06-.248-.092a2.8 2.8 0 0 0-.557-.062q-.836 0-1.394.372c-.34.248-.65.743-.867 1.518l-.526 1.826h2.013l.495 1.58-1.3 1.27h-2.014l-2.446 8.67h-3.53l2.446-8.67h-1.455l.805-2.85h1.425l.557-2.044c.185-.619.403-1.238.681-1.795a5 5 0 0 1 1.053-1.487c.433-.434.99-.775 1.641-1.022.65-.248 1.487-.372 2.447-.372.248 0 .464 0 .712.031A2.08 2.08 0 0 0 21.988 0zm6.565 11.118c-.898 0-1.672.278-2.323.805-.65.526-1.083 1.239-1.331 2.106s-.217 1.579.155 2.105c.31.557.929.805 1.858.805.898 0 1.672-.278 2.322-.805.65-.526 1.115-1.238 1.363-2.105.247-.867.185-1.58-.155-2.106-.34-.527-.991-.805-1.89-.805Z"/></svg></span> pfSense Configuration</h1>
 <div class="admonition info">
 <p class="admonition-title">Overview</p>
 <p>pfSense is an open-source firewall and router platform based on FreeBSD. It provides enterprise-grade features including stateful packet filtering, NAT, VPN, traffic shaping, and comprehensive network management capabilities. This makes it ideal for creating isolated, secure lab environments for penetration testing.</p>
@@ -4498,8 +4498,8 @@
 </ul>
 <p><strong>For production environments, always install pfSense on bare metal (dedicated physical hardware).</strong>   </p>
 </div>
-<h2 id="initial-setup-port-assignment-and-ip-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 15h2v3h2v-3h2v3h2v-3h2v3h2V9h-4V6H9v3H5v9h2zM4.38 3h15.25A2.37 2.37 0 0 1 22 5.38v14.25A2.37 2.37 0 0 1 19.63 22H4.38A2.37 2.37 0 0 1 2 19.63V5.38C2 4.06 3.06 3 4.38 3"/></svg></span> Initial Setup - Port Assignment and IP Configuration<a class="headerlink" href="#initial-setup-port-assignment-and-ip-configuration" title="Permanent link">&para;</a></h2>
-<h3 id="console-configuration">Console Configuration<a class="headerlink" href="#console-configuration" title="Permanent link">&para;</a></h3>
+<h2 id="initial-setup-port-assignment-and-ip-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 15h2v3h2v-3h2v3h2v-3h2v3h2V9h-4V6H9v3H5v9h2zM4.38 3h15.25A2.37 2.37 0 0 1 22 5.38v14.25A2.37 2.37 0 0 1 19.63 22H4.38A2.37 2.37 0 0 1 2 19.63V5.38C2 4.06 3.06 3 4.38 3"/></svg></span> Initial Setup - Port Assignment and IP Configuration</h2>
+<h3 id="console-configuration">Console Configuration</h3>
 <p>After the initial boot, pfSense will present a console menu.</p>
 <ol>
 <li>
@@ -4533,8 +4533,8 @@
 </li>
 </ul>
 <hr />
-<h2 id="web-interface-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16V4H3v12zm0-14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-7v2h2v2H8v-2h2v-2H3a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2zM5 6h9v5H5zm10 0h4v2h-4zm4 3v5h-4V9zM5 12h4v2H5zm5 0h4v2h-4z"/></svg></span> Web Interface Configuration<a class="headerlink" href="#web-interface-configuration" title="Permanent link">&para;</a></h2>
-<h3 id="basic-settings">Basic Settings<a class="headerlink" href="#basic-settings" title="Permanent link">&para;</a></h3>
+<h2 id="web-interface-configuration"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16V4H3v12zm0-14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-7v2h2v2H8v-2h2v-2H3a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2zM5 6h9v5H5zm10 0h4v2h-4zm4 3v5h-4V9zM5 12h4v2H5zm5 0h4v2h-4z"/></svg></span> Web Interface Configuration</h2>
+<h3 id="basic-settings">Basic Settings</h3>
 <ol>
 <li><strong>System &gt; General Setup</strong><ul>
 <li>Hostname: <code>pfsense</code>  </li>
@@ -4543,7 +4543,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="dns-configuration">DNS Configuration<a class="headerlink" href="#dns-configuration" title="Permanent link">&para;</a></h3>
+<h3 id="dns-configuration">DNS Configuration</h3>
 <p>Navigate to <strong>Services &gt; DNS Resolver</strong></p>
 <ol>
 <li>Enable DNS Resolver</li>
@@ -4556,7 +4556,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="firewall-rules"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg></span> Firewall Rules<a class="headerlink" href="#firewall-rules" title="Permanent link">&para;</a></h2>
+<h2 id="firewall-rules"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 11c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4 9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m2.8-10V9.5C14.8 8.1 13.4 7 12 7S9.2 8.1 9.2 9.5V11c-.6 0-1.2.6-1.2 1.2v3.5c0 .7.6 1.3 1.2 1.3h5.5c.7 0 1.3-.6 1.3-1.2v-3.5c0-.7-.6-1.3-1.2-1.3m-1.3 0h-3V9.5c0-.8.7-1.3 1.5-1.3s1.5.5 1.5 1.3z"/></svg></span> Firewall Rules</h2>
 <p>Navigate to <strong>Firewall &gt; Rules &gt; LAN</strong></p>
 <p>Create rules to control lab traffic. <strong>Rule order matters</strong> - rules are processed from top to bottom.</p>
 <div class="admonition danger">
@@ -4606,7 +4606,7 @@
 <p class="admonition-title">Rule Order is Critical</p>
 <p>Place the Kali Linux allow rule <strong>FIRST</strong>, then the block rule, then the LAN-to-LAN rule. The first matching rule wins, so specific exceptions must come before general blocks.</p>
 </div>
-<h3 id="rfc1918-networks-configuration">RFC1918 Networks Configuration<a class="headerlink" href="#rfc1918-networks-configuration" title="Permanent link">&para;</a></h3>
+<h3 id="rfc1918-networks-configuration">RFC1918 Networks Configuration</h3>
 <p>Navigate to <strong>Interfaces &gt; WAN</strong></p>
 <p>If you need connectivity between the host machine and lab VMs:</p>
 <ul>
@@ -4618,9 +4618,9 @@
 <p class="admonition-title">Security Warning</p>
 <p>Only disable RFC1918 blocking if your WAN interface is connected to a trusted network (like your host-only adapter). Never disable this on internet-facing interfaces.</p>
 </div>
-<h2 id="local-dns-configuration-for-web-applications"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 9a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2m13-6H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M7 19a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2m13-6H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1"/></svg></span> Local DNS Configuration for Web Applications<a class="headerlink" href="#local-dns-configuration-for-web-applications" title="Permanent link">&para;</a></h2>
+<h2 id="local-dns-configuration-for-web-applications"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 9a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2m13-6H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M7 19a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2m13-6H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1"/></svg></span> Local DNS Configuration for Web Applications</h2>
 <p>For hosting multiple web applications on a single IP using domain names, configure DNS Host Overrides and set up a reverse proxy.</p>
-<h3 id="step-1-dns-host-overrides-in-pfsense">Step 1: DNS Host Overrides in pfSense<a class="headerlink" href="#step-1-dns-host-overrides-in-pfsense" title="Permanent link">&para;</a></h3>
+<h3 id="step-1-dns-host-overrides-in-pfsense">Step 1: DNS Host Overrides in pfSense</h3>
 <p>Navigate to <strong>Services &gt; DNS Resolver &gt; Host Overrides</strong></p>
 <p>Add the following entries for your vulnerable web applications:</p>
 <table>
@@ -4666,14 +4666,14 @@
 </tbody>
 </table>
 <p><strong>Save</strong> and <strong>Apply Changes</strong> after adding all entries.</p>
-<h3 id="step-2-reverse-proxy-configuration-on-web-server">Step 2: Reverse Proxy Configuration on Web Server<a class="headerlink" href="#step-2-reverse-proxy-configuration-on-web-server" title="Permanent link">&para;</a></h3>
+<h3 id="step-2-reverse-proxy-configuration-on-web-server">Step 2: Reverse Proxy Configuration on Web Server</h3>
 <p>On the server hosting your applications (<code>10.0.0.50</code>), configure Apache as a reverse proxy to route requests based on the domain name.</p>
-<h4 id="enable-required-apache-modules">Enable Required Apache Modules<a class="headerlink" href="#enable-required-apache-modules" title="Permanent link">&para;</a></h4>
+<h4 id="enable-required-apache-modules">Enable Required Apache Modules</h4>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>a2enmod<span class="w"> </span>proxy
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>a2enmod<span class="w"> </span>proxy_http
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>apache2
 </span></code></pre></div>
-<h4 id="create-virtual-host-configurations">Create Virtual Host Configurations<a class="headerlink" href="#create-virtual-host-configurations" title="Permanent link">&para;</a></h4>
+<h4 id="create-virtual-host-configurations">Create Virtual Host Configurations</h4>
 <p>For each application, create a virtual host configuration file in <code>/etc/apache2/sites-available/</code>.</p>
 <p><strong>Example: <code>casino.dojo.lan.conf</code></strong></p>
 <div class="language-apache highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;VirtualHost</span><span class="w"> </span><span class="s">*:80</span><span class="nt">&gt;</span>
@@ -4719,7 +4719,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="enable-virtual-hosts">Enable Virtual Hosts<a class="headerlink" href="#enable-virtual-hosts" title="Permanent link">&para;</a></h4>
+<h4 id="enable-virtual-hosts">Enable Virtual Hosts</h4>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>a2ensite<span class="w"> </span>casino.dojo.lan.conf
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>a2ensite<span class="w"> </span>webgoat.dojo.lan.conf
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>a2ensite<span class="w"> </span>django.dojo.lan.conf
@@ -4728,7 +4728,7 @@
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>reload<span class="w"> </span>apache2
 </span></code></pre></div>
-<h3 id="step-3-testing-configuration">Step 3: Testing Configuration<a class="headerlink" href="#step-3-testing-configuration" title="Permanent link">&para;</a></h3>
+<h3 id="step-3-testing-configuration">Step 3: Testing Configuration</h3>
 <p><strong>Test DNS Resolution:</strong>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nslookup<span class="w"> </span>casino.dojo.lan
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># Should return: 10.0.0.50</span>
@@ -4739,13 +4739,13 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/apache2/casino_error.log
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/apache2/casino_access.log
 </span></code></pre></div></p>
-<h2 id="common-issues"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 12h-4v-2h4m0 6h-4v-2h4m6-6h-2.81a6 6 0 0 0-1.82-1.96L17 4.41 15.59 3l-2.17 2.17a6 6 0 0 0-2.83 0L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20z"/></svg></span> Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h2>
+<h2 id="common-issues"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 12h-4v-2h4m0 6h-4v-2h4m6-6h-2.81a6 6 0 0 0-1.82-1.96L17 4.41 15.59 3l-2.17 2.17a6 6 0 0 0-2.83 0L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20z"/></svg></span> Common Issues</h2>
 <ul>
 <li><strong>Seeing default Apache page</strong>: Ensure the virtual host is enabled and <code>ServerName</code> matches exactly  </li>
 <li><strong>DNS not resolving</strong>: Verify Host Overrides are saved and DNS Resolver is running  </li>
 <li><strong>Connection refused</strong>: Check that the backend application is running on the specified port  </li>
 </ul>
-<h2 id="configuration-summary">Configuration Summary<a class="headerlink" href="#configuration-summary" title="Permanent link">&para;</a></h2>
+<h2 id="configuration-summary">Configuration Summary</h2>
 <p>Your pfSense lab setup should now include:</p>
 <ul>
 <li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/></svg></span> WAN and LAN interfaces properly assigned</li>

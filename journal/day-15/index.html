@@ -4435,15 +4435,15 @@
   
 
 
-<h1 id="15-helm-chart">15 - Helm Chart<a class="headerlink" href="#15-helm-chart" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-15-helm-chart-dla-clients-api">K3s Homelab — Sesja 15 (Helm Chart dla clients-api)<a class="headerlink" href="#k3s-homelab-sesja-15-helm-chart-dla-clients-api" title="Permanent link">&para;</a></h2>
+<h1 id="15-helm-chart">15 - Helm Chart</h1>
+<h2 id="k3s-homelab-sesja-15-helm-chart-dla-clients-api">K3s Homelab — Sesja 15 (Helm Chart dla clients-api)</h2>
 <p><strong>Data:</strong> 2026-02-28<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <p>Własny Helm chart dla aplikacji clients-api w repozytorium aplikacji (opcja mono-repo), podłączony do klastra przez Flux GitOps.</p>
 <hr />
-<h3 id="1-struktura-helm-chart">1. Struktura Helm chart<a class="headerlink" href="#1-struktura-helm-chart" title="Permanent link">&para;</a></h3>
+<h3 id="1-struktura-helm-chart">1. Struktura Helm chart</h3>
 <p>Helm chart to paczka szablonów YAML + konfiguracja. </p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Generowanie szkieletu:</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>helm<span class="w"> </span>create<span class="w"> </span>helm/clients-api
@@ -4464,7 +4464,7 @@
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    ├── servicemonitor.yaml ← dodane ręcznie
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    └── networkpolicy.yaml  ← dodane ręcznie
 </span></code></pre></div>
-<h3 id="2-chartyaml-metadane">2. Chart.yaml — metadane<a class="headerlink" href="#2-chartyaml-metadane" title="Permanent link">&para;</a></h3>
+<h3 id="2-chartyaml-metadane">2. Chart.yaml — metadane</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v2</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Spring Boot REST API for client management</span>
@@ -4482,7 +4482,7 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>0.x.0  → nowe features (nowy zasób, nowy parametr w values)
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>x.0.0  → breaking changes (zmiana struktury values)
 </span></code></pre></div>
-<h3 id="3-valuesyaml-serce-charta">3. values.yaml — serce charta<a class="headerlink" href="#3-valuesyaml-serce-charta" title="Permanent link">&para;</a></h3>
+<h3 id="3-valuesyaml-serce-charta">3. values.yaml — serce charta</h3>
 <p>Wszystko co może się różnić między środowiskami trafia do <code>values.yaml</code>. </p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Liczba replik — nadpisywana przez HPA</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">replicaCount</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
@@ -4555,7 +4555,7 @@
 </span><span id="__span-4-69"><a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-4-70"><a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
 </span></code></pre></div>
-<h3 id="4-go-templates-skadnia">4. Go templates — składnia<a class="headerlink" href="#4-go-templates-skadnia" title="Permanent link">&para;</a></h3>
+<h3 id="4-go-templates-skadnia">4. Go templates — składnia</h3>
 <p>Helm używa Go templates do generowania YAML:</p>
 <table>
 <thead>
@@ -4602,7 +4602,7 @@
 <p><strong>Ważna zasada:</strong> nigdy nie wpisuj nazwy zasobu na twardo — zawsze przez helper:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">include "clients-api.fullname" .</span><span class="w"> </span><span class="p p-Indicator">}}</span>
 </span></code></pre></div>
-<h3 id="5-deploymentyaml-kluczowe-elementy">5. deployment.yaml — kluczowe elementy<a class="headerlink" href="#5-deploymentyaml-kluczowe-elementy" title="Permanent link">&para;</a></h3>
+<h3 id="5-deploymentyaml-kluczowe-elementy">5. deployment.yaml — kluczowe elementy</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">containers</span><span class="p">:</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Chart.Name</span><span class="w"> </span><span class="p p-Indicator">}}</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">"{{</span><span class="nv"> </span><span class="s">.Values.image.repository</span><span class="nv"> </span><span class="s">}}:{{</span><span class="nv"> </span><span class="s">.Values.image.tag</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">default</span><span class="nv"> </span><span class="s">.Chart.AppVersion</span><span class="nv"> </span><span class="s">}}"</span>
@@ -4628,7 +4628,7 @@
 </span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span><span class="nt">resources</span><span class="p">:</span>
 </span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">      </span><span class="p p-Indicator">{{</span><span class="nv">- toYaml .Values.resources | nindent 12</span><span class="w"> </span><span class="p p-Indicator">}}</span>
 </span></code></pre></div>
-<h3 id="6-walidacja-charta">6. Walidacja charta<a class="headerlink" href="#6-walidacja-charta" title="Permanent link">&para;</a></h3>
+<h3 id="6-walidacja-charta">6. Walidacja charta</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Sprawdź poprawność składni</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>helm<span class="w"> </span>lint<span class="w"> </span>helm/clients-api
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
@@ -4641,7 +4641,7 @@
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Dry-run z klastra (walidacja przez API server)</span>
 </span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>helm<span class="w"> </span>install<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>--dry-run
 </span></code></pre></div>
-<h3 id="7-podaczenie-do-flux-gitrepository-helmrelease">7. Podłączenie do Flux — GitRepository + HelmRelease<a class="headerlink" href="#7-podaczenie-do-flux-gitrepository-helmrelease" title="Permanent link">&para;</a></h3>
+<h3 id="7-podaczenie-do-flux-gitrepository-helmrelease">7. Podłączenie do Flux — GitRepository + HelmRelease</h3>
 <p>W k3s-homelab repo:</p>
 <p><strong>GitRepository</strong> — mówi Fluxowi skąd pobrać chart:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source.toolkit.fluxcd.io/v1</span>
@@ -4683,11 +4683,11 @@
 </span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">      </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="s">"1.4.0"</span><span class="w"> </span><span class="c1"># {"$imagepolicy": "flux-system:clients-api:tag"}</span>
 </span></code></pre></div>
 <p><strong>Marker dla image automation</strong> — <code># {"$imagepolicy": "flux-system:clients-api:tag"}</code> mówi Fluxowi żeby automatycznie aktualizował tag gdy pojawi się nowy image.</p>
-<h3 id="8-reconcilestrategy">8. reconcileStrategy<a class="headerlink" href="#8-reconcilestrategy" title="Permanent link">&para;</a></h3>
+<h3 id="8-reconcilestrategy">8. reconcileStrategy</h3>
 <p>Domyślna strategia to <code>ChartVersion</code> — Flux pobiera nowy chart <strong>tylko gdy zmieni się <code>version</code></strong> w Chart.yaml.</p>
 <p><code>Revision</code> — Flux pobiera chart <strong>przy każdym nowym commicie</strong> do repo.</p>
 <p>Dla developmentu <code>Revision</code> jest wygodniejsze. W produkcji <code>ChartVersion</code> daje lepszą kontrolę.</p>
-<h3 id="9-napotkane-problemy">9. Napotkane problemy<a class="headerlink" href="#9-napotkane-problemy" title="Permanent link">&para;</a></h3>
+<h3 id="9-napotkane-problemy">9. Napotkane problemy</h3>
 <p><strong><code>reconcileStrategy: ChartVersion</code> blokuje update:</strong></p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Bump version w Chart.yaml</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s/version: 0.1.0/version: 0.1.1/'</span><span class="w"> </span>helm/clients-api/Chart.yaml
@@ -4705,7 +4705,7 @@
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>helmrelease<span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>reconcile.fluxcd.io/requestedAt<span class="o">=</span><span class="s2">"</span><span class="k">$(</span>date<span class="w"> </span>+%s<span class="k">)</span><span class="s2">"</span><span class="w"> </span>--overwrite
 </span></code></pre></div>
-<h3 id="10-mono-repo-vs-osobne-repo">10. mono-repo vs osobne repo<a class="headerlink" href="#10-mono-repo-vs-osobne-repo" title="Permanent link">&para;</a></h3>
+<h3 id="10-mono-repo-vs-osobne-repo">10. mono-repo vs osobne repo</h3>
 <ul>
 <li>Mono-repo - chart i aplikacja wersjonowane razem.</li>
 <li>Chart w repo aplikacji (<code>helm/clients-api/</code>)</li>
@@ -4726,7 +4726,7 @@
 </span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kcn333-charts</span>
 </span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">      </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span>
 </span></code></pre></div>
-<h3 id="11-przydatne-narzedzia">11. Przydatne narzędzia<a class="headerlink" href="#11-przydatne-narzedzia" title="Permanent link">&para;</a></h3>
+<h3 id="11-przydatne-narzedzia">11. Przydatne narzędzia</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># helm-diff — podgląd zmian przed upgrade</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>helm<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/databus23/helm-diff
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>helm<span class="w"> </span>diff<span class="w"> </span>upgrade<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span>-n<span class="w"> </span>clients
@@ -4737,7 +4737,7 @@
 </span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>helm<span class="w"> </span><span class="nb">history</span><span class="w"> </span>clients-api<span class="w"> </span>-n<span class="w"> </span>clients<span class="w">         </span><span class="c1"># historia releasów</span>
 </span></code></pre></div>
 <hr />
-<h2 id="finalna-struktura-clients-api-repo">Finalna struktura clients-api repo<a class="headerlink" href="#finalna-struktura-clients-api-repo" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-struktura-clients-api-repo">Finalna struktura clients-api repo</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>clients-api/
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>├── src/                      ← kod aplikacji Java
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>├── Dockerfile
@@ -4758,7 +4758,7 @@
 </span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>            └── servicemonitor.yaml
 </span></code></pre></div>
 <hr />
-<h2 id="backlog">Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h2>
+<h2 id="backlog">Backlog</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Opcja B — opublikować chart jako OCI image na ghcr.io</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>helm test</code> — test po deploy sprawdzający endpoint</li>
@@ -4770,7 +4770,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RBAC</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Helm</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>helm<span class="w"> </span>lint<span class="w"> </span>helm/clients-api
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>helm<span class="w"> </span>template<span class="w"> </span>clients-api<span class="w"> </span>helm/clients-api<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^kind:\|^  name:"</span>

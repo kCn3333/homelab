@@ -4325,12 +4325,12 @@
   
 
 
-<h1 id="9-s3-garage">9 - S3 Garage<a class="headerlink" href="#9-s3-garage" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-09">K3s Homelab — Sesja 09<a class="headerlink" href="#k3s-homelab-sesja-09" title="Permanent link">&para;</a></h2>
+<h1 id="9-s3-garage">9 - S3 Garage</h1>
+<h2 id="k3s-homelab-sesja-09">K3s Homelab — Sesja 09</h2>
 <p><strong>Data:</strong> 2026-02-08<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ul>
 <li><strong>AlertManager + ntfy</strong> — powiadomienia push przez własny webhook adapter</li>
 <li><strong>Garage v2.2.0 na Debianie</strong> — self-hosted S3 storage (25GB)</li>
@@ -4339,7 +4339,7 @@
 <li><strong>NTP synchronizacja</strong> — poprawka zegarów na workerach</li>
 </ul>
 <hr />
-<h3 id="1-alertmanager-ntfy-przez-webhook-adapter">1. AlertManager + ntfy przez webhook adapter<a class="headerlink" href="#1-alertmanager-ntfy-przez-webhook-adapter" title="Permanent link">&para;</a></h3>
+<h3 id="1-alertmanager-ntfy-przez-webhook-adapter">1. AlertManager + ntfy przez webhook adapter</h3>
 <p><strong>Problem:</strong> AlertManager wysyła JSON, ntfy oczekuje prostego tekstu z nagłówkami HTTP. Nie ma natywnej integracji.</p>
 <p><strong>Rozwiązanie:</strong> Własny Python webhook adapter jako ConfigMap + Deployment.</p>
 <p><strong>Wnioski:</strong></p>
@@ -4447,7 +4447,7 @@
 <li><code>KubeDeploymentReplicasMismatch</code> — przejściowe, samo się naprawiło</li>
 </ul>
 <hr />
-<h3 id="2-ntp-synchronizacja-klastra">2. NTP synchronizacja klastra<a class="headerlink" href="#2-ntp-synchronizacja-klastra" title="Permanent link">&para;</a></h3>
+<h3 id="2-ntp-synchronizacja-klastra">2. NTP synchronizacja klastra</h3>
 <p><strong>Problem:</strong> Worker1 i Worker2 miały <code>System clock synchronized: no</code>. Wskazywały na <code>192.168.55.12</code> (worker2) jako serwer NTP — ale worker2 nie jest serwerem NTP!</p>
 <p><strong>Root cause:</strong> Błędna konfiguracja timesyncd na workerach.</p>
 <p><strong>Rozwiązanie — Ansible playbook:</strong></p>
@@ -4485,7 +4485,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ufw<span class="w"> </span>allow<span class="w"> </span>from<span class="w"> </span><span class="m">192</span>.168.55.0/24<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">123</span><span class="w"> </span>proto<span class="w"> </span>udp
 </span></code></pre></div>
 <hr />
-<h3 id="3-garage-v220-self-hosted-s3">3. Garage v2.2.0 — self-hosted S3<a class="headerlink" href="#3-garage-v220-self-hosted-s3" title="Permanent link">&para;</a></h3>
+<h3 id="3-garage-v220-self-hosted-s3">3. Garage v2.2.0 — self-hosted S3</h3>
 <p><strong>Garage</strong> — lekki rozproszony S3, napisany w Rust, idealny na homelab.</p>
 <p><strong>docker-compose.yml:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">services</span><span class="p">:</span>
@@ -4556,7 +4556,7 @@
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span>--<span class="w"> </span>s3<span class="w"> </span>ls<span class="w"> </span>--endpoint-url<span class="w"> </span>http://192.168.0.46:3900<span class="w"> </span>--region<span class="w"> </span>garage
 </span></code></pre></div>
 <hr />
-<h3 id="4-longhorn-backup-na-garage-s3">4. Longhorn backup na Garage S3<a class="headerlink" href="#4-longhorn-backup-na-garage-s3" title="Permanent link">&para;</a></h3>
+<h3 id="4-longhorn-backup-na-garage-s3">4. Longhorn backup na Garage S3</h3>
 <p><strong>Longhorn v1.11 używa <code>BackupTarget</code> CRD</strong> (nie <code>Setting</code>!):</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># apps/base/longhorn/backuptarget.yaml</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn.io/v1beta2</span>
@@ -4606,7 +4606,7 @@
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># Size &gt; 0 ← dane trafiają do Garage</span>
 </span></code></pre></div>
 <hr />
-<h3 id="5-loki-promtail-stack">5. Loki + Promtail stack<a class="headerlink" href="#5-loki-promtail-stack" title="Permanent link">&para;</a></h3>
+<h3 id="5-loki-promtail-stack">5. Loki + Promtail stack</h3>
 <p><strong>Loki v6.53.0 w trybie SingleBinary</strong> — wszystko w jednym podzie.</p>
 <p><strong>Kluczowe ustawienia values:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">deploymentMode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SingleBinary</span>
@@ -4714,7 +4714,7 @@
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>{namespace="loki"} |= "error"
 </span></code></pre></div>
 <hr />
-<h3 id="6-problemy-ktore-napotkaem">6. Problemy które napotkałem<a class="headerlink" href="#6-problemy-ktore-napotkaem" title="Permanent link">&para;</a></h3>
+<h3 id="6-problemy-ktore-napotkaem">6. Problemy które napotkałem</h3>
 <p><strong>Problem: metrics-server nie działa</strong></p>
 <ul>
 <li>metrics-server zarządzany przez k3s Addon — nie można go edytować przez Deployment (k3s nadpisuje)</li>
@@ -4734,7 +4734,7 @@
 <li><strong>Rozwiązanie:</strong> <code>kubectl delete ingress minimal-ingress -n flux-test</code></li>
 </ul>
 <hr />
-<h2 id="finalna-struktura-repo">Finalna struktura repo<a class="headerlink" href="#finalna-struktura-repo" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-struktura-repo">Finalna struktura repo</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>k3s-homelab/
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>├── apps/
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>│   └── base/
@@ -4763,7 +4763,7 @@
 </span><span id="__span-18-26"><a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>│       └── traefik-dashboard/
 </span></code></pre></div>
 <hr />
-<h2 id="backlog">Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h2>
+<h2 id="backlog">Backlog</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>AlertManager rules</strong> — własne reguły alertów (high CPU/RAM threshold)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hubble UI — Cilium network observability</li>
@@ -4777,7 +4777,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Upgrade ImagePolicy v1beta2 → v1 (Flux deprecation warning)</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># AlertManager test</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/kube-prometheus-stack-alertmanager<span class="w"> </span><span class="m">9093</span>:9093<span class="w"> </span><span class="p">&amp;</span>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>sleep<span class="w"> </span><span class="m">2</span>

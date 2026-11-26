@@ -4281,12 +4281,12 @@
   
 
 
-<h1 id="13-alerts">13 - Alerts<a class="headerlink" href="#13-alerts" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-13">K3s Homelab — Sesja 13<a class="headerlink" href="#k3s-homelab-sesja-13" title="Permanent link">&para;</a></h2>
+<h1 id="13-alerts">13 - Alerts</h1>
+<h2 id="k3s-homelab-sesja-13">K3s Homelab — Sesja 13</h2>
 <p><strong>Data:</strong> 2026-02-18<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li><strong>AlertManager — wyciszenie InfoInhibitor</strong> — null receiver dla szumów przy starcie klastra</li>
 <li><strong>PrometheusRule dla clients-api</strong> — 3 własne alerty aplikacyjne</li>
@@ -4295,7 +4295,7 @@
 <li><strong>Naprawka UFW</strong> — port 4240 (Cilium health), 4244 (Hubble), CIDR <code>/8</code> zamiast <code>/16</code></li>
 </ol>
 <hr />
-<h3 id="1-alertmanager-null-receiver-wyciszanie-szumow">1. AlertManager — null receiver (wyciszanie szumów)<a class="headerlink" href="#1-alertmanager-null-receiver-wyciszanie-szumow" title="Permanent link">&para;</a></h3>
+<h3 id="1-alertmanager-null-receiver-wyciszanie-szumow">1. AlertManager — null receiver (wyciszanie szumów)</h3>
 <p><strong>Problem:</strong> Przy każdym starcie klastra przychodziły dziesiątki powiadomień <code>InfoInhibitor</code> — normalny stan przejściowy, nie błąd.</p>
 <p><strong>Rozwiązanie:</strong> Route z <code>receiver: "null"</code> — AlertManager porzuca alerty bez wysyłania.</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">route</span><span class="p">:</span>
@@ -4317,7 +4317,7 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9093/api/v2/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>json.tool<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A30<span class="w"> </span><span class="s2">"config"</span>
 </span></code></pre></div>
 <hr />
-<h3 id="2-prometheusrule-wasne-alerty-aplikacyjne">2. PrometheusRule — własne alerty aplikacyjne<a class="headerlink" href="#2-prometheusrule-wasne-alerty-aplikacyjne" title="Permanent link">&para;</a></h3>
+<h3 id="2-prometheusrule-wasne-alerty-aplikacyjne">2. PrometheusRule — własne alerty aplikacyjne</h3>
 <p><strong>Krytyczny label — bez niego Prometheus ignoruje regułę:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">metadata</span><span class="p">:</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
@@ -4433,7 +4433,7 @@
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="s1">  }]'</span>
 </span></code></pre></div>
 <hr />
-<h3 id="3-pod-disruption-budget-pdb">3. Pod Disruption Budget (PDB)<a class="headerlink" href="#3-pod-disruption-budget-pdb" title="Permanent link">&para;</a></h3>
+<h3 id="3-pod-disruption-budget-pdb">3. Pod Disruption Budget (PDB)</h3>
 <p><strong>Problem:</strong> Podczas <code>kubectl drain</code> (aktualizacja nodów) Kubernetes może ewakuować wszystkie pody jednocześnie. Jeśli HPA zdecydował że wystarczą 2 pody i oba są na tym samym nodzie — aplikacja pada całkowicie.</p>
 <p><strong>PDB gwarantuje:</strong> podczas jakiejkolwiek operacji maintenance zawsze zostanie co najmniej X działających podów.</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">policy/v1</span>
@@ -4458,7 +4458,7 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>maxUnavailable: 1 → maksymalnie 1 pod może być NIEDOSTĘPNY jednocześnie
 </span></code></pre></div>
 <hr />
-<h3 id="4-hubble-ui">4. Hubble UI<a class="headerlink" href="#4-hubble-ui" title="Permanent link">&para;</a></h3>
+<h3 id="4-hubble-ui">4. Hubble UI</h3>
 <p><strong>Architektura:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Cilium Agent (każdy node) → port 4244 (gRPC)
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        ↑
@@ -4520,7 +4520,7 @@
 </span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hubble.cluster.kcn333.com</span>
 </span></code></pre></div>
 <hr />
-<h3 id="5-ufw-aktualizacja">5. UFW — aktualizacja<a class="headerlink" href="#5-ufw-aktualizacja" title="Permanent link">&para;</a></h3>
+<h3 id="5-ufw-aktualizacja">5. UFW — aktualizacja</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Cilium health checks między nodami</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rule</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">allow</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">from_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.55.0/24</span>
@@ -4544,7 +4544,7 @@
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># cluster-pool-ipv4-cidr: 10.0.0.0/8</span>
 </span></code></pre></div>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Hubble UI</strong> — reinstalacja Cilium (helm uninstall + reinstall przez Flux) </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PrometheusRule — dodatkowe alerty (high CPU/RAM)</li>
@@ -4556,7 +4556,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Upgrade ImageUpdateAutomation v1beta2 → v1 (Flux deprecation warning)</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># AlertManager</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span>svc/kube-prometheus-stack-alertmanager<span class="w"> </span><span class="m">9093</span>:9093<span class="w"> </span><span class="p">&amp;</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:9093/api/v2/status<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>json.tool<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A5<span class="w"> </span><span class="s2">"routes"</span>

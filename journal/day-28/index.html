@@ -4379,10 +4379,10 @@
   
 
 
-<h1 id="28-zakonczenie-aktualizacji-k3s-i-cloudnativepg">28 - zakończenie aktualizacji K3s i CloudNativePG<a class="headerlink" href="#28-zakonczenie-aktualizacji-k3s-i-cloudnativepg" title="Permanent link">&para;</a></h1>
+<h1 id="28-zakonczenie-aktualizacji-k3s-i-cloudnativepg">28 - zakończenie aktualizacji K3s i CloudNativePG</h1>
 <p><strong>Data:</strong> 2026-09-17</p>
 <p><strong>Środowisko końcowe:</strong> 3× HP T630, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Flux <code>v2.8.1</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Longhorn <code>1.11.0</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Potwierdzić poprawny zimny start po wcześniejszych aktualizacjach.</li>
 <li>Dokończyć kontrolowane podnoszenie K3s.</li>
@@ -4391,10 +4391,10 @@
 <li>Zachować logiczne kopie obu baz przed zmianą operatora.</li>
 <li>Sprawdzić zachowanie jednoinstancyjnych klastrów PostgreSQL i eksportera metryk.</li>
 </ol>
-<h2 id="stan-po-uruchomieniu-klastra">Stan po uruchomieniu klastra<a class="headerlink" href="#stan-po-uruchomieniu-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="stan-po-uruchomieniu-klastra">Stan po uruchomieniu klastra</h2>
 <p>Klaster wystartował bez błędu remotedialera. Wszystkie trzy nody osiągnęły <code>Ready</code>,
 a podstawowe kontrole klastra nie wykazały błędów.</p>
-<h2 id="dokonczenie-aktualizacji-k3s">Dokończenie aktualizacji K3s<a class="headerlink" href="#dokonczenie-aktualizacji-k3s" title="Permanent link">&para;</a></h2>
+<h2 id="dokonczenie-aktualizacji-k3s">Dokończenie aktualizacji K3s</h2>
 <p>Kontrolowany playbook Ansible podniósł wszystkie trzy serwery do:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>K3s:       v1.36.4+k3s1
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>containerd: 2.3.4-k3s1.36
@@ -4437,7 +4437,7 @@ a podstawowe kontrole klastra nie wykazały błędów.</p>
 </span></code></pre></div>
 <p>Aktualizacja została wykonana pojedynczo na serwerach. Po zmianie wykonano zimny
 start całego klastra. Klaster ponownie uruchomił się bez błędów.</p>
-<h2 id="weryfikacja-po-aktualizacji-k3s">Weryfikacja po aktualizacji K3s<a class="headerlink" href="#weryfikacja-po-aktualizacji-k3s" title="Permanent link">&para;</a></h2>
+<h2 id="weryfikacja-po-aktualizacji-k3s">Weryfikacja po aktualizacji K3s</h2>
 <p>Nie było Podów w fazie innej niż <code>Running</code> lub <code>Succeeded</code>.</p>
 <p>Wszystkie <code>Kustomization</code> Flux miały <code>Ready=True</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>apps
@@ -4464,7 +4464,7 @@ start całego klastra. Klaster ponownie uruchomił się bez błędów.</p>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Sealed Secrets: pobranie certyfikatu zakończone poprawnie
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Traefik: 1/1 Ready
 </span></code></pre></div>
-<h2 id="traefik-i-cilium">Traefik i Cilium<a class="headerlink" href="#traefik-i-cilium" title="Permanent link">&para;</a></h2>
+<h2 id="traefik-i-cilium">Traefik i Cilium</h2>
 <p>Traefik pozostaje komponentem pakowanym i zarządzanym przez K3s:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>HelmChart/traefik
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>HelmChart/traefik-crd
@@ -4480,7 +4480,7 @@ Podów. Flannel jest wyłączony argumentem K3s <code>--flannel-backend=none</co
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metrics-server</span>
 </span></code></pre></div>
 <p>Zewnętrzny <code>metrics-server</code> jest zarządzany przez Flux jako osobny <code>HelmRelease</code>.</p>
-<h2 id="stan-cloudnativepg-przed-aktualizacja">Stan CloudNativePG przed aktualizacją<a class="headerlink" href="#stan-cloudnativepg-przed-aktualizacja" title="Permanent link">&para;</a></h2>
+<h2 id="stan-cloudnativepg-przed-aktualizacja">Stan CloudNativePG przed aktualizacją</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>chart:    0.23.2
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>operator: 1.25.1
 </span></code></pre></div>
@@ -4516,12 +4516,12 @@ Podów. Flannel jest wyłączony argumentem K3s <code>--flannel-backend=none</co
 Wolumeny były <code>attached</code> i <code>healthy</code>.</p>
 <p>Nie było zasobów <code>ScheduledBackup</code> ani <code>Backup</code> CloudNativePG. Przed zmianą
 operatora wykonano dlatego logiczne kopie obu klastrów.</p>
-<h2 id="kopie-logiczne-postgresql">Kopie logiczne PostgreSQL<a class="headerlink" href="#kopie-logiczne-postgresql" title="Permanent link">&para;</a></h2>
+<h2 id="kopie-logiczne-postgresql">Kopie logiczne PostgreSQL</h2>
 <p>Kopie zapisano lokalnie w:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>/home/kcn/cnpg-backups/pre-1.26.1-20260917T073411Z/
 </span></code></pre></div>
 <p>Pliki miały prawa <code>600</code> i poprawną strukturę dumpa klastrowego.</p>
-<h2 id="aktualizacja-cloudnativepg">Aktualizacja CloudNativePG<a class="headerlink" href="#aktualizacja-cloudnativepg" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja-cloudnativepg">Aktualizacja CloudNativePG</h2>
 <p>Operator został podniesiony etapami, po jednej obsługiwanej wersji aplikacji:</p>
 <table>
 <thead>
@@ -4574,7 +4574,7 @@ operatora wykonano dlatego logiczne kopie obu klastrów.</p>
 </ul>
 <p>Logi operatora nie zawierały <code>error</code>, <code>failed</code>, <code>panic</code>, <code>fatal</code> ani błędów
 rekonsyliacji.</p>
-<h2 id="dostepnosc-baz-podczas-zmiany-operatora">Dostępność baz podczas zmiany operatora<a class="headerlink" href="#dostepnosc-baz-podczas-zmiany-operatora" title="Permanent link">&para;</a></h2>
+<h2 id="dostepnosc-baz-podczas-zmiany-operatora">Dostępność baz podczas zmiany operatora</h2>
 <p>Oba klastry mają:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>instances: 1
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>primaryUpdateStrategy: unsupervised
@@ -4623,7 +4623,7 @@ awarii.</p>
 </tbody>
 </table>
 <p>Oba Pody zostały odtworzone i oba klastry ponownie osiągnęły <code>Ready</code>.</p>
-<h2 id="zmiana-eksportera-metryk-w-cloudnativepg-129">Zmiana eksportera metryk w CloudNativePG 1.29<a class="headerlink" href="#zmiana-eksportera-metryk-w-cloudnativepg-129" title="Permanent link">&para;</a></h2>
+<h2 id="zmiana-eksportera-metryk-w-cloudnativepg-129">Zmiana eksportera metryk w CloudNativePG 1.29</h2>
 <p>Przed aktualizacją do <code>1.29.1</code> zapytanie o rolę zwracało pusty wynik:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>cnpg_metrics_exporter: brak roli
 </span></code></pre></div>
@@ -4640,7 +4640,7 @@ awarii.</p>
 <p>W obu klastrach:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>cnpg_collector_last_collection_error 0
 </span></code></pre></div>
-<h2 id="dostep-do-endpointu-metryk">Dostęp do endpointu metryk<a class="headerlink" href="#dostep-do-endpointu-metryk" title="Permanent link">&para;</a></h2>
+<h2 id="dostep-do-endpointu-metryk">Dostęp do endpointu metryk</h2>
 <p>Bezpośrednia próba połączenia z tymczasowego Poda do <code>PodIP:9187</code> zakończyła się
 timeoutem. Endpoint działał poprawnie przez <code>kubectl port-forward</code>.</p>
 <p>Przyczyną timeoutu były istniejące <code>NetworkPolicy</code> wybierające Pody baz. Ruch z
@@ -4649,12 +4649,12 @@ eksportera ani operatora.</p>
 <p>Port-forward potwierdził metryki <code>cnpg_*</code> i <code>pg_*</code> dla obu baz.</p>
 <p><code>enablePodMonitor</code> pozostaje ustawione na <code>false</code>. Prometheus nie ma jeszcze
 deklaratywnego <code>PodMonitor</code> i odpowiadających reguł ingress na port <code>9187</code>.</p>
-<h2 id="configmap-zapytan-monitorujacych">ConfigMap zapytań monitorujących<a class="headerlink" href="#configmap-zapytan-monitorujacych" title="Permanent link">&para;</a></h2>
+<h2 id="configmap-zapytan-monitorujacych">ConfigMap zapytań monitorujących</h2>
 <p>Klastry wskazują <code>cnpg-default-monitoring</code> jako <code>customQueriesConfigMap</code>, a domyślne zapytania nie są wyłączone.</p>
 <p>ConfigMapy w namespace <code>cnpg-system</code>, <code>clients</code> i <code>clients-staging</code> miały identyczną zawartość.</p>
 <p>W logach baz nie było ostrzeżeń o nadpisywaniu zapytań ani powielonych nazwach.
 Nie usuwano ConfigMap i nie zmieniano konfiguracji monitoringu w trakcie aktualizacji.</p>
-<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
+<h2 id="stan-koncowy">Stan końcowy</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>K3s:                    v1.36.4+k3s1 na 3/3 nodach
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Cilium:                 1.20.2, status OK na 3/3 nodach
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>CloudNativePG chart:    0.29.0
@@ -4667,7 +4667,7 @@ Nie usuwano ConfigMap i nie zmieniano konfiguracji monitoringu w trakcie aktuali
 <p>Sesja zakończyła się poprawnym zimnym startem, zakończoną aktualizacją K3s oraz
 zakończoną aktualizacją CloudNativePG. Nie pozostał stan przejściowy operatora ani
 klastrów PostgreSQL.</p>
-<h2 id="nastepna-sesja">Następna sesja<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="nastepna-sesja">Następna sesja</h2>
 <ol>
 <li>Przygotować kontrolowany playbook aktualizacji Ubuntu dla nodów klastra.</li>
 <li>Aktualizować system pojedynczo, z kontrolą quorum embedded etcd i gotowości noda.</li>

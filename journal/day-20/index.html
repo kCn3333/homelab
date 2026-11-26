@@ -4379,11 +4379,11 @@
   
 
 
-<h1 id="20-kontrolowana-awaria-coredns">20 - Kontrolowana awaria CoreDNS<a class="headerlink" href="#20-kontrolowana-awaria-coredns" title="Permanent link">&para;</a></h1>
+<h1 id="20-kontrolowana-awaria-coredns">20 - Kontrolowana awaria CoreDNS</h1>
 <p><strong>Data:</strong> 2026-09-07–2026-09-08 </p>
 <p><strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4+k3s1, Cilium v1.19.1, CoreDNS v1.14.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li>Obserwacja wymiany Poda CoreDNS i aktualizacji EndpointSlice.</li>
 <li>Pomiar dostępności DNS przy jednej replice.</li>
@@ -4393,7 +4393,7 @@
 <li>Podjęcie decyzji o docelowej liczbie replik w małym klastrze.</li>
 </ol>
 <hr />
-<h3 id="1-stan-poczatkowy">1. Stan początkowy<a class="headerlink" href="#1-stan-poczatkowy" title="Permanent link">&para;</a></h3>
+<h3 id="1-stan-poczatkowy">1. Stan początkowy</h3>
 <p>CoreDNS był zarządzany przez wbudowany AddOn K3s i działał jako pojedyncza replika:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Deployment: coredns
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Ready:      1/1
@@ -4410,7 +4410,7 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>serving=true
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>terminating=false
 </span></code></pre></div>
-<h3 id="2-znaczenie-warunkow-endpointslice">2. Znaczenie warunków EndpointSlice<a class="headerlink" href="#2-znaczenie-warunkow-endpointslice" title="Permanent link">&para;</a></h3>
+<h3 id="2-znaczenie-warunkow-endpointslice">2. Znaczenie warunków EndpointSlice</h3>
 <table>
 <thead>
 <tr>
@@ -4439,7 +4439,7 @@
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>terminating=true
 </span></code></pre></div>
 <p>Oznacza to wycofanie z normalnego ruchu przy trwającym jeszcze zamykaniu procesu.</p>
-<h3 id="3-test-jednej-repliki">3. Test jednej repliki<a class="headerlink" href="#3-test-jednej-repliki" title="Permanent link">&para;</a></h3>
+<h3 id="3-test-jednej-repliki">3. Test jednej repliki</h3>
 <p>Usunięto wyłącznie Pod CoreDNS. Deployment, ReplicaSet i Service pozostały bez zmian:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>&lt;COREDNS_POD&gt;<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
@@ -4458,7 +4458,7 @@
 <li>Nowy endpoint osiągnął <code>ready=true</code>.</li>
 </ol>
 <p>Okno bez gotowego endpointu widoczne w Kubernetes API trwało około dwóch sekund. Pętla <code>nslookup</code> nie zarejestrowała błędu, ale nie był to dowód ciągłej dostępności każdego pakietu. Klient mógł ponowić zapytanie, a EndpointSlice, lokalny dataplane i proces CoreDNS zmieniały stan asynchronicznie.</p>
-<h3 id="4-test-dwoch-replik">4. Test dwóch replik<a class="headerlink" href="#4-test-dwoch-replik" title="Permanent link">&para;</a></h3>
+<h3 id="4-test-dwoch-replik">4. Test dwóch replik</h3>
 <p>Deployment został tymczasowo przeskalowany:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>scale<span class="w"> </span>deployment<span class="w"> </span>coredns<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
@@ -4490,7 +4490,7 @@
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>zeroReadyEvents: 0
 </span></code></pre></div>
 <p>W żadnym z zaobserwowanych stanów Service nie stracił wszystkich gotowych backendów.</p>
-<h3 id="5-wynik-sond-dns">5. Wynik sond DNS<a class="headerlink" href="#5-wynik-sond-dns" title="Permanent link">&para;</a></h3>
+<h3 id="5-wynik-sond-dns">5. Wynik sond DNS</h3>
 <p>Zapytania były wysyłane równolegle z Podów przypisanych do każdego noda bezpośrednio do <code>10.43.0.10</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nslookup kubernetes.default.svc.cluster.local 10.43.0.10
 </span></code></pre></div>
@@ -4503,13 +4503,13 @@
 </ul>
 <p>Dwie repliki usunęły okno bez gotowego endpointu, ale nie zagwarantowały bezstratnego przełączenia pojedynczych pakietów UDP.</p>
 <p>Pełne statystyki sond nie zostały zachowane, ponieważ testowe Pody usunięto przed zapisaniem logów. Zachowano natomiast obserwację EndpointSlice i pojedynczy błąd widoczny w strumieniu testowym.</p>
-<h3 id="6-problemy-z-podami-diagnostycznymi">6. Problemy z Podami diagnostycznymi<a class="headerlink" href="#6-problemy-z-podami-diagnostycznymi" title="Permanent link">&para;</a></h3>
+<h3 id="6-problemy-z-podami-diagnostycznymi">6. Problemy z Podami diagnostycznymi</h3>
 <p>Pierwsza próba używała nieistniejącego obrazu:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>registry.k8s.io/e2e-test-images/dnsutils:1.3
 </span></code></pre></div>
 <p>Kubelet prawidłowo zwrócił <code>ErrImagePull</code> i <code>ImagePullBackOff</code>. Test powtórzono z dostępnym obrazem zawierającym <code>nslookup</code>.</p>
 <p>Pody wykonujące skończone polecenie przechodziły do fazy <code>Succeeded</code>, więc nie nadawały się do późniejszego <code>kubectl exec</code>. W teście wymagającym kolejnych poleceń proces kontenera musi pozostać uruchomiony. Logi należy zapisać przed usunięciem Podów.</p>
-<h3 id="7-incydent-remotedialer">7. Incydent remotedialer<a class="headerlink" href="#7-incydent-remotedialer" title="Permanent link">&para;</a></h3>
+<h3 id="7-incydent-remotedialer">7. Incydent remotedialer</h3>
 <p>Podczas testu <code>kubectl exec</code> do Poda na <code>worker2</code> okresowo zwracał:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>proxy error from 127.0.0.1:6443 while dialing &lt;WORKER2_IP&gt;:10250,
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>code 502: 502 Bad Gateway
@@ -4526,7 +4526,7 @@
 <p>Po kontrolowanym restarcie K3s na <code>worker2</code> agent ponownie zestawił tunel. Końcowy test dał:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>3 lokalne API servery × 3 docelowe kubelety = 9/9 OK
 </span></code></pre></div>
-<h3 id="8-cordon-bez-drain">8. Cordon bez drain<a class="headerlink" href="#8-cordon-bez-drain" title="Permanent link">&para;</a></h3>
+<h3 id="8-cordon-bez-drain">8. Cordon bez drain</h3>
 <p>Przed krótkim restartem wykonano <code>cordon</code>, aby scheduler nie umieszczał nowych Podów na <code>worker2</code>.</p>
 <p><code>drain</code> nie był potrzebny, ponieważ:</p>
 <ul>
@@ -4536,13 +4536,13 @@
 <li>ewakuacja workloadów i relokacja wolumenów Longhorn zwiększyłyby zakres operacji.</li>
 </ul>
 <p>Po odtworzeniu tunelu, potwierdzeniu <code>Node Ready</code>, gotowości Cilium oraz testach <code>9/9 OK</code> zdjęto cordon.</p>
-<h3 id="9-wniosek-dla-power-on">9. Wniosek dla Power On<a class="headerlink" href="#9-wniosek-dla-power-on" title="Permanent link">&para;</a></h3>
+<h3 id="9-wniosek-dla-power-on">9. Wniosek dla Power On</h3>
 <p><code>systemctl active</code>, <code>/readyz</code>, gotowość etcd i <code>Node Ready</code> nie potwierdzają poprawności wszystkich sesji remotedialer.</p>
 <p>Końcowa walidacja Power On powinna sprawdzać dostęp do każdego kubeleta przez lokalne API każdego serwera, na przykład przez:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>/api/v1/nodes/&lt;NODE&gt;/proxy/healthz
 </span></code></pre></div>
 <p>Dla trzech serwerów i trzech nodów jest to dziewięć odczytów. Kontrola ma wykrywać błąd, ale nie wykonywać automatycznego restartu bez diagnozy.</p>
-<h3 id="10-decyzja-konfiguracyjna">10. Decyzja konfiguracyjna<a class="headerlink" href="#10-decyzja-konfiguracyjna" title="Permanent link">&para;</a></h3>
+<h3 id="10-decyzja-konfiguracyjna">10. Decyzja konfiguracyjna</h3>
 <p>Po teście przywrócono jedną replikę CoreDNS zarządzaną przez wbudowany AddOn K3s.</p>
 <p>Nie wdrożono:</p>
 <ul>
@@ -4552,7 +4552,7 @@
 <li>dodatkowego PodDisruptionBudget.</li>
 </ul>
 <p>Dwie repliki poprawiają dostępność podczas awarii Poda lub noda, ale nie zapewniają pełnego HA. W tym trzywęzłowym homelabie korzyść nie uzasadnia przejmowania wbudowanego komponentu K3s ani zwiększania zakresu odpowiedzialności automatyzacji Power On.</p>
-<h3 id="11-stan-koncowy">11. Stan końcowy<a class="headerlink" href="#11-stan-koncowy" title="Permanent link">&para;</a></h3>
+<h3 id="11-stan-koncowy">11. Stan końcowy</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Deployment/coredns: 1/1 Ready
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>Pod CoreDNS:        10.42.1.113 na worker1
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>Service/kube-dns:   10.43.0.10
@@ -4563,7 +4563,7 @@
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>example.com.                           → rekordy A i AAAA
 </span></code></pre></div>
 <p>Restart kontenera CoreDNS odpowiadał czasowi uruchomienia klastra i nie wskazywał nowej awarii.</p>
-<h3 id="12-najwazniejsze-wnioski">12. Najważniejsze wnioski<a class="headerlink" href="#12-najwazniejsze-wnioski" title="Permanent link">&para;</a></h3>
+<h3 id="12-najwazniejsze-wnioski">12. Najważniejsze wnioski</h3>
 <ol>
 <li>ReplicaSet odtwarza usunięty Pod, ale jedna replika może pozostawić krótkie okno bez backendu.</li>
 <li>EndpointSlice pokazuje stan backendów, lecz nie przekazuje pakietów.</li>
@@ -4574,7 +4574,7 @@
 <li>Test powinien zapisywać wyniki przed cleanupem.</li>
 <li>Dodatkową redundancję należy wdrażać tylko wtedy, gdy odpowiada wymaganiom i uzasadnia koszt operacyjny.</li>
 </ol>
-<h3 id="nastepna-sesja">Następna sesja:<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h3>
+<h3 id="nastepna-sesja">Następna sesja:</h3>
 <p>Eksperymentalne prześledzenie dataplane <code>Service/kube-dns</code>: porównanie ruchu z procesu hosta i z Poda, liczników kube-proxy w iptables oraz transportu Cilium VXLAN do CoreDNS na innym nodzie.</p>
 
 

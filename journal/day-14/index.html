@@ -4635,53 +4635,53 @@
   
 
 
-<h1 id="14-hubble">14 - Hubble<a class="headerlink" href="#14-hubble" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-14-hubble-debugging-marathon">K3s Homelab — Sesja 14 (Hubble debugging marathon)<a class="headerlink" href="#k3s-homelab-sesja-14-hubble-debugging-marathon" title="Permanent link">&para;</a></h2>
+<h1 id="14-hubble">14 - Hubble</h1>
+<h2 id="k3s-homelab-sesja-14-hubble-debugging-marathon">K3s Homelab — Sesja 14 (Hubble debugging marathon)</h2>
 <p><strong>Data:</strong> 2026-02-20<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Cilium v1.19.1 (VXLAN)</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <p>Uruchomić Hubble UI — wbudowany w Cilium system observability sieci.</p>
 <hr />
-<h3 id="architektura-hubble">Architektura Hubble<a class="headerlink" href="#architektura-hubble" title="Permanent link">&para;</a></h3>
+<h3 id="architektura-hubble">Architektura Hubble</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Cilium Agent (każdy node) → nasłuchuje na port 4244 (gRPC, node IP)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        ↑
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Hubble Relay pod (IP z puli podów, np. 10.0.0.x)
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        ↑
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Hubble UI
 </span></code></pre></div>
-<h3 id="root-cause-problemu-z-hubble">Root cause problemu z Hubble<a class="headerlink" href="#root-cause-problemu-z-hubble" title="Permanent link">&para;</a></h3>
-<h3 id="dlaczego-relay-nie-dziaa-z-vxlan">Dlaczego relay nie działa z VXLAN<a class="headerlink" href="#dlaczego-relay-nie-dziaa-z-vxlan" title="Permanent link">&para;</a></h3>
+<h3 id="root-cause-problemu-z-hubble">Root cause problemu z Hubble</h3>
+<h3 id="dlaczego-relay-nie-dziaa-z-vxlan">Dlaczego relay nie działa z VXLAN</h3>
 <p>Relay pod ma IP z puli podów (<code>10.0.0.x</code>). Próbuje połączyć się z agentami na <code>192.168.55.x:4244</code> (node IP). W trybie VXLAN Cilium nie routuje ruchu <strong>pod→nodeIP</strong> — pakiety przepadają w BPF datapath zanim dotrą do fizycznego interfejsu.</p>
 <p>Potwierdzono przez tcpdump: pakiety SYN widoczne na veth interfejsie poda, ale <strong>nigdy nie docierają</strong> do <code>enp1s0</code> nodów docelowych.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>relay pod (10.0.0.x) → SYN → 192.168.55.11:4244
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Master widzi SYN na lxc interface ← ale nigdy nie wychodzi przez enp1s0
 </span></code></pre></div>
-<h3 id="hostnetwork">hostNetwork<a class="headerlink" href="#hostnetwork" title="Permanent link">&para;</a></h3>
+<h3 id="hostnetwork">hostNetwork</h3>
 <p>Cilium Helm chart nie ma opcji <code>hostNetwork</code> dla relay — nie jest to wspierana konfiguracja. </p>
 <hr />
-<h2 id="podjete-proby">Podjęte próby:<a class="headerlink" href="#podjete-proby" title="Permanent link">&para;</a></h2>
-<h3 id="1-usuniecie-i-regeneracja-certyfikatow-tls-hubble">1. Usunięcie i regeneracja certyfikatów TLS Hubble<a class="headerlink" href="#1-usuniecie-i-regeneracja-certyfikatow-tls-hubble" title="Permanent link">&para;</a></h3>
+<h2 id="podjete-proby">Podjęte próby:</h2>
+<h3 id="1-usuniecie-i-regeneracja-certyfikatow-tls-hubble">1. Usunięcie i regeneracja certyfikatów TLS Hubble</h3>
 <p><strong>Wynik:</strong> Certyfikaty się zregenerowały. Problem nie był w certach — TLS handshake działał poprawnie.</p>
 <p><strong>Wniosek:</strong> Zawsze sprawdź czy problem jest sieciowy czy TLS zanim zaczniesz grzebać w certach. <code>openssl s_client</code> z node→node pokazał że TLS działa.</p>
-<h3 id="2-dodanie-hubbletlsautomethod-helm-do-helmrelease">2. Dodanie <code>hubble.tls.auto.method: helm</code> do HelmRelease<a class="headerlink" href="#2-dodanie-hubbletlsautomethod-helm-do-helmrelease" title="Permanent link">&para;</a></h3>
+<h3 id="2-dodanie-hubbletlsautomethod-helm-do-helmrelease">2. Dodanie <code>hubble.tls.auto.method: helm</code> do HelmRelease</h3>
 <p><strong>Wynik:</strong> Cilium operator zaczął regenerować certyfikaty automatycznie. Dobra zmiana, ale nie rozwiązała problemu z routingiem.</p>
-<h3 id="3-reguy-ufw-dla-portow-42404244">3. Reguły UFW dla portów 4240/4244<a class="headerlink" href="#3-reguy-ufw-dla-portow-42404244" title="Permanent link">&para;</a></h3>
+<h3 id="3-reguy-ufw-dla-portow-42404244">3. Reguły UFW dla portów 4240/4244</h3>
 <p><strong>Wynik:</strong> UFW nie był problemem — już miał <code>10.0.0.0/8 ALLOW Anywhere</code> które pokrywało te porty.</p>
-<h3 id="4-kubeproxyreplacement-true-bez-zmiany-routing-mode">4. <code>kubeProxyReplacement: true</code> bez zmiany routing mode<a class="headerlink" href="#4-kubeproxyreplacement-true-bez-zmiany-routing-mode" title="Permanent link">&para;</a></h3>
+<h3 id="4-kubeproxyreplacement-true-bez-zmiany-routing-mode">4. <code>kubeProxyReplacement: true</code> bez zmiany routing mode</h3>
 <p><strong>Wynik:</strong> Klaster niestabilny. <code>kubeProxyReplacement: true</code> bez <code>routingMode: native</code> powoduje niespójny stan — Cilium próbuje przejąć obsługę serwisów ale nie ma pełnego native routing.</p>
 <p><strong>Wniosek:</strong> <code>kubeProxyReplacement: true</code> i <code>routingMode: native</code> muszą być włączone <strong>razem</strong>.</p>
-<h3 id="5-proba-przejscia-na-native-routing-na-zywym-klastrze-rolling-update">5. Próba przejścia na native routing na żywym klastrze (rolling update)<a class="headerlink" href="#5-proba-przejscia-na-native-routing-na-zywym-klastrze-rolling-update" title="Permanent link">&para;</a></h3>
+<h3 id="5-proba-przejscia-na-native-routing-na-zywym-klastrze-rolling-update">5. Próba przejścia na native routing na żywym klastrze (rolling update)</h3>
 <p><strong>Wynik:</strong> Katastrofa. Podczas rolling update Cilium DaemonSet jeden node miał native routing a pozostałe VXLAN → ruch sieciowy się posypał → SSH przestało działać → klaster niedostępny.</p>
 <p><strong>Wniosek:</strong> <strong>Zmiana routing mode Cilium wymaga pełnego restartu klastra.</strong> Rolling update DaemonSet nie jest bezpieczny przy zmianie fundamentalnych parametrów CNI.</p>
-<h3 id="6-disable-kube-proxy-w-k3sservice">6. <code>--disable-kube-proxy</code> w k3s.service<a class="headerlink" href="#6-disable-kube-proxy-w-k3sservice" title="Permanent link">&para;</a></h3>
+<h3 id="6-disable-kube-proxy-w-k3sservice">6. <code>--disable-kube-proxy</code> w k3s.service</h3>
 <p><strong>Efekt:</strong> Dodane podczas próby przejścia na native routing. Po cofnięciu Cilium do VXLAN z <code>kubeProxyReplacement: false</code> — nikt nie obsługiwał ClusterIP ani NodePort. Klaster działał "od wewnątrz" ale żaden zewnętrzny ruch nie docierał (Traefik, Grafana, wszystkie Ingress przestały działać).</p>
 <p><strong>Wniosek:</strong> <code>--disable-kube-proxy</code> ma sens TYLKO gdy <code>kubeProxyReplacement: true</code> i Cilium jest w trybie native routing.</p>
-<h3 id="7-proby-naprawy-configmap-recznie-przez-kubectl-patch">7. Próby naprawy ConfigMap ręcznie przez kubectl patch<a class="headerlink" href="#7-proby-naprawy-configmap-recznie-przez-kubectl-patch" title="Permanent link">&para;</a></h3>
+<h3 id="7-proby-naprawy-configmap-recznie-przez-kubectl-patch">7. Próby naprawy ConfigMap ręcznie przez kubectl patch</h3>
 <p><strong>Wynik:</strong> Działało jako rescue — pozwalało przywrócić VXLAN gdy klaster był niedostępny przez Flux.</p>
 <hr />
-<h2 id="kluczowe-wnioski-techniczne">Kluczowe wnioski techniczne<a class="headerlink" href="#kluczowe-wnioski-techniczne" title="Permanent link">&para;</a></h2>
-<h3 id="cilium-routing-modes">Cilium routing modes<a class="headerlink" href="#cilium-routing-modes" title="Permanent link">&para;</a></h3>
+<h2 id="kluczowe-wnioski-techniczne">Kluczowe wnioski techniczne</h2>
+<h3 id="cilium-routing-modes">Cilium routing modes</h3>
 <table>
 <thead>
 <tr>
@@ -4706,9 +4706,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="dlaczego-prometheus-dziaa-z-hostnetwork-a-relay-nie-moze">Dlaczego Prometheus działa z hostNetwork a relay nie może<a class="headerlink" href="#dlaczego-prometheus-dziaa-z-hostnetwork-a-relay-nie-moze" title="Permanent link">&para;</a></h3>
+<h3 id="dlaczego-prometheus-dziaa-z-hostnetwork-a-relay-nie-moze">Dlaczego Prometheus działa z hostNetwork a relay nie może</h3>
 <p>Prometheus używa <code>hostNetwork: true</code> — działa na sieci hosta, ma bezpośredni dostęp do node IP. To jest udokumentowane obejście dla k3s. Cilium Helm chart nie przewiduje <code>hostNetwork</code> dla relay.</p>
-<h3 id="prawidowa-konfiguracja-dla-native-routing">Prawidłowa konfiguracja dla native routing<a class="headerlink" href="#prawidowa-konfiguracja-dla-native-routing" title="Permanent link">&para;</a></h3>
+<h3 id="prawidowa-konfiguracja-dla-native-routing">Prawidłowa konfiguracja dla native routing</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Cilium HelmRelease values</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">kubeProxyReplacement</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">routingMode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native</span>
@@ -4719,7 +4719,7 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>'--disable-kube-proxy'
 </span></code></pre></div>
 <p>Wymagania: wszystkie nody w tej samej podsieci L2 (<code>192.168.55.0/24</code>).</p>
-<h3 id="bezpieczny-sposob-zmiany-routing-mode">Bezpieczny sposób zmiany routing mode<a class="headerlink" href="#bezpieczny-sposob-zmiany-routing-mode" title="Permanent link">&para;</a></h3>
+<h3 id="bezpieczny-sposob-zmiany-routing-mode">Bezpieczny sposób zmiany routing mode</h3>
 <ol>
 <li>Zaktualizuj HelmRelease w Git</li>
 <li>Graceful shutdown klastra przez Ansible</li>
@@ -4727,10 +4727,10 @@
 <li>Flux zaaplikuje nową konfigurację przy starcie</li>
 <li><strong>NIE rób rolling update DaemonSet na żywym klastrze</strong></li>
 </ol>
-<h3 id="dlaczego-delete-all-cilium-pods-at-once-jest-bezpieczniejsze-niz-rolling-update">Dlaczego "delete all Cilium pods at once" jest bezpieczniejsze niż rolling update<a class="headerlink" href="#dlaczego-delete-all-cilium-pods-at-once-jest-bezpieczniejsze-niz-rolling-update" title="Permanent link">&para;</a></h3>
+<h3 id="dlaczego-delete-all-cilium-pods-at-once-jest-bezpieczniejsze-niz-rolling-update">Dlaczego "delete all Cilium pods at once" jest bezpieczniejsze niż rolling update</h3>
 <p>Przy jednoczesnym usunięciu wszystkich podów — wszystkie nody tracą CNI jednocześnie i odbudowują się z tą samą konfiguracją. Brak okna gdy jeden node ma native a drugi VXLAN.</p>
 <hr />
-<h2 id="stan-klastra">Stan klastra<a class="headerlink" href="#stan-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="stan-klastra">Stan klastra</h2>
 <p><strong>Działa:</strong></p>
 <ul>
 <li>Cilium VXLAN <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/></svg></span></li>
@@ -4775,10 +4775,10 @@
 </span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hubble.cluster.kcn333.com</span>
 </span></code></pre></div>
 <hr />
-<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
+<h2 id="stan-koncowy">Stan końcowy</h2>
 <p>Hubble relay nadal nie działa. Klaster był kilkukrotnie destabilizowany.</p>
 <p>Klaster stabilny, wszystko działa <strong>oprócz Hubble relay</strong>. Konfiguracja Cilium: VXLAN, <code>kubeProxyReplacement: false</code>, kube-proxy k3s włączony.</p>
-<h2 id="plan-na-przyszosc-przejscie-na-native-routing">Plan na przyszłość — przejście na native routing (?)<a class="headerlink" href="#plan-na-przyszosc-przejscie-na-native-routing" title="Permanent link">&para;</a></h2>
+<h2 id="plan-na-przyszosc-przejscie-na-native-routing">Plan na przyszłość — przejście na native routing (?)</h2>
 <ol>
 <li>Zaktualizuj HelmRelease Cilium z pełną konfiguracją native</li>
 <li>Graceful shutdown klastra</li>
@@ -4787,7 +4787,7 @@
 </ol>
 <p><strong>Nie próbuj tego na żywym klastrze przez rolling update.</strong></p>
 <hr />
-<h2 id="przydatne-komendy-do-debugowania-cilium">Przydatne komendy do debugowania Cilium<a class="headerlink" href="#przydatne-komendy-do-debugowania-cilium" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy-do-debugowania-cilium">Przydatne komendy do debugowania Cilium</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Status Cilium</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ds/cilium<span class="w"> </span>--<span class="w"> </span>cilium<span class="w"> </span>status<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"Routing|KubeProxy|Hubble|Cluster"</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>

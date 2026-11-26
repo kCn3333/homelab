@@ -4347,8 +4347,8 @@
   
 
 
-<h1 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h1>
-<h2 id="addressing">Addressing<a class="headerlink" href="#addressing" title="Permanent link">&para;</a></h2>
+<h1 id="networking">Networking</h1>
+<h2 id="addressing">Addressing</h2>
 <table>
 <thead>
 <tr>
@@ -4397,7 +4397,7 @@
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'ipam={.data.ipam}{"\n"}require-pod-cidr={.data.k8s-require-ipv4-pod-cidr}{"\n"}'</span>
 </span></code></pre></div>
 <hr />
-<h2 id="cilium-and-kube-proxy">Cilium and kube-proxy<a class="headerlink" href="#cilium-and-kube-proxy" title="Permanent link">&para;</a></h2>
+<h2 id="cilium-and-kube-proxy">Cilium and kube-proxy</h2>
 <p>Cilium and kube-proxy coexist.</p>
 <table>
 <thead>
@@ -4442,7 +4442,7 @@
 </table>
 <p>These results apply to the tested UDP/53 ClusterIP traffic. NodePort and LoadBalancer use separate paths.</p>
 <hr />
-<h2 id="service-and-endpointslice">Service and EndpointSlice<a class="headerlink" href="#service-and-endpointslice" title="Permanent link">&para;</a></h2>
+<h2 id="service-and-endpointslice">Service and EndpointSlice</h2>
 <p>A Service provides a stable virtual frontend. EndpointSlice stores the current backend addresses and readiness conditions.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Service/kube-dns: 10.43.0.10:53
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>EndpointSlice:    Pod CoreDNS address, ready=true
@@ -4465,7 +4465,7 @@
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span>--output<span class="w"> </span>wide
 </span></code></pre></div>
 <hr />
-<h2 id="kube-proxy-iptables-path">kube-proxy iptables path<a class="headerlink" href="#kube-proxy-iptables-path" title="Permanent link">&para;</a></h2>
+<h2 id="kube-proxy-iptables-path">kube-proxy iptables path</h2>
 <p>For tested traffic originating from a node process, kube-proxy used:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>KUBE-SERVICES
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>→ KUBE-SVC-*
@@ -4479,7 +4479,7 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">'dns-tcp'</span>
 </span></code></pre></div>
 <hr />
-<h2 id="cilium-vxlan-path">Cilium VXLAN path<a class="headerlink" href="#cilium-vxlan-path" title="Permanent link">&para;</a></h2>
+<h2 id="cilium-vxlan-path">Cilium VXLAN path</h2>
 <p>After Service translation selects a Pod on another node, Cilium routes the packet through <code>cilium_host</code> and encapsulates it in VXLAN.</p>
 <p>Example observed during a DNS query:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>outer: 192.168.55.10 → 192.168.55.11:8472/UDP
@@ -4496,7 +4496,7 @@
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">8472</span>
 </span></code></pre></div>
 <hr />
-<h2 id="hubble-network-path">Hubble network path<a class="headerlink" href="#hubble-network-path" title="Permanent link">&para;</a></h2>
+<h2 id="hubble-network-path">Hubble network path</h2>
 <p>Each Cilium agent exposes the Hubble observer API on its node address at TCP port <code>4244</code>.</p>
 <p>Users reach Hubble UI through its normal Ingress at <code>https://hubble.cluster.kcn333.com</code>. Traefik routes this request to <code>Service/hubble-ui</code>; no manual port-forward is required.</p>
 <p>The <code>hubble-peer</code> Service uses <code>internalTrafficPolicy: Local</code>. Hubble Relay first connects through the Service to the local Cilium agent and obtains the peer list. It then opens a direct TLS connection to every advertised node endpoint:</p>
@@ -4523,7 +4523,7 @@ UFW route rule. Hubble UI provides live flows and the service map.</p>
 </span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span>--output<span class="w"> </span>wide
 </span></code></pre></div>
 <hr />
-<h2 id="haproxy-and-node-access">HAProxy and node access<a class="headerlink" href="#haproxy-and-node-access" title="Permanent link">&para;</a></h2>
+<h2 id="haproxy-and-node-access">HAProxy and node access</h2>
 <p>HAProxy is the intended external entry point:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>HAProxy:6443 → kube-apiserver
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>HAProxy:80   → Traefik HTTP
@@ -4532,7 +4532,7 @@ UFW route rule. Hubble UI provides live flows and the service map.</p>
 <p>Direct node addresses are still valid technical endpoints for NodePort and ServiceLB. Router and UFW rules decide which source networks may use them. HAProxy does not make those paths disappear.</p>
 <p>Application traffic through ServiceLB is described in <a href="../03-ingress-tls/">Ingress and TLS</a>.</p>
 <hr />
-<h2 id="networkpolicy">NetworkPolicy<a class="headerlink" href="#networkpolicy" title="Permanent link">&para;</a></h2>
+<h2 id="networkpolicy">NetworkPolicy</h2>
 <p>Without a policy, Pods can communicate across namespaces. A NetworkPolicy selects Pods and restricts ingress, egress or both.</p>
 <p>The application-access policy allows PostgreSQL traffic from <code>clients-api</code> Pods in the same namespace:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
@@ -4556,7 +4556,7 @@ UFW route rule. Hubble UI provides live flows and the service map.</p>
 </span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">          </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span>
 </span></code></pre></div>
 <p>Cilium drops traffic denied by policy. A timeout can therefore indicate a policy drop; it does not prove a routing failure.</p>
-<h3 id="cloudnativepg-replication">CloudNativePG replication<a class="headerlink" href="#cloudnativepg-replication" title="Permanent link">&para;</a></h3>
+<h3 id="cloudnativepg-replication">CloudNativePG replication</h3>
 <p>Both <code>clients/clients-db</code> and <code>clients-staging/clients-db-staging</code> have two
 instances. Their policies also allow the CNPG operator in <code>cnpg-system</code> to reach
 TCP <code>8000</code>, and Pods bearing the same <code>cnpg.io/cluster</code> label in the same namespace
@@ -4566,7 +4566,7 @@ to reach database instances on TCP <code>5432</code>.</p>
 that replica join Jobs are included. It does not allow other namespaces or
 unrelated workloads.</p>
 <p>The current policies do not allow Prometheus to scrape CNPG metrics on TCP <code>9187</code>.</p>
-<h3 id="api-server-proxy-traffic-to-sealed-secrets">API server proxy traffic to Sealed Secrets<a class="headerlink" href="#api-server-proxy-traffic-to-sealed-secrets" title="Permanent link">&para;</a></h3>
+<h3 id="api-server-proxy-traffic-to-sealed-secrets">API server proxy traffic to Sealed Secrets</h3>
 <p><code>kubeseal --fetch-cert</code> and <code>kubeseal --validate</code> reach the controller through the
 Kubernetes API server proxy. HAProxy may send the client request to an API server on a
 different node from the controller Pod. Cilium classifies the final hop as
@@ -4581,7 +4581,7 @@ policy separately permits Pod-originated traffic to port 8080.</p>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ds/cilium<span class="w"> </span>--<span class="w"> </span>cilium-dbg<span class="w"> </span>monitor<span class="w"> </span>--type<span class="w"> </span>drop
 </span></code></pre></div>
 <hr />
-<h2 id="required-node-ports">Required node ports<a class="headerlink" href="#required-node-ports" title="Permanent link">&para;</a></h2>
+<h2 id="required-node-ports">Required node ports</h2>
 <table>
 <thead>
 <tr>
@@ -4646,7 +4646,7 @@ policy separately permits Pod-originated traffic to port 8080.</p>
 <p>The firewall source ranges and active rules are documented in <a href="../06-security/">Security</a>
 and implemented by the <a href="https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks">cluster Ansible playbooks</a>.</p>
 <hr />
-<h2 id="useful-commands">Useful commands<a class="headerlink" href="#useful-commands" title="Permanent link">&para;</a></h2>
+<h2 id="useful-commands">Useful commands</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>kubectl<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ds/cilium<span class="w"> </span>--<span class="w"> </span>cilium-dbg<span class="w"> </span>status
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ciliumnodes
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>cilium<span class="w"> </span>-o<span class="w"> </span>wide

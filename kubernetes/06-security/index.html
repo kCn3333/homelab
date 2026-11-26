@@ -4203,8 +4203,8 @@
   
 
 
-<h1 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h1>
-<h2 id="network-boundaries">Network boundaries<a class="headerlink" href="#network-boundaries" title="Permanent link">&para;</a></h2>
+<h1 id="security">Security</h1>
+<h2 id="network-boundaries">Network boundaries</h2>
 <p>The cluster nodes are protected by the router and UFW. Names in the public DNS zone
 resolve to HAProxy's private LAN address. These DNS records do not expose HAProxy or
 the cluster to the Internet: the Kubernetes API on <code>6443/tcp</code> and application ports
@@ -4286,7 +4286,7 @@ that destructive policy is explicitly designed and reviewed.</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>ssh<span class="w"> </span><span class="s2">"</span><span class="nv">$node</span><span class="s2">"</span><span class="w"> </span><span class="s1">'sudo ufw status numbered'</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">done</span>
 </span></code></pre></div>
-<h2 id="exposure-through-services">Exposure through Services<a class="headerlink" href="#exposure-through-services" title="Permanent link">&para;</a></h2>
+<h2 id="exposure-through-services">Exposure through Services</h2>
 <p>A NodePort creates a reachable service path on every node through kube-proxy rules; it
 does not require a userspace process bound to the port. Router and UFW policy decide
 whether that path is reachable from another network.</p>
@@ -4297,7 +4297,7 @@ whether that path is reachable from another network.</p>
 </ul>
 <p>Direct node access may be technically possible from trusted networks. That does not
 make it the supported client path.</p>
-<h2 id="secrets">Secrets<a class="headerlink" href="#secrets" title="Permanent link">&para;</a></h2>
+<h2 id="secrets">Secrets</h2>
 <p>Plaintext credentials must not be committed. Sealed Secrets are encrypted for the
 cluster and may be stored in Git. The controller decrypts them into ordinary Secrets.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubeseal<span class="w"> </span>--format<span class="w"> </span>yaml<span class="w"> </span><span class="se">\</span>
@@ -4314,18 +4314,18 @@ remain outside the cluster, and be refreshed after a new key is created.</p>
 <p>The recovery set contains four active key pairs, encrypted with symmetric GPG
 AES-256 and protected by a SHA-256 checksum. A copy is stored on removable storage;
 the passphrase is kept separately in a password manager.</p>
-<h2 id="tls">TLS<a class="headerlink" href="#tls" title="Permanent link">&para;</a></h2>
+<h2 id="tls">TLS</h2>
 <p>cert-manager uses a restricted Cloudflare API token for DNS-01 challenges. Grant only
 DNS edit and zone read permissions for the required zone. Traefik terminates TLS for
 application traffic; HAProxy forwards TCP without inspecting certificates.</p>
-<h2 id="time-synchronization">Time synchronization<a class="headerlink" href="#time-synchronization" title="Permanent link">&para;</a></h2>
+<h2 id="time-synchronization">Time synchronization</h2>
 <p>All nodes must have consistent time. TLS, etcd, logs and distributed debugging depend
 on it.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>timedatectl<span class="w"> </span>status
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>chronyc<span class="w"> </span>tracking
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>chronyc<span class="w"> </span>sources<span class="w"> </span>-v
 </span></code></pre></div>
-<h2 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h2>
+<h2 id="verification">Verification</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>networkpolicy<span class="w"> </span>-A
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>sealedsecret<span class="w"> </span>-A
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>certificate<span class="w"> </span>-A

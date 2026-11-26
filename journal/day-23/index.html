@@ -4403,11 +4403,11 @@
   
 
 
-<h1 id="23-remotedialer-i-naprawa-grafany">23 - remotedialer i naprawa Grafany<a class="headerlink" href="#23-remotedialer-i-naprawa-grafany" title="Permanent link">&para;</a></h1>
+<h1 id="23-remotedialer-i-naprawa-grafany">23 - remotedialer i naprawa Grafany</h1>
 <p><strong>Data:</strong> 2026-09-12</p>
 <p><strong>Środowisko:</strong> 3× HP T630, k3s v1.34.4+k3s1, Flux v2.8.1, Cilium v1.19.1, kube-prometheus-stack 82.10.1, Grafana 12.4.0</p>
 <hr />
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Ponownie sprawdzić błąd tunelu remotedialer po uruchomieniu klastra.</li>
 <li>Potwierdzić bezpieczne, doraźne odtworzenie brakującego tunelu.</li>
@@ -4416,7 +4416,7 @@
 <li>Usunąć błędy sidecarów Grafany podczas uruchamiania Poda.</li>
 </ol>
 <hr />
-<h2 id="1-ponowne-odtworzenie-bedu-remotedialera">1. Ponowne odtworzenie błędu remotedialera<a class="headerlink" href="#1-ponowne-odtworzenie-bedu-remotedialera" title="Permanent link">&para;</a></h2>
+<h2 id="1-ponowne-odtworzenie-bedu-remotedialera">1. Ponowne odtworzenie błędu remotedialera</h2>
 <p>Klaster uruchomiono dotychczasowym playbookiem Power On, bez zmiany kolejności i odstępów Wake-on-LAN. Usługi K3s, lokalne API i etcd osiągnęły gotowość, ale test połączeń API server → kubelet nie przeszedł:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>worker1 API → worker2 kubelet: 502 Bad Gateway
 </span></code></pre></div>
@@ -4432,7 +4432,7 @@
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>192.168.55.12 ready=true
 </span></code></pre></div>
 <p>Problem nie wynikał więc z braku noda w EndpointSlice. Lokalny proces K3s na <code>worker2</code> nie zestawił jednego z wymaganych tuneli mimo poprawnego docelowego stanu API.</p>
-<h2 id="2-dorazny-resync-remotedialera">2. Doraźny resync remotedialera<a class="headerlink" href="#2-dorazny-resync-remotedialera" title="Permanent link">&para;</a></h2>
+<h2 id="2-dorazny-resync-remotedialera">2. Doraźny resync remotedialera</h2>
 <p>Zmiana adnotacji EndpointSlice wymusiła nowe zdarzenie obserwowane przez K3s:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>annotate<span class="w"> </span>endpointslice<span class="w"> </span>kubernetes<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--namespace<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
@@ -4459,7 +4459,7 @@
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--namespace<span class="w"> </span>default<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>diagnostics.kcn333.com/remotedialer-resync-
 </span></code></pre></div>
-<h3 id="stan-problemu">Stan problemu<a class="headerlink" href="#stan-problemu" title="Permanent link">&para;</a></h3>
+<h3 id="stan-problemu">Stan problemu</h3>
 <p>Przyczyna pozostaje nierozstrzygnięta. Potwierdzono jedynie, że:</p>
 <ul>
 <li>błąd może wystąpić po równoczesnym uruchomieniu nodów;</li>
@@ -4470,7 +4470,7 @@
 </ul>
 <p>Playbook Power On pozostawiono bez sztucznego opóźnienia między nodami. Resync EndpointSlice jest obejściem, nie wyjaśnieniem przyczyny.</p>
 <hr />
-<h2 id="3-objaw-awarii-grafany">3. Objaw awarii Grafany<a class="headerlink" href="#3-objaw-awarii-grafany" title="Permanent link">&para;</a></h2>
+<h2 id="3-objaw-awarii-grafany">3. Objaw awarii Grafany</h2>
 <p>Dashboardy Grafany wyświetlały:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>An error occurred within the plugin
 </span></code></pre></div>
@@ -4485,7 +4485,7 @@
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>192.168.55.11:9090   Prometheus Server is Ready
 </span></code></pre></div>
 <p>Połączenie z <code>worker2</code> kończyło się timeoutem. <code>tcpdump</code> na <code>worker1</code> pokazał przychodzące pakiety SYN z <code>192.168.55.12</code>, ale brak odpowiedzi SYN-ACK. Potwierdziło to blokadę na hoście docelowym, a nie awarię Prometheusa, Service albo DNS.</p>
-<h2 id="4-przyczyna-i-naprawa-poaczenia-grafana-prometheus">4. Przyczyna i naprawa połączenia Grafana → Prometheus<a class="headerlink" href="#4-przyczyna-i-naprawa-poaczenia-grafana-prometheus" title="Permanent link">&para;</a></h2>
+<h2 id="4-przyczyna-i-naprawa-poaczenia-grafana-prometheus">4. Przyczyna i naprawa połączenia Grafana → Prometheus</h2>
 <p>UFW na nodach nie zezwalał na ruch klastra do portu <code>9090/tcp</code>, na którym Prometheus nasłuchiwał przez <code>hostNetwork</code>.</p>
 <p>Regułę najpierw sprawdzono na <code>worker1</code>:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="se">\</span>
@@ -4510,7 +4510,7 @@
 </span></code></pre></div>
 <p>Nie otwarto portu <code>9090</code> dla całej sieci LAN ani Internetu.</p>
 <hr />
-<h2 id="5-utrwalenie-konfiguracji-grafany-przez-flux">5. Utrwalenie konfiguracji Grafany przez Flux<a class="headerlink" href="#5-utrwalenie-konfiguracji-grafany-przez-flux" title="Permanent link">&para;</a></h2>
+<h2 id="5-utrwalenie-konfiguracji-grafany-przez-flux">5. Utrwalenie konfiguracji Grafany przez Flux</h2>
 <p>Grafana używała <code>emptyDir</code> dla <code>/var/lib/grafana</code>. Ręcznie utworzone obiekty mogły więc zniknąć po wymianie Poda.</p>
 <p>Przed rolloutem wyeksportowano dashboard aplikacji:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>tytuł: clinets-api-APP
@@ -4537,7 +4537,7 @@
 </span></code></pre></div>
 <p>Dashboard i datasource nie zależą już od efemerycznej bazy Grafany.</p>
 <hr />
-<h2 id="6-konflikt-portow-sidecarow-grafany">6. Konflikt portów sidecarów Grafany<a class="headerlink" href="#6-konflikt-portow-sidecarow-grafany" title="Permanent link">&para;</a></h2>
+<h2 id="6-konflikt-portow-sidecarow-grafany">6. Konflikt portów sidecarów Grafany</h2>
 <p>Pod Grafany zawiera dwa sidecary <code>kiwigrid/k8s-sidecar</code>:</p>
 <ul>
 <li><code>grafana-sc-dashboard</code>;</li>
@@ -4557,7 +4557,7 @@
 </span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">        </span><span class="nt">HEALTH_PORT</span><span class="p">:</span><span class="w"> </span><span class="s">"8082"</span>
 </span></code></pre></div>
 <p>Po rolloutcie oba kontenery działały równocześnie, a Pod osiągnął <code>3/3 Running</code> bez restartów.</p>
-<h2 id="7-wyscig-podczas-uruchamiania-grafany">7. Wyścig podczas uruchamiania Grafany<a class="headerlink" href="#7-wyscig-podczas-uruchamiania-grafany" title="Permanent link">&para;</a></h2>
+<h2 id="7-wyscig-podczas-uruchamiania-grafany">7. Wyścig podczas uruchamiania Grafany</h2>
 <p>Po usunięciu konfliktu portów oba sidecary zgłosiły jednorazowy błąd połączenia z:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>http://localhost:3000/api/admin/provisioning/.../reload
 </span></code></pre></div>
@@ -4578,8 +4578,8 @@
 </span></code></pre></div>
 <p>Dashboardy Grafany wyświetlały dane. Temat Grafany został zamknięty.</p>
 <hr />
-<h2 id="8-koncowy-stan">8. Końcowy stan<a class="headerlink" href="#8-koncowy-stan" title="Permanent link">&para;</a></h2>
-<h3 id="grafana-naprawiona">Grafana — naprawiona<a class="headerlink" href="#grafana-naprawiona" title="Permanent link">&para;</a></h3>
+<h2 id="8-koncowy-stan">8. Końcowy stan</h2>
+<h3 id="grafana-naprawiona">Grafana — naprawiona</h3>
 <ul>
 <li>komunikacja Grafana → Prometheus działa;</li>
 <li>UFW deklaratywnie dopuszcza <code>9090/tcp</code> wyłącznie z sieci nodów;</li>
@@ -4590,7 +4590,7 @@
 <li>Pod działa jako <code>3/3 Running</code> bez restartów;</li>
 <li>dashboardy pokazują dane.</li>
 </ul>
-<h3 id="remotedialer-problem-otwarty">Remotedialer — problem otwarty<a class="headerlink" href="#remotedialer-problem-otwarty" title="Permanent link">&para;</a></h3>
+<h3 id="remotedialer-problem-otwarty">Remotedialer — problem otwarty</h3>
 <ul>
 <li>błąd został ponownie odtworzony;</li>
 <li>zachowano logi debug z niepoprawnego startu;</li>
@@ -4598,7 +4598,7 @@
 <li>właściwa przyczyna utraty pojedynczej sesji nadal wymaga ustalenia.</li>
 </ul>
 <hr />
-<h2 id="najwazniejsze-wnioski">Najważniejsze wnioski<a class="headerlink" href="#najwazniejsze-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="najwazniejsze-wnioski">Najważniejsze wnioski</h2>
 <ol>
 <li><code>hostNetwork: true</code> oznacza, że dostęp do portu workloadu zależy również od firewalla noda.</li>
 <li>Działający lokalnie Prometheus nie gwarantuje dostępu z innego noda.</li>
@@ -4610,7 +4610,7 @@
 <li>Poprawny EndpointSlice nie gwarantuje, że lokalny stan tuneli remotedialera został zsynchronizowany.</li>
 <li>Doraźny resync naprawia stan, ale nie zastępuje ustalenia przyczyny.</li>
 </ol>
-<h2 id="nastepna-sesja">Następna sesja<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="nastepna-sesja">Następna sesja</h2>
 <p>Diagnostyka Hubble. Problem remotedialera pozostaje zapisany jako osobny, nierozstrzygnięty wątek do porównania podczas kolejnych uruchomień klastra.</p>
 
 

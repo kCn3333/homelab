@@ -4303,19 +4303,19 @@
   
 
 
-<h1 id="4-ufw-backup">4 - UFW + backup<a class="headerlink" href="#4-ufw-backup" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-04">K3s Homelab — Sesja 04<a class="headerlink" href="#k3s-homelab-sesja-04" title="Permanent link">&para;</a></h2>
+<h1 id="4-ufw-backup">4 - UFW + backup</h1>
+<h2 id="k3s-homelab-sesja-04">K3s Homelab — Sesja 04</h2>
 <p><strong>Data:</strong> 2026-01-20<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, HAProxy, Traefik v3.6.7</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ul>
 <li>Diagnoza i naprawa problemu z IPv6/DNS</li>
 <li>UFW firewall na wszystkich nodach przez Ansible</li>
 <li>Automatyczny backup etcd na serwer Debiana przez rsync + cron</li>
 </ul>
 <hr />
-<h3 id="1-diagnoza-problemow-metodologia">1. Diagnoza problemów — metodologia<a class="headerlink" href="#1-diagnoza-problemow-metodologia" title="Permanent link">&para;</a></h3>
+<h3 id="1-diagnoza-problemow-metodologia">1. Diagnoza problemów — metodologia</h3>
 <ul>
 <li>Objaw: <code>time_namelookup: 15s</code> w curlu</li>
 <li>Błędne podejście: wyłączanie IPv6 na klientach (WSL, Debian)</li>
@@ -4334,7 +4334,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>curl<span class="w"> </span>-4<span class="w"> </span>https://domena.com
 </span></code></pre></div>
 <hr />
-<h3 id="2-tls-san-dynamiczny-certyfikat-k3s">2. TLS SAN — dynamiczny certyfikat k3s<a class="headerlink" href="#2-tls-san-dynamiczny-certyfikat-k3s" title="Permanent link">&para;</a></h3>
+<h3 id="2-tls-san-dynamiczny-certyfikat-k3s">2. TLS SAN — dynamiczny certyfikat k3s</h3>
 <p>k3s zarządza certyfikatem API servera przez mechanizm <strong>dynamic listener</strong> — Secret <code>k3s-serving</code> w namespace <code>kube-system</code>.</p>
 <p><strong>Skąd k3s bierze SAN:</strong></p>
 <ul>
@@ -4355,7 +4355,7 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>openssl<span class="w"> </span>x509<span class="w"> </span>-text<span class="w"> </span>-noout<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A10<span class="w"> </span><span class="s2">"Subject Alternative Name"</span>
 </span></code></pre></div>
 <hr />
-<h3 id="3-ufw-firewall-na-nodach-k3s">3. UFW — firewall na nodach k3s<a class="headerlink" href="#3-ufw-firewall-na-nodach-k3s" title="Permanent link">&para;</a></h3>
+<h3 id="3-ufw-firewall-na-nodach-k3s">3. UFW — firewall na nodach k3s</h3>
 <p><strong>Porty wymagane przez k3s:</strong></p>
 <table>
 <thead>
@@ -4429,7 +4429,7 @@
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">from_ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.42.0.0/16</span>
 </span></code></pre></div>
 <hr />
-<h3 id="4-ansible-playbook-dla-ufw">4. Ansible playbook dla UFW<a class="headerlink" href="#4-ansible-playbook-dla-ufw" title="Permanent link">&para;</a></h3>
+<h3 id="4-ansible-playbook-dla-ufw">4. Ansible playbook dla UFW</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nn">---</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prepare UFW firewall for K3s</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
@@ -4519,7 +4519,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>verbose
 </span></code></pre></div>
 <hr />
-<h3 id="5-backup-etcd-automatyczny-przez-rsync-cron">5. Backup etcd — automatyczny przez rsync + cron<a class="headerlink" href="#5-backup-etcd-automatyczny-przez-rsync-cron" title="Permanent link">&para;</a></h3>
+<h3 id="5-backup-etcd-automatyczny-przez-rsync-cron">5. Backup etcd — automatyczny przez rsync + cron</h3>
 <p><strong>Problem z uprawnieniami:</strong> Pliki snapshotów mają uprawnienia <code>rw-------</code> i właściciel <code>root</code>. Rozwiązanie: <code>--rsync-path="sudo rsync"</code> + wpis w sudoers.</p>
 <p><strong>Sudoers (bezpieczny wpis):</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kcn ALL=(ALL) NOPASSWD: /usr/bin/rsync --server *
@@ -4563,7 +4563,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>k3s<span class="w"> </span>etcd-snapshot<span class="w"> </span>ls
 </span></code></pre></div>
 <hr />
-<h2 id="architektura-klastra">Architektura klastra:<a class="headerlink" href="#architektura-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="architektura-klastra">Architektura klastra:</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Internet/LAN
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>     ↓
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>HAProxy (192.168.0.45:80/443/6443)
@@ -4578,7 +4578,7 @@
 <strong>Ruch klastrowy:</strong> dozwolony w podsieci <code>192.168.55.0/24</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/></svg></span><br />
 <strong>Sieć podów:</strong> dozwolona <code>10.42.0.0/16</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/></svg></span></p>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Flux — GitOps, CD</strong> ← następny krok</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Traefik dashboard z BasicAuth</li>
@@ -4591,7 +4591,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> NetworkPolicy dla izolacji między aplikacjami</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># UFW</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>verbose
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>show<span class="w"> </span>added

@@ -4203,10 +4203,10 @@
   
 
 
-<h1 id="k3s-homelab">K3s Homelab<a class="headerlink" href="#k3s-homelab" title="Permanent link">&para;</a></h1>
+<h1 id="k3s-homelab">K3s Homelab</h1>
 <p>Three-node Kubernetes homelab running on physical HP T630 machines. All nodes are k3s servers, control-plane nodes, etcd members and workload nodes.</p>
 <hr />
-<h2 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">&para;</a></h2>
+<h2 id="hardware">Hardware</h2>
 <table>
 <thead>
 <tr>
@@ -4240,7 +4240,7 @@
 <p>The node names are historical. <code>master</code>, <code>worker1</code> and <code>worker2</code> have the same Kubernetes roles.</p>
 <p>HAProxy runs in an LXC container on the Proxmox server and uses <code>192.168.0.45</code>.</p>
 <hr />
-<h2 id="traffic-paths">Traffic paths<a class="headerlink" href="#traffic-paths" title="Permanent link">&para;</a></h2>
+<h2 id="traffic-paths">Traffic paths</h2>
 <p>Kubernetes API:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>→ HAProxy:6443
@@ -4257,7 +4257,7 @@
 </span></code></pre></div>
 <p>HAProxy forwards API and HTTPS traffic in TCP mode. Traefik terminates application TLS and performs HTTP routing.</p>
 <hr />
-<h2 id="current-platform">Current platform<a class="headerlink" href="#current-platform" title="Permanent link">&para;</a></h2>
+<h2 id="current-platform">Current platform</h2>
 <p>State as of <strong>2026-09-29</strong>, incorporating the <a href="../../journal/day-33/">Day 33 monitoring update</a>.</p>
 <table>
 <thead>
@@ -4361,7 +4361,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="network-state">Network state<a class="headerlink" href="#network-state" title="Permanent link">&para;</a></h2>
+<h2 id="network-state">Network state</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Node network: 192.168.55.0/24
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Service CIDR: 10.43.0.0/16
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Pod CIDR:     10.42.0.0/16
@@ -4378,7 +4378,7 @@
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>worker2: 10.42.2.0/24
 </span></code></pre></div>
 <hr />
-<h2 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h2>
+<h2 id="repositories">Repositories</h2>
 <ul>
 <li><a href="https://github.com/kCn3333/homelab">homelab</a> — this documentation and the Polish journal.</li>
 <li><a href="https://github.com/kCn3333/k3s-homelab">k3s-homelab</a> — Flux manifests and Kubernetes desired state.</li>
@@ -4388,7 +4388,7 @@
 </ul>
 <p>Flux is the source of truth for Kubernetes resources managed by the repository. Ansible owns host-level configuration. Built-in k3s components remain managed by k3s unless explicitly stated otherwise.</p>
 <hr />
-<h2 id="documentation-map">Documentation map<a class="headerlink" href="#documentation-map" title="Permanent link">&para;</a></h2>
+<h2 id="documentation-map">Documentation map</h2>
 <table>
 <thead>
 <tr>

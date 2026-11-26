@@ -4225,8 +4225,8 @@
   
 
 
-<h1 id="ingress-and-tls">Ingress and TLS<a class="headerlink" href="#ingress-and-tls" title="Permanent link">&para;</a></h1>
-<h2 id="roles">Roles<a class="headerlink" href="#roles" title="Permanent link">&para;</a></h2>
+<h1 id="ingress-and-tls">Ingress and TLS</h1>
+<h2 id="roles">Roles</h2>
 <ul>
 <li><code>Ingress</code> is a Kubernetes API object that declares HTTP routing.</li>
 <li>Traefik is the Ingress Controller that implements those rules.</li>
@@ -4234,7 +4234,7 @@
 <li>HAProxy is the external L4 entry point running in an LXC container on Proxmox.</li>
 <li>K3s ServiceLB exposes Traefik on ports 80 and 443 of every node.</li>
 </ul>
-<h2 id="application-traffic-path">Application traffic path<a class="headerlink" href="#application-traffic-path" title="Permanent link">&para;</a></h2>
+<h2 id="application-traffic-path">Application traffic path</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>client -&gt; HAProxy -&gt; node:80/443 -&gt; ServiceLB -&gt; Service/traefik
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       -&gt; Traefik Pod -&gt; application backend
 </span></code></pre></div>
@@ -4242,7 +4242,7 @@
 Traefik <code>LoadBalancer</code> Service reachable on each node. The Kubernetes API on port
 <code>6443</code> follows a separate path and does not pass through ServiceLB or Traefik.</p>
 <p>The HAProxy LXC uses <code>192.168.0.45</code> for application and API forwarding.</p>
-<h2 id="traefik-service">Traefik Service<a class="headerlink" href="#traefik-service" title="Permanent link">&para;</a></h2>
+<h2 id="traefik-service">Traefik Service</h2>
 <table>
 <thead>
 <tr>
@@ -4286,7 +4286,7 @@ another independent load balancer tier.</p>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>endpointslices<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>-l<span class="w"> </span>kubernetes.io/service-name<span class="o">=</span>traefik
 </span></code></pre></div>
-<h2 id="routing-to-application-backends">Routing to application backends<a class="headerlink" href="#routing-to-application-backends" title="Permanent link">&para;</a></h2>
+<h2 id="routing-to-application-backends">Routing to application backends</h2>
 <p>Grafana currently uses:</p>
 <table>
 <thead>
@@ -4324,13 +4324,13 @@ that update before it can use the new backend.</p>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>endpointslices<span class="w"> </span>-n<span class="w"> </span>monitoring<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>-l<span class="w"> </span>kubernetes.io/service-name<span class="o">=</span>kube-prometheus-stack-grafana
 </span></code></pre></div>
-<h2 id="traefik-configuration">Traefik configuration<a class="headerlink" href="#traefik-configuration" title="Permanent link">&para;</a></h2>
+<h2 id="traefik-configuration">Traefik configuration</h2>
 <p>Traefik <code>3.7.8</code> is packaged by K3s and runs as one replica. Persistent changes
 belong in a Flux-managed <code>HelmChartConfig</code> named
 <code>traefik</code> in <code>kube-system</code>, not in the generated Deployment or HelmChart.</p>
 <p>Current customizations include HTTP-to-HTTPS redirection and the dashboard. The
 dashboard is exposed through an authenticated <code>IngressRoute</code> using <code>api@internal</code>.</p>
-<h2 id="tls">TLS<a class="headerlink" href="#tls" title="Permanent link">&para;</a></h2>
+<h2 id="tls">TLS</h2>
 <p>cert-manager chart and application <code>v1.21.2</code> are managed by Flux through
 <code>HelmRelease/cert-manager</code> in namespace <code>cert-manager</code>, with the release name
 <code>cert-manager</code>. Chart values enable CRD management with <code>crds.enabled: true</code>.</p>
@@ -4353,7 +4353,7 @@ internet.</p>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>certificate,certificaterequest,challenge<span class="w"> </span>-A
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>certificate<span class="w"> </span>grafana-tls<span class="w"> </span>-n<span class="w"> </span>monitoring
 </span></code></pre></div>
-<h2 id="troubleshooting-order">Troubleshooting order<a class="headerlink" href="#troubleshooting-order" title="Permanent link">&para;</a></h2>
+<h2 id="troubleshooting-order">Troubleshooting order</h2>
 <ol>
 <li>Confirm that DNS resolves to the HAProxy address.</li>
 <li>Check HAProxy access to node ports <code>80</code> and <code>443</code>.</li>

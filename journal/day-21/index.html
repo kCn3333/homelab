@@ -4357,11 +4357,11 @@
   
 
 
-<h1 id="21-kube-proxy-cilium-ebpf-i-vxlan">21 - kube-proxy, Cilium eBPF i VXLAN<a class="headerlink" href="#21-kube-proxy-cilium-ebpf-i-vxlan" title="Permanent link">&para;</a></h1>
+<h1 id="21-kube-proxy-cilium-ebpf-i-vxlan">21 - kube-proxy, Cilium eBPF i VXLAN</h1>
 <p><strong>Data:</strong> 2026-09-09</p>
 <p><strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4+k3s1, Cilium v1.19.1, kube-proxy/iptables</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li>Ustalenie, skąd Service <code>kube-dns</code> zna aktualny backend CoreDNS.</li>
 <li>Sprawdzenie reprezentacji Service i endpointu w iptables kube-proxy.</li>
@@ -4370,7 +4370,7 @@
 <li>Potwierdzenie miejsca translacji adresu względem enkapsulacji VXLAN.</li>
 </ol>
 <hr />
-<h3 id="1-stan-klastra-podczas-testu">1. Stan klastra podczas testu<a class="headerlink" href="#1-stan-klastra-podczas-testu" title="Permanent link">&para;</a></h3>
+<h3 id="1-stan-klastra-podczas-testu">1. Stan klastra podczas testu</h3>
 <table>
 <thead>
 <tr>
@@ -4414,7 +4414,7 @@
 </tbody>
 </table>
 <p>Test dotyczył wyłącznie ruchu do <code>ClusterIP</code> na porcie <code>53/UDP</code> w aktualnej konfiguracji klastra.</p>
-<h3 id="2-service-i-endpointslice">2. Service i EndpointSlice<a class="headerlink" href="#2-service-i-endpointslice" title="Permanent link">&para;</a></h3>
+<h3 id="2-service-i-endpointslice">2. Service i EndpointSlice</h3>
 <p>Klient DNS korzystał ze stałego frontendu:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>10.43.0.10:53
 </span></code></pre></div>
@@ -4429,7 +4429,7 @@
 <li>kube-proxy aktualizuje iptables, a Cilium aktualizuje mapy eBPF.</li>
 <li>Pakiet korzysta z zaprogramowanego dataplane i nie odpytuje EndpointSlice.</li>
 </ol>
-<h3 id="3-reprezentacja-service-w-iptables">3. Reprezentacja Service w iptables<a class="headerlink" href="#3-reprezentacja-service-w-iptables" title="Permanent link">&para;</a></h3>
+<h3 id="3-reprezentacja-service-w-iptables">3. Reprezentacja Service w iptables</h3>
 <p>Na <code>master</code> zaobserwowano następujący łańcuch kube-proxy:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>KUBE-SERVICES
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  10.43.0.10:53/UDP
@@ -4460,14 +4460,14 @@
 </tbody>
 </table>
 <p><code>KUBE-SEP-*</code> nie jest obiektem EndpointSlice. Jest lokalną regułą utworzoną przez kube-proxy na podstawie danych pobranych z Kubernetes API.</p>
-<h3 id="4-clusterip-na-poziomie-hosta">4. ClusterIP na poziomie hosta<a class="headerlink" href="#4-clusterip-na-poziomie-hosta" title="Permanent link">&para;</a></h3>
+<h3 id="4-clusterip-na-poziomie-hosta">4. ClusterIP na poziomie hosta</h3>
 <p>Na <code>master</code> potwierdzono:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>10.43.0.10 nie jest przypisany do interfejsu
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>brak dedykowanej trasy do 10.43.0.10
 </span></code></pre></div>
 <p>Proces hosta może korzystać z ClusterIP, ponieważ kube-proxy programuje reguły netfilter na nodzie. Zwykły host w LAN-ie nie ma tych reguł ani standardowo trasy do Service CIDR.</p>
 <p>Ruch z procesu noda jest ruchem spoza sieci Podów, ale nie jest tym samym co ruch z dowolnego klienta w LAN-ie.</p>
-<h3 id="5-trasa-do-zdalnego-podcidr">5. Trasa do zdalnego PodCIDR<a class="headerlink" href="#5-trasa-do-zdalnego-podcidr" title="Permanent link">&para;</a></h3>
+<h3 id="5-trasa-do-zdalnego-podcidr">5. Trasa do zdalnego PodCIDR</h3>
 <p>Decyzja routingu na <code>master</code>:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>ip<span class="w"> </span>route<span class="w"> </span>get<span class="w"> </span><span class="m">10</span>.42.1.113
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">10.42.1.113 dev cilium_host src 10.42.0.9 uid 1000</span>
@@ -4484,7 +4484,7 @@
 <li>MTU <code>1450</code> uwzględnia narzut tunelu VXLAN;</li>
 <li>Cilium odpowiada za transport do Poda na innym nodzie.</li>
 </ul>
-<h3 id="6-test-ruchu-z-hosta">6. Test ruchu z hosta<a class="headerlink" href="#6-test-ruchu-z-hosta" title="Permanent link">&para;</a></h3>
+<h3 id="6-test-ruchu-z-hosta">6. Test ruchu z hosta</h3>
 <p>Na <code>master</code> wykonano dziesięć oddzielnych zapytań:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">10</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>dig<span class="w"> </span>+tries<span class="o">=</span><span class="m">1</span><span class="w"> </span>+time<span class="o">=</span><span class="m">1</span><span class="w"> </span>+short<span class="w"> </span><span class="se">\</span>
@@ -4499,7 +4499,7 @@
 </span></code></pre></div>
 <p>Wniosek: dla ruchu z procesu hosta translację <code>10.43.0.10:53 → 10.42.1.113:53</code> wykonał kube-proxy przez iptables.</p>
 <p>Reguła <code>KUBE-MARK-MASQ</code> również otrzymała trafienia, ponieważ źródło hostowe nie należało do PodCIDR <code>10.42.0.0/16</code>.</p>
-<h3 id="7-test-ruchu-z-poda">7. Test ruchu z Poda<a class="headerlink" href="#7-test-ruchu-z-poda" title="Permanent link">&para;</a></h3>
+<h3 id="7-test-ruchu-z-poda">7. Test ruchu z Poda</h3>
 <p>Pod <code>10.42.0.161</code> działał na <code>master</code>. Wykonano pięć oddzielnych zapytań <code>nslookup</code> do <code>10.43.0.10</code>.</p>
 <table>
 <thead>
@@ -4526,7 +4526,7 @@
 <p>Pięć zapytań z Poda nie zwiększyło licznika iptables, natomiast kontrolne zapytanie z hosta zwiększyło go o jeden pakiet i 105 bajtów.</p>
 <p>Wniosek: dla badanego ruchu z Poda translację ClusterIP wykonał Cilium w eBPF, przed dojściem pakietu do reguł kube-proxy na hoście.</p>
 <p>Liczniki tabeli <code>nat</code> odnoszą się do pierwszych pakietów nowych przepływów śledzonych przez conntrack, a nie do wszystkich pakietów zapytania i odpowiedzi.</p>
-<h3 id="8-potwierdzenie-vxlan">8. Potwierdzenie VXLAN<a class="headerlink" href="#8-potwierdzenie-vxlan" title="Permanent link">&para;</a></h3>
+<h3 id="8-potwierdzenie-vxlan">8. Potwierdzenie VXLAN</h3>
 <p>Capture zapytania z Poda pokazał:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>outer: 192.168.55.10 → 192.168.55.11:8472
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>inner: 10.42.0.161 → 10.42.1.113:53/UDP
@@ -4542,7 +4542,7 @@
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>inner: 10.42.0.9 → 10.42.1.113:53/UDP
 </span></code></pre></div>
 <p>Odpowiedź wróciła przez VXLAN do <code>10.42.0.9</code>. Conntrack i netfilter wykonały odwrotne translacje NAT, dlatego aplikacja hostowa komunikowała się logicznie z <code>10.43.0.10:53</code>.</p>
-<h3 id="9-porownanie-sciezek">9. Porównanie ścieżek<a class="headerlink" href="#9-porownanie-sciezek" title="Permanent link">&para;</a></h3>
+<h3 id="9-porownanie-sciezek">9. Porównanie ścieżek</h3>
 <table>
 <thead>
 <tr>
@@ -4565,7 +4565,7 @@
 </tbody>
 </table>
 <p>Wspólny był transport między nodami przez Cilium VXLAN. Różniło się miejsce realizacji translacji Service.</p>
-<h3 id="10-najwazniejsze-wnioski">10. Najważniejsze wnioski<a class="headerlink" href="#10-najwazniejsze-wnioski" title="Permanent link">&para;</a></h3>
+<h3 id="10-najwazniejsze-wnioski">10. Najważniejsze wnioski</h3>
 <ol>
 <li>Service i EndpointSlice należą do ścieżki sterowania; pakiet korzysta z lokalnie zaprogramowanego dataplane.</li>
 <li>ClusterIP nie musi istnieć na interfejsie ani w tablicy routingu hosta.</li>
@@ -4577,7 +4577,7 @@
 <li><code>KubeProxyReplacement=False</code> nie oznacza, że Cilium nie obsługuje żadnego ruchu ClusterIP.</li>
 <li>Wyniku nie należy rozszerzać na NodePort, LoadBalancer, Ingress ani ruch przychodzący z LAN-u bez osobnych testów.</li>
 </ol>
-<h3 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h3>
+<h3 id="przydatne-komendy">Przydatne komendy</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>service<span class="w"> </span>kube-dns<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>--output<span class="w"> </span>wide
@@ -4597,7 +4597,7 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ssh<span class="w"> </span>master<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="s1">'sudo timeout 15 tcpdump -ni enp1s0 -nn -vv udp port 8472'</span>
 </span></code></pre></div>
-<h3 id="nastepna-sesja">Następna sesja:<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h3>
+<h3 id="nastepna-sesja">Następna sesja:</h3>
 <p>Porównanie ścieżek <code>ClusterIP</code>, <code>NodePort</code> i <code>LoadBalancer</code> oraz sprawdzenie, które elementy obsługuje kube-proxy, Cilium i Traefik w aktualnej konfiguracji klastra.</p>
 
 

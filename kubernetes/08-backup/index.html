@@ -4225,7 +4225,7 @@
   
 
 
-<h1 id="backup">Backup<a class="headerlink" href="#backup" title="Permanent link">&para;</a></h1>
+<h1 id="backup">Backup</h1>
 <p>The recovery plan has three independent data sets:</p>
 <table>
 <thead>
@@ -4254,7 +4254,7 @@
 </tbody>
 </table>
 <p>All three are required for a rebuild that does not rely on the original etcd state.</p>
-<h2 id="k3s-etcd-snapshots">K3s etcd snapshots<a class="headerlink" href="#k3s-etcd-snapshots" title="Permanent link">&para;</a></h2>
+<h2 id="k3s-etcd-snapshots">K3s etcd snapshots</h2>
 <p>K3s creates scheduled snapshots in:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/var/lib/rancher/k3s/server/db/snapshots/
 </span></code></pre></div>
@@ -4272,7 +4272,7 @@ are copied away from the cluster node. A copy on another machine in the same hom
 location is a separate host copy, not a true off-site backup.</p>
 <p>Snapshot restoration recovers Kubernetes objects. Repository state must still be
 consistent with the intended post-restore state because Flux will resume reconciliation.</p>
-<h2 id="sealed-secrets-recovery-keys">Sealed Secrets recovery keys<a class="headerlink" href="#sealed-secrets-recovery-keys" title="Permanent link">&para;</a></h2>
+<h2 id="sealed-secrets-recovery-keys">Sealed Secrets recovery keys</h2>
 <p>The controller rotates sealing keys and retains older active keys so that manifests
 created in earlier periods remain decryptable. Export every Secret selected by:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>secrets<span class="w"> </span><span class="se">\</span>
@@ -4286,7 +4286,7 @@ a SHA-256 checksum.</p>
 <p>Keep the encrypted payload and checksum outside the cluster, with at least one copy
 outside the workstation. Store the passphrase separately. Repeat the export after each
 key rotation and periodically test decryption without restoring into production.</p>
-<h2 id="garage">Garage<a class="headerlink" href="#garage" title="Permanent link">&para;</a></h2>
+<h2 id="garage">Garage</h2>
 <p>Garage runs on Logos and provides the S3-compatible backend used by Longhorn and Loki.</p>
 <table>
 <thead>
@@ -4315,7 +4315,7 @@ node and replication factor one, so it is a backup target but not itself highly
 available. Its data directory must also be backed up independently.</p>
 <p>Credentials and endpoint settings used by Kubernetes are stored as SealedSecrets, not
 as plaintext manifests.</p>
-<h2 id="longhorn-volume-backups">Longhorn volume backups<a class="headerlink" href="#longhorn-volume-backups" title="Permanent link">&para;</a></h2>
+<h2 id="longhorn-volume-backups">Longhorn volume backups</h2>
 <p>Longhorn <code>v1.12.1</code> uses a <code>BackupTarget</code> object:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">longhorn.io/v1beta2</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BackupTarget</span>
@@ -4334,14 +4334,14 @@ copy of the Garage data.</p>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>recurringjob<span class="w"> </span>-n<span class="w"> </span>longhorn-system
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>backupvolume,backup<span class="w"> </span>-n<span class="w"> </span>longhorn-system
 </span></code></pre></div>
-<h2 id="postgresql-backups">PostgreSQL backups<a class="headerlink" href="#postgresql-backups" title="Permanent link">&para;</a></h2>
+<h2 id="postgresql-backups">PostgreSQL backups</h2>
 <p>The CNPG databases have manual logical dumps and PVCs covered by Longhorn volume
 backups. CNPG-native backups are not configured: there are no <code>ScheduledBackup</code>
 or <code>Backup</code> resources or a dedicated CNPG backup destination.</p>
 <p>Asynchronous streaming replication provides a second running database instance;
 it does not protect against accidental deletion or logical corruption. Database
 restore procedures are not yet validated.</p>
-<h2 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h2>
+<h2 id="verification">Verification</h2>
 <p>A scheduled Job with <code>Completed</code> status confirms only that the Job exited successfully.
 Also verify that:</p>
 <ul>
@@ -4352,7 +4352,7 @@ Also verify that:</p>
 <li>the Sealed Secrets recovery export decrypts and contains every active key;</li>
 <li>the restore procedure is tested periodically.</li>
 </ul>
-<h2 id="recovery-order">Recovery order<a class="headerlink" href="#recovery-order" title="Permanent link">&para;</a></h2>
+<h2 id="recovery-order">Recovery order</h2>
 <p>For a complete cluster loss:</p>
 <ol>
 <li>Restore the K3s control-plane state from an etcd snapshot when one is available.</li>

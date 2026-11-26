@@ -4535,10 +4535,10 @@
   
 
 
-<h1 id="30-aktualizacja-longhorna-i-metrics-server">30 - aktualizacja Longhorna i Metrics Server<a class="headerlink" href="#30-aktualizacja-longhorna-i-metrics-server" title="Permanent link">&para;</a></h1>
+<h1 id="30-aktualizacja-longhorna-i-metrics-server">30 - aktualizacja Longhorna i Metrics Server</h1>
 <p><strong>Data:</strong> 2026-09-22
 <strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.5 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Longhorn <code>1.12.1</code>, Metrics Server <code>v0.9.0</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Potwierdzić poprawny stan klastra po poprzedniej sesji.</li>
 <li>Zamknąć weryfikację dwuinstancyjnych klastrów CloudNativePG.</li>
@@ -4549,7 +4549,7 @@
 <li>Zaktualizować Metrics Server z chartu <code>3.13.1</code> do <code>3.14.0</code>.</li>
 </ol>
 <hr />
-<h2 id="1-stan-klastra-po-uruchomieniu">1. Stan klastra po uruchomieniu<a class="headerlink" href="#1-stan-klastra-po-uruchomieniu" title="Permanent link">&para;</a></h2>
+<h2 id="1-stan-klastra-po-uruchomieniu">1. Stan klastra po uruchomieniu</h2>
 <p>Kolejny start klastra zakończył się bez błędów.</p>
 <p>Potwierdzono:</p>
 <ul>
@@ -4591,7 +4591,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="2-weryfikacja-replikacji-cloudnativepg">2. Weryfikacja replikacji CloudNativePG<a class="headerlink" href="#2-weryfikacja-replikacji-cloudnativepg" title="Permanent link">&para;</a></h2>
+<h2 id="2-weryfikacja-replikacji-cloudnativepg">2. Weryfikacja replikacji CloudNativePG</h2>
 <p>Na obu primary sprawdzono <code>pg_stat_replication</code>.</p>
 <p>Produkcja:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>application_name: clients-db-1
@@ -4609,7 +4609,7 @@
 </span></code></pre></div>
 <p>Etap zwiększania CloudNativePG do dwóch instancji został uznany za zamknięty.</p>
 <hr />
-<h2 id="3-wybor-kolejnego-komponentu">3. Wybór kolejnego komponentu<a class="headerlink" href="#3-wybor-kolejnego-komponentu" title="Permanent link">&para;</a></h2>
+<h2 id="3-wybor-kolejnego-komponentu">3. Wybór kolejnego komponentu</h2>
 <p>Po przeglądzie wersji do aktualizacji wybrano Longhorna.</p>
 <p>Przyjęto aktualizację dwuetapową:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>1.11.0 → 1.11.3 → test → zimny start
@@ -4624,7 +4624,7 @@
 <li>zimny start klastra.</li>
 </ul>
 <hr />
-<h2 id="4-aktualizacja-longhorna-1110-1113">4. Aktualizacja Longhorna <code>1.11.0 → 1.11.3</code><a class="headerlink" href="#4-aktualizacja-longhorna-1110-1113" title="Permanent link">&para;</a></h2>
+<h2 id="4-aktualizacja-longhorna-1110-1113">4. Aktualizacja Longhorna <code>1.11.0 → 1.11.3</code></h2>
 <p>HelmRelease został zaktualizowany do:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chart: longhorn 1.11.3
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>manager: longhorn-manager:v1.11.3
@@ -4651,7 +4651,7 @@
 <li>zimny start klastra zakończył się poprawnie.</li>
 </ul>
 <hr />
-<h2 id="5-punkt-odzyskiwania-przed-longhornem-1121">5. Punkt odzyskiwania przed Longhornem <code>1.12.1</code><a class="headerlink" href="#5-punkt-odzyskiwania-przed-longhornem-1121" title="Permanent link">&para;</a></h2>
+<h2 id="5-punkt-odzyskiwania-przed-longhornem-1121">5. Punkt odzyskiwania przed Longhornem <code>1.12.1</code></h2>
 <p>Przed drugim etapem ponownie potwierdzono:</p>
 <ul>
 <li>wszystkie wolumeny <code>attached</code> i <code>healthy</code>;</li>
@@ -4662,7 +4662,7 @@
 <li>brak nieprawidłowych Podów;</li>
 <li>HelmRelease Longhorna <code>Ready=True</code>.</li>
 </ul>
-<h3 id="snapshot-etcd">Snapshot etcd<a class="headerlink" href="#snapshot-etcd" title="Permanent link">&para;</a></h3>
+<h3 id="snapshot-etcd">Snapshot etcd</h3>
 <p>Utworzono snapshot:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pre-longhorn-upgrade-v1.12.1-master-1790065855
 </span></code></pre></div>
@@ -4670,7 +4670,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Unknown flag --disable found in config.yaml, skipping
 </span></code></pre></div>
 <p>Snapshot został mimo ostrzeżenia zapisany poprawnie. Ostrzeżenie należy przeanalizować osobno; nie blokowało bieżącej operacji.</p>
-<h3 id="backup-systemowy-longhorna">Backup systemowy Longhorna<a class="headerlink" href="#backup-systemowy-longhorna" title="Permanent link">&para;</a></h3>
+<h3 id="backup-systemowy-longhorna">Backup systemowy Longhorna</h3>
 <p>Backup target S3 w Garage był dostępny:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>s3://longhorn-backup@garage/
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>AVAILABLE=true
@@ -4679,7 +4679,7 @@
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">volumeBackupPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 </span></code></pre></div>
 <hr />
-<h2 id="6-aktualizacja-longhorna-1113-1121">6. Aktualizacja Longhorna <code>1.11.3 → 1.12.1</code><a class="headerlink" href="#6-aktualizacja-longhorna-1113-1121" title="Permanent link">&para;</a></h2>
+<h2 id="6-aktualizacja-longhorna-1113-1121">6. Aktualizacja Longhorna <code>1.11.3 → 1.12.1</code></h2>
 <p>Flux zakończył aktualizację HelmRelease:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>REVISION: 1.12.1
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>READY:    True
@@ -4707,7 +4707,7 @@
 </span></code></pre></div>
 <p>Jest to oczekiwane. Aktualizacja managera nie wymusza jednoczesnej migracji wszystkich działających silników.</p>
 <hr />
-<h2 id="7-migracja-silnikow-wolumenow-do-v1121">7. Migracja silników wolumenów do <code>v1.12.1</code><a class="headerlink" href="#7-migracja-silnikow-wolumenow-do-v1121" title="Permanent link">&para;</a></h2>
+<h2 id="7-migracja-silnikow-wolumenow-do-v1121">7. Migracja silników wolumenów do <code>v1.12.1</code></h2>
 <p>W Longhorn UI wykonano aktualizację obrazu silnika dla wszystkich sześciu wolumenów.</p>
 <p>Objęte PVC:</p>
 <table>
@@ -4763,7 +4763,7 @@
 </span></code></pre></div>
 <p>Starszych obrazów nie usunięto podczas tej sesji. Brak referencji oznacza, że nie obsługują aktywnych silników, ale pozostawienie ich do czasu kolejnych poprawnych startów ułatwia diagnostykę i ewentualny rollback.</p>
 <hr />
-<h2 id="8-repliki-longhorna">8. Repliki Longhorna<a class="headerlink" href="#8-repliki-longhorna" title="Permanent link">&para;</a></h2>
+<h2 id="8-repliki-longhorna">8. Repliki Longhorna</h2>
 <p>Każdy z sześciu wolumenów miał dwie działające repliki:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>worker1: running
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>worker2: running
@@ -4782,7 +4782,7 @@
 <li><code>spec.nodeID</code> repliki — node przechowujący kopię danych.</li>
 </ul>
 <hr />
-<h2 id="9-zimny-start-po-aktualizacji-longhorna">9. Zimny start po aktualizacji Longhorna<a class="headerlink" href="#9-zimny-start-po-aktualizacji-longhorna" title="Permanent link">&para;</a></h2>
+<h2 id="9-zimny-start-po-aktualizacji-longhorna">9. Zimny start po aktualizacji Longhorna</h2>
 <p>Po pełnym wyłączeniu i uruchomieniu klastra potwierdzono:</p>
 <ul>
 <li>trzy nody <code>Ready</code>;</li>
@@ -4820,7 +4820,7 @@
 <p>Zmiana primary jest poprawnym wynikiem elekcji CloudNativePG po pełnym starcie. Oba klastry pozostały <code>Cluster in healthy state</code>.</p>
 <p>Aktualizacja Longhorna do <code>1.12.1</code> została uznana za zakończoną.</p>
 <hr />
-<h2 id="10-aktualizacja-metrics-server">10. Aktualizacja Metrics Server<a class="headerlink" href="#10-aktualizacja-metrics-server" title="Permanent link">&para;</a></h2>
+<h2 id="10-aktualizacja-metrics-server">10. Aktualizacja Metrics Server</h2>
 <p>Jako ostatni, bezstanowy komponent wybrano Metrics Server.</p>
 <p>Zakres:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Helm chart: 3.13.1 → 3.14.0
@@ -4850,8 +4850,8 @@
 </ul>
 <p>Aktualizacja Metrics Server została uznana za zakończoną.</p>
 <hr />
-<h2 id="11-stan-koncowy">11. Stan końcowy<a class="headerlink" href="#11-stan-koncowy" title="Permanent link">&para;</a></h2>
-<h3 id="k3s-i-gitops">K3s i GitOps<a class="headerlink" href="#k3s-i-gitops" title="Permanent link">&para;</a></h3>
+<h2 id="11-stan-koncowy">11. Stan końcowy</h2>
+<h3 id="k3s-i-gitops">K3s i GitOps</h3>
 <ul>
 <li>trzy nody <code>Ready</code>;</li>
 <li>K3s <code>v1.36.4+k3s1</code>;</li>
@@ -4860,7 +4860,7 @@
 <li>Flux poprawnie wdrożył obie aktualizacje;</li>
 <li>kolejne zimne starty zakończyły się bez błędu remotedialera.</li>
 </ul>
-<h3 id="longhorn">Longhorn<a class="headerlink" href="#longhorn" title="Permanent link">&para;</a></h3>
+<h3 id="longhorn">Longhorn</h3>
 <ul>
 <li>chart i manager <code>1.12.1</code>;</li>
 <li>sześć wolumenów <code>attached</code> i <code>healthy</code>;</li>
@@ -4871,7 +4871,7 @@
 <li><code>SystemBackup</code> sprzed aktualizacji ma stan <code>Ready</code>;</li>
 <li>snapshot etcd został zapisany.</li>
 </ul>
-<h3 id="cloudnativepg">CloudNativePG<a class="headerlink" href="#cloudnativepg" title="Permanent link">&para;</a></h3>
+<h3 id="cloudnativepg">CloudNativePG</h3>
 <ul>
 <li>oba klastry <code>2/2 Ready</code>;</li>
 <li>oba w fazie <code>Cluster in healthy state</code>;</li>
@@ -4879,7 +4879,7 @@
 <li>repliki nie mają wstrzymanego replay WAL;</li>
 <li>zmiana primary po zimnym starcie przebiegła automatycznie.</li>
 </ul>
-<h3 id="metrics-server">Metrics Server<a class="headerlink" href="#metrics-server" title="Permanent link">&para;</a></h3>
+<h3 id="metrics-server">Metrics Server</h3>
 <ul>
 <li>chart <code>3.14.0</code>;</li>
 <li>aplikacja <code>v0.9.0</code>;</li>
@@ -4888,7 +4888,7 @@
 <li><code>kubectl top</code> działa dla nodów i Podów.</li>
 </ul>
 <hr />
-<h2 id="12-wnioski">12. Wnioski<a class="headerlink" href="#12-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="12-wnioski">12. Wnioski</h2>
 <ol>
 <li>Aktualizacja chartu Longhorna i migracja obrazu silnika wolumenów to dwie osobne operacje.</li>
 <li>Nowy EngineImage z <code>REFCOUNT=0</code> oznacza tylko, że żaden aktywny silnik jeszcze go nie używa.</li>
@@ -4900,7 +4900,7 @@
 <li>Metrics Server można zweryfikować nie tylko przez gotowość Deploymentu, lecz także przez stan <code>APIService</code> i rzeczywiste zapytania <code>kubectl top</code>.</li>
 </ol>
 <hr />
-<h2 id="13-nastepna-sesja">13. Następna sesja<a class="headerlink" href="#13-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="13-nastepna-sesja">13. Następna sesja</h2>
 <ol>
 <li>Nie wykonywać kolejnej dużej aktualizacji przed następnym poprawnym startem klastra.</li>
 <li>Ponownie sprawdzić:</li>

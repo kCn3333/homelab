@@ -4325,13 +4325,13 @@
   
 
 
-<h1 id="6-sealed-secrets-longhorn">6 - Sealed Secrets + Longhorn<a class="headerlink" href="#6-sealed-secrets-longhorn" title="Permanent link">&para;</a></h1>
+<h1 id="6-sealed-secrets-longhorn">6 - Sealed Secrets + Longhorn</h1>
 <p><span id="7-sealed-secrets-longhorn"></span></p>
-<h2 id="k3s-homelab-sesja-06">K3s Homelab — Sesja 06<a class="headerlink" href="#k3s-homelab-sesja-06" title="Permanent link">&para;</a></h2>
+<h2 id="k3s-homelab-sesja-06">K3s Homelab — Sesja 06</h2>
 <p><strong>Data:</strong> 2026-01-23<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ul>
 <li>Sealed Secrets — bezpieczne przechowywanie sekretów w Git</li>
 <li>Longhorn — distributed block storage z RWX</li>
@@ -4339,7 +4339,7 @@
 <li>Traefik dashboard z BasicAuth i TLS</li>
 </ul>
 <hr />
-<h3 id="1-sealed-secrets">1. Sealed Secrets<a class="headerlink" href="#1-sealed-secrets" title="Permanent link">&para;</a></h3>
+<h3 id="1-sealed-secrets">1. Sealed Secrets</h3>
 <p>Kubernetes Secrets w plaintext nie mogą być bezpiecznie trzymane w Git. Sealed Secrets szyfruje je kluczem publicznym klastra — tylko klaster może je odszyfrować.</p>
 <p><strong>Architektura:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Klucz prywatny → zostaje w klastrze (Secret w flux-system)
@@ -4421,7 +4421,7 @@
 <li>Certyfikaty TLS zarządzane przez cert-manager — <strong>nie trzeba</strong>, cert-manager regeneruje je automatycznie</li>
 </ul>
 <hr />
-<h3 id="2-longhorn-distributed-block-storage">2. Longhorn — Distributed Block Storage<a class="headerlink" href="#2-longhorn-distributed-block-storage" title="Permanent link">&para;</a></h3>
+<h3 id="2-longhorn-distributed-block-storage">2. Longhorn — Distributed Block Storage</h3>
 <p>Distributed storage dla Kubernetes — tworzy repliki danych między nodami. Jeśli jeden node padnie, dane są dostępne na pozostałych.</p>
 <p><strong>Wymagania systemowe (przez Ansible):</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">open-iscsi</span><span class="w">      </span><span class="c1"># iSCSI initiator</span>
@@ -4512,7 +4512,7 @@
 </ul>
 <p>Longhorn tworzy wewnętrzny serwer NFS (<code>share-manager</code> pod) dla wolumenów RWX.</p>
 <hr />
-<h3 id="3-persistentvolume-persistentvolumeclaim">3. PersistentVolume / PersistentVolumeClaim<a class="headerlink" href="#3-persistentvolume-persistentvolumeclaim" title="Permanent link">&para;</a></h3>
+<h3 id="3-persistentvolume-persistentvolumeclaim">3. PersistentVolume / PersistentVolumeClaim</h3>
 <p><strong>PVC w manifeście aplikacji:</strong></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># W tym samym pliku co Deployment</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
@@ -4583,7 +4583,7 @@
 </span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr/share/nginx/html</span>
 </span></code></pre></div>
 <hr />
-<h3 id="4-traefik-dashboard-z-basicauth">4. Traefik Dashboard z BasicAuth<a class="headerlink" href="#4-traefik-dashboard-z-basicauth" title="Permanent link">&para;</a></h3>
+<h3 id="4-traefik-dashboard-z-basicauth">4. Traefik Dashboard z BasicAuth</h3>
 <p><strong>Komponenty:</strong></p>
 <ol>
 <li><code>Certificate</code> — TLS cert od cert-manager w odpowiednim namespace</li>
@@ -4660,7 +4660,7 @@
 </span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="w">      </span><span class="no">dashboard: true</span>
 </span></code></pre></div>
 <hr />
-<h3 id="5-helmrepository-wazna-zasada">5. HelmRepository — ważna zasada<a class="headerlink" href="#5-helmrepository-wazna-zasada" title="Permanent link">&para;</a></h3>
+<h3 id="5-helmrepository-wazna-zasada">5. HelmRepository — ważna zasada</h3>
 <p><code>HelmRepository</code> zawsze w namespace <code>flux-system</code> — niezależnie gdzie instalujesz aplikację. Flux source-controller działa w <code>flux-system</code> i tam szuka źródeł.</p>
 <p>W <code>HelmRelease</code> dodaj referencję z namespace:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">sourceRef</span><span class="p">:</span>
@@ -4669,7 +4669,7 @@
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flux-system</span><span class="w">  </span><span class="c1"># ← ważne!</span>
 </span></code></pre></div>
 <hr />
-<h3 id="6-flux-generator-przydatne-komendy">6. Flux generator — przydatne komendy<a class="headerlink" href="#6-flux-generator-przydatne-komendy" title="Permanent link">&para;</a></h3>
+<h3 id="6-flux-generator-przydatne-komendy">6. Flux generator — przydatne komendy</h3>
 <p>Zamiast pisać YAML ręcznie:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Generuj HelmRepository</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>flux<span class="w"> </span>create<span class="w"> </span><span class="nb">source</span><span class="w"> </span>helm<span class="w"> </span>&lt;nazwa&gt;<span class="w"> </span><span class="se">\</span>
@@ -4686,7 +4686,7 @@
 </span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">  </span>--export<span class="w"> </span>&gt;<span class="w"> </span>helmrelease.yaml
 </span></code></pre></div>
 <hr />
-<h2 id="finalna-struktura-repo">Finalna struktura repo<a class="headerlink" href="#finalna-struktura-repo" title="Permanent link">&para;</a></h2>
+<h2 id="finalna-struktura-repo">Finalna struktura repo</h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>k3s-homelab/
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>├── README.md
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>├── apps/
@@ -4729,7 +4729,7 @@
 </span><span id="__span-22-40"><a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a>            └── kustomization.yaml
 </span></code></pre></div>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Własna aplikacja (Spring Boot) + CI/CD pipeline z GitHub Actions</strong> ← następny krok</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> InitContainer — zasilanie PVC z obrazu Docker</li>
@@ -4742,7 +4742,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RBAC — własni użytkownicy</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Sealed Secrets</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>kubeseal<span class="w"> </span>--fetch-cert<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span>--controller-name<span class="o">=</span>sealed-secrets-controller<span class="w"> </span><span class="se">\</span>

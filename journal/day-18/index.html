@@ -4335,11 +4335,11 @@
   
 
 
-<h1 id="18-powrot-do-klastra-i-diagnostyka-routingu">18 - Powrót do klastra i diagnostyka routingu<a class="headerlink" href="#18-powrot-do-klastra-i-diagnostyka-routingu" title="Permanent link">&para;</a></h1>
+<h1 id="18-powrot-do-klastra-i-diagnostyka-routingu">18 - Powrót do klastra i diagnostyka routingu</h1>
 <p><strong>Data:</strong> 2026-09-03–2026-09-04</p>
 <p><strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4+k3s1, Flux v2.8.1, Cilium v1.19.1</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li>Odtworzenie modelu działania klastra po dłuższej przerwie.</li>
 <li>Prześledzenie drogi <code>Service → EndpointSlice → Pod</code> na przykładzie CoreDNS.</li>
@@ -4349,13 +4349,13 @@
 <li>Walidacja pełnego cyklu Power Off → Power On na fizycznie wyłączonym klastrze.</li>
 </ol>
 <hr />
-<h3 id="1-stan-poczatkowy-klastra">1. Stan początkowy klastra<a class="headerlink" href="#1-stan-poczatkowy-klastra" title="Permanent link">&para;</a></h3>
+<h3 id="1-stan-poczatkowy-klastra">1. Stan początkowy klastra</h3>
 <p>Klaster składa się z trzech fizycznych nodów. Każdy z nich pełni role <code>control-plane</code> i <code>etcd</code>, dzięki czemu embedded etcd zachowuje trzy głosy i toleruje utratę jednego członka.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 </span></code></pre></div>
 <p>Wszystkie nody były <code>Ready</code>, nie miały taintów i mogły przyjmować zwykłe workloady. Nazwy <code>master</code>, <code>worker1</code> i <code>worker2</code> są nazwami hostów, ale nie decydują samodzielnie o pracy schedulera.</p>
 <p>Lokalny <code>kubectl</code> miał wersję o dwa wydania minor nowszą niż serwer. Przekracza to wspierany skew <code>±1</code>, dlatego aktualizacja klastra lub dopasowanie klienta trafiły do backlogu. Nie był to jednak powód omawianej awarii.</p>
-<h3 id="2-coredns-service-i-endpointslice">2. CoreDNS, Service i EndpointSlice<a class="headerlink" href="#2-coredns-service-i-endpointslice" title="Permanent link">&para;</a></h3>
+<h3 id="2-coredns-service-i-endpointslice">2. CoreDNS, Service i EndpointSlice</h3>
 <p>CoreDNS działa wewnątrz klastra jako Deployment. Stabilny adres DNS udostępnia Service <code>kube-dns</code>, a jego aktualne endpointy są przechowywane w EndpointSlice.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Deployment/coredns
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>└── ReplicaSet/coredns-...
@@ -4377,7 +4377,7 @@
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span>-o<span class="w"> </span>wide
 </span></code></pre></div>
 <p>Gdy Pod zostanie zastąpiony i otrzyma inne IP, kontroler aktualizuje EndpointSlice. Cilium obserwuje Service i EndpointSlice, a następnie programuje dataplane eBPF kierujący ruch do gotowych endpointów.</p>
-<h3 id="3-running-nie-oznacza-ready">3. Running nie oznacza Ready<a class="headerlink" href="#3-running-nie-oznacza-ready" title="Permanent link">&para;</a></h3>
+<h3 id="3-running-nie-oznacza-ready">3. Running nie oznacza Ready</h3>
 <p>Pod Loki zawierał dwa kontenery:</p>
 <table>
 <thead>
@@ -4409,13 +4409,13 @@
 <li>liveness może spowodować restart kontenera;</li>
 <li>startup chroni wolno uruchamiającą się aplikację przed przedwczesną oceną przez pozostałe probes.</li>
 </ul>
-<h3 id="4-objawy-awarii-loki">4. Objawy awarii Loki<a class="headerlink" href="#4-objawy-awarii-loki" title="Permanent link">&para;</a></h3>
+<h3 id="4-objawy-awarii-loki">4. Objawy awarii Loki</h3>
 <p>Readiness probe Loki do <code>/ready</code> kończyła się timeoutem. Główny kontener okresowo kończył pracę kodem <code>1</code>, natomiast sidecar pozostawał zdrowy.</p>
 <p>EndpointSlice headless Service <code>loki-memberlist</code> pokazywał endpoint Poda jako niegotowy:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>READY=false
 </span></code></pre></div>
 <p>Garage odpowiadał lokalnie oraz z komputera w podstawowej sieci LAN, ale połączenia inicjowane z nodów K3s kończyły się timeoutem. Oznaczało to, że należy sprawdzić ścieżkę sieciową, zanim zmieniona zostanie konfiguracja Loki lub poświadczenia S3.</p>
-<h3 id="5-diagnoza-warstwowa">5. Diagnoza warstwowa<a class="headerlink" href="#5-diagnoza-warstwowa" title="Permanent link">&para;</a></h3>
+<h3 id="5-diagnoza-warstwowa">5. Diagnoza warstwowa</h3>
 <p>Ten sam endpoint sprawdzono z kilku punktów sieci:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-sS<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>--connect-timeout<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
@@ -4434,14 +4434,14 @@
 <li>odpowiedź opuszczała Logos przez interfejs VLAN przeznaczony do WOL;</li>
 <li>klient nie otrzymywał poprawnej odpowiedzi i ponawiał SYN.</li>
 </ol>
-<h3 id="6-root-cause">6. Root cause<a class="headerlink" href="#6-root-cause" title="Permanent link">&para;</a></h3>
+<h3 id="6-root-cause">6. Root cause</h3>
 <p>Logos miał stale aktywny interfejs w VLAN-ie klastra, używany przez Semaphore do wysyłania Wake-on-LAN. Adres z prefiksem <code>/24</code> powodował utworzenie bezpośredniej trasy connected do całej podsieci K3s.</p>
 <p>Ruch przychodzący przez router otrzymywał odpowiedź wysłaną bezpośrednio przez interfejs WOL. Powstał routing asymetryczny.</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">dhcp4-overrides</span><span class="p">:</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">use-routes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </span></code></pre></div>
 <p>nie rozwiązywało problemu. Ustawienie odrzuca trasy przekazane przez DHCP, ale nie usuwa trasy connected wynikającej z adresu i jego prefiksu.</p>
-<h3 id="7-naprawa-i-automatyzacja">7. Naprawa i automatyzacja<a class="headerlink" href="#7-naprawa-i-automatyzacja" title="Permanent link">&para;</a></h3>
+<h3 id="7-naprawa-i-automatyzacja">7. Naprawa i automatyzacja</h3>
 <p>Profil Netplanu otrzymał:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">activation-mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manual</span>
 </span></code></pre></div>
@@ -4465,7 +4465,7 @@
 </span></code></pre></div>
 <p>Adresy, MAC, nazwa interfejsu i broadcast pozostały w prywatnym inventory Semaphore. Publiczny playbook opisuje mechanizm, ale nie ujawnia prywatnego planu adresowego.</p>
 <p>Power Off nie aktywuje interfejsu WOL. Do wyłączenia działających nodów wystarcza zwykły routing przez router.</p>
-<h3 id="8-peny-test-zimnego-startu">8. Pełny test zimnego startu<a class="headerlink" href="#8-peny-test-zimnego-startu" title="Permanent link">&para;</a></h3>
+<h3 id="8-peny-test-zimnego-startu">8. Pełny test zimnego startu</h3>
 <p>Test wykonano przy fizycznie wyłączonych wszystkich trzech nodach:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Power Off
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>→ networkctl up na gatewayu
@@ -4482,7 +4482,7 @@
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>Activation Policy: manual
 </span></code></pre></div>
 <p>oraz trasę do nodów przez podstawowy interfejs i router. <code>kubectl get nodes -o wide</code> pokazał trzy nody <code>Ready</code>.</p>
-<h3 id="9-rezultat">9. Rezultat<a class="headerlink" href="#9-rezultat" title="Permanent link">&para;</a></h3>
+<h3 id="9-rezultat">9. Rezultat</h3>
 <ul>
 <li>Loki odzyskał gotowość <code>2/2</code> i dostęp do Garage;</li>
 <li>EndpointSlice <code>loki-memberlist</code> zmienił <code>READY=false</code> na <code>READY=true</code>;</li>
@@ -4491,7 +4491,7 @@
 <li>prywatne dane infrastruktury pozostały poza publicznym repozytorium;</li>
 <li>procedura Power On kończy się dopiero po weryfikacji SSH, K3s, API, etcd i Kubernetes Node Ready.</li>
 </ul>
-<h3 id="10-najwazniejsze-wnioski">10. Najważniejsze wnioski<a class="headerlink" href="#10-najwazniejsze-wnioski" title="Permanent link">&para;</a></h3>
+<h3 id="10-najwazniejsze-wnioski">10. Najważniejsze wnioski</h3>
 <ol>
 <li><code>Running</code> nie jest synonimem <code>Ready</code>.</li>
 <li>EndpointSlice opisuje aktualne endpointy Service, ale nie przekazuje samodzielnie ruchu.</li>
@@ -4502,7 +4502,7 @@
 <li>Tymczasowy interfejs operacyjny powinien mieć jawny lifecycle i cleanup także po błędzie.</li>
 <li>Automatyzacja jest ukończona dopiero po teście na rzeczywistym scenariuszu, a nie po samym przejściu CI.</li>
 </ol>
-<h3 id="nastepna-sesja">Następna sesja:<a class="headerlink" href="#nastepna-sesja" title="Permanent link">&para;</a></h3>
+<h3 id="nastepna-sesja">Następna sesja:</h3>
 <p>CI dla repozytorium GitOps: budowanie punktów wejścia Kustomize, walidacja YAML i CRD oraz test negatywny blokujący błędny pull request.</p>
 
 

@@ -4203,16 +4203,16 @@
   
 
 
-<h1 id="24-start-remotedialera-i-naprawa-hubble">24 - start remotedialera i naprawa Hubble<a class="headerlink" href="#24-start-remotedialera-i-naprawa-hubble" title="Permanent link">&para;</a></h1>
+<h1 id="24-start-remotedialera-i-naprawa-hubble">24 - start remotedialera i naprawa Hubble</h1>
 <p><strong>Data:</strong> 2026-09-13</p>
 <p><strong>Środowisko:</strong> 3× HP T630, k3s <code>v1.34.4+k3s1</code>, Cilium <code>1.19.1 → 1.19.7</code>, Flux</p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Porównać poprawny start klastra z błędnym startem remotedialera z 2026-09-12.</li>
 <li>Zaktualizować Cilium w obrębie gałęzi <code>1.19.x</code>.</li>
 <li>Sprawdzić, czy aktualizacja naprawi Hubble.</li>
 </ol>
-<h2 id="start-klastra-i-remotedialer">Start klastra i remotedialer<a class="headerlink" href="#start-klastra-i-remotedialer" title="Permanent link">&para;</a></h2>
+<h2 id="start-klastra-i-remotedialer">Start klastra i remotedialer</h2>
 <p>Klaster uruchomił się poprawnie. Wszystkie dziewięć ścieżek lokalny API server → kubelet zakończyło się powodzeniem.</p>
 <p>Rzeczywiste czasy uruchomienia K3s:</p>
 <table>
@@ -4252,7 +4252,7 @@
 <p><code>worker2</code> dołączył tunele do <code>master</code> i <code>worker1</code> bez ręcznej ingerencji.</p>
 <p>W błędnym starcie z 2026-09-12 pełna lista z watch została anulowana przez późniejszą, niepełną listę <code>from server</code>. Nie pojawił się następny event, dlatego brakujący tunel nie został odtworzony. Zmiana adnotacji EndpointSlice wymusiła nową synchronizację i naprawiła połączenie.</p>
 <p>Wniosek: kolejność osiągania gotowości wpływa na moment zdarzeń, ale problemem jest wyścig pomiędzy źródłami listy API serverów i mechanizmem <code>Cancelled/Settled</code>. Playbook pozostaje bez zmian; istniejąca kontrola wykrywa błąd, a resync EndpointSlice służy jako obejście.</p>
-<h2 id="stan-hubble-przed-aktualizacja">Stan Hubble przed aktualizacją<a class="headerlink" href="#stan-hubble-przed-aktualizacja" title="Permanent link">&para;</a></h2>
+<h2 id="stan-hubble-przed-aktualizacja">Stan Hubble przed aktualizacją</h2>
 <p>Cilium <code>1.19.1</code> raportowało lokalny Hubble jako <code>Ok</code>, a Relay wykrywał trzy peery. Mimo tego:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>hubble status: NOT_SERVING
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>master:  Unavailable
@@ -4270,7 +4270,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ICMP tcp port 4244 unreachable
 </span></code></pre></div>
 <p>Proces <code>cilium-agent</code> słuchał na <code>*:4244</code>. Połączenia node → node działały. UFW zezwalał na Pod CIDR i port <code>4244</code>, NetworkPolicy nie obejmowała Hubble, a Cilium host firewall był wyłączony. Pakiet nie docierał do netfiltera ani monitora Cilium. Problem znajdował się w datapath ruchu Pod → NodeIP.</p>
-<h2 id="aktualizacja-cilium">Aktualizacja Cilium<a class="headerlink" href="#aktualizacja-cilium" title="Permanent link">&para;</a></h2>
+<h2 id="aktualizacja-cilium">Aktualizacja Cilium</h2>
 <p>Przed zmianą wykonano snapshot embedded etcd:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pre-cilium-1.19.7-20260913T122228Z
 </span></code></pre></div>
@@ -4296,7 +4296,7 @@
 <li>wszystkie nody <code>Ready</code>;</li>
 <li>brak Podów w stanie innym niż <code>Running</code> lub <code>Succeeded</code>.</li>
 </ul>
-<h2 id="wynik">Wynik<a class="headerlink" href="#wynik" title="Permanent link">&para;</a></h2>
+<h2 id="wynik">Wynik</h2>
 <p>Po aktualizacji Hubble UI zaczął natychmiast wyświetlać przepływy i mapę usług dla namespace <code>clients</code>.</p>
 <p>Kontrolny test z Poda Grafany:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>192.168.55.10:4244 CONNECTED
@@ -4304,7 +4304,7 @@
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>192.168.55.12:4244 CONNECTED
 </span></code></pre></div>
 <p>Aktualizacja Cilium <code>1.19.1 → 1.19.7</code> usunęła wcześniejszy problem Pod → NodeIP i przywróciła połączenia Hubble Relay z agentami. Nie ustalono konkretnego commita odpowiedzialnego za poprawkę, dlatego nie należy przypisywać awarii pojedynczemu błędowi źródłowemu bez dalszej analizy wydań.</p>
-<h2 id="stan-koncowy">Stan końcowy<a class="headerlink" href="#stan-koncowy" title="Permanent link">&para;</a></h2>
+<h2 id="stan-koncowy">Stan końcowy</h2>
 <ul>
 <li>Cilium: <code>1.19.7</code>.</li>
 <li>Hubble Relay: działa.</li>

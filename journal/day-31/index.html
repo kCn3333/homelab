@@ -4589,10 +4589,10 @@
   
 
 
-<h1 id="31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux">31 - przejęcie cert-managera przez Flux i aktualizacja Flux<a class="headerlink" href="#31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux" title="Permanent link">&para;</a></h1>
+<h1 id="31-przejecie-cert-managera-przez-flux-i-aktualizacja-flux">31 - przejęcie cert-managera przez Flux i aktualizacja Flux</h1>
 <p><strong>Data:</strong> 2026-09-23
 <strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.5 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, CloudNativePG <code>1.30.0</code>, PostgreSQL <code>17.4</code>, Metrics Server <code>v0.9.0</code>, cert-manager <code>v1.21.2</code>, Flux <code>v2.9.5</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Potwierdzić poprawny zimny start po aktualizacji Longhorna i Metrics Server.</li>
 <li>Zinwentaryzować instalację cert-managera <code>v1.19.4</code>.</li>
@@ -4603,7 +4603,7 @@
 <li>Zaktualizować dystrybucję Flux z <code>v2.8.1</code> do <code>v2.9.5</code>.</li>
 </ol>
 <hr />
-<h2 id="1-zimny-start-i-stan-wejsciowy">1. Zimny start i stan wejściowy<a class="headerlink" href="#1-zimny-start-i-stan-wejsciowy" title="Permanent link">&para;</a></h2>
+<h2 id="1-zimny-start-i-stan-wejsciowy">1. Zimny start i stan wejściowy</h2>
 <p>Playbook potwierdził:</p>
 <ul>
 <li>SSH, Ansible i <code>sudo</code> na wszystkich trzech nodach;</li>
@@ -4629,7 +4629,7 @@
 </ul>
 <p>Aktualizacje Longhorna i Metrics Server z poprzedniej sesji przeszły test zimnego startu.</p>
 <hr />
-<h2 id="2-inwentaryzacja-cert-managera">2. Inwentaryzacja cert-managera<a class="headerlink" href="#2-inwentaryzacja-cert-managera" title="Permanent link">&para;</a></h2>
+<h2 id="2-inwentaryzacja-cert-managera">2. Inwentaryzacja cert-managera</h2>
 <p>W klastrze działały trzy Deploymenty:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cert-manager              v1.19.4
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cert-manager-cainjector   v1.19.4
@@ -4651,7 +4651,7 @@
 </ul>
 <p>Przejęcie musiało zachować istniejące nazwy release i namespace, aby Flux wykonał aktualizację istniejącej instalacji zamiast tworzyć drugi zestaw zasobów.</p>
 <hr />
-<h2 id="3-dodanie-cert-managera-do-gitops">3. Dodanie cert-managera do GitOps<a class="headerlink" href="#3-dodanie-cert-managera-do-gitops" title="Permanent link">&para;</a></h2>
+<h2 id="3-dodanie-cert-managera-do-gitops">3. Dodanie cert-managera do GitOps</h2>
 <p>Dodano katalog:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>infrastructure/operators/cert-manager/
 </span></code></pre></div>
@@ -4685,7 +4685,7 @@
 </span></code></pre></div>
 <p>Oba polecenia zakończyły się poprawnie.</p>
 <hr />
-<h2 id="4-przejecie-istniejacego-release-bez-zmiany-wersji">4. Przejęcie istniejącego release bez zmiany wersji<a class="headerlink" href="#4-przejecie-istniejacego-release-bez-zmiany-wersji" title="Permanent link">&para;</a></h2>
+<h2 id="4-przejecie-istniejacego-release-bez-zmiany-wersji">4. Przejęcie istniejącego release bez zmiany wersji</h2>
 <p>Najpierw Flux wdrożył cert-manager w tej samej wersji <code>v1.19.4</code>.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>HelmRelease: cert-manager/cert-manager
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>chart:       cert-manager v1.19.4
@@ -4705,7 +4705,7 @@
 <li>nie wystąpiła ponowna emisja ani utrata certyfikatów.</li>
 </ul>
 <hr />
-<h2 id="5-aktualizacja-cert-managera">5. Aktualizacja cert-managera<a class="headerlink" href="#5-aktualizacja-cert-managera" title="Permanent link">&para;</a></h2>
+<h2 id="5-aktualizacja-cert-managera">5. Aktualizacja cert-managera</h2>
 <p>Aktualizację wykonano dwoma osobnymi etapami:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>v1.19.4 → v1.20.4
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>v1.20.4 → v1.21.2
@@ -4745,7 +4745,7 @@
 <p>Rollout wszystkich Deploymentów zakończył się poprawnie. W namespace <code>cert-manager</code> nie było Podów poza <code>Running</code> i <code>Succeeded</code>.</p>
 <p>Zweryfikowano również reguły roli <code>cert-manager-edit</code> dla API ACME. Uprawnienia do <code>challenges</code> i <code>orders</code> nie zawierały niepotrzebnych operacji odczytu sekretów ani szerszego zakresu niż wymagany przez nową wersję.</p>
 <hr />
-<h2 id="6-weryfikacja-certyfikatow">6. Weryfikacja certyfikatów<a class="headerlink" href="#6-weryfikacja-certyfikatow" title="Permanent link">&para;</a></h2>
+<h2 id="6-weryfikacja-certyfikatow">6. Weryfikacja certyfikatów</h2>
 <p>Po aktualizacji oba issuery działały:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>letsencrypt-prod-cluster-issuer      Ready=True
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>letsencrypt-staging-cluster-issuer   Ready=True
@@ -4795,7 +4795,7 @@
 </table>
 <p>Powiązane <code>CertificateRequest</code> były zatwierdzone i gotowe. Nie było aktywnych obiektów <code>Challenge</code>.</p>
 <hr />
-<h2 id="7-zachowanie-cert-managera-po-zimnym-starcie">7. Zachowanie cert-managera po zimnym starcie<a class="headerlink" href="#7-zachowanie-cert-managera-po-zimnym-starcie" title="Permanent link">&para;</a></h2>
+<h2 id="7-zachowanie-cert-managera-po-zimnym-starcie">7. Zachowanie cert-managera po zimnym starcie</h2>
 <p>Bezpośrednio po uruchomieniu klastra log kontrolera zawierał:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>dial tcp: lookup acme-staging-v02.api.letsencrypt.org on 10.43.0.10:53:
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>read: connection refused
@@ -4814,7 +4814,7 @@
 </ul>
 <p>Nie wykonywano restartu cert-managera ani ręcznej ingerencji w issuery. Kontroler sam ponowił operacje po odzyskaniu DNS.</p>
 <hr />
-<h2 id="8-stan-flux-przed-aktualizacja">8. Stan Flux przed aktualizacją<a class="headerlink" href="#8-stan-flux-przed-aktualizacja" title="Permanent link">&para;</a></h2>
+<h2 id="8-stan-flux-przed-aktualizacja">8. Stan Flux przed aktualizacją</h2>
 <p>Lokalny klient:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>flux: v2.9.5
 </span></code></pre></div>
@@ -4858,7 +4858,7 @@
 </table>
 <p><code>flux check --pre</code> potwierdził zgodność Kubernetes <code>v1.36.4+k3s1</code> z wymaganiami nowej dystrybucji.</p>
 <hr />
-<h2 id="9-migracja-api-image-toolkit">9. Migracja API Image Toolkit<a class="headerlink" href="#9-migracja-api-image-toolkit" title="Permanent link">&para;</a></h2>
+<h2 id="9-migracja-api-image-toolkit">9. Migracja API Image Toolkit</h2>
 <p>Repozytorium zawierało dziesięć deklaracji używających:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>image.toolkit.fluxcd.io/v1beta2
 </span></code></pre></div>
@@ -4888,7 +4888,7 @@
 </span></code></pre></div>
 <p>Wniosek: zmian strukturalnych pomiędzy gałęziami nie należy przenosić bezwarunkowym <code>cherry-pick</code>. Migracja uruchomiona w kontekście każdej gałęzi zachowuje jej zamierzony zestaw zasobów.</p>
 <hr />
-<h2 id="10-migracja-zywych-zasobow-flux">10. Migracja żywych zasobów Flux<a class="headerlink" href="#10-migracja-zywych-zasobow-flux" title="Permanent link">&para;</a></h2>
+<h2 id="10-migracja-zywych-zasobow-flux">10. Migracja żywych zasobów Flux</h2>
 <p>Po zastosowaniu nowych manifestów wykonano:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>flux<span class="w"> </span>migrate
 </span></code></pre></div>
@@ -4907,13 +4907,13 @@
 </span></code></pre></div>
 <p>Po migracji wszystkie źródła, polityki obrazów, automatyzacje, HelmRelease i Kustomization pozostały <code>Ready=True</code>.</p>
 <hr />
-<h2 id="11-punkt-odzyskiwania-przed-aktualizacja-flux">11. Punkt odzyskiwania przed aktualizacją Flux<a class="headerlink" href="#11-punkt-odzyskiwania-przed-aktualizacja-flux" title="Permanent link">&para;</a></h2>
+<h2 id="11-punkt-odzyskiwania-przed-aktualizacja-flux">11. Punkt odzyskiwania przed aktualizacją Flux</h2>
 <p>Przed wymianą kontrolerów utworzono snapshot etcd:</p>
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>pre-flux-v2.9.5-master-1790156948
 </span></code></pre></div>
 Snapshot został zapisany poprawnie.</p>
 <hr />
-<h2 id="12-generowanie-manifestu-flux-v295">12. Generowanie manifestu Flux <code>v2.9.5</code><a class="headerlink" href="#12-generowanie-manifestu-flux-v295" title="Permanent link">&para;</a></h2>
+<h2 id="12-generowanie-manifestu-flux-v295">12. Generowanie manifestu Flux <code>v2.9.5</code></h2>
 <p>Manifest wygenerowano klientem odpowiadającym wersji docelowej:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>flux<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span>--export<span class="w"> </span><span class="se">\</span>
@@ -4938,7 +4938,7 @@ Snapshot został zapisany poprawnie.</p>
 </span></code></pre></div>
 <p>Zakres commita obejmował wyłącznie <code>gotk-components.yaml</code>.</p>
 <hr />
-<h2 id="13-konflikty-podczas-recznego-dry-run">13. Konflikty podczas ręcznego dry-run<a class="headerlink" href="#13-konflikty-podczas-recznego-dry-run" title="Permanent link">&para;</a></h2>
+<h2 id="13-konflikty-podczas-recznego-dry-run">13. Konflikty podczas ręcznego dry-run</h2>
 <p>Polecenie:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span>--server-side<span class="w"> </span><span class="se">\</span>
@@ -4959,7 +4959,7 @@ Snapshot został zapisany poprawnie.</p>
 <p>Nie był to błąd składni ani niezgodność API. Ręczny <code>kubectl</code> próbował zostać kolejnym właścicielem pól zarządzanych przez Flux.</p>
 <p>Nie wykonano rzeczywistego <code>kubectl apply --force-conflicts</code>. Docelowa zmiana została wdrożona przez Kustomization Flux, czyli przez istniejącego właściciela zasobów.</p>
 <hr />
-<h2 id="14-aktualizacja-flux-v281-v295">14. Aktualizacja Flux <code>v2.8.1 → v2.9.5</code><a class="headerlink" href="#14-aktualizacja-flux-v281-v295" title="Permanent link">&para;</a></h2>
+<h2 id="14-aktualizacja-flux-v281-v295">14. Aktualizacja Flux <code>v2.8.1 → v2.9.5</code></h2>
 <p>Commit aktualizacji:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>5dfc3e1 chore(flux): upgrade controllers to v2.9.5
 </span></code></pre></div>
@@ -5013,7 +5013,7 @@ Snapshot został zapisany poprawnie.</p>
 </span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>AVAILABLE=1
 </span></code></pre></div>
 <hr />
-<h2 id="15-walidacja-koncowa-flux">15. Walidacja końcowa Flux<a class="headerlink" href="#15-walidacja-koncowa-flux" title="Permanent link">&para;</a></h2>
+<h2 id="15-walidacja-koncowa-flux">15. Walidacja końcowa Flux</h2>
 <p><code>flux version</code> potwierdził:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>flux:        v2.9.5
 </span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>distribution: flux-v2.9.5
@@ -5037,8 +5037,8 @@ Snapshot został zapisany poprawnie.</p>
 </ul>
 <p>Kustomization korzystające z <code>main</code> zastosowały commit <code>5dfc3e15</code>. <code>apps-staging</code> prawidłowo pozostało na osobnym źródle i rewizji gałęzi <code>staging</code>.</p>
 <hr />
-<h2 id="16-stan-koncowy">16. Stan końcowy<a class="headerlink" href="#16-stan-koncowy" title="Permanent link">&para;</a></h2>
-<h3 id="k3s">K3s<a class="headerlink" href="#k3s" title="Permanent link">&para;</a></h3>
+<h2 id="16-stan-koncowy">16. Stan końcowy</h2>
+<h3 id="k3s">K3s</h3>
 <ul>
 <li>trzy nody <code>Ready</code>;</li>
 <li>K3s <code>v1.36.4+k3s1</code>;</li>
@@ -5046,7 +5046,7 @@ Snapshot został zapisany poprawnie.</p>
 <li>macierz API server → kubelet <code>9/9</code>;</li>
 <li>kolejny zimny start bez błędu remotedialera.</li>
 </ul>
-<h3 id="storage-i-bazy">Storage i bazy<a class="headerlink" href="#storage-i-bazy" title="Permanent link">&para;</a></h3>
+<h3 id="storage-i-bazy">Storage i bazy</h3>
 <ul>
 <li>Longhorn <code>1.12.1</code>;</li>
 <li>sześć wolumenów <code>attached</code> i <code>healthy</code>;</li>
@@ -5054,7 +5054,7 @@ Snapshot został zapisany poprawnie.</p>
 <li>brak uszkodzonych replik;</li>
 <li>oba klastry CloudNativePG <code>2/2 Ready</code> i <code>Cluster in healthy state</code>.</li>
 </ul>
-<h3 id="cert-manager">cert-manager<a class="headerlink" href="#cert-manager" title="Permanent link">&para;</a></h3>
+<h3 id="cert-manager">cert-manager</h3>
 <ul>
 <li>instalacja jest deklaratywnie zarządzana przez Flux;</li>
 <li>chart i aplikacja <code>v1.21.2</code>;</li>
@@ -5064,7 +5064,7 @@ Snapshot został zapisany poprawnie.</p>
 <li>brak aktywnych wyzwań ACME;</li>
 <li>przejściowy błąd DNS po starcie ustąpił bez ingerencji.</li>
 </ul>
-<h3 id="flux">Flux<a class="headerlink" href="#flux" title="Permanent link">&para;</a></h3>
+<h3 id="flux">Flux</h3>
 <ul>
 <li>klient i dystrybucja <code>v2.9.5</code>;</li>
 <li>wszystkie sześć kontrolerów w docelowych wersjach;</li>
@@ -5074,7 +5074,7 @@ Snapshot został zapisany poprawnie.</p>
 <li>snapshot etcd sprzed aktualizacji istnieje.</li>
 </ul>
 <hr />
-<h2 id="17-wnioski">17. Wnioski<a class="headerlink" href="#17-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="17-wnioski">17. Wnioski</h2>
 <ol>
 <li>Istniejący release Helm można bezpiecznie przejąć przez Flux, jeśli zachowane zostaną jego nazwa, namespace i podstawowa konfiguracja.</li>
 <li>Pierwsze uzgodnienie należy wykonać bez podnoszenia wersji. Oddziela to migrację sposobu zarządzania od aktualizacji oprogramowania.</li>
@@ -5089,7 +5089,7 @@ Snapshot został zapisany poprawnie.</p>
 <li>Snapshot etcd chroni stan API przed zmianą CRD i kontrolerów, lecz nie zastępuje repozytorium Git jako źródła deklaracji.</li>
 </ol>
 <hr />
-<h2 id="18-nastepna-sesja">18. Następna sesja<a class="headerlink" href="#18-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="18-nastepna-sesja">18. Następna sesja</h2>
 <ol>
 <li>Wykonać zimny start klastra po aktualizacji Flux <code>v2.9.5</code>.</li>
 <li>Potwierdzić:</li>

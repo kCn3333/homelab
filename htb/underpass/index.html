@@ -4201,33 +4201,33 @@
   
 
 
-<h1 id="underpass">UnderPass<a class="headerlink" href="#underpass" title="Permanent link">&para;</a></h1>
+<h1 id="underpass">UnderPass</h1>
 <p><strong>Platform:</strong> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m22.51 6.457.001-.013a.89.89 0 0 0-.271-.638l-.027-.024q-.028-.025-.057-.048-.03-.022-.06-.04l-.029-.02-9.61-5.547a.89.89 0 0 0-.922.004L1.933 5.674l-.03.02-.023.014-.02.015a1 1 0 0 0-.147.134l-.003.003a.9.9 0 0 0-.221.584v.014l-.001.027v11.07c0 .328.18.63.469.784l9.599 5.542.023.011a1 1 0 0 0 .166.07l.04.01.072.015q.018.004.035.006a.8.8 0 0 0 .216 0q.018-.002.035-.006l.072-.014.04-.012.064-.022a1 1 0 0 0 .102-.047l.023-.011 9.599-5.542a.89.89 0 0 0 .469-.784V6.478zM5.255 6.082l6.537-3.774a.42.42 0 0 1 .418 0l6.537 3.774a.418.418 0 0 1 0 .725l-6.537 3.774a.42.42 0 0 1-.418 0L5.254 6.807a.418.418 0 0 1 0-.725m5.614 14.345a.417.417 0 0 1-.626.361l-6.524-3.766a.42.42 0 0 1-.209-.361V9.127a.417.417 0 0 1 .626-.361l6.524 3.766a.42.42 0 0 1 .209.362zm9.623-3.766a.42.42 0 0 1-.209.36l-6.524 3.767a.417.417 0 0 1-.626-.36v-7.533c0-.15.08-.287.209-.362l6.524-3.766a.417.417 0 0 1 .626.36z"/></svg></span> Hack The Box<br>
 <strong>OS:</strong> Linux<br>
 <strong>Lab date:</strong> 2025-03-23</p>
-<h2 id="tcp-and-udp-enumeration">TCP and UDP enumeration<a class="headerlink" href="#tcp-and-udp-enumeration" title="Permanent link">&para;</a></h2>
+<h2 id="tcp-and-udp-enumeration">TCP and UDP enumeration</h2>
 <p>The initial TCP scan identified SSH and HTTP. UDP enumeration and SNMP inspection identified the daloRADIUS service.</p>
 <p><img alt="TCP and UDP enumeration — evidence 1" src="../assets/underpass/UnderPass_image.jpg" /></p>
 <p><img alt="TCP and UDP enumeration — evidence 2" src="../assets/underpass/1_UnderPass_image.jpg" /></p>
 <p><img alt="TCP and UDP enumeration — evidence 3" src="../assets/underpass/5_UnderPass_image.jpg" /></p>
-<h2 id="web-application-discovery">Web application discovery<a class="headerlink" href="#web-application-discovery" title="Permanent link">&para;</a></h2>
+<h2 id="web-application-discovery">Web application discovery</h2>
 <p>Directory enumeration identified daloRADIUS resources, including an exposed Compose configuration.</p>
 <p><img alt="Web application discovery — evidence 1" src="../assets/underpass/9_UnderPass_image.jpg" /></p>
 <p><img alt="Web application discovery — evidence 2" src="../assets/underpass/2_UnderPass_image.jpg" /></p>
 <p><img alt="Web application discovery — evidence 3" src="../assets/underpass/4_UnderPass_image.jpg" /></p>
-<h2 id="operator-access-and-credential-recovery">Operator access and credential recovery<a class="headerlink" href="#operator-access-and-credential-recovery" title="Permanent link">&para;</a></h2>
+<h2 id="operator-access-and-credential-recovery">Operator access and credential recovery</h2>
 <p>The operator interface was accessible with default credentials. The svcMosh account record exposed a password hash, which was recovered using a hash lookup service.</p>
 <p><img alt="Operator access and credential recovery — evidence 1" src="../assets/underpass/7_UnderPass_image.jpg" /></p>
 <p><img alt="Operator access and credential recovery — evidence 2" src="../assets/underpass/8_UnderPass_image.jpg" /></p>
-<h2 id="ssh-access">SSH access<a class="headerlink" href="#ssh-access" title="Permanent link">&para;</a></h2>
+<h2 id="ssh-access">SSH access</h2>
 <p>The recovered credential enabled an SSH session as the service account. The sudo listing identified a privileged Mosh server executable.</p>
 <p><img alt="SSH access — evidence 1" src="../assets/underpass/3_UnderPass_image.jpg" /></p>
 <p><img alt="SSH access — evidence 2" src="../assets/underpass/11_UnderPass_image.jpg" /></p>
-<h2 id="root-access">Root access<a class="headerlink" href="#root-access" title="Permanent link">&para;</a></h2>
+<h2 id="root-access">Root access</h2>
 <p>The Mosh permission allowed a privileged session. The final screenshot shows a root prompt and successful reading of root.txt.</p>
 <p><img alt="Root access — evidence 1" src="../assets/underpass/6_UnderPass_image.jpg" /></p>
 <p><img alt="Root access — evidence 2" src="../assets/underpass/10_UnderPass_image.jpg" /></p>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<h2 id="references">References</h2>
 <ul>
 <li><a href="https://www.hackthebox.com/machines/underpass">Machine reference</a></li>
 </ul>

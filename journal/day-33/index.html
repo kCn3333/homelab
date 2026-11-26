@@ -4545,10 +4545,10 @@
   
 
 
-<h1 id="33-aktualizacja-kube-prometheus-stack-i-stabilizacja-grafany">33 - aktualizacja kube-prometheus-stack i stabilizacja Grafany<a class="headerlink" href="#33-aktualizacja-kube-prometheus-stack-i-stabilizacja-grafany" title="Permanent link">&para;</a></h1>
+<h1 id="33-aktualizacja-kube-prometheus-stack-i-stabilizacja-grafany">33 - aktualizacja kube-prometheus-stack i stabilizacja Grafany</h1>
 <p><strong>Data:</strong> 2026-09-29
 <strong>Środowisko końcowe:</strong> 3× HP T630, Ubuntu 24.04.5 LTS, K3s <code>v1.36.4+k3s1</code>, Cilium <code>1.20.2</code>, Longhorn <code>1.12.1</code>, Flux <code>v2.9.5</code>, kube-prometheus-stack chart <code>91.8.1</code>, Prometheus Operator <code>v0.94.1</code>, Prometheus <code>v3.15.0</code>, Alertmanager <code>v0.34.1</code>, Grafana <code>13.2.2</code></p>
-<h2 id="cel-sesji">Cel sesji<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h2>
+<h2 id="cel-sesji">Cel sesji</h2>
 <ol>
 <li>Potwierdzić kolejny poprawny zimny start klastra po aktualizacji K3s.</li>
 <li>Zamknąć problem niepełnej macierzy połączeń API server → kubelet.</li>
@@ -4560,7 +4560,7 @@
 <li>Potwierdzić działanie zaostrzonego RBAC Prometheus Operatora w chartcie <code>91.x</code>.</li>
 </ol>
 <hr />
-<h2 id="1-zimny-start-klastra">1. Zimny start klastra<a class="headerlink" href="#1-zimny-start-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="1-zimny-start-klastra">1. Zimny start klastra</h2>
 <p>Playbook potwierdził:</p>
 <ul>
 <li>prawidłową walidację pełnego inventory;</li>
@@ -4578,7 +4578,7 @@
 <p>K3s potrzebował kilku ponowień podczas oczekiwania na stan <code>active</code>. Wszystkie trzy usługi uruchomiły się w dopuszczalnym czasie, a końcowy wynik playbooka nie zawierał błędów.</p>
 <p>Był to kolejny pełny zimny start z macierzą <code>9/9</code>. Problem niepełnych tuneli remotedialera można uznać za rozwiązany przez aktualizację K3s do <code>v1.36.4+k3s1</code>. Skrypt resync pozostaje narzędziem diagnostycznym i nie musiał ingerować w start klastra.</p>
 <hr />
-<h2 id="2-stan-poczatkowy-kube-prometheus-stack">2. Stan początkowy kube-prometheus-stack<a class="headerlink" href="#2-stan-poczatkowy-kube-prometheus-stack" title="Permanent link">&para;</a></h2>
+<h2 id="2-stan-poczatkowy-kube-prometheus-stack">2. Stan początkowy kube-prometheus-stack</h2>
 <p>Przed aktualizacją działający release miał stan:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Helm release: kube-prometheus-stack
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>namespace:    monitoring
@@ -4609,7 +4609,7 @@
 </span></code></pre></div>
 <p>CRD nie były aktualizowane ręcznie. Helm uruchamiał Job <code>kube-prometheus-stack-crds-upgrade</code> przed każdą aktualizacją.</p>
 <hr />
-<h2 id="3-strategia-aktualizacji">3. Strategia aktualizacji<a class="headerlink" href="#3-strategia-aktualizacji" title="Permanent link">&para;</a></h2>
+<h2 id="3-strategia-aktualizacji">3. Strategia aktualizacji</h2>
 <p>Chart został zaktualizowany kolejno przez wszystkie główne wersje:</p>
 <table>
 <thead>
@@ -4715,7 +4715,7 @@
 </ol>
 <p>Nie wykonywano bezpośredniego <code>helm upgrade</code> ani ręcznego <code>kubectl apply</code> na zasobach zarządzanych przez Flux.</p>
 <hr />
-<h2 id="4-aktualizacje-83x86x">4. Aktualizacje <code>83.x–86.x</code><a class="headerlink" href="#4-aktualizacje-83x86x" title="Permanent link">&para;</a></h2>
+<h2 id="4-aktualizacje-83x86x">4. Aktualizacje <code>83.x–86.x</code></h2>
 <p>Aktualizacje do <code>83.7.0</code>, <code>84.5.0</code>, <code>85.4.0</code> i <code>86.3.2</code> zakończyły się poprawnie.</p>
 <p>Po każdym etapie potwierdzano rollout:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>deployment/kube-prometheus-stack-operator
@@ -4742,7 +4742,7 @@
 </span></code></pre></div>
 <p>Longhorn raportował wolumen jako <code>attached</code> i <code>healthy</code>.</p>
 <hr />
-<h2 id="5-przejsciowe-podwojne-targety-po-rolloutach">5. Przejściowe podwójne targety po rolloutach<a class="headerlink" href="#5-przejsciowe-podwojne-targety-po-rolloutach" title="Permanent link">&para;</a></h2>
+<h2 id="5-przejsciowe-podwojne-targety-po-rolloutach">5. Przejściowe podwójne targety po rolloutach</h2>
 <p>Podczas kolejnych rolloutów Prometheus chwilowo widział stare i nowe Pody kube-state-metrics oraz node-exportera.</p>
 <p>Przykładowo zapytania zwróciły:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kube-state-metrics: 2 zdrowe targety
@@ -4750,7 +4750,7 @@
 </span></code></pre></div>
 <p>Nie oznaczało to utworzenia dodatkowych stałych replik. W czasie rolling update stare Pody nadal istniały w TSDB i przez krótki czas pozostawały aktywnymi targetami. Po zakończeniu rolloutów EndpointSlice zawierał wyłącznie nowy gotowy endpoint, a liczba targetów wróciła do oczekiwanej wartości.</p>
 <hr />
-<h2 id="6-niedostepnosc-grafany-po-aktualizacji-87210">6. Niedostępność Grafany po aktualizacji <code>87.21.0</code><a class="headerlink" href="#6-niedostepnosc-grafany-po-aktualizacji-87210" title="Permanent link">&para;</a></h2>
+<h2 id="6-niedostepnosc-grafany-po-aktualizacji-87210">6. Niedostępność Grafany po aktualizacji <code>87.21.0</code></h2>
 <p>Po wdrożeniu chartu <code>87.21.0</code> Grafana okresowo zwracała przez Traefik:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>no available server
 </span></code></pre></div>
@@ -4777,7 +4777,7 @@
 </span></code></pre></div>
 <p>Nie była to awaria Prometheusa ani pojedynczego dashboardu. Problem dotyczył procesu Grafany i jego zasobów.</p>
 <hr />
-<h2 id="7-zmiana-zasobow-grafany">7. Zmiana zasobów Grafany<a class="headerlink" href="#7-zmiana-zasobow-grafany" title="Permanent link">&para;</a></h2>
+<h2 id="7-zmiana-zasobow-grafany">7. Zmiana zasobów Grafany</h2>
 <p>Zasoby zwiększono najpierw do:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">requests</span><span class="p">:</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100m</span>
@@ -4815,7 +4815,7 @@
 </ul>
 <p>W końcowym stanie Grafana używała około <code>735Mi</code> pamięci przy limicie <code>1280Mi</code>.</p>
 <hr />
-<h2 id="8-cpu-throttling-node-exportera">8. CPU throttling node-exportera<a class="headerlink" href="#8-cpu-throttling-node-exportera" title="Permanent link">&para;</a></h2>
+<h2 id="8-cpu-throttling-node-exportera">8. CPU throttling node-exportera</h2>
 <p>Po aktualizacji chartu alert <code>CPUThrottlingHigh</code> dotyczył wszystkich trzech Podów node-exportera.</p>
 <p>Początkowa konfiguracja:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">prometheus-node-exporter</span><span class="p">:</span>
@@ -4848,7 +4848,7 @@
 <p>zwróciło pusty wynik.</p>
 <p>Usunięcie limitu CPU nie zmienia rezerwacji schedulera. Node-exporter nadal rezerwuje <code>10m</code>, ale nie podlega sztucznemu ograniczeniu CFS podczas krótkich skoków pracy.</p>
 <hr />
-<h2 id="9-grafana-1321-distroless-i-read-only-root-filesystem">9. Grafana <code>13.2.1-distroless</code> i read-only root filesystem<a class="headerlink" href="#9-grafana-1321-distroless-i-read-only-root-filesystem" title="Permanent link">&para;</a></h2>
+<h2 id="9-grafana-1321-distroless-i-read-only-root-filesystem">9. Grafana <code>13.2.1-distroless</code> i read-only root filesystem</h2>
 <p>Chart <code>89.2.4</code> wprowadził:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker.io/grafana/grafana:13.2.1-distroless
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>readOnlyRootFilesystem: true
@@ -4874,7 +4874,7 @@
 </span></code></pre></div>
 <p>Po rolloutcie logi nie zawierały już błędów instalatora pluginów ani filesystemu. Grafana zachowała read-only root filesystem.</p>
 <hr />
-<h2 id="10-migracja-servicemonitor-w-chartcie-9020">10. Migracja ServiceMonitor w chartcie <code>90.2.0</code><a class="headerlink" href="#10-migracja-servicemonitor-w-chartcie-9020" title="Permanent link">&para;</a></h2>
+<h2 id="10-migracja-servicemonitor-w-chartcie-9020">10. Migracja ServiceMonitor w chartcie <code>90.2.0</code></h2>
 <p>Chart <code>90.x</code> usunął pola odwołujące się do plików z tokenem i CA znajdujących się w filesystemie Prometheusa. Dotychczasowa wartość:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nt">kubelet</span><span class="p">:</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nt">serviceMonitor</span><span class="p">:</span>
@@ -4923,7 +4923,7 @@
 </span></code></pre></div>
 <p>Wszystkie targety miały pusty <code>lastError</code>. Nie wystąpiły odpowiedzi <code>401</code> ani <code>403</code>.</p>
 <hr />
-<h2 id="11-aktualizacja-do-9181-i-zaostrzony-rbac">11. Aktualizacja do <code>91.8.1</code> i zaostrzony RBAC<a class="headerlink" href="#11-aktualizacja-do-9181-i-zaostrzony-rbac" title="Permanent link">&para;</a></h2>
+<h2 id="11-aktualizacja-do-9181-i-zaostrzony-rbac">11. Aktualizacja do <code>91.8.1</code> i zaostrzony RBAC</h2>
 <p>Chart <code>91.x</code> zaktualizował Prometheus Operator do <code>v0.94.1</code>. Nowy ClusterRole nie używa wildcardu <code>"*"</code> w <code>verbs</code>, lecz jawnie wymienia potrzebne operacje.</p>
 <p>Przed wdrożeniem sprawdzono render RBAC. Operator zachował dostęp do wymaganych zasobów:</p>
 <ul>
@@ -4954,7 +4954,7 @@
 </span></code></pre></div>
 <p>Zaostrzenie RBAC nie spowodowało regresji w tym klastrze.</p>
 <hr />
-<h2 id="12-stan-crd">12. Stan CRD<a class="headerlink" href="#12-stan-crd" title="Permanent link">&para;</a></h2>
+<h2 id="12-stan-crd">12. Stan CRD</h2>
 <p>Wszystkie CRD z grupy <code>monitoring.coreos.com</code> miały:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Established=True
 </span></code></pre></div>
@@ -5011,7 +5011,7 @@
 </table>
 <p><code>v1alpha1</code> dla AlertmanagerConfig, PrometheusAgent i ScrapeConfig jest prawidłowym stanem tych API. Nie oznacza niedokończonej migracji i nie wymaga ręcznej modyfikacji <code>status.storedVersions</code>.</p>
 <hr />
-<h2 id="13-koncowa-walidacja-prometheusa-i-grafany">13. Końcowa walidacja Prometheusa i Grafany<a class="headerlink" href="#13-koncowa-walidacja-prometheusa-i-grafany" title="Permanent link">&para;</a></h2>
+<h2 id="13-koncowa-walidacja-prometheusa-i-grafany">13. Końcowa walidacja Prometheusa i Grafany</h2>
 <p>Końcowy release:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Helm revision: 19
 </span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>chart:         kube-prometheus-stack-91.8.1
@@ -5058,8 +5058,8 @@
 </span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>reguły z niepustym błędem:  []
 </span></code></pre></div>
 <hr />
-<h2 id="14-stan-koncowy">14. Stan końcowy<a class="headerlink" href="#14-stan-koncowy" title="Permanent link">&para;</a></h2>
-<h3 id="k3s">K3s<a class="headerlink" href="#k3s" title="Permanent link">&para;</a></h3>
+<h2 id="14-stan-koncowy">14. Stan końcowy</h2>
+<h3 id="k3s">K3s</h3>
 <ul>
 <li>trzy nody <code>Ready</code>;</li>
 <li>K3s <code>v1.36.4+k3s1</code>;</li>
@@ -5068,7 +5068,7 @@
 <li>zimny start bez użycia remotedialer resync;</li>
 <li>problem niepełnej macierzy po zimnym starcie uznany za rozwiązany.</li>
 </ul>
-<h3 id="kube-prometheus-stack">kube-prometheus-stack<a class="headerlink" href="#kube-prometheus-stack" title="Permanent link">&para;</a></h3>
+<h3 id="kube-prometheus-stack">kube-prometheus-stack</h3>
 <ul>
 <li>chart <code>91.8.1</code>;</li>
 <li>Helm revision <code>19</code>;</li>
@@ -5084,7 +5084,7 @@
 <li>wszystkie reguły zdrowe;</li>
 <li>brak błędów RBAC operatora.</li>
 </ul>
-<h3 id="grafana">Grafana<a class="headerlink" href="#grafana" title="Permanent link">&para;</a></h3>
+<h3 id="grafana">Grafana</h3>
 <ul>
 <li>stabilny EndpointSlice;</li>
 <li>brak <code>no available server</code> po korekcie zasobów;</li>
@@ -5095,7 +5095,7 @@
 <li>limit pamięci <code>1280Mi</code>;</li>
 <li>przejściowe blokady SQLite ograniczone do krótkich retry podczas startu.</li>
 </ul>
-<h3 id="storage-i-sekrety">Storage i sekrety<a class="headerlink" href="#storage-i-sekrety" title="Permanent link">&para;</a></h3>
+<h3 id="storage-i-sekrety">Storage i sekrety</h3>
 <ul>
 <li>PVC Prometheusa pozostał na Longhornie;</li>
 <li>wolumen był <code>attached</code> i <code>healthy</code> podczas aktualizacji;</li>
@@ -5104,7 +5104,7 @@
 <li>wartość tokenu nie trafiła do Git.</li>
 </ul>
 <hr />
-<h2 id="15-wnioski">15. Wnioski<a class="headerlink" href="#15-wnioski" title="Permanent link">&para;</a></h2>
+<h2 id="15-wnioski">15. Wnioski</h2>
 <ol>
 <li>Duży skok chartu należy dzielić na kolejne wersje główne, nawet gdy wersja aplikacji przez kilka etapów się nie zmienia.</li>
 <li><code>HelmRelease Ready=True</code> nie wystarcza do zaliczenia aktualizacji systemu monitoringu. Trzeba sprawdzić targety, reguły, logi, API Grafany i storage.</li>
@@ -5123,7 +5123,7 @@
 <li>Przejściowe <code>SQLITE_BUSY</code> podczas startu nie oznacza awarii, jeśli retry kończy się powodzeniem, <code>/api/health</code> zwraca <code>database=ok</code>, a kolejne logi są czyste.</li>
 </ol>
 <hr />
-<h2 id="16-nastepna-sesja">16. Następna sesja<a class="headerlink" href="#16-nastepna-sesja" title="Permanent link">&para;</a></h2>
+<h2 id="16-nastepna-sesja">16. Następna sesja</h2>
 <ol>
 <li>Po zimnym starcie potwierdzić:</li>
 </ol>

@@ -4435,12 +4435,12 @@
   
 
 
-<h1 id="16-oci">16 - OCI<a class="headerlink" href="#16-oci" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-16-oci-helm-chart-progressive-delivery-setup">K3s Homelab — Sesja 16 (OCI Helm Chart + Progressive Delivery Setup)<a class="headerlink" href="#k3s-homelab-sesja-16-oci-helm-chart-progressive-delivery-setup" title="Permanent link">&para;</a></h2>
+<h1 id="16-oci">16 - OCI</h1>
+<h2 id="k3s-homelab-sesja-16-oci-helm-chart-progressive-delivery-setup">K3s Homelab — Sesja 16 (OCI Helm Chart + Progressive Delivery Setup)</h2>
 <p><strong>Data:</strong> 2026-03-03<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, Flux v2.8.1, Helm v3.14.0</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ol>
 <li><strong>Publikowanie Helm chart jako OCI image na GHCR</strong> — automatycznie przy każdym tagu</li>
 <li><strong>Flux pobiera chart z OCI registry</strong> zamiast z GitRepository</li>
@@ -4451,7 +4451,7 @@
 <li><strong>Poprawka NetworkPolicy</strong> — dozwolony ruch intra-namespace dla helm test</li>
 </ol>
 <hr />
-<h3 id="1-oci-helm-registry-jak-to-dziaa">1. OCI Helm Registry — jak to działa<a class="headerlink" href="#1-oci-helm-registry-jak-to-dziaa" title="Permanent link">&para;</a></h3>
+<h3 id="1-oci-helm-registry-jak-to-dziaa">1. OCI Helm Registry — jak to działa</h3>
 <p><strong>OCI (Open Container Initiative)</strong> — ten sam standard co obrazy Docker, używany do przechowywania Helm chartów. GHCR (GitHub Container Registry) obsługuje OCI.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>helm package helm/clients-api          # tworzy clients-api-1.5.0.tgz
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>helm push clients-api-1.5.0.tgz \
@@ -4464,7 +4464,7 @@
 <li>Można dystrybuować między organizacjami bez dostępu do repo</li>
 <li>Flux pobiera konkretną wersję — deterministyczne deploy</li>
 </ul>
-<h3 id="2-github-actions-job-publish-chart">2. GitHub Actions — job publish-chart<a class="headerlink" href="#2-github-actions-job-publish-chart" title="Permanent link">&para;</a></h3>
+<h3 id="2-github-actions-job-publish-chart">2. GitHub Actions — job publish-chart</h3>
 <p>dodany nowy job który uruchamia się <strong>tylko na tagach</strong> (<code>v*</code>):</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">publish-chart</span><span class="p">:</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Publish Helm Chart to GHCR</span>
@@ -4490,7 +4490,7 @@
 </span></code></pre></div>
 <p><strong>Wniosek:</strong> CI dynamicznie nadpisuje <code>version</code> i <code>appVersion</code> w <code>Chart.yaml</code>. Lokalny plik to placeholder — nie zmieniaj go ręcznie przed tagowaniem.</p>
 <p><strong>Wersjonowanie:</strong> tag <code>v1.5.0</code> → chart <code>1.5.0</code> + Docker image <code>1.5.0</code>. Jedna wersja dla obu.</p>
-<h3 id="3-flux-helmrepository-dla-oci">3. Flux HelmRepository dla OCI<a class="headerlink" href="#3-flux-helmrepository-dla-oci" title="Permanent link">&para;</a></h3>
+<h3 id="3-flux-helmrepository-dla-oci">3. Flux HelmRepository dla OCI</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source.toolkit.fluxcd.io/v1</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HelmRepository</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4506,7 +4506,7 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.versions[*].name}'</span>
 </span></code></pre></div>
 <p><strong>GHCR visibility:</strong> Package musi być <strong>publiczny</strong> żeby Flux mógł go pobrać bez secretu. Ustaw w: <code>github.com/users/kcn3333/packages/container/charts%2Fclients-api/settings</code></p>
-<h3 id="4-helmrelease-z-oci">4. HelmRelease z OCI<a class="headerlink" href="#4-helmrelease-z-oci" title="Permanent link">&para;</a></h3>
+<h3 id="4-helmrelease-z-oci">4. HelmRelease z OCI</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">chart</span><span class="p">:</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">spec</span><span class="p">:</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">chart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-api</span>
@@ -4518,7 +4518,7 @@
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1m</span>
 </span></code></pre></div>
 <p><strong><code>reconcileStrategy</code></strong> — domyślnie <code>ChartVersion</code> (update tylko gdy zmieni się wersja). Dla GitRepository używałem <code>Revision</code>. Dla OCI nie jest potrzebne — każdy nowy tag = nowa wersja.</p>
-<h3 id="5-helm-test">5. helm test<a class="headerlink" href="#5-helm-test" title="Permanent link">&para;</a></h3>
+<h3 id="5-helm-test">5. helm test</h3>
 <p>Testy które uruchamiają się po <code>helm install/upgrade</code>:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># templates/tests/test-connection.yaml</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
@@ -4549,7 +4549,7 @@
 <li><code>helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded</code> — usuń pod po sukcesie</li>
 </ul>
 <p><strong>Problem z HPA i test podem:</strong> Test pod nie ma <code>resources.requests</code> → HPA nie może liczyć metryk → <code>FailedGetResourceMetric</code>. Rozwiązuje się samo gdy test pod zostaje usunięty po sukcesie.</p>
-<h3 id="6-networkpolicy-intra-namespace-traffic">6. NetworkPolicy — intra-namespace traffic<a class="headerlink" href="#6-networkpolicy-intra-namespace-traffic" title="Permanent link">&para;</a></h3>
+<h3 id="6-networkpolicy-intra-namespace-traffic">6. NetworkPolicy — intra-namespace traffic</h3>
 <p>Test pod jest w tym samym namespace co aplikacja ale NetworkPolicy blokował mu ruch. Fix — dodaj <code>podSelector: {}</code>:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">ingress</span><span class="p">:</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
@@ -4562,7 +4562,7 @@
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">podSelector</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span><span class="w">    </span><span class="c1"># ← wszystkie pody z tego samego namespace</span>
 </span></code></pre></div>
 <p><code>podSelector: {}</code> = pusty selector = wszystkie pody w namespace gdzie jest NetworkPolicy.</p>
-<h3 id="7-warunkowe-env-vars-w-deployment-template">7. Warunkowe env vars w Deployment template<a class="headerlink" href="#7-warunkowe-env-vars-w-deployment-template" title="Permanent link">&para;</a></h3>
+<h3 id="7-warunkowe-env-vars-w-deployment-template">7. Warunkowe env vars w Deployment template</h3>
 <p>Dev używa H2 (nie potrzebuje credentiali DB), prod/staging używa PostgreSQL. Rozwiązanie przez warunek w template:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p p-Indicator">{{</span><span class="nv">- if .Values.database.credentialsSecret</span><span class="w"> </span><span class="p p-Indicator">}}</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPRING_DATASOURCE_URL</span>
@@ -4578,7 +4578,7 @@
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">database</span><span class="p">:</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">credentialsSecret</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w">    </span><span class="c1"># pusty = warunek false = nie montuj secretu</span>
 </span></code></pre></div>
-<h3 id="8-trzy-srodowiska-architektura">8. Trzy środowiska — architektura<a class="headerlink" href="#8-trzy-srodowiska-architektura" title="Permanent link">&para;</a></h3>
+<h3 id="8-trzy-srodowiska-architektura">8. Trzy środowiska — architektura</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>clients-dev     ← profil local (H2 in-memory)
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>clients-staging ← profil prod (PostgreSQL osobna baza)
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>clients         ← profil prod (PostgreSQL produkcyjna baza)
@@ -4590,7 +4590,7 @@
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>└── apps-staging.yaml   → apps/staging (staging)
 </span></code></pre></div>
 <p><strong>Każde środowisko ma własny HelmRelease</strong> z odpowiednimi values override.</p>
-<h3 id="9-staging-baza-danych">9. Staging baza danych<a class="headerlink" href="#9-staging-baza-danych" title="Permanent link">&para;</a></h3>
+<h3 id="9-staging-baza-danych">9. Staging baza danych</h3>
 <p>Staging ma osobną bazę PostgreSQL przez CloudNativePG:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># apps/staging/db-cluster.yaml</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql.cnpg.io/v1</span>
@@ -4607,7 +4607,7 @@
 </span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clients-db-secret</span><span class="w">   </span><span class="c1"># SealedSecret w namespace clients-staging</span>
 </span></code></pre></div>
 <p><strong>Ważne:</strong> Serwis CloudNativePG ma nazwę <code>{cluster-name}-rw</code>, więc dla stagingu: <code>clients-db-staging-rw</code>.</p>
-<h3 id="10-jvm-warmup-probe-tuning-dla-devstaging">10. JVM warmup — probe tuning dla dev/staging<a class="headerlink" href="#10-jvm-warmup-probe-tuning-dla-devstaging" title="Permanent link">&para;</a></h3>
+<h3 id="10-jvm-warmup-probe-tuning-dla-devstaging">10. JVM warmup — probe tuning dla dev/staging</h3>
 <p>JVM potrzebuje więcej czasu na start przy ograniczonych zasobach -&gt; zwiększ <code>initialDelaySeconds</code>:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">livenessProbe</span><span class="p">:</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">initialDelaySeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span><span class="w">   </span><span class="c1"># domyślnie 60 — za mało dla dev/staging</span>
@@ -4622,7 +4622,7 @@
 </span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000m</span>
 </span></code></pre></div>
 <hr />
-<h2 id="progressive-delivery">Progressive Delivery<a class="headerlink" href="#progressive-delivery" title="Permanent link">&para;</a></h2>
+<h2 id="progressive-delivery">Progressive Delivery</h2>
 <p><strong>Aktualny stan:</strong></p>
 <p>Wszystkie 3 środowiska aktualizują się przy każdym nowym tagu — nie ma różnicy w triggerze.</p>
 <p><strong>właściwy flow:</strong></p>
@@ -4639,7 +4639,7 @@
 <li>Deploy na prod = merge PR do brancha <code>main</code> w k3s-homelab</li>
 </ol>
 <hr />
-<h2 id="struktura-repo">Struktura repo<a class="headerlink" href="#struktura-repo" title="Permanent link">&para;</a></h2>
+<h2 id="struktura-repo">Struktura repo</h2>
 <p><strong>clients-api repo:</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>clients-api/
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>├── helm/
@@ -4677,7 +4677,7 @@
 </span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>└── apps-staging.yaml     (staging kustomization)
 </span></code></pre></div>
 <hr />
-<h2 id="backlog">Backlog<a class="headerlink" href="#backlog" title="Permanent link">&para;</a></h2>
+<h2 id="backlog">Backlog</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Progressive delivery</strong> — osobne branche staging/main dla k3s-homelab, różne triggery ← następna sesja</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hubble UI — native routing migration</li>
@@ -4686,7 +4686,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RBAC</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Helm OCI</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>helm<span class="w"> </span>push<span class="w"> </span>clients-api-1.5.0.tgz<span class="w"> </span>oci://ghcr.io/kcn3333/charts
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>helm<span class="w"> </span>show<span class="w"> </span>chart<span class="w"> </span>oci://ghcr.io/kcn3333/charts/clients-api<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.5.0

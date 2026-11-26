@@ -4435,12 +4435,12 @@
   
 
 
-<h1 id="2-lets-encrypt">2 - Let's Encrypt<a class="headerlink" href="#2-lets-encrypt" title="Permanent link">&para;</a></h1>
-<h2 id="k3s-homelab-sesja-02">K3s Homelab — Sesja 02<a class="headerlink" href="#k3s-homelab-sesja-02" title="Permanent link">&para;</a></h2>
+<h1 id="2-lets-encrypt">2 - Let's Encrypt</h1>
+<h2 id="k3s-homelab-sesja-02">K3s Homelab — Sesja 02</h2>
 <p><strong>Data:</strong> 2026-01-13<br />
 <strong>Środowisko:</strong> 3x HP T630, k3s v1.34.4, HAProxy, Traefik</p>
 <hr />
-<h3 id="cel-sesji">Cel sesji:<a class="headerlink" href="#cel-sesji" title="Permanent link">&para;</a></h3>
+<h3 id="cel-sesji">Cel sesji:</h3>
 <ul>
 <li>uzyskanie ważnych certyfikatów TLS (Let's Encrypt)</li>
 <li>brak wystawiania klastra do internetu</li>
@@ -4452,7 +4452,7 @@
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                                    (DNS-01 via Cloudflare API)
 </span></code></pre></div>
 <hr />
-<h3 id="1-instalacja-cert-manager-helm">1. Instalacja cert-manager (Helm)<a class="headerlink" href="#1-instalacja-cert-manager-helm" title="Permanent link">&para;</a></h3>
+<h3 id="1-instalacja-cert-manager-helm">1. Instalacja cert-manager (Helm)</h3>
 <p><strong>Helm</strong>
 - zarządza cyklem życia (install / upgrade / rollback)
 - pozwala łatwo zmieniać konfigurację (values.yaml)
@@ -4483,7 +4483,7 @@
 <li><code>crds.enabled=true</code> mówi Helmowi żeby zainstalował te definicje razem z chartem</li>
 </ul>
 <hr />
-<h3 id="2-cert-manager-automatyczne-zarzadzanie-certyfikatami">2. cert-manager — automatyczne zarządzanie certyfikatami<a class="headerlink" href="#2-cert-manager-automatyczne-zarzadzanie-certyfikatami" title="Permanent link">&para;</a></h3>
+<h3 id="2-cert-manager-automatyczne-zarzadzanie-certyfikatami">2. cert-manager — automatyczne zarządzanie certyfikatami</h3>
 <p><strong>Architektura cert-managera (3 pody):</strong></p>
 <ul>
 <li><code>cert-manager</code> — główny kontroler, zarządza cyklem życia certyfikatów</li>
@@ -4498,7 +4498,7 @@
 <li>Zero manualnej pracy po konfiguracji</li>
 </ul>
 <hr />
-<h3 id="3-issuer-vs-clusterissuer">3. Issuer vs ClusterIssuer<a class="headerlink" href="#3-issuer-vs-clusterissuer" title="Permanent link">&para;</a></h3>
+<h3 id="3-issuer-vs-clusterissuer">3. Issuer vs ClusterIssuer</h3>
 <table>
 <thead>
 <tr>
@@ -4528,7 +4528,7 @@
 <p><strong>Dla homelaba:</strong> <code>ClusterIssuer</code> — jeden issuer dla wszystkich aplikacji.</p>
 <p><code>ClusterIssuer</code> jest <strong>cluster-scoped</strong> jak <code>Node</code> czy <code>PersistentVolume</code> — nie należy do żadnego namespace, nie podajesz <code>-n</code> przy apply.</p>
 <hr />
-<h3 id="4-lets-encrypt-staging-vs-produkcja">4. Let's Encrypt — staging vs produkcja<a class="headerlink" href="#4-lets-encrypt-staging-vs-produkcja" title="Permanent link">&para;</a></h3>
+<h3 id="4-lets-encrypt-staging-vs-produkcja">4. Let's Encrypt — staging vs produkcja</h3>
 <p><strong>Dlaczego staging pierwszy:</strong></p>
 <ul>
 <li>Let's Encrypt produkcja ma <strong>rate limits</strong> — max 5 certyfikatów na domenę na tydzień</li>
@@ -4540,7 +4540,7 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Prod:    https://acme-v02.api.letsencrypt.org/directory
 </span></code></pre></div>
 <hr />
-<h3 id="5-dns-01-challenge-certyfikaty-bez-otwierania-portow">5. DNS-01 Challenge — certyfikaty bez otwierania portów<a class="headerlink" href="#5-dns-01-challenge-certyfikaty-bez-otwierania-portow" title="Permanent link">&para;</a></h3>
+<h3 id="5-dns-01-challenge-certyfikaty-bez-otwierania-portow">5. DNS-01 Challenge — certyfikaty bez otwierania portów</h3>
 <p><strong>HTTP-01 challenge:</strong> Let's Encrypt odpytuje <code>http://twojadomena.com/.well-known/acme-challenge/...</code> — wymaga że serwer jest dostępny z internetu.</p>
 <p><strong>DNS-01 challenge:</strong> Let's Encrypt sprawdza rekord <code>TXT _acme-challenge.twojadomena.com</code> w publicznym DNS — <strong>klaster nie musi być dostępny z internetu!</strong></p>
 <p><strong>Flow DNS-01 z Cloudflare:</strong></p>
@@ -4559,7 +4559,7 @@
 </ul>
 <p><strong>NIE używaj</strong> Global API Key — zbyt szerokie uprawnienia.</p>
 <hr />
-<h3 id="6-przechowywanie-sekretow-w-k8s">6. Przechowywanie sekretów w k8s<a class="headerlink" href="#6-przechowywanie-sekretow-w-k8s" title="Permanent link">&para;</a></h3>
+<h3 id="6-przechowywanie-sekretow-w-k8s">6. Przechowywanie sekretów w k8s</h3>
 <p>API Token Cloudflare przechowujemy jako <code>Secret</code>, nie wklejamy bezpośrednio do manifestu <code>ClusterIssuer</code>:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Secret</span>
@@ -4572,7 +4572,7 @@
 </span></code></pre></div>
 <p><strong>Dlaczego to ważne:</strong> manifest <code>ClusterIssuer</code> może trafić do GitHuba — Secret nie powinien. W produkcji używa się <strong>Sealed Secrets</strong> lub <strong>External Secrets Operator</strong> żeby bezpiecznie trzymać sekrety w repo (temat na później).</p>
 <hr />
-<h3 id="7-zasoby-cert-managera-przepyw">7. Zasoby cert-managera — przepływ<a class="headerlink" href="#7-zasoby-cert-managera-przepyw" title="Permanent link">&para;</a></h3>
+<h3 id="7-zasoby-cert-managera-przepyw">7. Zasoby cert-managera — przepływ</h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ClusterIssuer → Certificate → CertificateRequest → Order → Challenge → Secret (TLS)
 </span></code></pre></div>
 <p><strong>ClusterIssuer</strong> — konfiguracja CA (Let's Encrypt + Cloudflare)<br />
@@ -4589,7 +4589,7 @@
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>clusterissuer<span class="w"> </span>&lt;nazwa&gt;
 </span></code></pre></div>
 <hr />
-<h3 id="8-manifest-certificate">8. Manifest Certificate<a class="headerlink" href="#8-manifest-certificate" title="Permanent link">&para;</a></h3>
+<h3 id="8-manifest-certificate">8. Manifest Certificate</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cert-manager.io/v1</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Certificate</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4606,7 +4606,7 @@
 </span></code></pre></div>
 <p><strong>Częsty błąd:</strong> w Ingress podawanie nazwy <code>Certificate</code> zamiast nazwy <code>Secret</code> w polu <code>secretName</code>. Traefik potrzebuje nazwy Secretu.</p>
 <hr />
-<h3 id="9-ingress-z-tls">9. Ingress z TLS<a class="headerlink" href="#9-ingress-z-tls" title="Permanent link">&para;</a></h3>
+<h3 id="9-ingress-z-tls">9. Ingress z TLS</h3>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nt">metadata</span><span class="p">:</span>
@@ -4632,7 +4632,7 @@
 </span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 </span></code></pre></div>
 <hr />
-<h3 id="10-haproxy-tryby-i-tls">10. HAProxy — tryby i TLS<a class="headerlink" href="#10-haproxy-tryby-i-tls" title="Permanent link">&para;</a></h3>
+<h3 id="10-haproxy-tryby-i-tls">10. HAProxy — tryby i TLS</h3>
 <p><strong>Dwa tryby HAProxy:</strong></p>
 <ul>
 <li><code>mode http</code> — HAProxy rozumie HTTP, może modyfikować nagłówki, ale wymaga odszyfrowania TLS</li>
@@ -4651,7 +4651,7 @@
 <li>Rozwiązanie: usunąć <code>check</code> lub użyć <code>http-check expect status 200,301,302,404</code></li>
 </ul>
 <hr />
-<h3 id="11-debugowanie-certyfikatow">11. Debugowanie certyfikatów<a class="headerlink" href="#11-debugowanie-certyfikatow" title="Permanent link">&para;</a></h3>
+<h3 id="11-debugowanie-certyfikatow">11. Debugowanie certyfikatów</h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Sprawdź jaki certyfikat serwuje serwer</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>domena.com:443<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>openssl<span class="w"> </span>x509<span class="w"> </span>-text<span class="w"> </span>-noout<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A2<span class="w"> </span><span class="s2">"Issuer\|Subject"</span>
@@ -4660,7 +4660,7 @@
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Prod: Issuer: C = US, O = Let's Encrypt, CN = R10/R11/R12</span>
 </span></code></pre></div>
 <hr />
-<h3 id="12-problem-z-przekierowaniem-httphttps-przy-niestandardowych-portach">12. Problem z przekierowaniem HTTP→HTTPS przy niestandardowych portach<a class="headerlink" href="#12-problem-z-przekierowaniem-httphttps-przy-niestandardowych-portach" title="Permanent link">&para;</a></h3>
+<h3 id="12-problem-z-przekierowaniem-httphttps-przy-niestandardowych-portach">12. Problem z przekierowaniem HTTP→HTTPS przy niestandardowych portach</h3>
 <p>Traefik przekierowuje HTTP na <code>https://domena.com</code> (port 443). Przy niestandardowych portach (6453 zamiast 443) przekierowanie kieruje na zły port.</p>
 <p><strong>Opcje rozwiązania (do przemyślenia):</strong></p>
 <ul>
@@ -4669,7 +4669,7 @@
 <li>Zaakceptowanie niestandardowych portów i rezygnacja z automatycznego przekierowania</li>
 </ul>
 <hr />
-<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)<a class="headerlink" href="#backlog-do-zrobienia" title="Permanent link">&para;</a></h2>
+<h2 id="backlog-do-zrobienia">Backlog (do zrobienia)</h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Rozwiązać problem z portami (Cloudflare Tunnel lub przepięcie NPM)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Traefik dashboard z BasicAuth</li>
@@ -4683,7 +4683,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Sealed Secrets / External Secrets Operator</li>
 </ul>
 <hr />
-<h2 id="przydatne-komendy">Przydatne komendy<a class="headerlink" href="#przydatne-komendy" title="Permanent link">&para;</a></h2>
+<h2 id="przydatne-komendy">Przydatne komendy</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Helm</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>&lt;nazwa&gt;<span class="w"> </span>&lt;url&gt;
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>helm<span class="w"> </span>repo<span class="w"> </span>update

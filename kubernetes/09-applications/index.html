@@ -4303,8 +4303,8 @@
   
 
 
-<h1 id="applications">Applications<a class="headerlink" href="#applications" title="Permanent link">&para;</a></h1>
-<h2 id="active-applications">Active applications<a class="headerlink" href="#active-applications" title="Permanent link">&para;</a></h2>
+<h1 id="applications">Applications</h1>
+<h2 id="active-applications">Active applications</h2>
 <p>The main application Kustomization currently includes:</p>
 <ul>
 <li><a href="https://github.com/kCn3333/clients-api">clients-api</a>;</li>
@@ -4315,12 +4315,12 @@ resource list and are not deployed by Flux.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>deployments,statefulsets,services,ingress<span class="w"> </span>-A
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>flux<span class="w"> </span>get<span class="w"> </span>kustomizations<span class="w"> </span>-n<span class="w"> </span>flux-system
 </span></code></pre></div>
-<h2 id="clients-api">clients-api<a class="headerlink" href="#clients-api" title="Permanent link">&para;</a></h2>
+<h2 id="clients-api">clients-api</h2>
 <p><a href="https://github.com/kCn3333/clients-api">clients-api</a> is a Spring Boot API backed by
 PostgreSQL managed by CloudNativePG. It is used to exercise the complete delivery
 path: application CI, container images, Helm, Flux, database lifecycle, autoscaling
 and monitoring.</p>
-<h3 id="environments">Environments<a class="headerlink" href="#environments" title="Permanent link">&para;</a></h3>
+<h3 id="environments">Environments</h3>
 <table>
 <thead>
 <tr>
@@ -4348,7 +4348,7 @@ and monitoring.</p>
 </tbody>
 </table>
 <p>Each environment owns separate Kubernetes resources and database state.</p>
-<h3 id="delivery-flow">Delivery flow<a class="headerlink" href="#delivery-flow" title="Permanent link">&para;</a></h3>
+<h3 id="delivery-flow">Delivery flow</h3>
 <ol>
 <li>A semantic version tag starts GitHub Actions.</li>
 <li>CI tests and builds the application image.</li>
@@ -4358,7 +4358,7 @@ and monitoring.</p>
 </ol>
 <p>Semantic versions are used for release selection. Commit-SHA tags are useful for
 traceability but are not the ordering mechanism for production promotion.</p>
-<h3 id="runtime-configuration">Runtime configuration<a class="headerlink" href="#runtime-configuration" title="Permanent link">&para;</a></h3>
+<h3 id="runtime-configuration">Runtime configuration</h3>
 <p>The production profile uses the CloudNativePG read-write Service and credentials from
 a Kubernetes Secret. No database password is stored in plaintext Git.</p>
 <p>Readiness and liveness probes use the Spring Boot Actuator endpoints:</p>
@@ -4371,7 +4371,7 @@ a Kubernetes Secret. No database password is stored in plaintext Git.</p>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>deployment/clients-api<span class="w"> </span>--since<span class="o">=</span>15m
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>clients-api
 </span></code></pre></div>
-<h3 id="scaling-ownership">Scaling ownership<a class="headerlink" href="#scaling-ownership" title="Permanent link">&para;</a></h3>
+<h3 id="scaling-ownership">Scaling ownership</h3>
 <p>HPA is the sole owner of the Deployment replica count. The Deployment manifest does
 not set <code>spec.replicas</code>, otherwise Flux and HPA would continuously overwrite each
 other.</p>
@@ -4380,7 +4380,7 @@ Resource requests affect scheduling; limits bound runtime use.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>hpa<span class="w"> </span>-n<span class="w"> </span>clients
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>kubectl<span class="w"> </span>top<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>clients
 </span></code></pre></div>
-<h3 id="availability">Availability<a class="headerlink" href="#availability" title="Permanent link">&para;</a></h3>
+<h3 id="availability">Availability</h3>
 <p>A PodDisruptionBudget protects at least one API replica during voluntary disruption.
 It does not protect against all simultaneous failures and does not make the database
 or ingress path highly available by itself.</p>
@@ -4423,17 +4423,17 @@ See <a href="../08-backup/#postgresql-backups">Backup</a> for backup coverage an
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>clusters.postgresql.cnpg.io<span class="w"> </span>-A
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods,pvc<span class="w"> </span>-n<span class="w"> </span>clients
 </span></code></pre></div>
-<h3 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h3>
+<h3 id="monitoring">Monitoring</h3>
 <p>A <code>ServiceMonitor</code> selects the application Service and scrapes the Actuator Prometheus
 endpoint. Both the Service labels and ServiceMonitor selector must match.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>servicemonitor<span class="w"> </span>-n<span class="w"> </span>clients
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>servicemonitor<span class="w"> </span>-n<span class="w"> </span>clients<span class="w"> </span>-o<span class="w"> </span>yaml
 </span></code></pre></div>
-<h2 id="k8s-badge">k8s-badge<a class="headerlink" href="#k8s-badge" title="Permanent link">&para;</a></h2>
+<h2 id="k8s-badge">k8s-badge</h2>
 <p><a href="https://github.com/kCn3333/k8s-badge">k8s-badge</a> is a small stateless workload that
 publishes cluster status as JSON and SVG. It follows the same GitOps rule: changes are
 made in Git and verified after Flux applies the expected revision.</p>
-<h2 id="operational-checks">Operational checks<a class="headerlink" href="#operational-checks" title="Permanent link">&para;</a></h2>
+<h2 id="operational-checks">Operational checks</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>flux<span class="w"> </span>get<span class="w"> </span>kustomizations<span class="w"> </span>-n<span class="w"> </span>flux-system
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>flux<span class="w"> </span>get<span class="w"> </span>helmreleases<span class="w"> </span>-A
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>--field-selector<span class="o">=</span>status.phase!<span class="o">=</span>Running

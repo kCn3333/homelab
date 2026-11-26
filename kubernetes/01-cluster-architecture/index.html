@@ -4313,8 +4313,8 @@
   
 
 
-<h1 id="cluster-architecture">Cluster Architecture<a class="headerlink" href="#cluster-architecture" title="Permanent link">&para;</a></h1>
-<h2 id="nodes-and-roles">Nodes and roles<a class="headerlink" href="#nodes-and-roles" title="Permanent link">&para;</a></h2>
+<h1 id="cluster-architecture">Cluster Architecture</h1>
+<h2 id="nodes-and-roles">Nodes and roles</h2>
 <p>The cluster contains three k3s server nodes. Every node runs the Kubernetes control plane, an embedded etcd member and regular workloads.</p>
 <table>
 <thead>
@@ -4344,11 +4344,11 @@
 </table>
 <p>There is no dedicated worker-only node. The hostnames do not define scheduling priority or control-plane authority.</p>
 <hr />
-<h2 id="runtime">Runtime<a class="headerlink" href="#runtime" title="Permanent link">&para;</a></h2>
+<h2 id="runtime">Runtime</h2>
 <p>All three servers run K3s <code>v1.36.4+k3s1</code> with containerd <code>2.3.4-k3s1.36</code>
 on Ubuntu <code>24.04.5 LTS</code>, kernel <code>6.8.0-139-generic</code>.</p>
 <hr />
-<h2 id="control-plane-availability">Control-plane availability<a class="headerlink" href="#control-plane-availability" title="Permanent link">&para;</a></h2>
+<h2 id="control-plane-availability">Control-plane availability</h2>
 <p>Embedded etcd uses three voting members. The cluster tolerates the loss of one member while retaining quorum.</p>
 <p>Control-plane availability and application availability are separate:</p>
 <ul>
@@ -4358,7 +4358,7 @@ on Ubuntu <code>24.04.5 LTS</code>, kernel <code>6.8.0-139-generic</code>.</p>
 </ul>
 <p>One healthy API server and an etcd quorum are required for normal reconciliation.</p>
 <hr />
-<h2 id="api-access">API access<a class="headerlink" href="#api-access" title="Permanent link">&para;</a></h2>
+<h2 id="api-access">API access</h2>
 <p>Clients use a stable HAProxy endpoint:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>→ cluster.kcn333.com:6443
@@ -4374,7 +4374,7 @@ on Ubuntu <code>24.04.5 LTS</code>, kernel <code>6.8.0-139-generic</code>.</p>
 </span></code></pre></div>
 <p>The kubeconfig grants administrative access and must be protected like a root credential.</p>
 <hr />
-<h2 id="current-k3s-service-configuration">Current k3s service configuration<a class="headerlink" href="#current-k3s-service-configuration" title="Permanent link">&para;</a></h2>
+<h2 id="current-k3s-service-configuration">Current k3s service configuration</h2>
 <p>The initial server uses:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>k3s server
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>--cluster-init
@@ -4401,7 +4401,7 @@ with its <code>HelmChartConfig</code> managed through Flux.</p>
 managed through the <a href="https://github.com/kCn3333/homelab-ansible/tree/main/cluster/playbooks">cluster Ansible playbooks</a>;
 manual edits to generated systemd units are not the source of truth.</p>
 <hr />
-<h2 id="readiness-checks">Readiness checks<a class="headerlink" href="#readiness-checks" title="Permanent link">&para;</a></h2>
+<h2 id="readiness-checks">Readiness checks</h2>
 <p>Basic cluster state:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--all-namespaces
@@ -4433,7 +4433,7 @@ starts on K3s <code>v1.36.4+k3s1</code>, the incomplete-tunnel incident is consi
 in this cluster. The resync script remains a diagnostic tool; the full matrix check
 remains part of startup validation.</p>
 <hr />
-<h2 id="controlled-k3s-upgrade">Controlled K3s upgrade<a class="headerlink" href="#controlled-k3s-upgrade" title="Permanent link">&para;</a></h2>
+<h2 id="controlled-k3s-upgrade">Controlled K3s upgrade</h2>
 <p>K3s upgrades use the <code>K3S | 40 Controlled Upgrade</code> Semaphore template backed by:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cluster/playbooks/maintenance/k3s-upgrade.yml
 </span></code></pre></div>
@@ -4454,7 +4454,7 @@ unsupported version jumps. It performs:</p>
 <p>Use normal execution, not Semaphore Dry Run. Check mode skips command tasks whose
 output is required by later assertions.</p>
 <hr />
-<h2 id="etcd-operations">etcd operations<a class="headerlink" href="#etcd-operations" title="Permanent link">&para;</a></h2>
+<h2 id="etcd-operations">etcd operations</h2>
 <p>List snapshots:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>k3s<span class="w"> </span>etcd-snapshot<span class="w"> </span>ls
 </span></code></pre></div>
@@ -4465,7 +4465,7 @@ create a snapshot before the change:</p>
 </span></code></pre></div>
 <p>Do not restart two etcd members at the same time. A planned node restart should leave at least two server nodes available.</p>
 <hr />
-<h2 id="node-maintenance">Node maintenance<a class="headerlink" href="#node-maintenance" title="Permanent link">&para;</a></h2>
+<h2 id="node-maintenance">Node maintenance</h2>
 <p>Use <code>cordon</code> when a short service restart must prevent new Pods from being scheduled:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>cordon<span class="w"> </span>&lt;node&gt;
 </span></code></pre></div>
@@ -4485,7 +4485,7 @@ create a snapshot before the change:</p>
 </span></code></pre></div>
 <p>Before restarting another node, verify that Longhorn volumes have returned to <code>healthy</code>.</p>
 <hr />
-<h2 id="ubuntu-package-maintenance">Ubuntu package maintenance<a class="headerlink" href="#ubuntu-package-maintenance" title="Permanent link">&para;</a></h2>
+<h2 id="ubuntu-package-maintenance">Ubuntu package maintenance</h2>
 <p>The Ansible playbook <code>cluster/playbooks/maintenance/k3s-os-upgrade.yml</code> handles
 host package maintenance. It requires <code>k3s_os_upgrade_confirm: true</code> and the full
 inventory, rejects <code>--limit</code>, and accepts <code>k3s_os_upgrade_order</code> for the node sequence.</p>
@@ -4497,7 +4497,7 @@ uncordon. A failure stops the sequence.</p>
 <code>readyInstances == spec.instances</code>, <code>Ready=True</code> and phase <code>Cluster in healthy state</code>.
 A CNPG PDB reporting zero allowed disruptions can be protecting the current primary.</p>
 <hr />
-<h2 id="useful-commands">Useful commands<a class="headerlink" href="#useful-commands" title="Permanent link">&para;</a></h2>
+<h2 id="useful-commands">Useful commands</h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w"> </span>-o<span class="w"> </span>wide
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>events<span class="w"> </span>-A<span class="w"> </span>--sort-by<span class="o">=</span><span class="s1">'.lastTimestamp'</span>

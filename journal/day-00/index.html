@@ -4203,7 +4203,7 @@
   
 
 
-<h1 id="0-planowanie">0 - Planowanie<a class="headerlink" href="#0-planowanie" title="Permanent link">&para;</a></h1>
+<h1 id="0-planowanie">0 - Planowanie</h1>
 <p><strong>Data:</strong> 2026-01 </p>
 <p>Przygotowanie środowiska pod klaster HA k3s z embedded etcd oraz zewnętrznym Load Balancerem (HAProxy).</p>
 <p>kluczowe założenia:</p>
@@ -4219,7 +4219,7 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>workload + ingress
 </span></code></pre></div>
 <hr />
-<h2 id="plan-docelowy">Plan docelowy<a class="headerlink" href="#plan-docelowy" title="Permanent link">&para;</a></h2>
+<h2 id="plan-docelowy">Plan docelowy</h2>
 <ul>
 <li>HA control plane    </li>
 <li>persistent storage z replikacją    </li>
@@ -4235,7 +4235,7 @@
 <li>disaster recovery plan</li>
 </ul>
 <hr />
-<h2 id="krok-0-zewnetrzny-loadbalancer">Krok 0 — Zewnętrzny LoadBalancer<a class="headerlink" href="#krok-0-zewnetrzny-loadbalancer" title="Permanent link">&para;</a></h2>
+<h2 id="krok-0-zewnetrzny-loadbalancer">Krok 0 — Zewnętrzny LoadBalancer</h2>
 <p>Debian Server :
 <a href="https://github.com/kCn3333/docker-compose/tree/main/haproxy">https://github.com/kCn3333/docker-compose/tree/main/haproxy</a></p>
 <p>Dlaczego HAProxy zamiast MetalLB?</p>
@@ -4244,7 +4244,7 @@
 <li>daje pełną kontrolę nad routingiem</li>
 <li>lepszy do nauki niż "magiczny" LB</li>
 </ul>
-<h2 id="krok-1-wyaczenie-klastra">Krok 1 — Wyłączenie klastra<a class="headerlink" href="#krok-1-wyaczenie-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="krok-1-wyaczenie-klastra">Krok 1 — Wyłączenie klastra</h2>
 <p>Na wszystkich 3 nodach:</p>
 <p><code>sudo /usr/local/bin/k3s-uninstall.sh</code></p>
 <p>Na workerach:</p>
@@ -4254,7 +4254,7 @@
 <p><code>ls /var/lib/rancher</code></p>
 <p>Jeśli coś zostało:</p>
 <p><code>sudo rm -rf /var/lib/rancher</code></p>
-<h2 id="krok-2-pierwszy-control-plane-inicjalizacja-etcd">Krok 2 — Pierwszy control-plane (inicjalizacja etcd)<a class="headerlink" href="#krok-2-pierwszy-control-plane-inicjalizacja-etcd" title="Permanent link">&para;</a></h2>
+<h2 id="krok-2-pierwszy-control-plane-inicjalizacja-etcd">Krok 2 — Pierwszy control-plane (inicjalizacja etcd)</h2>
 <p>Na 192.168.55.10:</p>
 <p><div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">"  </span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="s2">server \  </span>
@@ -4266,9 +4266,9 @@ Kluczowe flagi:</p>
 <p><code>--cluster-init</code> → tworzy nowy klaster etcd</p>
 <p><code>--tls-san</code> → dodaje adres HAProxy do certyfikatu API servera</p>
 <p>Bez tego kube-apiserver nie zaakceptuje połączeń przez LB.</p>
-<h2 id="krok-3-pobranie-tokenu-klastra">Krok 3 — Pobranie tokenu klastra<a class="headerlink" href="#krok-3-pobranie-tokenu-klastra" title="Permanent link">&para;</a></h2>
+<h2 id="krok-3-pobranie-tokenu-klastra">Krok 3 — Pobranie tokenu klastra</h2>
 <p><code>sudo cat /var/lib/rancher/k3s/server/node-token</code></p>
-<h2 id="krok-4-dodanie-drugiego-control-plane">Krok 4 — Dodanie drugiego control-plane<a class="headerlink" href="#krok-4-dodanie-drugiego-control-plane" title="Permanent link">&para;</a></h2>
+<h2 id="krok-4-dodanie-drugiego-control-plane">Krok 4 — Dodanie drugiego control-plane</h2>
 <p>Na worker1 (192.168.55.11):</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">"  </span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s2">server \  </span>
