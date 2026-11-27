@@ -49,7 +49,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 <span class="color-green">**:simple-proxmox: Hypervisor**</span> — <span class="color-grey">Proxmox VE server running LXC containers and VMs (with Docker)</span>
 
-<span class="color-green">**:simple-kubernetes: Kubernetes**</span> — <span class="color-grey">3-node HA K3s with embedded etcd, Cilium and Flux GitOps, bare-metal provisioning via PXE and MAAS</span>
+<span class="color-green">**:simple-kubernetes: Kubernetes**</span> — <span class="color-grey">3-node HA K3s, etcd, Cilium, Flux GitOps, provisioned via MAAS</span>
 
 <span class="color-green">**:material-source-branch: CI/CD**</span> — <span class="color-grey">Spring Boot → Git → GitHub Actions → Flux  → Helm deployment</span>
 
@@ -65,7 +65,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 ## :material-folder-open-outline: Documentation Sections
 
-<div class="home-icon-list home-doc-sections" markdown="1">
+<div class="home-icon-list" markdown="1">
 
 - :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-server-network: Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>
 - :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-package-down: Provisioning**</span> - <span class="color-grey">:simple-virtualbox: VM and :simple-linux: bare-metal deployment workflows</span>
