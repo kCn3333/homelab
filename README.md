@@ -6,6 +6,7 @@
 
 [![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat&labelColor=555&logo=github&logoColor=white&label=Pages%20Build&color=4CAF50)](https://homelab.kcn333.com)
 [![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat&labelColor=555)](https://homelab.kcn333.com)
+[![Server Status](https://status.kcn333.com/api/badge/3/status?upColor=4CAF50&downColor=f38ba8)](https://status.kcn333.com)
 [![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat&labelColor=555)](LICENSE)
 
 
