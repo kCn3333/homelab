@@ -4,9 +4,9 @@
 
 <div align="center">
 
-[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat-square&logo=github&label=Pages%20Build&color=4CAF50)](https://homelab.kcn333.com)
-[![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat-square)](https://homelab.kcn333.com)
-[![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat-square)](LICENSE)
+[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/kCn3333/homelab/main.yml?style=flat&labelColor=555&logo=github&logoColor=white&label=Pages%20Build&color=4CAF50)](https://homelab.kcn333.com)
+[![Live](https://img.shields.io/badge/docs-live-4CAF50?style=flat&labelColor=555)](https://homelab.kcn333.com)
+[![License](https://img.shields.io/badge/license-MIT-4CAF50?style=flat&labelColor=555)](LICENSE)
 
 
 </div>

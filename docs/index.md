@@ -1,7 +1,7 @@
 # [ k C n ]  :material-home:  homelab  
 <p align="center">
   <a href="https://github.com/kCn3333/homelab">
-    <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat-square&logo=github&logoColor=white" alt="Version">
+    <img src="https://img.shields.io/badge/version-0.3.3.3-4CAF50?style=flat&labelColor=555&logo=github&logoColor=white" alt="Version">
   </a>
   <img src="https://status.kcn333.com/api/badge/3/status?upColor=4CAF50&downColor=f38ba8" alt="Server Status">
   <img src="https://status.kcn333.com/api/badge/3/uptime?color=4CAF50" alt="Uptime">
