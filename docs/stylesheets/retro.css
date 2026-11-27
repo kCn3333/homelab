@@ -218,3 +218,22 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
         padding-top: 0 !important; 
     }
 }
+
+/* SVG markers for the homepage link and documentation lists. */
+.md-typeset .home-icon-list ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.md-typeset .home-icon-list li {
+    position: relative;
+    margin-left: 0;
+    padding-left: 1.5em;
+}
+
+.md-typeset .home-icon-list .home-list-marker {
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    color: var(--md-primary-fg-color);
+}

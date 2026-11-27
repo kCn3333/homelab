@@ -12,9 +12,13 @@
 
 ## :material-link: Quick Links
 
-* [:fontawesome-solid-chart-line: **Service Status**](https://status.kcn333.com)
-* [:fontawesome-brands-github: **HomeLab K3S Cluster Repository**](https://github.com/kCn3333/k3s-homelab)
-* [:material-web: **My Home Page**](https://kcn333.com)
+<div class="home-icon-list" markdown="1">
+
+- :material-arrow-top-right:{ .home-list-marker } [:fontawesome-solid-chart-line: **Service Status**](https://status.kcn333.com)
+- :material-arrow-top-right:{ .home-list-marker } [:fontawesome-brands-github: **HomeLab K3S Cluster Repository**](https://github.com/kCn3333/k3s-homelab)
+- :material-arrow-top-right:{ .home-list-marker } [:material-web: **My Home Page**](https://kcn333.com)
+
+</div>
 
 ---
 
@@ -61,13 +65,16 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 ## :material-folder-open-outline: Documentation Sections
 
+<div class="home-icon-list" markdown="1">
 
-- <span class="color-green">**:material-server-network: Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>
-- <span class="color-green">**:material-package-down: Provisioning**</span> - <span class="color-grey">:simple-virtualbox: VM and :simple-linux: bare-metal deployment workflows</span>
-- <span class="color-green">**:material-shield-search: Pentesting**</span> - <span class="color-grey">:material-shield-search: Lab building and :simple-hackthebox: Hack The Box write-ups</span>
-- <span class="color-green">**:material-apps: Applications**</span> - <span class="color-grey">:simple-docker: Docker compose, :simple-kubernetes: k8s manifests, :material-cog: service configs</span>
-- <span class="color-green">**:material-cog-sync-outline: Automation**</span> - <span class="color-grey">:material-ansible: Playbooks, :simple-n8n: workflows, infrastructure as code</span>
-- <span class="color-green">**:material-wrench-outline: Troubleshooting**</span> - <span class="color-grey">:material-head-lightbulb: Common issues and their solutions</span>
+- :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-server-network: Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>
+- :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-package-down: Provisioning**</span> - <span class="color-grey">:simple-virtualbox: VM and :simple-linux: bare-metal deployment workflows</span>
+- :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-shield-search: Pentesting**</span> - <span class="color-grey">:material-shield-search: Lab building and :simple-hackthebox: Hack The Box write-ups</span>
+- :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-apps: Applications**</span> - <span class="color-grey">:simple-docker: Docker compose, :simple-kubernetes: k8s manifests, :material-cog: service configs</span>
+- :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-cog-sync-outline: Automation**</span> - <span class="color-grey">:material-ansible: Playbooks, :simple-n8n: workflows, infrastructure as code</span>
+- :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-wrench-outline: Troubleshooting**</span> - <span class="color-grey">:material-head-lightbulb: Common issues and their solutions</span>
+
+</div>
 
 <br>
 
