@@ -65,7 +65,7 @@ Hello and welcome! This is my personal homelab documentation – a living knowle
 
 ## :material-folder-open-outline: Documentation Sections
 
-<div class="home-icon-list" markdown="1">
+<div class="home-icon-list home-doc-sections" markdown="1">
 
 - :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-server-network: Infrastructure**</span> - <span class="color-grey">:material-server: Hardware setup, :material-server-network-outline: network configuration</span>
 - :material-chevron-right:{ .home-list-marker } <span class="color-green">**:material-package-down: Provisioning**</span> - <span class="color-grey">:simple-virtualbox: VM and :simple-linux: bare-metal deployment workflows</span>

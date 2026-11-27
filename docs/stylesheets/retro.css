@@ -225,6 +225,10 @@ body, .md-typeset, .md-nav, .md-header, .md-footer {
     margin-left: 0;
 }
 
+.md-typeset .home-doc-sections ul {
+    margin-left: 2em;
+}
+
 .md-typeset .home-icon-list li {
     position: relative;
     margin-left: 0;
